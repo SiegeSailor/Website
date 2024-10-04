@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Jin Yu, Zhang
 
 ![Last_Updated](https://img.shields.io/badge/Last_Updated-10/03/2024-blue?labelColor=555555)

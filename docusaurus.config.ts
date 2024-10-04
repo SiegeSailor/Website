@@ -185,25 +185,25 @@ const config: Config = {
       hideOnScroll: false,
       items: [
         {
+          docId: "read-me",
+          docsPluginId: "default",
+          label: "Read Me",
+          position: "right",
           type: "doc",
-          docId: "intro",
-          label: "Intro",
-          position: "right",
-          docsPluginId: "default",
         },
         {
           docsPluginId: "default",
-          label: "Tutorial Basics",
+          label: "Notes",
           position: "right",
-          sidebarId: "tutorialBasics",
+          sidebarId: "notes",
           type: "docSidebar",
         },
         {
           docsPluginId: "default",
-          type: "docSidebar",
-          sidebarId: "tutorialExtras",
+          label: "Projects",
           position: "right",
-          label: "Tutorial Extras",
+          sidebarId: "projects",
+          type: "docSidebar",
         },
         {
           items: [
