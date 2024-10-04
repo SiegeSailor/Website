@@ -185,11 +185,16 @@ const config: Config = {
       hideOnScroll: false,
       items: [
         {
-          docId: "read-me",
-          docsPluginId: "default",
+          activeBasePath: undefined,
+          activeBaseRegex: undefined,
+          className: undefined,
+          href: undefined,
+          html: undefined,
           label: "Read Me",
           position: "right",
-          type: "doc",
+          prependBaseUrlToHref: false,
+          to: "/read-me",
+          type: undefined,
         },
         {
           docsPluginId: "default",
