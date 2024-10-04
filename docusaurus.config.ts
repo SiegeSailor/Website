@@ -1,141 +1,273 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
-
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
-
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  baseUrl: "/",
+  baseUrlIssueBanner: true,
+  clientModules: [],
+  deploymentBranch: "main",
+  favicon: "img/favicon.ico",
+  future: undefined,
+  githubHost: "jinyu-zhang.com",
+  githubPort: "443",
+  headTags: [],
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
+    localeConfigs: {
+      en: {
+        label: "English",
+        direction: "ltr",
+        htmlLang: "en-US",
+        calendar: "gregory",
+        path: "en",
+      },
+    },
   },
-
+  markdown: {
+    anchors: {
+      maintainCase: false,
+    },
+    format: "detect",
+    mdx1Compat: undefined,
+    mermaid: true,
+    parseFrontMatter: undefined,
+    preprocessor: undefined,
+    remarkRehypeOptions: undefined,
+  },
+  noIndex: false,
+  onBrokenAnchors: "throw",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
+  onDuplicateRoutes: "throw",
+  organizationName: "SiegeSailor",
+  plugins: [],
   presets: [
     [
-      'classic',
+      "classic",
       {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
         blog: {
-          showReadingTime: true,
+          archiveBasePath: "archive",
+          authorsBasePath: "authors",
+          authorsMapPath: "authors.yml",
+          beforeDefaultRehypePlugins: undefined,
+          beforeDefaultRemarkPlugins: undefined,
+          blogArchiveComponent: "@theme/BlogArchivePage",
+          blogAuthorsListComponent: "@theme/Blog/Pages/BlogAuthorsListPage",
+          blogAuthorsPostsComponent: "@theme/Blog/Pages/BlogAuthorsPostsPage",
+          blogDescription: "A DevOps Engineer",
+          blogListComponent: "@theme/BlogListPage",
+          blogPostComponent: "@theme/BlogPostPage",
+          blogSidebarCount: "ALL",
+          blogSidebarTitle: "All Blog Posts",
+          blogTagsListComponent: "@theme/BlogTagsListPage",
+          blogTagsPostsComponent: "@theme/BlogTagsPostsPage",
+          blogTitle: "Blog",
+          editLocalizedFiles: false,
+          editUrl: undefined,
+          exclude: undefined,
           feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
+            copyright: undefined,
+            createFeedItems: undefined,
+            description: undefined,
+            language: undefined,
+            limit: false,
+            title: undefined,
+            type: "all",
+            xslt: undefined,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          include: undefined,
+          onInlineAuthors: "throw",
+          onInlineTags: "throw",
+          onUntruncatedBlogPosts: "throw",
+          pageBasePath: "page",
+          path: "./blog",
+          postsPerPage: "ALL",
+          readingTime: undefined,
+          recmaPlugins: [],
+          rehypePlugins: [],
+          remarkPlugins: [],
+          routeBasePath: "blog",
+          showLastUpdateAuthor: false,
+          showLastUpdateTime: true,
+          showReadingTime: true,
+          sortPosts: "descending",
+          tags: "tags.yml",
+          tagsBasePath: "tags",
+          truncateMarker: undefined,
         },
+        docs: {
+          sidebarPath: "./sidebars.ts",
+          editUrl: undefined,
+        },
+        pages: {},
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
   ],
-
+  projectName: "Website",
+  scripts: [],
+  ssrTemplate: undefined,
+  staticDirectories: ["static"],
+  stylesheets: [],
+  tagline: "A DevOps Engineer",
+  themes: [],
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
-    navbar: {
-      title: 'My Site',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+    announcementBar: {
+      id: undefined,
+      content:
+        "This website is under construction. Please proceed to other social links.",
+      backgroundColor: undefined,
+      textColor: undefined,
+      isCloseable: true,
+    },
+    blog: {
+      sidebar: {
+        groupByYear: true,
       },
-      items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
+    },
+    colorMode: {
+      defaultMode: "light",
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
+    docs: {
+      versionPersistence: "localStorage",
+      sidebar: {
+        autoCollapseCategories: true,
+        hideable: true,
+      },
     },
     footer: {
-      style: 'dark',
+      style: "light",
       links: [
         {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
+          href: "mailto:siegesailor@gmail.com",
+          html: undefined,
+          label: "Gmail",
+          to: undefined,
         },
         {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
+          href: "https://www.linkedin.com/in/jin-yu-zhang-812181155/",
+          html: undefined,
+          label: "LinkedIn",
+          to: undefined,
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      logo: undefined,
+      copyright: `Copyright © ${new Date().getFullYear()} Jin Yu, Zhang.`,
+    },
+    image: "img/social-card.png",
+    metadata: [],
+    navbar: {
+      hideOnScroll: false,
+      items: [
+        {
+          type: "doc",
+          docId: "intro",
+          label: "Intro",
+          position: "right",
+          docsPluginId: "default",
+        },
+        {
+          docsPluginId: "default",
+          label: "Tutorial Basics",
+          position: "right",
+          sidebarId: "tutorialBasics",
+          type: "docSidebar",
+        },
+        {
+          docsPluginId: "default",
+          type: "docSidebar",
+          sidebarId: "tutorialExtras",
+          position: "right",
+          label: "Tutorial Extras",
+        },
+        {
+          activeBasePath: undefined,
+          activeBaseRegex: undefined,
+          className: undefined,
+          href: undefined,
+          html: undefined,
+          label: "Blog",
+          position: "right",
+          prependBaseUrlToHref: false,
+          to: "/blog",
+          type: undefined,
+        },
+        {
+          items: [
+            {
+              activeBasePath: undefined,
+              activeBaseRegex: undefined,
+              className: undefined,
+              href: "mailto:siegesailor@gmail.com",
+              html: undefined,
+              label: "Gmail",
+              prependBaseUrlToHref: false,
+              to: undefined,
+              type: undefined,
+            },
+            {
+              activeBasePath: undefined,
+              activeBaseRegex: undefined,
+              className: undefined,
+              href: "https://www.linkedin.com/in/jin-yu-zhang-812181155/",
+              html: undefined,
+              label: "LinkedIn",
+              prependBaseUrlToHref: false,
+              to: undefined,
+              type: undefined,
+            },
+          ],
+          label: "Contact Me",
+          position: "right",
+          type: "dropdown",
+        },
+        {
+          type: "html",
+          position: "right",
+          value: "<button>Give feedback</button>",
+        },
+      ],
+      logo: {
+        alt: "Jin Yu, Zhang",
+        src: "img/profile.jpg",
+        srcDark: "img/profile.jpg",
+        href: undefined,
+        width: 32,
+        height: 32,
+        target: undefined,
+        className: undefined,
+        style: undefined,
+      },
+      style: undefined,
+      title: "Jin Yu, Zhang",
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      defaultLanguage: undefined,
+      magicComments: [
+        {
+          className: "theme-code-block-highlighted-line",
+          line: "highlight-next-line",
+          block: { start: "highlight-start", end: "highlight-end" },
+        },
+      ],
+    },
+    tableOfContents: {
+      minHeadingLevel: 2,
+      maxHeadingLevel: 6,
     },
   } satisfies Preset.ThemeConfig,
+  title: "Jin Yu, Zhang",
+  titleDelimiter: undefined,
+  trailingSlash: undefined,
+  url: "https://www.jinyu-zhang.com/",
 };
 
 export default config;
