@@ -32,7 +32,18 @@ const config: Config = {
     format: "detect",
     mdx1Compat: undefined,
     mermaid: true,
-    parseFrontMatter: undefined,
+    parseFrontMatter: async (parameters) => {
+      const result = await parameters.defaultParseFrontMatter(parameters);
+      if (result.frontMatter.tags) {
+        if (result.frontMatter.keywords)
+          console.warn(
+            `${result.frontMatter.keywords} will be overwritten by ${result.frontMatter.tags}.`
+          );
+        result.frontMatter.keywords = result.frontMatter.tags;
+      }
+
+      return result;
+    },
     preprocessor: undefined,
     remarkRehypeOptions: undefined,
   },
@@ -48,6 +59,7 @@ const config: Config = {
       "classic",
       {
         blog: {
+          admonitions: undefined,
           archiveBasePath: "archive",
           authorsBasePath: "authors",
           authorsMapPath: "authors.yml",
@@ -88,7 +100,7 @@ const config: Config = {
           recmaPlugins: [],
           rehypePlugins: [],
           remarkPlugins: [],
-          routeBasePath: "blog",
+          routeBasePath: "/",
           showLastUpdateAuthor: false,
           showLastUpdateTime: true,
           showReadingTime: true,
@@ -116,6 +128,13 @@ const config: Config = {
   tagline: "A DevOps Engineer",
   themes: [],
   themeConfig: {
+    algolia: {
+      appId: "to-be-filled",
+      apiKey: "to-be-filled",
+      indexName: "to-be-filled",
+      contextualSearch: true,
+      searchParameters: {},
+    },
     announcementBar: {
       id: undefined,
       content:
@@ -185,18 +204,6 @@ const config: Config = {
           sidebarId: "tutorialExtras",
           position: "right",
           label: "Tutorial Extras",
-        },
-        {
-          activeBasePath: undefined,
-          activeBaseRegex: undefined,
-          className: undefined,
-          href: undefined,
-          html: undefined,
-          label: "Blog",
-          position: "right",
-          prependBaseUrlToHref: false,
-          to: "/blog",
-          type: undefined,
         },
         {
           items: [
