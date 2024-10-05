@@ -53,7 +53,7 @@ const config: Config = {
   onBrokenMarkdownLinks: "throw",
   onDuplicateRoutes: "throw",
   organizationName: "SiegeSailor",
-  plugins: [],
+  plugins: ["docusaurus-plugin-sass"],
   presets: [
     [
       "classic",
@@ -173,7 +173,11 @@ const config: Config = {
         },
         sitemap: undefined,
         theme: {
-          customCss: "./source/css/custom.css",
+          customCss: [
+            "./source/style/theme.scss",
+            "./source/style/doc-search.scss",
+            "./source/style/overrides.scss",
+          ],
         },
       } satisfies Preset.Options,
     ],
@@ -335,11 +339,6 @@ const config: Config = {
           label: "Contact Me",
           position: "right",
           type: "dropdown",
-        },
-        {
-          type: "html",
-          position: "right",
-          value: "<button>Give feedback</button>",
         },
       ],
       logo: {

@@ -11,7 +11,7 @@ export default function BlogPostPageWrapper(props: Props): JSX.Element {
   return (
     <>
       <BlogPostPage {...props} />
-      <Comment title={props.content.metadata.title} />
+      <Comment />
     </>
   );
 }

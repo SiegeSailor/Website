@@ -1,25 +1,11 @@
 import React from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Giscus from "@giscus/react";
-import Link from "@docusaurus/Link";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
-export default function Comments(props: { title: string }): JSX.Element {
-  const docusaurusContext = useDocusaurusContext();
-  const [isOpen, setIsOpen] = React.useState();
-
-  const title = `${props.title} | ${docusaurusContext.siteConfig.title}`;
-
+export default function Comments(): JSX.Element {
   return (
-    <div className={styles.container}>
-      <h4>
-        Your can find your comment on{" "}
-        <Link to="https://github.com/SiegeSailor/Website/discussions/categories/comments">
-          Discussions
-        </Link>{" "}
-        {title}.
-      </h4>
+    <div className={styles.module}>
       <Giscus
         category="Comments"
         categoryId="DIC_kwDOM7PwvM4CjE_u"
@@ -33,7 +19,7 @@ export default function Comments(props: { title: string }): JSX.Element {
         repo="siegesailor/Website"
         repoId="R_kgDOM7PwvA="
         strict="0"
-        theme="light"
+        theme="preferred_color_scheme"
       />
     </div>
   );
