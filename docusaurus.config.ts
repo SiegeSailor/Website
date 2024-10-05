@@ -102,7 +102,7 @@ const config: Config = {
           recmaPlugins: [],
           rehypePlugins: [],
           remarkPlugins: [],
-          routeBasePath: "/",
+          routeBasePath: "/blog",
           showLastUpdateAuthor: false,
           showLastUpdateTime: true,
           showReadingTime: true,
@@ -207,7 +207,7 @@ const config: Config = {
     },
     blog: {
       sidebar: {
-        groupByYear: true,
+        groupByYear: false,
       },
     },
     colorMode: {
@@ -291,10 +291,10 @@ const config: Config = {
           className: undefined,
           href: undefined,
           html: undefined,
-          label: "Read Me",
+          label: "Blog",
           position: "right",
           prependBaseUrlToHref: false,
-          to: "/read-me",
+          to: "/blog",
           type: undefined,
         },
         {
