@@ -2,6 +2,11 @@
 sidebar_position: 3
 ---
 
+```mermaid
+graph LR
+  A -->|AA| B
+```
+
 # Create a Blog Post
 
 Docusaurus creates a **page for each blog post**, but also a **blog index page**, a **tag system**, an **RSS** feed...
