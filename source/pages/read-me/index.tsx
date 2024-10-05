@@ -4,13 +4,13 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Comment from "@site/source/components/Comment";
 
 export default function () {
-  const { siteConfig } = useDocusaurusContext();
+  const docusaurusContext = useDocusaurusContext();
 
   return (
-    <Layout title="Read Me" description={siteConfig.tagline}>
+    <Layout title="Read Me" description={docusaurusContext.siteConfig.tagline}>
       <main>
         A
-        <Comment />
+        <Comment title="Read Me" />
       </main>
     </Layout>
   );

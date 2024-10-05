@@ -11,7 +11,7 @@ export default function DocItemWrapper(props: Props): JSX.Element {
   return (
     <>
       <DocItem {...props} />
-      <Comment />
+      <Comment title={props.content.metadata.title} />
     </>
   );
 }
