@@ -135,7 +135,7 @@ const config: Config = {
           numberPrefixParser: undefined,
           onInlineTags: "throw",
           onlyIncludeVersions: undefined,
-          path: "./docs",
+          path: "./articles",
           recmaPlugins: [],
           rehypePlugins: [],
           remarkPlugins: [],
