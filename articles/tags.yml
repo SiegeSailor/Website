@@ -1,0 +1,9 @@
+linux:
+  label: Linux
+  permalink: /linux
+  description: Guides and tutorials related to the Linux operating system.
+
+webkit:
+  label: Webkit
+  permalink: /webkit
+  description: Resources and information about the WebKit browser engine.
