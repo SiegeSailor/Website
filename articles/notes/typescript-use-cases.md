@@ -88,6 +88,25 @@ import baz from "@foo/baz";
 import bar from "@bar";
 ```
 
+### Support Import Statement
+
+When the `target` in `tsconfig.json` is set to `ES5` or `ES3`, the `module` should be set to `CommonJS`. Otherwise, you will encounter a _SyntaxError: Cannot use import statement outside a module_. This is because the `import` syntax did not exist before ES5, and the `target` option is meant to compile TypeScript into the specified version of JavaScript:
+
+```json title="./tsconfig.json"
+{
+  "compilerOptions": {
+    // highlight-start
+    "target": "ES5",
+    "module": "CommonJS"
+    // highlight-end
+  }
+}
+```
+
+:::warning
+The official documentation suggests changing the file extension to `.mjs` to enforce `module` or `.cjs` to enforce `require`, or adding `--experimental-modules` to the `ts-node` command. However, in practice, these methods are ineffective. Additionally, setting `type` to `module` in `package.json` and setting `module` to `esnext` in `tsconfig.json` both result in errors when using `ts-node`.
+:::
+
 ## Type Notations
 
 This section covers some unique and uncommon use cases in TypeScript. These scenarios often can't be addressed with [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html) alone and may require a series of complex combinations.
@@ -108,7 +127,7 @@ import { exportObject, exportLet } from "./export";
 
 // error-start
 exportLet = 2;
-// Cannot assign to 'exportLet' because it is an import.ts(2632)
+/** Cannot assign to 'exportLet' because it is an import.ts(2632) */
 // error-end
 exportObject.foo = 2;
 ```
@@ -177,7 +196,8 @@ function bar(baz: number, qux: number) {
 
 // error-start
 bar(...foo());
-// A spread argument must either have a tuple type or be passed to a rest parameter.ts(2556)
+/** A spread argument must either have a tuple type
+ *  or be passed to a rest parameter.ts(2556) */
 // error-end
 ```
 
@@ -218,3 +238,7 @@ function bar<T>(quux?: T) {
   return [quux[0], quux[1]];
 }
 ```
+
+:::info
+There is an [Issue](https://github.com/microsoft/TypeScript/issues/5296) about supporting spread operator for arrays and tuples in function calls and should be been available since TypeScript 2.4.2. However, its been confirmed that 5.5.2 and 3.8.3 still persist this defect.
+:::
