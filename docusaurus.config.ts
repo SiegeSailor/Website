@@ -342,7 +342,7 @@ const config: Config = {
         },
       ],
       logo: {
-        alt: "Jin Yu, Zhang",
+        alt: "Jin Yu, Zhang's Website",
         src: "images/profile.jpg",
         srcDark: "images/profile.jpg",
         href: undefined,
@@ -353,7 +353,7 @@ const config: Config = {
         style: undefined,
       },
       style: undefined,
-      title: "Jin Yu, Zhang",
+      title: "Jin Yu, Zhang's Website",
     },
     prism: {
       additionalLanguages: ["bash", "shell-session", "sql"],
@@ -366,6 +366,11 @@ const config: Config = {
           line: "highlight-next-line",
           block: { start: "highlight-start", end: "highlight-end" },
         },
+        {
+          className: "code-block-error-line",
+          line: "error-next-line",
+          block: { start: "error-start", end: "error-end" },
+        },
       ],
     },
     tableOfContents: {
@@ -373,7 +378,7 @@ const config: Config = {
       maxHeadingLevel: 6,
     },
   } satisfies Preset.ThemeConfig,
-  title: "Jin Yu, Zhang",
+  title: "Jin Yu, Zhang's Website",
   titleDelimiter: undefined,
   trailingSlash: undefined,
   url: "https://www.jinyu-zhang.com/",

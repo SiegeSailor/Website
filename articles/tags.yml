@@ -3,6 +3,11 @@ linux:
   permalink: /linux
   description: Guides and tutorials related to the Linux operating system.
 
+typescript:
+  label: TypeScript
+  permalink: /typescript
+  description: Articles and tutorials about TypeScript, a superset of JavaScript.
+
 webkit:
   label: Webkit
   permalink: /webkit

@@ -1,0 +1,7 @@
+{
+  "label": "Account Hub",
+  "link": {
+    "type": "generated-index",
+    "description": "Constructs endpoints for a sophisticated account database system within the OWASP SAMM framework."
+  }
+}

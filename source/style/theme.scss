@@ -8,5 +8,23 @@
   --ifm-color-primary-lightest: #a295c4;
   --ifm-code-font-size: 95%;
   --ifm-background-color: #ffffff;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.075);
+  --docusaurus-error-code-line-bg: rgba(255, 0, 0, 0.1);
+}
+
+.code-block-error-line {
+  background-color: var(--docusaurus-error-code-line-bg);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  position: relative;
+
+  &::before {
+    border-left: 0.375rem solid rgb(255, 0, 0);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
 }

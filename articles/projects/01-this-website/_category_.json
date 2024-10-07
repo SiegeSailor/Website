@@ -1,0 +1,7 @@
+{
+  "label": "This Website",
+  "link": {
+    "type": "generated-index",
+    "description": "Technical details behind this website."
+  }
+}
