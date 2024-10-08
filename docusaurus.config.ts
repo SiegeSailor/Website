@@ -188,7 +188,7 @@ const config: Config = {
   staticDirectories: ["static"],
   stylesheets: [],
   tagline: "A DevOps Engineer",
-  themes: ["@docusaurus/theme-mermaid"],
+  themes: ["@docusaurus/theme-mermaid", "@docusaurus/theme-live-codeblock"],
   themeConfig: {
     algolia: {
       appId: "to-be-filled",

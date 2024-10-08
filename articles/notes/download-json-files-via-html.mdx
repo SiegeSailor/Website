@@ -1,0 +1,59 @@
+---
+tags: ["html", "javascript"]
+---
+
+# Download JSON Files via HTML
+
+A short guide on creating an HTML link for users to click and download JSON files. To start, prepare the data and an `a` element:
+
+```javascript
+const filename = "foo.json";
+const data = new Blob([
+  JSON.stringify({
+    bar: "bar",
+    baz: ["qux", "quux"],
+  }),
+]);
+
+const inviableLink = document.createElement("a");
+inviableLink.href = URL.createObjectURL(data);
+inviableLink.download = filename;
+```
+
+Then bind the element to a click event:
+
+```javascript
+document
+  .querySelector("#button-download")
+  .addEventListener("click", inviableLink.click);
+```
+
+## Interactive Example
+
+Test the code snippet below. The function has been wrapped in a React component for demonstration purposes:
+
+```jsx live
+function DemonstrationWrapper() {
+  return (
+    <button
+      onClick={() => {
+        const filename = "foo.json";
+        const data = new Blob([
+          JSON.stringify({
+            bar: "bar",
+            baz: ["qux", "quux"],
+          }),
+        ]);
+
+        const inviableLink = document.createElement("a");
+        inviableLink.href = URL.createObjectURL(data);
+        inviableLink.download = filename;
+
+        inviableLink.click();
+      }}
+    >
+      Click to Download
+    </button>
+  );
+}
+```

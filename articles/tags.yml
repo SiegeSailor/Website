@@ -1,3 +1,13 @@
+html:
+  label: HTML
+  permalink: /html
+  description: Tutorials and resources for HTML, the standard markup language for creating web pages.
+
+javascript:
+  label: JavaScript
+  permalink: /javascript
+  description: Guides and tutorials for JavaScript, the programming language of the web.
+
 linux:
   label: Linux
   permalink: /linux

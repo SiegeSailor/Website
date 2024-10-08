@@ -196,8 +196,8 @@ function bar(baz: number, qux: number) {
 
 // error-start
 bar(...foo());
-/** A spread argument must either have a tuple type
- *  or be passed to a rest parameter.ts(2556) */
+/** A spread argument must either have a tuple type or
+ *  be passed to a rest parameter.ts(2556) */
 // error-end
 ```
 
