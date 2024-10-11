@@ -1,3 +1,8 @@
+django:
+  label: Django
+  permalink: /django
+  description: Comprehensive guides and tutorials for Django, a high-level Python web framework.
+
 html:
   label: HTML
   permalink: /html

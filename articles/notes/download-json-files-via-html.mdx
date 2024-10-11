@@ -4,7 +4,7 @@ tags: ["html", "javascript"]
 
 # Download JSON Files via HTML
 
-A short guide on creating an HTML link for users to click and download JSON files. To start, prepare the data and an `a` element:
+A short guide on creating an HTML link for users to click and download JSON files. To start, prepare the data:
 
 ```javascript
 const filename = "foo.json";
@@ -14,13 +14,17 @@ const data = new Blob([
     baz: ["qux", "quux"],
   }),
 ]);
+```
 
+Then create an `a` element:
+
+```javascript
 const inviableLink = document.createElement("a");
 inviableLink.href = URL.createObjectURL(data);
 inviableLink.download = filename;
 ```
 
-Then bind the element to a click event:
+Bind the element to a click event:
 
 ```javascript
 document
@@ -28,11 +32,9 @@ document
   .addEventListener("click", inviableLink.click);
 ```
 
-## Interactive Example
+This demonstrates the function with a React component:
 
-Test the code snippet below. The function has been wrapped in a React component for demonstration purposes:
-
-```jsx live
+```tsx live
 function DemonstrationWrapper() {
   return (
     <button
