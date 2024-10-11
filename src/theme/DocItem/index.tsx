@@ -3,7 +3,7 @@ import DocItem from "@theme-original/DocItem";
 import type DocItemType from "@theme/DocItem";
 import type { WrapperProps } from "@docusaurus/types";
 
-import Comment from "@site/source/components/Comment";
+import Comment from "@site/src/components/Comment";
 
 type Props = WrapperProps<typeof DocItemType>;
 
