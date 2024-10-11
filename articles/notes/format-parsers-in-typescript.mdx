@@ -19,7 +19,6 @@ function DemonstrationWrapper() {
   const parser = (input = ""): number => {
     return parseInt(input.replace("#", ""), 16);
   };
-
   return <code>{parser("#ff5733")}</code>;
 }
 ```
@@ -41,7 +40,6 @@ function DemonstrationWrapper() {
           ("0" + parseInt(inputMatched[3], 10).toString(16)).slice(-2)
       : "";
   };
-
   return <code>{parser("rgba(255, 87, 51, 1)")}</code>;
 }
 ```
@@ -57,10 +55,8 @@ function DemonstrationWrapper() {
     const valueRed = parseInt(inputReplaced.substring(0, 2), 16);
     const valueGreen = parseInt(inputReplaced.substring(2, 4), 16);
     const valueBlue = parseInt(inputReplaced.substring(4, 6), 16);
-
     return `rgba(${valueRed}, ${valueGreen}, ${valueBlue}, ${alpha})`;
   };
-
   return <code>{parser("#ff5733")}</code>;
 }
 ```
@@ -85,7 +81,6 @@ function DemonstrationWrapper() {
         return accumulator;
       }, {} as Record<string, string>);
   };
-
   return <code>{JSON.stringify(parser("?foo=bar&bax=qux"))}</code>;
 }
 ```
@@ -103,7 +98,6 @@ function DemonstrationWrapper() {
       return null;
     }
   };
-
   return <code>{JSON.stringify(parser('{"foo": "bar"}'))}</code>;
 }
 ```
@@ -121,7 +115,6 @@ function DemonstrationWrapper() {
   const parser = (input = ""): number => {
     return parseInt(input, 2);
   };
-
   return <code>{parser("11")}</code>;
 }
 ```
@@ -135,7 +128,6 @@ function DemonstrationWrapper() {
   const parser = (input = ""): number => {
     return parseInt(input, 8);
   };
-
   return <code>{parser("17")}</code>;
 }
 ```
@@ -157,7 +149,6 @@ function DemonstrationWrapper() {
       M: 1000,
     };
     let result = 0;
-
     for (let i = 0; i < input.length; i++) {
       const current = mapRoman[input[i]];
       const next = mapRoman[input[i + 1]];
@@ -168,10 +159,8 @@ function DemonstrationWrapper() {
         result += current;
       }
     }
-
     return result;
   };
-
   return <code>{parser("IV")}</code>;
 }
 ```
@@ -189,7 +178,6 @@ function DemonstrationWrapper() {
   const parser = (input = ""): Record<string, string>[] => {
     const [headerLine, ...rowLines] = input.split("\n");
     const headers = headerLine.split(",");
-
     return rowLines.map((rowLine) => {
       const values = rowLine.split(",");
       return headers.reduce((accumulator, header, index) => {
@@ -198,7 +186,6 @@ function DemonstrationWrapper() {
       }, {} as Record<string, string>);
     });
   };
-
   return <code>{JSON.stringify(parser("foo,bar\nbax,qux\nquux,baz"))}</code>;
 }
 ```

@@ -6,7 +6,7 @@ export default function () {
 
   return (
     <Layout title="Read Me" description={docusaurusContext.siteConfig.tagline}>
-      <main>A</main>
+      <main></main>
     </Layout>
   );
 }

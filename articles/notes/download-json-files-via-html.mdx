@@ -46,11 +46,9 @@ function DemonstrationWrapper() {
             baz: ["qux", "quux"],
           }),
         ]);
-
         const inviableLink = document.createElement("a");
         inviableLink.href = URL.createObjectURL(data);
         inviableLink.download = filename;
-
         inviableLink.click();
       }}
     >
