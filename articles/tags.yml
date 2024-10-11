@@ -3,6 +3,16 @@ django:
   permalink: /django
   description: Comprehensive guides and tutorials for Django, a high-level Python web framework.
 
+docker:
+  label: Docker
+  permalink: /docker
+  description: Test
+
+gitlab:
+  label: Gitlab
+  permalink: /gitlab
+  description: Test
+
 html:
   label: HTML
   permalink: /html
