@@ -6,7 +6,7 @@ tags: ["django", "javascript"]
 
 When using Django as the server-side framework, if the CSRF mechanism is enabled, POST, PUT, and DELETE requests must include the CSRF token in the request headers. Only then will the request be validated and executed.
 
-## Retrieve Tokens
+## Retrieve and Use Tokens
 
 The CSRF token is rendered to templates via cookies, allowing templates to access data from Django. However, for asynchronous requests, additional setup is required to include CSRF tokens in the request headers. This section explains different methods on how to retrieve tokens from cookies.
 
@@ -36,19 +36,26 @@ fetch("/foo/bar", {
 });
 ```
 
+:::warning
+Note that `"csrftoken` is not available on this website since it is not rendered by a Django framework.
+:::
+
 ### Document Cookie
 
 CSRF token can be retrieved by parsing `document.cookie` without third-party packages:
 
-```javascript
-const cookies = document.cookie.split(";").reduce((current, accumulator) => {
-  const [key, value] = accumulator.trim().split("=").map(decodeURIComponent);
-  try {
-    return Object.assign(current, { [key]: JSON.parse(value) });
-  } catch (error) {
-    return Object.assign(current, { [key]: value });
-  }
-}, {});
+```jsx live
+function DemonstrationWrapper() {
+  const cookies = document.cookie.split(";").reduce((current, accumulator) => {
+    const [key, value] = accumulator.trim().split("=").map(decodeURIComponent);
+    try {
+      return Object.assign(current, { [key]: JSON.parse(value) });
+    } catch (error) {
+      return Object.assign(current, { [key]: value });
+    }
+  }, {});
+  return <code>{JSON.stringify(cookies)}</code>;
+}
 ```
 
 To use the CSRF token:
@@ -88,3 +95,7 @@ fetch("/foo/bar", {
   },
 });
 ```
+
+:::warning
+Note that `"csrftoken` is not available on this website since it is not rendered by a Django framework.
+:::

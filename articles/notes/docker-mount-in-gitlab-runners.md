@@ -4,7 +4,15 @@ tags: ["docker", "gitlab"]
 
 # Docker Mount in GitLab Runners
 
-When using Docker containers to generate files in a mounted location in a GitLab runner, if the cleanup or permission handling for the generated files are not done properly within the container, it creates a permission issue happens every time the runner checks out the repository, therefore stops the runner from running any future jobs. Consider this guide is helpful if the followings all are met:
+When using Docker containers to generate files in a mounted location in a GitLab runner, if the cleanup or permission handling for the generated files are not done properly within the container, it creates a permission issue happens every time the runner checks out the repository, therefore stops the runner from running any future jobs.
+
+## Reproduction
+
+This section demonstrates how to reproduce this issue.
+
+### Prerequesites
+
+The issue will only happen when the following conditions are all met:
 
 - Developers don't have access to the runners
 - Runners run as a non-root user, such as `gitlab-runner`
@@ -15,21 +23,11 @@ When using Docker containers to generate files in a mounted location in a GitLab
 The GitLab runners used during writing this guide are of Linux distributions. Through this might not be the case, different platforms can perform differently.
 :::
 
-## Reproduction
+### Dockerfile and Scripts Setup
 
-This section demonstrates how this issue happens.
+Create `Dockerfile`. `FROM`, `USER`, and `WORKDIR` can be any other value as long as they are consistent in [Generate Files in GitLab Runners](#generate-files-in-gitlab-runners) and still meet [Prerequesites](#prerequesites):
 
-### Generate Files via Docker
-
-Here is a simplified project file structure, which only contains an empty `Dockerfile`:
-
-```shell
-└── Dockerfile
-```
-
-Update `Dockerfile` to create a folder and a file:
-
-```dockerfile
+```docker title="./Dockerfile"
 FROM ubuntu:22.04
 USER "root"
 WORKDIR "/home/"
@@ -38,44 +36,35 @@ CMD mkdir --parent "foo" && touch "foo/bar.txt"
 
 Create `helper-docker-operate.sh` to operate Docker containers and images:
 
-```shell
-└── Dockerfile
-# highlight-next-line
-└── helper-docker-operate.sh
-```
-
 ```shell title="./helper-docker-operate.sh"
-docker build \
-    --tag "baz:latest" \
+docker build --tag "baz:latest" \
     "./"
-docker run --rm \
-    --volume "./home/:/home/" \
+docker run --rm --volume "./home/:/home/" \
     "baz:latest"
 ```
 
-### Run Docker in GitLab Runners
+Create `.gitignore` to keep generated files out of the Git file-tracking list:
 
-Create a `.gitlab-ci.yml`:
-
-```shell
-# highlight-next-line
-└── .gitlab-ci.yml
-└── Dockerfile
-└── helper-docker-operate.sh
+```git
+./home/
 ```
 
-```yaml
-stages:
-  - "primary"
-  - "secondary"
+This file structure now looks like:
 
-default:
-  before_script: |
-    echo "$CI_REGISTRY_PASSWORD" | \
-    docker login \
-      "$CI_REGISTRY" \
-      --username "$CI_REGISTRY_USER" \
-      --password-stdin
+```shell
+└── Dockerfile
+└── helper-docker-operate.sh
+└── .gitignore
+```
+
+### Generate Files in GitLab Runners
+
+After [Dockerfile and Scripts Setup](#dockerfile-and-scripts-setup), we are going to trigger GitLab CI/CD Pipelines. First of all, create `.gitlab-ci.yml`:
+
+```yml title="./.gitlab-ci.yml"
+stages:
+  - "stage-first"
+  - "stage-second"
 
 .demonstration: &demonstration
   stage: "$STAGE"
@@ -90,21 +79,25 @@ default:
 demonstration:first:
   <<: *demonstration
   variables:
-    STAGE: "primary"
+    STAGE: "stage-first"
 
 demonstration:second:
   <<: *demonstration
   variables:
-    STAGE: "secondary"
+    STAGE: "stage-second"
 ```
 
-Then trigger a pipeline by pushing a commit. After `demonstration:first` is done, the following error message will appear on the `demonstration:second`'s terminal when it starts:
+:::info
+`onsite-runner` is the tag for GitLab to choose the corresponding runner to execute the job, and only the runner has all the tags will be selected. Use a designated from the GitLab Runners list if no on-site runners are configured.
+:::
+
+Then trigger a pipeline by pushing a commit. After `demonstration:first` is done, the following error message will appear on the terminal of `demonstration:second` when it starts, and stops it from running:
 
 ```shell
 Error: unable to remove file "./home/foo/bar.txt"
 ```
 
-The issue is rooted to the file owner and its permission. Since the file-creating script is run by `root`, which causes the files created by mounting `./home/:/home/` belong to `root`, and the jobs are run by `gitlab-runner`, which doesn't have permission to modify `root` files, the cleanup performed automatically by the jobs will fail due to insufficient permission. This is how the project folder within the runner looks like now:
+The issue is rooted to the file owner and its permission. Since `CMD` is run by `root`, which causes the files created by mounting `./home/:/home/` belong to `root`, and the jobs are run by `gitlab-runner`, which doesn't have permission to modify `root` files, the cleanup performed automatically after a job is finished will fail due to insufficient permission. This is how the project folder within the runner looks like now:
 
 ```shell
 # highlight-start
@@ -113,77 +106,70 @@ The issue is rooted to the file owner and its permission. Since the file-creatin
         └── bar.txt
 # highlight-end
 └── Dockerfile
-└── helper-build.sh
-└── helper-run.sh
+└── helper-docker-operate.sh
+└── .gitignore
+└── .gitlab-ci.yml
 ```
 
 ## Solution
 
-### Prerequesites
+The steps to recover the runners from not running and promise the generated files are accessible by the host.
+
+### Resolve Existing Generated Files
 
 The permission issue happens every time the runner checks out the repository, which would stop the runner from running any of its job scripts. To resolve it, we need to first comment out the problematic jobs `demonstration:first` and `demonstration:second`, and then add the following to `.gitlab-ci.yml`:
 
-```yaml
+```yml
 variables:
   GIT_STRATEGY: "fetch"
 
 default:
   before_script: |
     bash helper-docker-permit.sh
-    echo "$CI_REGISTRY_PASSWORD" | \
-    docker login \
-      "$CI_REGISTRY" \
-      --username "$CI_REGISTRY_USER" \
-      --password-stdin
   after_script: |
     bash helper-docker-permit.sh
 ```
 
+Then create `helper-docker-permit.sh`:
+
+```shell title="./helper-docker-permit.sh"
+docker run --rm --user "root" --volume "./home/:/home/" \
+    "baz:latest" "bash" "-c" \
+    "
+        chmod --recursive 777 /home/ && \
+        chown --recursive gitlab-runner:gitlab-runner /home/
+    "
+```
+
+:::note
+You only need to run either `chmod` or `chown` to the mounted location. However, running both will still work.
+:::
+
 After that, push to trigger a pipeline. The job will still fail, however, the newest commit has been checked out and available on the runner. Modify `GIT_STRATEGY` to `none` and push it again:
 
-```yaml
+```yml
 variables:
   GIT_STRATEGY: "none"
 ```
 
 The runners are now back to normal and the permission will not appear and stop the jobs from running.
 
-### Own Dockerfile
+#### Update User in Dockerfile
 
-```shell
-docker run --rm \
-    --user "root" \
-    --volume "./home/:/home/" \
-    "baz:latest" \
-    "bash" "-c" \
-        "
-            sudo chmod --recursive 777 /home/ && \
-            sudo chown --recursive gitlab-runner:gitlab-runner /home/
-        "
+Use the current user in the runner for `USER` can also make the generated files accessible. `_DOCKER_IMAGE` can be any in-house or third-party Docker images that generates files by mounting volumes:
+
+```yml title="./.gitlab-ci.yml"
+script: |
+  _DOCKER_IMAGE="baz:latest"
+  touch "./Dockerfile"
+  echo "FROM $_DOCKER_IMAGE" > "./Dockerfile"
+  echo "USER $(id --user)" >> "./Dockerfile"
+  docker build --tag "baz:latest" \
+    "./"
+  docker run --rm --volume "./home/:/home/" \
+    "baz:latest"
 ```
 
-:::info
-You only need to run either `chmod` or `chown` to the mounted location. However, running both of them will still work.
+:::note
+The Docker run flag `--user` may also work. This hasn't been confirmed yet.
 :::
-
-### Third-Party Dockerfile
-
-```shell
-docker pull \
-    "$DOCKER_IMAGE_PROTOC_GEN_DOC"
-    touch "./Dockerfile"
-    echo "FROM $DOCKER_IMAGE_PROTOC_GEN_DOC" > "./Dockerfile"
-    echo "USER $(id --user)" >> "./Dockerfile"
-    docker build \
-      --file "./Dockerfile" \
-      --tag "$CI_PROJECT_NAME/protoc-gen-doc" \
-      "./"
-    mkdir --parent "./-/document/"
-    chmod --recursive 777 "./-/document/"
-    docker run \
-      --volume "./-/document/:/out/" \
-      --volume "./source/protocol-buffers/:/protos/" \
-      --network "host" \
-      --rm \
-      "$CI_PROJECT_NAME/protoc-gen-doc"
-```

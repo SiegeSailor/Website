@@ -356,7 +356,7 @@ const config: Config = {
       title: "Jin Yu, Zhang's Website",
     },
     prism: {
-      additionalLanguages: ["bash", "shell-session", "sql"],
+      additionalLanguages: ["bash", "docker", "shell-session", "sql"],
       theme: prismThemes.github,
       darkTheme: undefined,
       defaultLanguage: undefined,
