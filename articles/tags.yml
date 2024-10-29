@@ -1,3 +1,8 @@
+.net:
+  label: .NET
+  permalink: /dotnet
+  description: Articles and tutorials about the .NET framework and related technologies.
+
 django:
   label: Django
   permalink: /django
@@ -6,12 +11,12 @@ django:
 docker:
   label: Docker
   permalink: /docker
-  description: Test
+  description: Articles and tutorials about Docker, a platform for developing, shipping, and running applications.
 
 gitlab:
   label: Gitlab
   permalink: /gitlab
-  description: Test
+  description: Articles and tutorials about GitLab, a web-based DevOps lifecycle tool.
 
 html:
   label: HTML
@@ -27,6 +32,11 @@ linux:
   label: Linux
   permalink: /linux
   description: Guides and tutorials related to the Linux operating system.
+
+nuget:
+  label: NuGet
+  permalink: /nuget
+  description: Articles and tutorials about NuGet, a package manager for the Microsoft development platform.
 
 typescript:
   label: TypeScript
