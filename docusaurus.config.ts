@@ -278,7 +278,7 @@ const config: Config = {
         xyChart: undefined,
       },
       theme: {
-        light: "default",
+        light: "neutral",
         dark: "default",
       },
     },
@@ -356,7 +356,7 @@ const config: Config = {
       title: "Jin Yu, Zhang's Website",
     },
     prism: {
-      additionalLanguages: ["bash", "docker", "shell-session", "sql"],
+      additionalLanguages: ["bash", "csharp", "docker", "shell-session", "sql"],
       theme: prismThemes.github,
       darkTheme: undefined,
       defaultLanguage: undefined,
