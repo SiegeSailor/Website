@@ -13,6 +13,11 @@ docker:
   permalink: /docker
   description: Articles and tutorials about Docker, a platform for developing, shipping, and running applications.
 
+git:
+  label: Git
+  permalink: /git
+  description: Articles about Git, a distributed version control system.
+
 gitlab:
   label: Gitlab
   permalink: /gitlab

@@ -187,7 +187,7 @@ const config: Config = {
   ssrTemplate: undefined,
   staticDirectories: ["static"],
   stylesheets: [],
-  tagline: "A DevOps Engineer",
+  tagline: "A Software Engineer",
   themes: ["@docusaurus/theme-mermaid", "@docusaurus/theme-live-codeblock"],
   themeConfig: {
     algolia: {
