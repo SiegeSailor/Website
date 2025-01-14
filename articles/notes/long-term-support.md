@@ -26,6 +26,10 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `hotfix/<name>`            | `<SHORT_SHA>` for debugging                                 | `main` or `release/#.#` | `main` or `release/#.#` |
 | `backport/<SHORT_SHA>-#.#` | `<SHORT_SHA>` for debugging                                 | `release/#.#`           | `release/#.#`           |
 
+:::note
+Use `^(main|(feature|hotfix)\/[a-zA-Z0-9._-]+|release\/\d+\.\d+|backport\/[a-zA-Z0-9]{8}\-\d+\.\d+)$` for branch name regex matching.
+:::
+
 ### Long-Term Support Branches
 
 The LTS branches are created for major versions that require extended support from the `main` branch. They are used to maintain stability and provide critical updates over an extended period:

@@ -40,7 +40,7 @@ gitGraph
 
 ### Release Branches
 
-Release branches support the preparation of a new production release. They allow for last-minute defect fixes and preparing release metadata. They are created from the `develop` branch and merged back into both `develop` and `main` branches upon completion:
+Release branches support the preparation of a new production release. They allow for last-minute defect fixes and preparing release metadata. They are created from the `develop` branch, followed by merging onto the `main` branch, and merged back into both `develop` and `main` branches upon completion:
 
 ```mermaid
 gitGraph
@@ -67,7 +67,7 @@ gitGraph
     checkout "main"
     merge "release/1.0.0" tag: "1.0.0"
     branch "hotfix/1.0.1"
-    commit
+    commit tag: "SHORT_SHA"
     checkout "main"
     merge "hotfix/1.0.1" tag: "1.0.1"
 ```
