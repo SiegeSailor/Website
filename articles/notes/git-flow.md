@@ -26,6 +26,10 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `release/#.#.#`  | `<SHORT_SHA>` for debugging                                 | `develop`    | `main` and `develop` |
 | `hotfix/#.#.#`   | `<SHORT_SHA>` for debugging                                 | `main`       | `main` and `develop` |
 
+:::note
+Use `^(main|develop|feature\/[a-zA-Z0-9._-]+|(release|hotfix)\/\d+\.\d+\.\d+)$` for branch name regex matching.
+:::
+
 ### Main and Develop Branches
 
 Main branch contains production-ready code, and every commit should be a release-ready state. Develop branch contains the latest changes for the next release:
