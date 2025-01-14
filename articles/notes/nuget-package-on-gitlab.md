@@ -1,0 +1,505 @@
+---
+tags: [".net", "nuget", "gitlab"]
+---
+
+# NuGet Package on GitLab
+
+This guide walks you through the process of creating, configuring, and publishing and installing a NuGet package using GitLab CI/CD pipelines and GitLab Package Registry. It covers setting up a .NET 8.0 class library project, configuring the necessary metadata, and automating the build and deployment process with GitLab following [Git Flow](/notes/git-flow).
+
+### Prerequisites
+
+This guide was created using the following setup. Versions and tools may vary based on personal preference:
+
+- [GitLab](https://gitlab.com): Manage CI/CD pipelines for NuGet packages
+- [Git](https://git-scm.com/downloads): Version control for source code
+- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0): Build and run .NET applications
+- [Visual Studio Code with .NET Extensions](https://code.visualstudio.com/docs/languages/dotnet): Edit and manage .NET code
+
+## Create a Class Library Project
+
+Assume the project is called **Foo**. Run the .NET command to start a library:
+
+```shell
+dotnet new classlib --name Foo
+cd ./Foo/
+```
+
+This will provide the following starting files:
+
+```
+└── 📁Foo
+    └── Class1.cs
+    └── Foo.csproj
+```
+
+### Source Code
+
+Update the file structure. Add missing files accordingly:
+
+```
+└── 📁Source
+    └── Entrypoint.cs
+    └── Source.csproj
+└── README.md
+```
+
+#### Update Metadata
+
+Add package metadata in `Source.csproj`:
+
+```xml title="./Source/Source.csproj"
+<PropertyGroup>
+  <Authors>Author</Authors>
+  <Company>Company</Company>
+  <Description>Description.</Description>
+  <ImplicitUsings>enable</ImplicitUsings>
+  <Nullable>enable</Nullable>
+  <PackageId>Foo</PackageId>
+  <RepositoryUrl>https://gitlab.com/foo</RepositoryUrl>
+  <RootNamespace>Foo</RootNamespace>
+  <TargetFramework>net8.0</TargetFramework>
+</PropertyGroup>
+```
+
+Include `README.md` in `Source.csproj` for your package:
+
+```xml title="./Source/Source.csproj"
+<PropertyGroup>
+  <PackageReadmeFile>README.md</PackageReadmeFile>
+</PropertyGroup>
+<ItemGroup>
+  <None Include="..\README.md" Pack="true" PackagePath="\"/>
+</ItemGroup>
+```
+
+#### Add dependencies
+
+Add dependencies to the source code. You may skip this if there are no dependencies:
+
+```shell
+cd ./Source/
+dotnet add package Bar --version 2.0.0
+```
+
+You shall see the following in `Source.csproj`:
+
+```xml title="./Source/Source.csproj"
+<PropertyGroup>
+  <PackageTags>Bar</PackageTags>
+</PropertyGroup>
+<ItemGroup>
+  <PackageReference Include="Bar" Version="2.0.0" />
+</ItemGroup>
+```
+
+#### Update Entrypoint Class
+
+Add a public class in `Entrypoint.cs`. This will be the top parent class for the package consumers:
+
+```csharp title="./Source/Entrypoint.cs"
+namespace Foo;
+
+public class Entrypoint()
+{
+    public void Run()
+    {
+        Console.WriteLine("Called Entrypoint.Run().");
+    }
+}
+```
+
+### Test Code
+
+Update the file structure. Add missing files accordingly:
+
+```
+└── 📁Source
+└── 📁Test
+    └── Program.cs
+    └── Test.csproj
+└── README.md
+```
+
+#### Update Metadata
+
+Add metadata in `Test.csproj` to declare the test project attributes:
+
+```xml title="./Test/Test.csproj"
+<PropertyGroup>
+  <TargetFramework>net8.0</TargetFramework>
+  <ImplicitUsings>enable</ImplicitUsings>
+  <Nullable>enable</Nullable>
+  <IsPackable>false</IsPackable>
+  <IsTestProject>true</IsTestProject>
+  <StartupObject>Program</StartupObject>
+</PropertyGroup>
+```
+
+Reference the source code in `Test.csproj`:
+
+```xml title="./Test/Test.csproj"
+<ItemGroup>
+  <ProjectReference Include="..\Source\Source.csproj" />
+</ItemGroup>
+```
+
+#### Add dependencies
+
+Add the following dependencies to `Test.csproj`:
+
+```xml title="./Test/Test.csproj"
+<ItemGroup>
+  <PackageReference Include="coverlet.collector" Version="6.0.0" />
+  <PackageReference Include="JunitXml.TestLogger" Version="4.1.0" />
+  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+  <PackageReference Include="xunit" Version="2.5.3" />
+  <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+</ItemGroup>
+<ItemGroup>
+  <Using Include="Xunit" />
+</ItemGroup>
+```
+
+Restore the dependencies:
+
+```shell
+cd ./Test/
+dotnet restore
+```
+
+#### Add Test Cases
+
+Add a public class in `Program.cs`. This will be executed when running integration tests:
+
+```csharp title="./Test/Program.cs"
+using Foo;
+
+class Program
+{
+    static async Task Main()
+    {
+        Entrypoint entrypoint = new();
+        entrypoint.Run();
+    }
+}
+```
+
+Add a basic unit test case in `Entrypoint.cs`:
+
+```csharp title="./Test/Entrypoint.cs"
+namespace Test.Entrypoint;
+
+public class Run
+{
+    [Fact]
+    public async Task ShouldNotThrowExceptions()
+    {
+        var entrypoint = new Foo.Entrypoint();
+        await entrypoint.Run();
+    }
+}
+```
+
+:::info
+The file structure for unit test cases should be identical to the files in `./Source/`. For example, to test `./Source/Entrypoint.cs` we will have to create a file `./Test/Entrypoint.cs` containing all test cases.
+:::
+
+### Configure Pipelines
+
+Create `.gitlab-ci.yml` with workflow setups. The pipeline will be triggered in production when creating a tag or in development when there is a push event to the merge request:
+
+```yml title="./.gitlab-ci.yml"
+workflow:
+  rules:
+    - if: "$CI_COMMIT_TAG"
+      variables:
+        ENVIRONMENT: "production"
+    - if: "$CI_PIPELINE_SOURCE == 'merge_request_event'"
+      variables:
+        ENVIRONMENT: "development"
+```
+
+Define stages:
+
+```yml title="./.gitlab-ci.yml"
+stages:
+  - "build"
+  - "test"
+  - "publish"
+  - "release"
+```
+
+Define global variables and the default image:
+
+```yml title="./.gitlab-ci.yml"
+variables:
+  GIT_DEPTH: "1"
+  GIT_STRATEGY: "fetch"
+
+default:
+  image: "mcr.microsoft.com/dotnet/sdk:8.0"
+```
+
+#### Build Stage
+
+Build the application for later uses. `artifacts` is added for traceability and can be discarded if not needed:
+
+```yml title="./.gitlab-ci.yml"
+build:
+  stage: "build"
+  environment: "$ENVIRONMENT"
+  script: |
+    cd ./Source/
+    dotnet restore
+    dotnet build --configuration Release
+  dependencies: []
+  artifacts:
+    untracked: true
+    expire_in: "30 days"
+```
+
+#### Test Stage
+
+GitLab has integrated some test report tools, such as Cobertura and Junit. We will log the test results as XML files and have them stored within the artifact directory so that it can be accessed outside of the pipeline and offer a certain level of traceability:
+
+##### Unit Test
+
+Utilize .NET built-in test command and export it in the desired format:
+
+```yml title="./.gitlab-ci.yml"
+unit-test:
+  stage: "test"
+  environment: "$ENVIRONMENT"
+  script: |
+    cd ./Test/
+    dotnet restore
+    dotnet test --verbosity:normal --test-adapter-path:. \
+      --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  dependencies:
+    - "build"
+  artifacts:
+    untracked: true
+    expire_in: "30 days"
+    paths:
+      - "./artifacts/*test-result.xml"
+    reports:
+      junit:
+        - "./artifacts/*test-result.xml"
+```
+
+To display code coverage in the GitLab UI, we need to create a custom solution to calculate the coverage from our test result files. This is because .NET does not provide a summary or code coverage information in a format that GitLab can extract directly from the terminal output:
+
+```shell title="./code-coverage.sh"
+#!/bin/bash
+
+TEST_RESULT_FILE="./artifacts/Test-test-result.xml"
+
+TOTAL_TESTS=$(xmllint --xpath 'string(//testsuite/@tests)' "$TEST_RESULT_FILE")
+FAILURES=$(xmllint --xpath 'string(//testsuite/@failures)' "$TEST_RESULT_FILE")
+ERRORS=$(xmllint --xpath 'string(//testsuite/@errors)' "$TEST_RESULT_FILE")
+SUCCESSFUL_TESTS=$((TOTAL_TESTS - FAILURES - ERRORS))
+
+COVERAGE=$(echo "scale=2; ($SUCCESSFUL_TESTS / $TOTAL_TESTS) * 100" | bc)
+
+echo "Coverage: ${COVERAGE}%"
+```
+
+After having `code-coverage.sh` ready, add the following to the `unit-test` job:
+
+```yml title="./.gitlab-ci.yml"
+unit-test:
+  ...
+  script: |
+    ...
+    cd ./../
+    apt-get update --quiet
+    apt-get install --quiet --yes libxml2-utils bc
+    bash code-coverage.sh
+  coverage: /Coverage:\s+(\d{1,3}\.\d{2})%/
+```
+
+##### Integration Test
+
+Add a job to simply run the test program:
+
+```yml title="./.gitlab-ci.yml"
+integration-test:
+  stage: "test"
+  environment: "$ENVIRONMENT"
+  script: |
+    cd ./Test/
+    dotnet run
+  dependencies:
+    - "build"
+```
+
+#### Publish Stage
+
+Publish NuGet package using `CI_COMMIT_TAG` as the version. The job wouldn't run without triggering the pipeline with tagging:
+
+```yml title="./.gitlab-ci.yml"
+publish:
+  rules:
+    - if: "$CI_COMMIT_TAG"
+  stage: "publish"
+  environment: "$ENVIRONMENT"
+  script: |
+    cd ./Source/
+    dotnet pack --configuration Release /p:Version="$CI_COMMIT_TAG"
+    dotnet nuget push "./bin/Release/*.nupkg" \
+      --source "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json" \
+      --api-key "$CI_JOB_TOKEN"
+  dependencies:
+    - "build"
+```
+
+#### Release Stage
+
+Create a release using `CI_COMMIT_TAG` as the name. The job wouldn't run without triggering the pipeline with tagging:
+
+```yml title="./.gitlab-ci.yml"
+release:
+  rules:
+    - if: "$CI_COMMIT_TAG"
+  stage: "release"
+  environment: "$ENVIRONMENT"
+  image: "registry.gitlab.com/gitlab-org/release-cli:latest"
+  before_script: []
+  after_script: []
+  script: |
+    echo ""
+  release:
+    tag_name: "$CI_COMMIT_TAG"
+    name: "$CI_COMMIT_TAG"
+    description: "$CI_COMMIT_TAG_MESSAGE"
+```
+
+### Develop the Package
+
+Clone the repository:
+
+```shell
+git clone git@gitlab.com:foo.git Foo
+cd ./Foo/
+```
+
+Restore dependencies:
+
+```shell
+(cd ./Source/ && \
+    dotnet restore)
+```
+
+Build the project:
+
+```shell
+(cd ./Source/ && \
+    dotnet build)
+```
+
+#### Test
+
+Restore dependencies:
+
+```shell
+(cd ./Test/ && \
+    dotnet restore)
+```
+
+Run unit tests:
+
+```shell
+(cd ./Test/ && \
+    dotnet test --verbosity normal)
+```
+
+Run integration tests. Add environment values as needed:
+
+```shell
+export ENVIRONMENT_VARIABLE=""
+(cd ./Test/ && \
+    dotnet run)
+```
+
+#### Troubleshoot
+
+Run the following to clean build artifacts in the root directory when encounter _error CS0579: Duplicate 'System.Reflection.AssemblyProductAttribute' attribute_:
+
+```shell
+rm -rf ./Source/bin/ ./Source/obj/ ./Test/bin/ ./Test/obj/
+(cd ./Source/ && \
+    dotnet clean)
+(cd ./../Test/ && \
+    dotnet clean)
+```
+
+## Install Package in a Consumer Project
+
+Assume the consumer project is called **Baz**. First, create or modify a nuget.config file in the project directory:
+
+```shell
+dotnet new nugetconfig
+```
+
+Add the GitLab package source manually to `nuget.config`:
+
+```xml title="./nuget.config"
+<configuration>
+    <packageSources>
+        <add key="GitLab" value="https://gitlab.com/api/v4/projects/<CI_PROJECT_ID>/packages/nuget/index.json" />
+    </packageSources>
+    <packageSourceCredentials>
+        <GitLab>
+            <add key="Username" value="%GITLAB_USER" />
+            <add key="ClearTextPassword" value="%GITLAB_PERSONAL_ACCESS_TOKEN" />
+        </GitLab>
+    </packageSourceCredentials>
+</configuration>
+```
+
+:::info
+Find `CI_PROJECT_ID` on the .NET package's GitLab project general setting or its pipelines.
+:::
+
+:::info
+Create [Personal Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), with at least `read_api` and `read_package_registry` enabled, and export `GITLAB_USER` and `GITLAB_PERSONAL_ACCESS_TOKEN` to the shell or in the `\*.rc` files.
+:::
+
+Install the packages:
+
+```shell
+dotnet add package Foo --version <version>
+```
+
+:::note
+See available NuGet package versions on its GitLab Package Registry. Left it blank to use the newest version.
+:::
+
+Add references to the `.protobuf` files in `Baz.csproj`:
+
+```xml title="./.csproj"
+<ItemGroup>
+    <Protobuf Include="$(NuGetPackageRoot)<CI_PROJECT_NAME>/<version>/ProtocolBuffers/*.proto" GrpcServices="None" />
+</ItemGroup>
+```
+
+:::info
+`<CI_PROJECT_NAME>` is the package project name in lowercase, which is `foo` in this case. `<version>` has to be as same as the installed one.
+:::
+
+Restore the dependencies if the package is already in `Baz.csproj`:
+
+```shell
+dotnet restore
+```
+
+### Troubleshoot
+
+Run the following to ensure the newest package installation:
+
+```shell
+dotnet nuget locals all --clear
+rm -rf bin/ obj/
+dotnet clean
+dotnet restore
+```
