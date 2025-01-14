@@ -1,20 +1,16 @@
 ---
-tags: ["docker", "git", "gitlab"]
+tags: ["git"]
 ---
 
 # Git Flow
 
-[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) is a branching model for Git, originally created by Vincent Driessen. This article describes the setup using Docker, Git, and GitLab, and the modified coding flow for Git Flow.
+[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) is a branching model for Git, originally created by Vincent Driessen. This article describes the modified coding flow for Git Flow.
 
 :::note
 In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit identifier. `#.#` and `#.#.#` refer to semantic versioning where `#` can be any positive integer.
 :::
 
-## Coding Flow
-
-The branches and tags are illustrated here for better understanding of the setup.
-
-### Overview
+## Overview
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
@@ -30,7 +26,7 @@ Here's a table that indicates the branch naming convention and what branches cou
 Use `^(main|develop|feature\/[a-zA-Z0-9._-]+|(release|hotfix)\/\d+\.\d+\.\d+)$` for branch name regex matching.
 :::
 
-### Main and Develop Branches
+## Main and Develop Branches
 
 Main branch contains production-ready code, and every commit should be a release-ready state. Develop branch contains the latest changes for the next release:
 
@@ -42,7 +38,7 @@ gitGraph
     commit
 ```
 
-### Release Branches
+## Release Branches
 
 Release branches support the preparation of a new production release. They allow for last-minute defect fixes and preparing release metadata. They are created from the `develop` branch, followed by merging onto the `main` branch, and merged back into both `develop` and `main` branches upon completion:
 
@@ -59,7 +55,7 @@ gitGraph
     merge "release/1.0.0" tag: "1.0.0"
 ```
 
-### Tags
+## Tags
 
 Tags are used to create releases. They are created on the `release` branches following semantic versioning for marking release points or on any branch using `SHORT_SHA` for marking debugging points:
 
@@ -76,7 +72,7 @@ gitGraph
     merge "hotfix/1.0.1" tag: "1.0.1"
 ```
 
-### Feature Branches
+## Feature Branches
 
 Feature branches are used to develop new features or improvements. They are created from the `develop` branch and merged back upon completion:
 
@@ -95,7 +91,7 @@ gitGraph
     merge "feature/bar"
 ```
 
-### Hotfix Branches
+## Hotfix Branches
 
 Hotfix branches are used to address critical issues or security breaches. They are created from the `main` branch and merged back into both `main` and `develop` branches upon completion:
 
