@@ -14,13 +14,13 @@ In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit iden
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
-| Branch                     | Tags                                                        | Created From            | Merge To                |
-| -------------------------- | ----------------------------------------------------------- | ----------------------- | ----------------------- |
-| `main`                     | `<SHORT_SHA>` for debugging                                 |                         |                         |
-| `feature/<name>`           | `<SHORT_SHA>` for debugging                                 | `main`                  | `main`                  |
-| `release/#.#`              | `<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
-| `hotfix/<name>`            | `<SHORT_SHA>` for debugging                                 | `main` or `release/#.#` | `main` or `release/#.#` |
-| `backport/<SHORT_SHA>-#.#` | `<SHORT_SHA>` for debugging                                 | `release/#.#`           | `release/#.#`           |
+| Branch                     | Tags                                                        | Docker Image | NuGet Package                                                                 | Created From            | Merge To                |
+| -------------------------- | ----------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
+| `main`                     | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
+| `feature/<name>`           | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
+| `release/#.#`              | `<SHORT_SHA>` for debugging and `#.#.#` for making releases | Same as Tags | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
+| `hotfix/<name>`            | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
+| `backport/<SHORT_SHA>-#.#` | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-backport.<SHORT_SHA>.#.#` for debugging                                | `release/#.#`           | `release/#.#`           |
 
 :::note
 Use `^(main|(feature|hotfix)\/[a-zA-Z0-9._-]+|release\/\d+\.\d+|backport\/[a-zA-Z0-9]{8}\-\d+\.\d+)$` for branch name regex matching.
