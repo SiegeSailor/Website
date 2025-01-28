@@ -14,17 +14,54 @@ In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit iden
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
-| Branch                     | Tags                                                        | Docker Image | NuGet Package                                                                 | Created From            | Merge To                |
-| -------------------------- | ----------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
-| `main`                     | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
-| `feature/<name>`           | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
-| `release/#.#`              | `<SHORT_SHA>` for debugging and `#.#.#` for making releases | Same as Tags | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
-| `hotfix/<name>`            | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
-| `backport/<SHORT_SHA>-#.#` | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-backport.<SHORT_SHA>.#.#` for debugging                                | `release/#.#`           | `release/#.#`           |
+| Branch                            | Tags                                                                            | Docker Image | NuGet Package                                                                 | Created From            | Merge To                |
+| --------------------------------- | ------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
+| `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
+| `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
+| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
+| `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
+| `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#`           | `release/#.#`           |
 
 :::note
 Use `^(main|(feature|hotfix)\/[a-zA-Z0-9._-]+|release\/\d+\.\d+|backport\/[a-zA-Z0-9]{8}\-\d+\.\d+)$` for branch name regex matching.
 :::
+
+### Mapping
+
+Use the scripts in this sections to map the tag to the targeted environment.
+
+#### NuGet
+
+Only semantical versioning values are allowed:
+
+```shell
+#!/bin/bash
+
+# main-<SHORT_SHA> to 0.0.0-main.<SHORT_SHA>
+if [[ "$CI_COMMIT_TAG" =~ ^main-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-main.${BASH_REMATCH[1]}"
+# feature-<name>-<SHORT_SHA> to 0.0.0-feature.<name>.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^feature-([^-]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-feature.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# release-#.#-<SHORT_SHA> to 0.0.0-release.#.#.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-release.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# release-#.#.# to #.#.#
+elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+    _VERSION="${BASH_REMATCH[1]}"
+# hotfix-<name>-<SHORT_SHA> to 0.0.0-hotfix.<name>.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^hotfix-([^-]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-hotfix.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT> to 0.0.0-backport.<SHORT_SHA_SOURCE>.#.#.<SHORT_SHA_CURRENT>
+elif [[ "$CI_COMMIT_TAG" =~ ^backport-([a-f0-9]+)-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-backport.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+else
+    echo "Invalid CI_COMMIT_TAG format: $CI_COMMIT_TAG"
+    exit 1
+fi
+
+echo "$_VERSION"
+```
 
 ## Long-Term Support Branches
 

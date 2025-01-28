@@ -247,7 +247,6 @@ Build the application for later uses. `artifacts` is added for traceability and 
 ```yml title="./.gitlab-ci.yml"
 build:
   stage: "build"
-  environment: "$ENVIRONMENT"
   script: |
     cd ./Source/
     dotnet restore
@@ -269,7 +268,6 @@ Utilize .NET built-in test command and export it in the desired format:
 ```yml title="./.gitlab-ci.yml"
 unit-test:
   stage: "test"
-  environment: "$ENVIRONMENT"
   script: |
     cd ./Test/
     dotnet restore
@@ -314,7 +312,7 @@ unit-test:
     cd ./../
     apt-get update --quiet
     apt-get install --quiet --yes libxml2-utils bc
-    bash code-coverage.sh
+    bash "./code-coverage.sh"
   coverage: /Coverage:\s+(\d{1,3}\.\d{2})%/
 ```
 
@@ -325,7 +323,6 @@ Add a job to simply run the test program:
 ```yml title="./.gitlab-ci.yml"
 integration-test:
   stage: "test"
-  environment: "$ENVIRONMENT"
   script: |
     cd ./Test/
     dotnet run
@@ -342,16 +339,17 @@ publish:
   rules:
     - if: "$CI_COMMIT_TAG"
   stage: "publish"
-  environment: "$ENVIRONMENT"
   script: |
     cd ./Source/
-    dotnet pack --configuration Release /p:Version="$CI_COMMIT_TAG"
+    dotnet pack --configuration Release /p:Version="$(./tag-package.sh)"
     dotnet nuget push "./bin/Release/*.nupkg" \
       --source "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json" \
       --api-key "$CI_JOB_TOKEN"
   dependencies:
     - "build"
 ```
+
+You can create your `tag-package.sh` script to map `CI_COMMIT_TAG` according the code flow and branches. See [Long-Term Support](/notes/long-term-support) and [Git Flow](/notes/git-flow).
 
 #### Release Stage
 
@@ -362,7 +360,6 @@ release:
   rules:
     - if: "$CI_COMMIT_TAG"
   stage: "release"
-  environment: "$ENVIRONMENT"
   image: "registry.gitlab.com/gitlab-org/release-cli:latest"
   before_script: []
   after_script: []

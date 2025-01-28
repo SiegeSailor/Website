@@ -14,17 +14,51 @@ In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit iden
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
-| Branch           | Tags                                                        | Docker Image | NuGet Package                                                          | Created From | Merge To             |
-| ---------------- | ----------------------------------------------------------- | ------------ | ---------------------------------------------------------------------- | ------------ | -------------------- |
-| `main`           | `<SHORT_SHA>` for debugging and `#.#.#` for making releases | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging and `#.#.#` for making releases |              |                      |
-| `develop`        | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-develop.<SHORT_SHA>` for debugging                              | `main`       |                      |
-| `feature/<name>` | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                       | `develop`    | `develop`            |
-| `release/#.#.#`  | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-release.#.#.#.<SHORT_SHA>` for debugging                        | `develop`    | `main` and `develop` |
-| `hotfix/#.#.#`   | `<SHORT_SHA>` for debugging                                 | Same as Tags | `0.0.0-hotfix.#.#.#.<SHORT_SHA>` for debugging                         | `main`       | `main` and `develop` |
+| Branch           | Tags                                                             | Docker Image | NuGet Package                                                          | Created From | Merge To             |
+| ---------------- | ---------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------- | ------------ | -------------------- |
+| `main`           | `main-<SHORT_SHA>` for debugging and `#.#.#` for making releases | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging and `#.#.#` for making releases |              |                      |
+| `develop`        | `develop-<SHORT_SHA>` for debugging                              | Same as Tags | `0.0.0-develop.<SHORT_SHA>` for debugging                              | `main`       |                      |
+| `feature/<name>` | `feature-<name>-<SHORT_SHA>` for debugging                       | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                       | `develop`    | `develop`            |
+| `release/#.#.#`  | `release-#.#.#-<SHORT_SHA>` for debugging                        | Same as Tags | `0.0.0-release.#.#.#.<SHORT_SHA>` for debugging                        | `develop`    | `main` and `develop` |
+| `hotfix/#.#.#`   | `hotfix-#.#.#-<SHORT_SHA>` for debugging                         | Same as Tags | `0.0.0-hotfix.#.#.#.<SHORT_SHA>` for debugging                         | `main`       | `main` and `develop` |
 
 :::note
 Use `^(main|develop|feature\/[a-zA-Z0-9._-]+|(release|hotfix)\/\d+\.\d+\.\d+)$` for branch name regex matching.
 :::
+
+### Mapping
+
+Use the scripts in this sections to map the tag to the targeted environment.
+
+#### NuGet
+
+Only semantical versioning values are allowed:
+
+```shell
+#!/bin/bash
+
+# main-<SHORT_SHA> to 0.0.0-main.<SHORT_SHA>
+if [[ "$CI_COMMIT_TAG" =~ ^main-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-main.${BASH_REMATCH[1]}"
+# develop-<SHORT_SHA> to 0.0.0-develop.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^develop-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-develop.${BASH_REMATCH[1]}"
+# feature-<name>-<SHORT_SHA> to 0.0.0-feature.<name>.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^feature-([^-]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-feature.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# release-#.#.#-<SHORT_SHA> to 0.0.0-release.#.#.#-<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-release.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# hotfix-#.#.#-<SHORT_SHA> to 0.0.0-hotfix.#.#.#-<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^hotfix-([0-9]+\.[0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
+  _VERSION="0.0.0-hotfix.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+else
+    echo "Invalid CI_COMMIT_TAG format: $CI_COMMIT_TAG"
+    exit 1
+fi
+
+echo "$_VERSION"
+```
 
 ## Main and Develop Branches
 
