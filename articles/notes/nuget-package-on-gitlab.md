@@ -225,7 +225,7 @@ Define stages:
 stages:
   - "build"
   - "test"
-  - "publish"
+  - "deploy"
   - "release"
 ```
 
@@ -338,7 +338,8 @@ Publish NuGet package using `CI_COMMIT_TAG` as the version. The job wouldn't run
 publish:
   rules:
     - if: "$CI_COMMIT_TAG"
-  stage: "publish"
+  stage: "deploy"
+  environment: "$ENVIRONMENT"
   script: |
     cd ./Source/
     dotnet pack --configuration Release /p:Version="$(./tag-package.sh)"
