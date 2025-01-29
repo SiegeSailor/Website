@@ -23,7 +23,12 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `hotfix/#.#.#`   | `hotfix-#.#.#-<SHORT_SHA>` for debugging                         | Same as Tags | `0.0.0-hotfix.#.#.#.<SHORT_SHA>` for debugging                         | `main`       | `main` and `develop` |
 
 :::note
-Use `^(main|develop|feature\/[a-zA-Z0-9._-]+|(release|hotfix)\/\d+\.\d+\.\d+)$` for branch name regex matching.
+Use the following regex for branch name matching on _GitLab - Project - Settings - Repository - Push Rules_:
+
+```
+^(main|develop|feature\/[a-zA-Z0-9._-]+|(release|hotfix)\/\d+\.\d+\.\d+)$
+```
+
 :::
 
 ### Mapping

@@ -14,16 +14,29 @@ In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit iden
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
-| Branch                            | Tags                                                                            | Docker Image | NuGet Package                                                                 | Created From            | Merge To                |
-| --------------------------------- | ------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
-| `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
-| `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
-| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
-| `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
-| `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#`           | `release/#.#`           |
+| Branch                            | Tags                                                                            | Docker Image  | NuGet Package                                                                 | Created From            | Merge To                |
+| --------------------------------- | ------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
+| `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags  | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
+| `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags  | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
+| `release-candidate/#.#`           | `release-candidate-#.#-<SHORT_SHA>` for debugging                               | Same as Tags. | `0.0.0-release.candidate.#.#.<SHORT_SHA>` for debugging                       | `main`                  | `main`                  |
+| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags  | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
+| `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags  | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
+| `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags  | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#`           | `release/#.#`           |
 
 :::note
-Use `^(main|(feature|hotfix)\/[a-zA-Z0-9._-]+|release\/\d+\.\d+|backport\/[a-zA-Z0-9]{8}\-\d+\.\d+)$` for branch name regex matching.
+Use the following regex for branch name matching on _GitLab - Project - Settings - Repository - Push Rules_:
+
+```
+^(main|(feature|hotfix)\/[a-zA-Z0-9._-]+|release-candidate\/\d+\.\d+|release\/\d+\.\d+|backport\/[a-zA-Z0-9]{8}\-\d+\.\d+)$
+```
+
+![GitLab Project Settings Repository Push Rules](./GitLab%20Project%20Settings%20Repository%20Push%20Rules.png)
+:::
+
+:::note
+Use wildcard to create patterns to match each branch name to configure protected branches on _GitLab - Project - Settings - Repository - Protected Branches_:
+
+![GitLab Project Settings Repository Protected Branches](./GitLab%20Project%20Settings%20Repository%20Protected%20Branchesa.png)
 :::
 
 ### Mapping
@@ -43,6 +56,9 @@ if [[ "$CI_COMMIT_TAG" =~ ^main-([a-f0-9]+)$ ]]; then
 # feature-<name>-<SHORT_SHA> to 0.0.0-feature.<name>.<SHORT_SHA>
 elif [[ "$CI_COMMIT_TAG" =~ ^feature-([^-]+)-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-feature.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+# release-candidate-#.#-<SHORT_SHA> to 0.0.0-release.candidate.#.#.<SHORT_SHA>
+elif [[ "$CI_COMMIT_TAG" =~ ^release-candidate-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
+    _VERSION="0.0.0-release.candidate.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 # release-#.#-<SHORT_SHA> to 0.0.0-release.#.#.<SHORT_SHA>
 elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-release.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
@@ -78,6 +94,24 @@ gitGraph
     branch "release/2.0"
     commit
     checkout "main"
+    commit
+```
+
+## Release Candidate Branches
+
+Release Candidate branches are used for final testing. They are created from the `main` branch and merged back upon completion. LTS branches are created after it:
+
+```mermaid
+gitGraph
+    commit
+    branch "release-candidate/1.0"
+    commit
+    checkout "release-candidate/1.0"
+    commit
+    checkout "main"
+    merge "release-candidate/1.0"
+    commit
+    branch "release/1.0"
     commit
 ```
 
