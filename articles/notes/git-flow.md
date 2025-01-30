@@ -49,7 +49,7 @@ if [[ "$CI_COMMIT_TAG" =~ ^main-([a-f0-9]+)$ ]]; then
 elif [[ "$CI_COMMIT_TAG" =~ ^develop-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-develop.${BASH_REMATCH[1]}"
 # feature-<name>-<SHORT_SHA> to 0.0.0-feature.<name>.<SHORT_SHA>
-elif [[ "$CI_COMMIT_TAG" =~ ^feature-([^-]+)-([a-f0-9]+)$ ]]; then
+elif [[ "$CI_COMMIT_TAG" =~ ^feature-([z-a0-9-]+)-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-feature.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 # release-#.#.#-<SHORT_SHA> to 0.0.0-release.#.#.#-<SHORT_SHA>
 elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then

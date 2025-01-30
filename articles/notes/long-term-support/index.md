@@ -54,7 +54,7 @@ Only semantical versioning values are allowed:
 if [[ "$CI_COMMIT_TAG" =~ ^main-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-main.${BASH_REMATCH[1]}"
 # feature-<name>-<SHORT_SHA> to 0.0.0-feature.<name>.<SHORT_SHA>
-elif [[ "$CI_COMMIT_TAG" =~ ^feature-([^-]+)-([a-f0-9]+)$ ]]; then
+elif [[ "$CI_COMMIT_TAG" =~ ^feature-([z-a0-9-]+)-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-feature.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 # release-candidate-#.#-<SHORT_SHA> to 0.0.0-release.candidate.#.#.<SHORT_SHA>
 elif [[ "$CI_COMMIT_TAG" =~ ^release-candidate-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
@@ -66,7 +66,7 @@ elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
 elif [[ "$CI_COMMIT_TAG" =~ ^release-([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
     _VERSION="${BASH_REMATCH[1]}"
 # hotfix-<name>-<SHORT_SHA> to 0.0.0-hotfix.<name>.<SHORT_SHA>
-elif [[ "$CI_COMMIT_TAG" =~ ^hotfix-([^-]+)-([a-f0-9]+)$ ]]; then
+elif [[ "$CI_COMMIT_TAG" =~ ^hotfix-([z-a0-9-]+)-([a-f0-9]+)$ ]]; then
     _VERSION="0.0.0-hotfix.${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 # backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT> to 0.0.0-backport.<SHORT_SHA_SOURCE>.#.#.<SHORT_SHA_CURRENT>
 elif [[ "$CI_COMMIT_TAG" =~ ^backport-([a-f0-9]+)-([0-9]+\.[0-9]+)-([a-f0-9]+)$ ]]; then
