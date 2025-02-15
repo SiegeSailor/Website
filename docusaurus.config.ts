@@ -357,7 +357,7 @@ const config: Config = {
     },
     prism: {
       additionalLanguages: ["bash", "csharp", "docker", "shell-session", "sql"],
-      theme: prismThemes.github,
+      theme: prismThemes.jettwaveLight,
       darkTheme: undefined,
       defaultLanguage: undefined,
       magicComments: [
