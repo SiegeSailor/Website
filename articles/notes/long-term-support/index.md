@@ -19,7 +19,7 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags  | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
 | `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags  | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
 | `release-candidate/#.#`           | `release-candidate-#.#-<SHORT_SHA>` for debugging                               | Same as Tags. | `0.0.0-release.candidate.#.#.<SHORT_SHA>` for debugging                       | `main`                  | `main`                  |
-| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags  | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `main`                  |                         |
+| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags  | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `release-candidate/#.#` |                         |
 | `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags  | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
 | `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags  | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#`           | `release/#.#`           |
 
@@ -79,24 +79,6 @@ fi
 echo "$_VERSION"
 ```
 
-## Long-Term Support Branches
-
-The LTS branches are created for major versions that require extended support from the `main` branch. They are used to maintain stability and provide critical updates over an extended period:
-
-```mermaid
-gitGraph
-    commit
-    branch "release/1.0"
-    commit
-    checkout "main"
-    commit
-    commit
-    branch "release/2.0"
-    commit
-    checkout "main"
-    commit
-```
-
 ## Release Candidate Branches
 
 Release Candidate branches are used for final testing. They are created from the `main` branch and merged back upon completion. LTS branches are created after it:
@@ -106,12 +88,26 @@ gitGraph
     commit
     branch "release-candidate/1.0"
     commit
+    branch "release/1.0"
+    commit
+```
+
+## Long-Term Support Branches
+
+The LTS (Long-Term Support) branches are created for major versions that require extended. They are used to maintain stability and provide critical updates over an extended period:
+
+```mermaid
+gitGraph
+    commit
+    branch "release-candidate/1.0"
+    commit
     checkout "release-candidate/1.0"
     commit
-    checkout "main"
-    merge "release-candidate/1.0"
-    commit
     branch "release/1.0"
+    commit
+    checkout "main"
+    commit
+    branch "release-candidate/1.1"
     commit
 ```
 
