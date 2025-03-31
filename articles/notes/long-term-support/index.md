@@ -14,14 +14,14 @@ In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit iden
 
 Here's a table that indicates the branch naming convention and what branches could be created from each branch:
 
-| Branch                            | Tags                                                                            | Docker Image  | NuGet Package                                                                 | Created From            | Merge To                |
-| --------------------------------- | ------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------- | ----------------------- | ----------------------- |
-| `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags  | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                         |
-| `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags  | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                  | `main`                  |
-| `release-candidate/#.#`           | `release-candidate-#.#-<SHORT_SHA>` for debugging                               | Same as Tags. | `0.0.0-release.candidate.#.#.<SHORT_SHA>` for debugging                       | `main`                  | `main`                  |
-| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags  | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `release-candidate/#.#` |                         |
-| `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags  | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#` | `main` or `release/#.#` |
-| `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags  | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#`           | `release/#.#`           |
+| Branch                            | Tags                                                                            | Docker Image  | NuGet Package                                                                 | Created From                             | Merge To                                 |
+| --------------------------------- | ------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `main`                            | `main-<SHORT_SHA>` for debugging                                                | Same as Tags  | `0.0.0-main.<SHORT_SHA>` for debugging                                        |                                          |
+| `feature/<name>`                  | `feature-<name>-<SHORT_SHA>` for debugging                                      | Same as Tags  | `0.0.0-feature.<name>.<SHORT_SHA>` for debugging                              | `main`                                   | `main`                                   |
+| `release-candidate/#.#`           | `release-candidate-#.#-<SHORT_SHA>` for debugging                               | Same as Tags. | `0.0.0-release.candidate.#.#.<SHORT_SHA>` for debugging                       | `main`                                   | `main`                                   |
+| `release/#.#`                     | `release-#.#-<SHORT_SHA>` for debugging and `release-#.#.#` for making releases | Same as Tags  | `0.0.0-release.#.#.<SHORT_SHA>` for debugging and `#.#.#` for making releases | `release-candidate/#.#`                  |                                          |
+| `hotfix/<name>`                   | `hotfix-<name>-<SHORT_SHA>` for debugging                                       | Same as Tags  | `0.0.0-hotfix.<name>.<SHORT_SHA>` for debugging                               | `main` or `release/#.#`                  | `main` or `release/#.#`                  |
+| `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags  | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#` or `release-candidate/#.#` | `release/#.#` or `release-candidate/#.#` |
 
 :::note
 Use the following regex for branch name matching on _GitLab - Project - Settings - Repository - Push Rules_:
@@ -79,22 +79,24 @@ fi
 echo "$_VERSION"
 ```
 
-## Release Candidate Branches
+## Long Term Support Branches
 
-Release Candidate branches are used for final testing. They are created from the `main` branch and merged back upon completion. LTS branches are created after it:
+The LTS (Long-Term Support) branches are created for major versions that require extended. They are used to maintain stability and provide critical updates over an extended period, such as 6 months or 1 year:
 
 ```mermaid
 gitGraph
     commit
-    branch "release-candidate/1.0"
-    commit
     branch "release/1.0"
+    commit
+    checkout "main"
+    commit
+    branch "release/1.1"
     commit
 ```
 
-## Long-Term Support Branches
+### Release Candidate Branches
 
-The LTS (Long-Term Support) branches are created for major versions that require extended. They are used to maintain stability and provide critical updates over an extended period:
+This branch is only needed when the whole branch is a part of the release. On a usual scenario, only products, such as compiled files or images, that come with tags are supported as LTS. However, we do sometimes need to maintain a whole branch for other internal developers to prepare a formal release branch:
 
 ```mermaid
 gitGraph
