@@ -23,6 +23,11 @@ gitlab:
   permalink: /gitlab
   description: Articles and tutorials about GitLab, a web-based DevOps lifecycle tool.
 
+grpc:
+  label: gRPC
+  permalink: /grpc
+  description: Articles and tutorials about gRPC, a high-performance, open-source universal RPC framework.
+
 html:
   label: HTML
   permalink: /html

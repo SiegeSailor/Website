@@ -424,11 +424,11 @@ export ENVIRONMENT_VARIABLE=""
 Run the following to clean build artifacts in the root directory when encounter _error CS0579: Duplicate 'System.Reflection.AssemblyProductAttribute' attribute_:
 
 ```shell
-rm -rf ./Source/bin/ ./Source/obj/ ./Test/bin/ ./Test/obj/
 (cd ./Source/ && \
     dotnet clean)
-(cd ./../Test/ && \
+(cd ./Test/ && \
     dotnet clean)
+rm -rf ./Source/bin/ ./Source/obj/ ./Test/bin/ ./Test/obj/
 ```
 
 ## Install Package in a Consumer Project
