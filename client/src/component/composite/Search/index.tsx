@@ -1,17 +1,16 @@
 import React from "react";
-import * as ReactIconsCI from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
+import { Button, ButtonGroup } from "@heroui/button";
 
-import Button from "@/component/element/Button";
-import Input from "@/component/element/Input";
 import styles from "./index.module.scss";
-import Key from "@/component/element/Key";
 import Modal, { useModal } from "@/component/element/Modal";
 
 export default function () {
   const { isVisible, show, hide } = useModal();
   return (
     <div className={styles.container}>
-      <Button
+      <Button>fdsa</Button>
+      {/* <Button
         format="outline"
         size="small"
         icon={<ReactIconsCI.CiSearch />}
@@ -24,10 +23,11 @@ export default function () {
           show();
         }}
       />
-      <Button format="outline" size="small" icon={<ReactIconsCI.CiChat1 />} />
+      <Button format="outline" size="small" icon={<ReactIconsCI.CiChat1 />} /> */}
 
       <Modal isVisible={isVisible} onClickOverlay={hide}>
-        <Input />
+        {/* <Input /> */}
+        <></>
       </Modal>
     </div>
   );

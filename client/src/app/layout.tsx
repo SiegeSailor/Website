@@ -1,10 +1,7 @@
 import React from "react";
 import * as next from "next";
-import * as nextThemes from "next-themes";
+import * as heroUI from "@heroui/react";
 
-import "@/style/reset.scss";
-import "@/style/font.scss";
-import "@/style/theme.scss";
 import "@/style/global.scss";
 import Layout from "@/component/composite/Layout";
 
@@ -19,15 +16,10 @@ export default async function ({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning>
-        <nextThemes.ThemeProvider
-          disableTransitionOnChange
-          attribute="data-theme"
-          defaultTheme="light"
-          themes={["light", "dark"]}
-        >
+      <body>
+        <heroUI.HeroUIProvider>
           <Layout>{children}</Layout>
-        </nextThemes.ThemeProvider>
+        </heroUI.HeroUIProvider>
       </body>
     </html>
   );
