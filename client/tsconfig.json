@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
+    "target": "ES2017",
     "tsBuildInfoFile": "./build-cache"
   },
   "exclude": ["./node_modules/"],

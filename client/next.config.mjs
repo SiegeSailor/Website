@@ -3,7 +3,6 @@ const nextConfig = {
   distDir: ".next",
   redirects: async () => [],
   experimental: {
-    esmExternals: false,
     typedRoutes: true,
   },
   output: "standalone",
