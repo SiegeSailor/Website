@@ -4,7 +4,9 @@ import * as nextThemes from "next-themes";
 
 import "@/style/reset.scss";
 import "@/style/font.scss";
+import "@/style/theme.scss";
 import "@/style/global.scss";
+import Layout from "@/component/composite/Layout";
 
 export const metadata: next.Metadata = {
   title: "Home | Jin Yu Zhang",
@@ -24,7 +26,7 @@ export default async function ({
           defaultTheme="light"
           themes={["light", "dark"]}
         >
-          {children}
+          <Layout>{children}</Layout>
         </nextThemes.ThemeProvider>
       </body>
     </html>

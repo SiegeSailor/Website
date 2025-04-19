@@ -1,45 +1,3 @@
-:root {
-  --color-grey-100: 245, 245, 245;
-  --color-grey-200: 230, 230, 231;
-  --color-grey-300: 185, 185, 185;
-  --color-grey-400: 99, 100, 102;
-  --color-grey-500: 81, 81, 82;
-  --color-grey-600: 61, 61, 62;
-  --color-grey-700: 30, 30, 31;
-  --color-orange-100: 247, 222, 200;
-  --color-orange-200: 240, 189, 145;
-  --color-orange-300: 234, 156, 94;
-  --color-orange-400: 245, 128, 37;
-  --color-orange-500: 219, 115, 47;
-  --color-orange-600: 163, 86, 33;
-  --color-orange-700: 90, 48, 16;
-  --color-green-100: 192, 237, 200;
-  --color-green-200: 129, 218, 146;
-  --color-green-300: 65, 200, 92;
-  --color-green-400: 45, 154, 67;
-  --color-green-500: 65, 124, 63;
-  --color-green-600: 48, 94, 47;
-  --color-green-700: 31, 62, 31;
-  --color-aqua-100: 194, 248, 255;
-  --color-aqua-200: 92, 236, 255;
-  --color-aqua-300: 31, 229, 255;
-  --color-aqua-400: 0, 185, 210;
-  --color-aqua-500: 71, 160, 181;
-  --color-aqua-600: 54, 124, 141;
-  --color-aqua-700: 28, 71, 81;
-  --color-white: 255, 255, 255;
-  --color-black: 0, 0, 0;
-
-  --box-shadow-light: 0.0625rem 0.125rem 0.1875rem -0.0625rem rgba(var(--color-grey-500), 0.1);
-  --box-shadow-heavy: 0.0625rem 0.125rem 0.25rem 0.0625rem
-    rgba(var(--color-grey-500), 0.12);
-}
-
-[data-theme="dark"] {
-  --color-white: 0, 0, 0;
-  --color-black: 255, 255, 255;
-}
-
 html,
 body {
   max-width: 100vw;
@@ -58,4 +16,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.react-icons {
+  vertical-align: middle;
 }
