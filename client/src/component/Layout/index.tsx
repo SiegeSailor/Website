@@ -3,7 +3,7 @@
 import React from "react";
 
 import styles from "./index.module.scss";
-import Search from "@/component/composite/Search";
+import Search from "@/component/Search";
 
 const defaultValues = {};
 const Context = React.createContext(defaultValues);
