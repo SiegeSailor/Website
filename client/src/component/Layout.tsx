@@ -14,11 +14,5 @@ export default function ({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <Context.Provider value={defaultValues}>
-      <div className="overflow-y-auto">
-        <main>{children}</main>
-      </div>
-    </Context.Provider>
-  );
+  return <Context.Provider value={defaultValues}>{children}</Context.Provider>;
 }
