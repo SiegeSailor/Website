@@ -1,14 +1,11 @@
 "use client";
 
 import React from "react";
-import { Kbd } from "@heroui/kbd";
-import { link } from "@heroui/theme";
-import { NavbarMenu, NavbarMenuItem } from "@heroui/navbar";
+import { NavbarMenu, NavbarMenuItem, Kbd, link, Button } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import * as next from "next";
 import clsx from "clsx";
 import NextLink from "next/link";
-import { Button } from "@heroui/button";
 
 import Search from "@/component/Search";
 

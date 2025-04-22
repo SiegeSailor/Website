@@ -6,9 +6,9 @@ import {
   NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-} from "@heroui/navbar";
+  Divider,
+} from "@heroui/react";
 import NextLink from "next/link";
-import { Divider } from "@heroui/divider";
 
 import ThemeSwitch from "@/component/ThemeSwitch";
 import Search from "@/component/Search";
