@@ -4,11 +4,9 @@ import { Button } from "@heroui/button";
 import { Kbd } from "@heroui/kbd";
 import { Divider } from "@heroui/divider";
 
-import styles from "./index.module.scss";
-
 export default function () {
   return (
-    <div className={styles.container}>
+    <div>
       <Button startContent={<CiSearch />} size="sm" variant="bordered">
         Type <Kbd keys={["command"]}>S</Kbd> to search
       </Button>

@@ -1,25 +1,25 @@
 import React from "react";
 import * as next from "next";
-import * as heroUI from "@heroui/react";
 
 import "@/style/global.css";
 import Layout from "@/component/Layout";
+import Provider from "@/component/Provider";
 
 export const metadata: next.Metadata = {
   title: "Home | Jin Yu Zhang",
 };
 
-export default async function ({
+export default function ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning>
-        <heroUI.HeroUIProvider>
+    <html suppressHydrationWarning lang="en">
+      <body>
+        <Provider>
           <Layout>{children}</Layout>
-        </heroUI.HeroUIProvider>
+        </Provider>
       </body>
     </html>
   );
