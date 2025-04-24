@@ -34,7 +34,7 @@ export default function () {
                 <Button
                   endContent={<Kbd keys={["command"]}>{item.press}</Kbd>}
                   size="md"
-                  variant={isActive ? "flat" : "light"}
+                  variant="light"
                   className="w-full md:w-6/12 lg:w-8/12"
                   color={isActive ? "primary" : "default"}
                 >

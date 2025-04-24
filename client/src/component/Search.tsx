@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { RiSearch2Line } from "react-icons/ri";
+import { SearchIcon } from "lucide-react";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
+  ModalFooter,
   Button,
   Kbd,
   useDisclosure,
@@ -27,10 +28,7 @@ export default function () {
         endContent={<Kbd keys={["command"]}>S</Kbd>}
         variant="bordered"
         startContent={
-          <RiSearch2Line
-            size="1.25rem"
-            className="text-base text-default-400 pointer-events-none flex-shrink-0"
-          />
+          <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
       >
         Search
@@ -50,16 +48,21 @@ export default function () {
                   labelPlacement="outside"
                   placeholder="Type to search"
                   startContent={
-                    <RiSearch2Line className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+                    <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
                   }
                   disabled
                   type="search"
                 />
                 <Divider />
-                <p className="opacity-50 pb-1">
-                  Searching is not currently available.
+                <p className="opacity-50">
+                  Searching is currently Unavailable.
                 </p>
               </ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
             </>
           )}
         </ModalContent>

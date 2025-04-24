@@ -36,7 +36,7 @@ export default function ({
         <Provider>
           <Header />
           <div className="relative flex flex-col h-screen">
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="container mx-auto max-w-7xl py-8 px-6 flex-grow">
               <ScrollShadow>
                 <Layout>{children}</Layout>
               </ScrollShadow>

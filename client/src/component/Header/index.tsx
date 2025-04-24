@@ -1,5 +1,5 @@
 import React from "react";
-import { RiAliensLine } from "react-icons/ri";
+import { TerminalSquareIcon } from "lucide-react";
 import {
   Navbar,
   NavbarContent,
@@ -34,7 +34,7 @@ export default function () {
           <Search />
         </NavbarItem>
         <Divider orientation="vertical" className="hidden sm:flex h-6" />
-        <RiAliensLine className="text-default-500" size="1.25rem" />
+        <TerminalSquareIcon className="text-default-500" />
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
