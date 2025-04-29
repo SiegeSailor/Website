@@ -1,5 +1,6 @@
 import React from "react";
 import * as next from "next";
+import { Roboto } from "next/font/google";
 
 import "@/style/global.css";
 import { ScrollShadow } from "@heroui/react";
@@ -25,6 +26,8 @@ export const viewport: next.Viewport = {
   ],
 };
 
+const FontRoboto = Roboto({ subsets: ["latin"] });
+
 export default function ({
   children,
 }: Readonly<{
@@ -32,7 +35,7 @@ export default function ({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body>
+      <body className={FontRoboto.className}>
         <Provider>
           <Header />
           <div className="relative flex flex-col h-screen">
