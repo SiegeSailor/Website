@@ -5,6 +5,7 @@ import { Button, Card, CardFooter, CardHeader, Image } from "@heroui/react";
 import { concatTitle } from "@/helper";
 import ContentHero from "@/component/ContentHero";
 import CardExperience from "@/component/CardExperience";
+import CardBlog from "@/component/CardBlog";
 
 export const metadata: next.Metadata = {
   title: concatTitle("Home"),
@@ -16,22 +17,8 @@ export default function () {
       <ContentHero />
       <div className="gap-2 grid grid-cols-12 grid-rows-2">
         <CardExperience className="col-span-12 sm:col-span-4 h-[300px]" />
-        <Card className="col-span-12 sm:col-span-4 h-[300px]">
-          <CardHeader className="absolute z-10 top-1 flex-col items-start!">
-            <p className="text-tiny text-white/60 uppercase font-bold">
-              Plant a tree
-            </p>
-            <h4 className="text-white font-medium text-large">
-              Contribute to the planet
-            </h4>
-          </CardHeader>
-          <Image
-            removeWrapper
-            alt="Card background"
-            className="z-0 w-full h-full object-cover"
-            src="https://heroui.com/images/card-example-3.jpeg"
-          />
-        </Card>
+        <CardBlog className="col-span-12 sm:col-span-4 h-[300px]" />
+
         <Card className="col-span-12 sm:col-span-4 h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col items-start!">
             <p className="text-tiny text-white/60 uppercase font-bold">

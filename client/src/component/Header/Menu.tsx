@@ -12,7 +12,6 @@ import Search from "@/component/Search";
 const pages: { label: string; href: next.Route; press: string }[] = [
   { label: "Home", href: "/", press: "H" },
   { label: "Blog", href: "/blog", press: "B" },
-  { label: "Note", href: "/note", press: "N" },
   { label: "Profile", href: "/profile", press: "P" },
   { label: "Project", href: "/project", press: "R" },
   { label: "Contact", href: "/contact", press: "C" },
