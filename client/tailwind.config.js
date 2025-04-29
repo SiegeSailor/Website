@@ -9,8 +9,6 @@ const config = {
   theme: {
     inset: {
       "-1": "-0.425rem",
-      "-3.5": "-0.795rem",
-      "-3.75": "-0.85rem",
     },
     extend: {
       animation: {

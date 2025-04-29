@@ -16,6 +16,22 @@ export default function ({ className }: { className?: string }) {
         <Timeline
           items={[
             {
+              title: "Software Engineer at Servicetech International",
+              time: "Jun 2016 - Nov 2018",
+            },
+            {
+              title: "Software Engineer at Edallianz",
+              time: "Jan 2019 - Nov2019",
+            },
+            {
+              title: "Software Engineer at Shopee",
+              time: "Jan 2022 - Feb 2022",
+            },
+            {
+              title: "Software Engineer at StageSource",
+              time: "Sep 2022 - Dec 2022",
+            },
+            {
               title: "Master in Computer Science at Boston University",
               time: "May 2022 - Jan 2024",
             },
