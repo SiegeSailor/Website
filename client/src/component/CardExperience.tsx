@@ -30,20 +30,20 @@ export default function ({ className }: { className?: string }) {
         <Timeline
           items={[
             {
-              title: "M.S. in CS at Boston University",
+              title: "Master in Computer Science at Boston University",
               time: "May 2022 - Jan 2024",
             },
             {
-              title: "SWE Intern at CooperSurgical",
+              title: "Software Engineering Intern at CooperSurgical",
               time: "May 2023 - Aug 2023",
             },
             {
               title:
-                "Cert. in DS and ML at Massachusetts Institute of Technology",
+                "Certificate in Data Science and Machine Learning at Massachusetts Institute of Technology",
               time: "Aug 2023 - Nov 2023",
             },
             {
-              title: "SWE at CooperSurgical",
+              title: "Software Engineer at CooperSurgical",
               time: "Jan 2024 - Present",
             },
           ]}

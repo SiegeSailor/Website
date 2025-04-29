@@ -16,8 +16,8 @@ export default function ({
           >
             <div className="absolute top-0 -left-1 w-2.5 h-2.5 bg-black rounded-lg translate-y-6" />
             <div className="flex flex-col translate-y-6">
-              <p className="text-medium text-nowrap">{item.title}</p>
-              <p className="text-sm text-nowrap text-default-400">
+              <p className="text-sm text-nowrap">{item.title}</p>
+              <p className="text-tiny text-nowrap text-default-400">
                 {item.time}
               </p>
             </div>
