@@ -7,6 +7,11 @@ const config = {
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    inset: {
+      "-1": "-0.35rem",
+      "-3.5": "-0.795rem",
+      "-3.75": "-0.85rem",
+    },
     extend: {
       animation: {
         blink: "blink 1s step-start infinite",

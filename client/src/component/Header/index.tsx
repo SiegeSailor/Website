@@ -21,9 +21,7 @@ export default function () {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-center items-center gap-1" href="/">
-            <h1 className="text-xl font-semibold text-inherit">
-              {concatTitle()}
-            </h1>
+            <h1 className="text-xl font-light text-inherit">{concatTitle()}</h1>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
@@ -36,7 +34,7 @@ export default function () {
           <Search />
         </NavbarItem>
         <Divider orientation="vertical" className="hidden sm:flex h-6" />
-        <TerminalSquareIcon className="text-default-500" />
+        <TerminalSquareIcon className="text-default-500 text-opacity-disabled translate-y-px" />
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>

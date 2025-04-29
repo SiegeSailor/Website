@@ -1,91 +1,21 @@
 import React from "react";
 import * as next from "next";
-import { RocketIcon } from "lucide-react";
-import {
-  Button,
-  Card,
-  CardFooter,
-  CardHeader,
-  Image,
-  Link,
-} from "@heroui/react";
-import NextLink from "next/link";
+import { Button, Card, CardFooter, CardHeader, Image } from "@heroui/react";
 
 import { concatTitle } from "@/helper";
-import TextTyping from "@/component/TextTyping";
+import ContentHero from "@/component/ContentHero";
+import CardExperience from "@/component/CardExperience";
 
 export const metadata: next.Metadata = {
   title: concatTitle("Home"),
 };
 
-function BlockIntro() {
-  return (
-    <div className="text-left w-full">
-      <div className="space-y-2">
-        <h1 className="text-4xl font-light">Hi, I'm Jin Yu Zhang!</h1>
-        <h2 className="text-4xl font-light text-gray-700 flex flex-col">
-          <span className="text-nowrap">
-            I’m a
-            <span className="font-semibold px-2">
-              <TextTyping words={["Software", "Full-Stack", "DevOps"]} />
-            </span>
-            Engineer
-          </span>
-          <span className="text-nowrap">
-            at
-            <Link
-              className="px-2 text-4xl"
-              isExternal
-              showAnchorIcon
-              underline="always"
-              href="https://www.coopersurgical.com/"
-            >
-              CooperSurgical.
-            </Link>
-          </span>
-        </h2>
-      </div>
-      <div className="flex items-center gap-4 mt-8">
-        <NextLink href="/profile">
-          <Button
-            startContent={<RocketIcon />}
-            size="lg"
-            radius="full"
-            variant="shadow"
-            color="primary"
-          >
-            Open to Work
-          </Button>
-        </NextLink>
-        <p className="text-gray-600">
-          Feel free to explore my portfolio and reach out — I’d love to connect!
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export default function () {
   return (
     <section className="max-w-[768px] mx-auto flex flex-col items-center justify-center gap-16">
-      <BlockIntro />
+      <ContentHero />
       <div className="gap-2 grid grid-cols-12 grid-rows-2">
-        <Card className="col-span-12 sm:col-span-4 h-[300px]">
-          <CardHeader className="absolute z-10 top-1 flex-col items-start!">
-            <p className="text-tiny text-white/60 uppercase font-bold">
-              What to watch
-            </p>
-            <h4 className="text-white font-medium text-large">
-              Stream the Acme event
-            </h4>
-          </CardHeader>
-          <Image
-            removeWrapper
-            alt="Card background"
-            className="z-0 w-full h-full object-cover"
-            src="https://heroui.com/images/card-example-4.jpeg"
-          />
-        </Card>
+        <CardExperience className="col-span-12 sm:col-span-4 h-[300px]" />
         <Card className="col-span-12 sm:col-span-4 h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col items-start!">
             <p className="text-tiny text-white/60 uppercase font-bold">

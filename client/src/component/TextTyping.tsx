@@ -13,43 +13,43 @@ export default function ({
   timePause?: number;
   words: string[];
 }) {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [indexCurrentWord, setIndexCurrentWord] = useState(0);
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [charIndex, setCharIndex] = useState(0);
+  const [indexCharacter, setCharacterIndex] = useState(0);
 
   useEffect(() => {
-    const currentWord = words[currentWordIndex];
+    const currentWord = words[indexCurrentWord];
     let timeoutId: NodeJS.Timeout;
 
     if (!isDeleting) {
-      if (charIndex < currentWord.length) {
+      if (indexCharacter < currentWord.length) {
         timeoutId = setTimeout(() => {
-          setText(currentWord.substring(0, charIndex + 1));
-          setCharIndex((prev) => prev + 1);
+          setText(currentWord.substring(0, indexCharacter + 1));
+          setCharacterIndex((prev) => prev + 1);
         }, speedTyping);
       } else {
         timeoutId = setTimeout(() => setIsDeleting(true), timePause);
       }
     } else {
-      if (charIndex > 0) {
+      if (indexCharacter > 0) {
         timeoutId = setTimeout(() => {
-          setText(currentWord.substring(0, charIndex - 1));
-          setCharIndex((prev) => prev - 1);
+          setText(currentWord.substring(0, indexCharacter - 1));
+          setCharacterIndex((prev) => prev - 1);
         }, speedDeleting);
       } else {
         timeoutId = setTimeout(() => {
           setIsDeleting(false);
-          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+          setIndexCurrentWord((prev) => (prev + 1) % words.length);
         }, timePause / 2);
       }
     }
 
     return () => clearTimeout(timeoutId);
   }, [
-    charIndex,
+    indexCharacter,
     isDeleting,
-    currentWordIndex,
+    indexCurrentWord,
     words,
     speedTyping,
     speedDeleting,
