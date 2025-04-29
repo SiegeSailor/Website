@@ -22,8 +22,7 @@ Through being a full-stack application, **Client** will be mainly a UI serving n
 1. Dashboard entry routing page
    - Refer to iCloud Web
 2. Markdown file rendering
-   - Blog
-   - Note
+   - Blog and Note
 3. Project showcase
 4. Search
    - In text content

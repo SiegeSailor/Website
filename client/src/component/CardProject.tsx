@@ -9,9 +9,9 @@ export default function ({ className }: { className?: string }) {
     <CardBlock
       className={clsx(className, "border-white border-4 bg-slate-50")}
       href="/blog"
-      title="Let's Talk About Tech"
+      title="My Side Projects"
     >
-      <CardBody className="space-y-2 mt-6">fdsafdsa</CardBody>
+      <CardBody className="space-y-2 mt-6">Hello</CardBody>
     </CardBlock>
   );
 }

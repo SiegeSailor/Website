@@ -11,8 +11,8 @@ export default function ({
   className,
   href,
   title,
-}: {
-  children: Readonly<React.ReactNode>;
+  ...props
+}: React.ComponentProps<typeof Card> & {
   className?: string;
   href: next.Route;
   title: string;
@@ -20,14 +20,15 @@ export default function ({
   const router = useRouter();
   return (
     <Card
-      className={clsx(className, "border-white border-4 bg-slate-50")}
+      {...props}
+      className={clsx(className, "border-background border-4 bg-default-200")}
       isPressable
       isHoverable
       onPress={() => router.push(href)}
     >
       <CardHeader className="absolute z-10 top-1 flex-col items-start">
         <div className="items-start">
-          <Chip variant="shadow" size="sm" className="p-4 bg-white">
+          <Chip variant="bordered" size="sm" className="p-4 bg-background">
             <span className="font-semibold">{title}</span>
           </Chip>
         </div>
