@@ -1,30 +1,28 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 
 import Item from "@/component/Timeline/Item";
 
 export default function ({
   height = 64,
   items,
-  speedScroll = 40,
+  speedScroll = 30,
 }: {
   height?: number;
   items: Pick<React.ComponentProps<typeof Item>, "title" | "time">[];
   speedScroll?: number;
 }) {
   const [scrollDirection, setScrollDirection] = React.useState<"up" | "down">(
-    "up"
+    "down"
   );
 
   const refContainer = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const container = refContainer.current;
-
-    if (container) {
-      container.scrollTop = container.scrollHeight - container.clientHeight;
-      container.classList.remove("opacity-0");
+    if (refContainer.current) {
+      refContainer.current.classList.remove("opacity-0");
     }
 
     const interval = setInterval(() => {
@@ -53,11 +51,19 @@ export default function ({
   return (
     <div
       ref={refContainer}
-      className={`h-${height} overflow-hidden relative opacity-0 transition-opacity duration-500`}
+      className={clsx(
+        `h-${height}`,
+        "overflow-hidden relative",
+        "opacity-0 transition-opacity duration-500"
+      )}
     >
-      <ol className="pb-6">
+      <ol className="pb-16">
         {items.map((item, index) => (
-          <Item key={item.title} {...item} weight={index + 1} />
+          <Item
+            key={item.title}
+            {...item}
+            weight={index + 1 + Math.max(0, 9 - items.length)}
+          />
         ))}
       </ol>
     </div>

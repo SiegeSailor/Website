@@ -16,16 +16,6 @@ export default function ({ className }: { className?: string }) {
         <Timeline
           items={[
             {
-              title:
-                "Software Engineer at Servicetech International, Inc. / Taichung, Taiwan",
-              time: "Jun 2016 - Nov 2018",
-            },
-            {
-              title:
-                "Software Engineer at Edallianz, Pte. Ltd. / Taipei, Taiwan",
-              time: "Jan 2019 - Nov2019",
-            },
-            {
               title: "Software Engineer at Shopee, Pte. Ltd. / Taipei, Taiwan",
               time: "Jan 2022 - Feb 2022",
             },
