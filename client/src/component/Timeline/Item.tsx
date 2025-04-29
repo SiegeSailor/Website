@@ -1,0 +1,46 @@
+import React from "react";
+import clsx from "clsx";
+
+export default function ({
+  title,
+  time,
+  weight,
+  height = 20,
+}: {
+  title: string;
+  time: string;
+  weight: number;
+  height?: number;
+}) {
+  const level = Math.min(900, weight * 100);
+  const opacity = Math.min(100, weight * 10 + 10);
+  const offset = Math.floor(height / 2);
+
+  return (
+    <li
+      className={clsx(
+        "flex items-center relative pl-4 ml-2 border-l-2",
+        `h-${height}`,
+        `border-default-${level}`
+      )}
+    >
+      <div
+        className={clsx(
+          "absolute top-0 z-10 -left-1 w-3 h-3 rounded-lg",
+          `translate-y-${offset}`,
+          `bg-default-${level}`
+        )}
+      />
+      <div
+        className={clsx(
+          "flex flex-col",
+          `translate-y-${offset}`,
+          `opacity-${opacity}`
+        )}
+      >
+        <p className="text-sm">{title}</p>
+        <p className="text-tiny text-default-400">{time}</p>
+      </div>
+    </li>
+  );
+}

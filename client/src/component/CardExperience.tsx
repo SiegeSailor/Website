@@ -16,19 +16,21 @@ export default function ({ className }: { className?: string }) {
         <Timeline
           items={[
             {
-              title: "Software Engineer at Servicetech International",
+              title:
+                "Software Engineer at Servicetech International, Inc. / Taichung, Taiwan",
               time: "Jun 2016 - Nov 2018",
             },
             {
-              title: "Software Engineer at Edallianz",
+              title:
+                "Software Engineer at Edallianz, Pte. Ltd. / Taipei, Taiwan",
               time: "Jan 2019 - Nov2019",
             },
             {
-              title: "Software Engineer at Shopee",
+              title: "Software Engineer at Shopee, Pte. Ltd. / Taipei, Taiwan",
               time: "Jan 2022 - Feb 2022",
             },
             {
-              title: "Software Engineer at StageSource",
+              title: "Software Engineer at StageSource / Boston, MA, USA",
               time: "Sep 2022 - Dec 2022",
             },
             {
@@ -36,7 +38,8 @@ export default function ({ className }: { className?: string }) {
               time: "May 2022 - Jan 2024",
             },
             {
-              title: "Software Engineering Intern at CooperSurgical",
+              title:
+                "Software Engineering Intern at CooperSurgical, Inc. / Trumbull, CT, USA",
               time: "May 2023 - Aug 2023",
             },
             {
@@ -45,7 +48,8 @@ export default function ({ className }: { className?: string }) {
               time: "Aug 2023 - Nov 2023",
             },
             {
-              title: "Software Engineer at CooperSurgical",
+              title:
+                "Software Engineer at CooperSurgical, Inc. / Trumbull, CT, USA",
               time: "Jan 2024 - Present",
             },
           ]}
