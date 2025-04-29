@@ -6,13 +6,13 @@ export default function ({
   items: { title: string; time: string }[];
 }) {
   return (
-    <ol className="-translate-y-8">
+    <ol>
       {items.map((item, index) => {
         const level = (index + 1) * 100 + (700 - items.length * 100);
         const opacity = (level + 100) / 10 + (70 - items.length * 10);
         return (
           <li
-            className={`h-12 flex items-center relative pl-4 ml-2 border-l-2 border-default-${level}`}
+            className={`h-14 flex items-center relative pl-4 ml-2 border-l-2 border-default-${level}`}
             key={item.title}
           >
             <div

@@ -16,7 +16,7 @@ export default async function ({
 
   return (
     <HeroUIProvider navigate={push}>
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         {children}
       </ThemeProvider>
     </HeroUIProvider>
