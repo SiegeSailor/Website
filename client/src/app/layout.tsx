@@ -11,9 +11,9 @@ import { concatTitle } from "@/helper";
 export const metadata: next.Metadata = {
   title: concatTitle(),
   description: [
-    "Welcome to my personal website." +
-      "I am a software engineer focused on full-stack development and DevOps." +
-      "Explore my profile, project, blog, and note to learn more about me.",
+    "Welcome to my personal website.",
+    "I am a software engineer focused on full-stack development and DevOps.",
+    "Explore my profile, project, blog, and note to learn more about me.",
   ].join(" "),
   icons: { icon: "/favicon.ico" },
 };

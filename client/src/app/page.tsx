@@ -1,34 +1,75 @@
 import React from "react";
 import * as next from "next";
-import { Card, CardHeader, CardFooter, Image, Button } from "@heroui/react";
+import { RocketIcon } from "lucide-react";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  Image,
+  Link,
+} from "@heroui/react";
+import NextLink from "next/link";
 
 import { concatTitle } from "@/helper";
+import TextTyping from "@/component/TextTyping";
 
 export const metadata: next.Metadata = {
   title: concatTitle("Home"),
 };
 
-export default function App() {
+function BlockIntro() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Hi, I'm Jin Yu Zhang!</h1>
-        <h2 className="text-2xl font-medium text-gray-700">
-          I’m a <span className="font-semibold text-black">Product Lead</span>{" "}
-          at <span className="text-orange-500">Apple Design.</span>
-        </h2>
-        <div className="flex items-center gap-4">
-          <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
-            Open to work
+    <div className="text-left w-full">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-light">Hi, I'm Jin Yu Zhang!</h1>
+        <h2 className="text-4xl font-light text-gray-700 flex flex-col">
+          <span className="text-nowrap">
+            I’m a
+            <span className="font-semibold px-2">
+              <TextTyping words={["Software", "Full-Stack", "DevOps"]} />
+            </span>
+            Engineer
           </span>
-          <Button>Book a call</Button>
-        </div>
-        <p className="text-gray-600 text-sm">
+          <span className="text-nowrap">
+            at
+            <Link
+              className="px-2 text-4xl"
+              isExternal
+              showAnchorIcon
+              underline="always"
+              href="https://www.coopersurgical.com/"
+            >
+              CooperSurgical.
+            </Link>
+          </span>
+        </h2>
+      </div>
+      <div className="flex items-center gap-4 mt-8">
+        <NextLink href="/profile">
+          <Button
+            startContent={<RocketIcon />}
+            size="lg"
+            radius="full"
+            variant="shadow"
+            color="primary"
+          >
+            Open to Work
+          </Button>
+        </NextLink>
+        <p className="text-gray-600">
           Feel free to explore my portfolio and reach out — I’d love to connect!
         </p>
       </div>
+    </div>
+  );
+}
 
-      <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2">
+export default function () {
+  return (
+    <section className="max-w-[768px] mx-auto flex flex-col items-center justify-center gap-16">
+      <BlockIntro />
+      <div className="gap-2 grid grid-cols-12 grid-rows-2">
         <Card className="col-span-12 sm:col-span-4 h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col items-start!">
             <p className="text-tiny text-white/60 uppercase font-bold">

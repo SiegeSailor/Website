@@ -7,7 +7,16 @@ const config = {
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        blink: "blink 1s step-start infinite",
+      },
+      keyframes: {
+        blink: {
+          "50%": { opacity: "0" },
+        },
+      },
+    },
   },
   darkMode: "class",
   plugins: [
