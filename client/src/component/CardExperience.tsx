@@ -16,6 +16,10 @@ export default function ({ className }: { className?: string }) {
         <Timeline
           items={[
             {
+              title: "Software Engineer at StageSource",
+              time: "Sep 2022 - Dec 2022",
+            },
+            {
               title: "Master in Computer Science at Boston University",
               time: "May 2022 - Jan 2024",
             },

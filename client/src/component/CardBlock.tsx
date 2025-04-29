@@ -21,7 +21,7 @@ export default function ({
   return (
     <Card
       {...props}
-      className={clsx(className, "border-background border-4 bg-default-200")}
+      className={clsx(className, "border-background border-4 bg-default-100")}
       isPressable
       isHoverable
       onPress={() => router.push(href)}
