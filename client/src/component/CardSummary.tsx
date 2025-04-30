@@ -9,16 +9,14 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 
+import { getCSSVariable } from "@/helper";
 import CardBlock from "@/component/CardBlock";
 import MotionFloating from "@/component/MotionFloating";
-import { getCSSVariable } from "@/helper";
+import SpinnerCenter from "@/component/SpinnerCenter";
 
 const Bar = dynamic(
   () => import("react-chartjs-2").then((module) => module.Bar),
-  {
-    ssr: false,
-    loading: () => <Spinner color="default" className="h-64 w-64" />,
-  }
+  { ssr: false, loading: () => <SpinnerCenter /> }
 );
 
 export default function ({ className }: { className?: string }) {

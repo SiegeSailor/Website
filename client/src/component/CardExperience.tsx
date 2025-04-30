@@ -6,13 +6,11 @@ import dynamic from "next/dynamic";
 import clsx from "clsx";
 
 import CardBlock from "@/component/CardBlock";
+import SpinnerCenter from "@/component/SpinnerCenter";
 
 const Timeline = dynamic(
   () => import("@/component/Timeline").then((module) => module.default),
-  {
-    ssr: false,
-    loading: () => <Spinner color="default" className="h-64 w-64" />,
-  }
+  { ssr: false, loading: () => <SpinnerCenter /> }
 );
 
 export default function ({ className }: { className?: string }) {
