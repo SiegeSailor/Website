@@ -8,9 +8,9 @@ export default function () {
   return (
     <div className="text-left w-full">
       <div className="space-y-2">
-        <h2 className="text-3xl sm:text-4xl font-light text-default-400 flex flex-col">
+        <h2 className="text-3xl sm:text-4xl font-light text-default-600 flex flex-col">
           <span className="text-nowrap">
-            Hi, I'm <span className="text-default-700">Jin Yu Zhang</span>!
+            Hi, I'm <span className="text-foreground">Jin Yu Zhang</span>!
           </span>
           <span className="text-nowrap">
             I’m a
@@ -22,7 +22,7 @@ export default function () {
           <span className="text-nowrap">
             at
             <Link
-              className="px-2 text-2xl sm:text-3xl text-default-400"
+              className="px-2 text-2xl sm:text-3xl text-default-600"
               isExternal
               showAnchorIcon
               underline="always"

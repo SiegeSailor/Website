@@ -6,11 +6,7 @@ import CardBlock from "@/component/CardBlock";
 
 export default function ({ className }: { className?: string }) {
   return (
-    <CardBlock
-      className={clsx(className, "border-white border-4 bg-slate-50")}
-      href="/blog"
-      title="My Skills"
-    >
+    <CardBlock className={clsx(className)} href="/blog" title="My Skills">
       <CardBody className="space-y-2 mt-6">fdsafdsa</CardBody>
     </CardBlock>
   );

@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation";
 export default function ({
   children,
   className,
+  contentHeader,
   href,
   title,
   ...props
 }: React.ComponentProps<typeof Card> & {
   className?: string;
+  contentHeader?: React.ReactNode;
   href: next.Route;
   title: string;
 }) {
@@ -35,6 +37,7 @@ export default function ({
             <span className="font-semibold">{title}</span>
           </Chip>
         </div>
+        {contentHeader}
       </CardHeader>
       {children}
     </Card>

@@ -8,7 +8,7 @@ import Timeline from "@/component/Timeline";
 export default function ({ className }: { className?: string }) {
   return (
     <CardBlock
-      className={clsx(className, "border-white border-4 bg-slate-50")}
+      className={clsx(className)}
       href="/profile"
       title="My Experience"
     >

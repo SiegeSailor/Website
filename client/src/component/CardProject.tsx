@@ -7,7 +7,7 @@ import CardBlock from "@/component/CardBlock";
 export default function ({ className }: { className?: string }) {
   return (
     <CardBlock
-      className={clsx(className, "border-white border-4 bg-slate-50")}
+      className={clsx(className)}
       href="/blog"
       title="My Side Projects"
     >
