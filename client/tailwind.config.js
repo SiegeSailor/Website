@@ -14,10 +14,10 @@ const config = {
     { pattern: /translate-y-(0|1|2|3|4|5|6|7|8|9|10|11|12|14|16)/ },
   ],
   theme: {
-    inset: {
-      "-1": "-0.425rem",
-    },
     extend: {
+      inset: {
+        "-1": "-0.425rem",
+      },
       animation: {
         blink: "blink 1s step-start infinite",
       },

@@ -26,7 +26,7 @@ export default function ({
       <div
         className={clsx(
           "absolute top-0 z-10 -left-1 w-3 h-3 rounded-lg",
-          "translate-y-12",
+          "translate-y-20",
           `bg-default-${level}`
         )}
       />
