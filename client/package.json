@@ -2,6 +2,7 @@
   "dependencies": {
     "@heroui/react": "2.7.6",
     "@svgr/webpack": "8.1.0",
+    "chartjs-plugin-datalabels": "2.2.0",
     "classnames": "2.5.1",
     "framer-motion": "12.7.4",
     "lucide-react": "0.503.0",

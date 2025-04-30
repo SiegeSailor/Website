@@ -4,3 +4,8 @@ export function concatTitle(content?: string) {
 
   return [content, suffix].join(" | ");
 }
+
+export function getCSSVariable(variable: string) {
+  const root = document.documentElement;
+  return getComputedStyle(root).getPropertyValue(variable);
+}

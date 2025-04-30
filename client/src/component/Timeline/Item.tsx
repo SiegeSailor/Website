@@ -37,8 +37,8 @@ export default function ({
           `opacity-${opacity}`
         )}
       >
-        <p className="text-sm">{title}</p>
-        <p className="text-tiny text-default-400">{time}</p>
+        <p className="text-md sm:text-sm">{title}</p>
+        <p className="text-sm sm:text-tiny text-default-400">{time}</p>
       </div>
     </li>
   );
