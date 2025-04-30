@@ -40,8 +40,14 @@ export default function ({ className }: { className?: string }) {
       href="/profile"
       title="What I Bring to the Table"
       contentHeader={
-        <div className={clsx("w-full flex justify-end pt-2")}>
-          <div className="text-xl sm:text-lg text-default-600 text-right font-light w-1/2">
+        <div className={clsx("w-full flex justify-end pt-1")}>
+          <div
+            className={clsx(
+              "text-xl sm:text-lg",
+              "text-default-600 text-right font-light",
+              "w-1/2 pr-2"
+            )}
+          >
             6 Years of Working Experience in
             <div className="font-semibold text-default-700">
               Software Engineering
