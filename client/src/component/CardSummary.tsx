@@ -44,9 +44,9 @@ export default function ({ className }: { className?: string }) {
       contentHeader={
         <MotionFloating
           className={clsx(
-            "text-xl sm:text-lg leading-3",
+            "text-xl sm:text-lg leading-tight",
             "text-default-600 text-right font-light",
-            "w-1/2 pr-2 pt-10",
+            "w-1/2 pr-2 pt-12",
             "absolute top-0 right-0"
           )}
         >

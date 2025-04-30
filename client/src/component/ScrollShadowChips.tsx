@@ -3,23 +3,49 @@
 import React from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 export default function ({
   rows,
 }: {
   rows: { name: string; icon: React.ReactNode }[][];
 }) {
+  const refContainerParent = React.useRef<HTMLDivElement>(null);
+
   return (
-    <div className="w-64 h-64 flex flex-col gap-5">
+    <div ref={refContainerParent} className="w-full h-full flex flex-col gap-5">
       {rows.map((items, index) => {
         const isEven = index % 2 === 0;
-        const widthRow = items.length * 100;
-        const speed = 30;
+        const speed = 35;
+
+        const containerRef = React.useRef<HTMLDivElement>(null);
+        const [widthRow, setWidthRow] = React.useState(0);
+
+        React.useEffect(() => {
+          if (containerRef.current) {
+            const widthTotal = Array.from(containerRef.current.children).reduce(
+              (accumulator, child) => {
+                const childWidth = (child as HTMLElement).offsetWidth;
+                return accumulator + childWidth;
+              },
+              0
+            );
+            setWidthRow(
+              Math.max(widthTotal, refContainerParent.current?.offsetWidth || 0)
+            );
+          }
+        }, [items]);
 
         return (
           <ScrollShadow key={index} className="w-full" orientation="horizontal">
             <motion.div
-              className="flex gap-2 nowrap"
+              ref={containerRef}
+              key={widthRow}
+              className={clsx(
+                "flex gap-2 nowrap w-full",
+                widthRow > 0 ? "opacity-100" : "opacity-0",
+                "transition-opacity duration-1000 ease-in-out"
+              )}
               initial={{ x: isEven ? widthRow : -widthRow }}
               animate={{ x: isEven ? -widthRow : widthRow }}
               transition={{

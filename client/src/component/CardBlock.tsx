@@ -22,12 +22,14 @@ export default function ({
   title: string;
 }) {
   const router = useRouter();
+
   return (
     <Card
       {...props}
       className={clsx(
         className,
-        "border-background dark:border-default-100 border-2 bg-default-50"
+        "border-background dark:border-default-100",
+        "border-2 bg-default-50 relative"
       )}
       isPressable
       isHoverable

@@ -17,10 +17,10 @@ export default function () {
   return (
     <section className="max-w-[880px] mx-auto flex flex-col items-center justify-center gap-12">
       <ContentHero />
-      <div className="gap-2 grid grid-cols-12 grid-rows-2 p-2">
-        <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-        <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-        <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+      <div className="gap-2 grid grid-cols-12 grid-rows-2 p-2 w-full">
+        <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />
+        <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />
+        <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />
         <CardBlog className="col-span-12 sm:col-span-6 md:col-span-5 h-[300px] w-full" />
         <CardProject className="col-span-12 md:col-span-7 h-[300px] w-full" />
       </div>
