@@ -2,7 +2,7 @@
 
 import React from "react";
 import "chart.js/auto";
-import { Button, CardBody, CardFooter, Chip, Spinner } from "@heroui/react";
+import { CardBody, Spinner } from "@heroui/react";
 import { Chart } from "chart.js";
 import { useTheme } from "next-themes";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -119,7 +119,7 @@ export default function ({ className }: { className?: string }) {
                   bottomRight: 8,
                   topRight: 8,
                 },
-                barThickness: 40,
+                barThickness: 28,
               },
             ],
           }}

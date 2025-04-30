@@ -15,7 +15,12 @@ export default function () {
           <span className="text-nowrap">
             I’m a
             <span className="font-light text-primary px-2">
-              <TextTyping words={["Software", "Full-Stack", "DevOps"]} />
+              <TextTyping
+                words={["Software", "Full-Stack", "DevOps"]}
+                speedDeleting={125}
+                speedTyping={100}
+                timePause={2000}
+              />
             </span>
             Engineer
           </span>
