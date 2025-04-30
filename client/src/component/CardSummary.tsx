@@ -3,7 +3,6 @@
 import React from "react";
 import "chart.js/auto";
 import { Chart } from "chart.js";
-import { motion } from "framer-motion";
 import { Spinner } from "@heroui/react";
 import { useTheme } from "next-themes";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -11,6 +10,7 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 
 import CardBlock from "@/component/CardBlock";
+import MotionFloating from "@/component/MotionFloating";
 import { getCSSVariable } from "@/helper";
 
 const Bar = dynamic(
@@ -44,34 +44,19 @@ export default function ({ className }: { className?: string }) {
       href="/profile"
       title="What I Bring to the Table"
       contentHeader={
-        <motion.div
+        <MotionFloating
           className={clsx(
             "text-xl sm:text-lg leading-3",
             "text-default-600 text-right font-light",
             "w-1/2 pr-2 pt-10",
             "absolute top-0 right-0"
           )}
-          animate={["floating"]}
-          initial={{ y: -6.5 }}
-          variants={{
-            floating: {
-              y: [-6.5, 6.5],
-              opacity: 1,
-              transition: {
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 0.2,
-                repeatType: "reverse",
-                ease: "easeInOut",
-              },
-            },
-          }}
         >
           6 Years of Working Experience in
           <div className="font-semibold text-default-700">
             Software Engineering
           </div>
-        </motion.div>
+        </MotionFloating>
       }
     >
       <Bar
