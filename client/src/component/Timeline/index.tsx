@@ -54,7 +54,7 @@ export default function ({
       className={clsx(
         `h-${height}`,
         "overflow-hidden relative",
-        "opacity-0 transition-opacity duration-500"
+        "opacity-0 transition-opacity duration-1000"
       )}
     >
       <ol className="pb-16">

@@ -1,9 +1,19 @@
+"use client";
+
 import React from "react";
-import { CardBody } from "@heroui/react";
+import { Spinner } from "@heroui/react";
+import dynamic from "next/dynamic";
 import clsx from "clsx";
 
 import CardBlock from "@/component/CardBlock";
-import Timeline from "@/component/Timeline";
+
+const Timeline = dynamic(
+  () => import("@/component/Timeline").then((module) => module.default),
+  {
+    ssr: false,
+    loading: () => <Spinner color="default" className="h-64 w-64" />,
+  }
+);
 
 export default function ({ className }: { className?: string }) {
   return (
@@ -12,39 +22,37 @@ export default function ({ className }: { className?: string }) {
       href="/profile"
       title="My Experience"
     >
-      <CardBody className="space-y-2 mt-6">
-        <Timeline
-          items={[
-            {
-              title: "Software Engineer at Shopee, Pte. Ltd. / Taipei, Taiwan",
-              time: "Jan 2022 - Feb 2022",
-            },
-            {
-              title: "Software Engineer at StageSource / Boston, MA, USA",
-              time: "Sep 2022 - Dec 2022",
-            },
-            {
-              title: "Master in Computer Science at Boston University",
-              time: "May 2022 - Jan 2024",
-            },
-            {
-              title:
-                "Software Engineering Intern at CooperSurgical, Inc. / Trumbull, CT, USA",
-              time: "May 2023 - Aug 2023",
-            },
-            {
-              title:
-                "Certificate in Data Science and Machine Learning at Massachusetts Institute of Technology",
-              time: "Aug 2023 - Nov 2023",
-            },
-            {
-              title:
-                "Software Engineer at CooperSurgical, Inc. / Trumbull, CT, USA",
-              time: "Jan 2024 - Present",
-            },
-          ]}
-        />
-      </CardBody>
+      <Timeline
+        items={[
+          {
+            title: "Software Engineer at Shopee, Pte. Ltd. / Taipei, Taiwan",
+            time: "Jan 2022 - Feb 2022",
+          },
+          {
+            title: "Software Engineer at StageSource / Boston, MA, USA",
+            time: "Sep 2022 - Dec 2022",
+          },
+          {
+            title: "Master in Computer Science at Boston University",
+            time: "May 2022 - Jan 2024",
+          },
+          {
+            title:
+              "Software Engineering Intern at CooperSurgical, Inc. / Trumbull, CT, USA",
+            time: "May 2023 - Aug 2023",
+          },
+          {
+            title:
+              "Certificate in Data Science and Machine Learning at Massachusetts Institute of Technology",
+            time: "Aug 2023 - Nov 2023",
+          },
+          {
+            title:
+              "Software Engineer at CooperSurgical, Inc. / Trumbull, CT, USA",
+            time: "Jan 2024 - Present",
+          },
+        ]}
+      />
     </CardBlock>
   );
 }

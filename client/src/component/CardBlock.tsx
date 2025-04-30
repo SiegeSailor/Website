@@ -2,7 +2,7 @@
 
 import React from "react";
 import * as next from "next";
-import { Card, CardHeader, Chip } from "@heroui/react";
+import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 
@@ -31,7 +31,7 @@ export default function ({
       isHoverable
       onPress={() => router.push(href)}
     >
-      <CardHeader className="absolute z-20 top-1 flex-col items-start">
+      <CardHeader className="absolute z-20 top-0 flex-col items-start">
         <div className="items-start">
           <Chip variant="bordered" size="sm" className="p-4 bg-background">
             <span className="font-semibold">{title}</span>
@@ -39,7 +39,7 @@ export default function ({
         </div>
         {contentHeader}
       </CardHeader>
-      {children}
+      <CardBody className="mt-10">{children}</CardBody>
     </Card>
   );
 }
