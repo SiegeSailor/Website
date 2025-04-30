@@ -1,6 +1,6 @@
 import React from "react";
 import TextTyping from "@/component/TextTyping";
-import { RocketIcon } from "lucide-react";
+import { LuRocket } from "react-icons/lu";
 import { Button, Link } from "@heroui/react";
 import NextLink from "next/link";
 
@@ -41,7 +41,7 @@ export default function () {
       <div className="gap-4 grid grid-cols-12 grid-rows-1 mt-8">
         <NextLink href="/profile" className="col-span-12 sm:col-span-4">
           <Button
-            startContent={<RocketIcon />}
+            startContent={<LuRocket size="1.45rem" />}
             size="lg"
             radius="full"
             variant="shadow"

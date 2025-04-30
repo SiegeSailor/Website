@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { SearchIcon } from "lucide-react";
+import { LuSearch } from "react-icons/lu";
 import {
   Modal,
   ModalContent,
@@ -28,7 +28,10 @@ export default function () {
         endContent={<Kbd keys={["command"]}>S</Kbd>}
         variant="bordered"
         startContent={
-          <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+          <LuSearch
+            size="1.45rem"
+            className="text-base text-default-400 pointer-events-none flex-shrink-0"
+          />
         }
       >
         Search
@@ -48,7 +51,7 @@ export default function () {
                   labelPlacement="outside"
                   placeholder="Type to search"
                   startContent={
-                    <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+                    <LuSearch className="text-base text-default-400 pointer-events-none flex-shrink-0" />
                   }
                   disabled
                   type="search"

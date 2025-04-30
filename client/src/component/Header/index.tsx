@@ -1,5 +1,5 @@
 import React from "react";
-import { TerminalSquareIcon } from "lucide-react";
+import { LuSquareTerminal } from "react-icons/lu";
 import {
   Navbar,
   NavbarContent,
@@ -34,7 +34,10 @@ export default function () {
           <Search />
         </NavbarItem>
         <Divider orientation="vertical" className="hidden sm:flex h-6" />
-        <TerminalSquareIcon className="text-default-500 text-opacity-disabled translate-y-px" />
+        <LuSquareTerminal
+          size="1.45rem"
+          className="text-default-500 text-opacity-disabled translate-y-px"
+        />
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
