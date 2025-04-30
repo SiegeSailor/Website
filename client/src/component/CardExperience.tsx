@@ -25,11 +25,11 @@ export default function ({ className }: { className?: string }) {
       <Timeline
         items={[
           {
-            title: "Software Engineer at Shopee, Pte. Ltd. / Taipei, Taiwan",
+            title: "Software Engineer at Shopee",
             time: "Jan 2022 - Feb 2022",
           },
           {
-            title: "Software Engineer at StageSource / Boston, MA, USA",
+            title: "Software Engineer at StageSource",
             time: "Sep 2022 - Dec 2022",
           },
           {
@@ -37,8 +37,7 @@ export default function ({ className }: { className?: string }) {
             time: "May 2022 - Jan 2024",
           },
           {
-            title:
-              "Software Engineering Intern at CooperSurgical, Inc. / Trumbull, CT, USA",
+            title: "Software Engineering Intern at CooperSurgical",
             time: "May 2023 - Aug 2023",
           },
           {
@@ -47,8 +46,7 @@ export default function ({ className }: { className?: string }) {
             time: "Aug 2023 - Nov 2023",
           },
           {
-            title:
-              "Software Engineer at CooperSurgical, Inc. / Trumbull, CT, USA",
+            title: "Software Engineer at CooperSurgical",
             time: "Jan 2024 - Present",
           },
         ]}
