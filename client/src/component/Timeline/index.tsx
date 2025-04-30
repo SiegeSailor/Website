@@ -49,12 +49,6 @@ export default function ({
   return (
     <div className="w-full h-full relative">
       <div
-        className={clsx(
-          "w-full h-28 absolute -top-3 left-0 z-10",
-          "blur bg-gradient-to-b from-background/100 to-background/0"
-        )}
-      />
-      <div
         ref={refContainer}
         className={clsx(
           `h-full`,
