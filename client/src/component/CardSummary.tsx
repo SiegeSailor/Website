@@ -3,7 +3,6 @@
 import React from "react";
 import "chart.js/auto";
 import { Chart } from "chart.js";
-import { Spinner } from "@heroui/react";
 import { useTheme } from "next-themes";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import clsx from "clsx";

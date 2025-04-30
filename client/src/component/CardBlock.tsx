@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import * as next from "next";
 import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
-import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import * as next from "next";
+import clsx from "clsx";
+
+import SpinnerCenter from "@/component/SpinnerCenter";
 
 export default function ({
   children,
@@ -37,9 +39,13 @@ export default function ({
             <span className="font-semibold">{title}</span>
           </Chip>
         </div>
-        {contentHeader}
+        <React.Suspense fallback={<SpinnerCenter />}>
+          {contentHeader}
+        </React.Suspense>
       </CardHeader>
-      <CardBody className="mt-10">{children}</CardBody>
+      <CardBody className="mt-10">
+        <React.Suspense fallback={<SpinnerCenter />}>{children}</React.Suspense>
+      </CardBody>
     </Card>
   );
 }
