@@ -35,7 +35,7 @@ export default function ({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={FontRoboto.className}>
+      <body suppressHydrationWarning className={FontRoboto.className}>
         <Provider>
           <Header />
           <div className="relative flex flex-col h-screen">

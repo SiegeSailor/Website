@@ -5,7 +5,7 @@ import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/navigation";
 
-export default async function ({
+export default function ({
   children,
 }: Readonly<{
   children: React.ReactNode;
