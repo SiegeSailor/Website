@@ -7,20 +7,32 @@ export default function ({
   className,
   volume = 6.5,
   duration = 1.5,
+  direction,
   ...props
-}: HTMLMotionProps<"div"> & { volume?: number; duration?: number }) {
+}: HTMLMotionProps<"div"> & {
+  volume?: number;
+  duration?: number;
+  direction: "horizontal" | "vertical";
+}) {
+  const keyDirection: any = direction === "horizontal" ? "x" : "y";
   return (
     <motion.div
-      animate={["floating"]}
-      initial={{ y: -volume }}
+      animate={["floating", "visible"]}
+      initial={{ [keyDirection]: 0, opacity: 0 }}
       variants={{
         floating: {
-          y: [-volume, volume],
-          opacity: 1,
+          [keyDirection]: [-volume, volume],
           transition: {
             duration: duration,
             repeat: Infinity,
             repeatType: "reverse",
+            ease: "easeInOut",
+          },
+        },
+        visible: {
+          opacity: 1,
+          transition: {
+            duration: duration,
             ease: "easeInOut",
           },
         },

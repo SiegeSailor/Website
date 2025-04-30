@@ -43,10 +43,11 @@ export default function ({ className }: { className?: string }) {
       title="What I Bring to the Table"
       contentHeader={
         <MotionFloating
+          direction="horizontal"
           className={clsx(
             "text-xl sm:text-lg leading-tight",
             "text-default-600 text-right font-light",
-            "w-1/2 pr-2 pt-12",
+            "w-1/2 pr-4 pt-12",
             "absolute top-0 right-0"
           )}
         >
