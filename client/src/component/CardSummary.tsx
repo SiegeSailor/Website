@@ -23,6 +23,7 @@ export default function ({ className }: { className?: string }) {
   const [colorDefault200, setColorDefault200] = React.useState("transparent");
   const [colorDefault700, setColorDefault700] = React.useState("transparent");
   const [colorForeground, setColorForeground] = React.useState("transparent");
+  const [isBarLoaded, setIsBarLoaded] = React.useState(false);
 
   React.useEffect(() => {
     Chart.register(ChartDataLabels);
@@ -50,9 +51,16 @@ export default function ({ className }: { className?: string }) {
             "absolute top-0 right-0"
           )}
         >
-          6 Years of Working Experience in
-          <div className="font-semibold text-default-700">
-            Software Engineering
+          <div
+            className={clsx(
+              isBarLoaded ? "opacity-100" : "opacity-0",
+              "transition-opacity duration-1000 ease-in-out"
+            )}
+          >
+            6 Years of Working Experience in
+            <div className="font-semibold text-default-700">
+              Software Engineering
+            </div>
           </div>
         </MotionFloating>
       }
@@ -68,6 +76,9 @@ export default function ({ className }: { className?: string }) {
           animation: {
             duration: 1500,
             easing: "easeOutElastic",
+            onComplete: () => {
+              setIsBarLoaded(() => true);
+            },
           },
           scales: {
             x: {

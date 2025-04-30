@@ -59,7 +59,7 @@ export default function ({
         className={clsx(
           `h-full`,
           "overflow-hidden relative",
-          "opacity-0 transition-opacity duration-1000"
+          "opacity-0 transition-opacity duration-1000 ease-in-out"
         )}
       >
         <ol className="pb-16">
