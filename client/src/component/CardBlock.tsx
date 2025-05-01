@@ -12,12 +12,14 @@ export default function ({
   children,
   className,
   contentHeader,
+  contentBody,
   href,
   title,
   ...props
 }: React.ComponentProps<typeof Card> & {
   className?: string;
   contentHeader?: React.ReactNode;
+  contentBody?: React.ReactNode;
   href: next.Route;
   title: string;
 }) {
@@ -45,9 +47,16 @@ export default function ({
           {contentHeader}
         </React.Suspense>
       </CardHeader>
-      <CardBody className="mt-10">
-        <React.Suspense fallback={<SpinnerCenter />}>{children}</React.Suspense>
-      </CardBody>
+      <React.Suspense fallback={<SpinnerCenter />}>
+        {contentBody}
+      </React.Suspense>
+      {children && (
+        <CardBody className="mt-10">
+          <React.Suspense fallback={<SpinnerCenter />}>
+            {children}
+          </React.Suspense>
+        </CardBody>
+      )}
     </Card>
   );
 }

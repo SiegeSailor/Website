@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import clsx from "clsx";
@@ -15,6 +17,7 @@ export default function ({
   direction: "horizontal" | "vertical";
 }) {
   const keyDirection: any = direction === "horizontal" ? "x" : "y";
+
   return (
     <motion.div
       animate={["floating", "visible"]}
