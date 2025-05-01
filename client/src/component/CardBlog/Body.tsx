@@ -1,7 +1,7 @@
 "use server";
 
 import React from "react";
-import { Chip, Image } from "@heroui/react";
+import { Chip, Image, ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 import NextImage from "next/image";
 
@@ -59,7 +59,7 @@ export default async function () {
         >
           {title}
         </p>
-        <div className="flex gap-2 mt-2">
+        <ScrollShadow className="flex gap-2 mt-2" orientation="horizontal">
           {tags.map((tag) => (
             <Chip
               key={tag}
@@ -73,7 +73,7 @@ export default async function () {
               {tag}
             </Chip>
           ))}
-        </div>
+        </ScrollShadow>
       </MotionFloating>
     </>
   );

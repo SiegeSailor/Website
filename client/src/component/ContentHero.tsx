@@ -39,7 +39,11 @@ export default function () {
         </h2>
       </div>
       <div className="gap-4 grid grid-cols-12 grid-rows-1 mt-8">
-        <NextLink href="/profile" className="col-span-12 sm:col-span-4">
+        <NextLink
+          href="mailto:siegesailor@gmail.com?subject=Query from Jin YU Zhang's Website"
+          target="_blank"
+          className="col-span-12 sm:col-span-4"
+        >
           <Button
             startContent={<LuRocket size="1.45rem" />}
             size="lg"
