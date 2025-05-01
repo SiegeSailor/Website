@@ -1,23 +1,25 @@
 "use server";
 
 import React from "react";
-import { Image } from "@heroui/react";
+import { Chip, Image } from "@heroui/react";
 import clsx from "clsx";
 import NextImage from "next/image";
 
 import MotionFloating from "@/component/MotionFloating";
 
 export default async function () {
-  const { date, title, image } = await new Promise<{
+  const { date, title, image, tags } = await new Promise<{
     date: string;
     title: string;
     image: string;
+    tags: string[];
   }>((resolve) => {
     setTimeout(() => {
       resolve({
         date: "2024-10-16",
         title: "Build WEP Webkit on Linux",
         image: "/weston-cog-google.png",
+        tags: ["Linux", "Webkit"],
       });
     }, 1000);
   });
@@ -57,6 +59,21 @@ export default async function () {
         >
           {title}
         </p>
+        <div className="flex gap-2 mt-2">
+          {tags.map((tag) => (
+            <Chip
+              key={tag}
+              variant="bordered"
+              className={clsx(
+                "text-background dark:text-foreground",
+                "border-default-400 dark:border-default-500",
+                "font-medium text-sm text-left"
+              )}
+            >
+              {tag}
+            </Chip>
+          ))}
+        </div>
       </MotionFloating>
     </>
   );

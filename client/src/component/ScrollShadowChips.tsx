@@ -37,7 +37,12 @@ export default function ({
         }, [items]);
 
         return (
-          <ScrollShadow key={index} className="w-full" orientation="horizontal">
+          <ScrollShadow
+            key={index}
+            className="w-full pointer-events-none cursor-none"
+            orientation="horizontal"
+            hideScrollBar
+          >
             <motion.div
               ref={containerRef}
               key={widthRow}
