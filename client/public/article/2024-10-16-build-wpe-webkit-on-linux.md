@@ -1,4 +1,5 @@
 ---
+title: Build WPE Webkit on Linux
 tags: [linux, webkit]
 ---
 

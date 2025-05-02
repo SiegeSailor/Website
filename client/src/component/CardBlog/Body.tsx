@@ -18,7 +18,7 @@ export default async function () {
       resolve({
         date: "2024-10-16",
         title: "Build WEP Webkit on Linux",
-        image: "/weston-cog-google.png",
+        image: "/image/weston-cog-google.png",
         tags: ["Linux", "Webkit"],
       });
     }, 1000);

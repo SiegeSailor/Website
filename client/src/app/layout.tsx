@@ -16,7 +16,7 @@ export const metadata: next.Metadata = {
     "I am a software engineer focused on full-stack development and DevOps.",
     "Explore my profile, project, blog, and note to learn more about me.",
   ].join(" "),
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/image/favicon.ico" },
 };
 
 export const viewport: next.Viewport = {
