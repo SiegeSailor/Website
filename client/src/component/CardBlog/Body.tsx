@@ -30,8 +30,8 @@ export default async function () {
         alt={title}
         as={NextImage}
         className={clsx(
-          "z-0 w-full h-full",
-          "object-cover grayscale brightness-50 contrast-100"
+          "z-0 w-full h-full object-cover",
+          "grayscale brightness-50 contrast-100"
         )}
         src={image}
         removeWrapper
@@ -40,7 +40,7 @@ export default async function () {
       />
       <MotionFloating
         direction="vertical"
-        className="absolute top-1/2 left-4 w-full z-10 justify-start"
+        className={clsx("absolute top-1/2 left-4", "w-full z-10 justify-start")}
       >
         <p
           className={clsx(

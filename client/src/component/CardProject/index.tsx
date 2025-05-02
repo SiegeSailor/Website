@@ -19,7 +19,9 @@ export default function ({ className }: { className?: string }) {
       href="/blog"
       title="My Side Projects"
     >
-      <Body />
+      <Body
+        items={["A.I. Story Writer", "Dynamic Account Hub", "Cryptography CLI"]}
+      />
     </CardBlock>
   );
 }
