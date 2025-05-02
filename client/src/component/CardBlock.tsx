@@ -47,11 +47,11 @@ export default function ({
           {contentHeader}
         </React.Suspense>
       </CardHeader>
-      <React.Suspense fallback={<SpinnerCenter />}>
+      <React.Suspense fallback={<SpinnerCenter className="mt-12" />}>
         {contentBody}
       </React.Suspense>
       {children && (
-        <CardBody className="mt-10">
+        <CardBody className="mt-12">
           <React.Suspense fallback={<SpinnerCenter />}>
             {children}
           </React.Suspense>

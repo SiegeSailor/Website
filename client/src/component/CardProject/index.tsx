@@ -1,8 +1,16 @@
+"use client";
+
 import React from "react";
-import { Button, CardBody, CardFooter, Chip } from "@heroui/react";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 
 import CardBlock from "@/component/CardBlock";
+import SpinnerCenter from "@/component/SpinnerCenter";
+
+const Body = dynamic(
+  () => import("@/component/CardProject/Body").then((module) => module.default),
+  { ssr: false, loading: () => <SpinnerCenter /> }
+);
 
 export default function ({ className }: { className?: string }) {
   return (
@@ -11,7 +19,7 @@ export default function ({ className }: { className?: string }) {
       href="/blog"
       title="My Side Projects"
     >
-      <CardBody className="space-y-2 mt-6">Hello</CardBody>
+      <Body />
     </CardBlock>
   );
 }
