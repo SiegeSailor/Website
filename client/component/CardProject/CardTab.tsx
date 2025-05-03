@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Spacer } from "@heroui/react";
+import { Link, Spacer } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { home } from "@/setting";
@@ -36,6 +36,13 @@ export default function ({
             <p className="text-normal font-normal text-default-400">
               {item.description}
             </p>
+            <Link
+              href={item.href}
+              target="_blank"
+              className="text-default-500 hover:text-default-400"
+            >
+              Read More
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

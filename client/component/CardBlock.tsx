@@ -20,21 +20,24 @@ export default function ({
   className?: string;
   contentHeader?: React.ReactNode;
   contentBody?: React.ReactNode;
-  href: next.Route;
+  href?: next.Route;
   title: string;
 }) {
   const router = useRouter();
 
   return (
     <Card
+      isHoverable
+      isPressable
+      onPress={() => {
+        if (href) router.push(href);
+      }}
       {...props}
       className={clsx(
         className,
         "border-background dark:border-default-100",
         "border-2 bg-default-50 relative"
       )}
-      isHoverable
-      onPress={() => router.push(href)}
     >
       <CardHeader className="absolute z-20 top-0 flex-col items-start">
         <div className="items-start z-20">

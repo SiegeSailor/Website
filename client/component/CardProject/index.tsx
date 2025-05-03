@@ -17,8 +17,9 @@ export default function ({ className }: { className?: string }) {
   return (
     <CardBlock
       className={clsx(className)}
-      href="/blog"
+      href="/project"
       title="My Side Projects"
+      isPressable={false}
     >
       <Body items={home.project} />
     </CardBlock>
