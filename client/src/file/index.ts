@@ -1,51 +1,29 @@
 import fs from "fs";
 import path from "path";
-import matter from "front-matter";
+import matter from "gray-matter";
 
-export const revalidate = 0;
+import { PATH_ARTICLE } from "@/setting";
 
 export async function getArticles() {
-  const directory = path.join(process.cwd(), "public/article");
+  const directory = path.join(process.cwd(), PATH_ARTICLE);
   const filenames = fs.readdirSync(directory);
 
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
-      const content = fs.readFileSync(path.join(directory, filename), "utf8");
-      const { attributes } = matter<{ title: string; tags: string[] }>(content);
-      return {
-        filename,
-        metadata: {
-          ...attributes,
-          date: filename.split(".")[0],
-        },
-      };
+      const filePath = path.join(directory, filename);
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const { data: metadata } = matter(fileContents);
+
+      return { filename, metadata };
     });
 }
 
-export async function getArticle(filename: string) {
-  const directory = path.join(process.cwd(), "public/article");
-  const filePath = path.join(directory, filename);
-  const content = fs.readFileSync(filePath, "utf8");
-  const { attributes, body } = matter<{ title: string; tags: string[] }>(
-    content
-  );
+export async function getArticle(slug: string) {
+  const filename = `${slug}.md`;
+  const filePath = path.join(process.cwd(), PATH_ARTICLE, filename);
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const { content, data: metadata } = matter(fileContents);
 
-  return {
-    filename,
-    metadata: {
-      ...attributes,
-      date: filename.split(".")[0],
-    },
-    body,
-  };
-}
-
-export async function getLatestArticle() {
-  const articles = await getArticles();
-  return articles.sort(
-    (left, right) =>
-      new Date(right.metadata.date).getTime() -
-      new Date(left.metadata.date).getTime()
-  )[0];
+  return { filename, metadata, content };
 }
