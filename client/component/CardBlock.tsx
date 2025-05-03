@@ -33,7 +33,6 @@ export default function ({
         "border-background dark:border-default-100",
         "border-2 bg-default-50 relative"
       )}
-      isPressable
       isHoverable
       onPress={() => router.push(href)}
     >

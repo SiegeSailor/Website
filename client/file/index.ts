@@ -2,10 +2,10 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-import { PATH_ARTICLE } from "@/setting";
+import { site } from "@/setting";
 
 export async function getArticles() {
-  const directory = path.join(process.cwd(), PATH_ARTICLE);
+  const directory = path.join(process.cwd(), site.article.path);
   const filenames = fs.readdirSync(directory);
 
   return filenames
@@ -21,7 +21,7 @@ export async function getArticles() {
 
 export async function getArticle(slug: string) {
   const filename = `${slug}.md`;
-  const filePath = path.join(process.cwd(), PATH_ARTICLE, filename);
+  const filePath = path.join(process.cwd(), site.article.path, filename);
   const fileContents = fs.readFileSync(filePath, "utf8");
   const { content, data: metadata } = matter(fileContents);
 

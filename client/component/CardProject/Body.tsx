@@ -5,8 +5,9 @@ import { Tabs, Tab, Progress } from "@heroui/react";
 import { motion } from "framer-motion";
 
 import CardTab from "@/component/CardProject/CardTab";
+import { home } from "@/setting";
 
-export default function ({ items }: { items: string[] }) {
+export default function ({ items }: { items: (typeof home)["project"] }) {
   const [indexItem, setIndexItem] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -35,18 +36,18 @@ export default function ({ items }: { items: string[] }) {
       <Tabs
         aria-label="Options"
         placement="bottom"
-        selectedKey={items[indexItem]}
+        selectedKey={items[indexItem].title}
         radius="md"
         size="md"
         onSelectionChange={(key) => {
-          setIndexItem(items.indexOf(key.toString()));
+          setIndexItem(items.map((item) => item.title).indexOf(key.toString()));
           setProgress(0);
         }}
       >
         {items.map((item) => {
           return (
-            <Tab key={item} title={item}>
-              <CardTab isLeaving={progress >= 95} title={item} />
+            <Tab key={item.title} title={item.title}>
+              <CardTab isLeaving={progress >= 95} item={item} />
             </Tab>
           );
         })}

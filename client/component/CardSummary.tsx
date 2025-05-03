@@ -12,6 +12,7 @@ import { getCSSVariable } from "@/helper";
 import CardBlock from "@/component/CardBlock";
 import MotionFloating from "@/component/MotionFloating";
 import SpinnerCenter from "@/component/SpinnerCenter";
+import { home } from "@/setting";
 
 const Bar = dynamic(
   () => import("react-chartjs-2").then((module) => module.Bar),
@@ -122,16 +123,10 @@ export default function ({ className }: { className?: string }) {
           },
         }}
         data={{
-          labels: [
-            "DevOps",
-            "System Design",
-            "Leadership",
-            "Front-End",
-            "Back-End",
-          ],
+          labels: home.summary.map((item) => item.title),
           datasets: [
             {
-              data: [1.5, 2, 1.5, 4, 4.5],
+              data: home.summary.map((item) => item.portion),
               backgroundColor: colorDefault700,
               borderRadius: {
                 bottomRight: 8,

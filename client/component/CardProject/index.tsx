@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
+import { home } from "@/setting";
 
 const Body = dynamic(
   () => import("@/component/CardProject/Body").then((module) => module.default),
@@ -19,9 +20,7 @@ export default function ({ className }: { className?: string }) {
       href="/blog"
       title="My Side Projects"
     >
-      <Body
-        items={["A.I. Story Writer", "Dynamic Account Hub", "Cryptography CLI"]}
-      />
+      <Body items={home.project} />
     </CardBlock>
   );
 }
