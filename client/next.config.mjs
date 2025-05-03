@@ -8,6 +8,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   output: "standalone",
+  pageExtensions: ["md", "ts", "tsx"],
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -42,7 +43,7 @@ const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [["rehype-katex", { strict: true, throwOnError: true }]],
   },
 });
 
