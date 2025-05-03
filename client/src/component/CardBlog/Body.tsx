@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import { Chip, Image, ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
@@ -34,12 +32,14 @@ export default async function () {
           "grayscale brightness-50 contrast-100"
         )}
         src={image}
+        loading="eager"
         removeWrapper
         width={4032}
         height={3024}
       />
       <MotionFloating
         direction="vertical"
+        duration={2}
         className={clsx("absolute top-1/2 left-4", "w-full z-10 justify-start")}
       >
         <p

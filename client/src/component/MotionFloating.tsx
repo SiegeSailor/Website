@@ -26,7 +26,7 @@ export default function ({
         floating: {
           [keyDirection]: [-volume, volume],
           transition: {
-            duration: duration,
+            duration,
             repeat: Infinity,
             repeatType: "reverse",
             ease: "easeInOut",
@@ -35,7 +35,7 @@ export default function ({
         visible: {
           opacity: 1,
           transition: {
-            duration: duration,
+            duration,
             ease: "easeInOut",
           },
         },
