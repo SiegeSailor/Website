@@ -24,7 +24,7 @@ export async function generateMetadata({
 
   return {
     title: generateTitle(article.metadata.title, "Blog"),
-    description: article?.metadata.description || "A blog post on my website",
+    description: article.metadata.description,
   };
 }
 
