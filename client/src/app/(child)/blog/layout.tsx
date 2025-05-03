@@ -1,10 +1,10 @@
 import React from "react";
 import * as next from "next";
 
-import { concatTitle } from "@/helper";
+import { generateTitle } from "@/helper";
 
 export const metadata: next.Metadata = {
-  title: concatTitle("Blog"),
+  title: generateTitle("Blog"),
 };
 
 export default function ({

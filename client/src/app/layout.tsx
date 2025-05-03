@@ -7,10 +7,10 @@ import { ScrollShadow } from "@heroui/react";
 import Header from "@/component/Header";
 import Layout from "@/component/Layout";
 import Provider from "@/component/Provider";
-import { concatTitle } from "@/helper";
+import { generateTitle } from "@/helper";
 
 export const metadata: next.Metadata = {
-  title: concatTitle(),
+  title: generateTitle(),
   description: [
     "Welcome to my personal website.",
     "I am a software engineer focused on full-stack development and DevOps.",

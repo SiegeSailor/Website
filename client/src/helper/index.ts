@@ -1,8 +1,7 @@
-export function concatTitle(content?: string) {
-  const suffix = "Jin Yu Zhang's Website";
-  if (!content) return suffix;
+import { NAME_WEBSITE } from "@/setting";
 
-  return [content, suffix].join(" | ");
+export function generateTitle(...content: string[]) {
+  return [...content, NAME_WEBSITE].join(" | ");
 }
 
 export function getCSSVariable(variable: string) {

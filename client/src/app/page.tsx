@@ -1,7 +1,7 @@
 import React from "react";
 import * as next from "next";
 
-import { concatTitle } from "@/helper";
+import { generateTitle } from "@/helper";
 import CardBlog from "@/component/CardBlog";
 import CardExperience from "@/component/CardExperience";
 import CardSummary from "@/component/CardSummary";
@@ -10,7 +10,7 @@ import CardSkill from "@/component/CardSkill";
 import ContentHero from "@/component/ContentHero";
 
 export const metadata: next.Metadata = {
-  title: concatTitle("Home"),
+  title: generateTitle("Home"),
 };
 
 export default function () {
