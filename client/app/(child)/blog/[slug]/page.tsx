@@ -1,6 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 
-import { getArticles, getArticle } from "@/file";
+import { getArticles, getArticleBySlug } from "@/file";
 import { generateTitle } from "@/helper";
 
 export const dynamicParams = false;
@@ -9,6 +9,7 @@ type TParams = { slug: string };
 
 export async function generateStaticParams(): Promise<TParams[]> {
   const articles = await getArticles();
+
   return articles.map((article) => ({
     slug: article.filename.replace(".md", ""),
   }));
@@ -20,7 +21,7 @@ export async function generateMetadata({
   params: Promise<TParams>;
 }) {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const article = await getArticleBySlug(slug);
 
   return {
     title: generateTitle(article.metadata.title, "Blog"),
@@ -30,7 +31,7 @@ export async function generateMetadata({
 
 export default async function ({ params }: { params: Promise<TParams> }) {
   const { slug } = await params;
-  const { metadata, content } = await getArticle(slug);
+  const { metadata, content } = await getArticleBySlug(slug);
 
   return (
     <div>

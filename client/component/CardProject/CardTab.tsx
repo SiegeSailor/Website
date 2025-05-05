@@ -18,7 +18,7 @@ export default function ({
   return (
     <div
       {...props}
-      className={clsx(props.className, "flex flex-col gap-2", "h-32")}
+      className={clsx(props.className, "flex flex-col gap-2", "h-40")}
     >
       <Spacer y={2} />
       <AnimatePresence>
@@ -36,6 +36,7 @@ export default function ({
             <p className="text-normal font-normal text-default-400">
               {item.description}
             </p>
+            <Spacer y={1} />
             <Link
               href={item.href}
               target="_blank"

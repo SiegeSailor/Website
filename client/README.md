@@ -33,7 +33,8 @@ Through being a full-stack application, **Client** will be mainly a UI serving n
    3. Experience
    4. Skills
    5. Area, salary, and VISA requirements
-   6. PDF preview and download
+   6. I am a full-stack engineer, knows DevOps
+   7. PDF preview and download
 6. Contact
    - External links and email
    - Website mails

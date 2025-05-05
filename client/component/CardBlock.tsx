@@ -36,7 +36,8 @@ export default function ({
       className={clsx(
         className,
         "border-background dark:border-default-100",
-        "border-2 bg-default-50 relative"
+        "border-2 bg-default-50 relative",
+        "overflow-hidden"
       )}
     >
       <CardHeader className="absolute z-20 top-0 flex-col items-start">
@@ -53,7 +54,7 @@ export default function ({
         {contentBody}
       </React.Suspense>
       {children && (
-        <CardBody className="mt-12">
+        <CardBody className="mt-12 overflow-hidden">
           <React.Suspense fallback={<SpinnerCenter />}>
             {children}
           </React.Suspense>

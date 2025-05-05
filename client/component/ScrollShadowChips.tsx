@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
-import { motion } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
 import clsx from "clsx";
 
 export default function ({
@@ -16,14 +16,16 @@ export default function ({
     <div ref={refContainerParent} className="w-full h-full flex flex-col gap-5">
       {rows.map((items, index) => {
         const isEven = index % 2 === 0;
-        const speed = 35;
+        const speed = 40;
 
-        const containerRef = React.useRef<HTMLDivElement>(null);
+        // const containerRef = React.useRef<HTMLDivElement>(null);
+        const [scope, animate] = useAnimate<HTMLDivElement>();
         const [widthRow, setWidthRow] = React.useState(0);
+        // console.log("animate", animate);
 
         React.useEffect(() => {
-          if (containerRef.current) {
-            const widthTotal = Array.from(containerRef.current.children).reduce(
+          if (scope.current) {
+            const widthTotal = Array.from(scope.current.children).reduce(
               (accumulator, child) => {
                 const childWidth = (child as HTMLElement).offsetWidth;
                 return accumulator + childWidth;
@@ -44,15 +46,15 @@ export default function ({
             hideScrollBar
           >
             <motion.div
-              ref={containerRef}
+              ref={scope}
               key={widthRow}
               className={clsx(
                 "flex gap-2 nowrap w-full",
                 widthRow > 0 ? "opacity-100" : "opacity-0",
                 "transition-opacity duration-1000 ease-in-out"
               )}
-              initial={{ x: isEven ? widthRow : -widthRow }}
-              animate={{ x: isEven ? -widthRow : widthRow }}
+              initial={{ x: isEven ? -widthRow : widthRow }}
+              animate={{ x: isEven ? widthRow : -widthRow }}
               transition={{
                 duration: widthRow / speed,
                 repeat: Infinity,
