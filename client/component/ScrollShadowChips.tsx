@@ -2,15 +2,25 @@
 
 import React from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
-import { motion, useAnimate } from "framer-motion";
+import { motion } from "framer-motion";
 import clsx from "clsx";
 
 export default function ({
   rows,
+  parentIdentifier,
 }: {
   rows: { name: string; icon: React.ReactNode }[][];
+  parentIdentifier?: string;
 }) {
   const refContainerParent = React.useRef<HTMLDivElement>(null);
+
+  const [widthParent, setWidthParent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (refContainerParent.current) {
+      setWidthParent(refContainerParent.current.offsetWidth);
+    }
+  }, [parentIdentifier]);
 
   return (
     <div ref={refContainerParent} className="w-full h-full flex flex-col gap-5">
@@ -18,14 +28,12 @@ export default function ({
         const isEven = index % 2 === 0;
         const speed = 40;
 
-        // const containerRef = React.useRef<HTMLDivElement>(null);
-        const [scope, animate] = useAnimate<HTMLDivElement>();
+        const containerRef = React.useRef<HTMLDivElement>(null);
         const [widthRow, setWidthRow] = React.useState(0);
-        // console.log("animate", animate);
 
         React.useEffect(() => {
-          if (scope.current) {
-            const widthTotal = Array.from(scope.current.children).reduce(
+          if (containerRef.current) {
+            const widthTotal = Array.from(containerRef.current.children).reduce(
               (accumulator, child) => {
                 const childWidth = (child as HTMLElement).offsetWidth;
                 return accumulator + childWidth;
@@ -36,7 +44,11 @@ export default function ({
               Math.max(widthTotal, refContainerParent.current?.offsetWidth || 0)
             );
           }
-        }, [items]);
+        }, []);
+
+        const offset = 30;
+        const xStart = isEven ? -widthRow - offset : widthParent + offset;
+        const xEnd = isEven ? widthParent + offset : -widthRow - offset;
 
         return (
           <ScrollShadow
@@ -46,21 +58,33 @@ export default function ({
             hideScrollBar
           >
             <motion.div
-              ref={scope}
+              ref={containerRef}
               key={widthRow}
               className={clsx(
                 "flex gap-2 nowrap w-full",
                 widthRow > 0 ? "opacity-100" : "opacity-0",
                 "transition-opacity duration-1000 ease-in-out"
               )}
-              initial={{ x: isEven ? -widthRow : widthRow }}
-              animate={{ x: isEven ? widthRow : -widthRow }}
-              transition={{
-                duration: widthRow / speed,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              animate={["scrolling", "visible"]}
+              initial={{ x: xStart, opacity: 0 }}
               style={{ width: widthRow }}
+              variants={{
+                scrolling: {
+                  x: xEnd,
+                  transition: {
+                    duration: widthRow / speed,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    duration: 1.5,
+                    ease: "easeInOut",
+                  },
+                },
+              }}
             >
               {items.map((item) => (
                 <Chip

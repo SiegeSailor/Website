@@ -15,10 +15,18 @@ const ScrollShadowChips = dynamic(
 );
 
 export default function ({ className }: { className?: string }) {
+  const parentIdentifier = "skill";
+
   return (
-    <CardBlock className={clsx(className)} href="/blog" title="My Skills">
+    <CardBlock
+      className={clsx(className)}
+      href="/blog"
+      title="My Skills"
+      id={parentIdentifier}
+    >
       <div className="w-full h-full flex flex-col gap-5">
         <ScrollShadowChips
+          parentIdentifier={parentIdentifier}
           rows={home.skill.map((row) =>
             row.map((skill) => ({
               name: skill.name,
