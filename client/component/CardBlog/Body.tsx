@@ -8,6 +8,7 @@ import NextImage from "next/image";
 
 import { getArticles } from "@/file";
 import MotionFloating from "@/component/MotionFloating";
+import ScrollShadowTags from "@/component/ScrollShadowTags";
 
 export default function ({
   articles,
@@ -84,24 +85,7 @@ export default function ({
                   >
                     {title}
                   </p>
-                  <ScrollShadow
-                    className="flex gap-2 mt-2"
-                    orientation="horizontal"
-                  >
-                    {tags.map((tag) => (
-                      <Chip
-                        key={tag}
-                        variant="bordered"
-                        className={clsx(
-                          "text-background dark:text-foreground",
-                          "border-default-400 dark:border-default-500",
-                          "font-medium text-sm text-left"
-                        )}
-                      >
-                        {tag}
-                      </Chip>
-                    ))}
-                  </ScrollShadow>
+                  <ScrollShadowTags tags={tags} />
                 </MotionFloating>
               </motion.div>
             )}

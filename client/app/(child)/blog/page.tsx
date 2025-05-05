@@ -1,36 +1,45 @@
 import React from "react";
-import { Card, CardBody, CardHeader, CardFooter, Chip } from "@heroui/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Chip,
+  Divider,
+  ScrollShadow,
+} from "@heroui/react";
+import clsx from "clsx";
+
 import { getArticles } from "@/file";
+import Markdown from "@/component/Markdown";
+import ScrollShadowTags from "@/component/ScrollShadowTags";
 
 export default async function () {
   const articles = await getArticles();
 
   return (
-    <div className="gap-2 grid grid-cols-12 grid-rows-2 p-2 w-full">
+    <div className="gap-2 flex flex-col p-2 w-full">
       {articles.map((article) => {
         return (
-          <Card
-            key={article.filename}
-            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full"
-          >
-            <CardHeader className="absolute z-20 top-0 flex-col items-start">
-              <div className="items-start z-20">
-                <Chip
-                  variant="bordered"
-                  size="sm"
-                  className="p-4 bg-background"
-                >
-                  <span className="font-semibold">
-                    {article.metadata.title}
-                  </span>
-                </Chip>
+          <Card key={article.filename} className="w-full h-[300px]">
+            <CardHeader>
+              <div className="flex flex-col">
+                <p className="text-md">{article.metadata.title}</p>
+                <p className="text-small text-default-500">
+                  {article.metadata.date}
+                </p>
               </div>
             </CardHeader>
-            <CardBody className="mt-12">
-              <p>{article.metadata.description}</p>
+            <Divider />
+            <CardBody>
+              <Markdown source={article.metadata.description} />
             </CardBody>
-            <CardFooter className="mt-12">
-              <p>{article.metadata.date}</p>
+            {/* <Divider /> */}
+            <CardFooter>
+              <ScrollShadowTags
+                tags={article.metadata.tags}
+                className="text-foreground dark:text-background"
+              />
             </CardFooter>
           </Card>
         );

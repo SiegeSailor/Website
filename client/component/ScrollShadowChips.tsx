@@ -46,7 +46,7 @@ export default function ({
           }
         }, []);
 
-        const offset = 30;
+        const offset = 20;
         const xStart = isEven ? -widthRow - offset : widthParent + offset;
         const xEnd = isEven ? widthParent + offset : -widthRow - offset;
 

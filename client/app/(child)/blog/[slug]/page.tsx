@@ -1,7 +1,6 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
-
-import { getArticles, getArticleBySlug } from "@/file";
 import { generateTitle } from "@/helper";
+import { getArticles, getArticleBySlug } from "@/file";
+import Markdown from "@/component/Markdown";
 
 export const dynamicParams = false;
 
@@ -38,7 +37,7 @@ export default async function ({ params }: { params: Promise<TParams> }) {
       <h1>{metadata.title}</h1>
       <p>{metadata.date}</p>
       <article>
-        <MDXRemote source={content} components={{}} />
+        <Markdown source={content} />
       </article>
     </div>
   );
