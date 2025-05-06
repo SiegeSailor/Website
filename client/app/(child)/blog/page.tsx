@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, CardBody, CardHeader, CardFooter } from "@heroui/react";
 import clsx from "clsx";
-import Link from "next/link";
 
 import { getArticles } from "@/file";
+import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTags from "@/component/ScrollShadowTags";
 
@@ -16,12 +16,12 @@ export default async function () {
         return (
           <Card key={article.filename} className="p-2">
             <CardHeader>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 <p
                   className={clsx(
                     "text-foreground dark:text-background",
                     "opacity-60",
-                    "font-bold text-medium text-left"
+                    "font-normal text-sm text-left"
                   )}
                 >
                   {article.metadata.date}
@@ -41,15 +41,14 @@ export default async function () {
                 <ScrollShadowTags
                   tags={article.metadata.tags}
                   propsChip={{
-                    className: "text-foreground dark:text-background",
+                    className: "text-foreground",
                   }}
                   propsScrollShadow={{ className: "w-full flex-grow" }}
                 />
                 <div className="text-nowrap">
                   <Link
                     href={`/blog/${article.metadata.date}`}
-                    target="_blank"
-                    className="text-default-500 hover:text-default-400"
+                    className="font-normal"
                   >
                     Read More
                   </Link>

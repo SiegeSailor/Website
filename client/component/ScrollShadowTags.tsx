@@ -22,12 +22,11 @@ export default function ({
       {tags.map((tag) => (
         <Chip
           key={tag}
-          variant="bordered"
+          variant="flat"
           {...propsChip}
           className={clsx(
             "text-background dark:text-foreground",
-            "border-default-400 dark:border-default-500",
-            "font-medium text-sm text-left",
+            "font-normal text-sm text-left",
             "px-2 py-1",
             propsChip?.className
           )}

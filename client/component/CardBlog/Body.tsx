@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Image, Progress } from "@heroui/react";
+import { Image, Progress, Spacer } from "@heroui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import NextImage from "next/image";
@@ -64,27 +64,31 @@ export default function ({
                   direction="vertical"
                   duration={2}
                   className={clsx(
-                    "absolute top-1/2 left-4",
-                    "w-full z-10 justify-start"
+                    "absolute top-28 left-4",
+                    "z-10 justify-start"
                   )}
+                  style={{ width: "calc(100% - 1.5rem)" }}
                 >
                   <p
                     className={clsx(
                       "text-background dark:text-foreground",
                       "opacity-60",
-                      "font-bold text-sm text-left"
+                      "font-normal text-sm text-left"
                     )}
                   >
                     {date}
                   </p>
+                  <Spacer y={1} />
                   <p
                     className={clsx(
                       "text-background dark:text-foreground",
-                      "font-medium text-xl text-left"
+                      "font-medium text-xl text-left",
+                      "text-wrap w-full"
                     )}
                   >
                     {title}
                   </p>
+                  <Spacer y={4} />
                   <ScrollShadowTags
                     tags={tags}
                     propsScrollShadow={{ className: "mt-2" }}

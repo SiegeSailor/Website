@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
-import Link from "next/link";
+
+import Link from "@/component/Link";
 
 export default function ({ source }: { source: string }) {
   return (
@@ -12,12 +13,8 @@ export default function ({ source }: { source: string }) {
         ),
         a: (props) => (
           <Link
-            target="_blank"
             {...props}
-            className={clsx(
-              props.className,
-              "text-default-500 hover:text-default-400"
-            )}
+            target={props.href[0] === "/" ? "_self" : "_blank"}
           />
         ),
       }}

@@ -1,8 +1,10 @@
 import React from "react";
 import TextTyping from "@/component/TextTyping";
 import { LuRocket } from "react-icons/lu";
-import { Button, Link } from "@heroui/react";
+import { Button } from "@heroui/react";
 import NextLink from "next/link";
+
+import Link from "@/component/Link";
 
 export default function () {
   return (
