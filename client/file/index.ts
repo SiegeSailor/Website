@@ -26,7 +26,7 @@ export async function getArticleByFilename(filename: string) {
   const filePath = path.join(process.cwd(), site.article.path, filename);
   const fileContents = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(fileContents);
-  const contents = content.split("<!-- Description Above -->");
+  const contents = content.split("<!-- description -->");
 
   return {
     content: `# ${data.title} ${contents.join("")}`,

@@ -6,25 +6,30 @@ import { site } from "@/setting";
 
 export default function ({
   tags,
-  className,
-  ...props
-}: React.ComponentProps<typeof Chip> & {
+  propsChip,
+  propsScrollShadow,
+}: {
   tags: string[];
-  className?: string;
+  propsChip?: React.ComponentProps<typeof Chip>;
+  propsScrollShadow?: React.ComponentProps<typeof ScrollShadow>;
 }) {
   return (
-    <ScrollShadow className="flex gap-2 mt-2" orientation="horizontal">
+    <ScrollShadow
+      {...propsScrollShadow}
+      className={clsx("flex gap-2", propsScrollShadow?.className)}
+      orientation="horizontal"
+    >
       {tags.map((tag) => (
         <Chip
           key={tag}
           variant="bordered"
-          {...props}
+          {...propsChip}
           className={clsx(
             "text-background dark:text-foreground",
             "border-default-400 dark:border-default-500",
             "font-medium text-sm text-left",
             "px-2 py-1",
-            className
+            propsChip?.className
           )}
           startContent={
             tag in site.iconMap &&

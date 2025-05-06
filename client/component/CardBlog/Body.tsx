@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Chip, Image, ScrollShadow, Progress } from "@heroui/react";
+import { Image, Progress } from "@heroui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import NextImage from "next/image";
@@ -85,7 +85,10 @@ export default function ({
                   >
                     {title}
                   </p>
-                  <ScrollShadowTags tags={tags} />
+                  <ScrollShadowTags
+                    tags={tags}
+                    propsScrollShadow={{ className: "mt-2" }}
+                  />
                 </MotionFloating>
               </motion.div>
             )}
