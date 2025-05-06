@@ -1,5 +1,5 @@
 import React from "react";
-import TextTyping from "@/component/TextTyping";
+import TypingText from "@/component/TypingText";
 import { LuRocket } from "react-icons/lu";
 import { Button } from "@heroui/react";
 import NextLink from "next/link";
@@ -17,7 +17,7 @@ export default function () {
           <span className="text-nowrap">
             I’m a
             <span className="font-light text-primary px-2">
-              <TextTyping
+              <TypingText
                 words={["Software", "Full-Stack", "DevOps"]}
                 speedDeleting={125}
                 speedTyping={100}
