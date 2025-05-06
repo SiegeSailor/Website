@@ -41,6 +41,7 @@ export const site = {
   article: {
     path: "public/article",
   },
+  pathMap: { "/": "Home", "/blog": "Blog" } as Record<next.Route, string>,
   iconMap: {
     ".NET": SiDotnet,
     "C++": SiCplusplus,

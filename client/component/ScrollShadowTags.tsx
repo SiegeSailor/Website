@@ -16,8 +16,9 @@ export default function ({
   return (
     <ScrollShadow
       {...propsScrollShadow}
-      className={clsx("flex gap-2", propsScrollShadow?.className)}
+      className={clsx("flex gap-2 w-11/12", propsScrollShadow?.className)}
       orientation="horizontal"
+      size={120}
     >
       {tags.map((tag) => (
         <Chip

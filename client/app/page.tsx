@@ -8,9 +8,10 @@ import CardSummary from "@/component/CardSummary";
 import CardProject from "@/component/CardProject";
 import CardSkill from "@/component/CardSkill";
 import ContentHero from "@/component/ContentHero";
+import { site } from "@/setting";
 
 export const metadata: next.Metadata = {
-  title: generateTitle("Home"),
+  title: generateTitle(site.pathMap["/"]),
 };
 
 export default function () {

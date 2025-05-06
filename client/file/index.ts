@@ -25,22 +25,25 @@ export async function getArticleByFilename(filename: string) {
   const date = filename.split(".")[0];
   const filePath = path.join(process.cwd(), site.article.path, filename);
   const fileContents = fs.readFileSync(filePath, "utf8");
-  const { content, data } = matter(fileContents);
-  const contents = content.split("<!-- description -->");
+  const { content: source, data } = matter(fileContents);
+
+  const sources = source.split("<!-- description -->");
+  const content = sources.join("").trim();
 
   return {
-    content: contents.join(""),
+    content,
     filename,
     metadata: {
       date,
       tags: (data.tags as string[]).map((tag: string) => tag.trim()),
       title: data.title,
-      description: contents[0].trim(),
+      description: sources[0].trim(),
+      minutes: Math.ceil((content.split(" ").length + 1) / 200),
     },
   };
 }
 
-export async function getArticleBySlug(slug: string) {
-  const filename = `${slug}.md`;
+export async function getArticleByDate(date: string) {
+  const filename = `${date}.md`;
   return getArticleByFilename(filename);
 }
