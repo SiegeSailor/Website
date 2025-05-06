@@ -3,7 +3,7 @@
 import React from "react";
 import clsx from "clsx";
 
-import Item from "@/component/Timeline/Item";
+import Item from "@/component/ScrollingTimeline/Item";
 
 export default function ({
   items,

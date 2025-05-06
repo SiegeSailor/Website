@@ -7,16 +7,26 @@ import clsx from "clsx";
 
 export default function ({
   rows,
+  parentIdentifier,
 }: {
   rows: { name: string; icon: React.ReactNode }[][];
+  parentIdentifier?: string;
 }) {
   const refContainerParent = React.useRef<HTMLDivElement>(null);
+
+  const [widthParent, setWidthParent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (refContainerParent.current) {
+      setWidthParent(refContainerParent.current.offsetWidth);
+    }
+  }, [parentIdentifier]);
 
   return (
     <div ref={refContainerParent} className="w-full h-full flex flex-col gap-5">
       {rows.map((items, index) => {
         const isEven = index % 2 === 0;
-        const speed = 35;
+        const speed = 40;
 
         const containerRef = React.useRef<HTMLDivElement>(null);
         const [widthRow, setWidthRow] = React.useState(0);
@@ -34,7 +44,11 @@ export default function ({
               Math.max(widthTotal, refContainerParent.current?.offsetWidth || 0)
             );
           }
-        }, [items]);
+        }, []);
+
+        const offset = 20;
+        const xStart = isEven ? -widthRow - offset : widthParent + offset;
+        const xEnd = isEven ? widthParent + offset : -widthRow - offset;
 
         return (
           <ScrollShadow
@@ -51,14 +65,26 @@ export default function ({
                 widthRow > 0 ? "opacity-100" : "opacity-0",
                 "transition-opacity duration-1000 ease-in-out"
               )}
-              initial={{ x: isEven ? widthRow : -widthRow }}
-              animate={{ x: isEven ? -widthRow : widthRow }}
-              transition={{
-                duration: widthRow / speed,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              animate={["scrolling", "visible"]}
+              initial={{ x: xStart, opacity: 0 }}
               style={{ width: widthRow }}
+              variants={{
+                scrolling: {
+                  x: xEnd,
+                  transition: {
+                    duration: widthRow / speed,
+                    repeat: Infinity,
+                    ease: "linear",
+                  },
+                },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    duration: 1.5,
+                    ease: "easeInOut",
+                  },
+                },
+              }}
             >
               {items.map((item) => (
                 <Chip

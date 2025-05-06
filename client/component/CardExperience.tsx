@@ -8,8 +8,9 @@ import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
 import { home } from "@/setting";
 
-const Timeline = dynamic(
-  () => import("@/component/Timeline").then((module) => module.default),
+const ScrollingTimeline = dynamic(
+  () =>
+    import("@/component/ScrollingTimeline").then((module) => module.default),
   { ssr: false, loading: () => <SpinnerCenter /> }
 );
 
@@ -28,7 +29,7 @@ export default function ({ className }: { className?: string }) {
         />
       }
     >
-      <Timeline items={home.experience} />
+      <ScrollingTimeline items={home.experience} />
     </CardBlock>
   );
 }

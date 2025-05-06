@@ -7,7 +7,7 @@ import clsx from "clsx";
 import NextImage from "next/image";
 
 import { getArticles } from "@/file";
-import MotionFloating from "@/component/MotionFloating";
+import FloatingDIV from "@/component/FloatingDIV";
 import ScrollShadowTags from "@/component/ScrollShadowTags";
 
 export default function ({
@@ -60,7 +60,7 @@ export default function ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <MotionFloating
+                <FloatingDIV
                   direction="vertical"
                   duration={2}
                   className={clsx(
@@ -93,7 +93,7 @@ export default function ({
                     tags={tags}
                     propsScrollShadow={{ className: "mt-2" }}
                   />
-                </MotionFloating>
+                </FloatingDIV>
               </motion.div>
             )}
           </AnimatePresence>
