@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@heroui/react";
+import { Card, CardBody, CardHeader, CardFooter, Divider } from "@heroui/react";
 import clsx from "clsx";
 
 import { getArticles } from "@/file";
@@ -12,9 +12,14 @@ export default async function () {
 
   return (
     <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-4">
-      {articles.map((article) => {
+      {articles.map((article, index) => {
+        const isFullRow = index % 3 === 0;
+
         return (
-          <Card key={article.filename} className="p-2">
+          <Card
+            key={article.filename}
+            className={clsx("p-2", isFullRow && "col-span-full")}
+          >
             <CardHeader>
               <div className="flex flex-col gap-1">
                 <p

@@ -9,7 +9,10 @@ export default function ({ source }: { source: string }) {
       source={source}
       components={{
         p: (props) => (
-          <p {...props} className={clsx(props.className, "font-light")} />
+          <p
+            {...props}
+            className={clsx(props.className, "font-light text-medium")}
+          />
         ),
         a: (props) => (
           <Link

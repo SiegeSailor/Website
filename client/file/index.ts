@@ -29,7 +29,7 @@ export async function getArticleByFilename(filename: string) {
   const contents = content.split("<!-- description -->");
 
   return {
-    content: `# ${data.title} ${contents.join("")}`,
+    content: contents.join(""),
     filename,
     metadata: {
       date,

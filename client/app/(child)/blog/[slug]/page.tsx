@@ -1,6 +1,7 @@
 import { generateTitle } from "@/helper";
 import { getArticles, getArticleBySlug } from "@/file";
 import Markdown from "@/component/Markdown";
+import ScrollShadowTags from "@/component/ScrollShadowTags";
 
 export const dynamicParams = false;
 
@@ -36,6 +37,7 @@ export default async function ({ params }: { params: Promise<TParams> }) {
     <div>
       <h1>{metadata.title}</h1>
       <p>{metadata.date}</p>
+      <ScrollShadowTags tags={metadata.tags} />
       <article>
         <Markdown source={content} />
       </article>
