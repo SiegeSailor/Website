@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 
 import { getCSSVariable } from "@/helper";
 import CardBlock from "@/component/CardBlock";
-import FloatingDIV from "@/component/FloatingDIV";
+import FloatingDivision from "@/component/FloatingDivision";
 import SpinnerCenter from "@/component/SpinnerCenter";
 import { home } from "@/setting";
 
@@ -43,7 +43,7 @@ export default function ({ className }: { className?: string }) {
       href="/profile"
       title="What I Bring to the Table"
       contentHeader={
-        <FloatingDIV
+        <FloatingDivision
           direction="horizontal"
           className={clsx(
             "text-xl sm:text-lg leading-tight",
@@ -63,7 +63,7 @@ export default function ({ className }: { className?: string }) {
               Software Engineering
             </div>
           </div>
-        </FloatingDIV>
+        </FloatingDivision>
       }
     >
       <Bar

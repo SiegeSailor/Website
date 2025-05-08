@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { generateTitle } from "@/helper";
 import { getArticles, getArticleByDate } from "@/file";
 import Markdown from "@/component/Markdown";
-import ScrollShadowTags from "@/component/ScrollShadowTags";
+import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export const dynamicParams = false;
 
@@ -49,7 +49,7 @@ export default async function ({ params }: { params: Promise<TParams> }) {
           <p>{metadata.date}</p>·<p>{metadata.minutes} Minutes Read</p>
         </div>
         <h2 className="font-medium text-3xl mb-4">{metadata.title}</h2>
-        <ScrollShadowTags
+        <ScrollShadowChips
           tags={metadata.tags}
           propsChip={{ className: "text-foreground" }}
         />

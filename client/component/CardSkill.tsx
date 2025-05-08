@@ -8,8 +8,9 @@ import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
 import { home } from "@/setting";
 
-const ScrollingChips = dynamic(
-  () => import("@/component/ScrollingChips").then((module) => module.default),
+const ScrollRowsChips = dynamic(
+  () =>
+    import("@/component/ScrollingRowsChips").then((module) => module.default),
   { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
@@ -24,7 +25,7 @@ export default function ({ className }: { className?: string }) {
       id={parentIdentifier}
     >
       <div className="w-full h-full flex flex-col gap-5">
-        <ScrollingChips
+        <ScrollRowsChips
           parentIdentifier={parentIdentifier}
           rows={home.skill.map((row) =>
             row.map((skill) => ({

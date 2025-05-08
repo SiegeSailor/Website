@@ -8,7 +8,7 @@ import { getArticles } from "@/file";
 import { site } from "@/setting";
 import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
-import ScrollShadowTags from "@/component/ScrollShadowTags";
+import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export const metadata: next.Metadata = {
   title: generateTitle(site.pathMap["/blog"]),
@@ -49,7 +49,7 @@ export default async function () {
 
             <CardFooter>
               <div className="flex justify-between items-center gap-2 w-full">
-                <ScrollShadowTags
+                <ScrollShadowChips
                   tags={article.metadata.tags}
                   propsChip={{ className: "text-foreground" }}
                   propsScrollShadow={{ className: "w-full flex-grow" }}
