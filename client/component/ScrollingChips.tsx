@@ -12,28 +12,28 @@ export default function ({
   rows: { name: string; icon: React.ReactNode }[][];
   parentIdentifier?: string;
 }) {
-  const refContainerParent = React.useRef<HTMLDivElement>(null);
+  const refContainer = React.useRef<HTMLDivElement>(null);
 
   const [widthParent, setWidthParent] = React.useState(0);
 
   React.useEffect(() => {
-    if (refContainerParent.current) {
-      setWidthParent(refContainerParent.current.offsetWidth);
+    if (refContainer.current) {
+      setWidthParent(refContainer.current.offsetWidth);
     }
   }, [parentIdentifier]);
 
   return (
-    <div ref={refContainerParent} className="w-full h-full flex flex-col gap-5">
+    <div ref={refContainer} className="w-full h-full flex flex-col gap-5">
       {rows.map((items, index) => {
         const isEven = index % 2 === 0;
         const speed = 40;
 
-        const containerRef = React.useRef<HTMLDivElement>(null);
+        const refRow = React.useRef<HTMLDivElement>(null);
         const [widthRow, setWidthRow] = React.useState(0);
 
         React.useEffect(() => {
-          if (containerRef.current) {
-            const widthTotal = Array.from(containerRef.current.children).reduce(
+          if (refRow.current) {
+            const widthTotal = Array.from(refRow.current.children).reduce(
               (accumulator, child) => {
                 const childWidth = (child as HTMLElement).offsetWidth;
                 return accumulator + childWidth;
@@ -41,7 +41,7 @@ export default function ({
               0
             );
             setWidthRow(
-              Math.max(widthTotal, refContainerParent.current?.offsetWidth || 0)
+              Math.max(widthTotal, refContainer.current?.offsetWidth || 0)
             );
           }
         }, []);
@@ -58,7 +58,7 @@ export default function ({
             hideScrollBar
           >
             <motion.div
-              ref={containerRef}
+              ref={refRow}
               key={widthRow}
               className={clsx(
                 "flex gap-2 nowrap w-full",

@@ -16,7 +16,7 @@ import { home } from "@/setting";
 
 const Bar = dynamic(
   () => import("react-chartjs-2").then((module) => module.Bar),
-  { ssr: false, loading: () => <SpinnerCenter /> }
+  { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
 export default function ({ className }: { className?: string }) {

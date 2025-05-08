@@ -10,7 +10,7 @@ import { home } from "@/setting";
 
 const Body = dynamic(
   () => import("@/component/CardProject/Body").then((module) => module.default),
-  { ssr: false, loading: () => <SpinnerCenter /> }
+  { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
 export default function ({ className }: { className?: string }) {

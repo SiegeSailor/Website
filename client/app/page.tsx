@@ -16,9 +16,9 @@ export const metadata: next.Metadata = {
 
 export default function () {
   return (
-    <section className="flex flex-col items-center justify-center gap-12">
+    <section className="flex flex-col items-center justify-center gap-12 p-4">
       <ContentHero />
-      <div className="gap-4 grid grid-cols-12 grid-rows-2 p-4 w-full">
+      <div className="gap-4 grid grid-cols-12 grid-rows-2 w-full">
         <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />
         <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />
         <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full" />

@@ -11,7 +11,7 @@ import { home } from "@/setting";
 const ScrollingTimeline = dynamic(
   () =>
     import("@/component/ScrollingTimeline").then((module) => module.default),
-  { ssr: false, loading: () => <SpinnerCenter /> }
+  { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
 export default function ({ className }: { className?: string }) {

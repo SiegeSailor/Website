@@ -47,25 +47,23 @@ export default function ({
   }, [scrollDirection, speedScroll]);
 
   return (
-    <div className="w-full h-full relative">
-      <div
-        ref={refContainer}
-        className={clsx(
-          `h-full`,
-          "overflow-hidden relative",
-          "opacity-0 transition-opacity duration-1000 ease-in-out"
-        )}
-      >
-        <ol className="pb-16">
-          {items.map((item, index) => (
-            <Item
-              key={item.title}
-              {...item}
-              weight={index + 1 + Math.max(0, 9 - items.length)}
-            />
-          ))}
-        </ol>
-      </div>
+    <div
+      ref={refContainer}
+      className={clsx(
+        "w-full h-full relative",
+        "overflow-hidden relative",
+        "opacity-0 transition-opacity duration-1000 ease-in-out"
+      )}
+    >
+      <ol className="pb-16">
+        {items.map((item, index) => (
+          <Item
+            key={item.title}
+            {...item}
+            weight={index + 1 + Math.max(0, 9 - items.length)}
+          />
+        ))}
+      </ol>
     </div>
   );
 }
