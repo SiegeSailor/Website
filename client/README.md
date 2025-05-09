@@ -39,3 +39,7 @@ Through being a full-stack application, **Client** will be mainly a UI serving n
    - External links and email
    - Website mails
 7. Review and authentication
+8. Footer
+   1. No AI generated content
+   2. No AI scraping allowed
+   3. Last updated date
