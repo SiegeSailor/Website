@@ -13,7 +13,6 @@ const pages: { label: string; href: next.Route; press: string }[] = [
   { label: "Home", href: "/", press: "H" },
   { label: "Blog", href: "/blog", press: "B" },
   { label: "Profile", href: "/profile", press: "P" },
-  { label: "Project", href: "/project", press: "R" },
 ];
 
 export default function () {

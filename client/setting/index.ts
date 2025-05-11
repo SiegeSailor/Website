@@ -164,19 +164,19 @@ export const home = {
       title: "A.I. Story Writer",
       description:
         "A web application that generates stories using OpenAI's GPT-3.5-turbo model.",
-      href: "/project",
+      href: "/profile",
     },
     {
       title: "Dynamic Account Hub",
       description:
         "A web application that allows users to manage their accounts and settings.",
-      href: "/project",
+      href: "/profile",
     },
     {
       title: "Cryptography CLI",
       description:
         "A command-line interface for encrypting and decrypting files using various algorithms.",
-      href: "/project",
+      href: "/profile",
     },
   ] as { title: string; description: string; href: next.Route }[],
 };
