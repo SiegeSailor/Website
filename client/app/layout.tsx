@@ -42,7 +42,7 @@ export default function ({
             <main className="container mx-auto max-w-7xl py-8 px-6 flex-grow">
               <ScrollShadow className="h-full w-full">
                 <Layout>
-                  <div className="max-w-[880px] mx-auto p-4">{children}</div>
+                  <div className="max-w-[880px] mx-auto">{children}</div>
                 </Layout>
               </ScrollShadow>
             </main>

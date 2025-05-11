@@ -23,13 +23,13 @@ export default function () {
         <Search />
       </div>
       <div className="mt-2 flex flex-col gap-2 text-center">
-        {pages.map((item) => {
-          const isActive = pathname === item.href;
+        {pages.map((page) => {
+          const isActive = pathname === page.href;
           return (
-            <NavbarMenuItem key={item.label} isActive={isActive}>
-              <NextLink href={item.href}>
+            <NavbarMenuItem key={page.label} isActive={isActive}>
+              <NextLink href={page.href}>
                 <Button
-                  endContent={<Kbd keys={["command"]}>{item.press}</Kbd>}
+                  endContent={<Kbd keys={["command"]}>{page.press}</Kbd>}
                   size="md"
                   variant="light"
                   className="w-full md:w-6/12 lg:w-8/12"
@@ -42,7 +42,7 @@ export default function () {
                       "data-[active=true]:text-primary data-[active=true]:font-medium"
                     )}
                   >
-                    {item.label}
+                    {page.label}
                   </span>
                 </Button>
               </NextLink>

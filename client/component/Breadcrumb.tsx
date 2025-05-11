@@ -43,13 +43,13 @@ export default function ({
       {...propsBreadcrumbs}
       className={clsx(propsBreadcrumbs?.className)}
     >
-      {breadcrumbs.map((item) => (
+      {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem
           {...propsBreadcrumbItem}
-          key={item.name}
-          href={item.href}
+          key={breadcrumb.name}
+          href={breadcrumb.href}
         >
-          {item.name}
+          {breadcrumb.name}
         </BreadcrumbItem>
       ))}
     </Breadcrumbs>
