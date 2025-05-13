@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@heroui/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  ScrollShadow,
+} from "@heroui/react";
 import clsx from "clsx";
 
 import { getArticleByFilename } from "@/file";
@@ -25,7 +31,9 @@ export default function ({
       </CardHeader>
 
       <CardBody>
-        <Markdown source={article.metadata.description} />
+        <ScrollShadow orientation="vertical">
+          <Markdown source={article.metadata.description} />
+        </ScrollShadow>
       </CardBody>
 
       <CardFooter>

@@ -18,12 +18,17 @@ export default async function () {
   return (
     <section>
       <InfiniteScroll
+        orientation="vertical"
+        className="gap-4 grid grid-cols-12 auto-rows-[minmax(200px, auto)] w-full p-4"
         items={articles.map((article, index) => {
-          const isFullRow = index % 3 === 0;
+          const isFullRow = index % 4 === 0;
           return (
             <CardArticle
               key={index}
-              className={clsx(isFullRow && "col-span-full")}
+              className={clsx(
+                "col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full",
+                isFullRow && "md:col-span-full md:h-[200px]"
+              )}
               article={article}
             />
           );
