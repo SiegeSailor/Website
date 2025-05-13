@@ -8,6 +8,7 @@ export default function ({
   ...props
 }: React.ComponentProps<typeof ScrollShadow> & { items: React.ReactNode[] }) {
   const [indexItems, setIndexItems] = React.useState(8);
+
   return (
     <ScrollShadow
       onScroll={(event) => {

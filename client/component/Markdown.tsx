@@ -11,15 +11,21 @@ export default function ({ source }: { source: string }) {
         p: (props) => (
           <p
             {...props}
-            className={clsx(props.className, "font-light text-medium")}
+            className={clsx(props.className, "font-light text-medium pb-2")}
           />
         ),
-        a: (props) => (
-          <Link
-            {...props}
-            target={props.href[0] === "/" ? "_self" : "_blank"}
-          />
-        ),
+        a: (props) => {
+          const isExternal = props.href?.startsWith("http");
+          return (
+            <Link
+              {...props}
+              isExternal={isExternal}
+              showAnchorIcon={isExternal}
+              underline="always"
+              target={isExternal ? "_blank" : "_self"}
+            />
+          );
+        },
       }}
     />
   );

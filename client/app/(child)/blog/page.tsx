@@ -27,7 +27,7 @@ export default async function () {
               key={index}
               className={clsx(
                 "col-span-12 sm:col-span-6 md:col-span-4 h-[300px] w-full",
-                isFullRow && "md:col-span-full md:h-[200px]"
+                isFullRow && "md:col-span-full md:h-[225px]"
               )}
               article={article}
             />

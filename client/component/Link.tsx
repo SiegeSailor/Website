@@ -5,6 +5,7 @@ import { Link } from "@heroui/react";
 export default function ({ ...props }: React.ComponentProps<typeof Link>) {
   return (
     <Link
+      color="foreground"
       {...props}
       className={clsx(
         "text-default-500 hover:text-default-400",
