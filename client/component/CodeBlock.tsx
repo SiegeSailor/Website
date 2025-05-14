@@ -1,28 +1,39 @@
 "use client";
 
 import React from "react";
+import { Skeleton } from "@heroui/react";
+import clsx from "clsx";
 import highlight from "highlight.js";
 
+import ButtonCopy from "@/component/ButtonCopy";
+
 export default function ({
-  content,
+  children,
   className,
-}: {
-  content: string;
-  className: string;
-}) {
-  const refCode = React.useRef<HTMLElement>(null);
+}: Readonly<{
+  children: React.ReactNode;
+  className?: string;
+}>) {
+  const refPre = React.useRef<HTMLPreElement>(null);
+
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
-    if (refCode.current) {
-      highlight.highlightElement(refCode.current);
+    if (refPre.current) {
+      highlight.highlightElement(refPre.current);
+      setIsMounted(true);
     }
   }, []);
 
   return (
-    <pre>
-      <code ref={refCode} className={className}>
-        {content}
-      </code>
-    </pre>
+    <Skeleton className="rounded-medium mb-4" isLoaded={isMounted}>
+      <pre
+        ref={refPre}
+        className={clsx("p-3", "rounded-medium w-full", className)}
+      >
+        {children}
+      </pre>
+      <ButtonCopy ref={refPre} />
+    </Skeleton>
   );
 }

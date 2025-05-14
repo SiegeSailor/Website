@@ -8,7 +8,7 @@ export default async function ({
 
   return (
     <div>
-      <div className="mb-12">
+      <div className="mb-16">
         <Breadcrumb articles={articles} />
       </div>
       {children}
