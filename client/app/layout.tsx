@@ -2,6 +2,7 @@ import React from "react";
 import * as next from "next";
 import { Roboto } from "next/font/google";
 
+import "highlight.js/styles/github-dark.css";
 import "@/style/global.css";
 import { ScrollShadow } from "@heroui/react";
 import Header from "@/component/Header";

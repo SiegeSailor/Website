@@ -19,6 +19,8 @@ export default function ({
 }: React.ComponentProps<typeof Card> & {
   article: Awaited<ReturnType<typeof getArticleByFilename>>;
 }) {
+  const href = `/blog/${article.metadata.date}`;
+
   return (
     <Card {...props} className={clsx("p-2", props.className)}>
       <CardHeader>
@@ -44,10 +46,7 @@ export default function ({
             propsScrollShadow={{ className: "w-full flex-grow" }}
           />
           <div className="text-nowrap">
-            <Link
-              href={`/blog/${article.metadata.date}`}
-              className="font-normal"
-            >
+            <Link href={href} className="font-normal">
               Read More
             </Link>
           </div>
