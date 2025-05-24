@@ -11,33 +11,30 @@ export default function ({
   category,
   children,
   className,
-}: {
+  title,
+}: Readonly<{
   category: "info" | "warning" | "note";
   children: React.ReactNode;
   className?: string;
-}) {
+  title: string;
+}>) {
   const setup = {
-    title: category[0].toUpperCase() + category.slice(1),
     icon: <LuBadgeInfo size="1.25rem" className="text-gray-500" />,
     color: "",
     backgroundColor: "",
   };
   switch (category) {
     case "info":
-      setup.title = "Information";
       setup.icon = <LuBadgeCheck size="1.25rem" className="text-green-500" />;
       break;
     case "warning":
-      setup.title = "Warning";
       setup.icon = <LuBadgeAlert size="1.25rem" className="text-yellow-500" />;
       break;
     case "note":
-      setup.title = "Note";
       setup.icon = <LuBadgeHelp size="1.25rem" className="text-blue-500" />;
       break;
-    default:
-      break;
   }
+
   return (
     <div
       className={clsx(
@@ -47,7 +44,7 @@ export default function ({
     >
       <div className={clsx("flex gap-4 items-center")}>
         <div>{setup.icon}</div>
-        <div>{setup.title}</div>
+        <div>{title}</div>
       </div>
 
       {children}
