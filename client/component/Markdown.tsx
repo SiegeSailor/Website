@@ -85,47 +85,15 @@ export default function ({ source }: Readonly<{ source: string }>) {
           />
         ),
         pre: (element) => <CodeBlock {...element.children.props} />,
-        p: (element) => {
-          const isCallout = Array.isArray(element.children)
-            ? element.children[0].startsWith(":::") &&
-              element.children[element.children.length - 1].endsWith(":::")
-            : element.children.startsWith(":::") &&
-              element.children.endsWith(":::");
-
-          if (isCallout) {
-            const contents: string[] = Array.isArray(element.children)
-              ? element.children
-              : [element.children];
-            return (
-              <div
-                {...element}
-                className={clsx(
-                  element.className,
-                  "bg-default-200 dark:bg-default-700 rounded-md px-4 py-2 mb-4"
-                )}
-              >
-                {contents.map((content, index) => {
-                  if (contents.length === 1) return content.slice(3, -3);
-                  if (index === 0) return content.slice(3);
-                  if (index === contents.length - 1)
-                    return content.slice(0, -3);
-
-                  return content;
-                })}
-              </div>
-            );
-          }
-
-          return (
-            <p
-              {...element}
-              className={clsx(
-                element.className,
-                "font-light text-medium pb-4 leading-6"
-              )}
-            />
-          );
-        },
+        p: (element) => (
+          <p
+            {...element}
+            className={clsx(
+              element.className,
+              "font-light text-medium pb-4 leading-6"
+            )}
+          />
+        ),
         a: (element) => {
           const isExternal = element.href?.startsWith("http");
           return (
