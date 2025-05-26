@@ -1,15 +1,14 @@
 "use client";
 
-import React from "react";
 import { NavbarMenu, NavbarMenuItem, Kbd, link, Button } from "@heroui/react";
 import { usePathname } from "next/navigation";
-import * as next from "next";
+import { Route } from "next";
 import clsx from "clsx";
 import NextLink from "next/link";
 
 import Search from "@/component/Search";
 
-const PAGES: { label: string; href: next.Route; press: string }[] = [
+const PAGES: { label: string; href: Route; press: string }[] = [
   { label: "Home", href: "/", press: "H" },
   { label: "Blog", href: "/blog", press: "B" },
   { label: "Profile", href: "/profile", press: "P" },

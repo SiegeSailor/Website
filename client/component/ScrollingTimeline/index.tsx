@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { ComponentProps, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 
 import Item from "@/component/ScrollingTimeline/Item";
@@ -8,17 +8,15 @@ import Item from "@/component/ScrollingTimeline/Item";
 export default function ({
   items,
   speedScroll = 30,
-}: {
-  items: Pick<React.ComponentProps<typeof Item>, "title" | "time">[];
+}: Readonly<{
+  items: Readonly<Pick<ComponentProps<typeof Item>, "title" | "time">[]>;
   speedScroll?: number;
-}) {
-  const [scrollDirection, setScrollDirection] = React.useState<"up" | "down">(
-    "down"
-  );
+}>) {
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
 
-  const refContainer = React.useRef<HTMLDivElement>(null);
+  const refContainer = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (refContainer.current) {
       refContainer.current.classList.remove("opacity-0");
     }

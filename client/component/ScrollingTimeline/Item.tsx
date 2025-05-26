@@ -1,14 +1,9 @@
-import React from "react";
 import clsx from "clsx";
 
 export default function ({
   title,
   time,
-}: {
-  title: string;
-  time: string;
-  weight: number;
-}) {
+}: Readonly<{ title: string; time: string; weight: number }>) {
   return (
     <li
       className={clsx(

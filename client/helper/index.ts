@@ -1,7 +1,7 @@
-import { site } from "@/setting";
+import { NAME } from "@/setting/site";
 
 export function generateTitle(...content: string[]) {
-  return [...content, site.name].join(" | ");
+  return [...content, NAME].join(" | ");
 }
 
 export function getCSSVariable(variable: string) {

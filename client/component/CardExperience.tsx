@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 
 import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
-import { home } from "@/setting";
+import { EXPERIENCE } from "@/setting/home";
 
 const ScrollingTimeline = dynamic(
   () =>
@@ -29,7 +28,7 @@ export default function ({ className }: { className?: string }) {
         />
       }
     >
-      <ScrollingTimeline items={home.experience} />
+      <ScrollingTimeline items={EXPERIENCE} />
     </CardBlock>
   );
 }

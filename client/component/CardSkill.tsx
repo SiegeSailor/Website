@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
-import { home } from "@/setting";
+import { SKILL } from "@/setting/home";
 
 const ScrollRowsChips = dynamic(
   () =>
@@ -14,7 +14,7 @@ const ScrollRowsChips = dynamic(
   { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
-export default function ({ className }: { className?: string }) {
+export default function ({ className }: Readonly<{ className?: string }>) {
   const parentIdentifier = "skill";
 
   return (
@@ -27,7 +27,7 @@ export default function ({ className }: { className?: string }) {
       <div className="w-full h-full flex flex-col gap-5">
         <ScrollRowsChips
           parentIdentifier={parentIdentifier}
-          rows={home.skill.map((row) =>
+          rows={SKILL.map((row) =>
             row.map((skill) => ({
               name: skill.name,
               icon: React.createElement(skill.icon),

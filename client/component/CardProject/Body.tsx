@@ -1,17 +1,17 @@
 "use client";
 
-import React from "react";
-import { Tabs, Tab, Progress } from "@heroui/react";
 import { motion } from "framer-motion";
+import { Tabs, Tab, Progress } from "@heroui/react";
+import { useState, useEffect } from "react";
 
+import { PROJECT } from "@/setting/home";
 import CardTab from "@/component/CardProject/CardTab";
-import { home } from "@/setting";
 
-export default function ({ items }: { items: (typeof home)["project"] }) {
-  const [indexItem, setIndexItem] = React.useState(0);
-  const [progress, setProgress] = React.useState(0);
+export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
+  const [indexItem, setIndexItem] = useState(0);
+  const [progress, setProgress] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setProgress((previous) => {
         return previous >= 100 ? 0 : previous + 0.5;
@@ -21,7 +21,7 @@ export default function ({ items }: { items: (typeof home)["project"] }) {
     return () => clearInterval(interval);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (progress === 100)
       setIndexItem((previous) => (previous + 1) % items.length);
   }, [progress]);

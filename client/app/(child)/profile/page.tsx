@@ -1,9 +1,8 @@
-import React from "react";
-import * as next from "next";
+import { Metadata } from "next";
 
 import { generateTitle } from "@/helper";
 
-export const metadata: next.Metadata = {
+export const metadata: Metadata = {
   title: generateTitle("Profile"),
 };
 

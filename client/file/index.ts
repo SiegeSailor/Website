@@ -1,12 +1,12 @@
-import fs from "fs";
-import path from "path";
+import { join } from "path";
+import { readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 
-import { site } from "@/setting";
+import { DOMAIN_PATH } from "@/setting/site";
 
 export async function getArticles() {
-  const directory = path.join(process.cwd(), site.article.path);
-  const filenames = fs.readdirSync(directory);
+  const directory = join(process.cwd(), DOMAIN_PATH.article);
+  const filenames = readdirSync(directory);
 
   const articles = await Promise.all(
     filenames
@@ -23,8 +23,8 @@ export async function getArticles() {
 
 export async function getArticleByFilename(filename: string) {
   const date = filename.split(".")[0];
-  const filePath = path.join(process.cwd(), site.article.path, filename);
-  const fileContents = fs.readFileSync(filePath, "utf8");
+  const filePath = join(process.cwd(), DOMAIN_PATH.article, filename);
+  const fileContents = readFileSync(filePath, "utf8");
   const { content: source, data } = matter(fileContents);
 
   const sources = source.split("<!-- description -->");

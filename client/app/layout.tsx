@@ -1,5 +1,5 @@
-import React from "react";
-import * as next from "next";
+import { ReactNode } from "react";
+import { Viewport, Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 import "highlight.js/styles/atom-one-dark.css";
@@ -10,7 +10,7 @@ import Layout from "@/component/Layout";
 import Provider from "@/component/Provider";
 import { generateTitle } from "@/helper";
 
-export const metadata: next.Metadata = {
+export const metadata: Metadata = {
   title: generateTitle(),
   description: [
     "Welcome to my personal website.",
@@ -20,7 +20,7 @@ export const metadata: next.Metadata = {
   icons: { icon: "/image/favicon.ico" },
 };
 
-export const viewport: next.Viewport = {
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -32,7 +32,7 @@ const FontRoboto = Roboto({ subsets: ["latin"] });
 export default function ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html suppressHydrationWarning lang="en">

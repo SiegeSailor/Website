@@ -1,17 +1,16 @@
-import React from "react";
-import * as next from "next";
+import { Metadata } from "next";
 
 import { generateTitle } from "@/helper";
+import { ROUTE_TITLE } from "@/setting/site";
 import CardBlog from "@/component/CardBlog";
 import CardExperience from "@/component/CardExperience";
-import CardSummary from "@/component/CardSummary";
 import CardProject from "@/component/CardProject";
 import CardSkill from "@/component/CardSkill";
+import CardSummary from "@/component/CardSummary";
 import ContentHero from "@/component/ContentHero";
-import { site } from "@/setting";
 
-export const metadata: next.Metadata = {
-  title: generateTitle(site.pathMap["/"]),
+export const metadata: Metadata = {
+  title: generateTitle(ROUTE_TITLE["/"]),
 };
 
 export default function () {

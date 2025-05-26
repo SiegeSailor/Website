@@ -1,8 +1,8 @@
-import React from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
+import { ComponentProps, createElement } from "react";
 import clsx from "clsx";
 
-import { site } from "@/setting";
+import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export default function ({
   tags,
@@ -10,8 +10,8 @@ export default function ({
   propsScrollShadow,
 }: {
   tags: string[];
-  propsChip?: React.ComponentProps<typeof Chip>;
-  propsScrollShadow?: React.ComponentProps<typeof ScrollShadow>;
+  propsChip?: ComponentProps<typeof Chip>;
+  propsScrollShadow?: ComponentProps<typeof ScrollShadow>;
 }) {
   return (
     <ScrollShadow
@@ -32,8 +32,8 @@ export default function ({
             propsChip?.className
           )}
           startContent={
-            tag in site.iconMap &&
-            React.createElement(site.iconMap[tag as keyof typeof site.iconMap])
+            tag in TECHNOLOGY_ICON &&
+            createElement(TECHNOLOGY_ICON[tag as keyof typeof TECHNOLOGY_ICON])
           }
         >
           {tag}

@@ -1,30 +1,30 @@
 "use client";
 
-import React from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
+import { ComponentProps } from "react";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import * as navigation from "next/navigation";
 
-import { site } from "@/setting";
 import { getArticles } from "@/file";
+import { ROUTE_TITLE } from "@/setting/site";
 
 export default function ({
   propsBreadcrumbs,
   propsBreadcrumbItem,
   articles,
 }: {
-  propsBreadcrumbs?: React.ComponentProps<typeof Breadcrumbs>;
-  propsBreadcrumbItem?: React.ComponentProps<typeof BreadcrumbItem>;
+  propsBreadcrumbs?: ComponentProps<typeof Breadcrumbs>;
+  propsBreadcrumbItem?: ComponentProps<typeof BreadcrumbItem>;
   articles: Awaited<ReturnType<typeof getArticles>>;
 }) {
-  const pathname = navigation.usePathname();
+  const pathname = usePathname();
 
   const paths = pathname.split("/");
   const breadcrumbs = paths.map((path, index) => {
     const href = (index != 0 ? paths[index - 1] : "") + "/" + path;
     let name = path;
-    if (href in site.pathMap) {
-      name = site.pathMap[href as keyof typeof site.pathMap];
+    if (href in ROUTE_TITLE) {
+      name = ROUTE_TITLE[href as keyof typeof ROUTE_TITLE];
     }
     if (/^\d{4}-\d{2}-\d{2}$/.test(path)) {
       name =

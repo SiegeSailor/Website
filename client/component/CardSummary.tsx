@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 import "chart.js/auto";
 import { Chart } from "chart.js";
 import { useTheme } from "next-themes";
@@ -9,29 +9,29 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 
 import { getCSSVariable } from "@/helper";
+import { SUMMARY } from "@/setting/home";
 import CardBlock from "@/component/CardBlock";
 import FloatingDivision from "@/component/FloatingDivision";
 import SpinnerCenter from "@/component/SpinnerCenter";
-import { home } from "@/setting";
 
 const Bar = dynamic(
   () => import("react-chartjs-2").then((module) => module.Bar),
   { ssr: true, loading: () => <SpinnerCenter /> }
 );
 
-export default function ({ className }: { className?: string }) {
-  const [colorDefault200, setColorDefault200] = React.useState("transparent");
-  const [colorDefault700, setColorDefault700] = React.useState("transparent");
-  const [colorForeground, setColorForeground] = React.useState("transparent");
-  const [isBarLoaded, setIsBarLoaded] = React.useState(false);
+export default function ({ className }: Readonly<{ className?: string }>) {
+  const [colorDefault200, setColorDefault200] = useState("transparent");
+  const [colorDefault700, setColorDefault700] = useState("transparent");
+  const [colorForeground, setColorForeground] = useState("transparent");
+  const [isBarLoaded, setIsBarLoaded] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Chart.register(ChartDataLabels);
   }, []);
 
   const { theme } = useTheme();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setColorDefault200(() => `hsl(${getCSSVariable("--heroui-default-200")})`);
     setColorDefault700(() => `hsl(${getCSSVariable("--heroui-default-700")})`);
     setColorForeground(() => `hsl(${getCSSVariable("--heroui-background")})`);
@@ -123,10 +123,10 @@ export default function ({ className }: { className?: string }) {
           },
         }}
         data={{
-          labels: home.summary.map((item) => item.title),
+          labels: SUMMARY.map((item) => item.title),
           datasets: [
             {
-              data: home.summary.map((item) => item.portion),
+              data: SUMMARY.map((item) => item.portion),
               backgroundColor: colorDefault700,
               borderRadius: {
                 bottomRight: 8,

@@ -1,15 +1,14 @@
-import React from "react";
-import * as next from "next";
+import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper";
 import { getArticles } from "@/file";
-import { site } from "@/setting";
-import InfiniteScroll from "@/component/InfiniteScroll";
+import { ROUTE_TITLE } from "@/setting/site";
 import CardArticle from "@/component/CardArticle";
+import InfiniteScroll from "@/component/InfiniteScroll";
 
-export const metadata: next.Metadata = {
-  title: generateTitle(site.pathMap["/blog"]),
+export const metadata: Metadata = {
+  title: generateTitle(ROUTE_TITLE["/blog"]),
 };
 
 export default async function () {
