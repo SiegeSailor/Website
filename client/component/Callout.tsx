@@ -3,6 +3,7 @@ import { Code } from "@heroui/react";
 import clsx from "clsx";
 import {
   LuBadgeAlert,
+  LuBadgeMinus,
   LuBadgeCheck,
   LuBadgeHelp,
   LuBadgeInfo,
@@ -12,9 +13,9 @@ const COLOR_ICON: Record<
   NonNullable<React.ComponentProps<typeof Code>["color"]>,
   React.ReactNode
 > = {
-  danger: <LuBadgeAlert size="1.25rem" />,
-  default: <LuBadgeInfo size="1.25rem" />,
-  primary: <LuBadgeCheck size="1.25rem" />,
+  danger: <LuBadgeMinus size="1.25rem" />,
+  default: <LuBadgeHelp size="1.25rem" />,
+  primary: <LuBadgeInfo size="1.25rem" />,
   secondary: <LuBadgeHelp size="1.25rem" />,
   success: <LuBadgeCheck size="1.25rem" />,
   warning: <LuBadgeAlert size="1.25rem" />,
@@ -47,7 +48,7 @@ export default function ({
     <div
       className={clsx(
         "rounded-md p-3",
-        "bg-background border-wa border-small",
+        "bg-background border-wa border-2",
         className
       )}
     >

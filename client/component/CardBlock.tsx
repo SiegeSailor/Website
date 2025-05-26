@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
 import { useRouter } from "next/navigation";
-import * as next from "next";
+import { Route } from "next";
 import clsx from "clsx";
 
 import SpinnerCenter from "@/component/SpinnerCenter";
@@ -20,7 +20,7 @@ export default function ({
   className?: string;
   contentHeader?: React.ReactNode;
   contentBody?: React.ReactNode;
-  href?: next.Route;
+  href?: Route;
   title: string;
 }) {
   const router = useRouter();

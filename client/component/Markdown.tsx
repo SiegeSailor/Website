@@ -1,4 +1,3 @@
-import React from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Code } from "@heroui/react";
 import clsx from "clsx";
@@ -6,7 +5,10 @@ import clsx from "clsx";
 import { remarkRehypeCallout } from "@/helper/plugin";
 import Callout from "@/component/Callout";
 import CodeBlock from "@/component/CodeBlock";
+import Heading from "@/component/Heading";
 import Link from "@/component/Link";
+
+const SPACE = "mb-6 last:mb-0";
 
 export default function ({ source }: Readonly<{ source: string }>) {
   return (
@@ -20,39 +22,45 @@ export default function ({ source }: Readonly<{ source: string }>) {
       }}
       components={{
         h1: (element) => (
-          <h1
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-3xl pb-4")}
+            level={1}
+            className={clsx(element.className, SPACE)}
           />
         ),
         h2: (element) => (
-          <h2
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-2xl pb-4")}
+            level={2}
+            className={clsx(element.className, SPACE)}
           />
         ),
         h3: (element) => (
-          <h3
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-xl pb-4")}
+            level={3}
+            className={clsx(element.className, SPACE)}
           />
         ),
         h4: (element) => (
-          <h4
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-lg pb-4")}
+            level={4}
+            className={clsx(element.className, SPACE)}
           />
         ),
         h5: (element) => (
-          <h5
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-base pb-4")}
+            level={5}
+            className={clsx(element.className, SPACE)}
           />
         ),
         h6: (element) => (
-          <h6
+          <Heading
             {...element}
-            className={clsx(element.className, "font-medium text-sm pb-4")}
+            level={6}
+            className={clsx(element.className, SPACE)}
           />
         ),
         blockquote: (element) => (
@@ -60,7 +68,8 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "border-l-2 border-default-500 pl-4 italic text-medium"
+              "border-l-2 border-default-500 pl-2 italic text-medium",
+              SPACE
             )}
           />
         ),
@@ -69,7 +78,8 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-inside pl-4 text-medium"
+              "list-disc list-inside pl-4 text-medium",
+              SPACE
             )}
           />
         ),
@@ -78,22 +88,36 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-inside pl-4 text-medium"
+              "list-decimal list-inside pl-4 text-medium",
+              SPACE
             )}
           />
         ),
         li: (element) => (
-          <li {...element} className={clsx(element.className, "text-medium")} />
+          <li
+            {...element}
+            className={clsx(element.className, "text-medium mb-2")}
+          />
         ),
-        code: (element) => <Code {...element} />,
-        callout: (element) => <Callout {...element} />,
-        pre: (element) => <CodeBlock {...element.children.props} />,
+        code: (element) => (
+          <Code {...element} className={clsx(element.className, SPACE)} />
+        ),
+        callout: (element) => (
+          <Callout {...element} className={clsx(element.className, SPACE)} />
+        ),
+        pre: (element) => (
+          <CodeBlock
+            {...element.children.props}
+            className={clsx(element.className, SPACE)}
+          />
+        ),
         p: (element) => (
           <p
             {...element}
             className={clsx(
               element.className,
-              "font-light text-medium pb-4 leading-6"
+              "font-light text-medium leading-6",
+              SPACE
             )}
           />
         ),
