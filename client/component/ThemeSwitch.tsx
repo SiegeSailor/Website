@@ -16,11 +16,8 @@ export default function ({
   classNames?: SwitchProps["classNames"];
 }) {
   const { theme, setTheme } = useTheme();
-  const isSSR = useIsSSR();
 
-  const onChange = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
+  const isSSR = useIsSSR();
 
   const {
     Component,
@@ -34,7 +31,9 @@ export default function ({
     "aria-label": `Switch to ${
       theme === "light" || isSSR ? "dark" : "light"
     } mode`,
-    onChange,
+    onChange: () => {
+      theme === "light" ? setTheme("dark") : setTheme("light");
+    },
   });
 
   return (

@@ -20,7 +20,9 @@ The issue will only happen when the following conditions are all met:
 - Designated or onsite runners are used
 
 :::note
+
 The GitLab runners used during writing this guide are of Linux distributions. Through this might not be the case, different platforms can perform differently.
+
 :::
 
 ### Dockerfile and Scripts Setup
@@ -88,7 +90,9 @@ demonstration:second:
 ```
 
 :::info
+
 `onsite-runner` is the tag for GitLab to choose the corresponding runner to execute the job, and only the runner has all the tags will be selected. Use a designated from the GitLab Runners list if no on-site runners are configured.
+
 :::
 
 Then trigger a pipeline by pushing a commit. After `demonstration:first` is done, the following error message will appear on the terminal of `demonstration:second` when it starts, and stops it from running:
@@ -142,7 +146,9 @@ docker run --rm --user "root" --volume "./home/:/home/" \
 ```
 
 :::note
+
 You only need to run either `chmod` or `chown` to the mounted location. However, running both will still work.
+
 :::
 
 After that, push to trigger a pipeline. The job will still fail, however, the newest commit has been checked out and available on the runner. Modify `GIT_STRATEGY` to `none` and push it again:
@@ -171,5 +177,7 @@ script: |
 ```
 
 :::note
+
 The Docker run flag `--user` may also work. This hasn't been confirmed yet.
+
 :::

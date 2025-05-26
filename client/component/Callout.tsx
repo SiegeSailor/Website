@@ -44,6 +44,7 @@ export default function ({
     >
       <div className={clsx("flex gap-4 items-center")}>
         <div>{setup.icon}</div>
+        <div>{category}</div>
         <div>{title}</div>
       </div>
 

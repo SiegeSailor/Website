@@ -1,13 +1,21 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 
-import Link from "@/component/Link";
+import { remarkRehypeCallout } from "@/helper/plugin";
+import Callout from "@/component/Callout";
 import CodeBlock from "@/component/CodeBlock";
+import Link from "@/component/Link";
 
 export default function ({ source }: Readonly<{ source: string }>) {
   return (
     <MDXRemote
       source={source}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkRehypeCallout],
+          rehypePlugins: [],
+        },
+      }}
       components={{
         h1: (element) => (
           <h1
@@ -84,6 +92,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             )}
           />
         ),
+        callout: (element) => <Callout {...element} />,
         pre: (element) => <CodeBlock {...element.children.props} />,
         p: (element) => (
           <p

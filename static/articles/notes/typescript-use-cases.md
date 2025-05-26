@@ -104,7 +104,9 @@ When the `target` in `tsconfig.json` is set to `ES5` or `ES3`, the `module` shou
 ```
 
 :::warning
+
 The official documentation suggests changing the file extension to `.mjs` to enforce `module` or `.cjs` to enforce `require`, or adding `--experimental-modules` to the `ts-node` command. However, in practice, these methods are ineffective. Additionally, setting `type` to `module` in `package.json` and setting `module` to `esnext` in `tsconfig.json` both result in errors when using `ts-node`.
+
 :::
 
 ## Type Notations
@@ -240,5 +242,7 @@ function bar<T>(quux?: T) {
 ```
 
 :::info
+
 There is an [Issue](https://github.com/microsoft/TypeScript/issues/5296) about supporting spread operator for arrays and tuples in function calls and should have been available since TypeScript 2.4.2. However, its been confirmed that 5.5.2 and 3.8.3 still persist this defect.
+
 :::

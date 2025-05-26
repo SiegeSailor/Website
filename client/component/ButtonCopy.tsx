@@ -13,17 +13,6 @@ const ButtonCopy = React.forwardRef<
 >(({ title = "Copy Code" }, ref) => {
   const [isCopied, setIsCopied] = React.useState(false);
 
-  const handleCopy = () => {
-    if (ref && "current" in ref && ref.current) {
-      navigator.clipboard.writeText(ref.current.innerText);
-
-      if (!isCopied) {
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
-      }
-    }
-  };
-
   return (
     <Button
       className={clsx(
@@ -31,7 +20,16 @@ const ButtonCopy = React.forwardRef<
         "text-default-500 hover:text-default-700",
         "dark:text-default-400 dark:hover:text-default-200"
       )}
-      onPress={handleCopy}
+      onPress={() => {
+        if (ref && "current" in ref && ref.current) {
+          navigator.clipboard.writeText(ref.current.innerText);
+
+          if (!isCopied) {
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000);
+          }
+        }
+      }}
       title={title}
       isIconOnly
       size="sm"

@@ -201,7 +201,9 @@ public class Run
 ```
 
 :::info
+
 The file structure for unit test cases should be identical to the files in `./Source/`. For example, to test `./Source/Entrypoint.cs` we will have to create a file `./Test/Entrypoint.cs` containing all test cases.
+
 :::
 
 ### Configure Pipelines
@@ -456,11 +458,15 @@ Add the GitLab package source manually to `nuget.config`:
 ```
 
 :::info
+
 Find `CI_PROJECT_ID` on the .NET package's GitLab project general setting or its pipelines.
+
 :::
 
 :::info
+
 Create [Personal Access Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), with at least `read_api` and `read_package_registry` enabled, and export `GITLAB_USER` and `GITLAB_PERSONAL_ACCESS_TOKEN` to the shell or in the `\*.rc` files.
+
 :::
 
 Install the packages:
@@ -470,7 +476,9 @@ dotnet add package Foo --version <version>
 ```
 
 :::note
+
 See available NuGet package versions on its GitLab Package Registry. Left it blank to use the newest version.
+
 :::
 
 Add references to the `.protobuf` files in `Baz.csproj`:
@@ -482,7 +490,9 @@ Add references to the `.protobuf` files in `Baz.csproj`:
 ```
 
 :::info
+
 `<CI_PROJECT_NAME>` is the package project name in lowercase, which is `foo` in this case. `<version>` has to be as same as the installed one.
+
 :::
 
 Restore the dependencies if the package is already in `Baz.csproj`:

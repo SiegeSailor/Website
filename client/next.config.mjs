@@ -1,5 +1,3 @@
-import createMDX from "@next/mdx";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: ".next",
@@ -8,7 +6,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   output: "standalone",
-  pageExtensions: ["md", "ts", "tsx"],
+  pageExtensions: ["ts", "tsx"],
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -39,12 +37,4 @@ const nextConfig = {
   },
 };
 
-const withMDX = createMDX({
-  extension: /\.(md|mdx)$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [["rehype-katex", { strict: true, throwOnError: true }]],
-  },
-});
-
-export default withMDX(nextConfig);
+export default nextConfig;

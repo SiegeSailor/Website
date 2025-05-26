@@ -7,7 +7,9 @@ tags: ["git"]
 Long-Term Support (LTS) is a practice of maintaining software versions for an extended period, ensuring stability and providing critical updates. This article describes the coding flow for managing LTS branches and tags. This article describes the coding flow for LTS.
 
 :::note
+
 In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit identifier. `#.#` and `#.#.#` refer to semantic versioning where `#` can be any positive integer.
+
 :::
 
 ## Overview
@@ -24,6 +26,7 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `backport/<SHORT_SHA_SOURCE>-#.#` | `backport-<SHORT_SHA_SOURCE>-#.#-<SHORT_SHA_CURRENT>` for debugging             | Same as Tags  | `0.0.0-backport.<SHORT_SHA_CURRENT>.#.#` for debugging                        | `release/#.#` or `release-candidate/#.#` | `release/#.#` or `release-candidate/#.#` |
 
 :::note
+
 Use the following regex for branch name matching on _GitLab - Project - Settings - Repository - Push Rules_:
 
 ```
@@ -31,12 +34,15 @@ Use the following regex for branch name matching on _GitLab - Project - Settings
 ```
 
 ![GitLab Project Settings Repository Push Rules](./GitLab%20Project%20Settings%20Repository%20Push%20Rules.png)
+
 :::
 
 :::note
+
 Use wildcard to create patterns to match each branch name to configure protected branches on _GitLab - Project - Settings - Repository - Protected Branches_:
 
 ![GitLab Project Settings Repository Protected Branches](./GitLab%20Project%20Settings%20Repository%20Protected%20Branchesa.png)
+
 :::
 
 ### Mapping
