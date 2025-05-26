@@ -1,4 +1,5 @@
 import React from "react";
+import { Code } from "@heroui/react";
 import clsx from "clsx";
 import {
   LuBadgeAlert,
@@ -7,45 +8,52 @@ import {
   LuBadgeInfo,
 } from "react-icons/lu";
 
+const COLOR_ICON: Record<
+  NonNullable<React.ComponentProps<typeof Code>["color"]>,
+  React.ReactNode
+> = {
+  danger: <LuBadgeAlert size="1.25rem" />,
+  default: <LuBadgeInfo size="1.25rem" />,
+  primary: <LuBadgeCheck size="1.25rem" />,
+  secondary: <LuBadgeHelp size="1.25rem" />,
+  success: <LuBadgeCheck size="1.25rem" />,
+  warning: <LuBadgeAlert size="1.25rem" />,
+};
+
+const COLOR_TITLE: Record<
+  NonNullable<React.ComponentProps<typeof Code>["color"]>,
+  string
+> = {
+  danger: "Danger",
+  default: "Note",
+  primary: "Fact",
+  secondary: "Note",
+  success: "Success",
+  warning: "Warning",
+};
+
 export default function ({
-  category,
+  color,
   children,
   className,
   title,
 }: Readonly<{
-  category: "info" | "warning" | "note";
+  color: NonNullable<React.ComponentProps<typeof Code>["color"]>;
   children: React.ReactNode;
   className?: string;
   title: string;
 }>) {
-  const setup = {
-    icon: <LuBadgeInfo size="1.25rem" className="text-gray-500" />,
-    color: "",
-    backgroundColor: "",
-  };
-  switch (category) {
-    case "info":
-      setup.icon = <LuBadgeCheck size="1.25rem" className="text-green-500" />;
-      break;
-    case "warning":
-      setup.icon = <LuBadgeAlert size="1.25rem" className="text-yellow-500" />;
-      break;
-    case "note":
-      setup.icon = <LuBadgeHelp size="1.25rem" className="text-blue-500" />;
-      break;
-  }
-
   return (
     <div
       className={clsx(
-        className,
-        "bg-default-200 dark:bg-default-700 rounded-md px-4 py-2 mb-4"
+        "rounded-md p-3",
+        "bg-background border-wa border-small",
+        className
       )}
     >
-      <div className={clsx("flex gap-4 items-center")}>
-        <div>{setup.icon}</div>
-        <div>{category}</div>
-        <div>{title}</div>
+      <div className={clsx("flex items-center justify-start gap-2 mb-2")}>
+        <div>{COLOR_ICON[color]}</div>
+        <div>{title ? title : COLOR_TITLE[color]}</div>
       </div>
 
       {children}

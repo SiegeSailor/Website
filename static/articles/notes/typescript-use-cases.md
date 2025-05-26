@@ -241,7 +241,7 @@ function bar<T>(quux?: T) {
 }
 ```
 
-:::info
+:::primary
 
 There is an [Issue](https://github.com/microsoft/TypeScript/issues/5296) about supporting spread operator for arrays and tuples in function calls and should have been available since TypeScript 2.4.2. However, its been confirmed that 5.5.2 and 3.8.3 still persist this defect.
 

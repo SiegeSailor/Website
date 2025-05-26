@@ -1,4 +1,6 @@
+import React from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { Code } from "@heroui/react";
 import clsx from "clsx";
 
 import { remarkRehypeCallout } from "@/helper/plugin";
@@ -83,15 +85,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
         li: (element) => (
           <li {...element} className={clsx(element.className, "text-medium")} />
         ),
-        code: (element) => (
-          <code
-            {...element}
-            className={clsx(
-              element.className,
-              "bg-default-200 dark:bg-default-700 rounded-md px-1 py-0.5 text-sm"
-            )}
-          />
-        ),
+        code: (element) => <Code {...element} />,
         callout: (element) => <Callout {...element} />,
         pre: (element) => <CodeBlock {...element.children.props} />,
         p: (element) => (

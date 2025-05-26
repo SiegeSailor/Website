@@ -9,7 +9,7 @@ import NextLink from "next/link";
 
 import Search from "@/component/Search";
 
-const pages: { label: string; href: next.Route; press: string }[] = [
+const PAGES: { label: string; href: next.Route; press: string }[] = [
   { label: "Home", href: "/", press: "H" },
   { label: "Blog", href: "/blog", press: "B" },
   { label: "Profile", href: "/profile", press: "P" },
@@ -23,7 +23,7 @@ export default function () {
         <Search />
       </div>
       <div className="mt-2 flex flex-col gap-2 text-center">
-        {pages.map((page) => {
+        {PAGES.map((page) => {
           const isActive = pathname === page.href;
           return (
             <NavbarMenuItem key={page.label} isActive={isActive}>

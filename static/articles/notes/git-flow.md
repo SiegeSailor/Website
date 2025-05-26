@@ -6,7 +6,7 @@ tags: ["git"]
 
 [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) is a branching model for Git, originally created by Vincent Driessen. This article describes the modified coding flow for Git Flow.
 
-:::note
+:::secondary
 
 In this article, `<SHORT_SHA>` refers to the first 8 digits of a Git commit identifier. `#.#` and `#.#.#` refer to semantic versioning where `#` can be any positive integer.
 
@@ -24,7 +24,7 @@ Here's a table that indicates the branch naming convention and what branches cou
 | `release/#.#.#`  | `release-#.#.#-<SHORT_SHA>` for debugging                        | Same as Tags | `0.0.0-release.#.#.#.<SHORT_SHA>` for debugging                        | `develop`    | `main` and `develop` |
 | `hotfix/#.#.#`   | `hotfix-#.#.#-<SHORT_SHA>` for debugging                         | Same as Tags | `0.0.0-hotfix.#.#.#.<SHORT_SHA>` for debugging                         | `main`       | `main` and `develop` |
 
-:::note
+:::secondary
 
 Use the following regex for branch name matching on _GitLab - Project - Settings - Repository - Push Rules_:
 

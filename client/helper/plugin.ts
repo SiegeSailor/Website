@@ -8,7 +8,7 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       data: {
         hName: "callout",
         hProperties: {
-          category: "",
+          color: "",
           title: "",
         },
       },
@@ -39,7 +39,7 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
         const match = text.match(/^:::([^\s]+)\s*(.*)?$/);
         if (match) {
           isInCallout = true;
-          callout.data.hProperties.category = match[1];
+          callout.data.hProperties.color = match[1];
           callout.data.hProperties.title = match[2] || "";
           continue;
         }

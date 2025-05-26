@@ -19,7 +19,7 @@ The issue will only happen when the following conditions are all met:
 - `sudo` is not available in the runners
 - Designated or onsite runners are used
 
-:::note
+:::secondary
 
 The GitLab runners used during writing this guide are of Linux distributions. Through this might not be the case, different platforms can perform differently.
 
@@ -89,7 +89,7 @@ demonstration:second:
     STAGE: "stage-second"
 ```
 
-:::info
+:::primary
 
 `onsite-runner` is the tag for GitLab to choose the corresponding runner to execute the job, and only the runner has all the tags will be selected. Use a designated from the GitLab Runners list if no on-site runners are configured.
 
@@ -145,7 +145,7 @@ docker run --rm --user "root" --volume "./home/:/home/" \
     "
 ```
 
-:::note
+:::secondary
 
 You only need to run either `chmod` or `chown` to the mounted location. However, running both will still work.
 
@@ -176,7 +176,7 @@ script: |
     "baz:latest"
 ```
 
-:::note
+:::secondary
 
 The Docker run flag `--user` may also work. This hasn't been confirmed yet.
 
