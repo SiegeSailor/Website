@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import { HTMLAttributes } from "react";
 import { Spacer } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
-import { home } from "@/setting";
+import { PROJECT } from "@/setting/home";
 import Link from "@/component/Link";
 
 export default function ({
@@ -13,10 +13,11 @@ export default function ({
   item,
   isLeaving,
   ...props
-}: {
-  item: (typeof home)["project"][number];
-  isLeaving: boolean;
-} & React.HTMLAttributes<HTMLDivElement>) {
+}: HTMLAttributes<HTMLDivElement> &
+  Readonly<{
+    item: (typeof PROJECT)[number];
+    isLeaving: boolean;
+  }>) {
   return (
     <div
       {...props}

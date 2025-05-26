@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { LuSearch } from "react-icons/lu";
 import {
   Modal,

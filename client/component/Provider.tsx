@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { ReactNode, ComponentProps } from "react";
 import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/navigation";
@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 export default function ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-  const push = useRouter().push as React.ComponentProps<
+  const push = useRouter().push as ComponentProps<
     typeof HeroUIProvider
   >["navigate"];
 

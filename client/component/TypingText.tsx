@@ -1,24 +1,24 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 
 export default function ({
   speedDeleting = 100,
   speedTyping = 150,
   timePause = 1000,
   words,
-}: {
+}: Readonly<{
   speedDeleting?: number;
   speedTyping?: number;
   timePause?: number;
   words: string[];
-}) {
-  const [indexCurrentWord, setIndexCurrentWord] = React.useState(0);
-  const [text, setText] = React.useState("");
-  const [isDeleting, setIsDeleting] = React.useState(false);
-  const [indexCharacter, setCharacterIndex] = React.useState(0);
+}>) {
+  const [indexCurrentWord, setIndexCurrentWord] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [indexCharacter, setCharacterIndex] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const currentWord = words[indexCurrentWord];
     let timeoutId: NodeJS.Timeout;
 

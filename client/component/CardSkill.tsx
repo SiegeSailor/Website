@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import { createElement } from "react";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 
+import { SKILL } from "@/setting/home";
 import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
-import { SKILL } from "@/setting/home";
 
 const ScrollRowsChips = dynamic(
   () =>
@@ -30,7 +30,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           rows={SKILL.map((row) =>
             row.map((skill) => ({
               name: skill.name,
-              icon: React.createElement(skill.icon),
+              icon: createElement(skill.icon),
             }))
           )}
         />

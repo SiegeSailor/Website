@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import clsx from "clsx";
 
@@ -11,11 +10,12 @@ export default function ({
   duration = 1.5,
   direction,
   ...props
-}: HTMLMotionProps<"div"> & {
-  volume?: number;
-  duration?: number;
-  direction: "horizontal" | "vertical";
-}) {
+}: HTMLMotionProps<"div"> &
+  Readonly<{
+    volume?: number;
+    duration?: number;
+    direction: "horizontal" | "vertical";
+  }>) {
   const keyDirection: any = direction === "horizontal" ? "x" : "y";
 
   return (

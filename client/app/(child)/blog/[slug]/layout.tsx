@@ -1,5 +1,5 @@
+import { getArticles } from "@/helper/article";
 import Breadcrumb from "@/component/Breadcrumb";
-import { getArticles } from "@/file";
 
 export default async function ({
   children,

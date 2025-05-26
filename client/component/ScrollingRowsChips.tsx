@@ -1,22 +1,22 @@
 "use client";
 
-import React from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
 import { motion } from "framer-motion";
+import { ReactNode, useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 
 export default function ({
   rows,
   parentIdentifier,
-}: {
-  rows: { name: string; icon: React.ReactNode }[][];
+}: Readonly<{
+  rows: { name: string; icon: ReactNode }[][];
   parentIdentifier?: string;
-}) {
-  const refContainer = React.useRef<HTMLDivElement>(null);
+}>) {
+  const refContainer = useRef<HTMLDivElement>(null);
 
-  const [widthParent, setWidthParent] = React.useState(0);
+  const [widthParent, setWidthParent] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (refContainer.current) {
       setWidthParent(refContainer.current.offsetWidth);
     }
@@ -28,10 +28,10 @@ export default function ({
         const isEven = index % 2 === 0;
         const speed = 40;
 
-        const refRow = React.useRef<HTMLDivElement>(null);
-        const [widthRow, setWidthRow] = React.useState(0);
+        const refRow = useRef<HTMLDivElement>(null);
+        const [widthRow, setWidthRow] = useState(0);
 
-        React.useEffect(() => {
+        useEffect(() => {
           if (refRow.current) {
             const widthTotal = Array.from(refRow.current.children).reduce(
               (accumulator, child) => {

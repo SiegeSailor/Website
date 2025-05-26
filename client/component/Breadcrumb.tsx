@@ -5,18 +5,18 @@ import { ComponentProps } from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { getArticles } from "@/file";
+import { getArticles } from "@/helper/article";
 import { ROUTE_TITLE } from "@/setting/site";
 
 export default function ({
   propsBreadcrumbs,
   propsBreadcrumbItem,
   articles,
-}: {
+}: Readonly<{
   propsBreadcrumbs?: ComponentProps<typeof Breadcrumbs>;
   propsBreadcrumbItem?: ComponentProps<typeof BreadcrumbItem>;
   articles: Awaited<ReturnType<typeof getArticles>>;
-}) {
+}>) {
   const pathname = usePathname();
 
   const paths = pathname.split("/");

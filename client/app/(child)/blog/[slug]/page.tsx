@@ -1,14 +1,13 @@
-import { Divider } from "@heroui/react";
 import clsx from "clsx";
 
-import { generateTitle } from "@/helper";
-import { getArticles, getArticleByDate } from "@/file";
+import { generateTitle } from "@/helper/utility";
+import { getArticles, getArticleByDate } from "@/helper/article";
 import Markdown from "@/component/Markdown";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export const dynamicParams = false;
 
-type TParams = { slug: string };
+type TParams = Readonly<{ slug: string }>;
 
 export async function generateStaticParams(): Promise<TParams[]> {
   const articles = await getArticles();
@@ -20,9 +19,9 @@ export async function generateStaticParams(): Promise<TParams[]> {
 
 export async function generateMetadata({
   params,
-}: {
+}: Readonly<{
   params: Promise<TParams>;
-}) {
+}>) {
   const { slug } = await params;
   const article = await getArticleByDate(slug);
 
@@ -32,7 +31,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function ({ params }: { params: Promise<TParams> }) {
+export default async function ({
+  params,
+}: Readonly<{ params: Promise<TParams> }>) {
   const { slug } = await params;
   const { metadata, content } = await getArticleByDate(slug);
 

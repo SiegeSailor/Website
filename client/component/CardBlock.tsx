@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
 import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { ComponentProps, ReactNode, Suspense } from "react";
 import { Route } from "next";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import SpinnerCenter from "@/component/SpinnerCenter";
@@ -16,13 +16,14 @@ export default function ({
   href,
   title,
   ...props
-}: React.ComponentProps<typeof Card> & {
-  className?: string;
-  contentHeader?: React.ReactNode;
-  contentBody?: React.ReactNode;
-  href?: Route;
-  title: string;
-}) {
+}: ComponentProps<typeof Card> &
+  Readonly<{
+    className?: string;
+    contentHeader?: ReactNode;
+    contentBody?: ReactNode;
+    href?: Route;
+    title: string;
+  }>) {
   const router = useRouter();
 
   return (
@@ -46,18 +47,14 @@ export default function ({
             <span className="font-semibold">{title}</span>
           </Chip>
         </div>
-        <React.Suspense fallback={<SpinnerCenter />}>
-          {contentHeader}
-        </React.Suspense>
+        <Suspense fallback={<SpinnerCenter />}>{contentHeader}</Suspense>
       </CardHeader>
-      <React.Suspense fallback={<SpinnerCenter className="mt-12" />}>
+      <Suspense fallback={<SpinnerCenter className="mt-12" />}>
         {contentBody}
-      </React.Suspense>
+      </Suspense>
       {children && (
         <CardBody className="mt-12 overflow-hidden">
-          <React.Suspense fallback={<SpinnerCenter />}>
-            {children}
-          </React.Suspense>
+          <Suspense fallback={<SpinnerCenter />}>{children}</Suspense>
         </CardBody>
       )}
     </Card>

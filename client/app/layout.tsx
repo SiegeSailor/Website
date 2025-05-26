@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
-import { Viewport, Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { Viewport, Metadata } from "next";
 
 import "highlight.js/styles/atom-one-dark.css";
 import "@/style/global.css";
+import { generateTitle } from "@/helper/utility";
 import { ScrollShadow } from "@heroui/react";
 import Header from "@/component/Header";
 import Layout from "@/component/Layout";
 import Provider from "@/component/Provider";
-import { generateTitle } from "@/helper";
 
 export const metadata: Metadata = {
   title: generateTitle(),

@@ -1,4 +1,3 @@
-import React from "react";
 import { LuSquareTerminal } from "react-icons/lu";
 import {
   Navbar,
@@ -10,10 +9,10 @@ import {
 } from "@heroui/react";
 import NextLink from "next/link";
 
-import ThemeSwitch from "@/component/ThemeSwitch";
-import Search from "@/component/Search";
+import { generateTitle } from "@/helper/utility";
 import Menu from "@/component/Header/Menu";
-import { generateTitle } from "@/helper";
+import Search from "@/component/Search";
+import ThemeSwitch from "@/component/ThemeSwitch";
 
 export default function () {
   return (

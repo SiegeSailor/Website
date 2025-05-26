@@ -1,9 +1,9 @@
-import React from "react";
+import { ReactNode } from "react";
 
 export default async function ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return <div className="w-full h-full">{children}</div>;
 }

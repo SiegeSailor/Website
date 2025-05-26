@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { Skeleton } from "@heroui/react";
+import { useRef, useEffect, useState, ReactNode } from "react";
 import clsx from "clsx";
 import highlight from "highlight.js";
 
@@ -11,14 +11,14 @@ export default function ({
   children,
   className,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }>) {
-  const refPre = React.useRef<HTMLPreElement>(null);
+  const refPre = useRef<HTMLPreElement>(null);
 
-  const [isMounted, setIsMounted] = React.useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (refPre.current) {
       highlight.highlightElement(refPre.current);
       setIsMounted(true);

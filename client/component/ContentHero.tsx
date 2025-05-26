@@ -1,10 +1,9 @@
-import React from "react";
-import TypingText from "@/component/TypingText";
-import { LuRocket } from "react-icons/lu";
 import { Button } from "@heroui/react";
+import { LuRocket } from "react-icons/lu";
 import NextLink from "next/link";
 
 import Link from "@/component/Link";
+import TypingText from "@/component/TypingText";
 
 export default function () {
   return (

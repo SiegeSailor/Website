@@ -1,8 +1,8 @@
 "use client";
 
 import { NavbarMenu, NavbarMenuItem, Kbd, link, Button } from "@heroui/react";
-import { usePathname } from "next/navigation";
 import { Route } from "next";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import NextLink from "next/link";
 
@@ -12,7 +12,7 @@ const PAGES: { label: string; href: Route; press: string }[] = [
   { label: "Home", href: "/", press: "H" },
   { label: "Blog", href: "/blog", press: "B" },
   { label: "Profile", href: "/profile", press: "P" },
-];
+] as const;
 
 export default function () {
   const pathname = usePathname();

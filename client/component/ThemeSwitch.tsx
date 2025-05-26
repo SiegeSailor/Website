@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { LuSun, LuMoon } from "react-icons/lu";
 import { SwitchProps, useSwitch } from "@heroui/switch";
 import { useIsSSR } from "@react-aria/ssr";
@@ -11,10 +10,10 @@ import clsx from "clsx";
 export default function ({
   className,
   classNames,
-}: {
+}: Readonly<{
   className?: string;
   classNames?: SwitchProps["classNames"];
-}) {
+}>) {
   const { theme, setTheme } = useTheme();
 
   const isSSR = useIsSSR();

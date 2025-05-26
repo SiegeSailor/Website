@@ -1,18 +1,22 @@
 "use client";
 
-import React from "react";
+import { createContext, useContext, ReactNode } from "react";
 
-const defaultValues = {};
-const Context = React.createContext(defaultValues);
+export const defaultLayoutContextValues = {};
+const Context = createContext(defaultLayoutContextValues);
 
-export function useContext() {
-  return React.useContext(Context);
+export function useLayoutContext() {
+  return useContext(Context);
 }
 
 export default function ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-  return <Context.Provider value={defaultValues}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={defaultLayoutContextValues}>
+      {children}
+    </Context.Provider>
+  );
 }

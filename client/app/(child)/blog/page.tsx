@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import clsx from "clsx";
 
-import { generateTitle } from "@/helper";
-import { getArticles } from "@/file";
+import { generateTitle } from "@/helper/utility";
+import { getArticles } from "@/helper/article";
 import { ROUTE_TITLE } from "@/setting/site";
 import CardArticle from "@/component/CardArticle";
 import InfiniteScroll from "@/component/InfiniteScroll";

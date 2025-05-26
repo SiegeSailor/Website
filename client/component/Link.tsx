@@ -1,8 +1,8 @@
-import React from "react";
+import { ComponentProps } from "react";
 import clsx from "clsx";
 import { Link } from "@heroui/react";
 
-export default function ({ ...props }: React.ComponentProps<typeof Link>) {
+export default function ({ ...props }: ComponentProps<typeof Link>) {
   return (
     <Link
       color="foreground"

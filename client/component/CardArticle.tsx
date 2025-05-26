@@ -1,4 +1,4 @@
-import React from "react";
+import { ComponentProps } from "react";
 import {
   Card,
   CardBody,
@@ -8,7 +8,7 @@ import {
 } from "@heroui/react";
 import clsx from "clsx";
 
-import { getArticleByFilename } from "@/file";
+import { getArticleByFilename } from "@/helper/article";
 import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
@@ -16,11 +16,10 @@ import ScrollShadowChips from "@/component/ScrollShadowChips";
 export default function ({
   article,
   ...props
-}: React.ComponentProps<typeof Card> & {
-  article: Awaited<ReturnType<typeof getArticleByFilename>>;
-}) {
-  const href = `/blog/${article.metadata.date}`;
-
+}: ComponentProps<typeof Card> &
+  Readonly<{
+    article: Awaited<ReturnType<typeof getArticleByFilename>>;
+  }>) {
   return (
     <Card {...props} className={clsx("p-2", props.className)}>
       <CardHeader>
@@ -46,7 +45,10 @@ export default function ({
             propsScrollShadow={{ className: "w-full flex-grow" }}
           />
           <div className="text-nowrap">
-            <Link href={href} className="font-normal">
+            <Link
+              href={`/blog/${article.metadata.date}`}
+              className="font-normal"
+            >
               Read More
             </Link>
           </div>

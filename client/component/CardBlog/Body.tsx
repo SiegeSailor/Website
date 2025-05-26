@@ -1,24 +1,24 @@
 "use client";
 
-import React from "react";
-import { Image, Progress, Spacer } from "@heroui/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Image, Progress, Spacer } from "@heroui/react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import NextImage from "next/image";
 
-import { getArticles } from "@/file";
+import { getArticles } from "@/helper/article";
 import FloatingDivision from "@/component/FloatingDivision";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export default function ({
   articles,
-}: {
+}: Readonly<{
   articles: Awaited<ReturnType<typeof getArticles>>;
-}) {
-  const [indexArticle, setIndexArticle] = React.useState(0);
-  const [progress, setProgress] = React.useState(0);
+}>) {
+  const [indexArticle, setIndexArticle] = useState(0);
+  const [progress, setProgress] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setProgress((previous) => {
         return previous >= 100 ? 0 : previous + 0.5;
@@ -28,7 +28,7 @@ export default function ({
     return () => clearInterval(interval);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (progress === 100)
       setIndexArticle((previous) => (previous + 1) % articles.length);
   }, [progress]);

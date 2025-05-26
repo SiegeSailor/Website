@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { generateTitle } from "@/helper";
+import { generateTitle } from "@/helper/utility";
 
 export const metadata: Metadata = {
   title: generateTitle("Profile"),

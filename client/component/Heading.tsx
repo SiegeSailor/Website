@@ -8,7 +8,7 @@ const LEVEL_TEXT: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
   4: "text-lg",
   5: "text-base",
   6: "text-sm",
-};
+} as const;
 
 export default function ({
   level,

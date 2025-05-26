@@ -1,11 +1,12 @@
-import React from "react";
 import clsx from "clsx";
 
-import { getArticles } from "@/file";
+import { getArticles } from "@/helper/article";
 import Body from "@/component/CardBlog/Body";
 import CardBlock from "@/component/CardBlock";
 
-export default async function ({ className }: { className?: string }) {
+export default async function ({
+  className,
+}: Readonly<{ className?: string }>) {
   const articles = await getArticles();
 
   return (

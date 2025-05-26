@@ -8,11 +8,11 @@ export default function ({
   tags,
   propsChip,
   propsScrollShadow,
-}: {
+}: Readonly<{
   tags: string[];
   propsChip?: ComponentProps<typeof Chip>;
   propsScrollShadow?: ComponentProps<typeof ScrollShadow>;
-}) {
+}>) {
   return (
     <ScrollShadow
       {...propsScrollShadow}

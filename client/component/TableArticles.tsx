@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   Table,
   TableHeader,
@@ -9,7 +8,7 @@ import {
   TableRow,
   TableCell,
 } from "@heroui/react";
-import { getArticles } from "@/file";
+import { getArticles } from "@/helper/article";
 
 const COLUMNS: {
   key: keyof Awaited<ReturnType<typeof getArticles>>[0]["metadata"];
@@ -18,13 +17,13 @@ const COLUMNS: {
   { key: "title", label: "Title" },
   { key: "tags", label: "Tags" },
   { key: "date", label: "Date" },
-];
+] as const;
 
 export default function ({
   articles,
-}: {
+}: Readonly<{
   articles: Awaited<ReturnType<typeof getArticles>>;
-}) {
+}>) {
   return (
     <Table
       isHeaderSticky

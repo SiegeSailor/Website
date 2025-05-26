@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { generateTitle } from "@/helper";
+import { generateTitle } from "@/helper/utility";
 import { ROUTE_TITLE } from "@/setting/site";
 import CardBlog from "@/component/CardBlog";
 import CardExperience from "@/component/CardExperience";

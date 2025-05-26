@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import { ComponentProps, useState, Fragment, ReactNode } from "react";
 import { ScrollShadow } from "@heroui/react";
 
 export default function ({
   items,
   ...props
-}: React.ComponentProps<typeof ScrollShadow> & { items: React.ReactNode[] }) {
-  const [indexItems, setIndexItems] = React.useState(8);
+}: ComponentProps<typeof ScrollShadow> & Readonly<{ items: ReactNode[] }>) {
+  const [indexItems, setIndexItems] = useState(8);
 
   return (
     <ScrollShadow
@@ -21,7 +21,7 @@ export default function ({
       {...props}
     >
       {items.slice(0, indexItems).map((item, index) => (
-        <React.Fragment key={index}>{item}</React.Fragment>
+        <Fragment key={index}>{item}</Fragment>
       ))}
     </ScrollShadow>
   );

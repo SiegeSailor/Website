@@ -1,4 +1,4 @@
-import React from "react";
+import { ComponentProps, ReactNode } from "react";
 import { Code } from "@heroui/react";
 import clsx from "clsx";
 import {
@@ -10,8 +10,8 @@ import {
 } from "react-icons/lu";
 
 const COLOR_ICON: Record<
-  NonNullable<React.ComponentProps<typeof Code>["color"]>,
-  React.ReactNode
+  NonNullable<ComponentProps<typeof Code>["color"]>,
+  ReactNode
 > = {
   danger: <LuBadgeMinus size="1.25rem" />,
   default: <LuBadgeHelp size="1.25rem" />,
@@ -22,7 +22,7 @@ const COLOR_ICON: Record<
 };
 
 const COLOR_TITLE: Record<
-  NonNullable<React.ComponentProps<typeof Code>["color"]>,
+  NonNullable<ComponentProps<typeof Code>["color"]>,
   string
 > = {
   danger: "Danger",
@@ -39,8 +39,8 @@ export default function ({
   className,
   title,
 }: Readonly<{
-  color: NonNullable<React.ComponentProps<typeof Code>["color"]>;
-  children: React.ReactNode;
+  color: NonNullable<ComponentProps<typeof Code>["color"]>;
+  children: ReactNode;
   className?: string;
   title: string;
 }>) {
