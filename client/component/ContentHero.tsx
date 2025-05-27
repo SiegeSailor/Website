@@ -1,15 +1,22 @@
 import { Button } from "@heroui/react";
 import { LuMail } from "react-icons/lu";
+import clsx from "clsx";
 import NextLink from "next/link";
 
 import Link from "@/component/Link";
 import TypingText from "@/component/TypingText";
 
-export default function () {
+export default function ({ className }: Readonly<{ className?: string }>) {
   return (
-    <div className="text-left w-full">
+    <div className={clsx("text-left w-full", className)}>
       <div className="space-y-2">
-        <h2 className="text-3xl sm:text-4xl font-light text-default-600 flex flex-col">
+        <h2
+          className={clsx(
+            "text-3xl sm:text-4xl",
+            "font-light text-default-600",
+            "flex flex-col gap-1"
+          )}
+        >
           <span className="text-nowrap">
             Hi, I'm <span className="text-foreground">Jin Yu Zhang</span>!
           </span>

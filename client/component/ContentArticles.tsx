@@ -22,7 +22,7 @@ export default async function ({ title }: Readonly<{ title?: string }>) {
         </h4>
       )}
 
-      <div className="gap-4 grid grid-cols-12 w-full">
+      <div className="gap-4 grid grid-cols-12 w-full border-collapse">
         {articles.slice(0, 5).map((article, index) => {
           return (
             <CardArticle
