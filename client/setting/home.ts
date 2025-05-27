@@ -98,12 +98,12 @@ export const PROJECT = [
     title: "Dynamic Account Hub",
     description:
       "A web application that allows users to manage their accounts and settings.",
-    href: "/profile",
+    href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
   },
   {
     title: "Cryptography CLI",
     description:
       "A command-line interface for encrypting and decrypting files using various algorithms.",
-    href: "/profile",
+    href: "https://github.com/SiegeSailor/OpenSource.Formulas",
   },
 ] as Readonly<{ title: string; description: string; href: Route }[]>;

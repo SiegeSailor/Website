@@ -40,7 +40,9 @@ export default function ({
               {item.description}
             </p>
             <Spacer y={1} />
-            <Link href={item.href}>Read More</Link>
+            <Link href={item.href} isExternal>
+              Read More
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

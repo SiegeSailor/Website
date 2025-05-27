@@ -5,10 +5,12 @@ import Body from "@/component/CardBlog/Body";
 import CardBlock from "@/component/CardBlock";
 
 export default async function ({
+  articles,
   className,
-}: Readonly<{ className?: string }>) {
-  const articles = await getArticles();
-
+}: Readonly<{
+  className?: string;
+  articles: Awaited<ReturnType<typeof getArticles>>;
+}>) {
   return (
     <CardBlock
       className={clsx(className)}
