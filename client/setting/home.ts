@@ -34,7 +34,11 @@ export const EXPERIENCE = [
   },
   {
     title: "Software Engineer at CooperSurgical",
-    time: "Jan 2024 - Present",
+    time: "Jan 2024 - May 2025",
+  },
+  {
+    title: "Senior Software Engineer at CooperSurgical",
+    time: "May 2025 - Present",
   },
 ] as const;
 

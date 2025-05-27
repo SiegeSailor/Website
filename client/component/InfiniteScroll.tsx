@@ -5,9 +5,11 @@ import { ScrollShadow } from "@heroui/react";
 
 export default function ({
   items,
+  indexInitial,
   ...props
-}: ComponentProps<typeof ScrollShadow> & Readonly<{ items: ReactNode[] }>) {
-  const [indexItems, setIndexItems] = useState(8);
+}: ComponentProps<typeof ScrollShadow> &
+  Readonly<{ items: ReactNode[]; indexInitial: number }>) {
+  const [indexItems, setIndexItems] = useState(indexInitial);
 
   return (
     <ScrollShadow

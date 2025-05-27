@@ -64,7 +64,7 @@ export default function ({
                   direction="vertical"
                   duration={2}
                   className={clsx(
-                    "absolute top-28 left-4",
+                    "absolute top-24 left-4",
                     "z-10 justify-start"
                   )}
                   style={{ width: "calc(100% - 1.5rem)" }}

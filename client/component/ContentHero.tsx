@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { LuRocket } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
 import NextLink from "next/link";
 
 import Link from "@/component/Link";
@@ -14,7 +14,7 @@ export default function () {
             Hi, I'm <span className="text-foreground">Jin Yu Zhang</span>!
           </span>
           <span className="text-nowrap">
-            I’m a
+            I’m a Senior
             <span className="font-light text-primary px-2">
               <TypingText
                 words={["Software", "Full-Stack", "DevOps"]}
@@ -46,19 +46,19 @@ export default function () {
           className="col-span-12 sm:col-span-4"
         >
           <Button
-            startContent={<LuRocket size="1.45rem" />}
+            startContent={<LuMail size="1.45rem" />}
             size="lg"
             radius="full"
             variant="shadow"
             color="primary"
             className="w-full"
           >
-            Open to Work
+            Let's Connect
           </Button>
         </NextLink>
         <p className="text-gray-600 col-span-12 sm:col-span-8">
-          Feel free to explore my portfolio and reach out — I am actively
-          looking for new opportunities.
+          Browse my website and feel free to drop me a line if you’d like to
+          exchange insights or chat about industry trends.
         </p>
       </div>
     </div>

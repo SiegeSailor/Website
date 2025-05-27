@@ -13,12 +13,12 @@ const COLOR_ICON: Record<
   NonNullable<ComponentProps<typeof Code>["color"]>,
   ReactNode
 > = {
-  danger: <LuBadgeMinus size="1.25rem" />,
-  default: <LuBadgeHelp size="1.25rem" />,
-  primary: <LuBadgeInfo size="1.25rem" />,
-  secondary: <LuBadgeHelp size="1.25rem" />,
-  success: <LuBadgeCheck size="1.25rem" />,
-  warning: <LuBadgeAlert size="1.25rem" />,
+  danger: <LuBadgeMinus size="1.45rem" />,
+  default: <LuBadgeHelp size="1.45rem" />,
+  primary: <LuBadgeInfo size="1.45rem" />,
+  secondary: <LuBadgeHelp size="1.45rem" />,
+  success: <LuBadgeCheck size="1.45rem" />,
+  warning: <LuBadgeAlert size="1.45rem" />,
 };
 
 const COLOR_TITLE: Record<
