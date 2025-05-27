@@ -89,21 +89,15 @@ export const SKILL = [
 
 export const PROJECT = [
   {
-    title: "A.I. Story Writer",
-    description:
-      "A web application that generates stories using OpenAI's GPT-3.5-turbo model.",
-    href: "/profile",
-  },
-  {
     title: "Dynamic Account Hub",
     description:
-      "A web application that allows users to manage their accounts and settings.",
+      "A scalable cloud-based web service that allows users to manage their accounts and settings. The service provides an event-driven architecture comes with a eventual consistency model.",
     href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
   },
   {
     title: "Cryptography CLI",
     description:
-      "A command-line interface for encrypting and decrypting files using various algorithms.",
+      "A command-line interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
     href: "https://github.com/SiegeSailor/OpenSource.Formulas",
   },
 ] as Readonly<{ title: string; description: string; href: Route }[]>;

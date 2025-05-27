@@ -1,7 +1,7 @@
 "use client";
 
 import { HTMLAttributes } from "react";
-import { Spacer } from "@heroui/react";
+import { Spacer, ScrollShadow } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
@@ -36,13 +36,15 @@ export default function ({
           >
             <h4 className="text-2xl font-bold">{item.title}</h4>
             <Spacer y={2} />
-            <p className="text-lg font-normal text-default-400">
-              {item.description}
-            </p>
-            <Spacer y={1} />
-            <Link href={item.href} isExternal>
-              Read More
-            </Link>
+            <ScrollShadow className="h-24" size={60}>
+              <p className={clsx("text-lg font-normal text-default-400")}>
+                {item.description}
+              </p>
+              <Spacer y={1} />
+              <Link href={item.href} isExternal>
+                Read More
+              </Link>
+            </ScrollShadow>
           </motion.div>
         )}
       </AnimatePresence>
