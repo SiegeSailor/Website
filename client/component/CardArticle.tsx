@@ -31,17 +31,20 @@ export default function ({
         </p>
       </CardHeader>
 
-      <CardBody className="flex justify-center items-center">
+      <CardBody className="flex justify-center items-center gap-2">
         <h3 className="text-2xl font-light text-center">
           {article.metadata.title}
         </h3>
+        <p className={clsx("text-nowrap font-normal text-sm", "opacity-60")}>
+          {article.metadata.minutes} Minutes Read
+        </p>
       </CardBody>
 
       <CardFooter>
         <div className="flex justify-between items-center gap-2 w-full">
           <ScrollShadowChips
             tags={article.metadata.tags}
-            propsChip={{ className: "text-foreground" }}
+            propsChip={{ className: "text-foreground", variant: "bordered" }}
             propsScrollShadow={{ className: "w-full flex-grow" }}
           />
         </div>
