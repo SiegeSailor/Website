@@ -36,13 +36,13 @@ export default function ({
   return (
     <div className="relative w-full h-full">
       <Image
-        alt="Weston Cog"
+        alt="Photo by Kevin Ku on Unsplash"
         as={NextImage}
         className={clsx(
           "z-0 w-full h-full object-cover",
-          "grayscale brightness-50 contrast-100"
+          "grayscale brightness-75 contrast-100"
         )}
-        src="/image/Weston-Cog-Google.png"
+        src="/image/Glasses-Code.jpg"
         loading="eager"
         priority
         width={640}
@@ -82,7 +82,7 @@ export default function ({
                   <p
                     className={clsx(
                       "text-background dark:text-foreground",
-                      "font-medium text-xl text-left",
+                      "font-light text-2xl text-left",
                       "text-wrap w-full"
                     )}
                   >

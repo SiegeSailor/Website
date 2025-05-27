@@ -34,9 +34,9 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <h4 className="text-xl font-bold">{item.title}</h4>
+            <h4 className="text-2xl font-bold">{item.title}</h4>
             <Spacer y={2} />
-            <p className="text-normal font-normal text-default-400">
+            <p className="text-lg font-normal text-default-400">
               {item.description}
             </p>
             <Spacer y={1} />

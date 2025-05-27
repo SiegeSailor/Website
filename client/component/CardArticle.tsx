@@ -1,16 +1,11 @@
+"use client";
+
 import { ComponentProps } from "react";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  ScrollShadow,
-} from "@heroui/react";
+import { Card, CardBody, CardHeader, CardFooter } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import { getArticleByFilename } from "@/helper/article";
-import Link from "@/component/Link";
-import Markdown from "@/component/Markdown";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export default function ({
@@ -20,21 +15,26 @@ export default function ({
   Readonly<{
     article: Awaited<ReturnType<typeof getArticleByFilename>>;
   }>) {
+  const router = useRouter();
+
   return (
-    <Card {...props} className={clsx("p-2", props.className)}>
+    <Card
+      {...props}
+      className={clsx("p-2", props.className)}
+      isHoverable
+      isPressable
+      onPress={() => router.push(`/blog/${article.metadata.date}`)}
+    >
       <CardHeader>
-        <div className="flex flex-col gap-1">
-          <p className={clsx("opacity-60", "font-normal text-sm text-left")}>
-            {article.metadata.date}
-          </p>
-          <h3 className="text-xl font-medium">{article.metadata.title}</h3>
-        </div>
+        <p className={clsx("opacity-60", "font-normal text-sm text-left")}>
+          {article.metadata.date}
+        </p>
       </CardHeader>
 
-      <CardBody>
-        <ScrollShadow orientation="vertical">
-          <Markdown source={article.metadata.description} />
-        </ScrollShadow>
+      <CardBody className="flex justify-center items-center">
+        <h3 className="text-2xl font-light text-center">
+          {article.metadata.title}
+        </h3>
       </CardBody>
 
       <CardFooter>
@@ -44,14 +44,6 @@ export default function ({
             propsChip={{ className: "text-foreground" }}
             propsScrollShadow={{ className: "w-full flex-grow" }}
           />
-          <div className="text-nowrap">
-            <Link
-              href={`/blog/${article.metadata.date}`}
-              className="font-normal"
-            >
-              Read More
-            </Link>
-          </div>
         </div>
       </CardFooter>
     </Card>
