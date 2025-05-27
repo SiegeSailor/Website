@@ -25,7 +25,7 @@ export default function ({
     >
       <Spacer y={2} />
       <AnimatePresence>
-        {item.description && !isLeaving && (
+        {!isLeaving && (
           <motion.div
             key={item.title}
             className="w-full h-full rounded-lg"
@@ -34,16 +34,17 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <h4 className="text-2xl font-bold">{item.title}</h4>
-            <Spacer y={2} />
-            <ScrollShadow className="h-24" size={60}>
-              <p className={clsx("text-lg font-normal text-default-400")}>
-                {item.description}
-              </p>
-              <Spacer y={1} />
+            <div className="flex gap-2 flex-wrap whitespace-nowrap">
+              <h4 className="text-2xl font-medium">{item.title}</h4>
               <Link href={item.href} isExternal>
                 Read More
               </Link>
+            </div>
+            <Spacer y={2} />
+            <ScrollShadow className="h-24 sm:h-16 md:h-28">
+              <p className={clsx("text-lg font-normal text-default-400")}>
+                {item.description}
+              </p>
             </ScrollShadow>
           </motion.div>
         )}

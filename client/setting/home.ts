@@ -91,13 +91,13 @@ export const PROJECT = [
   {
     title: "Dynamic Account Hub",
     description:
-      "A scalable cloud-based web service that allows users to manage their accounts and settings. The service provides an event-driven architecture comes with a eventual consistency model.",
+      "Scalable Cloud-Based Web Microservices that allows users to manage their accounts and settings. The CBWMs provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
     href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
   },
   {
     title: "Cryptography CLI",
     description:
-      "A command-line interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
+      "A Command-Line Interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
     href: "https://github.com/SiegeSailor/OpenSource.Formulas",
   },
 ] as Readonly<{ title: string; description: string; href: Route }[]>;

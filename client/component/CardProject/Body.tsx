@@ -5,7 +5,7 @@ import { Tabs, Tab, Progress } from "@heroui/react";
 import { useState, useEffect } from "react";
 
 import { PROJECT } from "@/setting/home";
-import CardTab from "@/component/CardProject/CardTab";
+import ContentTab from "@/component/CardProject/ContentTab";
 
 export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
   const [indexItem, setIndexItem] = useState(0);
@@ -31,10 +31,11 @@ export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col gap-2 justify-end h-full"
+      className="flex flex-col gap-4 justify-end h-full"
     >
       <Tabs
         aria-label="Options"
+        fullWidth
         placement="bottom"
         selectedKey={items[indexItem].title}
         radius="md"
@@ -47,7 +48,7 @@ export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
         {items.map((item) => {
           return (
             <Tab key={item.title} title={item.title}>
-              <CardTab isLeaving={progress >= 95} item={item} />
+              <ContentTab isLeaving={progress >= 95} item={item} />
             </Tab>
           );
         })}
