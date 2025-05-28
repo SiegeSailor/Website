@@ -34,8 +34,10 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <div className="flex gap-2 flex-wrap whitespace-nowrap">
-              <h4 className="text-2xl font-medium">{item.title}</h4>
+            <div className="flex gap-2 sm:gap-1 md:gap-2 flex-wrap whitespace-nowrap">
+              <h4 className="text-2xl sm:text-xl md:text-2xl font-medium">
+                {item.title}
+              </h4>
               <Link href={item.href} isExternal>
                 Read More
               </Link>

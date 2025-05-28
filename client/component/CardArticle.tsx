@@ -1,12 +1,11 @@
 "use client";
 
 import { ComponentProps } from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "@heroui/react";
+import { Card } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import { getArticleByFilename } from "@/helper/article";
-import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 export default function ({
   article,
@@ -20,35 +19,20 @@ export default function ({
   return (
     <Card
       {...props}
-      className={clsx("p-2", props.className)}
+      className={clsx(props.className)}
       isHoverable
       isPressable
       onPress={() => router.push(`/blog/${article.metadata.date}`)}
     >
-      <CardHeader>
-        <p className={clsx("opacity-60", "font-normal text-sm text-left")}>
-          {article.metadata.date}
-        </p>
-      </CardHeader>
-
-      <CardBody className="flex justify-center items-center gap-2">
-        <h3 className="text-2xl font-light text-center">
+      <div className="gap-4 flex flex-nowrap justify-between items-center whitespace-nowrap p-4">
+        <h3 className="text-lg font-normal text-left text-ellipsis overflow-hidden w-2/3">
           {article.metadata.title}
         </h3>
-        <p className={clsx("text-nowrap font-normal text-sm", "opacity-60")}>
-          {article.metadata.minutes} Minutes Read
-        </p>
-      </CardBody>
 
-      <CardFooter>
-        <div className="flex justify-between items-center gap-2 w-full">
-          <ScrollShadowChips
-            tags={article.metadata.tags}
-            propsChip={{ className: "text-foreground", variant: "bordered" }}
-            propsScrollShadow={{ className: "w-full flex-grow" }}
-          />
-        </div>
-      </CardFooter>
+        <p className={clsx("opacity-60", "font-normal text-sm")}>
+          {article.metadata.date}
+        </p>
+      </div>
     </Card>
   );
 }

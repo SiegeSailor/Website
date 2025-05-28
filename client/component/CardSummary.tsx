@@ -44,6 +44,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
       title="What I Bring to the Table"
       contentHeader={
         <FloatingDivision
+          volume={4.5}
           direction="horizontal"
           className={clsx(
             "text-xl sm:text-lg leading-tight",
@@ -84,7 +85,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           scales: {
             x: {
               min: 0,
-              max: 4.5,
+              max: Math.max(...SUMMARY.map((item) => item.portion)),
               ticks: { display: false },
               grid: {
                 display: true,
@@ -110,7 +111,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
               align: "end",
               color: colorForeground,
               font: {
-                size: 12,
+                size: 14,
                 weight: "normal",
                 family: "Roboto",
               },

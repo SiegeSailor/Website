@@ -6,8 +6,8 @@ export const SUMMARY = [
   { title: "DevOps", portion: 1.5 },
   { title: "System Design", portion: 2 },
   { title: "Leadership", portion: 1.5 },
-  { title: "Front-End", portion: 4 },
-  { title: "Back-End", portion: 4.5 },
+  { title: "Front-End", portion: 3 },
+  { title: "Back-End", portion: 4 },
 ] as const;
 
 export const EXPERIENCE = [

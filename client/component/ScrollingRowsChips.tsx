@@ -92,6 +92,7 @@ export default function ({
                   className="px-2 py-1 text-default-700"
                   variant="flat"
                   startContent={row.icon}
+                  size="md"
                 >
                   {row.name}
                 </Chip>

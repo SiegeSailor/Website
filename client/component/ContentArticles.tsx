@@ -20,20 +20,20 @@ export default async function () {
         >
           Let's Talk About Tech
         </h4>
-        <p className="text-lg opacity-60">
+        <p className="text-lg text-default-400">
           Here, I share real experiences from my journey in software
           engineering—lessons learned, challenges faced, and thoughts on the
           ever-changing world of technology.
         </p>
       </div>
 
-      <div className="flex gap-4">
-        <div className="gap-4 grid grid-cols-12">
+      <div className="flex flex-wrap md:flex-nowrap gap-4 items-center">
+        <div className="md:basis-1/2 flex flex-col gap-2 w-full">
           {articles.slice(0, 4).map((article, index) => {
             return (
               <CardArticle
                 key={index}
-                className={clsx("col-span-12 sm:col-span-6")}
+                className={clsx("w-full")}
                 article={article}
               />
             );
@@ -41,10 +41,7 @@ export default async function () {
         </div>
         <CardBlog
           articles={articles.slice(4)}
-          className={clsx(
-            "col-span-12 sm:col-span-6 md:col-span-4",
-            "h-[300px]"
-          )}
+          className={clsx("md:basis-1/2 h-[300px]")}
         />
       </div>
     </div>

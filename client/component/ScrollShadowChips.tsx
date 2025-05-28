@@ -24,6 +24,7 @@ export default function ({
         <Chip
           key={tag}
           variant="flat"
+          size="md"
           {...propsChip}
           className={clsx(
             "text-background dark:text-foreground",

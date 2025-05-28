@@ -63,7 +63,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
             Let's Connect
           </Button>
         </NextLink>
-        <p className="text-gray-600 col-span-12 sm:col-span-8">
+        <p className="text-medium text-gray-600 col-span-12 sm:col-span-8">
           Browse my website and feel free to drop me a line if you’d like to
           exchange insights or chat about industry trends.
         </p>
