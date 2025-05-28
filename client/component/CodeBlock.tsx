@@ -29,7 +29,11 @@ export default function ({
     <Skeleton className="rounded-medium mb-4" isLoaded={isMounted}>
       <pre
         ref={refPre}
-        className={clsx("p-3", "rounded-medium w-full", className)}
+        className={clsx(
+          "p-3",
+          "rounded-medium w-full whitespace-break-spaces",
+          className
+        )}
       >
         {children}
       </pre>
