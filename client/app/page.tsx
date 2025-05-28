@@ -15,19 +15,19 @@ export const metadata: Metadata = {
 
 export default async function () {
   return (
-    <section className="items-center justify-center p-4">
-      <div className="gap-24 grid grid-cols-1 gird-rows-3">
-        <div className="flex flex-col gap-12">
-          <ContentHero />
-          <div className="gap-4 grid grid-cols-12 grid-rows-1">
-            <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-            <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-            <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-            <CardProject className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
-          </div>
+    <section className="p-4 gap-24 grid grid-cols-1 gird-rows-2">
+      <div className="flex flex-col gap-12">
+        <ContentHero />
+
+        <div className="gap-4 grid grid-cols-12 grid-rows-1">
+          <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardProject className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
         </div>
-        <ContentArticles />
       </div>
+
+      <ContentArticles />
     </section>
   );
 }

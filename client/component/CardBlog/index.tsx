@@ -15,7 +15,7 @@ export default async function ({
   return (
     <CardBlock
       href="/blog"
-      title="Let's Talk About Tech"
+      title="More Insights on My Blog"
       {...props}
       contentBody={<Body articles={articles} />}
     />

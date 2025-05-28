@@ -11,6 +11,7 @@ export default function ({ ...props }: ComponentProps<typeof Link>) {
       {...props}
       className={clsx(
         "text-default-500 hover:text-default-400",
+        "font-light",
         props.className
       )}
     />
