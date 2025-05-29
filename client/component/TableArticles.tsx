@@ -31,7 +31,7 @@ const COLUMNS: {
 }[] = [
   { key: "date", label: "Date", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
-  { key: "minutes", label: "Read Time", isSortable: true },
+  { key: "minutes", label: "Read Minutes", isSortable: true },
   { key: "tags", label: "Technologies", isSortable: false },
 ] as const;
 
@@ -106,13 +106,16 @@ export default function ({
           return <div>{article.metadata.date}</div>;
         case "minutes":
           const minutes = article.metadata[keyColumn];
-          return <div>{minutes} Minutes</div>;
+          return <div>{minutes}</div>;
         case "tags":
           const tags = article.metadata[keyColumn];
           return (
             <ScrollShadowTechnologies
               tags={tags}
-              propsChip={{ className: "text-foreground" }}
+              propsChip={{
+                className: "text-foreground",
+                variant: "faded",
+              }}
             />
           );
         case "title":
@@ -200,7 +203,7 @@ export default function ({
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
             <select
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent text-default-400 text-small"
               onChange={(event) => {
                 setRowsPerPage(() => Number(event.target.value));
                 setPage(() => 1);
@@ -258,7 +261,7 @@ export default function ({
       aria-label="Articles"
       bottomContent={contentBottom}
       bottomContentPlacement="outside"
-      classNames={{ td: "whitespace-nowrap" }}
+      classNames={{ td: "whitespace-nowrap h-10" }}
       isHeaderSticky
       layout="auto"
       onSortChange={setSortDescriptor}
@@ -266,7 +269,6 @@ export default function ({
       topContent={contentTop}
       topContentPlacement="outside"
       maxTableHeight={800}
-      rowHeight={80}
     >
       <TableHeader columns={headers}>
         {(column) => (
