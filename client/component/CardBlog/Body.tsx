@@ -8,7 +8,7 @@ import NextImage from "next/image";
 
 import { getArticles } from "@/helper/article";
 import FloatingDivision from "@/component/FloatingDivision";
-import ScrollShadowChips from "@/component/ScrollShadowChips";
+import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
 export default function ({
   articles,
@@ -89,7 +89,7 @@ export default function ({
                     {title}
                   </p>
                   <Spacer y={4} />
-                  <ScrollShadowChips
+                  <ScrollShadowTechnologies
                     tags={tags}
                     propsScrollShadow={{ className: "mt-2" }}
                   />
