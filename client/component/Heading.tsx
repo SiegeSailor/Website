@@ -2,12 +2,12 @@ import { createElement } from "react";
 import clsx from "clsx";
 
 const LEVEL_TEXT: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
-  1: "text-3xl",
-  2: "text-2xl",
-  3: "text-xl",
-  4: "text-lg",
-  5: "text-base",
-  6: "text-sm",
+  1: "text-4xl",
+  2: "text-3xl",
+  3: "text-2xl",
+  4: "text-xl",
+  5: "text-lg",
+  6: "text-medium",
 } as const;
 
 export default function ({
