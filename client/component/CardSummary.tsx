@@ -47,16 +47,19 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           volume={4.5}
           direction="horizontal"
           className={clsx(
-            "text-xl sm:text-lg leading-tight",
+            "text-xl sm:text-lg",
             "text-default-600 text-right font-light",
-            "w-1/2 pr-4 pt-12",
-            "absolute top-0 right-0"
+            "w-3/5 pr-4 pt-12",
+            "absolute top-1 right-1"
           )}
         >
           <div
             className={clsx(
               isBarLoaded ? "opacity-100" : "opacity-0",
-              "transition-opacity duration-1000 ease-in-out"
+              "transition-opacity duration-1000 ease-in-out",
+              "leading-6 text-medium",
+              "bg-default-100 bg-opacity-60 border-1 border-default-200",
+              "p-2 rounded-sm"
             )}
           >
             6 Years of Working Experience in

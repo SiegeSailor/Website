@@ -3,11 +3,11 @@ import { Route } from "next";
 import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export const SUMMARY = [
-  { title: "DevOps", portion: 1.5 },
-  { title: "System Design", portion: 2 },
-  { title: "Leadership", portion: 1.5 },
-  { title: "Front-End", portion: 3 },
-  { title: "Back-End", portion: 4 },
+  { title: "DevOps", portion: 1.25 },
+  { title: "System Design", portion: 2.25 },
+  { title: "Leadership", portion: 1.65 },
+  { title: "Front-End", portion: 2.5 },
+  { title: "Back-End", portion: 3.5 },
 ] as const;
 
 export const EXPERIENCE = [
