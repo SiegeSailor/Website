@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
 import { ROUTE_TITLE } from "@/setting/site";
@@ -15,7 +16,13 @@ export const metadata: Metadata = {
 
 export default async function () {
   return (
-    <section className="p-4 gap-24 grid grid-cols-1 gird-rows-2">
+    <section
+      className={clsx(
+        "max-w-[880px] mx-auto",
+        "p-4",
+        "gap-24 grid grid-cols-1 gird-rows-2"
+      )}
+    >
       <div className="flex flex-col gap-12">
         <ContentHero />
 

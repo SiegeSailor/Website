@@ -42,9 +42,7 @@ export default function ({
           <div className="relative flex flex-col h-screen">
             <main className="container mx-auto max-w-8xl py-8 px-4">
               <ScrollShadow className="h-full w-full">
-                <Layout>
-                  <div className="max-w-[880px] mx-auto">{children}</div>
-                </Layout>
+                <Layout>{children}</Layout>
               </ScrollShadow>
             </main>
           </div>

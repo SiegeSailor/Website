@@ -6,10 +6,14 @@ import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export default function ({
   tags,
+  isHideText = false,
+  isHideIcon = false,
   propsChip,
   propsScrollShadow,
 }: Readonly<{
   tags: string[];
+  isHideText?: boolean;
+  isHideIcon?: boolean;
   propsChip?: ComponentProps<typeof Chip>;
   propsScrollShadow?: ComponentProps<typeof ScrollShadow>;
 }>) {
@@ -33,11 +37,12 @@ export default function ({
             propsChip?.className
           )}
           startContent={
+            !isHideIcon &&
             tag in TECHNOLOGY_ICON &&
             createElement(TECHNOLOGY_ICON[tag as keyof typeof TECHNOLOGY_ICON])
           }
         >
-          {tag}
+          {!isHideText && tag}
         </Chip>
       ))}
     </ScrollShadow>

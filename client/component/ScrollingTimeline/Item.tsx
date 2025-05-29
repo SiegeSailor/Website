@@ -12,7 +12,7 @@ export default function ({
         "border-default-700"
       )}
     >
-      <div className={clsx("translate-y-14")}>
+      <div className={clsx("translate-y-12")}>
         <div
           className={clsx(
             "absolute top-1/2 z-10 -left-7 w-3 h-3 rounded-lg",
@@ -21,7 +21,7 @@ export default function ({
           )}
         />
         <div className={clsx("flex flex-col relative w-10/12")}>
-          <p className={clsx("text-medium leading-6")}>{title}</p>
+          <p className={clsx("text-medium leading-5")}>{title}</p>
           <p className={clsx("text-small text-default-400")}>{time}</p>
         </div>
       </div>

@@ -34,7 +34,7 @@ export async function getArticleByFilename(filename: string) {
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date))
       throw new Error("Date format must be YYYY-MM-DD");
-    if (!Array.isArray(data.tags))
+    if (!Array.isArray(data.tags) || data.tags.length === 0)
       throw new Error("Tags must be an array of non-empty strings");
     if (!data.tags.every((tag) => typeof tag === "string" && tag.length > 0))
       throw new Error("Each tag must be a non-empty string");

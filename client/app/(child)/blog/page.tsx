@@ -14,7 +14,7 @@ export default async function () {
   const articles = await getArticles();
 
   return (
-    <section>
+    <section className={clsx("p-4")}>
       <TableArticles articles={articles} />
     </section>
   );
