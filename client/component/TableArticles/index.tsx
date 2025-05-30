@@ -199,10 +199,10 @@ export default function ({
   const contentTop = useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+        <div className="flex justify-between gap-3 items-end flex-wrap">
           <Input
             isClearable
-            className="w-full sm:max-w-[25%]"
+            className="w-full md:w-1/4"
             placeholder="Search by Title"
             startContent={
               <LuSearch
