@@ -184,6 +184,7 @@ export default function ({
                 variant: "bordered",
                 size: "md",
               }}
+              propsIcon={{ color: "default" }}
             />
           );
         case "title":

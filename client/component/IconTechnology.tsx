@@ -14,5 +14,5 @@ export default function ({
     >["metadata"]["technologies"][number];
   }>) {
   const Icon = TECHNOLOGY_ICON[technology];
-  return <Icon size={16} title={technology} {...props} />;
+  return <Icon size="1rem" title={technology} {...props} />;
 }
