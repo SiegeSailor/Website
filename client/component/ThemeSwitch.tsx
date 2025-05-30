@@ -1,6 +1,6 @@
 "use client";
 
-import { LuSun, LuMoon } from "react-icons/lu";
+import { SunIcon, MoonIcon } from "lucide-react";
 import { SwitchProps, useSwitch } from "@heroui/switch";
 import { useIsSSR } from "@react-aria/ssr";
 import { useTheme } from "next-themes";
@@ -68,9 +68,9 @@ export default function ({
         })}
       >
         {!isSelected || isSSR ? (
-          <LuSun size="1.45rem" />
+          <SunIcon size="1.45rem" />
         ) : (
-          <LuMoon size="1.45rem" />
+          <MoonIcon size="1.45rem" />
         )}
       </div>
     </Component>

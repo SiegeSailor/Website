@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import { LuMail } from "react-icons/lu";
+import { MailIcon } from "lucide-react";
 import clsx from "clsx";
 import NextLink from "next/link";
 
@@ -53,7 +53,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           className="col-span-12 sm:col-span-4"
         >
           <Button
-            startContent={<LuMail size="1.45rem" />}
+            startContent={<MailIcon size="1.45rem" />}
             size="lg"
             radius="full"
             variant="shadow"

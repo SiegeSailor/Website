@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
-import { LuSearch, LuChevronDown } from "react-icons/lu";
+import { SearchIcon, ChevronDownIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/article";
 import { STATUS_COLOR } from "@/setting/site";
@@ -205,7 +205,7 @@ export default function ({
             className="w-full md:w-1/4"
             placeholder="Search by Title"
             startContent={
-              <LuSearch
+              <SearchIcon
                 size="1.45rem"
                 className="text-default-400 flex-shrink-0"
               />
@@ -244,7 +244,7 @@ export default function ({
             />
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<LuChevronDown />} variant="flat">
+                <Button endContent={<ChevronDownIcon />} variant="flat">
                   Columns
                 </Button>
               </DropdownTrigger>

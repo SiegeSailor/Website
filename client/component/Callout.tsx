@@ -2,23 +2,23 @@ import { ComponentProps, ReactNode } from "react";
 import { Code } from "@heroui/react";
 import clsx from "clsx";
 import {
-  LuBadgeAlert,
-  LuBadgeMinus,
-  LuBadgeCheck,
-  LuBadgeHelp,
-  LuBadgeInfo,
-} from "react-icons/lu";
+  BadgeAlertIcon,
+  BadgeMinusIcon,
+  BadgeCheckIcon,
+  BadgeHelpIcon,
+  BadgeInfoIcon,
+} from "lucide-react";
 
 const COLOR_ICON: Record<
   NonNullable<ComponentProps<typeof Code>["color"]>,
   ReactNode
 > = {
-  danger: <LuBadgeMinus size="1.45rem" />,
-  default: <LuBadgeHelp size="1.45rem" />,
-  primary: <LuBadgeInfo size="1.45rem" />,
-  secondary: <LuBadgeHelp size="1.45rem" />,
-  success: <LuBadgeCheck size="1.45rem" />,
-  warning: <LuBadgeAlert size="1.45rem" />,
+  danger: <BadgeMinusIcon size="1.45rem" />,
+  default: <BadgeHelpIcon size="1.45rem" />,
+  primary: <BadgeInfoIcon size="1.45rem" />,
+  secondary: <BadgeHelpIcon size="1.45rem" />,
+  success: <BadgeCheckIcon size="1.45rem" />,
+  warning: <BadgeAlertIcon size="1.45rem" />,
 };
 
 const COLOR_TITLE: Record<

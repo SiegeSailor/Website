@@ -1,8 +1,8 @@
-import { ComponentProps, createElement } from "react";
+import { ComponentProps } from "react";
 
 import { getArticleByFilename } from "@/helper/article";
-import { TECHNOLOGY_ICON } from "@/setting/icon";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
+import IconTechnology from "@/component/IconTechnology";
 
 export default function ({
   technologies,
@@ -18,7 +18,7 @@ export default function ({
       {...props}
       row={technologies.map((technology) => ({
         name: technology,
-        icon: createElement(TECHNOLOGY_ICON[technology]),
+        icon: <IconTechnology technology={technology} />,
       }))}
     />
   );

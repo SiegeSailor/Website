@@ -42,48 +42,22 @@ export const EXPERIENCE = [
   },
 ] as const;
 
-export const SKILL = [
+export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
+  ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET"],
+  ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
+  ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],
+  ["Express.js", "Flask", "Django"],
   [
-    { name: "Python", icon: TECHNOLOGY_ICON.Python },
-    { name: "TypeScript", icon: TECHNOLOGY_ICON.TypeScript },
-    { name: "JavaScript", icon: TECHNOLOGY_ICON.JavaScript },
-    { name: "Bash", icon: TECHNOLOGY_ICON.Bash },
-    { name: "C++", icon: TECHNOLOGY_ICON["C++"] },
-    { name: ".NET", icon: TECHNOLOGY_ICON[".NET"] },
-  ],
-  [
-    { name: "Docker", icon: TECHNOLOGY_ICON.Docker },
-    { name: "AWS", icon: TECHNOLOGY_ICON.AWS },
-    { name: "GCP", icon: TECHNOLOGY_ICON.GCP },
-    { name: "GitHub", icon: TECHNOLOGY_ICON.GitHub },
-    { name: "GitLab", icon: TECHNOLOGY_ICON.GitLab },
-    { name: "Linux", icon: TECHNOLOGY_ICON.Linux },
-    { name: "Kubernetes", icon: TECHNOLOGY_ICON.Kubernetes },
-  ],
-  [
-    { name: "MongoDB", icon: TECHNOLOGY_ICON.MongoDB },
-    { name: "MySQL", icon: TECHNOLOGY_ICON.MySQL },
-    { name: "Redis", icon: TECHNOLOGY_ICON.Redis },
-    { name: "RabbitMQ", icon: TECHNOLOGY_ICON.RabbitMQ },
-    { name: "Nginx", icon: TECHNOLOGY_ICON.Nginx },
-    { name: "Terraform", icon: TECHNOLOGY_ICON.Terraform },
-  ],
-  [
-    { name: "Express.js", icon: TECHNOLOGY_ICON["Express.js"] },
-    { name: "Flask", icon: TECHNOLOGY_ICON.Flask },
-    { name: "Django", icon: TECHNOLOGY_ICON.Django },
-  ],
-  [
-    { name: "React.js", icon: TECHNOLOGY_ICON["React.js"] },
-    { name: "Tailwind CSS", icon: TECHNOLOGY_ICON["Tailwind CSS"] },
-    { name: "Three.js", icon: TECHNOLOGY_ICON["Three.js"] },
-    { name: "Electron", icon: TECHNOLOGY_ICON["Electron"] },
-    { name: "Redux", icon: TECHNOLOGY_ICON["Redux"] },
-    { name: "HTML", icon: TECHNOLOGY_ICON.HTML },
-    { name: "CSS", icon: TECHNOLOGY_ICON.CSS },
-    { name: "Webpack", icon: TECHNOLOGY_ICON.Webpack },
-    { name: "Gulp", icon: TECHNOLOGY_ICON.Gulp },
-    { name: "Babel", icon: TECHNOLOGY_ICON.Babel },
+    "React.js",
+    "Tailwind CSS",
+    "Three.js",
+    "Electron",
+    "Redux",
+    "HTML",
+    "CSS",
+    "Webpack",
+    "Gulp",
+    "Babel",
   ],
 ] as const;
 

@@ -35,7 +35,7 @@ import {
   SiThreedotjs,
   SiTypescript,
   SiWebpack,
-} from "react-icons/si";
+} from "@icons-pack/react-simple-icons";
 
 export const TECHNOLOGY_ICON = {
   ".NET": SiDotnet,

@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { LuCopy, LuCheck } from "react-icons/lu";
+import { CopyIcon, CheckIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import clsx from "clsx";
 
@@ -32,7 +32,7 @@ export default forwardRef<HTMLPreElement, Readonly<{ title?: string }>>(
         variant="light"
         radius="full"
       >
-        {isCopied ? <LuCheck size="1.25rem" /> : <LuCopy size="1.25rem" />}
+        {isCopied ? <CheckIcon size="1.25rem" /> : <CopyIcon size="1.25rem" />}
       </Button>
     );
   }

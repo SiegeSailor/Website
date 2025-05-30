@@ -7,7 +7,7 @@ import {
   DropdownTrigger,
   Selection,
 } from "@heroui/react";
-import { LuChevronDown } from "react-icons/lu";
+import { ChevronDownIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/article";
 
@@ -32,7 +32,7 @@ export default function ({
       }
     >
       <DropdownTrigger className="hidden sm:flex">
-        <Button endContent={<LuChevronDown />} variant="flat">
+        <Button endContent={<ChevronDownIcon />} variant="flat">
           <span className="capitalize">{metadata}</span>
         </Button>
       </DropdownTrigger>
