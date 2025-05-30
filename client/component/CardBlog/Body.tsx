@@ -49,7 +49,7 @@ export default function ({
         height={480}
       />
       {articles.map((article, index) => {
-        const { title, date, technologies } = article.metadata;
+        const { title, date, technologies, category } = article.metadata;
 
         return (
           <AnimatePresence key={title}>
@@ -73,10 +73,11 @@ export default function ({
                     className={clsx(
                       "text-background dark:text-foreground",
                       "opacity-60",
-                      "font-normal text-sm text-left"
+                      "font-normal text-sm text-left",
+                      "flex gap-1 items-center text-nowrap"
                     )}
                   >
-                    {date}
+                    <span>{date}</span>·<span>{category}</span>
                   </p>
                   <Spacer y={1} />
                   <p

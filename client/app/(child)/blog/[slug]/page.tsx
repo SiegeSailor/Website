@@ -48,7 +48,8 @@ export default async function ({
               "opacity-60"
             )}
           >
-            <p>{metadata.date}</p>·<p>{metadata.minutes} Minutes Read</p>
+            <span>{metadata.date}</span>·
+            <span>{metadata.minutes} Minutes Read</span>
           </div>
 
           <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>

@@ -44,7 +44,7 @@ export default function ({
             </div>
             <Spacer y={2} />
             <ScrollShadow className="h-24 sm:h-16 md:h-28">
-              <p className={clsx("text-lg font-normal text-default-400")}>
+              <p className={clsx("text-medium font-normal text-default-400")}>
                 {item.description}
               </p>
             </ScrollShadow>

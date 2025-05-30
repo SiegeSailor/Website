@@ -189,7 +189,11 @@ export default function ({
           );
         case "title":
           const title = article.metadata[keyColumn];
-          return <Link href={`/blog/${article.metadata.date}`}>{title}</Link>;
+          return (
+            <Link href={`/blog/${article.metadata.date}`} className="text-base">
+              {title}
+            </Link>
+          );
         default:
           return <div>{String(article.metadata[keyColumn])}</div>;
       }
