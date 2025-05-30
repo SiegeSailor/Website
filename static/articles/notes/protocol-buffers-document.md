@@ -1,5 +1,5 @@
 ---
-tags: [grpc]
+technologies: [grpc]
 ---
 
 # Protocol Buffers Document

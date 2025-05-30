@@ -32,7 +32,7 @@ const COLUMNS: {
   { key: "date", label: "Date", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
   { key: "minutes", label: "Read Minutes", isSortable: true },
-  { key: "tags", label: "Technologies", isSortable: false },
+  { key: "technologies", label: "Technologies", isSortable: false },
 ] as const;
 
 export default function ({
@@ -40,16 +40,21 @@ export default function ({
 }: Readonly<{
   articles: Awaited<ReturnType<typeof getArticles>>;
 }>) {
-  const tagUniques = useMemo(() => {
-    const tagSet = new Set<string>();
+  const technologyUniques = useMemo(() => {
+    const technologySet = new Set<string>();
     articles.forEach((article) => {
-      article.metadata.tags.forEach((tag) => tagSet.add(tag));
+      article.metadata.technologies.forEach((technology) =>
+        technologySet.add(technology)
+      );
     });
-    return Array.from(tagSet).map((tag) => ({ key: tag, label: tag }));
+    return Array.from(technologySet).map((technology) => ({
+      key: technology,
+      label: technology,
+    }));
   }, [articles]);
 
   const [filter, setFilter] = useState("");
-  const [tags, setTags] = useState<Selection>("all");
+  const [technologies, setTags] = useState<Selection>("all");
   const [columns, setColumns] = useState<Selection>("all");
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "date",
@@ -67,13 +72,18 @@ export default function ({
       results = articles.filter((article) =>
         article.metadata.title.toLowerCase().includes(filter.toLowerCase())
       );
-    if (tags !== "all" && Array.from(tags).length !== tagUniques.length)
+    if (
+      technologies !== "all" &&
+      Array.from(technologies).length !== technologyUniques.length
+    )
       results = results.filter((article) =>
-        article.metadata.tags.some((tag) => tags.has(tag))
+        article.metadata.technologies.some((technology) =>
+          technologies.has(technology)
+        )
       );
 
     return results;
-  }, [articles, isFiltering, filter, tags, tagUniques]);
+  }, [articles, isFiltering, filter, technologies, technologyUniques]);
   const itemsCurrentPage = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
@@ -107,11 +117,11 @@ export default function ({
         case "minutes":
           const minutes = article.metadata[keyColumn];
           return <div>{minutes}</div>;
-        case "tags":
-          const tags = article.metadata[keyColumn];
+        case "technologies":
+          const technologies = article.metadata[keyColumn];
           return (
             <ScrollShadowTechnologies
-              tags={tags}
+              technologies={technologies}
               propsChip={{
                 className: "text-foreground",
                 variant: "faded",
@@ -163,15 +173,17 @@ export default function ({
                 disallowEmptySelection
                 aria-label="Table Technologies"
                 closeOnSelect={false}
-                selectedKeys={tags}
+                selectedKeys={technologies}
                 selectionMode="multiple"
                 onSelectionChange={(keys) => {
                   console.log("Selected Tags:", keys);
                   setTags(keys);
                 }}
               >
-                {tagUniques.map((tag) => (
-                  <DropdownItem key={tag.key}>{tag.label}</DropdownItem>
+                {technologyUniques.map((technology) => (
+                  <DropdownItem key={technology.key}>
+                    {technology.label}
+                  </DropdownItem>
                 ))}
               </DropdownMenu>
             </Dropdown>
@@ -217,7 +229,7 @@ export default function ({
         </div>
       </div>
     );
-  }, [filter, tags, articles.length, isFiltering, columns]);
+  }, [filter, technologies, articles.length, isFiltering, columns]);
 
   const contentBottom = useMemo(() => {
     return (

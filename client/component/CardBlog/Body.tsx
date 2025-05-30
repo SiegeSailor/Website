@@ -49,7 +49,7 @@ export default function ({
         height={480}
       />
       {articles.map((article, index) => {
-        const { title, date, tags } = article.metadata;
+        const { title, date, technologies } = article.metadata;
 
         return (
           <AnimatePresence key={title}>
@@ -90,7 +90,7 @@ export default function ({
                   </p>
                   <Spacer y={4} />
                   <ScrollShadowTechnologies
-                    tags={tags}
+                    technologies={technologies}
                     propsScrollShadow={{ className: "mt-2" }}
                   />
                 </FloatingDivision>

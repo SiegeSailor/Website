@@ -1,5 +1,5 @@
 ---
-tags: ["git"]
+technologies: ["git"]
 ---
 
 # Git Flow

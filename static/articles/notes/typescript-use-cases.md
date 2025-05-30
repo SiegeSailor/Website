@@ -1,5 +1,5 @@
 ---
-tags: ["typescript"]
+technologies: ["typescript"]
 ---
 
 # TypeScript Use Cases

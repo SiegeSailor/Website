@@ -1,5 +1,5 @@
 <!-- ---
-tags: ["DIOVV", "medical devices", "verification", "validation"]
+technologies: ["DIOVV", "medical devices", "verification", "validation"]
 --- -->
 
 # Design Input Output Verification Validation (DIOVV)

@@ -55,7 +55,7 @@ export default async function ({
           <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>
 
           <ScrollShadowTechnologies
-            tags={metadata.tags}
+            technologies={metadata.technologies}
             propsChip={{ className: "text-foreground", variant: "faded" }}
             propsScrollShadow={{ className: "mb-4" }}
           />

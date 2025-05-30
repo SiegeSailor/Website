@@ -2,16 +2,19 @@ import { Chip, ScrollShadow } from "@heroui/react";
 import { ComponentProps, createElement } from "react";
 import clsx from "clsx";
 
+import { getArticleByFilename } from "@/helper/article";
 import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export default function ({
-  tags,
+  technologies,
   isHideText = false,
   isHideIcon = false,
   propsChip,
   propsScrollShadow,
 }: Readonly<{
-  tags: string[];
+  technologies: Awaited<
+    ReturnType<typeof getArticleByFilename>
+  >["metadata"]["technologies"];
   isHideText?: boolean;
   isHideIcon?: boolean;
   propsChip?: ComponentProps<typeof Chip>;
@@ -24,9 +27,9 @@ export default function ({
       orientation="horizontal"
       size={120}
     >
-      {tags.map((tag) => (
+      {technologies.map((technology) => (
         <Chip
-          key={tag}
+          key={technology}
           variant="flat"
           size="md"
           {...propsChip}
@@ -37,12 +40,10 @@ export default function ({
             propsChip?.className
           )}
           startContent={
-            !isHideIcon &&
-            tag in TECHNOLOGY_ICON &&
-            createElement(TECHNOLOGY_ICON[tag as keyof typeof TECHNOLOGY_ICON])
+            !isHideIcon && createElement(TECHNOLOGY_ICON[technology])
           }
         >
-          {!isHideText && tag}
+          {!isHideText && technology}
         </Chip>
       ))}
     </ScrollShadow>
