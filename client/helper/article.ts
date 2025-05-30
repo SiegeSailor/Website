@@ -50,7 +50,7 @@ export async function getArticleByFilename(filename: string) {
       filename,
       metadata: {
         date,
-        tags: data.tags.map((tag: string) => tag.trim()),
+        tags: data.tags.map((tag: string) => tag.trim()).sort(),
         title: data.title,
         description,
         minutes: Math.ceil((content.split(" ").length + 1) / 200),

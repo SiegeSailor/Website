@@ -56,7 +56,7 @@ export default async function ({
 
           <ScrollShadowTechnologies
             tags={metadata.tags}
-            propsChip={{ className: "text-foreground" }}
+            propsChip={{ className: "text-foreground", variant: "faded" }}
             propsScrollShadow={{ className: "mb-4" }}
           />
         </div>
