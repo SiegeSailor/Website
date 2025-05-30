@@ -35,9 +35,13 @@ import {
   SiThreedotjs,
   SiTypescript,
   SiWebpack,
+  SiGo,
+  SiNextdotjs,
 } from "@icons-pack/react-simple-icons";
 
 export const TECHNOLOGY_ICON = {
+  "Next.js": SiNextdotjs,
+  Go: SiGo,
   ".NET": SiDotnet,
   "C++": SiCplusplus,
   "Express.js": SiExpress,

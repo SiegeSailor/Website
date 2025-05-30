@@ -43,21 +43,20 @@ export const EXPERIENCE = [
 ] as const;
 
 export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
-  ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET"],
+  ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET", "Go"],
   ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
   ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],
-  ["Express.js", "Flask", "Django"],
+  ["Django", "Flask", "Express.js", "Next.js", "React.js"],
   [
-    "React.js",
     "Tailwind CSS",
     "Three.js",
-    "Electron",
     "Redux",
     "HTML",
     "CSS",
     "Webpack",
     "Gulp",
     "Babel",
+    "Electron",
   ],
 ] as const;
 
