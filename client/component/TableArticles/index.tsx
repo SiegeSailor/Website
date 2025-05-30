@@ -21,8 +21,9 @@ import {
 } from "@heroui/react";
 import { LuSearch, LuChevronDown } from "react-icons/lu";
 
-import { STATUS_COLOR } from "@/setting/site";
 import { getArticles } from "@/helper/article";
+import { STATUS_COLOR } from "@/setting/site";
+import DropdownMetadata from "@/component/TableArticles/DropdownMetadata";
 import Link from "@/component/Link";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
@@ -44,6 +45,26 @@ export default function ({
 }: Readonly<{
   articles: Awaited<ReturnType<typeof getArticles>>;
 }>) {
+  const categoryUniques = useMemo(() => {
+    const categorySet = new Set<string>();
+    articles.forEach((article) => {
+      categorySet.add(article.metadata.category);
+    });
+    return Array.from(categorySet).map((category) => ({
+      key: category,
+      label: category,
+    }));
+  }, [articles]);
+  const statusUniques = useMemo(() => {
+    const statusSet = new Set<string>();
+    articles.forEach((article) => {
+      statusSet.add(article.metadata.status);
+    });
+    return Array.from(statusSet).map((status) => ({
+      key: status,
+      label: status,
+    }));
+  }, [articles]);
   const technologyUniques = useMemo(() => {
     const technologySet = new Set<string>();
     articles.forEach((article) => {
@@ -57,21 +78,11 @@ export default function ({
     }));
   }, [articles]);
 
-  const statusUniques = useMemo(() => {
-    const statusSet = new Set<string>();
-    articles.forEach((article) => {
-      statusSet.add(article.metadata.status);
-    });
-    return Array.from(statusSet).map((status) => ({
-      key: status,
-      label: status,
-    }));
-  }, [articles]);
-
   const [filter, setFilter] = useState("");
+  const [category, setCategory] = useState<Selection>("all");
+  const [status, setStatus] = useState<Selection>("all");
   const [technologies, setTechnologies] = useState<Selection>("all");
   const [columns, setColumns] = useState<Selection>("all");
-  const [status, setStatus] = useState<Selection>("all");
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "date",
     direction: "descending",
@@ -88,6 +99,18 @@ export default function ({
       results = articles.filter((article) =>
         article.metadata.title.toLowerCase().includes(filter.toLowerCase())
       );
+
+    if (
+      category !== "all" &&
+      Array.from(category).length !== categoryUniques.length
+    )
+      results = results.filter((article) =>
+        category.has(article.metadata.category)
+      );
+    if (status !== "all" && Array.from(status).length !== statusUniques.length)
+      results = results.filter((article) =>
+        status.has(article.metadata.status)
+      );
     if (
       technologies !== "all" &&
       Array.from(technologies).length !== technologyUniques.length
@@ -96,10 +119,6 @@ export default function ({
         article.metadata.technologies.some((technology) =>
           technologies.has(technology)
         )
-      );
-    if (status !== "all" && Array.from(status).length !== statusUniques.length)
-      results = results.filter((article) =>
-        status.has(article.metadata.status)
       );
 
     return results;
@@ -111,6 +130,8 @@ export default function ({
     technologyUniques,
     status,
     statusUniques,
+    category,
+    categoryUniques,
   ]);
   const itemsCurrentPage = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -200,58 +221,27 @@ export default function ({
             }}
           />
           <div className="flex gap-3">
-            <Dropdown
-              isDisabled={
-                columns !== "all" &&
-                !Array.from(columns).find((column) => column === "status")
-              }
-            >
-              <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<LuChevronDown />} variant="flat">
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Status"
-                closeOnSelect={false}
-                selectedKeys={technologies}
-                selectionMode="multiple"
-                onSelectionChange={setStatus}
-              >
-                {statusUniques.map((statusItem) => (
-                  <DropdownItem key={statusItem.key}>
-                    {statusItem.label}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Dropdown
-              isDisabled={
-                columns !== "all" &&
-                !Array.from(columns).find((column) => column === "technologies")
-              }
-            >
-              <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<LuChevronDown />} variant="flat">
-                  Technologies
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Technologies"
-                closeOnSelect={false}
-                selectedKeys={technologies}
-                selectionMode="multiple"
-                onSelectionChange={setTechnologies}
-              >
-                {technologyUniques.map((technology) => (
-                  <DropdownItem key={technology.key}>
-                    {technology.label}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
+            <DropdownMetadata
+              items={category}
+              setItems={setCategory}
+              columns={columns}
+              metadata="category"
+              uniques={categoryUniques}
+            />
+            <DropdownMetadata
+              items={status}
+              setItems={setStatus}
+              columns={columns}
+              metadata="status"
+              uniques={statusUniques}
+            />
+            <DropdownMetadata
+              items={technologies}
+              setItems={setTechnologies}
+              columns={columns}
+              metadata="technologies"
+              uniques={technologyUniques}
+            />
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<LuChevronDown />} variant="flat">
@@ -285,6 +275,7 @@ export default function ({
                 setRowsPerPage(() => Number(event.target.value));
                 setPage(() => 1);
               }}
+              value={rowsPerPage}
             >
               <option value="10">10</option>
               <option value="20">20</option>
@@ -296,18 +287,23 @@ export default function ({
     );
   }, [
     filter,
-    technologies,
+    setFilter,
     articles.length,
     isFiltering,
-    columns,
+    technologies,
+    setTechnologies,
     technologyUniques,
-    statusUniques,
+    category,
+    setCategory,
+    categoryUniques,
     status,
     setStatus,
-    setTechnologies,
+    statusUniques,
+    columns,
     setColumns,
-    setFilter,
+    rowsPerPage,
     setRowsPerPage,
+    setPage,
   ]);
 
   const contentBottom = useMemo(() => {
