@@ -1,4 +1,24 @@
+import { ComponentProps } from "react";
 import { Route } from "next";
+import { Chip } from "@heroui/react";
+
+import { getEntries } from "@/helper/utility";
+import { TECHNOLOGY_ICON } from "@/setting/icon";
+
+export const STATUS = ["Draft", "Writing", "Published", "Archived"] as const;
+export const STATUS_SET = new Set(STATUS);
+export const STATUS_COLOR: Record<
+  string,
+  ComponentProps<typeof Chip>["color"]
+> = {
+  Draft: "warning",
+  Writing: "success",
+  Published: "primary",
+  Archived: "default",
+};
+
+export const TECHNOLOGIES = getEntries(TECHNOLOGY_ICON).map(([key]) => key);
+export const TECHNOLOGY_SET = new Set(TECHNOLOGIES);
 
 export const NAME = "Jin Yu Zhang's Website" as const;
 

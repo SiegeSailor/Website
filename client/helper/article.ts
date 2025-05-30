@@ -2,14 +2,13 @@ import { join } from "path";
 import { readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_PATH } from "@/setting/site";
-import { getEntries } from "@/helper/utility";
-import { TECHNOLOGY_ICON } from "@/setting/icon";
-
-const STATUS = ["Draft", "Writing", "Published", "Archived"] as const;
-const STATUS_SET = new Set(STATUS);
-const TECHNOLOGIES = getEntries(TECHNOLOGY_ICON).map(([key]) => key);
-const TECHNOLOGY_SET = new Set(TECHNOLOGIES);
+import {
+  DOMAIN_PATH,
+  TECHNOLOGIES,
+  TECHNOLOGY_SET,
+  STATUS,
+  STATUS_SET,
+} from "@/setting/site";
 
 export async function getArticles() {
   const directory = join(process.cwd(), DOMAIN_PATH.article);

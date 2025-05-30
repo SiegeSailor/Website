@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import {
   Button,
+  Chip,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -20,6 +21,7 @@ import {
 } from "@heroui/react";
 import { LuSearch, LuChevronDown } from "react-icons/lu";
 
+import { STATUS_COLOR } from "@/setting/site";
 import { getArticles } from "@/helper/article";
 import Link from "@/component/Link";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
@@ -30,9 +32,11 @@ const COLUMNS: {
   isSortable: boolean;
 }[] = [
   { key: "date", label: "Date", isSortable: true },
+  { key: "category", label: "Category", isSortable: true },
+  { key: "status", label: "Status", isSortable: false },
   { key: "title", label: "Title", isSortable: true },
-  { key: "minutes", label: "Read Minutes", isSortable: true },
   { key: "technologies", label: "Technologies", isSortable: false },
+  { key: "minutes", label: "Read Minutes", isSortable: true },
 ] as const;
 
 export default function ({
@@ -53,9 +57,21 @@ export default function ({
     }));
   }, [articles]);
 
+  const statusUniques = useMemo(() => {
+    const statusSet = new Set<string>();
+    articles.forEach((article) => {
+      statusSet.add(article.metadata.status);
+    });
+    return Array.from(statusSet).map((status) => ({
+      key: status,
+      label: status,
+    }));
+  }, [articles]);
+
   const [filter, setFilter] = useState("");
-  const [technologies, setTags] = useState<Selection>("all");
+  const [technologies, setTechnologies] = useState<Selection>("all");
   const [columns, setColumns] = useState<Selection>("all");
+  const [status, setStatus] = useState<Selection>("all");
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "date",
     direction: "descending",
@@ -81,9 +97,21 @@ export default function ({
           technologies.has(technology)
         )
       );
+    if (status !== "all" && Array.from(status).length !== statusUniques.length)
+      results = results.filter((article) =>
+        status.has(article.metadata.status)
+      );
 
     return results;
-  }, [articles, isFiltering, filter, technologies, technologyUniques]);
+  }, [
+    articles,
+    isFiltering,
+    filter,
+    technologies,
+    technologyUniques,
+    status,
+    statusUniques,
+  ]);
   const itemsCurrentPage = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
@@ -113,10 +141,18 @@ export default function ({
     ) => {
       switch (keyColumn) {
         case "date":
-          return <div>{article.metadata.date}</div>;
-        case "minutes":
-          const minutes = article.metadata[keyColumn];
-          return <div>{minutes}</div>;
+          return (
+            <div>{new Date(article.metadata.date).toLocaleDateString()}</div>
+          );
+        case "status":
+          const status = article.metadata[keyColumn];
+          return (
+            <div>
+              <Chip size="md" variant="flat" color={STATUS_COLOR[status]}>
+                {status}
+              </Chip>
+            </div>
+          );
         case "technologies":
           const technologies = article.metadata[keyColumn];
           return (
@@ -124,7 +160,8 @@ export default function ({
               technologies={technologies}
               propsItem={{
                 className: "text-foreground",
-                variant: "faded",
+                variant: "bordered",
+                size: "md",
               }}
             />
           );
@@ -144,7 +181,7 @@ export default function ({
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
-            className="w-full sm:max-w-[44%]"
+            className="w-full sm:max-w-[25%]"
             placeholder="Search by Title"
             startContent={
               <LuSearch
@@ -163,7 +200,38 @@ export default function ({
             }}
           />
           <div className="flex gap-3">
-            <Dropdown>
+            <Dropdown
+              isDisabled={
+                columns !== "all" &&
+                !Array.from(columns).find((column) => column === "status")
+              }
+            >
+              <DropdownTrigger className="hidden sm:flex">
+                <Button endContent={<LuChevronDown />} variant="flat">
+                  Status
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                disallowEmptySelection
+                aria-label="Table Status"
+                closeOnSelect={false}
+                selectedKeys={technologies}
+                selectionMode="multiple"
+                onSelectionChange={setStatus}
+              >
+                {statusUniques.map((statusItem) => (
+                  <DropdownItem key={statusItem.key}>
+                    {statusItem.label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+            <Dropdown
+              isDisabled={
+                columns !== "all" &&
+                !Array.from(columns).find((column) => column === "technologies")
+              }
+            >
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<LuChevronDown />} variant="flat">
                   Technologies
@@ -175,10 +243,7 @@ export default function ({
                 closeOnSelect={false}
                 selectedKeys={technologies}
                 selectionMode="multiple"
-                onSelectionChange={(keys) => {
-                  console.log("Selected Tags:", keys);
-                  setTags(keys);
-                }}
+                onSelectionChange={setTechnologies}
               >
                 {technologyUniques.map((technology) => (
                   <DropdownItem key={technology.key}>
@@ -229,7 +294,21 @@ export default function ({
         </div>
       </div>
     );
-  }, [filter, technologies, articles.length, isFiltering, columns]);
+  }, [
+    filter,
+    technologies,
+    articles.length,
+    isFiltering,
+    columns,
+    technologyUniques,
+    statusUniques,
+    status,
+    setStatus,
+    setTechnologies,
+    setColumns,
+    setFilter,
+    setRowsPerPage,
+  ]);
 
   const contentBottom = useMemo(() => {
     return (
@@ -273,7 +352,7 @@ export default function ({
       aria-label="Articles"
       bottomContent={contentBottom}
       bottomContentPlacement="outside"
-      classNames={{ td: "whitespace-nowrap h-10" }}
+      classNames={{ td: "whitespace-nowrap h-12" }}
       isHeaderSticky
       layout="auto"
       onSortChange={setSortDescriptor}
