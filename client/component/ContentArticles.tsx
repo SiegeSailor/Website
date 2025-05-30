@@ -28,20 +28,16 @@ export default async function () {
       </div>
 
       <div className="flex flex-wrap md:flex-nowrap gap-4 items-center">
-        <div className="md:basis-1/2 flex flex-col gap-2 w-full">
+        <div className="w-full md:w-1/2 flex flex-col gap-2">
           {articles.slice(0, 4).map((article, index) => {
-            return (
-              <CardArticle
-                key={index}
-                className={clsx("w-full")}
-                article={article}
-              />
-            );
+            return <CardArticle key={index} article={article} />;
           })}
         </div>
         <CardBlog
           articles={articles.slice(4)}
-          className={clsx("md:basis-1/2 h-[300px]")}
+          className={clsx(
+            "w-full md:w-1/2 h-[300px] min-w-[200px] flex-shrink-0"
+          )}
         />
       </div>
     </div>

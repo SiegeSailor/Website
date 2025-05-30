@@ -1,8 +1,14 @@
 import { ComponentProps } from "react";
+import dynamic from "next/dynamic";
 
 import { getArticles } from "@/helper/article";
-import Body from "@/component/CardBlog/Body";
 import CardBlock from "@/component/CardBlock";
+import SpinnerCenter from "@/component/SpinnerCenter";
+
+const Body = dynamic(
+  () => import("@/component/CardBlog/Body").then((module) => module.default),
+  { ssr: true, loading: () => <SpinnerCenter /> }
+);
 
 export default async function ({
   articles,
