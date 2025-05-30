@@ -4,21 +4,17 @@ import clsx from "clsx";
 
 export default function ({
   row,
-  isHideText = false,
-  isHideIcon = false,
-  propsChip,
-  propsScrollShadow,
+  propsContainer,
+  propsItem,
 }: Readonly<{
   row: { name: string; icon: ReactNode }[];
-  isHideText?: boolean;
-  isHideIcon?: boolean;
-  propsChip?: ComponentProps<typeof Chip>;
-  propsScrollShadow?: ComponentProps<typeof ScrollShadow>;
+  propsContainer?: ComponentProps<typeof ScrollShadow>;
+  propsItem?: ComponentProps<typeof Chip>;
 }>) {
   return (
     <ScrollShadow
-      {...propsScrollShadow}
-      className={clsx("flex gap-2 w-11/12", propsScrollShadow?.className)}
+      {...propsContainer}
+      className={clsx("flex gap-2 w-11/12", propsContainer?.className)}
       orientation="horizontal"
       size={120}
     >
@@ -26,17 +22,17 @@ export default function ({
         <Chip
           key={item.name}
           variant="flat"
-          size="md"
-          {...propsChip}
+          size="lg"
+          {...propsItem}
           className={clsx(
             "text-background dark:text-foreground",
             "font-normal text-sm text-left",
             "px-2 py-1",
-            propsChip?.className
+            propsItem?.className
           )}
-          startContent={!isHideIcon && item.icon}
+          startContent={item.icon}
         >
-          {!isHideText && item.name}
+          {item.name}
         </Chip>
       ))}
     </ScrollShadow>

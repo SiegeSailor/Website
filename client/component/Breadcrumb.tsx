@@ -9,12 +9,12 @@ import { getArticles } from "@/helper/article";
 import { ROUTE_TITLE } from "@/setting/site";
 
 export default function ({
-  propsBreadcrumbs,
-  propsBreadcrumbItem,
+  propsContainer,
+  propsItem,
   articles,
 }: Readonly<{
-  propsBreadcrumbs?: ComponentProps<typeof Breadcrumbs>;
-  propsBreadcrumbItem?: ComponentProps<typeof BreadcrumbItem>;
+  propsContainer?: ComponentProps<typeof Breadcrumbs>;
+  propsItem?: ComponentProps<typeof BreadcrumbItem>;
   articles: Awaited<ReturnType<typeof getArticles>>;
 }>) {
   const pathname = usePathname();
@@ -40,12 +40,12 @@ export default function ({
 
   return (
     <Breadcrumbs
-      {...propsBreadcrumbs}
-      className={clsx(propsBreadcrumbs?.className)}
+      {...propsContainer}
+      className={clsx(propsContainer?.className)}
     >
       {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem
-          {...propsBreadcrumbItem}
+          {...propsItem}
           key={breadcrumb.name}
           href={breadcrumb.href}
         >

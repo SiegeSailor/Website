@@ -57,8 +57,8 @@ export default function ({ className }: Readonly<{ className?: string }>) {
             className={clsx(
               isBarLoaded ? "opacity-100" : "opacity-0",
               "transition-opacity duration-1000 ease-in-out",
-              "leading-6 text-medium",
-              "bg-default-100 bg-opacity-60 border-1 border-default-200",
+              "leading-8 text-lg",
+              "bg-default-50 bg-opacity-60 border-1 border-default-200",
               "p-2 rounded-sm"
             )}
           >
@@ -114,7 +114,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
               align: "end",
               color: colorForeground,
               font: {
-                size: 14,
+                size: 16,
                 weight: "normal",
                 family: "Roboto",
               },

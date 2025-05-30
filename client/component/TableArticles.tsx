@@ -122,7 +122,7 @@ export default function ({
           return (
             <ScrollShadowTechnologies
               technologies={technologies}
-              propsChip={{
+              propsItem={{
                 className: "text-foreground",
                 variant: "faded",
               }}

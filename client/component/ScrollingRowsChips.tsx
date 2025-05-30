@@ -92,7 +92,7 @@ export default function ({
                   className="px-2 py-1 text-default-700"
                   variant="flat"
                   startContent={item.icon}
-                  size="md"
+                  size="lg"
                 >
                   {item.name}
                 </Chip>
