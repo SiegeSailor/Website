@@ -1,4 +1,3 @@
-import { Divider, Card } from "@heroui/react";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
@@ -54,11 +53,12 @@ export default async function ({
 
           <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>
 
-          <ScrollShadowTechnologies
-            technologies={metadata.technologies}
-            propsChip={{ className: "text-foreground", variant: "faded" }}
-            propsScrollShadow={{ className: "mb-4" }}
-          />
+          <div className="mb-4">
+            <ScrollShadowTechnologies
+              technologies={metadata.technologies}
+              propsChip={{ className: "text-foreground", variant: "faded" }}
+            />
+          </div>
         </div>
 
         <article>

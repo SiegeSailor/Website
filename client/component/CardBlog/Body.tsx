@@ -89,10 +89,7 @@ export default function ({
                     {title}
                   </p>
                   <Spacer y={4} />
-                  <ScrollShadowTechnologies
-                    technologies={technologies}
-                    propsScrollShadow={{ className: "mt-2" }}
-                  />
+                  <ScrollShadowTechnologies technologies={technologies} />
                 </FloatingDivision>
               </motion.div>
             )}

@@ -24,7 +24,7 @@ export default function ({
 
   return (
     <div ref={refContainer} className="w-full h-full flex flex-col gap-5">
-      {rows.map((rows, index) => {
+      {rows.map((row, index) => {
         const isEven = index % 2 === 0;
         const speed = 40;
 
@@ -86,15 +86,15 @@ export default function ({
                 },
               }}
             >
-              {rows.map((row) => (
+              {row.map((item) => (
                 <Chip
-                  key={row.name}
+                  key={item.name}
                   className="px-2 py-1 text-default-700"
                   variant="flat"
-                  startContent={row.icon}
+                  startContent={item.icon}
                   size="md"
                 >
-                  {row.name}
+                  {item.name}
                 </Chip>
               ))}
             </motion.div>
