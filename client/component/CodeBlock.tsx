@@ -32,7 +32,11 @@ export default function ({
     >
       <pre
         ref={refPre}
-        className={clsx("p-3", "rounded-medium", "whitespace-break-spaces")}
+        className={clsx(
+          "py-4 px-6",
+          "rounded-medium",
+          "whitespace-break-spaces"
+        )}
       >
         {children}
       </pre>

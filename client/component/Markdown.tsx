@@ -102,7 +102,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
           />
         ),
         code: (element) => (
-          <Code {...element} className={clsx(element.className, SPACE)} />
+          <Code {...element} className={clsx(element.className)} />
         ),
         callout: (element) => (
           <Callout {...element} className={clsx(element.className, SPACE)} />
@@ -123,7 +123,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "font-normal text-medium leading-6",
+              "font-normal text-lg leading-6",
               SPACE
             )}
           />
@@ -136,6 +136,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
               isExternal={isExternal}
               showAnchorIcon={isExternal}
               underline="always"
+              className="text-lg"
               target={isExternal ? "_blank" : "_self"}
             />
           );

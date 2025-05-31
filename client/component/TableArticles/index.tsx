@@ -33,8 +33,8 @@ const COLUMNS: {
   isSortable: boolean;
 }[] = [
   { key: "date", label: "Date", isSortable: true },
-  { key: "category", label: "Category", isSortable: true },
   { key: "status", label: "Status", isSortable: false },
+  { key: "category", label: "Category", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
   { key: "technologies", label: "Technologies", isSortable: false },
   { key: "minutes", label: "Read Minutes", isSortable: true },
@@ -189,11 +189,7 @@ export default function ({
           );
         case "title":
           const title = article.metadata[keyColumn];
-          return (
-            <Link href={`/blog/${article.metadata.date}`} className="text-base">
-              {title}
-            </Link>
-          );
+          return <Link href={`/blog/${article.metadata.date}`}>{title}</Link>;
         default:
           return <div>{String(article.metadata[keyColumn])}</div>;
       }

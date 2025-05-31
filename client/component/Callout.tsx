@@ -1,24 +1,33 @@
-import { ComponentProps, ReactNode } from "react";
+import {
+  ComponentProps,
+  createElement,
+  ForwardRefExoticComponent,
+  ReactNode,
+  RefAttributes,
+} from "react";
 import { Code } from "@heroui/react";
-import clsx from "clsx";
 import {
   BadgeAlertIcon,
   BadgeMinusIcon,
   BadgeCheckIcon,
   BadgeHelpIcon,
   BadgeInfoIcon,
+  LucideProps,
 } from "lucide-react";
+import clsx from "clsx";
 
 const COLOR_ICON: Record<
   NonNullable<ComponentProps<typeof Code>["color"]>,
-  ReactNode
+  ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >
 > = {
-  danger: <BadgeMinusIcon size="1.45rem" />,
-  default: <BadgeHelpIcon size="1.45rem" />,
-  primary: <BadgeInfoIcon size="1.45rem" />,
-  secondary: <BadgeHelpIcon size="1.45rem" />,
-  success: <BadgeCheckIcon size="1.45rem" />,
-  warning: <BadgeAlertIcon size="1.45rem" />,
+  danger: BadgeMinusIcon,
+  default: BadgeHelpIcon,
+  primary: BadgeInfoIcon,
+  secondary: BadgeHelpIcon,
+  success: BadgeCheckIcon,
+  warning: BadgeAlertIcon,
 };
 
 const COLOR_TITLE: Record<
@@ -31,6 +40,18 @@ const COLOR_TITLE: Record<
   secondary: "Note",
   success: "Success",
   warning: "Warning",
+};
+
+const COLOR_COLOR: Record<
+  NonNullable<ComponentProps<typeof Code>["color"]>,
+  string
+> = {
+  danger: "bg-red-50 border-red-300",
+  default: "bg-gray-50 border-gray-300",
+  primary: "bg-blue-50 border-blue-300",
+  secondary: "bg-gray-50 border-gray-300",
+  success: "bg-green-50 border-green-300",
+  warning: "bg-yellow-50 border-yellow-300",
 };
 
 export default function ({
@@ -47,13 +68,23 @@ export default function ({
   return (
     <div
       className={clsx(
-        "rounded-md p-3",
-        "bg-background border-wa border-2",
+        "rounded-md p-4",
+        COLOR_COLOR[color],
+        "border-2",
         className
       )}
     >
-      <div className={clsx("flex items-center justify-start gap-2 mb-2")}>
-        <div>{COLOR_ICON[color]}</div>
+      <div
+        className={clsx(
+          "flex items-center justify-start gap-2 mb-2",
+          "text-xl font-semibold"
+        )}
+      >
+        <div>
+          {createElement(COLOR_ICON[color], {
+            size: "1.45rem",
+          })}
+        </div>
         <div>{title ? title : COLOR_TITLE[color]}</div>
       </div>
 

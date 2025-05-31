@@ -33,8 +33,14 @@ export default ({ source }: { source: string }) => {
   }, []);
 
   return (
-    <Skeleton className={clsx("rounded-medium")} isLoaded={isMounted}>
-      <ScrollShadow className={clsx("h-80 p-3", "bg-default-100")} size={120}>
+    <Skeleton isLoaded={isMounted}>
+      <ScrollShadow
+        className={clsx(
+          "rounded-medium h-96 p-3",
+          "bg-default-100 dark:bg-default-50"
+        )}
+        size={120}
+      >
         <div id={identity} ref={refMermaid} />
       </ScrollShadow>
     </Skeleton>
