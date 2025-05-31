@@ -49,7 +49,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           className={clsx(
             "text-xl sm:text-lg",
             "text-default-600 text-right font-light",
-            "w-3/5 pr-4 pt-12",
+            "w-2/5 sm:w-3/5 pr-4 pt-12",
             "absolute top-1 right-1"
           )}
         >
@@ -58,7 +58,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
               isBarLoaded ? "opacity-100" : "opacity-0",
               "transition-opacity duration-1000 ease-in-out",
               "leading-8 text-lg",
-              "bg-default-50 bg-opacity-60 border-1 border-default-200",
+              "bg-default-50 bg-opacity-80 border-1 border-default-200",
               "p-2 rounded-sm"
             )}
           >

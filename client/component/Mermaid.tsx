@@ -36,7 +36,7 @@ export default ({ source }: { source: string }) => {
     <Skeleton isLoaded={isMounted}>
       <ScrollShadow
         className={clsx(
-          "rounded-medium h-96 p-3",
+          "rounded-medium h-96 p-4",
           "bg-default-100 dark:bg-default-50"
         )}
         size={120}

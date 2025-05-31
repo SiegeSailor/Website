@@ -28,7 +28,6 @@ export default function ({
         <p className="text-left w-[5.25rem] text-ellipsis overflow-hidden">
           {article.metadata.category}
         </p>
-        <Divider orientation="vertical" className="h-4 mr-2" />
         <h3 className="text-left text-medium text-ellipsis overflow-hidden w-1/2">
           {article.metadata.title}
         </h3>
