@@ -1,5 +1,5 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { Code } from "@heroui/react";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 
 import { remarkRehypeCallout } from "@/helper/plugin";
@@ -7,6 +7,7 @@ import Callout from "@/component/Callout";
 import CodeBlock from "@/component/CodeBlock";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
+import Mermaid from "@/component/Mermaid";
 
 const SPACE = "mb-4 last:mb-0";
 const SPACE_LARGE = "mb-4 last:mb-0 mt-12 first:mt-0";
@@ -106,12 +107,17 @@ export default function ({ source }: Readonly<{ source: string }>) {
         callout: (element) => (
           <Callout {...element} className={clsx(element.className, SPACE)} />
         ),
-        pre: (element) => (
-          <CodeBlock
-            {...element.children.props}
-            className={clsx(element.className, SPACE)}
-          />
-        ),
+        pre: (element) => {
+          if (element.children.props.className === "language-mermaid")
+            return <Mermaid source={element.children.props.children} />;
+
+          return (
+            <CodeBlock
+              {...element.children.props}
+              className={clsx(element.className, SPACE)}
+            />
+          );
+        },
         p: (element) => (
           <p
             {...element}

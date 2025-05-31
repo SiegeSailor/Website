@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
-
 import "highlight.js/styles/atom-one-dark.css";
+
 import "@/style/global.css";
 import { generateTitle } from "@/helper/utility";
 import { ScrollShadow } from "@heroui/react";
