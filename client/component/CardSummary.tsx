@@ -22,7 +22,6 @@ const Bar = dynamic(
 export default function ({ className }: Readonly<{ className?: string }>) {
   const [colorDefault200, setColorDefault200] = useState("transparent");
   const [colorDefault700, setColorDefault700] = useState("transparent");
-  const [colorForeground, setColorForeground] = useState("transparent");
   const [isBarLoaded, setIsBarLoaded] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ export default function ({ className }: Readonly<{ className?: string }>) {
   useEffect(() => {
     setColorDefault200(() => `hsl(${getCSSVariable("--heroui-default-200")})`);
     setColorDefault700(() => `hsl(${getCSSVariable("--heroui-default-700")})`);
-    setColorForeground(() => `hsl(${getCSSVariable("--heroui-background")})`);
   }, [theme]);
 
   return (
@@ -44,25 +42,25 @@ export default function ({ className }: Readonly<{ className?: string }>) {
       title="What I Bring to the Table"
       contentHeader={
         <FloatingDivision
-          volume={4.5}
+          volume={2.5}
           direction="horizontal"
           className={clsx(
-            "text-xl sm:text-lg",
-            "text-default-600 text-right font-light",
-            "w-2/5 sm:w-3/5 pr-4 pt-12",
-            "absolute top-1 right-1"
+            "absolute top-28 right-1",
+            "-translate-x-1/2 -translate-y-1/2",
+            "w-1/2"
           )}
         >
           <div
             className={clsx(
               isBarLoaded ? "opacity-100" : "opacity-0",
               "transition-opacity duration-1000 ease-in-out",
-              "leading-8 text-lg",
-              "bg-default-50 bg-opacity-80 border-1 border-default-200",
+              "text-lg",
+              "text-default-600 text-right font-normal",
+              "leading-8",
               "p-2 rounded-sm"
             )}
           >
-            6 Years of Working Experience in
+            6 Years in
             <div className="font-semibold text-default-700">
               Software Engineering
             </div>
@@ -112,16 +110,14 @@ export default function ({ className }: Readonly<{ className?: string }>) {
             datalabels: {
               anchor: "start",
               align: "end",
-              color: colorForeground,
+              color: colorDefault700,
               font: {
-                size: 16,
+                size: 14,
                 weight: "normal",
                 family: "Roboto",
               },
-              formatter: (_value, context) => {
-                const label = context.chart.data.labels?.[context.dataIndex];
-                return `${label}`;
-              },
+              formatter: (_value, context) =>
+                context.chart.data.labels?.[context.dataIndex],
             },
             tooltip: { enabled: false },
           },
@@ -131,7 +127,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           datasets: [
             {
               data: SUMMARY.map((item) => item.portion),
-              backgroundColor: colorDefault700,
+              backgroundColor: colorDefault200,
               borderRadius: {
                 bottomRight: 8,
                 topRight: 8,
