@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
@@ -13,7 +14,7 @@ export async function generateStaticParams(): Promise<TParams[]> {
   const articles = await getArticles();
 
   return articles.map((article) => ({
-    slug: article.filename.replace(".md", ""),
+    slug: article.metadata.date,
   }));
 }
 
@@ -21,7 +22,7 @@ export async function generateMetadata({
   params,
 }: Readonly<{
   params: Promise<TParams>;
-}>) {
+}>): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleByDate(slug);
 
@@ -38,34 +39,32 @@ export default async function ({
   const { metadata, content } = await getArticleByDate(slug);
 
   return (
-    <section className="p-4">
-      <div className="max-w-[880px] mx-auto">
-        <div className="flex flex-col gap-2 mb-8">
-          <div
-            className={clsx(
-              "flex gap-2 items-center",
-              "text-nowrap font-normal text-sm",
-              "opacity-60"
-            )}
-          >
-            <span>{metadata.date}</span>·
-            <span>{metadata.minutes} Minutes Read</span>
-          </div>
-
-          <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>
-
-          <div className="mb-4">
-            <ScrollShadowTechnologies
-              technologies={metadata.technologies}
-              propsItem={{ className: "text-foreground", variant: "faded" }}
-            />
-          </div>
+    <section className={clsx("max-w-[880px] mx-auto p-4")}>
+      <div className="flex flex-col gap-2 mb-8">
+        <div
+          className={clsx(
+            "flex gap-2 items-center",
+            "text-nowrap font-normal text-sm",
+            "opacity-60"
+          )}
+        >
+          <span>{metadata.date}</span>·
+          <span>{metadata.minutes} Minutes Read</span>
         </div>
 
-        <article>
-          <Markdown source={content} />
-        </article>
+        <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>
+
+        <div className="mb-4">
+          <ScrollShadowTechnologies
+            technologies={metadata.technologies}
+            propsItem={{ className: "text-foreground", variant: "faded" }}
+          />
+        </div>
       </div>
+
+      <article>
+        <Markdown source={content} />
+      </article>
     </section>
   );
 }

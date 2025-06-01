@@ -1,17 +1,5 @@
-import { getArticles } from "@/helper/article";
-import Breadcrumb from "@/component/Breadcrumb";
-
-export default async function ({
+export default function ({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const articles = await getArticles();
-
-  return (
-    <div>
-      <div className="mb-16">
-        <Breadcrumb articles={articles} />
-      </div>
-      {children}
-    </div>
-  );
+  return <div className="w-full h-full">{children}</div>;
 }

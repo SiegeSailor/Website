@@ -162,9 +162,7 @@ export default function ({
     ) => {
       switch (keyColumn) {
         case "date":
-          return (
-            <div>{new Date(article.metadata.date).toLocaleDateString()}</div>
-          );
+          return <div>{article.metadata.date}</div>;
         case "status":
           const status = article.metadata[keyColumn];
           return (

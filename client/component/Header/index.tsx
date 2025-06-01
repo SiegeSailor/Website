@@ -14,7 +14,7 @@ import Menu from "@/component/Header/Menu";
 import Search from "@/component/Search";
 import ThemeSwitch from "@/component/ThemeSwitch";
 
-export default function () {
+export default async function () {
   return (
     <Navbar maxWidth="md" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">

@@ -16,6 +16,7 @@ const PAGES: { label: string; href: Route; press: string }[] = [
 
 export default function () {
   const pathname = usePathname();
+
   return (
     <NavbarMenu>
       <div className="sm:hidden">
