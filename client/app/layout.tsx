@@ -38,11 +38,9 @@ export default function ({
       <body suppressHydrationWarning className={FontRoboto.className}>
         <Provider>
           <Header />
-          <div className="relative flex flex-col h-screen">
+          <div className="relative flex flex-col">
             <main className="container mx-auto max-w-8xl py-8 px-4">
-              <ScrollShadow className="h-full w-full">
-                {children}
-              </ScrollShadow>
+              <ScrollShadow className="h-full w-full">{children}</ScrollShadow>
             </main>
           </div>
         </Provider>

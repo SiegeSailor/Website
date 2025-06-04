@@ -3,12 +3,11 @@ import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/article";
+import { TParams } from "@/app/(child)/blog/[slug]/layout";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
 export const dynamicParams = false;
-
-type TParams = Readonly<{ slug: string }>;
 
 export async function generateStaticParams(): Promise<TParams[]> {
   const articles = await getArticles();
@@ -39,7 +38,7 @@ export default async function ({
   const { metadata, content } = await getArticleByDate(slug);
 
   return (
-    <section className={clsx("max-w-[880px] mx-auto p-4")}>
+    <section>
       <div className="flex flex-col gap-2 mb-8">
         <div
           className={clsx(
@@ -52,12 +51,19 @@ export default async function ({
           <span>{metadata.minutes} Minutes Read</span>
         </div>
 
-        <h2 className="font-medium text-4xl mb-2">{metadata.title}</h2>
+        <h2 id={metadata.title} className="font-medium text-4xl mb-2">
+          {metadata.title}
+        </h2>
 
         <div className="mb-4">
           <ScrollShadowTechnologies
             technologies={metadata.technologies}
-            propsItem={{ className: "text-foreground", variant: "faded" }}
+            propsItem={{
+              className: "text-foreground",
+              variant: "bordered",
+              size: "md",
+            }}
+            propsIcon={{ color: "default" }}
           />
         </div>
       </div>

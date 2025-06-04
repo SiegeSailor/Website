@@ -21,6 +21,6 @@ export default function ({
       ...props,
       className: clsx(LEVEL_TEXT[level], "font-medium", props.className),
     },
-    createElement("a", { href: `#${props.children}` }, props.children)
+    createElement("a", { href: `#${props.id}` }, props.children)
   );
 }

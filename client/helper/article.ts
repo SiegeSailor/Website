@@ -67,6 +67,7 @@ export async function getArticleByFilename(filename: string) {
           .map((technology) => technology.trim())
           .sort() as typeof TECHNOLOGIES,
         title: data.title,
+        anchors: getAnchorsByContent(content),
       },
     };
   } catch (_) {
@@ -80,4 +81,41 @@ export async function getArticleByFilename(filename: string) {
 export async function getArticleByDate(date: string) {
   const filename = `${date}.md`;
   return getArticleByFilename(filename);
+}
+
+export function getAnchorsByContent(content: string) {
+  const lines = content.split("\n");
+  const result: {
+    level: 1 | 2 | 3 | 4 | 5 | 6;
+    title: string;
+    identifier: string;
+  }[] = [];
+
+  const slugCount: Record<string, number> = {};
+  for (const line of lines) {
+    const match = line.match(/^(#{1,6})\s+(.*)/);
+    if (match) {
+      const level = match[1].length as (typeof result)[number]["level"];
+      if (level < 1 || level > 6) continue;
+      const title = match[2].trim();
+      if (title.length === 0) continue;
+
+      const baseSlug = title.toLowerCase().replace(/\s+/g, "-");
+      let identifier = baseSlug;
+      if (baseSlug in slugCount) {
+        slugCount[baseSlug] += 1;
+        identifier = `${baseSlug}-${slugCount[baseSlug]}`;
+      } else {
+        slugCount[baseSlug] = 0;
+      }
+
+      result.push({
+        level,
+        title,
+        identifier,
+      });
+    }
+  }
+
+  return result;
 }

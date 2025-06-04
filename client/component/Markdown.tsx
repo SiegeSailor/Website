@@ -1,6 +1,7 @@
 import { Code } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
+import rehypeSlug from "rehype-slug";
 
 import { remarkRehypeCallout } from "@/helper/plugin";
 import Callout from "@/component/Callout";
@@ -19,7 +20,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
       options={{
         mdxOptions: {
           remarkPlugins: [remarkRehypeCallout],
-          rehypePlugins: [],
+          rehypePlugins: [rehypeSlug],
         },
       }}
       components={{
