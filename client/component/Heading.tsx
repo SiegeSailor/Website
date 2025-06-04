@@ -2,12 +2,12 @@ import { createElement } from "react";
 import clsx from "clsx";
 
 const LEVEL_TEXT: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
-  1: "text-5xl",
-  2: "text-4xl",
-  3: "text-3xl",
-  4: "text-2xl",
-  5: "text-xl",
-  6: "text-lg",
+  1: "text-4xl",
+  2: "text-3xl",
+  3: "text-2xl",
+  4: "text-xl",
+  5: "text-lg",
+  6: "text-medium",
 } as const;
 
 export default function ({
@@ -19,7 +19,12 @@ export default function ({
     `h${level}`,
     {
       ...props,
-      className: clsx(LEVEL_TEXT[level], "font-medium", props.className),
+      className: clsx(
+        LEVEL_TEXT[level],
+        "font-light",
+        "mb-4 last:mb-0 mt-16 first:mt-0",
+        props.className
+      ),
     },
     createElement("a", { href: `#${props.id}` }, props.children)
   );

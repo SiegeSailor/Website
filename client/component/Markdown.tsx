@@ -11,7 +11,6 @@ import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
 
 const SPACE = "mb-4 last:mb-0";
-const SPACE_LARGE = "mb-4 last:mb-0 mt-12 first:mt-0";
 
 export default function ({ source }: Readonly<{ source: string }>) {
   return (
@@ -25,46 +24,22 @@ export default function ({ source }: Readonly<{ source: string }>) {
       }}
       components={{
         h1: (element) => (
-          <Heading
-            {...element}
-            level={1}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={1} className={clsx(element.className)} />
         ),
         h2: (element) => (
-          <Heading
-            {...element}
-            level={2}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={2} className={clsx(element.className)} />
         ),
         h3: (element) => (
-          <Heading
-            {...element}
-            level={3}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={3} className={clsx(element.className)} />
         ),
         h4: (element) => (
-          <Heading
-            {...element}
-            level={4}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={4} className={clsx(element.className)} />
         ),
         h5: (element) => (
-          <Heading
-            {...element}
-            level={5}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={5} className={clsx(element.className)} />
         ),
         h6: (element) => (
-          <Heading
-            {...element}
-            level={6}
-            className={clsx(element.className, SPACE_LARGE)}
-          />
+          <Heading {...element} level={6} className={clsx(element.className)} />
         ),
         blockquote: (element) => (
           <blockquote

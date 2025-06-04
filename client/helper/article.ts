@@ -54,20 +54,27 @@ export async function getArticleByFilename(filename: string) {
       throw new Error("Category must be a non-empty string");
     if (!STATUS_SET.has(data.status)) throw new Error("Status must be valid");
 
+    const anchors: ReturnType<typeof getAnchorsByContent> = [
+      { level: 1, title: data.title, identifier: data.title },
+      ...getAnchorsByContent(content),
+    ];
+    const technologies: typeof TECHNOLOGIES = data.technologies
+      .map((technology) => technology.trim())
+      .sort();
+    const status: (typeof STATUS)[number] = data.status;
+
     return {
       content,
       filename,
       metadata: {
+        anchors,
         category: data.category,
         date,
         description,
         minutes: Math.ceil((content.split(" ").length + 1) / 200),
-        status: data.status as (typeof STATUS)[number],
-        technologies: data.technologies
-          .map((technology) => technology.trim())
-          .sort() as typeof TECHNOLOGIES,
+        status,
+        technologies,
         title: data.title,
-        anchors: getAnchorsByContent(content),
       },
     };
   } catch (_) {

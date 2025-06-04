@@ -8,6 +8,7 @@ import { generateTitle } from "@/helper/utility";
 import { ScrollShadow } from "@heroui/react";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
   title: generateTitle(),
@@ -35,7 +36,10 @@ export default function ({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body suppressHydrationWarning className={FontRoboto.className}>
+      <body
+        suppressHydrationWarning
+        className={clsx(FontRoboto.className, "overscroll-y-none")}
+      >
         <Provider>
           <Header />
           <div className="relative flex flex-col">
