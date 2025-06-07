@@ -55,7 +55,7 @@ export async function getArticleByFilename(filename: string) {
     if (!STATUS_SET.has(data.status)) throw new Error("Status must be valid");
 
     const anchors: ReturnType<typeof getAnchorsByContent> = [
-      { level: 1, title: data.title, identifier: data.title },
+      { level: 1, title: data.title, identifier: getSlugByTitle(data.title) },
       ...getAnchorsByContent(content),
     ];
     const technologies: typeof TECHNOLOGIES = data.technologies
@@ -90,6 +90,10 @@ export async function getArticleByDate(date: string) {
   return getArticleByFilename(filename);
 }
 
+export function getSlugByTitle(title: string) {
+  return title.toLowerCase().replace(/\s+/g, "-");
+}
+
 export function getAnchorsByContent(content: string) {
   const lines = content.split("\n");
   const result: {
@@ -107,20 +111,16 @@ export function getAnchorsByContent(content: string) {
       const title = match[2].trim();
       if (title.length === 0) continue;
 
-      const baseSlug = title.toLowerCase().replace(/\s+/g, "-");
-      let identifier = baseSlug;
-      if (baseSlug in slugCount) {
-        slugCount[baseSlug] += 1;
-        identifier = `${baseSlug}-${slugCount[baseSlug]}`;
+      const slug = getSlugByTitle(title);
+      let identifier = slug;
+      if (slug in slugCount) {
+        slugCount[slug] += 1;
+        identifier = `${slug}-${slugCount[slug]}`;
       } else {
-        slugCount[baseSlug] = 0;
+        slugCount[slug] = 0;
       }
 
-      result.push({
-        level,
-        title,
-        identifier,
-      });
+      result.push({ level, title, identifier });
     }
   }
 

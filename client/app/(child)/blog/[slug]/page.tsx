@@ -3,12 +3,16 @@ import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
-import { getArticles, getArticleByDate } from "@/helper/article";
+import {
+  getArticles,
+  getArticleByDate,
+  getSlugByTitle,
+} from "@/helper/article";
 import { ScrollShadow } from "@heroui/react";
 import Heading from "@/component/Heading";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
-import TableOfContents from "@/component/TableOfContents";
+import TableOfContents, { IDENTIFIER } from "@/component/TableOfContents";
 
 export const dynamicParams = false;
 
@@ -46,9 +50,13 @@ export default async function ({
     <section className={clsx("max-w-[880px] mx-auto p-4")}>
       <div className={clsx("gap-12 grid grid-cols-12 gird-rows-1")}>
         <div className={clsx("col-span-12 md:col-span-8")}>
-          <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
+          <ScrollShadow
+            id={IDENTIFIER}
+            className="h-[65vh] md:h-[72.5vh]"
+            size={5}
+          >
             <div className="flex flex-col gap-2 mb-12">
-              <Heading level={1} id={metadata.title}>
+              <Heading level={1} id={getSlugByTitle(metadata.title)}>
                 {metadata.title}
               </Heading>
               <div
@@ -78,7 +86,10 @@ export default async function ({
             </article>
           </ScrollShadow>
         </div>
-        <Card className={clsx("hidden md:block md:col-span-4", "p-4")}>
+        <Card
+          shadow="sm"
+          className={clsx("hidden md:block md:col-span-4", "p-4")}
+        >
           <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
             <TableOfContents anchors={metadata.anchors} />
           </ScrollShadow>
