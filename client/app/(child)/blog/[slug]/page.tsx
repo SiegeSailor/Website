@@ -52,7 +52,7 @@ export default async function ({
         <div className={clsx("col-span-12 md:col-span-8")}>
           <ScrollShadow
             id={IDENTIFIER}
-            className="h-[65vh] md:h-[72.5vh]"
+            className="h-[calc(100vh-14rem)]"
             size={5}
           >
             <div className="flex flex-col gap-2 mb-12">
@@ -87,7 +87,7 @@ export default async function ({
           </ScrollShadow>
         </div>
         <Card shadow="sm" className={clsx("hidden md:block md:col-span-4")}>
-          <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
+          <ScrollShadow className="h-[calc(100vh-14rem)]" size={5}>
             <TableOfContents anchors={metadata.anchors} />
           </ScrollShadow>
         </Card>
