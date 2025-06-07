@@ -86,10 +86,7 @@ export default async function ({
             </article>
           </ScrollShadow>
         </div>
-        <Card
-          shadow="sm"
-          className={clsx("hidden md:block md:col-span-4", "p-4")}
-        >
+        <Card shadow="sm" className={clsx("hidden md:block md:col-span-4")}>
           <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
             <TableOfContents anchors={metadata.anchors} />
           </ScrollShadow>
