@@ -48,6 +48,8 @@ export default function ({
           {...propsItem}
           key={breadcrumb.name}
           href={breadcrumb.href}
+          className={clsx(propsItem?.className)}
+          classNames={{ item: "whitespace-break-spaces" }}
         >
           {breadcrumb.name}
         </BreadcrumbItem>

@@ -43,8 +43,14 @@ export default function ({
         <Provider>
           <Header />
           <div className="relative flex flex-col">
-            <main className="container mx-auto max-w-8xl py-8 px-4">
-              <ScrollShadow className="h-full w-full">{children}</ScrollShadow>
+            <main
+              className={clsx(
+                "container max-w-8xl",
+                "mx-auto pt-4 sm:pt-8 px-4",
+                "overflow-hidden"
+              )}
+            >
+              {children}
             </main>
           </div>
         </Provider>
