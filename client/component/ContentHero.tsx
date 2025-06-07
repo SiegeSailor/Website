@@ -20,9 +20,9 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           <span className="text-nowrap">
             Hi, I'm <span className="text-foreground">Jin Yu Zhang</span>!
           </span>
-          <span className="text-nowrap">
-            I’m a Senior
-            <span className="font-light text-primary px-2">
+          <span className="flex flex-col sm:block sm:text-nowrap">
+            <span>I’m a Senior</span>
+            <span className="h-9 sm:h-auto sm:px-2 font-light text-primary">
               <TypingText
                 words={["Software", "Full-Stack", "DevOps"]}
                 speedDeleting={125}
@@ -30,7 +30,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
                 timePause={2000}
               />
             </span>
-            Engineer
+            <span>Engineer</span>
           </span>
           <span className="text-nowrap">
             at

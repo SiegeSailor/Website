@@ -38,7 +38,7 @@ export default function ({
     <html suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
-        className={clsx(FontRoboto.className, "overscroll-y-none")}
+        className={clsx(FontRoboto.className, "overscroll-none")}
       >
         <Provider>
           <Header />
