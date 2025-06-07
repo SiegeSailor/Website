@@ -43,50 +43,47 @@ export default async function ({
   const { metadata, content } = await getArticleByDate(slug);
 
   return (
-    <section
-      className={clsx(
-        "max-w-[880px] mx-auto p-4",
-        "gap-12 grid grid-cols-12 gird-rows-1"
-      )}
-    >
-      <div className={clsx("col-span-12 md:col-span-8")}>
-        <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
-          <div className="flex flex-col gap-2 mb-12">
-            <Heading level={1} id={metadata.title}>
-              {metadata.title}
-            </Heading>
-            <div
-              className={clsx(
-                "flex gap-2 items-center",
-                "text-nowrap font-normal text-sm",
-                "opacity-60",
-                "mb-2"
-              )}
-            >
-              <span>{metadata.date}</span>·
-              <span>{metadata.minutes} Minutes Read</span>
+    <section className={clsx("max-w-[880px] mx-auto p-4")}>
+      <div className={clsx("gap-12 grid grid-cols-12 gird-rows-1")}>
+        <div className={clsx("col-span-12 md:col-span-8")}>
+          <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
+            <div className="flex flex-col gap-2 mb-12">
+              <Heading level={1} id={metadata.title}>
+                {metadata.title}
+              </Heading>
+              <div
+                className={clsx(
+                  "flex gap-2 items-center",
+                  "text-nowrap font-normal text-sm",
+                  "opacity-60",
+                  "mb-2"
+                )}
+              >
+                <span>{metadata.date}</span>·
+                <span>{metadata.minutes} Minutes Read</span>
+              </div>
+              <ScrollShadowTechnologies
+                technologies={metadata.technologies}
+                propsItem={{
+                  className: "text-foreground",
+                  variant: "bordered",
+                  size: "md",
+                }}
+                propsIcon={{ color: "default" }}
+              />
             </div>
-            <ScrollShadowTechnologies
-              technologies={metadata.technologies}
-              propsItem={{
-                className: "text-foreground",
-                variant: "bordered",
-                size: "md",
-              }}
-              propsIcon={{ color: "default" }}
-            />
-          </div>
 
-          <article>
-            <Markdown source={content} />
-          </article>
-        </ScrollShadow>
+            <article>
+              <Markdown source={content} />
+            </article>
+          </ScrollShadow>
+        </div>
+        <Card className={clsx("hidden md:block md:col-span-4", "p-4")}>
+          <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
+            <TableOfContents anchors={metadata.anchors} />
+          </ScrollShadow>
+        </Card>
       </div>
-      <Card className={clsx("hidden md:block md:col-span-4", "p-4")}>
-        <ScrollShadow className="h-[65vh] md:h-[72.5vh]" size={5}>
-          <TableOfContents anchors={metadata.anchors} />
-        </ScrollShadow>
-      </Card>
     </section>
   );
 }
