@@ -16,27 +16,23 @@ export default function ({
 }>) {
   const refPre = useRef<HTMLPreElement>(null);
 
-  const [isMounted, setIsMounted] = useState(false);
+  const [isHighlighted, setIsHighlighted] = useState(false);
 
   useEffect(() => {
     if (refPre.current) {
       highlight.highlightElement(refPre.current);
-      setIsMounted(true);
+      setIsHighlighted(true);
     }
   }, []);
 
   return (
     <Skeleton
       className={clsx("rounded-medium", className)}
-      isLoaded={isMounted}
+      isLoaded={isHighlighted}
     >
       <pre
         ref={refPre}
-        className={clsx(
-          "py-4 px-6",
-          "rounded-medium",
-          "whitespace-break-spaces"
-        )}
+        className={clsx("py-4 px-6", "rounded-medium", "overflow-x-auto")}
       >
         {children}
       </pre>

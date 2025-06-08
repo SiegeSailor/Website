@@ -42,6 +42,7 @@ export default function ({
     <Breadcrumbs
       {...propsContainer}
       className={clsx(propsContainer?.className)}
+      classNames={{ list: "overflow-hidden flex-nowrap" }}
     >
       {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem
@@ -49,7 +50,9 @@ export default function ({
           key={breadcrumb.name}
           href={breadcrumb.href}
           className={clsx(propsItem?.className)}
-          classNames={{ item: "whitespace-break-spaces" }}
+          classNames={{
+            item: "whitespace-nowrap text-ellipsis block overflow-hidden max-w-64",
+          }}
         >
           {breadcrumb.name}
         </BreadcrumbItem>

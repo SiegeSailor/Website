@@ -8,7 +8,6 @@ import {
   getArticleByDate,
   getSlugByTitle,
 } from "@/helper/article";
-import { ScrollShadow } from "@heroui/react";
 import Heading from "@/component/Heading";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
@@ -48,12 +47,16 @@ export default async function ({
 
   return (
     <section className={clsx("max-w-[880px] mx-auto p-4")}>
-      <div className={clsx("gap-12 grid grid-cols-12 gird-rows-1")}>
-        <div className={clsx("col-span-12 md:col-span-8")}>
-          <ScrollShadow
+      <div
+        className={clsx(
+          "gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1",
+          "w-full"
+        )}
+      >
+        <div className={clsx("md:col-span-8")}>
+          <div
             id={IDENTIFIER}
-            className="max-h-[calc(100vh-12rem)]"
-            size={5}
+            className={clsx("max-h-[calc(100vh-12rem)]", "overflow-y-auto")}
           >
             <div className="flex flex-col gap-2 mb-12">
               <Heading level={1} id={getSlugByTitle(metadata.title)}>
@@ -84,13 +87,15 @@ export default async function ({
             <article>
               <Markdown source={content} />
             </article>
-          </ScrollShadow>
+          </div>
         </div>
         <div className={clsx("hidden md:block md:col-span-4")}>
           <Card shadow="sm">
-            <ScrollShadow className="max-h-[calc(100vh-12rem)]" size={5}>
+            <div
+              className={clsx("max-h-[calc(100vh-12rem)]", "overflow-y-auto")}
+            >
               <TableOfContents anchors={metadata.anchors} />
-            </ScrollShadow>
+            </div>
           </Card>
         </div>
       </div>
