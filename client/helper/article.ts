@@ -103,8 +103,16 @@ export function getAnchorsByContent(content: string) {
   }[] = [];
 
   const slugCount: Record<string, number> = {};
+  let isInCodeBlock = false;
+
   for (const line of lines) {
-    const match = line.match(/^(#{1,6})\s+(.*)/);
+    if (/^```|^~~~/.test(line.trim())) {
+      isInCodeBlock = !isInCodeBlock;
+      continue;
+    }
+    if (isInCodeBlock) continue;
+
+    const match = line.match(/^(#{1,6}) (.*)/);
     if (match) {
       const level = match[1].length as (typeof result)[number]["level"];
       if (level < 1 || level > 6) continue;
