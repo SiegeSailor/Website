@@ -49,9 +49,11 @@ export default function ({
           {...propsItem}
           key={breadcrumb.name}
           href={breadcrumb.href}
-          className={clsx(propsItem?.className)}
           classNames={{
-            item: "whitespace-nowrap text-ellipsis block overflow-hidden max-w-64",
+            item: clsx(
+              "whitespace-nowrap text-ellipsis block overflow-hidden",
+              "max-w-36 sm:max-w-64 md:max-w-72"
+            ),
           }}
         >
           {breadcrumb.name}

@@ -42,16 +42,30 @@ const COLOR_TITLE: Record<
   warning: "Warning",
 };
 
+const COLOR_FRAME: Record<
+  NonNullable<ComponentProps<typeof Code>["color"]>,
+  string
+> = {
+  danger: "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
+  default: "bg-gray-50 border-gray-300 dark:bg-gray-950 dark:border-gray-700",
+  primary: "bg-blue-50 border-blue-300 dark:bg-blue-950 dark:border-blue-700",
+  secondary: "bg-gray-50 border-gray-300 dark:bg-gray-950 dark:border-gray-700",
+  success:
+    "bg-green-50 border-green-300 dark:bg-green-950 dark:border-green-700",
+  warning:
+    "bg-yellow-50 border-yellow-300 dark:bg-yellow-950 dark:border-yellow-700",
+};
+
 const COLOR_COLOR: Record<
   NonNullable<ComponentProps<typeof Code>["color"]>,
   string
 > = {
-  danger: "bg-red-50 border-red-300",
-  default: "bg-gray-50 border-gray-300",
-  primary: "bg-blue-50 border-blue-300",
-  secondary: "bg-gray-50 border-gray-300",
-  success: "bg-green-50 border-green-300",
-  warning: "bg-yellow-50 border-yellow-300",
+  danger: "text-red-500 dark:text-red-400",
+  default: "text-gray-500 dark:text-gray-400",
+  primary: "text-blue-500 dark:text-blue-400",
+  secondary: "text-gray-500 dark:text-gray-400",
+  success: "text-green-500 dark:text-green-400",
+  warning: "text-yellow-500 dark:text-yellow-400",
 };
 
 export default function ({
@@ -69,7 +83,7 @@ export default function ({
     <div
       className={clsx(
         "rounded-md p-4",
-        COLOR_COLOR[color],
+        COLOR_FRAME[color],
         "border-2",
         className
       )}
@@ -77,14 +91,13 @@ export default function ({
       <div
         className={clsx(
           "flex items-center justify-start gap-2 mb-2",
-          "text-xl font-semibold"
+          "font-semibold"
         )}
       >
-        <div>
-          {createElement(COLOR_ICON[color], {
-            size: "1.45rem",
-          })}
-        </div>
+        {createElement(COLOR_ICON[color], {
+          size: "1.25rem",
+          className: COLOR_COLOR[color],
+        })}
         <div>{title ? title : COLOR_TITLE[color]}</div>
       </div>
 
