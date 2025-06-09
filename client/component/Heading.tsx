@@ -1,4 +1,5 @@
 import { createElement } from "react";
+import { Link2Icon } from "lucide-react";
 import clsx from "clsx";
 
 const LEVEL_TEXT: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
@@ -23,9 +24,13 @@ export default function ({
         LEVEL_TEXT[level],
         "font-light",
         "mb-4 last:mb-0 mt-16 first:mt-0",
+        "hover:text-default-500",
         props.className
       ),
     },
-    createElement("a", { href: `#${props.id}` }, props.children)
+    <a href={`#${props.id}`}>
+      <span className="pr-2">{props.children}</span>
+      <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
+    </a>
   );
 }

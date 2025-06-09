@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { EyeIcon } from "lucide-react";
+import { EyeIcon, MoveUpIcon } from "lucide-react";
 import { Listbox, ListboxItem, ListboxSection, Skeleton } from "@heroui/react";
 import clsx from "clsx";
 
@@ -12,7 +12,11 @@ export const IDENTIFIER = "table-of-contents" as const;
 
 export default function ({
   anchors,
-}: Readonly<{ anchors: ReturnType<typeof getAnchorsByContent> }>) {
+  propsContainer,
+}: Readonly<{
+  propsContainer?: ComponentProps<typeof Skeleton>;
+  anchors: ReturnType<typeof getAnchorsByContent>;
+}>) {
   const [identifier, setIdentifier] = useState<string | null>(null);
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function ({
   }, [anchors]);
 
   return (
-    <Skeleton isLoaded={!!identifier}>
+    <Skeleton isLoaded={!!identifier} {...propsContainer}>
       <Listbox
         aria-label="Table of Contents"
         color="default"
@@ -52,7 +56,7 @@ export default function ({
         hideSelectedIcon
         variant="flat"
       >
-        <ListboxSection title="Table of Contents">
+        <ListboxSection title="Table of Contents" showDivider>
           {anchors.map((anchor) => {
             return (
               <ListboxItem
@@ -61,11 +65,10 @@ export default function ({
                     {anchor.identifier === identifier && (
                       <motion.span
                         key="eye"
-                        initial={{ scale: 0.25 }}
+                        initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        exit={{ scale: 0.25 }}
+                        exit={{ scale: 0 }}
                         transition={{ duration: 0.25 }}
-                        style={{ display: "inline-flex" }}
                       >
                         <EyeIcon size="1rem" strokeWidth="0.1rem" />
                       </motion.span>
@@ -90,6 +93,13 @@ export default function ({
             );
           })}
         </ListboxSection>
+        <ListboxItem
+          href={`#${anchors[0].identifier}`}
+          endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
+          onPress={() => setIdentifier(anchors[0].identifier)}
+        >
+          Back to Top
+        </ListboxItem>
       </Listbox>
     </Skeleton>
   );

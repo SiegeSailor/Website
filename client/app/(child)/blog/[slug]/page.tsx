@@ -56,7 +56,7 @@ export default async function ({
         <div className={clsx("md:col-span-8")}>
           <div
             id={IDENTIFIER}
-            className={clsx("max-h-[calc(100vh-12rem)]", "overflow-y-auto")}
+            className={clsx("max-h-[calc(100vh-12rem)] overflow-y-auto")}
           >
             <div className="flex flex-col gap-2 mb-12">
               <Heading level={1} id={getSlugByTitle(metadata.title)}>
@@ -91,9 +91,7 @@ export default async function ({
         </div>
         <div className={clsx("hidden md:block md:col-span-4")}>
           <Card shadow="sm">
-            <div
-              className={clsx("max-h-[calc(100vh-12rem)]", "overflow-y-auto")}
-            >
+            <div className={clsx("max-h-[calc(100vh-12rem)] overflow-y-auto")}>
               <TableOfContents anchors={metadata.anchors} />
             </div>
           </Card>
