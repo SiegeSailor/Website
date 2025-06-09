@@ -53,7 +53,7 @@ const COLOR_FRAME: Record<
   success:
     "bg-green-50 border-green-300 dark:bg-green-950 dark:border-green-700",
   warning:
-    "bg-yellow-50 border-yellow-300 dark:bg-yellow-950 dark:border-yellow-700",
+    "bg-orange-50 border-orange-300 dark:bg-orange-950 dark:border-orange-700",
 };
 
 const COLOR_COLOR: Record<
@@ -65,7 +65,7 @@ const COLOR_COLOR: Record<
   primary: "text-blue-500 dark:text-blue-400",
   secondary: "text-gray-500 dark:text-gray-400",
   success: "text-green-500 dark:text-green-400",
-  warning: "text-yellow-500 dark:text-yellow-400",
+  warning: "text-orange-500 dark:text-orange-400",
 };
 
 export default function ({
@@ -84,7 +84,7 @@ export default function ({
       className={clsx(
         "rounded-md p-4",
         COLOR_FRAME[color],
-        "border-2",
+        "border-1",
         className
       )}
     >

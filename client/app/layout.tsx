@@ -5,7 +5,6 @@ import "highlight.js/styles/atom-one-dark.css";
 
 import "@/style/global.css";
 import { generateTitle } from "@/helper/utility";
-import { ScrollShadow } from "@heroui/react";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
 import clsx from "clsx";
