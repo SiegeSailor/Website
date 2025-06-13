@@ -30,12 +30,11 @@ export default function ({ className }: Readonly<{ className?: string }>) {
                 timePause={2000}
               />
             </span>
-            <span>Engineer</span>
           </span>
-          <span className="text-nowrap">
-            at
+          <span>
+            <span className="pr-3">Engineer at</span>
             <Link
-              className="px-2 text-2xl sm:text-3xl text-default-600"
+              className="text-2xl sm:text-3xl text-default-600"
               isExternal
               showAnchorIcon
               underline="always"

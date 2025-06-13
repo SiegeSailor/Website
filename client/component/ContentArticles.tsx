@@ -12,7 +12,7 @@ export default async function () {
       <div className="flex flex-col gap-2 mb-12">
         <h4
           className={clsx(
-            "text-3xl sm:text-4xl",
+            "text-2xl sm:text-3xl",
             "font-light text-default-600",
             "w-full",
             "text-left"
@@ -20,7 +20,7 @@ export default async function () {
         >
           Let's Talk About Tech
         </h4>
-        <p className="text-lg text-default-400">
+        <p className="text-medium text-default-400">
           Here, I share real experiences from my journey in software
           engineering—lessons learned, challenges faced, and thoughts on the
           ever-changing world of technology.
