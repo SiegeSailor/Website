@@ -36,8 +36,8 @@ const COLUMNS: {
   { key: "status", label: "Status", isSortable: false },
   { key: "category", label: "Category", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
+  { key: "minutes", label: "Read Time", isSortable: true },
   { key: "technologies", label: "Technologies", isSortable: false },
-  { key: "minutes", label: "Read Minutes", isSortable: true },
 ] as const;
 
 export default function ({
@@ -188,6 +188,9 @@ export default function ({
         case "title":
           const title = article.metadata[keyColumn];
           return <Link href={`/blog/${article.metadata.date}`}>{title}</Link>;
+        case "minutes":
+          const minutes = article.metadata[keyColumn];
+          return <div>{minutes} Minutes</div>;
         default:
           return <div>{String(article.metadata[keyColumn])}</div>;
       }

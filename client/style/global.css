@@ -11,3 +11,18 @@
     outline: none;
   }
 }
+
+@layer components {
+  .markdown-table {
+    @apply my-4 text-left text-medium border-separate border-spacing-0 border-1 rounded-md border-gray-300 dark:border-gray-700;
+  }
+  .markdown-table th {
+    @apply p-4 font-semibold border-separate border-spacing-0 border-b-1 border-r-1 first:rounded-tl-md last:rounded-tr-md last:border-r-0 border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-950;
+  }
+  .markdown-table td {
+    @apply p-4 text-nowrap border-separate border-spacing-0 border-b-1 border-r-1 first:rounded-tl-md last:rounded-tr-md last:border-r-0 border-gray-300 dark:border-gray-700;
+  }
+  .markdown-table tr:last-child td {
+    @apply border-b-0;
+  }
+}
