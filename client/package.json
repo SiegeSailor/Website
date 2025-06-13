@@ -38,8 +38,8 @@
   "name": "client",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "start": "next start",
+    "build": "next build --turbopack",
+    "start": "next start --turbopack",
     "watch": "next dev"
   },
   "version": "1.0.0"
