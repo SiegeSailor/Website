@@ -46,7 +46,7 @@ export default async function ({
   const { metadata, content } = await getArticleByDate(slug);
 
   return (
-    <section className={clsx("max-w-[880px] mx-auto p-4")}>
+    <section className={clsx("max-w-[1080px] mx-auto p-4")}>
       <div
         className={clsx(
           "gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1",
@@ -64,7 +64,7 @@ export default async function ({
               </Heading>
               <div
                 className={clsx(
-                  "flex gap-2 items-center",
+                  "flex gap-1 items-center",
                   "text-nowrap font-normal text-sm",
                   "opacity-60",
                   "mb-2"

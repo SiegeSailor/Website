@@ -51,8 +51,8 @@ export default function ({
           href={breadcrumb.href}
           classNames={{
             item: clsx(
-              "whitespace-nowrap text-ellipsis block overflow-hidden",
-              "max-w-36 sm:max-w-64 md:max-w-72"
+              "block truncate",
+              "max-w-40 sm:max-w-[28rem] md:max-w-[36rem] lg:max-w-[52rem]"
             ),
           }}
         >

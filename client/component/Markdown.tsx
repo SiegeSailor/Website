@@ -2,6 +2,7 @@ import { Code } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 import rehypeSlug from "rehype-slug";
+import remarkGFM from "remark-gfm";
 
 import { remarkRehypeCallout } from "@/helper/plugin";
 import Callout from "@/component/Callout";
@@ -12,13 +13,18 @@ import Mermaid from "@/component/Mermaid";
 
 const SPACE = "mb-4 last:mb-0";
 
+const TABLE_CLASS = `
+   w-full border-collapse my-4 text-left text-medium overflow-x-auto
+  [th]:border-b [th]:border-default-300 [th]:px-4 [th]:py-2 [th]:font-semibold [th]:bg-default-100
+  [td]:border-b [td]:border-default-200 [td]:px-4 [td]:py-2
+  `;
 export default function ({ source }: Readonly<{ source: string }>) {
   return (
     <MDXRemote
       source={source}
       options={{
         mdxOptions: {
-          remarkPlugins: [remarkRehypeCallout],
+          remarkPlugins: [remarkGFM, remarkRehypeCallout],
           rehypePlugins: [rehypeSlug],
         },
       }}
@@ -119,6 +125,17 @@ export default function ({ source }: Readonly<{ source: string }>) {
             />
           );
         },
+        table: (element) => (
+          <table
+            {...element}
+            className={clsx(element.className, TABLE_CLASS)}
+          />
+        ),
+        thead: (element) => <thead {...element} />,
+        tbody: (element) => <tbody {...element} />,
+        tr: (element) => <tr {...element} />,
+        th: (element) => <th {...element} />,
+        td: (element) => <td {...element} />,
       }}
     />
   );
