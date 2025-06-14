@@ -25,10 +25,12 @@ export default function ({
       onPress={() => router.push(`/blog/${article.metadata.date}`)}
     >
       <div className="flex flex-nowrap justify-between items-center whitespace-nowrap p-4">
-        <p className="text-left w-[5.25rem] text-ellipsis overflow-hidden">
+        <p className={clsx("text-left", "truncate w-[5.25rem]")}>
           {article.metadata.category}
         </p>
-        <h3 className="text-left text-medium text-ellipsis overflow-hidden w-1/2">
+        <h3
+          className={clsx("text-left text-medium font-light", "truncate w-1/2")}
+        >
           {article.metadata.title}
         </h3>
         <p className={clsx("opacity-60 text-sm text-right", "w-1/4")}>
