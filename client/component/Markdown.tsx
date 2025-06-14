@@ -103,7 +103,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "font-normal text-medium leading-6",
+              "font-light text-medium leading-6",
               SPACE
             )}
           />

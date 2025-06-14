@@ -35,8 +35,8 @@ export async function getArticleByFilename(filename: string) {
     const { content: source, data } = matter(fileContents);
 
     const sources = source.split("<!-- description -->");
-    const description = sources[0].trim();
-    const content = sources.join("").trim();
+    const description = sources[0]?.trim();
+    const content = sources[1]?.trim();
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date))
       throw new Error("Date format must be YYYY-MM-DD");
@@ -71,7 +71,7 @@ export async function getArticleByFilename(filename: string) {
         category: data.category,
         date,
         description,
-        minutes: Math.ceil((content.split(" ").length + 1) / 200),
+        minutes: Math.ceil((content.split(" ").length + 1) / 175),
         status,
         technologies,
         title: data.title,

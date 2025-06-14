@@ -1,4 +1,4 @@
-import { Card } from "@heroui/react";
+import { Card, Divider } from "@heroui/react";
 import { Metadata } from "next";
 import clsx from "clsx";
 
@@ -58,7 +58,7 @@ export default async function ({
             id={IDENTIFIER}
             className={clsx("max-h-[calc(100vh-12rem)] overflow-y-auto")}
           >
-            <div className="flex flex-col gap-2 mb-12">
+            <div className="flex flex-col gap-2 mb-16">
               <Heading level={1} id={getSlugByTitle(metadata.title)}>
                 {metadata.title}
               </Heading>
@@ -66,8 +66,7 @@ export default async function ({
                 className={clsx(
                   "flex gap-1 items-center",
                   "text-nowrap font-normal text-sm",
-                  "opacity-60",
-                  "mb-2"
+                  "opacity-60"
                 )}
               >
                 <span>{metadata.date}</span>·
@@ -82,6 +81,11 @@ export default async function ({
                 }}
                 propsIcon={{ color: "default" }}
               />
+              <Divider className="mt-4" />
+              <div className="my-4">
+                <Markdown source={metadata.description} />
+              </div>
+              <Divider />
             </div>
 
             <article>
