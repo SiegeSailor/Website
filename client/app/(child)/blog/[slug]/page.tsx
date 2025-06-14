@@ -53,7 +53,7 @@ export default async function ({
           "w-full"
         )}
       >
-        <div className={clsx("md:col-span-8")}>
+        <div className={clsx("md:col-span-8 lg:col-span-9")}>
           <div
             id={IDENTIFIER}
             className={clsx("max-h-[calc(100vh-12rem)] overflow-y-auto")}
@@ -89,7 +89,7 @@ export default async function ({
             </article>
           </div>
         </div>
-        <div className={clsx("hidden md:block md:col-span-4")}>
+        <div className={clsx("hidden md:block md:col-span-4 lg:col-span-3")}>
           <Card shadow="sm">
             <div className={clsx("max-h-[calc(100vh-12rem)] overflow-y-auto")}>
               <TableOfContents anchors={metadata.anchors} />

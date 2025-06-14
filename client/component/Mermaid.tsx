@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useId, useState } from "react";
-import { Skeleton, ScrollShadow } from "@heroui/react";
+import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
@@ -33,16 +33,17 @@ export default ({ source }: { source: string }) => {
   }, []);
 
   return (
-    <Skeleton isLoaded={isMounted}>
-      <ScrollShadow
-        className={clsx(
-          "rounded-medium h-96 p-4",
-          "bg-default-100 dark:bg-default-50"
-        )}
-        size={120}
-      >
-        <div id={identity} ref={refMermaid} />
-      </ScrollShadow>
+    <Skeleton isLoaded={isMounted} className={clsx("rounded-md")}>
+      <div className={clsx("bg-default-100 dark:bg-default-50", "rounded-md")}>
+        <div
+          id={identity}
+          ref={refMermaid}
+          className={clsx(
+            "flex items-center justify-center",
+            "h-96 w-full overflow-auto"
+          )}
+        />
+      </div>
     </Skeleton>
   );
 };
