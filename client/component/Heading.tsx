@@ -2,8 +2,8 @@ import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
 import clsx from "clsx";
 
-const LEVEL_TEXT: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
-  1: "text-6xl",
+const LEVEL_CLASSNAMES: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
+  1: "text-6xl leading-[1.05]",
   2: "text-4xl",
   3: "text-3xl",
   4: "text-2xl",
@@ -15,13 +15,13 @@ export default function ({
   level,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement> &
-  Readonly<{ level: keyof typeof LEVEL_TEXT }>) {
+  Readonly<{ level: keyof typeof LEVEL_CLASSNAMES }>) {
   return createElement(
     `h${level}`,
     {
       ...props,
       className: clsx(
-        LEVEL_TEXT[level],
+        LEVEL_CLASSNAMES[level],
         "font-light",
         "mb-4 last:mb-0 mt-16 first:mt-0",
         "hover:text-default-500",
