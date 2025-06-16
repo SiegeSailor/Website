@@ -108,18 +108,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             )}
           />
         ),
-        a: (element) => {
-          const isExternal = element.href?.startsWith("http");
-          return (
-            <Link
-              {...element}
-              isExternal={isExternal}
-              showAnchorIcon={isExternal}
-              underline="always"
-              target={isExternal ? "_blank" : "_self"}
-            />
-          );
-        },
+        a: (element) => <Link {...element} />,
         table: (element) => (
           <ScrollShadow orientation="horizontal" size={0}>
             <table

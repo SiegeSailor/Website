@@ -39,9 +39,7 @@ export default function ({
                 <h4 className="text-2xl sm:text-xl md:text-2xl font-medium">
                   {item.title}
                 </h4>
-                <Link href={item.href} isExternal>
-                  Read More
-                </Link>
+                <Link href={item.href}>Read More</Link>
               </div>
               <ScrollShadow className="h-full sm:h-16 md:h-28">
                 <p className={clsx("text-medium font-normal text-default-400")}>

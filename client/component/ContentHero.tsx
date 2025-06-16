@@ -35,13 +35,11 @@ export default function ({ className }: Readonly<{ className?: string }>) {
             <span className="pr-3">Engineer at</span>
             <Link
               className="text-2xl sm:text-3xl text-default-600"
-              isExternal
-              showAnchorIcon
-              underline="always"
               href="https://www.coopersurgical.com/"
             >
-              CooperSurgical.
+              CooperSurgical
             </Link>
+            .
           </span>
         </h2>
       </div>
