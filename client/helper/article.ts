@@ -71,7 +71,7 @@ export async function getArticleByFilename(filename: string) {
         category: data.category,
         date,
         description,
-        minutes: Math.ceil((content.split(" ").length + 1) / 175),
+        minutes: Math.ceil((source.split(" ").length + 1) / 150),
         status,
         technologies,
         title: data.title,

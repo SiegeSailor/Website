@@ -40,11 +40,10 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 export const TECHNOLOGY_ICON = {
-  "Next.js": SiNextdotjs,
-  Go: SiGo,
   ".NET": SiDotnet,
   "C++": SiCplusplus,
   "Express.js": SiExpress,
+  "Next.js": SiNextdotjs,
   "React.js": SiReact,
   "Tailwind CSS": SiTailwindcss,
   "Three.js": SiThreedotjs,
@@ -60,6 +59,7 @@ export const TECHNOLOGY_ICON = {
   Git: SiGit,
   GitHub: SiGithub,
   GitLab: SiGitlab,
+  Go: SiGo,
   Gulp: SiGulp,
   HTML: SiHtml5,
   JavaScript: SiJavascript,
