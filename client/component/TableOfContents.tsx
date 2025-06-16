@@ -10,6 +10,15 @@ import { getAnchorsByContent } from "@/helper/article";
 
 export const IDENTIFIER = "table-of-contents" as const;
 
+const LEVEL_PADDING: Record<number, string> = {
+  1: "pl-2",
+  2: "pl-4",
+  3: "pl-8",
+  4: "pl-10",
+  5: "pl-12",
+  6: "pl-14",
+};
+
 export default function ({
   anchors,
   propsContainer,
@@ -75,16 +84,7 @@ export default function ({
                     )}
                   </AnimatePresence>
                 }
-                className={clsx(
-                  {
-                    1: "pl-2",
-                    2: "pl-4",
-                    3: "pl-8",
-                    4: "pl-10",
-                    5: "pl-12",
-                    6: "pl-14",
-                  }[anchor.level]
-                )}
+                className={clsx(LEVEL_PADDING[anchor.level])}
                 key={anchor.identifier}
                 href={`#${anchor.identifier}`}
               >

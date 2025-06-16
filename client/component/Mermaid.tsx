@@ -5,7 +5,16 @@ import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-mermaid.initialize({ theme: "neutral" });
+mermaid.initialize({
+  theme: "neutral",
+  fontFamily: "Roboto",
+  fontSize: 14,
+  gitGraph: {
+    showBranches: true,
+    showCommitLabel: true,
+    parallelCommits: true,
+  },
+});
 
 export default ({ source }: { source: string }) => {
   const [isMounted, setIsMounted] = useState(false);

@@ -12,6 +12,12 @@
   }
 }
 
+@layer base {
+  img {
+    @apply rounded-md w-full grayscale brightness-90 contrast-75;
+  }
+}
+
 @layer components {
   .markdown-table {
     @apply my-4 text-left text-medium;

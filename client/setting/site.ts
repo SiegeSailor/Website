@@ -5,15 +5,14 @@ import { Chip } from "@heroui/react";
 import { getEntries } from "@/helper/utility";
 import { TECHNOLOGY_ICON } from "@/setting/icon";
 
-export const STATUS = ["Draft", "Writing", "Published", "Archived"] as const;
+export const STATUS = ["Draft", "Ready", "Archived"] as const;
 export const STATUS_SET = new Set(STATUS);
 export const STATUS_COLOR: Record<
   string,
   ComponentProps<typeof Chip>["color"]
 > = {
   Draft: "warning",
-  Writing: "success",
-  Published: "primary",
+  Ready: "success",
   Archived: "default",
 };
 

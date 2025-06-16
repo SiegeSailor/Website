@@ -82,7 +82,7 @@ export default async function ({
                 propsIcon={{ color: "default" }}
               />
               <Divider className="mt-4" />
-              <div className="my-4">
+              <div className="my-2">
                 <Markdown source={metadata.description} />
               </div>
               <Divider />
