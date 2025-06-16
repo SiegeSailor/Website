@@ -14,7 +14,8 @@
 
 @layer base {
   img {
-    @apply rounded-md w-full grayscale brightness-90 contrast-75;
+    @apply rounded-md w-full;
+    @apply grayscale shadow-md;
   }
 }
 

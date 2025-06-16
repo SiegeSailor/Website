@@ -69,6 +69,10 @@ export default function ({
           {anchors.map((anchor) => {
             return (
               <ListboxItem
+                classNames={{
+                  base: clsx(LEVEL_PADDING[anchor.level]),
+                  title: "font-medium",
+                }}
                 endContent={
                   <AnimatePresence>
                     {anchor.identifier === identifier && (
@@ -84,22 +88,20 @@ export default function ({
                     )}
                   </AnimatePresence>
                 }
-                className={clsx(LEVEL_PADDING[anchor.level])}
-                key={anchor.identifier}
                 href={`#${anchor.identifier}`}
-              >
-                {anchor.title}
-              </ListboxItem>
+                key={anchor.identifier}
+                title={anchor.title}
+              />
             );
           })}
         </ListboxSection>
         <ListboxItem
-          href={`#${anchors[0].identifier}`}
+          classNames={{ title: "font-medium" }}
           endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
+          href={`#${anchors[0].identifier}`}
           onPress={() => setIdentifier(anchors[0].identifier)}
-        >
-          Back to Top
-        </ListboxItem>
+          title="Back to Top"
+        />
       </Listbox>
     </Skeleton>
   );

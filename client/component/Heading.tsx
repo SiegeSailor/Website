@@ -24,11 +24,10 @@ export default function ({
         LEVEL_CLASSNAMES[level],
         "font-light",
         "mb-4 last:mb-0 mt-16 first:mt-0",
-        "hover:text-default-500",
         props.className
       ),
     },
-    <a href={`#${props.id}`}>
+    <a href={`#${props.id}`} className="hover:text-default-500">
       <span className="pr-2">{props.children}</span>
       <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
     </a>

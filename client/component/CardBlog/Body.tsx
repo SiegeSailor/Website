@@ -38,7 +38,10 @@ export default function ({
       <Image
         alt="Photo by Kevin Ku on Unsplash"
         as={NextImage}
-        className={clsx("z-0 w-full h-full object-cover")}
+        className={clsx(
+          "z-0 w-full h-full object-cover",
+          "brightness-75 contrast-100"
+        )}
         src="/image/Glasses-Code.jpg"
         loading="eager"
         priority
