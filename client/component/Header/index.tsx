@@ -16,7 +16,11 @@ import ThemeSwitch from "@/component/ThemeSwitch";
 
 export default async function () {
   return (
-    <Navbar position="sticky" maxWidth="md" className="shadow-sm">
+    <Navbar
+      position="sticky"
+      maxWidth="md"
+      className="border-b-1 border-default-300"
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-center items-center gap-1" href="/">

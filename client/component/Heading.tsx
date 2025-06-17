@@ -27,7 +27,10 @@ export default function ({
         props.className
       ),
     },
-    <a href={`#${props.id}`} className="hover:text-default-500">
+    <a
+      href={`#${props.id}`}
+      className="hover:text-default-700 dark:hover:text-default-600"
+    >
       <span className="pr-2">{props.children}</span>
       <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
     </a>
