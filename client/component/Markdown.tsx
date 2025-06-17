@@ -11,7 +11,7 @@ import Heading from "@/component/Heading";
 import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
 
-const SPACE = "mb-4 last:mb-0";
+const SPACE = "my-4 first:mt-0 last:mb-0";
 
 export default function ({ source }: Readonly<{ source: string }>) {
   return (
@@ -75,7 +75,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
         li: (element) => (
           <li
             {...element}
-            className={clsx(element.className, "text-medium mb-2")}
+            className={clsx(element.className, "text-medium mb-2 last:mb-0")}
           />
         ),
         code: (element) => (

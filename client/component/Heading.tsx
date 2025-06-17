@@ -23,7 +23,7 @@ export default function ({
       className: clsx(
         LEVEL_CLASSNAMES[level],
         "font-light",
-        "mb-4 last:mb-0 mt-16 first:mt-0",
+        "mb-4 last:mb-0 mt-12 first:mt-0",
         props.className
       ),
     },
