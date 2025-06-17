@@ -40,7 +40,7 @@
   "scripts": {
     "build": "next build --turbopack",
     "start": "next start --turbopack",
-    "watch": "next dev"
+    "watch": "NODE_OPTIONS='--inspect' next dev"
   },
   "version": "1.0.0"
 }
