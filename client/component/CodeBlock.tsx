@@ -13,7 +13,7 @@ const LEVEL_CLASSNAMES: { [key in "error" | "highlight"]: string } = {
   highlight: "bg-default-700 dark:bg-default-300/50",
 } as const;
 
-function parse(content: string) {
+function parseRaw(content: string) {
   const lines = content.split("\n");
 
   const result: {
@@ -32,6 +32,7 @@ function parse(content: string) {
   };
 
   for (const line of lines) {
+    let isHandled = false;
     getKeys(LEVEL_CLASSNAMES).forEach((level) => {
       if (line.includes(`${level}-start`)) {
         if (buffer.length > 0) {
@@ -39,6 +40,7 @@ function parse(content: string) {
           buffer = [];
         }
         state.within[level] = true;
+        isHandled = true;
         return;
       }
 
@@ -48,22 +50,29 @@ function parse(content: string) {
           buffer = [];
         }
         state.within[level] = false;
+        isHandled = true;
         return;
       }
 
       if (line.includes(`${level}-next-line`)) {
+        if (buffer.length > 0) {
+          result.push({ lines: buffer });
+          buffer = [];
+        }
         state.next[level] = true;
+        isHandled = true;
         return;
       }
 
       if (state.next[level]) {
         result.push({ lines: [line], level });
         state.next[level] = false;
+        isHandled = true;
         return;
       }
     });
 
-    buffer.push(line);
+    if (!isHandled) buffer.push(line);
   }
 
   if (buffer.length > 0) {
@@ -99,6 +108,8 @@ export default function ({
     }
   }, []);
 
+  const sections = parseRaw(children);
+
   return (
     <Skeleton
       className={clsx("rounded-medium", className)}
@@ -113,22 +124,28 @@ export default function ({
           "hljs language-stylus"
         )}
       >
-        {parse(children).map((value, index) => {
+        {sections.map((section, index) => {
+          const isLastSection = index === sections.length - 1;
+
           return (
             <div
               ref={(element) => {
-                if (refItems.current === null) {
-                  refItems.current = [];
-                }
+                if (refItems.current === null) refItems.current = [];
                 refItems.current[index] = element;
               }}
               key={index}
               className={clsx(
-                value.level ? LEVEL_CLASSNAMES[value.level] : "bg-transparent",
+                section.level
+                  ? LEVEL_CLASSNAMES[section.level]
+                  : "bg-transparent",
                 "whitespace-pre px-6"
               )}
             >
-              {value.lines.join("\n")}
+              {section.lines.map((line, index) => {
+                const isLastLine = index === section.lines.length - 1;
+
+                return isLastSection && isLastLine ? line : line + "\n";
+              })}
             </div>
           );
         })}
