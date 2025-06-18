@@ -1,89 +1,79 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import { Skeleton } from "@heroui/react";
-import { useRef, useEffect, useState, ReactNode } from "react";
 import clsx from "clsx";
 import highlight from "highlight.js";
 
+import { getKeys, getValues } from "@/helper/utility";
 import ButtonCopy from "@/component/ButtonCopy";
+
+const LEVEL_CLASSNAMES: { [key in "error" | "highlight"]: string } = {
+  error: "bg-red-900/50",
+  highlight: "bg-default-700 dark:bg-default-300/50",
+} as const;
 
 function parse(content: string) {
   const lines = content.split("\n");
 
   const result: {
     lines: string[];
-    isHighlighted: boolean;
-    isErrored: boolean;
+    level?: keyof typeof LEVEL_CLASSNAMES;
   }[] = [];
   let buffer: string[] = [];
-  let isInHighlight = false;
-  let isHighlighting = false;
-  let isInError = false;
-  let isErroring = false;
+
+  const state: {
+    [key in "within" | "next"]: {
+      [key in keyof typeof LEVEL_CLASSNAMES]: boolean;
+    };
+  } = {
+    within: { error: false, highlight: false },
+    next: { error: false, highlight: false },
+  };
 
   for (const line of lines) {
-    if (line.includes("highlight-start")) {
-      if (buffer.length > 0) {
-        result.push({ lines: buffer, isHighlighted: false, isErrored: false });
-        buffer = [];
+    getKeys(LEVEL_CLASSNAMES).forEach((level) => {
+      if (line.includes(`${level}-start`)) {
+        if (buffer.length > 0) {
+          result.push({ lines: buffer });
+          buffer = [];
+        }
+        state.within[level] = true;
+        return;
       }
-      isInHighlight = true;
-      continue;
-    }
-    if (line.includes("highlight-end")) {
-      if (buffer.length > 0) {
-        result.push({ lines: buffer, isHighlighted: true, isErrored: false });
-        buffer = [];
-      }
-      isInHighlight = false;
-      continue;
-    }
-    if (line.includes("highlight-next-line")) {
-      isHighlighting = true;
-      continue;
-    }
 
-    if (line.includes("error-start")) {
-      if (buffer.length > 0) {
-        result.push({ lines: buffer, isHighlighted: false, isErrored: false });
-        buffer = [];
+      if (line.includes(`${level}-end`)) {
+        if (buffer.length > 0) {
+          result.push({ lines: buffer, level });
+          buffer = [];
+        }
+        state.within[level] = false;
+        return;
       }
-      isInError = true;
-      continue;
-    }
-    if (line.includes("error-end")) {
-      if (buffer.length > 0) {
-        result.push({ lines: buffer, isHighlighted: false, isErrored: true });
-        buffer = [];
-      }
-      isInError = false;
-      continue;
-    }
-    if (line.includes("error-next-line")) {
-      isErroring = true;
-      continue;
-    }
 
-    if (isHighlighting) {
-      result.push({ lines: [line], isHighlighted: true, isErrored: false });
-      isHighlighting = false;
-      continue;
-    }
-    if (isErroring) {
-      result.push({ lines: [line], isHighlighted: false, isErrored: true });
-      isErroring = false;
-      continue;
-    }
+      if (line.includes(`${level}-next-line`)) {
+        state.next[level] = true;
+        return;
+      }
+
+      if (state.next[level]) {
+        result.push({ lines: [line], level });
+        state.next[level] = false;
+        return;
+      }
+    });
 
     buffer.push(line);
   }
 
-  if (buffer.length > 0)
+  if (buffer.length > 0) {
     result.push({
       lines: buffer,
-      isHighlighted: isInHighlight,
-      isErrored: isInError,
+      level: getKeys(LEVEL_CLASSNAMES).find((key) =>
+        getValues(state).some((values) => values[key])
+      ),
     });
+  }
 
   return result;
 }
@@ -134,11 +124,7 @@ export default function ({
               }}
               key={index}
               className={clsx(
-                value.isErrored
-                  ? "bg-red-900/50"
-                  : value.isHighlighted
-                  ? "bg-default-700 dark:bg-default-300/50"
-                  : "bg-transparent",
+                value.level ? LEVEL_CLASSNAMES[value.level] : "bg-transparent",
                 "whitespace-pre px-6"
               )}
             >

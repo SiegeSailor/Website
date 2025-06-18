@@ -9,8 +9,16 @@ export function getCSSVariable(variable: string) {
   return getComputedStyle(root).getPropertyValue(variable);
 }
 
-export function getEntries<T extends object>(obj: T) {
-  return Object.entries(obj) as {
+export function getEntries<T extends object>(entity: T) {
+  return Object.entries(entity) as {
     [K in keyof T]-?: [K, T[K]];
   }[keyof T][];
+}
+
+export function getValues<T extends object>(entity: T) {
+  return Object.values(entity) as T[keyof T][];
+}
+
+export function getKeys<T extends object>(entity: T) {
+  return Object.keys(entity) as (keyof T)[];
 }
