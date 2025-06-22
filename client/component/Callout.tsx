@@ -77,7 +77,7 @@ export default function ({
   color: NonNullable<ComponentProps<typeof Code>["color"]>;
   children: ReactNode;
   className?: string;
-  title: string;
+  title?: string;
 }>) {
   return (
     <div
@@ -98,7 +98,7 @@ export default function ({
           size: "1.25rem",
           className: COLOR_COLOR[color],
         })}
-        <div>{title ? title : COLOR_TITLE[color]}</div>
+        <div>{title || COLOR_TITLE[color]}</div>
       </div>
 
       {children}
