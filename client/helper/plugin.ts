@@ -1,24 +1,32 @@
-import { Plugin } from "unified";
-import { Root, RootContent, Text } from "mdast";
 import { fromMarkdown } from "mdast-util-from-markdown";
+import { Plugin } from "unified";
+import { Root, RootContent } from "mdast";
 import { toMarkdown } from "mdast-util-to-markdown";
 
 export const remarkRehypeCallout: Plugin<[], Root> = () => {
-  function createCallout() {
-    return {
-      type: "paragraph",
-      data: {
-        hName: "callout",
-        hProperties: {
-          color: "",
-          title: "",
-        },
-      },
-      children: [] as RootContent[],
+  const createCallout = (): {
+    type: "paragraph";
+    data: {
+      hName: "callout";
+      hProperties: {
+        color: string;
+        title: string;
+      };
     };
-  }
+    children: RootContent[];
+  } => ({
+    type: "paragraph",
+    data: {
+      hName: "callout",
+      hProperties: {
+        color: "",
+        title: "",
+      },
+    },
+    children: [],
+  });
 
-  function nodeToMarkdown(node: any): string {
+  const convertNodeMarkdown = (node: any): string => {
     try {
       return toMarkdown(node);
     } catch {
@@ -28,32 +36,57 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
         return `\`\`\`${node.lang || ""}\n${node.value}\n\`\`\``;
       if (node.type === "image") return `![${node.alt || ""}](${node.url})`;
       if (node.type === "link")
-        return `[${nodeToMarkdown({
+        return `[${convertNodeMarkdown({
           type: "paragraph",
           children: node.children,
         })}](${node.url})`;
       if (node.type === "strong")
-        return `**${nodeToMarkdown({
+        return `**${convertNodeMarkdown({
           type: "paragraph",
           children: node.children,
         })}**`;
       if (node.type === "emphasis")
-        return `*${nodeToMarkdown({
+        return `*${convertNodeMarkdown({
           type: "paragraph",
           children: node.children,
         })}*`;
-      if (node.children) {
+      if (node.children)
         return node.children
-          .map((child: any) => nodeToMarkdown(child))
+          .map((child: any) => convertNodeMarkdown(child))
           .join("");
-      }
       return "";
     }
-  }
+  };
 
-  function reconstructMarkdown(nodes: any[]): string {
-    return nodes.map((node) => nodeToMarkdown(node)).join("\n\n");
-  }
+  const reconstructMarkdown = (nodes: any[]): string =>
+    nodes.map((node) => convertNodeMarkdown(node)).join("\n\n");
+
+  const parseContent = (content: string): RootContent[] => {
+    try {
+      return fromMarkdown(content).children;
+    } catch {
+      return [
+        {
+          type: "paragraph",
+          children: [{ type: "text", value: content }],
+        } as RootContent,
+      ];
+    }
+  };
+
+  const seeIsContentLike = (text: string): boolean =>
+    text.length > 50 ||
+    text.endsWith(":") ||
+    text.includes("*") ||
+    text.includes("`");
+
+  const addContent = (content: string, calloutNodes: any[]): void => {
+    if (!content) return;
+
+    if (content.startsWith(":::")) return;
+
+    calloutNodes.push(...parseContent(content));
+  };
 
   return (tree: Root) => {
     const childrenTree: typeof tree.children = [];
@@ -61,13 +94,13 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
     let callout = createCallout();
     let calloutNodes: any[] = [];
 
-    function flush() {
+    const flushCallout = (): void => {
       if (calloutNodes.length > 0) {
         const markdownContent = reconstructMarkdown(calloutNodes);
         try {
           const parsedContent = fromMarkdown(markdownContent);
           callout.children.push(...parsedContent.children);
-        } catch (error) {
+        } catch {
           callout.children.push(...calloutNodes);
         }
       }
@@ -79,11 +112,40 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       isInCallout = false;
       callout = createCallout();
       calloutNodes = [];
-    }
+    };
 
-    for (let i = 0; i < tree.children.length; i++) {
-      const node = tree.children[i];
+    const processSingleCallout = (match: RegExpMatchArray): void => {
+      const singleCallout = createCallout();
+      singleCallout.data.hProperties.color = match[1];
+      singleCallout.data.hProperties.title = match[2]?.trim() || "";
 
+      const content = match[3].trim();
+      if (content) {
+        singleCallout.children.push(...parseContent(content));
+      }
+
+      childrenTree.push(singleCallout as (typeof tree.children)[0]);
+    };
+
+    const processCalloutStart = (match: RegExpMatchArray): void => {
+      const calloutType = match[1];
+      const potentialTitle = match[2]?.trim();
+      const contentAfterNewline = match[3]?.trim();
+
+      isInCallout = true;
+      callout.data.hProperties.color = calloutType;
+
+      if (potentialTitle && seeIsContentLike(potentialTitle)) {
+        callout.data.hProperties.title = "";
+        calloutNodes.push(...parseContent(potentialTitle));
+      } else {
+        callout.data.hProperties.title = potentialTitle || "";
+      }
+
+      addContent(contentAfterNewline, calloutNodes);
+    };
+
+    for (const node of tree.children) {
       let nodeText = "";
       let isCalloutMarker = false;
 
@@ -95,105 +157,32 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
         /^:::([^\s\n]+)(?:\s+([^\n]*))?\n([\s\S]*?)\n:::\s*$/
       );
       if (singleCalloutMatch) {
-        const singleCallout = createCallout();
-        singleCallout.data.hProperties.color = singleCalloutMatch[1];
-        singleCallout.data.hProperties.title =
-          singleCalloutMatch[2]?.trim() || "";
-
-        const content = singleCalloutMatch[3].trim();
-        if (content) {
-          try {
-            const parsedContent = fromMarkdown(content);
-            singleCallout.children.push(...parsedContent.children);
-          } catch {
-            singleCallout.children.push({
-              type: "paragraph",
-              children: [{ type: "text", value: content }],
-            } as RootContent);
-          }
-        }
-
-        childrenTree.push(singleCallout as (typeof tree.children)[0]);
+        processSingleCallout(singleCalloutMatch);
         continue;
       }
 
       const startMatch = nodeText.match(
-        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n?(.*)$/s
+        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n?([\s\S]*)$/
       );
-
       if (startMatch) {
-        const calloutType = startMatch[1];
-        const potentialTitle = startMatch[2]?.trim();
-        const contentAfterNewline = startMatch[3]?.trim();
-
-        isInCallout = true;
-        callout.data.hProperties.color = calloutType;
-
-        const looksLikeContent =
-          potentialTitle &&
-          (potentialTitle.length > 50 || // Too long for a typical title
-            potentialTitle.endsWith(":") || // Ends with colon (likely content)
-            potentialTitle.includes("*") || // Contains markdown formatting
-            potentialTitle.includes("`")); // Contains inline code
-
-        if (looksLikeContent) {
-          callout.data.hProperties.title = "";
-
-          try {
-            const parsedContent = fromMarkdown(potentialTitle);
-            calloutNodes.push(...parsedContent.children);
-          } catch {
-            calloutNodes.push({
-              type: "paragraph",
-              children: [{ type: "text", value: potentialTitle }],
-            });
-          }
-        } else {
-          callout.data.hProperties.title = potentialTitle || "";
-        }
-
-        if (contentAfterNewline && !contentAfterNewline.startsWith(":::")) {
-          try {
-            const parsedContent = fromMarkdown(contentAfterNewline);
-            calloutNodes.push(...parsedContent.children);
-          } catch {
-            calloutNodes.push({
-              type: "paragraph",
-              children: [{ type: "text", value: contentAfterNewline }],
-            });
-          }
-        }
-
+        processCalloutStart(startMatch);
         isCalloutMarker = true;
       }
 
       if (isInCallout && nodeText.includes(":::")) {
-        const endMatch = nodeText.match(/^(.*?)\s*:::\s*$/s);
+        const endMatch = nodeText.match(/^([\s\S]*?)\s*:::\s*$/);
         if (endMatch) {
-          const contentBeforeEnd = endMatch[1]?.trim();
-          if (contentBeforeEnd) {
-            try {
-              const parsedContent = fromMarkdown(contentBeforeEnd);
-              calloutNodes.push(...parsedContent.children);
-            } catch {
-              calloutNodes.push({
-                type: "paragraph",
-                children: [{ type: "text", value: contentBeforeEnd }],
-              });
-            }
-          }
-
-          flush();
+          addContent(endMatch[1]?.trim(), calloutNodes);
+          flushCallout();
           isCalloutMarker = true;
         }
       }
 
       if (nodeText.trim() === ":::" && isInCallout) {
-        flush();
+        flushCallout();
         isCalloutMarker = true;
       }
 
-      // Handle content
       if (isInCallout && !isCalloutMarker) {
         calloutNodes.push(node);
       } else if (!isCalloutMarker) {
@@ -202,7 +191,7 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
     }
 
     if (isInCallout) {
-      flush();
+      flushCallout();
     }
 
     tree.children = childrenTree;

@@ -84,12 +84,9 @@ export default function ({ source }: Readonly<{ source: string }>) {
             className={clsx(element.className, "py-[0.05rem]")}
           />
         ),
-        callout: (element) => {
-          console.log("Callout Element:", element);
-          return (
-            <Callout {...element} className={clsx(element.className, SPACE)} />
-          );
-        },
+        callout: (element) => (
+          <Callout {...element} className={clsx(element.className, SPACE)} />
+        ),
         pre: (element) => {
           if (element.children.props.className === "language-mermaid")
             return <Mermaid source={element.children.props.children} />;
