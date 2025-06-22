@@ -19,7 +19,7 @@ export default async function () {
     <Navbar
       position="sticky"
       maxWidth="md"
-      className="border-b-1 border-default-300"
+      className="border-b-1 border-default-300 border-opacity-60"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
