@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGFM from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 
-import { remarkRehypeCallout } from "@/helper/plugin";
+import { remarkShowLineNumbers, remarkRehypeCallout } from "@/helper/plugin";
 import Callout from "@/component/Callout";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
@@ -19,7 +19,11 @@ export default function ({ source }: Readonly<{ source: string }>) {
       source={source}
       options={{
         mdxOptions: {
-          remarkPlugins: [remarkGFM, remarkRehypeCallout],
+          remarkPlugins: [
+            remarkGFM,
+            remarkRehypeCallout,
+            remarkShowLineNumbers,
+          ],
           rehypePlugins: [
             rehypeSlug,
             [rehypePrettyCode, { theme: "slack-dark", defaultLang: "shell" }],

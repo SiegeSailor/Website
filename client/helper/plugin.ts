@@ -3,6 +3,16 @@ import { Plugin } from "unified";
 import { Root, RootContent } from "mdast";
 import { toMarkdown } from "mdast-util-to-markdown";
 
+export function remarkShowLineNumbers() {
+  return (tree: Root) => {
+    for (const node of tree.children) {
+      if (node.type === "code") {
+        node.meta = node.meta + (node.meta ? " " : "") + "showLineNumbers";
+      }
+    }
+  };
+}
+
 export const remarkRehypeCallout: Plugin<[], Root> = () => {
   const createCallout = (): {
     type: "paragraph";
