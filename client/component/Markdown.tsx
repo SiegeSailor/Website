@@ -3,10 +3,10 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 import rehypeSlug from "rehype-slug";
 import remarkGFM from "remark-gfm";
+import rehypePrettyCode from "rehype-pretty-code";
 
 import { remarkRehypeCallout } from "@/helper/plugin";
 import Callout from "@/component/Callout";
-import CodeBlock from "@/component/CodeBlock";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
@@ -20,7 +20,10 @@ export default function ({ source }: Readonly<{ source: string }>) {
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGFM, remarkRehypeCallout],
-          rehypePlugins: [rehypeSlug],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypePrettyCode, { theme: "slack-dark", defaultLang: "shell" }],
+          ],
         },
       }}
       components={{
@@ -78,25 +81,32 @@ export default function ({ source }: Readonly<{ source: string }>) {
             className={clsx(element.className, "text-medium mb-2 last:mb-0")}
           />
         ),
-        code: (element) => (
-          <Code
-            {...element}
-            className={clsx(element.className, "py-[0.05rem]")}
-          />
-        ),
         callout: (element) => (
           <Callout {...element} className={clsx(element.className, SPACE)} />
         ),
-        pre: (element) => {
-          if (element.children.props.className === "language-mermaid")
-            return <Mermaid source={element.children.props.children} />;
-
+        code: (element) => {
           return (
-            <CodeBlock
-              {...element.children.props}
-              className={clsx(element.className, SPACE)}
+            <Code
+              {...element}
+              className={clsx(element.className, "py-[0.05rem] !bg-gray-700")}
             />
           );
+        },
+        pre: (element) => {
+          if (element["data-language"] === "mermaid")
+            return (
+              <Mermaid
+                source={element.children.props.children
+                  .map((child: any) =>
+                    typeof child === "string"
+                      ? child
+                      : child.props.children.props.children
+                  )
+                  .join("")}
+              />
+            );
+
+          return <pre {...element.children.props} />;
         },
         p: (element) => (
           <p

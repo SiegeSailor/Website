@@ -59,8 +59,13 @@ export default function ({
       </ListboxSection>
       <ListboxItem
         classNames={{ title: "font-medium" }}
+        href="/blog"
+        title="Blog"
+      />
+      <ListboxItem
+        classNames={{ title: "font-medium" }}
         href="/"
-        title="Homepage"
+        title="Home"
       />
     </Listbox>
   );

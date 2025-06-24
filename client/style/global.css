@@ -17,6 +17,53 @@
     @apply rounded-md w-full;
     @apply grayscale shadow-md;
   }
+
+  figure[data-rehype-pretty-code-figure] {
+    @apply flex flex-col items-start justify-start;
+    @apply text-sm;
+    @apply my-4 first:mt-0 last:mb-0;
+  }
+
+  figure[data-rehype-pretty-code-figure] figcaption {
+    @apply overflow-x-auto px-4 py-2 rounded-t-md w-full;
+    @apply bg-gray-900 text-white;
+    @apply border-b-8 border-gray-900 -mb-2;
+    @apply italic;
+  }
+
+  figure[data-rehype-pretty-code-figure] pre {
+    @apply overflow-x-auto py-4 rounded-md w-full;
+    @apply bg-gray-800 text-transparent;
+  }
+
+  figure[data-rehype-pretty-code-figure] pre > span {
+    @apply px-4;
+  }
+
+  figure[data-rehype-pretty-code-figure] pre span[data-highlighted-line] {
+    @apply bg-white/10;
+  }
+
+  pre[data-line-numbers] {
+    @apply [counter-reset:line];
+  }
+
+  pre[data-line-numbers] > [data-line]::before {
+    @apply [counter-increment:line] [content:counter(line)];
+    @apply inline-block w-3 mr-8 text-right text-gray-500;
+  }
+
+  pre[data-line-numbers-max-digits="2"] > [data-line]::before {
+    @apply w-5;
+  }
+
+  pre[data-line-numbers-max-digits="3"] > [data-line]::before {
+    @apply w-7;
+  }
+
+  pre[data-line-numbers-max-digits="4"] > [data-line]::before {
+    @apply w-9;
+  }
 }
 
 @layer components {
