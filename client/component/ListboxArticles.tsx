@@ -60,12 +60,12 @@ export default function ({
       <ListboxItem
         classNames={{ title: "font-medium" }}
         href="/blog"
-        title="Blog"
+        title="Back to Blog"
       />
       <ListboxItem
         classNames={{ title: "font-medium" }}
         href="/"
-        title="Home"
+        title="Back to Home"
       />
     </Listbox>
   );
