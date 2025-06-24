@@ -29,11 +29,14 @@ export default function ({
           {article.metadata.category}
         </p>
         <h3
-          className={clsx("text-left text-medium font-light", "truncate w-1/2")}
+          className={clsx(
+            "text-left text-medium font-light",
+            "truncate w-[calc(100%-10.25rem)]"
+          )}
         >
           {article.metadata.title}
         </h3>
-        <p className={clsx("opacity-60 text-sm text-right", "w-1/4")}>
+        <p className={clsx("opacity-60 text-sm text-right", "w-[5rem]")}>
           {article.metadata.date}
         </p>
       </div>
