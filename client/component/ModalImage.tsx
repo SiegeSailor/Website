@@ -27,13 +27,21 @@ export default function ({
         radius="md"
         className="cursor-pointer"
       />
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader>{alt.replaceAll("-", " ")}</ModalHeader>
-              <ModalBody>
-                <Image src={source} alt={alt} onClick={onClose} radius="none" />
+              <ModalBody className={clsx("overflow-auto")}>
+                <Image
+                  className={clsx("w-max max-w-max")}
+                  removeWrapper
+                  src={source}
+                  alt={alt}
+                  onClick={onClose}
+                  radius="none"
+                  shadow="sm"
+                />
               </ModalBody>
               <ModalFooter>
                 <Button variant="light" color="default" onPress={onClose}>
