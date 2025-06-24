@@ -26,7 +26,13 @@ export default function ({ source }: Readonly<{ source: string }>) {
           ],
           rehypePlugins: [
             rehypeSlug,
-            [rehypePrettyCode, { theme: "slack-dark", defaultLang: "shell" }],
+            [
+              rehypePrettyCode,
+              {
+                theme: "slack-dark",
+                defaultLang: { block: "shell", inline: "text" },
+              },
+            ],
           ],
         },
       }}
