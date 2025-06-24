@@ -1,8 +1,14 @@
 "use client";
 
+import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
+import { HomeIcon, NewspaperIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/article";
+import { ROUTE_ICON } from "@/setting/icon";
+import { ROUTE_TITLE } from "@/setting/site";
+
+const ROUTES: Route[] = ["/blog", "/"];
 
 export default function ({
   articles,
@@ -57,16 +63,20 @@ export default function ({
           );
         })}
       </ListboxSection>
-      <ListboxItem
-        classNames={{ title: "font-medium" }}
-        href="/blog"
-        title="Back to Blog"
-      />
-      <ListboxItem
-        classNames={{ title: "font-medium" }}
-        href="/"
-        title="Back to Home"
-      />
+      <>
+        {ROUTES.map((route) => {
+          const Icon = ROUTE_ICON[route];
+          return (
+            <ListboxItem
+              classNames={{ title: "font-medium" }}
+              endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
+              key={route}
+              href={route}
+              title={`Back to ${ROUTE_TITLE[route]}`}
+            />
+          );
+        })}
+      </>
     </Listbox>
   );
 }

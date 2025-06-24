@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
 import clsx from "clsx";
 
-const LEVEL_CLASSNAMES: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
+const LEVEL_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
   1: "text-6xl leading-[1.05]",
   2: "text-4xl",
   3: "text-3xl",

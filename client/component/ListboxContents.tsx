@@ -10,14 +10,14 @@ import { getAnchorsByContent } from "@/helper/article";
 
 export const IDENTIFIER = "table-of-contents" as const;
 
-const LEVEL_PADDING: Record<number, string> = {
+const LEVEL_PADDING: Readonly<Record<number, string>> = {
   1: "pl-2",
   2: "pl-4",
   3: "pl-8",
   4: "pl-10",
   5: "pl-12",
   6: "pl-14",
-};
+} as const;
 
 export default function ({
   anchors,

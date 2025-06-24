@@ -16,10 +16,12 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 
-const COLOR_ICON: Record<
-  NonNullable<ComponentProps<typeof Code>["color"]>,
-  ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+const COLOR_ICON: Readonly<
+  Record<
+    NonNullable<ComponentProps<typeof Code>["color"]>,
+    ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+    >
   >
 > = {
   danger: BadgeMinusIcon,
@@ -30,9 +32,8 @@ const COLOR_ICON: Record<
   warning: BadgeAlertIcon,
 };
 
-const COLOR_TITLE: Record<
-  NonNullable<ComponentProps<typeof Code>["color"]>,
-  string
+const COLOR_TITLE: Readonly<
+  Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "Danger",
   default: "Note",
@@ -42,9 +43,8 @@ const COLOR_TITLE: Record<
   warning: "Warning",
 };
 
-const COLOR_FRAME: Record<
-  NonNullable<ComponentProps<typeof Code>["color"]>,
-  string
+const COLOR_FRAME: Readonly<
+  Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
   default: "bg-gray-50 border-gray-300 dark:bg-gray-950 dark:border-gray-700",
@@ -56,9 +56,8 @@ const COLOR_FRAME: Record<
     "bg-orange-50 border-orange-300 dark:bg-orange-950 dark:border-orange-700",
 };
 
-const COLOR_COLOR: Record<
-  NonNullable<ComponentProps<typeof Code>["color"]>,
-  string
+const COLOR_COLOR: Readonly<
+  Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "text-red-500 dark:text-red-400",
   default: "text-gray-500 dark:text-gray-400",

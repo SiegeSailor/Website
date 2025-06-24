@@ -32,10 +32,7 @@ export default function ({
           .title || path;
     }
 
-    return {
-      name,
-      href,
-    };
+    return { name, href };
   });
 
   return (

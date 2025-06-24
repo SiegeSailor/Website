@@ -1,3 +1,5 @@
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Route } from "next";
 import {
   SiAmazon,
   SiBabel,
@@ -38,6 +40,25 @@ import {
   SiGo,
   SiNextdotjs,
 } from "@icons-pack/react-simple-icons";
+import {
+  HomeIcon,
+  LucideProps,
+  NewspaperIcon,
+  PersonStandingIcon,
+} from "lucide-react";
+
+export const ROUTE_ICON: Readonly<
+  Record<
+    Route,
+    ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+    >
+  >
+> = {
+  "/": HomeIcon,
+  "/blog": NewspaperIcon,
+  "/profile": PersonStandingIcon,
+} as const;
 
 export const TECHNOLOGY_ICON = {
   ".NET": SiDotnet,
