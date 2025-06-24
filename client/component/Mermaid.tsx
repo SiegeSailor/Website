@@ -4,9 +4,29 @@ import { useEffect, useRef, useId, useState } from "react";
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
+// click image to enlarge
+// mermaid charts in small screens
 
 mermaid.initialize({
   theme: "neutral",
+  themeCSS: `
+    .gitBranchLabel0, .gitBranchLabel1, .gitBranchLabel2, .gitBranchLabel3,
+    .gitBranchLabel4, .gitBranchLabel5, .gitBranchLabel6, .gitBranchLabel7 {
+      font-size: 14px !important;
+    }
+    .commit-id, .commit-msg, .commit-label {
+      font-size: 14px !important;
+    }
+    .tag-label {
+      font-size: 14px !important;
+    }
+    path {
+      stroke-width: 4px !important;
+    }
+    text {
+      font-size: 14px !important;
+    }
+  `,
   fontFamily: "Roboto",
   fontSize: 14,
   gitGraph: {
@@ -32,6 +52,7 @@ export default ({ source }: { source: string }) => {
           source
         );
         refMermaid.current.innerHTML = svg;
+        console.log(svg);
         bindFunctions?.(refMermaid.current);
       }
     })();
@@ -42,7 +63,7 @@ export default ({ source }: { source: string }) => {
   }, []);
 
   return (
-    <Skeleton isLoaded={isMounted} className={clsx("rounded-md")}>
+    <Skeleton isLoaded={isMounted} className={clsx("w-full", "rounded-md")}>
       <div className={clsx("bg-default-100 dark:bg-default-50", "rounded-md")}>
         <div
           id={identity}

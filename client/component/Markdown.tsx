@@ -1,4 +1,4 @@
-import { Code, ScrollShadow } from "@heroui/react";
+import { Code, ScrollShadow, Image } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 import rehypeSlug from "rehype-slug";
@@ -10,6 +10,7 @@ import Callout from "@/component/Callout";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
+import ModalImage from "@/component/ModalImage";
 
 const SPACE = "my-4 first:mt-0 last:mb-0";
 
@@ -137,6 +138,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             />
           </ScrollShadow>
         ),
+        img: (element) => <ModalImage source={element.src} alt={element.alt} />,
       }}
     />
   );

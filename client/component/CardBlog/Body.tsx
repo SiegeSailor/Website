@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Image, Progress, Spacer } from "@heroui/react";
+import { Progress, Spacer } from "@heroui/react";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import NextImage from "next/image";
@@ -35,9 +35,8 @@ export default function ({
 
   return (
     <div className="relative w-full h-full">
-      <Image
+      <NextImage
         alt="Photo by Kevin Ku on Unsplash"
-        as={NextImage}
         className={clsx(
           "z-0 w-full h-full object-cover",
           "brightness-75 contrast-100"
