@@ -27,7 +27,6 @@ export default function ({
       color="default"
       className="p-4"
       disabledKeys={[date]}
-      selectionMode="none"
       hideSelectedIcon
       variant="flat"
     >

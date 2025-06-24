@@ -61,7 +61,6 @@ export default function ({
         className="p-4"
         onAction={(key) => setIdentifier(() => String(key))}
         selectedKeys={identifier ? [identifier] : []}
-        selectionMode="single"
         hideSelectedIcon
         variant="flat"
       >
