@@ -4,7 +4,9 @@ import { useEffect, useRef, useId, useState } from "react";
 import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
-// click image to enlarge
+// image div wrapped by p
+// check ol li gaps
+// create profile page
 // mermaid charts in small screens
 
 mermaid.initialize({

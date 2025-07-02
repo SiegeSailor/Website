@@ -9,6 +9,7 @@ import {
   ModalFooter,
   Button,
   Image,
+  ScrollShadow,
 } from "@heroui/react";
 import clsx from "clsx";
 
@@ -33,15 +34,17 @@ export default function ({
             <>
               <ModalHeader>{alt.replaceAll("-", " ")}</ModalHeader>
               <ModalBody className={clsx("overflow-auto")}>
-                <Image
-                  className={clsx("w-max max-w-max")}
-                  removeWrapper
-                  src={source}
-                  alt={alt}
-                  onClick={onClose}
-                  radius="none"
-                  shadow="sm"
-                />
+                <ScrollShadow className={clsx("h-full w-full")}>
+                  <Image
+                    className={clsx("w-max max-w-max")}
+                    removeWrapper
+                    src={source}
+                    alt={alt}
+                    onClick={onClose}
+                    radius="none"
+                    shadow="sm"
+                  />
+                </ScrollShadow>
               </ModalBody>
               <ModalFooter>
                 <Button variant="light" color="default" onPress={onClose}>
