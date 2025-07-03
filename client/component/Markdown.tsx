@@ -1,4 +1,5 @@
-import { Code, ScrollShadow, Image } from "@heroui/react";
+import { Children, isValidElement } from "react";
+import { Code, ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 import rehypeSlug from "rehype-slug";
@@ -119,16 +120,27 @@ export default function ({ source }: Readonly<{ source: string }>) {
 
           return <pre {...element.children.props} />;
         },
-        p: (element) => (
-          <p
-            {...element}
-            className={clsx(
-              element.className,
-              "font-light text-medium leading-6",
-              SPACE
-            )}
-          />
-        ),
+        p: (element) => {
+          const children = Children.toArray(element.children);
+          const isHaveOnlyImage =
+            children.length === 1 &&
+            isValidElement(children[0]) &&
+            typeof (children[0] as any).props?.src === "string" &&
+            typeof (children[0] as any).props?.alt === "string";
+
+          if (isHaveOnlyImage) return <>{element.children}</>;
+
+          return (
+            <p
+              {...element}
+              className={clsx(
+                element.className,
+                "font-light text-medium leading-6",
+                SPACE
+              )}
+            />
+          );
+        },
         a: (element) => <Link {...element} />,
         table: (element) => (
           <ScrollShadow orientation="horizontal" size={0}>
