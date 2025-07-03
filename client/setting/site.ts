@@ -18,9 +18,14 @@ export const STATUS_COLOR: Readonly<
 export const TECHNOLOGIES = getEntries(TECHNOLOGY_ICON).map(([key]) => key);
 export const TECHNOLOGY_SET = new Set(TECHNOLOGIES);
 
-export const NAME = "Jin Yu Zhang's Website" as const;
+export const AUTHOR = "Jin Yu Zhang" as const;
 
-export const DOMAIN_PATH = { article: "public/article" } as const;
+export const NAME = `${AUTHOR}'s Website` as const;
+
+export const DOMAIN_PATH = {
+  article: "public/article",
+  document: "public/document",
+} as const;
 
 export const ROUTE_TITLE: Readonly<Record<Route, string>> = {
   "/": "Home",

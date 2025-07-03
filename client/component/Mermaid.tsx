@@ -5,8 +5,6 @@ import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-// create profile page
-
 const SCALE = 1;
 const ELEMENT_STYLE_WRAPPER =
   "display: flex; align-items: center; " +

@@ -20,7 +20,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
   return (
     <CardBlock
       className={clsx(className)}
-      href="/blog"
+      href="/profile"
       title="My Skills"
       id={parentIdentifier}
     >

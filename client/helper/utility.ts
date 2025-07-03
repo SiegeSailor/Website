@@ -1,4 +1,3 @@
-import { Route } from "next";
 import { NAME } from "@/setting/site";
 
 export function generateTitle(...content: string[]) {
