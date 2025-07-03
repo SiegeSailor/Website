@@ -5,7 +5,6 @@ import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-// check ol li gaps
 // create profile page
 // mermaid charts in small screens
 

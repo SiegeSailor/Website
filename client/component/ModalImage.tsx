@@ -33,15 +33,15 @@ export default function ({
           {(onClose) => (
             <>
               <ModalHeader>{alt.replaceAll("-", " ")}</ModalHeader>
-              <ModalBody className={clsx("overflow-auto")}>
-                <ScrollShadow className={clsx("h-full w-full")}>
+              <ModalBody>
+                <ScrollShadow className={clsx("h-full w-full max-h-[65vh]")}>
                   <Image
                     className={clsx("w-max max-w-max")}
                     removeWrapper
                     src={source}
                     alt={alt}
                     onClick={onClose}
-                    radius="none"
+                    radius="md"
                     shadow="sm"
                   />
                 </ScrollShadow>
