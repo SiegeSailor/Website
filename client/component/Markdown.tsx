@@ -72,8 +72,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-inside pl-4 text-medium",
-              SPACE
+              "list-disc list-inside pl-4 text-medium"
             )}
           />
         ),
@@ -82,8 +81,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-inside pl-4 text-medium",
-              SPACE
+              "list-decimal list-inside pl-4 text-medium"
             )}
           />
         ),
