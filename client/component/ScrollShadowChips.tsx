@@ -14,7 +14,7 @@ export default function ({
   return (
     <ScrollShadow
       {...propsContainer}
-      className={clsx("flex gap-2 w-11/12", propsContainer?.className)}
+      className={clsx("flex gap-2", propsContainer?.className)}
       orientation="horizontal"
       size={120}
     >
