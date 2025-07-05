@@ -40,12 +40,7 @@ import {
   SiGo,
   SiNextdotjs,
 } from "@icons-pack/react-simple-icons";
-import {
-  HomeIcon,
-  LucideProps,
-  NewspaperIcon,
-  PersonStandingIcon,
-} from "lucide-react";
+import { HomeIcon, LucideProps, NewspaperIcon, UserIcon } from "lucide-react";
 
 export const ROUTE_ICON: Readonly<
   Record<
@@ -57,7 +52,7 @@ export const ROUTE_ICON: Readonly<
 > = {
   "/": HomeIcon,
   "/blog": NewspaperIcon,
-  "/profile": PersonStandingIcon,
+  "/profile": UserIcon,
 } as const;
 
 export const TECHNOLOGY_ICON = {

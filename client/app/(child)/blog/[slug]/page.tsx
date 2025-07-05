@@ -45,7 +45,7 @@ export default async function ({
 }: Readonly<{ params: Promise<TParams> }>) {
   const articles = await getArticles();
   const { slug } = await params;
-  const { metadata, content } = await getArticleByDate(slug);
+  const { content, metadata } = await getArticleByDate(slug);
 
   return (
     <section className={clsx("max-w-[1280px] mx-auto p-4")}>

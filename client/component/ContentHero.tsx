@@ -1,12 +1,16 @@
 import { Button } from "@heroui/react";
-import { MailIcon } from "lucide-react";
 import clsx from "clsx";
-import NextLink from "next/link";
 
+import { AUTHOR } from "@/setting/site";
+import { ROUTE_ICON } from "@/setting/icon";
 import Link from "@/component/Link";
 import TypingText from "@/component/TypingText";
 
-export default function ({ className }: Readonly<{ className?: string }>) {
+export default async function ({
+  className,
+}: Readonly<{ className?: string }>) {
+  const Icon = ROUTE_ICON["/profile"];
+
   return (
     <div className={clsx("text-left w-full", className)}>
       <div className="space-y-2">
@@ -18,7 +22,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           )}
         >
           <span className="text-nowrap">
-            Hi, I'm <span className="text-foreground">Jin Yu Zhang</span>!
+            Hi, I'm <span className="text-foreground">{AUTHOR}</span>!
           </span>
           <span className="flex flex-col sm:block sm:text-nowrap">
             <span>I’m a Senior</span>
@@ -44,13 +48,13 @@ export default function ({ className }: Readonly<{ className?: string }>) {
         </h2>
       </div>
       <div className="gap-4 grid grid-cols-12 grid-rows-1 mt-8">
-        <NextLink
-          href="mailto:siegesailor@gmail.com?subject=Query from Jin YU Zhang's Website"
-          target="_blank"
+        <Link
+          href="/profile"
           className="col-span-12 sm:col-span-4"
+          underline="none"
         >
           <Button
-            startContent={<MailIcon size="1.45rem" />}
+            startContent={<Icon size="1.45rem" />}
             size="lg"
             radius="full"
             variant="shadow"
@@ -59,7 +63,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
           >
             Let's Connect
           </Button>
-        </NextLink>
+        </Link>
         <p className="text-medium text-gray-600 col-span-12 sm:col-span-8">
           Browse my website and feel free to drop me a line if you’d like to
           exchange insights or chat about industry trends.

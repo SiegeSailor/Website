@@ -1,6 +1,11 @@
-📧 siegesailor@gmail.com | 📞 857-540-6713
-
 ---
+picture: /image/Jin-Yu-Zhang.jpg
+---
+
+- **GitHub**: https://github.com/SiegeSailor
+- **LinkedIn**: https://www.linkedin.com/in/jin-yu-zhang-812181155/
+
+<!-- description -->
 
 ## Summary
 

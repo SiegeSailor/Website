@@ -38,7 +38,7 @@ export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
   },
   {
     title: "Senior Software Engineer at CooperSurgical",
-    time: "May 2025 - Present",
+    time: "Jun 2025 - Present",
   },
 ] as const;
 

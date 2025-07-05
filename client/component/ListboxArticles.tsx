@@ -65,6 +65,7 @@ export default function ({
       <>
         {ROUTES.map((route) => {
           const Icon = ROUTE_ICON[route];
+
           return (
             <ListboxItem
               classNames={{ title: "font-medium" }}
