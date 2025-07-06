@@ -1,9 +1,26 @@
 ---
-picture: /image/Jin-Yu-Zhang.jpg
+picture: /image/Jin-Yu-Zhang-Cropped.jpg
+headlines:
+  - "Full-Stack Development and DevOps"
+  - "Cloud Architecture"
+  - "Event-Driven Systems"
+  - "Cloud-Based Web Microservices"
+media:
+  github: "https://github.com/SiegeSailor"
+  linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
+  resume: https://drive.google.com/file/d/1eSR5fJNkc6h0R_3YsAkLCfX2W9_MYPed/view?usp=sharing
+status:
+  experience: "7 Years"
+  location: "NYC Metropolitan Area"
+  position: "Senior Software Engineer"
+  visa: "STEM OPT (GC EAD ~05/2027)"
 ---
 
-- **GitHub**: https://github.com/SiegeSailor
-- **LinkedIn**: https://www.linkedin.com/in/jin-yu-zhang-812181155/
+I'm a software engineer with 7+ years of experience who loves building scalable, resueable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud microservices to medical device software.
+
+I've been fortunate to work across different industries - from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (I've managed up to 6 developers) and boosting productivity across the entire development lifecycle.
+
+In my past work, I committed to developing developer tools, such as libraries and SDKs, and high-volume tolerance applications, including backend services and frontend interfaces. I've also committed to CI/CD pipelines, automation tools, codebase management, infrastructure configuration, and testing plans for the products I developed. I believe in writing code that not only works today but can evolve gracefully as requirements change, which my diverse background has prepared me well for.
 
 <!-- description -->
 

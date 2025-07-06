@@ -37,19 +37,23 @@ export async function getArticleByFilename(filename: string) {
     const sources = source.split("<!-- description -->");
     const description = sources[0]?.trim();
     const content = sources[1]?.trim();
+    const technologies: typeof TECHNOLOGIES = data.technologies
+      .map((technology: string) => technology.trim())
+      .sort();
+    const status: (typeof STATUS)[number] = data.status;
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date))
       throw new Error("Date format must be YYYY-MM-DD");
+    if (typeof description !== "string" || description.length === 0)
+      throw new Error("Description must be a non-empty string");
+    if (typeof content !== "string" || content.length === 0)
+      throw new Error("Content must be a non-empty string");
     if (!Array.isArray(data.technologies) || data.technologies.length === 0)
       throw new Error("Technologies must be an array of non-empty strings");
     if (!data.technologies.every((item) => TECHNOLOGY_SET.has(item)))
       throw new Error("Each technology must be valid");
     if (typeof data.title !== "string" || data.title.length === 0)
       throw new Error("Title must be a non-empty string");
-    if (typeof description !== "string" || description.length === 0)
-      throw new Error("Description must be a non-empty string");
-    if (typeof content !== "string" || content.length === 0)
-      throw new Error("Content must be a non-empty string");
     if (typeof data.category !== "string" || data.category.length === 0)
       throw new Error("Category must be a non-empty string");
     if (!STATUS_SET.has(data.status)) throw new Error("Status must be valid");
@@ -58,10 +62,6 @@ export async function getArticleByFilename(filename: string) {
       { level: 1, title: data.title, identifier: getSlugByTitle(data.title) },
       ...getAnchorsByContent(content),
     ];
-    const technologies: typeof TECHNOLOGIES = data.technologies
-      .map((technology) => technology.trim())
-      .sort();
-    const status: (typeof STATUS)[number] = data.status;
 
     return {
       content,

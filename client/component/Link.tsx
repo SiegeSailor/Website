@@ -14,7 +14,7 @@ export default function ({ ...props }: ComponentProps<typeof Link>) {
       target={isExternal ? "_blank" : "_self"}
       {...props}
       className={clsx(
-        "text-default-500 hover:text-default-400",
+        !props.color && "text-default-500 hover:text-default-400",
         "font-light",
         props.className
       )}
