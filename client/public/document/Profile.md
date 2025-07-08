@@ -1,7 +1,8 @@
 ---
 picture: /image/Jin-Yu-Zhang-Cropped.jpg
 headlines:
-  - "Full-Stack Development and DevOps"
+  - "Full-Stack Development"
+  - "DevOps"
   - "Cloud Architecture"
   - "Event-Driven Systems"
   - "Cloud-Based Web Microservices"
@@ -10,10 +11,10 @@ media:
   linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
   resume: https://drive.google.com/file/d/1eSR5fJNkc6h0R_3YsAkLCfX2W9_MYPed/view?usp=sharing
 status:
-  experience: "7 Years"
+  experience: "7+ Years"
   location: "NYC Metropolitan Area"
   position: "Senior Software Engineer"
-  visa: "STEM OPT (GC EAD ~05/2027)"
+  visa: "STEM OPT (GC ~06/27)"
 ---
 
 I'm a software engineer with 7+ years of experience who loves building scalable, resueable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud microservices to medical device software.
@@ -26,124 +27,133 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ## Summary
 
-1. **6 years of Software Engineering experience** across SaaS, PaaS, and SiMD
-
-   - 1.25 years in DevOps
-   - 1.5 years in Front-End Development
-   - 1.5 years in Leadership
-   - 2 years in System Design
-   - 4.5 years in Full-Stack Development
-
-2. **Experience in Agile & Waterfall methodologies**
-
-   - Agile: scrum, sprint planning, XP
-   - Waterfall: FDA & EU MDR compliance
-     - Document generation
-     - Verification & Validation
-
-3. **System Design Expertise**
-
-   - **Cloud microservices** for global/regional e-commerce
-     - REST, WebSocket, RPC, Messaging
-     - Sharding, Partitioning, Caching
-   - **Hybrid medical device design**
-     - Embedded Linux, firmware, MQTT
-   - **Digital Transformation** from paper to web
-
-4. **Version Control**: Git (LTS, Git Flow, GitHub Flow)
-5. **Cloud Platforms**:
-   - GCP: GCE, GCS, GKE, IAM, GA, BigQuery, Cloud Run, Firebase
-   - AWS: EC2, ECS, EKS, S3, RDS, Lambda, CloudWatch, SES, IAM, Route 53
-   - Terraform, LocalStack
-6. **Data Structures & Algorithms**
-
-   - Concurrency, ETL, multi-player games
-   - Sorting: QuickSort, HeapSort
-   - Graph: DFS, BFS, Union Find
-   - Techniques: DP, Divide & Conquer, Trie, QuickSelect
-
-7. **Programming Paradigms**
-
-   - OOP: Observer, Factory, Singleton, MVC
-   - AOP: Decorators, Logging, Error Handling
-   - FP & PP
-
-8. **Web Frameworks**
-
-   - Flask, Django, Next.js, Express.js, ASP.NET Core, .NET SDK
-
-9. **Database Experience**
-
-   - MongoDB (Mongoose, PyMongo, Compass, Atlas)
-   - MySQL (SQLAlchemy, Sequelize, Workbench)
-   - PostgreSQL, Redis
-
-10. **Team Collaboration Tools**
-
-    - Slack, Jira, Asana, Trello, Miro, Figma, GitBook
-
-11. **UI/UX Engineering**
-    - Responsive Web Design, PWAs, kiosk apps
-    - TypeScript, Jest, Redux, Webpack, SASS, TailwindCSS
-    - Game UIs: Three.js, Framer Motion, Phaser
-    - UI frameworks: Ant Design, Bootstrap, Material UI, Hero UI
-
----
+- **7+ years of Software Engineering experience** across SaaS, PaaS, and SiMD
+  - 1.25 years in DevOps
+  - 1.5 years in Leadership
+  - 2 years in Front-End Development
+  - 2 years in System Design
+  - 3.5 years in Back-End Development
+- **Experience in Agile & Waterfall methodologies**
+  - Agile: scrum, sprint planning, XP
+  - Waterfall: FDA & EU MDR compliance
+    - Document generation
+    - Verification & Validation
+- **System Design Expertise**
+  - **Cloud microservices** for global/regional e-commerce
+    - REST, WebSocket, RPC, Messaging
+    - Sharding, Partitioning, Caching
+  - **Hybrid medical device design**
+    - Embedded Linux, firmware, MQTT
+  - **Digital Transformation** from paper to web
+- **Version Control**:
+  - Git (LTS, Git Flow, GitHub Flow)
+- **Cloud Platforms**:
+  - GCP: GCE, GCS, GKE, IAM, GA, BigQuery, Cloud Run, Firebase
+  - AWS: EC2, ECS, EKS, S3, RDS, Lambda, CloudWatch, SES, IAM, Route 53
+  - Terraform, LocalStack
+- **Data Structures & Algorithms**
+  - Concurrency, ETL, multi-player games
+  - Sorting: QuickSort, HeapSort
+  - Graph: DFS, BFS, Union Find
+  - Techniques: DP, Divide & Conquer, Trie, QuickSelect
+- **Programming Paradigms**
+  - OOP: Observer, Factory, Singleton, MVC
+  - AOP: Decorators, Logging, Error Handling
+  - FP & PP
+- **Web Frameworks**
+  - Flask, Django, Next.js, Express.js, ASP.NET Core, .NET SDK
+- **Database Experience**
+  - MongoDB (Mongoose, PyMongo, Compass, Atlas)
+  - MySQL (SQLAlchemy, Sequelize, Workbench)
+  - PostgreSQL, Redis
+- **Team Collaboration Tools**
+  - Slack, Jira, Asana, Trello, Miro, Figma, GitBook
+- **UI/UX Engineering**
+  - Responsive Web Design, PWAs, kiosk apps
+  - TypeScript, Jest, Redux, Webpack, SASS, TailwindCSS
+  - Game UIs: Three.js, Framer Motion, Phaser
+  - UI frameworks: Ant Design, Bootstrap, Material UI, Hero UI
 
 ## Employment
 
-### 1. CooperSurgical
+### CooperSurgical
 
-**Software Engineering Intern → Software Engineer**  
-_Remote, CT, USA | May 2023 – Aug 2023, Jan 2024 – Present_
+> Medical Device R&D.
 
-- Created container SDK for medical devices with Docker, gRPC, RabbitMQ
-- Secured IVF workstation software; CI/CD with GitLab
-- Built RFID-integrated UI in ASP.NET Core
-- Developed NuGet libs and CLI automation tools
-- Real-time kiosk UI with Electron, Redux, Next.js
-- Reduced RFID processing time by 90%
-- Designed AWS + WindRiver compliant cloud microservices
+| Year                | Position                    | Location         |
+| ------------------- | --------------------------- | ---------------- |
+| Jun 2025 - Present  | Senior Software Engineer    | NJ, USA (Hybrid) |
+| Jan 2024 – Jun 2025 | Software Engineer           | CT, USA (Hybrid) |
+| May 2023 – Aug 2023 | Software Engineering Intern | CT, USA          |
 
-### 2. StageSource
+- Developed a container as an SDK solution for multiple medical device products using **Docker**, **gRPC**, **MongoDB**, **RabbitMQ**, and **Zeroconf**, and support for **.NET**, **Node.js**, **Python**, and **C++**
+- Architected secured medical software for IVF workstations, including integration with purpose-built embedded **Linux**, SDLC for compliance, **GitLab CI/CD** pipelines, and containerized applications
+- Crafted a message streaming UI using **ASP.NET Core** for hardware/firmware integration with RFID
+- Built utilities and provided documentation to streamline the organization's software development and delivery processes, such as **NuGet** network connectivity libraries and CLI automation scripts
+- Created an RPC-based kiosk-like real-time UI using **Electron**, **Framer Motion**, **Redux**, and **Next.js**
+- Reduced RFID data transitioning time by 90% by implementing database caching and **gRPC**, leading to a 50% reduction in environmental data reading rendering time
+- Architected cloud microservices to comply with government regulations for data integrity and retention with **AWS**, **WindRiver Studio**, and on-site service plans
 
-**Software Engineer (DevOps + Leadership)**  
-_MA, USA | Sep 2022 – Dec 2022_
+### StageSource
 
-- Led 6-member team, deployed with uWSGI, Django, Nginx, PostgreSQL
-- CI/CD with GitHub Actions and OpenID
-- AWS CloudWatch + S3 layered storage
-- Built automated testing pipeline
+> DevOps and Leadership.
 
-### 3. Shopee
+| Year                | Position          | Location |
+| ------------------- | ----------------- | -------- |
+| Sep 2022 - Dec 2022 | Software Engineer | MA, USA  |
 
-**Software Engineer (Mobile Web Games)**  
-_Taipei, Taiwan | Jan 2020 – Feb 2022_
+- Led a 6-developer team and delivered a team-development workflow and a product prototype using **uWSGI**, **Django**, **Nginx**, and **PostgreSQL**, deploying through **GitHub Actions** to **AWS** instances
+- Optimized deployment time by 50% by introducing automated pipelines using **GitHub Actions** with **OpenID** authentication, promising a 25% increase in team efficiency
+- Utilized **AWS CloudWatch** and **S3** to develop a layered storage system
+- Structured an automated testing pipeline using **Unittest**
 
-- Scaled Socket.io-based multiplayer game to 200K+ DAUs, 10K RPS
-- Regional warehouse + deployment pipeline integration via GCP
-- Player retention boost via weighted RNG
-- Built 2D/3D games with Three.js + Phaser
+### Shopee
 
-### 4. Edallianz
+> Mobile Web Games.
 
-**Software Engineer (UX Integration)**  
-_Taipei, Taiwan | Jan 2019 – Nov 2019_
+| Year                | Position          | Location       |
+| ------------------- | ----------------- | -------------- |
+| Jan 2020 - Feb 2022 | Software Engineer | Taipei, Taiwan |
 
-- Built SASS-based RWD framework
-- Increased user posts by 500% via CDN
-- Built review kiosk app with Django + React
+- Implemented high-volume tolerant socket connections using **Socket.io**, **Express.js**, and **Redis** for multi-player real-time SPA games built upon **Ant Design**, **Phaser**, **React.js**, **Redux**, **TypeScript**, and **Three.js**, accommodating over 200,000 daily traffic and the highest RPS of 10,000
+- Integrated region data warehouse and deployment pipelines with global services, with a TTD-enforced workflow using **GCP** to manage, operate, and monitor cloud services
+- Increased average player retention rate from 0.25 to 0.65 by implementing a weighted random algorithm
+- Designed 2D-3D-blended web mobile games with **Three.js** and **Phaser**, integrating with the main application built on **React.js** and **Redux**
 
-### 5. Servicetech International
+### Edallianz
 
-**Software Engineer (Digital Transformation)**  
-_Taichung, Taiwan | Jun 2016 – Nov 2018_
+> Cross-Platform UX Integration.
 
-- Developed PWA for supply chain using Firebase + React
-- Created Bootstrap/PHP website & CIS warehouse
-- Automated contract filing with Python
+| Year                | Position          | Location       |
+| ------------------- | ----------------- | -------------- |
+| Jan 2019 - Nov 2019 | Software Engineer | Taipei, Taiwan |
 
----
+- Launched an RWD UI framework using **SASS** and **Webpack** to restructure websites built with **Apache HTTP Server**, **Django**, **MySQL**, and **Tornado**
+- Boosted user post threads per day by 500% by introducing **CDN** caching, creating 800 more posts per day
+- Built a responsive website to embed into kiosks to gather reviews using **Django** and **React.js**
+
+### Servicetech International
+
+> Digital Transformation.
+
+| Year                | Position                    | Location         |
+| ------------------- | --------------------------- | ---------------- |
+| Jun 2017 - Nov 2018 | Software Engineer           | Taichung, Taiwan |
+| Jun 2016 - Jan 2017 | Software Engineering Intern | Taichung, Taiwan |
+
+- Formulated the supply chain management workflow to develop a PWA using **Firebase**, **Ionic**, and **React.js**
+- Initiated a configurable website using **Bootstrap** and **PHP**, and a CIS material warehouse
+- Automated the contract filing process using **Python** Scripting
+
+### DY Game
+
+> Motion Sensing Game.
+
+| Year                | Position               | Location      |
+| ------------------- | ---------------------- | ------------- |
+| May 2014 - Aug 2014 | Game Developing Intern | Huwei, Taiwan |
+
+- Co-managed a 30-member team across programming, arts, and operations for a motion control game
 
 ## Projects
 
@@ -174,8 +184,6 @@ _Taichung, Taiwan | Jun 2016 – Nov 2018_
 - **Python S3 Scaffold**  
   File storage scaffold  
   _AWS S3, Terraform, GitHub Actions_
-
----
 
 ## Skills
 

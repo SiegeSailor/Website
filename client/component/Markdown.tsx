@@ -72,7 +72,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-inside pl-4 text-medium"
+              "list-disc list-outside pl-4 text-medium my-1 last:my-0"
             )}
           />
         ),
@@ -81,14 +81,14 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-inside pl-4 text-medium"
+              "list-decimal list-outside pl-4 text-medium my-1 last:my-0"
             )}
           />
         ),
         li: (element) => (
           <li
             {...element}
-            className={clsx(element.className, "text-medium mb-2 last:mb-0")}
+            className={clsx(element.className, "text-medium my-1 last:my-0")}
           />
         ),
         callout: (element) => (

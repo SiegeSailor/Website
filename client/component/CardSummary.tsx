@@ -60,7 +60,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
               "p-2 rounded-sm"
             )}
           >
-            6 Years in
+            7+ Years in
             <div className="font-semibold text-default-700">
               Software Engineering
             </div>

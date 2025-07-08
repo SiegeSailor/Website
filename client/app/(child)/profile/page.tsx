@@ -1,9 +1,9 @@
-import { Button, Card, Divider } from "@heroui/react";
+import { Button, Card, CardBody, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 import clsx from "clsx";
 
-import { generateTitle } from "@/helper/utility";
+import { generateTitle, getEntries } from "@/helper/utility";
 import { getProfile } from "@/helper/document";
 import { getSlugByTitle } from "@/helper/article";
 import Heading from "@/component/Heading";
@@ -46,16 +46,35 @@ export default async function () {
             <div
               className={clsx(
                 "flex gap-1 flex-wrap items-center",
-                "text-nowrap font-light text-2xl leading-6",
+                "text-nowrap font-light text-xl leading-6",
                 "mb-2"
               )}
             >
               {metadata.headlines.map((headline, index) => (
                 <span key={headline}>
                   {headline}
-                  {index < metadata.headlines.length - 1 && " · "}
+                  {index < metadata.headlines.length - 1 && " /"}
                 </span>
               ))}
+            </div>
+            <div className={clsx("gap-2 grid grid-cols-12", "mt-4")}>
+              {getEntries(metadata.status).map(([key, value]) => {
+                return (
+                  <Card
+                    shadow="none"
+                    key={key}
+                    className={clsx(
+                      "col-span-12 sm:col-span-6 lg:col-span-3",
+                      "border-1 border-gray-300 dark:border-gray-700 rounded-md",
+                      "px-4 py-2",
+                      "flex flex-col gap-1"
+                    )}
+                  >
+                    <p className="text-small opacity-60 capitalize">{key}</p>
+                    <p className="text-medium">{value}</p>
+                  </Card>
+                );
+              })}
             </div>
             <div className={clsx("flex gap-2 items-center")}>
               {[
