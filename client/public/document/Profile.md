@@ -17,7 +17,7 @@ status:
   visa: "STEM OPT (GC ~06/27)"
 ---
 
-I'm a software engineer with 7+ years of experience who loves building scalable, resueable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud microservices to medical device software.
+I'm a software engineer with 7+ years of experience who loves building scalable, reuseable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud microservices to medical device software.
 
 I've been fortunate to work across different industries - from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (I've managed up to 6 developers) and boosting productivity across the entire development lifecycle.
 
@@ -76,15 +76,27 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ## Employment
 
+| Timeline            | Length    | Company                   | Industry       | Location         | Role                        | Link                                                        |
+| ------------------- | --------- | ------------------------- | -------------- | ---------------- | --------------------------- | ----------------------------------------------------------- |
+| Jun 2025 - Present  | 7 months  | CooperSurgical            | Medical Device | NJ, USA          | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| Jan 2024 - May 2025 | 16 months | CooperSurgical            | Medical Device | CT, USA          | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| May 2023 - Aug 2023 | 4 months  | CooperSurgical            | Medical Device | CT, USA          | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| Sep 2022 - Dec 2022 | 4 months  | StageSource               | Art Service    | MA, USA          | Software Engineer           | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
+| Jan 2020 - Feb 2022 | 25 months | Shopee                    | E-Commerce     | Taipei, Taiwan   | Software Engineer           | [shopee.tw](https://shopee.tw/)                             |
+| Jan 2019 - Nov 2019 | 11 months | Edallianz                 | E-Commerce     | Taipei, Taiwan   | Software Engineer           | [twincn.com](https://www.twincn.com/item.aspx?no=51236578)  |
+| Jun 2017 - Nov 2018 | 17 months | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineer           | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
+| Jun 2016 - Jan 2017 | 8 months  | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineering Intern | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
+| May 2014 - Aug 2014 | 4 months  | DY Game                   | Gaming         | Huwei, Taiwan    | Game Development Intern     | [dygame.cn](https://www.dygame.cn/)                         |
+
 ### CooperSurgical
 
-> Medical Device R&D.
+| Timeline            | Length    | Company        | Industry       | Location | Role                        | Link                                                  |
+| ------------------- | --------- | -------------- | -------------- | -------- | --------------------------- | ----------------------------------------------------- |
+| Jun 2025 - Present  | 7 months  | CooperSurgical | Medical Device | NJ, USA  | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Jan 2024 - May 2025 | 16 months | CooperSurgical | Medical Device | CT, USA  | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/) |
+| May 2023 - Aug 2023 | 4 months  | CooperSurgical | Medical Device | CT, USA  | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/) |
 
-| Year                | Position                    | Location         |
-| ------------------- | --------------------------- | ---------------- |
-| Jun 2025 - Present  | Senior Software Engineer    | NJ, USA (Hybrid) |
-| Jan 2024 – Jun 2025 | Software Engineer           | CT, USA (Hybrid) |
-| May 2023 – Aug 2023 | Software Engineering Intern | CT, USA          |
+> Medical Device R&D.
 
 - Developed a container as an SDK solution for multiple medical device products using **Docker**, **gRPC**, **MongoDB**, **RabbitMQ**, and **Zeroconf**, and support for **.NET**, **Node.js**, **Python**, and **C++**
 - Architected secured medical software for IVF workstations, including integration with purpose-built embedded **Linux**, SDLC for compliance, **GitLab CI/CD** pipelines, and containerized applications
@@ -96,11 +108,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### StageSource
 
-> DevOps and Leadership.
+| Timeline            | Length   | Company     | Industry    | Location | Role              | Link                                                        |
+| ------------------- | -------- | ----------- | ----------- | -------- | ----------------- | ----------------------------------------------------------- |
+| Sep 2022 - Dec 2022 | 4 months | StageSource | Art Service | MA, USA  | Software Engineer | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
 
-| Year                | Position          | Location |
-| ------------------- | ----------------- | -------- |
-| Sep 2022 - Dec 2022 | Software Engineer | MA, USA  |
+> DevOps and Leadership.
 
 - Led a 6-developer team and delivered a team-development workflow and a product prototype using **uWSGI**, **Django**, **Nginx**, and **PostgreSQL**, deploying through **GitHub Actions** to **AWS** instances
 - Optimized deployment time by 50% by introducing automated pipelines using **GitHub Actions** with **OpenID** authentication, promising a 25% increase in team efficiency
@@ -109,11 +121,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Shopee
 
-> Mobile Web Games.
+| Timeline            | Length    | Company | Industry   | Location       | Role              | Link                            |
+| ------------------- | --------- | ------- | ---------- | -------------- | ----------------- | ------------------------------- |
+| Jan 2020 - Feb 2022 | 25 months | Shopee  | E-Commerce | Taipei, Taiwan | Software Engineer | [shopee.tw](https://shopee.tw/) |
 
-| Year                | Position          | Location       |
-| ------------------- | ----------------- | -------------- |
-| Jan 2020 - Feb 2022 | Software Engineer | Taipei, Taiwan |
+> Mobile Web Games.
 
 - Implemented high-volume tolerant socket connections using **Socket.io**, **Express.js**, and **Redis** for multi-player real-time SPA games built upon **Ant Design**, **Phaser**, **React.js**, **Redux**, **TypeScript**, and **Three.js**, accommodating over 200,000 daily traffic and the highest RPS of 10,000
 - Integrated region data warehouse and deployment pipelines with global services, with a TTD-enforced workflow using **GCP** to manage, operate, and monitor cloud services
@@ -122,11 +134,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Edallianz
 
-> Cross-Platform UX Integration.
+| Timeline            | Length    | Company   | Industry   | Location       | Role              | Link                                                       |
+| ------------------- | --------- | --------- | ---------- | -------------- | ----------------- | ---------------------------------------------------------- |
+| Jan 2019 - Nov 2019 | 11 months | Edallianz | E-Commerce | Taipei, Taiwan | Software Engineer | [twincn.com](https://www.twincn.com/item.aspx?no=51236578) |
 
-| Year                | Position          | Location       |
-| ------------------- | ----------------- | -------------- |
-| Jan 2019 - Nov 2019 | Software Engineer | Taipei, Taiwan |
+> Cross-Platform UX Integration.
 
 - Launched an RWD UI framework using **SASS** and **Webpack** to restructure websites built with **Apache HTTP Server**, **Django**, **MySQL**, and **Tornado**
 - Boosted user post threads per day by 500% by introducing **CDN** caching, creating 800 more posts per day
@@ -134,12 +146,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Servicetech International
 
-> Digital Transformation.
+| Timeline            | Length   | Company | Industry | Location      | Role                    | Link                                |
+| ------------------- | -------- | ------- | -------- | ------------- | ----------------------- | ----------------------------------- |
+| May 2014 - Aug 2014 | 4 months | DY Game | Gaming   | Huwei, Taiwan | Game Development Intern | [dygame.cn](https://www.dygame.cn/) |
 
-| Year                | Position                    | Location         |
-| ------------------- | --------------------------- | ---------------- |
-| Jun 2017 - Nov 2018 | Software Engineer           | Taichung, Taiwan |
-| Jun 2016 - Jan 2017 | Software Engineering Intern | Taichung, Taiwan |
+> Digital Transformation.
 
 - Formulated the supply chain management workflow to develop a PWA using **Firebase**, **Ionic**, and **React.js**
 - Initiated a configurable website using **Bootstrap** and **PHP**, and a CIS material warehouse
@@ -147,11 +158,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### DY Game
 
-> Motion Sensing Game.
+| Timeline            | Length   | Company | Industry | Location      | Role                    |
+| ------------------- | -------- | ------- | -------- | ------------- | ----------------------- |
+| May 2014 - Aug 2014 | 4 months | DY Game | Gaming   | Huwei, Taiwan | Game Development Intern |
 
-| Year                | Position               | Location      |
-| ------------------- | ---------------------- | ------------- |
-| May 2014 - Aug 2014 | Game Developing Intern | Huwei, Taiwan |
+> Motion Sensing Game.
 
 - Co-managed a 30-member team across programming, arts, and operations for a motion control game
 
