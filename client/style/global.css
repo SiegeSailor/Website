@@ -14,8 +14,8 @@
 
 @layer base {
   img {
-    @apply rounded-md w-full;
-    @apply shadow-md;
+    @apply w-full min-h-5;
+    @apply rounded-md shadow-md;
   }
 
   figure[data-rehype-pretty-code-figure] {
@@ -90,14 +90,8 @@
     @apply border-b-0;
   }
 
-  .markdown-table td div {
-    @apply w-max h-auto;
-    @apply shadow-none rounded-none;
-  }
-
   .markdown-table td img,
   .markdown-list-item img {
     @apply max-w-none h-auto;
-    @apply shadow-none rounded-none;
   }
 }

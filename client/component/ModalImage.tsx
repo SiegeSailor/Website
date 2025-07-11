@@ -62,8 +62,8 @@ export default function ({
     <div
       className={clsx(
         "bg-default-100 dark:bg-default-50",
-        "rounded-md shadow-sm",
-        "flex"
+        "rounded-md shadow-md",
+        "inline-block"
       )}
     >
       <Image
@@ -74,7 +74,11 @@ export default function ({
         removeWrapper
         {...propsImageThumbnail}
         onClick={handleOpen}
-        className={clsx("cursor-pointer", propsImageThumbnail?.className)}
+        className={clsx(
+          "cursor-pointer",
+          "w-max h-max",
+          propsImageThumbnail?.className
+        )}
       />
       <Modal isOpen={isOpen} onClose={handleModalClose} size="5xl">
         <ModalContent>
