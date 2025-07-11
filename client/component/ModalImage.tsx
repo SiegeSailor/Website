@@ -59,7 +59,13 @@ export default function ({
   };
 
   return (
-    <div className={clsx("bg-default-100 dark:bg-default-50", "rounded-md")}>
+    <div
+      className={clsx(
+        "bg-default-100 dark:bg-default-50",
+        "rounded-md",
+        "inline-block"
+      )}
+    >
       <Image
         src={source}
         alt={alt}
@@ -74,12 +80,7 @@ export default function ({
             <>
               <ModalHeader>{alt.replaceAll("-", " ")}</ModalHeader>
               <ModalBody>
-                <div
-                  className={clsx(
-                    "h-full w-full max-h-[65vh]",
-                    "overflow-auto"
-                  )}
-                >
+                <div className={clsx("h-[65vh] w-full", "overflow-auto")}>
                   <Image
                     removeWrapper
                     src={source}
