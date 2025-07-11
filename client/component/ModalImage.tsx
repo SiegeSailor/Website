@@ -62,14 +62,16 @@ export default function ({
     <div
       className={clsx(
         "bg-default-100 dark:bg-default-50",
-        "rounded-md",
-        "inline-block"
+        "rounded-md shadow-sm",
+        "flex"
       )}
     >
       <Image
         src={source}
         alt={alt}
         radius="md"
+        shadow="none"
+        removeWrapper
         {...propsImageThumbnail}
         onClick={handleOpen}
         className={clsx("cursor-pointer", propsImageThumbnail?.className)}

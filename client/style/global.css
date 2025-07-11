@@ -68,7 +68,7 @@
 
 @layer components {
   .markdown-table {
-    @apply my-4 text-left text-medium;
+    @apply my-4 text-left text-medium table table-auto;
     @apply border-separate border-spacing-0;
     @apply border-1 rounded-md;
     @apply border-gray-300 dark:border-gray-700;
@@ -84,8 +84,20 @@
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-r-1 first:rounded-tl-md last:rounded-tr-md last:border-r-0;
     @apply border-gray-300 dark:border-gray-700;
+    @apply align-middle leading-none;
   }
   .markdown-table tr:last-child td {
     @apply border-b-0;
+  }
+
+  .markdown-table td div {
+    @apply w-max h-auto;
+    @apply shadow-none rounded-none;
+  }
+
+  .markdown-table td img,
+  .markdown-list-item img {
+    @apply max-w-none h-auto;
+    @apply shadow-none rounded-none;
   }
 }
