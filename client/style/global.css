@@ -15,7 +15,7 @@
 @layer base {
   img {
     @apply rounded-md w-full;
-    @apply grayscale shadow-md;
+    @apply shadow-md;
   }
 
   figure[data-rehype-pretty-code-figure] {

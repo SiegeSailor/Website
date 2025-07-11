@@ -39,7 +39,8 @@ export default function ({
         alt="Photo by Kevin Ku on Unsplash"
         className={clsx(
           "z-0 w-full h-full object-cover",
-          "brightness-75 contrast-100"
+          "brightness-75 contrast-100",
+          "grayscale"
         )}
         src="/image/Glasses-Code.jpg"
         loading="eager"

@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Divider } from "@heroui/react";
+import { Button, Card, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 import clsx from "clsx";
@@ -35,7 +35,12 @@ export default async function () {
           )}
         >
           <div className="flex flex-col gap-2 mb-16">
-            <ModalImage source={metadata.picture} alt={metadata.title} />
+            <ModalImage
+              source={metadata.picture}
+              alt={metadata.title}
+              propsImageThumbnail={{ className: "grayscale" }}
+              propsImageModal={{ className: "grayscale" }}
+            />
 
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}

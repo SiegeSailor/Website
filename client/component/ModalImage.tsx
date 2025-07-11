@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, ComponentProps } from "react";
 import {
   useDisclosure,
   Modal,
@@ -11,7 +12,6 @@ import {
   Image,
 } from "@heroui/react";
 import { PlusIcon, MinusIcon } from "lucide-react";
-import { useState } from "react";
 import clsx from "clsx";
 
 const ZOOM_MAX = 5 as const;
@@ -19,19 +19,34 @@ const ZOOM_MIN = 1 as const;
 const ZOOM_STEP = 0.25 as const;
 
 export default function ({
-  source,
   alt,
-}: Readonly<{ source: string; alt: string }>) {
+  propsImageModal,
+  propsImageThumbnail,
+  source,
+}: Readonly<{
+  alt: string;
+  propsImageModal?: ComponentProps<typeof Image>;
+  propsImageThumbnail?: ComponentProps<typeof Image>;
+  source: string;
+}>) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [zoom, setZoom] = useState<number>(ZOOM_MIN);
 
+  const handleOpen = (
+    event: Parameters<NonNullable<ComponentProps<typeof Image>["onClick"]>>[0]
+  ) => {
+    setZoom(ZOOM_MIN);
+    if (propsImageThumbnail?.onClick) propsImageThumbnail.onClick(event);
+    onOpen();
+  };
+
   const handleZoomIn = () => {
-    setZoom((prev) => Math.min(prev + ZOOM_STEP, ZOOM_MAX));
+    setZoom((previous) => Math.min(previous + ZOOM_STEP, ZOOM_MAX));
   };
 
   const handleZoomOut = () => {
-    setZoom((prev) => Math.max(prev - ZOOM_STEP, ZOOM_MIN));
+    setZoom((previous) => Math.max(previous - ZOOM_STEP, ZOOM_MIN));
   };
 
   const handleResetZoom = () => {
@@ -48,9 +63,10 @@ export default function ({
       <Image
         src={source}
         alt={alt}
-        onClick={onOpen}
         radius="md"
-        className="cursor-pointer"
+        {...propsImageThumbnail}
+        onClick={handleOpen}
+        className={clsx("cursor-pointer", propsImageThumbnail?.className)}
       />
       <Modal isOpen={isOpen} onClose={handleModalClose} size="5xl">
         <ModalContent>
@@ -65,15 +81,17 @@ export default function ({
                   )}
                 >
                   <Image
-                    className={clsx(
-                      "block w-auto h-auto",
-                      "transition-transform duration-200 origin-top-left"
-                    )}
                     removeWrapper
                     src={source}
                     alt={alt}
                     radius="none"
                     shadow="none"
+                    {...propsImageThumbnail}
+                    className={clsx(
+                      "block w-auto h-auto",
+                      "transition-transform duration-200 origin-top-left",
+                      propsImageModal?.className
+                    )}
                     style={{ transform: `scale(${zoom})` }}
                   />
                 </div>
