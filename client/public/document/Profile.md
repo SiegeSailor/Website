@@ -27,56 +27,32 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ## Summary
 
-- **7+ years of Software Engineering experience** across SaaS, PaaS, and SiMD
-  - 1.25 years in DevOps
-  - 1.5 years in Leadership
-  - 2 years in Front-End Development
-  - 2 years in System Design
-  - 3.5 years in Back-End Development
-- **Experience in Agile & Waterfall methodologies**
-  - Agile: scrum, sprint planning, XP
-  - Waterfall: FDA & EU MDR compliance
-    - Document generation
-    - Verification & Validation
-- **System Design Expertise**
-  - **Cloud microservices** for global/regional e-commerce
-    - REST, WebSocket, RPC, Messaging
-    - Sharding, Partitioning, Caching
-  - **Hybrid medical device design**
-    - Embedded Linux, firmware, MQTT
-  - **Digital Transformation** from paper to web
-- **Version Control**:
-  - Git (LTS, Git Flow, GitHub Flow)
-- **Cloud Platforms**:
-  - GCP: GCE, GCS, GKE, IAM, GA, BigQuery, Cloud Run, Firebase
-  - AWS: EC2, ECS, EKS, S3, RDS, Lambda, CloudWatch, SES, IAM, Route 53
-  - Terraform, LocalStack
-- **Data Structures & Algorithms**
-  - Concurrency, ETL, multi-player games
-  - Sorting: QuickSort, HeapSort
-  - Graph: DFS, BFS, Union Find
-  - Techniques: DP, Divide & Conquer, Trie, QuickSelect
-- **Programming Paradigms**
-  - OOP: Observer, Factory, Singleton, MVC
-  - AOP: Decorators, Logging, Error Handling
-  - FP & PP
-- **Web Frameworks**
-  - Flask, Django, Next.js, Express.js, ASP.NET Core, .NET SDK
-- **Database Experience**
-  - MongoDB (Mongoose, PyMongo, Compass, Atlas)
-  - MySQL (SQLAlchemy, Sequelize, Workbench)
-  - PostgreSQL, Redis
-- **Team Collaboration Tools**
-  - Slack, Jira, Asana, Trello, Miro, Figma, GitBook
-- **UI/UX Engineering**
-  - Responsive Web Design, PWAs, kiosk apps
-  - TypeScript, Jest, Redux, Webpack, SASS, TailwindCSS
-  - Game UIs: Three.js, Framer Motion, Phaser
-  - UI frameworks: Ant Design, Bootstrap, Material UI, Hero UI
+### Technical Expertise
+
+- **8+ years** full-stack development (Python, TypeScript, React.js, Django, AWS, GCP)
+- **3+ years** DevOps and cloud architecture (Docker, Kubernetes, CI/CD, microservices)
+- **2+ years** team leadership and project management (led teams up to 6 developers)
+- **Specialized domains:** Medical device software, e-commerce platforms, real-time gaming systems
+
+### Industry Experience
+
+| Industry               | Years    | Key Technologies                              | Notable Achievements                          |
+| ---------------------- | -------- | --------------------------------------------- | --------------------------------------------- |
+| Medical Device         | 2+ years | Docker, gRPC, ASP.NET Core, FDA compliance    | 90% RFID optimization, multi-language SDK     |
+| E-Commerce             | 3+ years | React.js, Socket.io, CDN, high-volume systems | 200K+ concurrent users, 160% retention boost  |
+| Gaming                 | 6 months | Three.js, Phaser, real-time multiplayer       | 10K RPS, motion control systems               |
+| Digital Transformation | 2+ years | PWA, Firebase, automation                     | Supply chain digitization, process automation |
+
+### Core Competencies
+
+- **Architecture:** Cloud microservices, REST APIs, event-driven systems, scalable backends
+- **Development:** Full-stack web applications, real-time systems, cross-platform UIs
+- **DevOps:** Container orchestration, CI/CD pipelines, infrastructure automation
+- **Leadership:** Agile methodologies, cross-functional collaboration, technical mentoring
 
 ## Employment
 
-| Timeline            | Length    | Company                   | Industry       | Location         | Role                        | Link                                                        |
+| Timeline            | Duration  | Company                   | Industry       | Location         | Role                        | Link                                                        |
 | ------------------- | --------- | ------------------------- | -------------- | ---------------- | --------------------------- | ----------------------------------------------------------- |
 | Jun 2025 - Present  | 7 months  | CooperSurgical            | Medical Device | NJ, USA          | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/)       |
 | Jan 2024 - May 2025 | 16 months | CooperSurgical            | Medical Device | CT, USA          | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/)       |
@@ -90,11 +66,11 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### CooperSurgical
 
-| Timeline            | Length    | Company        | Industry       | Location | Role                        | Link                                                  |
-| ------------------- | --------- | -------------- | -------------- | -------- | --------------------------- | ----------------------------------------------------- |
-| Jun 2025 - Present  | 7 months  | CooperSurgical | Medical Device | NJ, USA  | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/) |
-| Jan 2024 - May 2025 | 16 months | CooperSurgical | Medical Device | CT, USA  | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/) |
-| May 2023 - Aug 2023 | 4 months  | CooperSurgical | Medical Device | CT, USA  | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Timeline            | Duration  | Industry       | Location | Role                        | Link                                                  |
+| ------------------- | --------- | -------------- | -------- | --------------------------- | ----------------------------------------------------- |
+| Jun 2025 - Present  | 7 months  | Medical Device | NJ, USA  | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Jan 2024 - May 2025 | 16 months | Medical Device | CT, USA  | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/) |
+| May 2023 - Aug 2023 | 4 months  | Medical Device | CT, USA  | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/) |
 
 > Medical Device R&D.
 
@@ -108,7 +84,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### StageSource
 
-| Timeline            | Length   | Company     | Industry    | Location | Role              | Link                                                        |
+| Timeline            | Duration | Company     | Industry    | Location | Role              | Link                                                        |
 | ------------------- | -------- | ----------- | ----------- | -------- | ----------------- | ----------------------------------------------------------- |
 | Sep 2022 - Dec 2022 | 4 months | StageSource | Art Service | MA, USA  | Software Engineer | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
 
@@ -121,7 +97,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Shopee
 
-| Timeline            | Length    | Company | Industry   | Location       | Role              | Link                            |
+| Timeline            | Duration  | Company | Industry   | Location       | Role              | Link                            |
 | ------------------- | --------- | ------- | ---------- | -------------- | ----------------- | ------------------------------- |
 | Jan 2020 - Feb 2022 | 25 months | Shopee  | E-Commerce | Taipei, Taiwan | Software Engineer | [shopee.tw](https://shopee.tw/) |
 
@@ -131,10 +107,12 @@ In my past work, I committed to developing developer tools, such as libraries an
 - Integrated region data warehouse and deployment pipelines with global services, with a TTD-enforced workflow using **GCP** to manage, operate, and monitor cloud services
 - Increased average player retention rate from 0.25 to 0.65 by implementing a weighted random algorithm
 - Designed 2D-3D-blended web mobile games with **Three.js** and **Phaser**, integrating with the main application built on **React.js** and **Redux**
+- Technical Presenter at [ALPHA Camp](https://rise.alphacamp.co/) Digital Career 2021
+- Co-Organizer at [I’m the Best Coder Challenge 2020](https://careers.shopee.tw/bestcoder/)
 
 ### Edallianz
 
-| Timeline            | Length    | Company   | Industry   | Location       | Role              | Link                                                       |
+| Timeline            | Duration  | Company   | Industry   | Location       | Role              | Link                                                       |
 | ------------------- | --------- | --------- | ---------- | -------------- | ----------------- | ---------------------------------------------------------- |
 | Jan 2019 - Nov 2019 | 11 months | Edallianz | E-Commerce | Taipei, Taiwan | Software Engineer | [twincn.com](https://www.twincn.com/item.aspx?no=51236578) |
 
@@ -146,9 +124,10 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Servicetech International
 
-| Timeline            | Length   | Company | Industry | Location      | Role                    | Link                                |
-| ------------------- | -------- | ------- | -------- | ------------- | ----------------------- | ----------------------------------- |
-| May 2014 - Aug 2014 | 4 months | DY Game | Gaming   | Huwei, Taiwan | Game Development Intern | [dygame.cn](https://www.dygame.cn/) |
+| Timeline            | Duration  | Company                   | Industry       | Location         | Role                        | Link                                                  |
+| ------------------- | --------- | ------------------------- | -------------- | ---------------- | --------------------------- | ----------------------------------------------------- |
+| Jun 2017 - Nov 2018 | 17 months | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineer           | [servicetech.com.tw](https://www.servicetech.com.tw/) |
+| Jun 2016 - Jan 2017 | 8 months  | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineering Intern | [servicetech.com.tw](https://www.servicetech.com.tw/) |
 
 > Digital Transformation.
 
@@ -158,7 +137,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### DY Game
 
-| Timeline            | Length   | Company | Industry | Location      | Role                    |
+| Timeline            | Duration | Company | Industry | Location      | Role                    |
 | ------------------- | -------- | ------- | -------- | ------------- | ----------------------- |
 | May 2014 - Aug 2014 | 4 months | DY Game | Gaming   | Huwei, Taiwan | Game Development Intern |
 
@@ -166,103 +145,97 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 - Co-managed a 30-member team across programming, arts, and operations for a motion control game
 
-## Projects
-
-- **Java Account Hub**  
-  RESTful service for account system under OWASP SAMM  
-  _Java, Spring MVC, MySQL_
-
-- **TypeScript Markdown Files Converter**  
-  NPM package converting MD → HTML  
-  _TypeScript, Remark_
-
-- **AI Story Writer**  
-  Local fantasy universe generator  
-  _Python, SQLite, Ollama, Mistral 7B, Streamlit_
-
-- **Personal Website**  
-  Full-stack personal site using converter above  
-  _Next.js, TailwindCSS, Hero UI, ElasticSearch, AWS RDS_
-
-- **TypeScript Cryptography**  
-  CLI encryption tool + key algorithm demo  
-  _TypeScript_
-
-- **Python Async Class Wrapper**  
-  PIP package for waterfall-style async tasks  
-  _Python, AsyncIO_
-
-- **Python S3 Scaffold**  
-  File storage scaffold  
-  _AWS S3, Terraform, GitHub Actions_
-
 ## Skills
 
-### Languages
+### Programming Languages
 
-- **Expert**: Python, TypeScript/JavaScript
-- **Proficient**: Bash
-- **Prior Experience**: C#, C++, Java
+| Language              | Proficiency      |
+| --------------------- | ---------------- |
+| Python                | Expert           |
+| JavaScript/TypeScript | Expert           |
+| Bash/Unix Shell       | Proficient       |
+| C#                    | Vibe Coding      |
+| C++                   | Prior Experience |
+| Java                  | Prior Experience |
 
-### Back-End
+- Back-End Development
 
-- gRPC, RabbitMQ, Socket.io
-- Django, Flask, Tornado, Express, Next.js, ASP.NET Core
-- Linux, Nginx, Avahi, Envoy, Apache
+  - gRPC, RabbitMQ, Socket.io
+  - Django, Flask, Tornado
+  - Express.js, Next.js
+  - .NET SDK
+  - Avahi, Envoy, Nginx, Apache HTTP Server, uWSGI
+  - Linux
 
-### DevOps
+- **DevOps Technologies:**
 
-- Docker, Kubernetes
-- GitHub Actions, GitLab CI, WindRiver
-- Terraform, LocalStack, Supervisord
+  - Docker, Kubernetes
+  - GitLab CI/CD, GitHub Actions, WindRiver Studio
+  - LocalStack, Terraform, Supervisord
 
-### Front-End
+- **Front-End Development:**
 
-- React.js, Redux, Electron, Phaser, Framer Motion, Three.js
-- TailwindCSS, SASS, Webpack, Gulp
-- UI Libraries: AntD, Bootstrap, Material UI, Hero UI
+  - ASP.NET Core
+  - React.js, Redux, Three.js, Framer Motion, Phaser, Electron, jQuery
+  - HTML, CSS, SASS, TailwindCSS
+  - Ant Design, Bootstrap, Material UI, Hero UI, Semantic UI, Ionic
+  - Webpack, Gulp, Babel
 
-### Cloud
+- **Cloud Services:**
 
-- **GCP**: GCE, GCS, GKE, Cloud Run, Firebase
-- **AWS**: EC2, ECS, S3, Lambda, RDS, CloudWatch, Route 53, Amplify
+  - **GCP:** GCE, GCS, GKE, IAM, GA, BigQuery, Firebase, Cloud Run, Cloud Run Functions, Firebase (Authentication, Firestore, Remote Config, RTDB, Storage, Hosting, Analytics, Functions)
+  - **AWS:** EC2, ECS, EKS, SNS, SQS, MQ, SES, IAM, RDS, S3, CloudWatch, Lambda, Route 53, Amplify
 
-### Databases
+- **Databases:**
 
-- MySQL, MongoDB, PostgreSQL, Redis
+  - MySQL, MongoDB, PostgreSQL, Redis, SQL
 
-### Collaboration
-
-- Git, GitHub, GitLab
-- Slack, Jira, Miro, Figma, Docusaurus
-
----
+- **Team Collaboration:**
+  - ERD, DFD
+  - Git, GitHub, GitLab
+  - Slack, Jira, Mattermost, Trello, Asana
+  - Miro, Mermaid, Postman, Docusaurus, GitBook, Figma
+  - Ngrok
 
 ## Education
 
+| Timeline            | Institution                           | Program                                              | Degree                |
+| ------------------- | ------------------------------------- | ---------------------------------------------------- | --------------------- |
+| Aug 2023 - Nov 2023 | Massachusetts Institute of Technology | Data Science and Machine Learning                    | Certificate           |
+| May 2022 - Jan 2024 | Boston University                     | Computer Science                                     | Master in Science     |
+| Jan 2022 - May 2022 | New York University                   | Preparatory Course for Graduate Studies in Computing | Certificate           |
+| Sep 2013 - Jan 2017 | National Formosa University           | Multimedia Design                                    | Bachelor in Fine Arts |
+
 ### Massachusetts Institute of Technology
 
-**Certificate** – Data Science and Machine Learning  
-_Aug 2023 – Nov 2023 | Score: 579.5/600_
+| Timeline            | Program                           | Degree      |
+| ------------------- | --------------------------------- | ----------- |
+| Aug 2023 - Nov 2023 | Data Science and Machine Learning | Certificate |
+
+- Ranked 15 out of 131 participants
+- Score 579.5/600
 
 ### Boston University
 
-**M.S. in Computer Science**  
-_May 2022 – Jan 2024 | GPA: 3.8/4.0_
+| Timeline            | Program          | Degree            |
+| ------------------- | ---------------- | ----------------- |
+| May 2022 - Jan 2024 | Computer Science | Master in Science |
 
-- 3rd Place @ NCAE-C 2023 NE Division
-- 1st Author – IEEE Access 2024:  
-  _“Quantitative DevSecOps Metrics for Cloud-Based Web Microservices”_  
-  DOI: [10.1109/ACCESS.2024.3486314](https://doi.org/10.1109/ACCESS.2024.3486314)
+- Ranked 3rd in infrastructure services configuration and defense at [NCAE-C](https://www.ncaecybergames.org/) 2023, North East Division
+- 1st Author for [“Quantitative DevSecOps Metrics for Cloud-Based Web Microservices”](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317-160342, 2024, doi: 10.1109/ACCESS.2024.3486314
+- Member of Cybersecurity Club
+- GPA 3.8/4.0
 
 ### New York University
 
-**Certificate** – Graduate Studies in Computing  
-_Jan 2022 – May 2022_
+| Timeline            | Program                                              | Degree      |
+| ------------------- | ---------------------------------------------------- | ----------- |
+| Jan 2022 - May 2022 | Preparatory Course for Graduate Studies in Computing | Certificate |
 
 ### National Formosa University
 
-**B.F.A. in Multimedia Design**  
-_Sep 2013 – Jan 2017_
+| Timeline            | Program           | Degree                |
+| ------------------- | ----------------- | --------------------- |
+| Sep 2013 - Jan 2017 | Multimedia Design | Bachelor in Fine Arts |
 
-- Focus: Cross-Platform UX Integration
+- Researched the integration of browser runtime and 3D modeling technology

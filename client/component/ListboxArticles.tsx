@@ -7,7 +7,7 @@ import { getArticles } from "@/helper/article";
 import { ROUTE_ICON } from "@/setting/icon";
 import { ROUTE_TITLE } from "@/setting/site";
 
-const ROUTES: Route[] = ["/blog", "/"];
+const ROUTES: Route[] = ["/blog"];
 
 export default function ({
   articles,
