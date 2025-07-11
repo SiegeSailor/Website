@@ -38,7 +38,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
   return (
     <CardBlock
       className={clsx(className)}
-      href="/profile"
+      href="/profile#summary"
       title="What I Bring to the Table"
       contentHeader={
         <FloatingDivision

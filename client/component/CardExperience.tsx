@@ -17,7 +17,7 @@ export default function ({ className }: Readonly<{ className?: string }>) {
   return (
     <CardBlock
       className={clsx(className)}
-      href="/profile"
+      href="/profile#employment"
       title="My Experience"
       contentHeader={
         <div

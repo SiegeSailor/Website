@@ -49,7 +49,7 @@ export default async function ({
       </div>
       <div className="gap-4 grid grid-cols-12 grid-rows-1 mt-8">
         <Link
-          href="/profile"
+          href="/profile#jin-yu-zhang"
           className="col-span-12 sm:col-span-4"
           underline="none"
         >
