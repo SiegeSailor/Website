@@ -68,12 +68,14 @@ export default async function ({
             </Heading>
             <div
               className={clsx(
-                "flex gap-1 items-center",
+                "flex flex-wrap gap-1 items-center",
                 "text-nowrap font-normal text-sm",
                 "opacity-60"
               )}
             >
-              <span>{metadata.date}</span>·
+              <span>Drafted on {metadata.date}</span>·
+              <span>Created on {metadata.createdOn}</span>·
+              <span>Updated on {metadata.updatedOn}</span>·
               <span>{metadata.minutes} Minutes Read</span>
             </div>
             <ScrollShadowTechnologies

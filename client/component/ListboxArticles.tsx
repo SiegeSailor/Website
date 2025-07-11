@@ -2,7 +2,6 @@
 
 import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
-import { HomeIcon, NewspaperIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/article";
 import { ROUTE_ICON } from "@/setting/icon";

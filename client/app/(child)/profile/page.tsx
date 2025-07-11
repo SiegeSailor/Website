@@ -36,16 +36,23 @@ export default async function () {
         >
           <div className="flex flex-col gap-2 mb-16">
             <ModalImage source={metadata.picture} alt={metadata.title} />
-            <Heading
-              level={1}
-              id={getSlugByTitle(metadata.title)}
-              className="!font-semibold !text-5xl sm:!text-6xl !mb-2"
-            >
+
+            <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
             <div
               className={clsx(
-                "flex gap-1 flex-wrap items-center",
+                "flex flex-wrap gap-1 items-center",
+                "text-nowrap font-normal text-sm",
+                "opacity-60"
+              )}
+            >
+              <span>Created on {metadata.createdOn}</span>·
+              <span>Updated on {metadata.updatedOn}</span>
+            </div>
+            <div
+              className={clsx(
+                "flex flex-wrap gap-1 items-center",
                 "text-nowrap font-light text-xl leading-6",
                 "mb-2"
               )}
@@ -57,6 +64,7 @@ export default async function () {
                 </span>
               ))}
             </div>
+
             <div className={clsx("gap-2 grid grid-cols-12", "mt-4")}>
               {getEntries(metadata.status).map(([key, value]) => {
                 return (
@@ -125,20 +133,6 @@ export default async function () {
           <article>
             <Markdown source={content} />
           </article>
-
-          <Divider className="my-4" />
-          <div
-            className={clsx(
-              "flex gap-1 items-center",
-              "text-nowrap font-normal text-sm",
-              "opacity-60"
-            )}
-          >
-            <span>
-              Last Modified on{" "}
-              {metadata.statistics.mtime.toISOString().split("T")[0]}
-            </span>
-          </div>
         </div>
         <div
           className={clsx(

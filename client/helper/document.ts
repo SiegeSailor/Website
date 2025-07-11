@@ -1,9 +1,10 @@
-import { readFileSync, statSync } from "fs";
 import { join } from "path";
+import { readFileSync, statSync } from "fs";
 import matter from "gray-matter";
 
 import { DOMAIN_PATH, AUTHOR } from "@/setting/site";
 import { getAnchorsByContent, getSlugByTitle } from "@/helper/article";
+import { getDateStringByDate } from "@/helper/utility";
 
 const REGEX_URL = /^https?:\/\/.+/;
 
@@ -64,18 +65,21 @@ export async function getProfile() {
       ...getAnchorsByContent(content),
     ];
 
+    const statistics = statSync(filePath);
+
     return {
       content,
       filename,
       metadata: {
         anchors,
+        createdOn: getDateStringByDate(statistics.birthtime),
         description,
-        picture: data.picture,
         headlines,
         media,
+        picture: data.picture,
         status,
-        statistics: statSync(filePath),
         title: AUTHOR,
+        updatedOn: getDateStringByDate(statistics.mtime),
       },
     };
   } catch (_) {

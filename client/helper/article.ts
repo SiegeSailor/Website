@@ -1,7 +1,8 @@
 import { join } from "path";
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync, statSync } from "fs";
 import matter from "gray-matter";
 
+import { getDateStringByDate } from "@/helper/utility";
 import {
   DOMAIN_PATH,
   TECHNOLOGIES,
@@ -63,18 +64,22 @@ export async function getArticleByFilename(filename: string) {
       ...getAnchorsByContent(content),
     ];
 
+    const statistics = statSync(filePath);
+
     return {
       content,
       filename,
       metadata: {
         anchors,
         category: data.category,
+        createdOn: getDateStringByDate(statistics.birthtime),
         date,
         description,
         minutes: Math.ceil((source.split(" ").length + 1) / 150),
         status,
         technologies,
         title: data.title,
+        updatedOn: getDateStringByDate(statistics.mtime),
       },
     };
   } catch (_) {

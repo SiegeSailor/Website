@@ -22,3 +22,7 @@ export function getValues<T extends object>(entity: T) {
 export function getKeys<T extends object>(entity: T) {
   return Object.keys(entity) as (keyof T)[];
 }
+
+export function getDateStringByDate(date: Date) {
+  return date.toISOString().split("T")[0];
+}
