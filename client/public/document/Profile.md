@@ -147,25 +147,23 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ## Skills
 
-### Programming Languages
+| Language              | Proficiency      | Years | Experience                                                                                            |
+| --------------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------- |
+| Python                | Expert           | 7+    | Server Management / Network Communication / Data Science / Web Crawlers / Libraries / SDK Development |
+| JavaScript/TypeScript | Expert           | 7+    | Server Management / PWA / SPA / CSR and SSR / 2D and 3D Games / Serverless Functions / Libraries      |
+| Bash/Unix Shell       | Proficient       | 3+    | Process Management / Automation Tools / Software Operations / SDK Development                         |
+| C#                    | Vibe Coding      | 1+    | Network Communication / MVC / Libraries                                                               |
+| C++                   | Prior Experience | 1+    |                                                                                                       |
+| Java                  | Prior Experience | 1+    |                                                                                                       |
 
-| Language              | Proficiency      |
-| --------------------- | ---------------- |
-| Python                | Expert           |
-| JavaScript/TypeScript | Expert           |
-| Bash/Unix Shell       | Proficient       |
-| C#                    | Vibe Coding      |
-| C++                   | Prior Experience |
-| Java                  | Prior Experience |
+### Back-End Development
 
-- Back-End Development
-
-  - gRPC, RabbitMQ, Socket.io
-  - Django, Flask, Tornado
-  - Express.js, Next.js
-  - .NET SDK
-  - Avahi, Envoy, Nginx, Apache HTTP Server, uWSGI
-  - Linux
+- gRPC, RabbitMQ, Socket.io
+- Django, Flask, Tornado
+- Express.js, Next.js
+- .NET SDK
+- Avahi, Envoy, Nginx, Apache HTTP Server, uWSGI
+- Linux
 
 - **DevOps Technologies:**
 
@@ -208,34 +206,31 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ### Massachusetts Institute of Technology
 
-| Timeline            | Program                           | Degree      |
-| ------------------- | --------------------------------- | ----------- |
-| Aug 2023 - Nov 2023 | Data Science and Machine Learning | Certificate |
-
-- Ranked 15 out of 131 participants
-- Score 579.5/600
+- **Program:** Data Science and Machine Learning
+- **Degree:** Certificate
+- **Timeline:** Aug 2023 - Nov 2023
+  - Ranked 15 out of 131 participants
+  - Score 579.5/600
 
 ### Boston University
 
-| Timeline            | Program          | Degree            |
-| ------------------- | ---------------- | ----------------- |
-| May 2022 - Jan 2024 | Computer Science | Master in Science |
-
-- Ranked 3rd in infrastructure services configuration and defense at [NCAE-C](https://www.ncaecybergames.org/) 2023, North East Division
-- 1st Author for [“Quantitative DevSecOps Metrics for Cloud-Based Web Microservices”](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317-160342, 2024, doi: 10.1109/ACCESS.2024.3486314
-- Member of Cybersecurity Club
-- GPA 3.8/4.0
+- **Program:** Computer Science
+- **Degree:** Master in Science
+- **Timeline:** May 2022 - Jan 2024
+  - Ranked 3rd in infrastructure services configuration and defense at [NCAE-C](https://www.ncaecybergames.org/) 2023, North East Division
+  - 1st Author for [Quantitative DevSecOps Metrics for Cloud-Based Web Microservices](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317-160342, 2024, doi: 10.1109/ACCESS.2024.3486314
+  - Member of Cybersecurity Club
+  - GPA 3.8/4.0
 
 ### New York University
 
-| Timeline            | Program                                              | Degree      |
-| ------------------- | ---------------------------------------------------- | ----------- |
-| Jan 2022 - May 2022 | Preparatory Course for Graduate Studies in Computing | Certificate |
+- **Program:** Preparatory Course for Graduate Studies in Computing
+- **Degree:** Certificate
+- **Timeline:** Jan 2022 - May 2022
 
 ### National Formosa University
 
-| Timeline            | Program           | Degree                |
-| ------------------- | ----------------- | --------------------- |
-| Sep 2013 - Jan 2017 | Multimedia Design | Bachelor in Fine Arts |
-
-- Researched the integration of browser runtime and 3D modeling technology
+- **Program:** Multimedia Design
+- **Degree:** Bachelor in Fine Arts
+- **Timeline:** Sep 2013 - Jan 2017
+  - Researched the integration of browser runtime and 3D modeling technology
