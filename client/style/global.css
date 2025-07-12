@@ -14,7 +14,7 @@
 
 @layer base {
   img {
-    @apply w-full min-h-5;
+    @apply w-full min-h-[22px];
     @apply rounded-md shadow-md;
   }
 
@@ -73,6 +73,7 @@
     @apply border-1 rounded-md;
     @apply border-gray-300 dark:border-gray-700;
   }
+
   .markdown-table th {
     @apply p-4 font-semibold;
     @apply border-separate border-spacing-0;
@@ -80,6 +81,7 @@
     @apply border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-950;
     @apply sticky left-0 z-10;
   }
+
   .markdown-table td {
     @apply p-4 text-nowrap;
     @apply border-separate border-spacing-0;
@@ -99,6 +101,6 @@
   }
 
   .markdown-list-item .markdown-modal-image {
-    @apply translate-y-[5px];
+    @apply translate-y-[6px];
   }
 }
