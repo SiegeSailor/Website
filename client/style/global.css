@@ -76,22 +76,25 @@
   .markdown-table th {
     @apply p-4 font-semibold;
     @apply border-separate border-spacing-0;
-    @apply border-b-1 border-r-1 first:rounded-tl-md last:rounded-tr-md last:border-r-0;
+    @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-950;
+    @apply sticky left-0 z-10;
   }
   .markdown-table td {
     @apply p-4 text-nowrap;
     @apply border-separate border-spacing-0;
-    @apply border-b-1 border-r-1 first:rounded-tl-md last:rounded-tr-md last:border-r-0;
-    @apply border-gray-300 dark:border-gray-700;
+    @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
+    @apply border-gray-300 dark:border-gray-700 bg-background;
     @apply align-middle leading-none;
-  }
-  .markdown-table tr:last-child td {
-    @apply border-b-0;
+    @apply sticky left-0 z-10;
   }
 
-  .markdown-table td img,
-  .markdown-list-item img {
+  .markdown-table tr:last-child td {
+    @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
+  }
+
+  .markdown-table td > img,
+  .markdown-list-item > img {
     @apply max-w-none h-auto;
   }
 
