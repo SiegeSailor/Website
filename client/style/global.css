@@ -93,8 +93,8 @@
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
   }
 
-  .markdown-table td > img,
-  .markdown-list-item > img {
+  .markdown-table td img,
+  .markdown-list-item img {
     @apply max-w-none h-auto;
   }
 
