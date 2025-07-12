@@ -72,7 +72,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-outside pl-4 text-medium my-1 last:my-0",
+              "list-disc list-outside pl-4 my-1 last:my-0",
               "markdown-list"
             )}
           />
@@ -82,7 +82,7 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-outside pl-4 text-medium my-1 last:my-0",
+              "list-decimal list-outside pl-4 my-1 last:my-0",
               "markdown-list"
             )}
           />
@@ -92,9 +92,15 @@ export default function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "text-medium my-1 last:my-0",
+              "text-medium font-light my-1 last:my-0",
               "markdown-list-item"
             )}
+          />
+        ),
+        strong: (element) => (
+          <strong
+            {...element}
+            className={clsx(element.className, "font-bold")}
           />
         ),
         callout: (element) => (

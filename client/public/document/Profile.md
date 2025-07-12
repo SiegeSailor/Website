@@ -161,7 +161,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 ### Technologies
 
 - **Back-End Development**
-  - ![gRPC](https://img.shields.io/badge/gRPC-4285F4?logo=grpc&logoColor=fff) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=fff) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff)
+  - `gRPC` ![gRPC](https://img.shields.io/badge/gRPC-4285F4?logo=grpc&logoColor=fff) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=fff) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff)
   - ![Django](https://img.shields.io/badge/Django-%23092E20.svg?logo=django&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff) ![Tornado](https://img.shields.io/badge/Tornado-3C4142?logo=tornado&logoColor=fff)
   - ![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB) ![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white) ![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)
   - ![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff) ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?logo=dotnet&logoColor=fff)

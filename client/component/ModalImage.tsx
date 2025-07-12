@@ -63,7 +63,8 @@ export default function ({
       className={clsx(
         "bg-default-100 dark:bg-default-50",
         "rounded-md shadow-md",
-        "inline-block"
+        "inline-block",
+        "markdown-modal-image"
       )}
     >
       <Image

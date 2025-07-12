@@ -94,4 +94,8 @@
   .markdown-list-item img {
     @apply max-w-none h-auto;
   }
+
+  .markdown-list-item .markdown-modal-image {
+    @apply translate-y-[5px];
+  }
 }
