@@ -7,6 +7,33 @@ import { getAnchorsByContent, getSlugByTitle } from "@/helper/article";
 import { getDateStringByDate } from "@/helper/utility";
 
 const REGEX_URL = /^https?:\/\/.+/;
+const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
+
+const TIMELINE = {
+  start: "2016-06-01",
+  intervals: [
+    { start: "2017-01-01", end: "2017-06-30", reason: "Military Service" },
+    { start: "2022-02-01", end: "2024-01-31", reason: "Career Gap" },
+  ],
+} as const;
+
+function getExperienceYears(): string {
+  const dateCurrent = new Date();
+  const dateCareerStart = new Date(TIMELINE.start);
+
+  const timeTotal = dateCurrent.getTime() - dateCareerStart.getTime();
+
+  const timeExcluded = TIMELINE.intervals.reduce((total, period) => {
+    return (
+      total +
+      (new Date(period.end).getTime() - new Date(period.start).getTime())
+    );
+  }, 0);
+
+  const experienceYears = (timeTotal - timeExcluded) / MILLISECOND_ONE_YEAR;
+
+  return `${experienceYears.toFixed(1)} Years`;
+}
 
 export async function getProfile() {
   const filename = "Profile.md";
@@ -23,7 +50,6 @@ export async function getProfile() {
     const media: { resume: string; github: string; linkedin: string } =
       data.media;
     const status: {
-      experience: string;
       location: string;
       position: string;
       visa: string;
@@ -51,8 +77,6 @@ export async function getProfile() {
       throw new Error("LinkedIn URL must be a valid URL");
     if (!status || typeof status !== "object")
       throw new Error("Status must be an object");
-    if (typeof status.experience !== "string" || status.experience.length === 0)
-      throw new Error("Experience must be a non-empty string");
     if (typeof status.location !== "string" || status.location.length === 0)
       throw new Error("Location must be a non-empty string");
     if (typeof status.position !== "string" || status.position.length === 0)
@@ -77,7 +101,10 @@ export async function getProfile() {
         headlines,
         media,
         picture: data.picture,
-        status,
+        status: {
+          ...status,
+          experience: getExperienceYears(),
+        },
         title: AUTHOR,
         updatedOn: getDateStringByDate(statistics.mtime),
       },

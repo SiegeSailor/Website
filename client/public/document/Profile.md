@@ -3,7 +3,6 @@ picture: /image/Jin-Yu-Zhang-Cropped.jpg
 headlines:
   - "Full-Stack Development"
   - "DevOps"
-  - "Cloud Architecture"
   - "Event-Driven Systems"
   - "Cloud-Based Web Microservices"
 media:
@@ -11,44 +10,39 @@ media:
   linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
   resume: https://drive.google.com/file/d/1eSR5fJNkc6h0R_3YsAkLCfX2W9_MYPed/view?usp=sharing
 status:
-  experience: "7+ Years"
   location: "NYC Metropolitan Area"
   position: "Senior Software Engineer"
   visa: "STEM OPT (GC ~06/27)"
 ---
 
-I'm a software engineer with 7+ years of experience who loves building scalable, reuseable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud microservices to medical device software.
+I'm a software engineer who loves building scalable, reuseable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud-based microservices to medical device software.
 
 I've been fortunate to work across different industries - from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (I've managed up to 6 developers) and boosting productivity across the entire development lifecycle.
 
-In my past work, I committed to developing developer tools, such as libraries and SDKs, and high-volume tolerance applications, including backend services and frontend interfaces. I've also committed to CI/CD pipelines, automation tools, codebase management, infrastructure configuration, and testing plans for the products I developed. I believe in writing code that not only works today but can evolve gracefully as requirements change, which my diverse background has prepared me well for.
+In my past work, I committed to developing developer tools, such as libraries and SDKs, and high-volume tolerance real-time applications, including backend services and frontend interfaces. I've also committed to CI/CD pipelines, automation tools, codebase management, infrastructure configuration, and testing plans for the products I developed.
 
 <!-- description -->
 
 ## Summary
 
-### Technical Expertise
-
-- **8+ years** full-stack development (Python, TypeScript, React.js, Django, AWS, GCP)
-- **3+ years** DevOps and cloud architecture (Docker, Kubernetes, CI/CD, microservices)
-- **2+ years** team leadership and project management (led teams up to 6 developers)
-- **Specialized domains:** Medical device software, e-commerce platforms, real-time gaming systems
-
-### Industry Experience
-
-| Industry               | Years    | Key Technologies                              | Notable Achievements                          |
-| ---------------------- | -------- | --------------------------------------------- | --------------------------------------------- |
-| Medical Device         | 2+ years | Docker, gRPC, ASP.NET Core, FDA compliance    | 90% RFID optimization, multi-language SDK     |
-| E-Commerce             | 3+ years | React.js, Socket.io, CDN, high-volume systems | 200K+ concurrent users, 160% retention boost  |
-| Gaming                 | 6 months | Three.js, Phaser, real-time multiplayer       | 10K RPS, motion control systems               |
-| Digital Transformation | 2+ years | PWA, Firebase, automation                     | Supply chain digitization, process automation |
-
-### Core Competencies
-
-- **Architecture:** Cloud microservices, REST APIs, event-driven systems, scalable backends
-- **Development:** Full-stack web applications, real-time systems, cross-platform UIs
-- **DevOps:** Container orchestration, CI/CD pipelines, infrastructure automation
-- **Leadership:** Agile methodologies, cross-functional collaboration, technical mentoring
+- Years of working experience in **Software Engineering** in **Saas**, **PaaS**, and **SiMD**
+- Engagements in variant working environments
+  - **Agile**, which entails scrum meetings, sprint planning meetings, and extreme programming for e-commerce software development
+  - **Waterfall**, which compiles FDA and EU MDR government regulations for medical device development
+- Experience in **System Design** using Data Modeling with **ERD** and Data Flow with **DFD**
+  - **Cloud-Based Microservices** for e-commerce global and regional service integration
+    - Extensive experience in various communication protocols, such as **REST**, **WebSocket**, **RPC**, and **Messaging**
+    - Strong understanding of **Sharding**, **Partitioning**, and various **Caching Strategies**
+  - Hybrid approaches for medical devices to support no-internet-access locations
+    - Hardware security layer with purpose-built embedded **Linux**
+    - Firmware integration with **RFID**
+  - **Digital Transformation** for regulated businesses
+- Extensively worked with **Git** for version control in different workflows, such as **Long-Term Support (LTS)**, **Git Flow**, and **GitHub Flow**, so-called **Trunk-Based Flow**
+- Experience in cloud-based distributed services
+  - Integration with Google Cloud Platform, **GCP**, and Amazon Web Services, **AWS**
+  - Deploy, manage, and test AWS services using **Terraform** and **LocalStack**
+- Solid understanding of essential Data Structure and Algorithm, DSA
+  - **Concurrent Programming** for high I/O blocking tasks on medical devices, data ETL for e-commerce platforms worldwide, and high-volume tolerance multiple-player games
 
 ## Employment
 
@@ -147,57 +141,66 @@ In my past work, I committed to developing developer tools, such as libraries an
 
 ## Skills
 
-| Language                                                                                                                                                                                                                                                                    | Proficiency        | Years | Experience                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----- | ----------------------------------------------------------------------------------------------------- |
-| ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)                                                                                                                                                                                             | Daily Use          | 7+    | Server Management / Network Communication / Data Science / Web Crawlers / Libraries / SDK Development |
-| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff) ![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white) | Daily Use          | 7+    | Server Management / PWA / SPA / CSR and SSR / 2D and 3D Games / Serverless Functions / Libraries      |
-| ![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=fff)                                                                                                                                                                                                | Daily Use          | 3+    | Process Management / Automation Tools / Software Operations / SDK Development                         |
-| ![SQL](https://img.shields.io/badge/SQL-%2307405e.svg?logo=sqlite&logoColor=white)                                                                                                                                                                                          | Project Experience | 2+    | Database Management                                                                                   |
-| ![C#](https://img.shields.io/badge/C%23-%23239120.svg?logo=csharp&logoColor=white)                                                                                                                                                                                          | Project Experience | 1+    | Network Communication / MVC / Libraries                                                               |
-| ![C](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white) ![C++](https://img.shields.io/badge/C++-%2300599C.svg?logo=c%2B%2B&logoColor=white)                                                                                                                      | Academic           | 1+    |                                                                                                       |
-| ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)                                                                                                                                                                                       | Academic           | 1-    |                                                                                                       |
-| ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?&logo=php&logoColor=white)                                                                                                                                                                                            | Project Experience | 1-    | WordPress Plugins                                                                                     |
+| Language                                                                                                                                                                                                                                                                    | Proficiency        | Years | Experience                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff) ![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white) | Daily Use          | 7+    | Front-End Development / Back-End Development / RWD / PWA / SPA / CSR and SSR / 2D and 3D Games / Serverless Functions / Libraries |
+| ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)                                                                                                                                                                                             | Daily Use          | 4+    | Back-End Development / Network Communication / Data Science / Web Crawlers / Libraries / SDK Development                          |
+| ![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=fff)                                                                                                                                                                                                | Daily Use          | 3+    | Back-End Development / DevOps / Automation Tools / Software Operations / SDK Development                                          |
+| ![SQL](https://img.shields.io/badge/SQL-%2307405e.svg?logo=sqlite&logoColor=white)                                                                                                                                                                                          | Project Experience | 1+    | Database Management                                                                                                               |
+| ![C#](https://img.shields.io/badge/C%23-%23239120.svg?logo=csharp&logoColor=white)                                                                                                                                                                                          | Project Experience | 1+    | Network Communication / MVC / Libraries                                                                                           |
+| ![C](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white) ![C++](https://img.shields.io/badge/C++-%2300599C.svg?logo=c%2B%2B&logoColor=white)                                                                                                                      | Academic           | 1+    |                                                                                                                                   |
+| ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)                                                                                                                                                                                       | Academic           | 1-    |                                                                                                                                   |
+| ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?&logo=php&logoColor=white)                                                                                                                                                                                            | Project Experience | 1-    | WordPress Plugins                                                                                                                 |
 
-### Technologies
+### Back-End Development
 
-- **Back-End Development**:
-  - ![gRPC](https://img.shields.io/badge/gRPC-4285F4?logo=trpc&logoColor=fff) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=fff) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff) ![Avahi](https://img.shields.io/badge/Avahi-FF6B35?logo=avahi&logoColor=fff) ![Envoy](https://img.shields.io/badge/Envoy-AC6199?logo=envoyproxy&logoColor=fff) ![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=fff) ![Apache](https://img.shields.io/badge/Apache-D22128?logo=apache&logoColor=fff)
-  - ![Django](https://img.shields.io/badge/Django-%23092E20.svg?logo=django&logoColor=white) ![uWSGI](https://img.shields.io/badge/uWSGI-333?logo=uwsgi&logoColor=000) ![Flask](https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff) ![Tornado](https://img.shields.io/badge/Tornado-3C4142?logo=tornado&logoColor=fff)
-  - ![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB) ![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)
-  - ![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff) ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?logo=dotnet&logoColor=fff)
-  - ![Supervisord](https://img.shields.io/badge/Supervisord-8BC34A?logo=supervisor&logoColor=fff)
-  - ![CMake](https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=fff)
-- **Databases**:
-  - ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=fff) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white) ![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-%2307405e.svg?logo=sqlite&logoColor=white)
-  - ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-%23DD0031.svg?logo=redis&logoColor=white)
-- **DevOps**:
-  - ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)
-  - ![GitLab CI](https://img.shields.io/badge/GitLab%20CI-FC6D26?logo=gitlab&logoColor=fff) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white) ![WindRiver Studio](https://img.shields.io/badge/WindRiver%20Studio-0052CC?logo=windriver&logoColor=fff)
-  - ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?logo=ubuntu&logoColor=white) ![Debian](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff)
-  - ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff) ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white) ![GitLab](https://img.shields.io/badge/GitLab-FC6D26?logo=gitlab&logoColor=fff) ![NPM](https://img.shields.io/badge/NPM-CB3837?logo=npm&logoColor=fff) ![NVM](https://img.shields.io/badge/NVM-4B32C3?logo=nvm&logoColor=fff) ![NuGet](https://img.shields.io/badge/NuGet-004880?logo=nuget&logoColor=fff)
-  - ![Sentry](https://img.shields.io/badge/Sentry-362D59?logo=sentry&logoColor=fff)
-  - ![LocalStack](https://img.shields.io/badge/LocalStack-4B32C3?logo=localstack&logoColor=fff) ![Terraform](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=fff)
-- **Cloud Services**:
-  - ![Google Cloud Platform](https://img.shields.io/badge/Google%20Cloud%20Platform-%234285F4.svg?logo=google-cloud&logoColor=white)
-    - ![Google Compute Engine](https://img.shields.io/badge/Google%20Compute%20Engine-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Storage](https://img.shields.io/badge/Google%20Cloud%20Storage-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Kubernetes Engine](https://img.shields.io/badge/Google%20Kubernetes%20Engine-%234285F4.svg?logo=kubernetes&logoColor=white) ![Identity & Access Management](https://img.shields.io/badge/Identity%20%26%20Access%20Management-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Analytics](https://img.shields.io/badge/Google%20Analytics-E37400?logo=googleanalytics&logoColor=fff) ![Google BigQuery](https://img.shields.io/badge/Google%20BigQuery-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Run](https://img.shields.io/badge/Google%20Cloud%20Run-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Functions](https://img.shields.io/badge/Google%20Cloud%20Functions-%234285F4.svg?logo=google-cloud&logoColor=white)
-    - ![Firebase](https://img.shields.io/badge/Firebase-DD2C00?logo=firebase&logoColor=fff)
-      - ![Firebase Authentication](https://img.shields.io/badge/Firebase%20Authentication-DD2C00?logo=firebase&logoColor=fff) ![Cloud Firestore](https://img.shields.io/badge/Cloud%20Firestore-DD2C00?logo=firebase&logoColor=fff) ![Firebase Remote Config](https://img.shields.io/badge/Firebase%20Remote%20Config-DD2C00?logo=firebase&logoColor=fff) ![Firebase Realtime Database](https://img.shields.io/badge/Firebase%20Realtime%20Database-DD2C00?logo=firebase&logoColor=fff) ![Firebase Hosting](https://img.shields.io/badge/Firebase%20Hosting-DD2C00?logo=firebase&logoColor=fff) ![Firebase Analytics](https://img.shields.io/badge/Firebase%20Analytics-DD2C00?logo=firebase&logoColor=fff)
-  - ![Amazon Web Services](https://custom-icon-badges.demolab.com/badge/Amazon_Web_Services-%23FF9900.svg?logo=aws&logoColor=white)
-    - ![Amazon EC2](https://custom-icon-badges.demolab.com/badge/Amazon_EC2-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon ECS](https://custom-icon-badges.demolab.com/badge/Amazon_ECS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon EKS](https://custom-icon-badges.demolab.com/badge/Amazon_EKS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SNS](https://custom-icon-badges.demolab.com/badge/Amazon_SNS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SQS](https://custom-icon-badges.demolab.com/badge/Amazon_SQS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon MQ](https://custom-icon-badges.demolab.com/badge/Amazon_MQ-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SES](https://custom-icon-badges.demolab.com/badge/Amazon_SES-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Identity & Access Management](https://custom-icon-badges.demolab.com/badge/AWS_Identity_%26_Access_Management-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon RDS](https://custom-icon-badges.demolab.com/badge/Amazon_RDS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon S3](https://custom-icon-badges.demolab.com/badge/Amazon_S3-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon CloudWatch](https://custom-icon-badges.demolab.com/badge/Amazon_CloudWatch-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Lambda](https://custom-icon-badges.demolab.com/badge/AWS%20Lambda-%23FF9900.svg?logo=aws-lambda&logoColor=white) ![Amazon Route 53](https://custom-icon-badges.demolab.com/badge/Amazon_Route_53-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Amplify](https://custom-icon-badges.demolab.com/badge/AWS_Amplify-%23FF9900.svg?logo=aws&logoColor=white)
-- **Front-End Development**:
-  - ![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff)
-  - ![Three.js](https://img.shields.io/badge/Three.js-000?logo=threedotjs&logoColor=fff) ![Framer](https://img.shields.io/badge/Framer-05F?logo=framer&logoColor=fff) ![Phaser](https://img.shields.io/badge/Phaser-FF6B35?logo=phaser&logoColor=fff) ![D3.js](https://img.shields.io/badge/D3.js-F9A03C?logo=d3&logoColor=fff) ![jQuery](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=fff)
-  - ![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff) ![SASS](https://img.shields.io/badge/SASS-C69?logo=sass&logoColor=fff) ![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)
-  - ![Babel](https://img.shields.io/badge/Babel-F9DC3E?logo=babel&logoColor=000) ![Gulp](https://img.shields.io/badge/Gulp-CF4647?logo=gulp&logoColor=fff) ![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?logo=webpack&logoColor=000)
-  - ![Electron](https://img.shields.io/badge/Electron-2B2E3A?logo=electron&logoColor=fff)
-  - ![Ant Design](https://img.shields.io/badge/Ant%20Design-0170FE?logo=antdesign&logoColor=fff) ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff) ![Material UI](https://img.shields.io/badge/Material%20UI-007FFF?logo=mui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-8B5CF6?logo=headlessui&logoColor=fff) ![Semantic UI](https://img.shields.io/badge/Semantic%20UI-35BDB2?logo=semanticuireact&logoColor=fff) ![Ionic](https://img.shields.io/badge/Ionic-3880FF?logo=ionic&logoColor=white) ![Chakra UI](https://img.shields.io/badge/Chakra%20UI-319795?logo=chakraui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-000000?logo=heroui&logoColor=fff)
-  - ![Cypress](https://img.shields.io/badge/Cypress-69D3A7?logo=cypress&logoColor=fff) ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=fff)
-- **Team Collaboration**:
-  - ![Jira](https://img.shields.io/badge/Jira-0052CC?logo=jira&logoColor=fff) ![Mattermost](https://img.shields.io/badge/Mattermost-0058CC?logo=mattermost&logoColor=fff) ![Trello](https://img.shields.io/badge/Trello-0052CC?logo=trello&logoColor=fff) ![Asana](https://img.shields.io/badge/Asana-F06A6A?logo=asana&logoColor=fff)
-  - ![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?logo=mermaid&logoColor=fff) ![Miro](https://img.shields.io/badge/Miro-050038?logo=miro&logoColor=fff) ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
-  - ![Postman](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff) ![Ngrok](https://img.shields.io/badge/Ngrok-1F1E37?logo=ngrok&logoColor=fff)
-  - ![Docusaurus](https://img.shields.io/badge/Docusaurus-3ECC5F?logo=docusaurus&logoColor=fff) ![GitBook](https://img.shields.io/badge/GitBook-3884FF?logo=gitbook&logoColor=fff) ![GitLab Pages](https://img.shields.io/badge/GitLab_Pages-FC6D26?logo=githubpages&logoColor=fff) ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
-  - ![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack&logoColor=fff)
+- ![gRPC](https://img.shields.io/badge/gRPC-4285F4?logo=trpc&logoColor=fff) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=fff) ![Socket.io](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff) ![Avahi](https://img.shields.io/badge/Avahi-FF6B35?logo=avahi&logoColor=fff) ![Envoy](https://img.shields.io/badge/Envoy-AC6199?logo=envoyproxy&logoColor=fff) ![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=fff) ![Apache](https://img.shields.io/badge/Apache-D22128?logo=apache&logoColor=fff)
+- ![Django](https://img.shields.io/badge/Django-%23092E20.svg?logo=django&logoColor=white) ![uWSGI](https://img.shields.io/badge/uWSGI-333?logo=uwsgi&logoColor=000) ![Flask](https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff) ![Tornado](https://img.shields.io/badge/Tornado-3C4142?logo=tornado&logoColor=fff)
+- ![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB) ![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)
+- ![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff) ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?logo=dotnet&logoColor=fff)
+- ![Supervisord](https://img.shields.io/badge/Supervisord-8BC34A?logo=supervisor&logoColor=fff)
+- ![CMake](https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=fff)
+
+### Databases
+
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=fff) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white) ![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-%2307405e.svg?logo=sqlite&logoColor=white)
+- ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-%23DD0031.svg?logo=redis&logoColor=white)
+
+### DevOps
+
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)
+- ![GitLab CI](https://img.shields.io/badge/GitLab%20CI-FC6D26?logo=gitlab&logoColor=fff) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white) ![WindRiver Studio](https://img.shields.io/badge/WindRiver%20Studio-0052CC?logo=windriver&logoColor=fff)
+- ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?logo=ubuntu&logoColor=white) ![Debian](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff)
+- ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff) ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white) ![GitLab](https://img.shields.io/badge/GitLab-FC6D26?logo=gitlab&logoColor=fff) ![NPM](https://img.shields.io/badge/NPM-CB3837?logo=npm&logoColor=fff) ![NVM](https://img.shields.io/badge/NVM-4B32C3?logo=nvm&logoColor=fff) ![NuGet](https://img.shields.io/badge/NuGet-004880?logo=nuget&logoColor=fff)
+- ![Sentry](https://img.shields.io/badge/Sentry-362D59?logo=sentry&logoColor=fff)
+- ![LocalStack](https://img.shields.io/badge/LocalStack-4B32C3?logo=localstack&logoColor=fff) ![Terraform](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=fff)
+
+### Cloud Services
+
+- ![Google Cloud Platform](https://img.shields.io/badge/Google%20Cloud%20Platform-%234285F4.svg?logo=google-cloud&logoColor=white)
+  - ![Google Compute Engine](https://img.shields.io/badge/Google%20Compute%20Engine-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Storage](https://img.shields.io/badge/Google%20Cloud%20Storage-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Kubernetes Engine](https://img.shields.io/badge/Google%20Kubernetes%20Engine-%234285F4.svg?logo=kubernetes&logoColor=white) ![Identity & Access Management](https://img.shields.io/badge/Identity%20%26%20Access%20Management-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Analytics](https://img.shields.io/badge/Google%20Analytics-E37400?logo=googleanalytics&logoColor=fff) ![Google BigQuery](https://img.shields.io/badge/Google%20BigQuery-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Run](https://img.shields.io/badge/Google%20Cloud%20Run-%234285F4.svg?logo=google-cloud&logoColor=white) ![Google Cloud Functions](https://img.shields.io/badge/Google%20Cloud%20Functions-%234285F4.svg?logo=google-cloud&logoColor=white)
+  - ![Firebase](https://img.shields.io/badge/Firebase-DD2C00?logo=firebase&logoColor=fff)
+    - ![Firebase Authentication](https://img.shields.io/badge/Firebase%20Authentication-DD2C00?logo=firebase&logoColor=fff) ![Cloud Firestore](https://img.shields.io/badge/Cloud%20Firestore-DD2C00?logo=firebase&logoColor=fff) ![Firebase Remote Config](https://img.shields.io/badge/Firebase%20Remote%20Config-DD2C00?logo=firebase&logoColor=fff) ![Firebase Realtime Database](https://img.shields.io/badge/Firebase%20Realtime%20Database-DD2C00?logo=firebase&logoColor=fff) ![Firebase Hosting](https://img.shields.io/badge/Firebase%20Hosting-DD2C00?logo=firebase&logoColor=fff) ![Firebase Analytics](https://img.shields.io/badge/Firebase%20Analytics-DD2C00?logo=firebase&logoColor=fff)
+- ![Amazon Web Services](https://custom-icon-badges.demolab.com/badge/Amazon_Web_Services-%23FF9900.svg?logo=aws&logoColor=white)
+  - ![Amazon EC2](https://custom-icon-badges.demolab.com/badge/Amazon_EC2-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon ECS](https://custom-icon-badges.demolab.com/badge/Amazon_ECS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon EKS](https://custom-icon-badges.demolab.com/badge/Amazon_EKS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SNS](https://custom-icon-badges.demolab.com/badge/Amazon_SNS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SQS](https://custom-icon-badges.demolab.com/badge/Amazon_SQS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon MQ](https://custom-icon-badges.demolab.com/badge/Amazon_MQ-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon SES](https://custom-icon-badges.demolab.com/badge/Amazon_SES-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Identity & Access Management](https://custom-icon-badges.demolab.com/badge/AWS_Identity_%26_Access_Management-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon RDS](https://custom-icon-badges.demolab.com/badge/Amazon_RDS-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon S3](https://custom-icon-badges.demolab.com/badge/Amazon_S3-%23FF9900.svg?logo=aws&logoColor=white) ![Amazon CloudWatch](https://custom-icon-badges.demolab.com/badge/Amazon_CloudWatch-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Lambda](https://custom-icon-badges.demolab.com/badge/AWS%20Lambda-%23FF9900.svg?logo=aws-lambda&logoColor=white) ![Amazon Route 53](https://custom-icon-badges.demolab.com/badge/Amazon_Route_53-%23FF9900.svg?logo=aws&logoColor=white) ![AWS Amplify](https://custom-icon-badges.demolab.com/badge/AWS_Amplify-%23FF9900.svg?logo=aws&logoColor=white)
+
+### Front-End Development
+
+- ![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff)
+- ![Three.js](https://img.shields.io/badge/Three.js-000?logo=threedotjs&logoColor=fff) ![Framer](https://img.shields.io/badge/Framer-05F?logo=framer&logoColor=fff) ![Phaser](https://img.shields.io/badge/Phaser-FF6B35?logo=phaser&logoColor=fff) ![D3.js](https://img.shields.io/badge/D3.js-F9A03C?logo=d3&logoColor=fff) ![jQuery](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=fff)
+- ![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff) ![SASS](https://img.shields.io/badge/SASS-C69?logo=sass&logoColor=fff) ![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)
+- ![Babel](https://img.shields.io/badge/Babel-F9DC3E?logo=babel&logoColor=000) ![Gulp](https://img.shields.io/badge/Gulp-CF4647?logo=gulp&logoColor=fff) ![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?logo=webpack&logoColor=000)
+- ![Electron](https://img.shields.io/badge/Electron-2B2E3A?logo=electron&logoColor=fff)
+- ![Ant Design](https://img.shields.io/badge/Ant%20Design-0170FE?logo=antdesign&logoColor=fff) ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff) ![Material UI](https://img.shields.io/badge/Material%20UI-007FFF?logo=mui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-8B5CF6?logo=headlessui&logoColor=fff) ![Semantic UI](https://img.shields.io/badge/Semantic%20UI-35BDB2?logo=semanticuireact&logoColor=fff) ![Ionic](https://img.shields.io/badge/Ionic-3880FF?logo=ionic&logoColor=white) ![Chakra UI](https://img.shields.io/badge/Chakra%20UI-319795?logo=chakraui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-000000?logo=heroui&logoColor=fff)
+- ![Cypress](https://img.shields.io/badge/Cypress-69D3A7?logo=cypress&logoColor=fff) ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=fff)
+
+### Team Collaboration
+
+- ![Jira](https://img.shields.io/badge/Jira-0052CC?logo=jira&logoColor=fff) ![Mattermost](https://img.shields.io/badge/Mattermost-0058CC?logo=mattermost&logoColor=fff) ![Trello](https://img.shields.io/badge/Trello-0052CC?logo=trello&logoColor=fff) ![Asana](https://img.shields.io/badge/Asana-F06A6A?logo=asana&logoColor=fff)
+- ![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?logo=mermaid&logoColor=fff) ![Miro](https://img.shields.io/badge/Miro-050038?logo=miro&logoColor=fff) ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
+- ![Postman](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff) ![Ngrok](https://img.shields.io/badge/Ngrok-1F1E37?logo=ngrok&logoColor=fff)
+- ![Docusaurus](https://img.shields.io/badge/Docusaurus-3ECC5F?logo=docusaurus&logoColor=fff) ![GitBook](https://img.shields.io/badge/GitBook-3884FF?logo=gitbook&logoColor=fff) ![GitLab Pages](https://img.shields.io/badge/GitLab_Pages-FC6D26?logo=githubpages&logoColor=fff) ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
+- ![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack&logoColor=fff)
 
 ## Education
 
