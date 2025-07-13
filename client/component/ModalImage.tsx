@@ -14,7 +14,7 @@ import {
 import { PlusIcon, MinusIcon } from "lucide-react";
 import clsx from "clsx";
 
-const ZOOM_MAX = 5 as const;
+const ZOOM_MAX = 10 as const;
 const ZOOM_MIN = 1 as const;
 const ZOOM_STEP = 0.25 as const;
 
