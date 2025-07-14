@@ -30,17 +30,14 @@ In my past work, I committed to developing developer tools, such as libraries an
   - **Agile**, which entails scrum meetings, sprint planning meetings, and extreme programming for e-commerce software development
   - **Waterfall**, which compiles FDA and EU MDR government regulations for medical device development
 - Experience in **System Design** using Data Modeling with **ERD** and Data Flow with **DFD**
-  - **Cloud-Based Microservices** for e-commerce global and regional service integration
-    - Extensive experience in various communication protocols, such as **REST**, **WebSocket**, **RPC**, and **Messaging**
+  - Extensive experience in various communication protocols, such as **REST**, **WebSocket**, **RPC**, and **Messaging**
+  - Distributed **Cloud-Based Microservices** for e-commerce global and regional service integration
     - Strong understanding of **Sharding**, **Partitioning**, and various **Caching Strategies**
   - Hybrid approaches for medical devices to support no-internet-access locations
     - Hardware security layer with purpose-built embedded **Linux**
     - Firmware integration with **RFID**
   - **Digital Transformation** for regulated businesses
 - Extensively worked with **Git** for version control in different workflows, such as **Long-Term Support (LTS)**, **Git Flow**, and **GitHub Flow**, so-called **Trunk-Based Flow**
-- Experience in cloud-based distributed services
-  - Integration with Google Cloud Platform, **GCP**, and Amazon Web Services, **AWS**
-  - Deploy, manage, and test AWS services using **Terraform** and **LocalStack**
 - Solid understanding of essential Data Structure and Algorithm, DSA
   - **Concurrent Programming** for high I/O blocking tasks on medical devices, data ETL for e-commerce platforms worldwide, and high-volume tolerance multiple-player games
 

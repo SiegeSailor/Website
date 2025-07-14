@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
+import clsx from "clsx";
 
 import "@/style/global.css";
 import { generateTitle } from "@/helper/utility";
+import { getArticles } from "@/helper/article";
+import { getProfile } from "@/helper/document";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
-import clsx from "clsx";
 
 export const metadata: Metadata = {
   title: generateTitle(),
@@ -27,11 +29,14 @@ export const viewport: Viewport = {
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
-export default function ({
+export default async function ({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const articles = await getArticles();
+  const profile = await getProfile();
+
   return (
     <html suppressHydrationWarning lang="en">
       <body
@@ -39,7 +44,7 @@ export default function ({
         className={clsx(FontRoboto.className, "overscroll-none")}
       >
         <Provider>
-          <Header />
+          <Header articles={articles} profile={profile} />
           <div className="relative flex flex-col">
             <main
               className={clsx(
