@@ -19,17 +19,17 @@ export default function () {
   return (
     <>
       <Button
-        onPress={onOpen}
         aria-label="Search"
-        className="w-full sm:w-48"
+        className="w-full sm:w-32"
+        onPress={onOpen}
         radius="full"
-        variant="bordered"
         startContent={
           <SearchIcon
             size="1.45rem"
             className="text-base text-default-400 pointer-events-none flex-shrink-0"
           />
         }
+        variant="bordered"
       >
         Search
       </Button>

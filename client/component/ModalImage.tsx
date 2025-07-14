@@ -53,7 +53,7 @@ export default function ({
     setZoom(ZOOM_MIN);
   };
 
-  const handleModalClose = () => {
+  const handleClose = () => {
     setZoom(ZOOM_MIN);
     onClose();
   };
@@ -81,7 +81,7 @@ export default function ({
           propsImageThumbnail?.className
         )}
       />
-      <Modal isOpen={isOpen} onClose={handleModalClose} size="5xl">
+      <Modal isOpen={isOpen} onClose={handleClose} size="5xl">
         <ModalContent>
           {(onClose) => (
             <>

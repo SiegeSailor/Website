@@ -54,12 +54,12 @@ export default async function ({
           underline="none"
         >
           <Button
-            startContent={<Icon size="1.45rem" />}
-            size="lg"
-            radius="full"
-            variant="shadow"
-            color="primary"
             className="w-full"
+            color="primary"
+            radius="full"
+            size="lg"
+            startContent={<Icon size="1.45rem" />}
+            variant="shadow"
           >
             Let's Connect
           </Button>

@@ -21,24 +21,31 @@ import Search from "@/component/Search";
 import ThemeSwitch from "@/component/ThemeSwitch";
 
 export default function () {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsMenuOpen(() => false);
+    setIsOpen(() => false);
+    setIsLoading(() => false);
   }, [pathname]);
 
   const title = generateTitle();
+
+  const handlePress = () => {
+    setIsLoading(() => true);
+  };
 
   return (
     <Navbar
       className="border-b-1 border-default-300 border-opacity-60"
       disableAnimation
       isBordered
-      isMenuOpen={isMenuOpen}
+      isMenuOpen={isOpen}
       maxWidth="md"
-      onMenuOpenChange={setIsMenuOpen}
+      onMenuOpenChange={setIsOpen}
       position="sticky"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -79,6 +86,8 @@ export default function () {
               <Link
                 color={pathname === route ? "primary" : undefined}
                 href={route}
+                isDisabled={isLoading}
+                onPress={handlePress}
                 size="lg"
                 underline="none"
               >
