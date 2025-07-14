@@ -31,11 +31,15 @@ export default function ({
   articles: Awaited<ReturnType<typeof getArticles>>;
   profile: Awaited<ReturnType<typeof getProfile>>;
 }>) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     setIsOpen(() => false);
@@ -85,6 +89,8 @@ export default function ({
 
     return result;
   }, [articles]);
+
+  if (!isMounted) return null;
 
   return (
     <Navbar
