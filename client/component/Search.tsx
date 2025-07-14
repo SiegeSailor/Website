@@ -2,16 +2,15 @@
 
 import { SearchIcon } from "lucide-react";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
-  Kbd,
-  useDisclosure,
-  Input,
   Divider,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
 } from "@heroui/react";
 
 export default function () {
@@ -24,7 +23,6 @@ export default function () {
         aria-label="Search"
         className="w-full sm:w-48"
         radius="full"
-        endContent={<Kbd keys={["command"]}>S</Kbd>}
         variant="bordered"
         startContent={
           <SearchIcon
