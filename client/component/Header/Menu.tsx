@@ -4,7 +4,8 @@ import { NavbarMenu, NavbarMenuItem, Kbd, link, Button } from "@heroui/react";
 import { Route } from "next";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import NextLink from "next/link";
+
+import Link from "@/component/Link";
 
 import Search from "@/component/Search";
 
@@ -22,34 +23,21 @@ export default function () {
       <div className="sm:hidden">
         <Search />
       </div>
-      <div className="mt-2 flex flex-col gap-2 text-center">
-        {PAGES.map((page) => {
-          const isActive = pathname === page.href;
-          return (
-            <NavbarMenuItem key={page.label} isActive={isActive}>
-              <NextLink href={page.href}>
-                <Button
-                  endContent={<Kbd keys={["command"]}>{page.press}</Kbd>}
-                  size="md"
-                  variant="light"
-                  className="w-full md:w-6/12 lg:w-8/12"
-                  color={isActive ? "primary" : "default"}
-                >
-                  <span
-                    data-active={isActive}
-                    className={clsx(
-                      link({ color: "foreground" }),
-                      "data-[active=true]:text-primary data-[active=true]:font-medium"
-                    )}
-                  >
-                    {page.label}
-                  </span>
-                </Button>
-              </NextLink>
-            </NavbarMenuItem>
-          );
-        })}
-      </div>
+      {PAGES.map((page) => {
+        const isActive = pathname === page.href;
+        return (
+          <NavbarMenuItem key={page.label}>
+            <Link
+              href={page.href}
+              color={isActive ? "primary" : undefined}
+              size="lg"
+              underline="none"
+            >
+              {page.label}
+            </Link>
+          </NavbarMenuItem>
+        );
+      })}
     </NavbarMenu>
   );
 }

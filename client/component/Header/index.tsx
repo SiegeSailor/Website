@@ -1,3 +1,5 @@
+"use client";
+
 import { SquareTerminalIcon } from "lucide-react";
 import {
   Navbar,
@@ -6,28 +8,48 @@ import {
   NavbarBrand,
   NavbarItem,
   Divider,
+  NavbarMenu,
+  NavbarMenuItem,
 } from "@heroui/react";
-import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { generateTitle } from "@/helper/utility";
-import Menu from "@/component/Header/Menu";
+import { generateTitle, getEntries } from "@/helper/utility";
+import { ROUTE_TITLE } from "@/setting/site";
+import Link from "@/component/Link";
 import Search from "@/component/Search";
 import ThemeSwitch from "@/component/ThemeSwitch";
 
-export default async function () {
+export default function () {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMenuOpen(() => false);
+  }, [pathname]);
+
+  const title = generateTitle();
+
   return (
     <Navbar
-      position="sticky"
-      maxWidth="md"
       className="border-b-1 border-default-300 border-opacity-60"
+      disableAnimation
+      isBordered
+      isMenuOpen={isMenuOpen}
+      maxWidth="md"
+      onMenuOpenChange={setIsMenuOpen}
+      position="sticky"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-center items-center gap-1" href="/">
-            <h1 className="text-xl font-light text-inherit">
-              {generateTitle()}
-            </h1>
-          </NextLink>
+          <Link
+            className="flex justify-center items-center gap-1"
+            href="/"
+            underline="none"
+          >
+            <h1 className="text-xl font-light">{title}</h1>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -46,7 +68,26 @@ export default async function () {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
-      <Menu />
+
+      <NavbarMenu>
+        <div className="sm:hidden">
+          <Search />
+        </div>
+        {getEntries(ROUTE_TITLE).map(([route, title]) => {
+          return (
+            <NavbarMenuItem key={route}>
+              <Link
+                color={pathname === route ? "primary" : undefined}
+                href={route}
+                size="lg"
+                underline="none"
+              >
+                {title}
+              </Link>
+            </NavbarMenuItem>
+          );
+        })}
+      </NavbarMenu>
     </Navbar>
   );
 }
