@@ -90,8 +90,6 @@ export default function ({
     return result;
   }, [articles]);
 
-  if (!isMounted) return null;
-
   return (
     <Navbar
       className="border-b-1 border-default-300 border-opacity-60"
@@ -135,31 +133,33 @@ export default function ({
           <div className="sm:hidden mb-4">
             <Search />
           </div>
-          {items.map(([route, title, className]) => {
-            return (
-              <NavbarMenuItem key={route}>
-                <Link
-                  color={
-                    `${pathname}${window.location.hash}` === route
-                      ? "primary"
-                      : "foreground"
-                  }
-                  className={clsx(
-                    "w-full whitespace-normal",
-                    "py-1 border-b-1",
-                    className
-                  )}
-                  href={route}
-                  isDisabled={isLoading}
-                  onPress={() => handlePress(route)}
-                  size="lg"
-                  underline="none"
-                >
-                  {title}
-                </Link>
-              </NavbarMenuItem>
-            );
-          })}
+          {isMounted &&
+            items.map(([route, title, className]) => {
+              return (
+                <NavbarMenuItem key={route}>
+                  <Link
+                    color={
+                      `${pathname}${window.location.hash}` === route
+                        ? "primary"
+                        : "foreground"
+                    }
+                    className={clsx(
+                      "w-full whitespace-normal",
+                      "py-1 border-b-1",
+                      "hover:!opacity-60",
+                      className
+                    )}
+                    href={route}
+                    isDisabled={isLoading}
+                    onPress={() => handlePress(route)}
+                    size="lg"
+                    underline="none"
+                  >
+                    {title}
+                  </Link>
+                </NavbarMenuItem>
+              );
+            })}
         </div>
       </NavbarMenu>
     </Navbar>
