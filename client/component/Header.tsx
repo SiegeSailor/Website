@@ -32,8 +32,6 @@ export default function () {
     setIsLoading(() => false);
   }, [pathname]);
 
-  const title = generateTitle();
-
   const handlePress = () => {
     setIsLoading(() => true);
   };
@@ -55,7 +53,7 @@ export default function () {
             href="/"
             underline="none"
           >
-            <h1 className="text-xl font-light">{title}</h1>
+            <h1 className="text-xl font-light">{generateTitle()}</h1>
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -77,25 +75,28 @@ export default function () {
       </NavbarContent>
 
       <NavbarMenu>
-        <div className="sm:hidden">
-          <Search />
+        <div className="max-w-[880px] w-full mx-auto">
+          <div className="sm:hidden mb-4">
+            <Search />
+          </div>
+          {getEntries(ROUTE_TITLE).map(([route, title]) => {
+            return (
+              <NavbarMenuItem key={route}>
+                <Link
+                  color={pathname === route ? "primary" : "foreground"}
+                  className="w-full"
+                  href={route}
+                  isDisabled={isLoading}
+                  onPress={handlePress}
+                  size="lg"
+                  underline="none"
+                >
+                  {title}
+                </Link>
+              </NavbarMenuItem>
+            );
+          })}
         </div>
-        {getEntries(ROUTE_TITLE).map(([route, title]) => {
-          return (
-            <NavbarMenuItem key={route}>
-              <Link
-                color={pathname === route ? "primary" : undefined}
-                href={route}
-                isDisabled={isLoading}
-                onPress={handlePress}
-                size="lg"
-                underline="none"
-              >
-                {title}
-              </Link>
-            </NavbarMenuItem>
-          );
-        })}
       </NavbarMenu>
     </Navbar>
   );
