@@ -129,7 +129,7 @@ export default function ({
       </NavbarContent>
 
       <NavbarMenu>
-        <div className={clsx("max-w-[880px] w-full mx-auto")}>
+        <div className={clsx("max-w-compact w-full mx-auto")}>
           <div className="sm:hidden mb-4">
             <Search />
           </div>

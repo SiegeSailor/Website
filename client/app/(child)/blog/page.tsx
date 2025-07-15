@@ -14,7 +14,7 @@ export default async function () {
   const articles = await getArticles();
 
   return (
-    <section className={clsx("max-w-[1280px] mx-auto p-4")}>
+    <section className={clsx("max-w-content mx-auto p-4")}>
       <TableArticles articles={articles} />
     </section>
   );

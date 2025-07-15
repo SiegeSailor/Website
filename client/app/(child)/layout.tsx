@@ -10,7 +10,7 @@ export default async function ({
 
   return (
     <div className="w-full h-full">
-      <div className={clsx("max-w-[1280px] mx-auto p-4")}>
+      <div className={clsx("max-w-content mx-auto p-4")}>
         <Breadcrumb articles={articles} />
       </div>
 

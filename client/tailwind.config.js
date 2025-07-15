@@ -9,6 +9,10 @@ const config = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        compact: "880px",
+        content: "1280px",
+      },
       inset: {
         "-1": "-0.425rem",
       },
