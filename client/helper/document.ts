@@ -22,7 +22,6 @@ function getExperienceYears(): string {
   const dateCareerStart = new Date(TIMELINE.start);
 
   const timeTotal = dateCurrent.getTime() - dateCareerStart.getTime();
-
   const timeExcluded = TIMELINE.intervals.reduce((total, period) => {
     return (
       total +
@@ -30,9 +29,8 @@ function getExperienceYears(): string {
     );
   }, 0);
 
-  const experienceYears = (timeTotal - timeExcluded) / MILLISECOND_ONE_YEAR;
-
-  return `${experienceYears.toFixed(1)} Years`;
+  const years = ((timeTotal - timeExcluded) / MILLISECOND_ONE_YEAR).toFixed(1);
+  return `${years} Years`;
 }
 
 export async function getProfile() {
