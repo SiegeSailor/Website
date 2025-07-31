@@ -20,9 +20,9 @@ const Bar = dynamic(
 );
 
 export default function ({
-  year,
+  experience,
   className,
-}: Readonly<{ year: string; className?: string }>) {
+}: Readonly<{ experience: string; className?: string }>) {
   const [colorDefault200, setColorDefault200] = useState("transparent");
   const [colorDefault700, setColorDefault700] = useState("transparent");
   const [isBarLoaded, setIsBarLoaded] = useState(false);
@@ -63,7 +63,7 @@ export default function ({
               "p-2 rounded-sm"
             )}
           >
-            {year} in
+            {experience} in
             <div className="font-semibold text-default-700">
               Software Engineering
             </div>
