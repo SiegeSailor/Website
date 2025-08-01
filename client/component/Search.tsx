@@ -54,7 +54,7 @@ export default function () {
                   type="search"
                 />
                 <Divider />
-                <p className="opacity-50">
+                <p className="opacity-disabled">
                   Searching is currently Unavailable.
                 </p>
               </ModalBody>

@@ -136,7 +136,13 @@ export default function ({
                     onPress={handleZoomIn}
                     disabled={zoom >= ZOOM_MAX}
                   >
-                    <PlusIcon size="1.25rem" />
+                    <PlusIcon
+                      size="1.25rem"
+                      className={clsx(
+                        zoom >= ZOOM_MAX &&
+                          "text-default-500 text-opacity-disabled"
+                      )}
+                    />
                   </Button>
                 </div>
                 <Button variant="light" color="default" onPress={onClose}>
