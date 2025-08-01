@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, HTMLMotionProps } from "framer-motion";
 import clsx from "clsx";
 
