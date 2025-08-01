@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentProps } from "react";
-import { Card, Divider } from "@heroui/react";
+import { Card } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
