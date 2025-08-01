@@ -1,17 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: ["localhost", "127.0.0.1"],
+  compress: true,
   distDir: ".next",
-  redirects: async () => [],
   experimental: {
     typedRoutes: true,
   },
-  output: "standalone",
-  pageExtensions: ["ts", "tsx"],
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     dangerouslyAllowSVG: true,
   },
+  output: "standalone",
+  pageExtensions: ["ts", "tsx"],
+  redirects: async () => [],
+  reactStrictMode: process.env.NODE_ENV === "development",
   turbopack: {
     rules: {
       "*.svg": {
