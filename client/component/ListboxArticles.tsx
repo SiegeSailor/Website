@@ -40,7 +40,7 @@ export default function ({
           .map((item) => {
             return (
               <ListboxItem
-                classNames={{ title: "font-medium" }}
+                classNames={{ title: "font-normal" }}
                 href={`/blog/${item.metadata.date}`}
                 key={item.metadata.date}
                 title={item.metadata.title}
@@ -52,7 +52,7 @@ export default function ({
         {articles.slice(0, 5).map((item) => {
           return (
             <ListboxItem
-              classNames={{ title: "font-medium truncate" }}
+              classNames={{ title: "font-normal truncate" }}
               description={item.metadata.title}
               href={`/blog/${item.metadata.date}`}
               key={item.metadata.date}
@@ -67,7 +67,7 @@ export default function ({
 
           return (
             <ListboxItem
-              classNames={{ title: "font-medium" }}
+              classNames={{ title: "font-normal" }}
               endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
               key={route}
               href={route}

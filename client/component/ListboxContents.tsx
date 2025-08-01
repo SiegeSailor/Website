@@ -70,7 +70,7 @@ export default function ({
               <ListboxItem
                 classNames={{
                   base: clsx(LEVEL_PADDING[anchor.level]),
-                  title: "font-medium",
+                  title: "font-normal",
                 }}
                 endContent={
                   <AnimatePresence>
@@ -95,7 +95,7 @@ export default function ({
           })}
         </ListboxSection>
         <ListboxItem
-          classNames={{ title: "font-medium" }}
+          classNames={{ title: "font-normal" }}
           endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
           href={`#${anchors[0].identifier}`}
           onPress={() => setIdentifier(anchors[0].identifier)}
