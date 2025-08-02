@@ -52,8 +52,9 @@ export default async function () {
                 "opacity-60"
               )}
             >
-              <span>Created on {metadata.createdOn}</span>·
-              <span>Updated on {metadata.updatedOn}</span>
+              <span>{metadata.createdOn} (Created)</span>
+              <span>·</span>
+              <span>{metadata.updatedOn} (Updated)</span>
             </div>
             <div
               className={clsx(
@@ -146,18 +147,9 @@ export default async function () {
             "p-1"
           )}
         >
-          {[
-            <Card shadow="sm">
-              <ListboxContents anchors={metadata.anchors} />
-            </Card>,
-            // <Card shadow="sm">
-            //   <ListboxArticles date={metadata.date} articles={articles} />
-            // </Card>,
-          ].map((item, index) => (
-            <div key={index} className="mb-4">
-              {item}
-            </div>
-          ))}
+          <Card shadow="sm">
+            <ListboxContents anchors={metadata.anchors} />
+          </Card>
         </div>
       </div>
     </section>
