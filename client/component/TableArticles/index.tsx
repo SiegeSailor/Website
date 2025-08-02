@@ -10,6 +10,7 @@ import {
   DropdownTrigger,
   Input,
   Pagination,
+  ScrollShadow,
   Selection,
   SortDescriptor,
   Table,
@@ -174,6 +175,7 @@ export default function ({
           const technologies = article.metadata[keyColumn];
           return (
             <ScrollShadowTechnologies
+              propsContainer={{ className: "w-64" }}
               technologies={technologies}
               propsItem={{
                 className: "text-foreground",
@@ -185,7 +187,11 @@ export default function ({
           );
         case "title":
           const title = article.metadata[keyColumn];
-          return <Link href={`/blog/${article.metadata.date}`}>{title}</Link>;
+          return (
+            <ScrollShadow className="w-96" orientation="horizontal">
+              <Link href={`/blog/${article.metadata.date}`}>{title}</Link>
+            </ScrollShadow>
+          );
         case "minutes":
           const minutes = article.metadata[keyColumn];
           return <div>{minutes} Minutes</div>;
