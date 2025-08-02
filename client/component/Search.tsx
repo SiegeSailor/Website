@@ -20,7 +20,7 @@ export default function () {
     <>
       <Button
         aria-label="Search"
-        className="w-full sm:w-32"
+        className="w-full sm:w-32 font-light"
         onPress={onOpen}
         radius="full"
         startContent={
@@ -37,7 +37,7 @@ export default function () {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Search</ModalHeader>
+              <ModalHeader>Search</ModalHeader>
               <ModalBody>
                 <Input
                   aria-label="Search"
