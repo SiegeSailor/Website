@@ -2,7 +2,7 @@ import { join } from "path";
 import { readFileSync, readdirSync, statSync } from "fs";
 import matter from "gray-matter";
 
-import { getDateStringByDate } from "@/helper/utility";
+import { getStatisticByFilePath } from "@/helper/file";
 import {
   DOMAIN_PATH,
   TECHNOLOGIES,
@@ -64,7 +64,7 @@ export async function getArticleByFilename(filename: string) {
       ...getAnchorsByContent(content),
     ];
 
-    const statistics = statSync(filePath);
+    const statistics = await getStatisticByFilePath(filePath);
 
     return {
       content,
@@ -72,14 +72,14 @@ export async function getArticleByFilename(filename: string) {
       metadata: {
         anchors,
         category: data.category,
-        createdOn: getDateStringByDate(statistics.birthtime),
+        createdOn: statistics.createdOn,
         date,
         description,
         minutes: Math.ceil((source.split(" ").length + 1) / 150),
         status,
         technologies,
         title: data.title,
-        updatedOn: getDateStringByDate(statistics.mtime),
+        updatedOn: statistics.updatedOn,
       },
     };
   } catch (_) {

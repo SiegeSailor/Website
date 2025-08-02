@@ -36,8 +36,8 @@ const COLUMNS: {
   { key: "status", label: "Status", isSortable: false },
   { key: "category", label: "Category", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
-  { key: "minutes", label: "Read Time", isSortable: true },
   { key: "technologies", label: "Technologies", isSortable: false },
+  { key: "minutes", label: "Read Time", isSortable: true },
 ] as const;
 
 export default function ({
@@ -166,11 +166,9 @@ export default function ({
         case "status":
           const status = article.metadata[keyColumn];
           return (
-            <div>
-              <Chip size="md" variant="flat" color={STATUS_COLOR[status]}>
-                {status}
-              </Chip>
-            </div>
+            <Chip size="md" variant="flat" color={STATUS_COLOR[status]}>
+              {status}
+            </Chip>
           );
         case "technologies":
           const technologies = article.metadata[keyColumn];

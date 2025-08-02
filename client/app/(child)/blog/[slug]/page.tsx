@@ -1,4 +1,4 @@
-import { Card, Divider } from "@heroui/react";
+import { Card, Chip, Divider } from "@heroui/react";
 import { Metadata } from "next";
 import clsx from "clsx";
 
@@ -13,6 +13,7 @@ import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import { STATUS_COLOR } from "@/setting/site";
 
 export const dynamicParams = false;
 
@@ -62,7 +63,7 @@ export default async function ({
             "max-h-[calc(100vh-12rem)] overflow-y-auto"
           )}
         >
-          <div className="flex flex-col gap-2 mb-16">
+          <div className="flex flex-col gap-4 mb-16">
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
@@ -73,20 +74,34 @@ export default async function ({
                 "opacity-60"
               )}
             >
-              <span>Drafted on {metadata.date}</span>·
-              <span>Created on {metadata.createdOn}</span>·
-              <span>Updated on {metadata.updatedOn}</span>·
-              <span>{metadata.minutes} Minutes Read</span>
+              <span>{metadata.date} (Drafted)</span>
+              <span>·</span>
+              <span>{metadata.createdOn} (Created)</span>
+              <span>·</span>
+              <span>{metadata.updatedOn} (Updated)</span>
+              <span>·</span>
+              <span>{metadata.minutes} min read</span>
             </div>
-            <ScrollShadowTechnologies
-              technologies={metadata.technologies}
-              propsItem={{
-                className: "text-foreground",
-                variant: "bordered",
-                size: "md",
-              }}
-              propsIcon={{ color: "default" }}
-            />
+            <div className="flex gap-2 items-center">
+              <Chip
+                size="md"
+                variant="flat"
+                color={STATUS_COLOR[metadata.status]}
+              >
+                {metadata.status}
+              </Chip>
+              {/* <Divider orientation="vertical" className="h-[1.75rem]" /> */}
+              <span>·</span>
+              <ScrollShadowTechnologies
+                technologies={metadata.technologies}
+                propsItem={{
+                  className: "text-foreground",
+                  variant: "bordered",
+                  size: "md",
+                }}
+                propsIcon={{ color: "default" }}
+              />
+            </div>
             <Divider className="mt-4" />
             <div className="my-2">
               <Markdown source={metadata.description} />

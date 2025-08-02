@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 import { DOMAIN_PATH, AUTHOR } from "@/setting/site";
 import { getAnchorsByContent, getSlugByTitle } from "@/helper/article";
-import { getDateStringByDate } from "@/helper/utility";
+import { getStatisticByFilePath } from "@/helper/file";
 
 const REGEX_URL = /^https?:\/\/.+/;
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -87,14 +87,14 @@ export async function getProfile() {
       ...getAnchorsByContent(content),
     ];
 
-    const statistics = statSync(filePath);
+    const statistics = await getStatisticByFilePath(filePath);
 
     return {
       content,
       filename,
       metadata: {
         anchors,
-        createdOn: getDateStringByDate(statistics.birthtime),
+        createdOn: statistics.createdOn,
         description,
         headlines,
         media,
@@ -104,7 +104,7 @@ export async function getProfile() {
           experience: getExperienceYears(),
         },
         title: AUTHOR,
-        updatedOn: getDateStringByDate(statistics.mtime),
+        updatedOn: statistics.updatedOn,
       },
     };
   } catch (_) {
