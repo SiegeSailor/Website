@@ -7,6 +7,7 @@ import remarkGFM from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 
 import { remarkShowLineNumbers, remarkRehypeCallout } from "@/helper/plugin";
+import ButtonCopy from "@/component/ButtonCopy";
 import Callout from "@/component/Callout";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
@@ -128,7 +129,16 @@ export default function ({ source }: Readonly<{ source: string }>) {
               />
             );
 
-          return <pre {...element.children.props} />;
+          return (
+            <pre
+              {...element.children.props}
+              className={clsx(element.className, "relative")}
+            >
+              <ButtonCopy content={element.children.props.children} />
+
+              {element.children.props.children}
+            </pre>
+          );
         },
         p: (element) => {
           const children = Children.toArray(element.children);

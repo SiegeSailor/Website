@@ -1,14 +1,24 @@
 "use client";
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, isValidElement, useState } from "react";
 import { CopyIcon, CheckIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import clsx from "clsx";
 
+function parseContentRecursively(children: any): string {
+  if (typeof children === "string") return children;
+  if (Array.isArray(children))
+    return children.map(parseContentRecursively).join("");
+  if (isValidElement(children))
+    return parseContentRecursively((children.props as Element).children);
+
+  return "";
+}
+
 export default function ({
   content,
   ...props
-}: ComponentProps<typeof Button> & Readonly<{ content: string }>) {
+}: ComponentProps<typeof Button> & Readonly<{ content: any }>) {
   const [isCopied, setIsCopied] = useState(false);
 
   return (
@@ -19,7 +29,7 @@ export default function ({
         "dark:text-default-400 dark:hover:text-default-200"
       )}
       onPress={() => {
-        navigator.clipboard.writeText(content);
+        navigator.clipboard.writeText(parseContentRecursively(content));
 
         if (!isCopied) {
           setIsCopied(true);
