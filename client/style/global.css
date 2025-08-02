@@ -33,7 +33,7 @@
 
   figure[data-rehype-pretty-code-figure] pre {
     @apply overflow-x-auto py-4 rounded-md w-full;
-    @apply bg-gray-800 text-transparent;
+    @apply bg-gray-800 text-white;
   }
 
   figure[data-rehype-pretty-code-figure] pre > span {
