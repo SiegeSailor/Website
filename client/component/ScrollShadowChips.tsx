@@ -16,7 +16,6 @@ export default function ({
       {...propsContainer}
       className={clsx("flex gap-2", propsContainer?.className)}
       orientation="horizontal"
-      size={120}
     >
       {row.map((item) => (
         <Chip
