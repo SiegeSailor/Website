@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 * {
+  @apply font-light;
+
   *::-webkit-scrollbar {
     display: none;
   }
@@ -33,7 +35,7 @@
 
   figure[data-rehype-pretty-code-figure] pre {
     @apply overflow-x-auto py-4 rounded-md w-full;
-    @apply bg-gray-800 text-white;
+    @apply bg-gray-800 text-gray-300;
   }
 
   figure[data-rehype-pretty-code-figure] pre > span {
