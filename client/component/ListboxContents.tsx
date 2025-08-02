@@ -2,7 +2,7 @@
 
 import { ComponentProps, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { EyeIcon, MoveUpIcon } from "lucide-react";
+import { MoveLeftIcon, MoveUpIcon } from "lucide-react";
 import { Listbox, ListboxItem, ListboxSection, Skeleton } from "@heroui/react";
 import clsx from "clsx";
 
@@ -66,15 +66,17 @@ export default function ({
       >
         <ListboxSection title="Table of Contents" showDivider>
           {anchors.map((anchor) => {
+            const isBrowsing = anchor.identifier === identifier;
+
             return (
               <ListboxItem
                 classNames={{
                   base: clsx(LEVEL_PADDING[anchor.level]),
-                  title: "font-normal",
+                  title: isBrowsing ? "font-normal" : "font-light",
                 }}
                 endContent={
                   <AnimatePresence>
-                    {anchor.identifier === identifier && (
+                    {isBrowsing && (
                       <motion.span
                         key="eye"
                         initial={{ scale: 0 }}
@@ -82,7 +84,7 @@ export default function ({
                         exit={{ scale: 0 }}
                         transition={{ duration: 0.25 }}
                       >
-                        <EyeIcon size="1rem" strokeWidth="0.1rem" />
+                        <MoveLeftIcon size="1rem" strokeWidth="0.1rem" />
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -95,7 +97,7 @@ export default function ({
           })}
         </ListboxSection>
         <ListboxItem
-          classNames={{ title: "font-normal" }}
+          classNames={{ title: "font-light" }}
           endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
           href={`#${anchors[0].identifier}`}
           onPress={() => setIdentifier(anchors[0].identifier)}
