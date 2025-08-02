@@ -1,8 +1,8 @@
 import { join } from "path";
-import { readFileSync, statSync } from "fs";
+import { readFileSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_PATH, AUTHOR } from "@/setting/site";
+import { DOMAIN_PATH, AUTHOR, TITLE_ROUTE } from "@/setting/site";
 import { getAnchorsByContent, getSlugByTitle } from "@/helper/article";
 import { getStatisticByFilePath } from "@/helper/file";
 
@@ -82,9 +82,15 @@ export async function getProfile() {
     if (typeof status.visa !== "string" || status.visa.length === 0)
       throw new Error("Visa must be a non-empty string");
 
+    const identifierProfile = getSlugByTitle(AUTHOR);
     const anchors: ReturnType<typeof getAnchorsByContent> = [
-      { level: 1, title: AUTHOR, identifier: getSlugByTitle(AUTHOR) },
-      ...getAnchorsByContent(content),
+      {
+        level: 1,
+        title: AUTHOR,
+        identifier: identifierProfile,
+        route: `${TITLE_ROUTE.Profile}#${identifierProfile}`,
+      },
+      ...getAnchorsByContent(content, TITLE_ROUTE.Profile),
     ];
 
     const statistics = await getStatisticByFilePath(filePath);

@@ -64,10 +64,10 @@ export default function ({
                   direction="vertical"
                   duration={2}
                   className={clsx(
-                    "absolute top-24 left-4",
-                    "z-10 justify-start"
+                    "absolute top-20 left-4",
+                    "z-10 justify-start",
+                    "w-11/12"
                   )}
-                  style={{ width: "calc(100% - 1.5rem)" }}
                 >
                   <p
                     className={clsx(

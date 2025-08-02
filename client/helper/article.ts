@@ -1,5 +1,5 @@
 import { join } from "path";
-import { readFileSync, readdirSync, statSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 
 import { getStatisticByFilePath } from "@/helper/file";
@@ -9,7 +9,9 @@ import {
   TECHNOLOGY_SET,
   STATUS,
   STATUS_SET,
+  TITLE_ROUTE,
 } from "@/setting/site";
+import { Route } from "next";
 
 export async function getArticles() {
   const directory = join(process.cwd(), DOMAIN_PATH.article);
@@ -59,9 +61,15 @@ export async function getArticleByFilename(filename: string) {
       throw new Error("Category must be a non-empty string");
     if (!STATUS_SET.has(data.status)) throw new Error("Status must be valid");
 
+    const identifierArticle = getSlugByTitle(data.title);
     const anchors: ReturnType<typeof getAnchorsByContent> = [
-      { level: 1, title: data.title, identifier: getSlugByTitle(data.title) },
-      ...getAnchorsByContent(content),
+      {
+        level: 1,
+        title: data.title,
+        identifier: identifierArticle,
+        route: `${TITLE_ROUTE.Blog}#${identifierArticle}`,
+      },
+      ...getAnchorsByContent(content, TITLE_ROUTE.Blog),
     ];
 
     const statistics = await getStatisticByFilePath(filePath);
@@ -76,6 +84,7 @@ export async function getArticleByFilename(filename: string) {
         date,
         description,
         minutes: Math.ceil((source.split(" ").length + 1) / 150),
+        route: `${TITLE_ROUTE.Blog}/${date}` as Route,
         status,
         technologies,
         title: data.title,
@@ -99,12 +108,13 @@ export function getSlugByTitle(title: string) {
   return title.toLowerCase().replace(/\s+/g, "-");
 }
 
-export function getAnchorsByContent(content: string) {
+export function getAnchorsByContent(content: string, prefixRoute: Route) {
   const lines = content.split("\n");
   const result: {
     level: 1 | 2 | 3 | 4 | 5 | 6;
     title: string;
     identifier: string;
+    route: Route;
   }[] = [];
 
   const slugCount: Record<string, number> = {};
@@ -133,7 +143,9 @@ export function getAnchorsByContent(content: string) {
         slugCount[slug] = 0;
       }
 
-      result.push({ level, title, identifier });
+      const route = `${prefixRoute}#${identifier}` as Route;
+
+      result.push({ level, title, identifier, route });
     }
   }
 

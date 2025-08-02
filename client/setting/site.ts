@@ -27,8 +27,14 @@ export const DOMAIN_PATH = {
   document: "public/document",
 } as const;
 
-export const ROUTE_TITLE: Readonly<Record<Route, string>> = {
+type TTitle = "Home" | "Blog" | "Profile";
+
+export const ROUTE_TITLE: Readonly<Record<Route, TTitle>> = {
   "/": "Home",
   "/blog": "Blog",
   "/profile": "Profile",
 } as const;
+
+export const TITLE_ROUTE = Object.fromEntries(
+  getEntries(ROUTE_TITLE).map(([route, title]) => [title, route])
+) as Readonly<Record<TTitle, Route>>;
