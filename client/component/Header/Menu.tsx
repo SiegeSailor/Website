@@ -1,5 +1,4 @@
-import { Route } from "next";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Card, Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -10,6 +9,7 @@ import { getProfile } from "@/helper/server/document";
 import { NavbarMenu } from "@heroui/react";
 import { ROUTE_ICON } from "@/setting/icon";
 import { TITLE_ROUTE } from "@/setting/site";
+import { useRoute } from "@/helper/client/history";
 import Search from "@/component/Search";
 
 export default function ({
@@ -21,11 +21,11 @@ export default function ({
   profile: Awaited<ReturnType<typeof getProfile>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }>) {
-  const pathname = usePathname();
+  const { route, pathname } = useRoute();
 
   useEffect(() => {
     setIsOpen(() => false);
-  }, [pathname]);
+  }, [route]);
 
   return (
     <NavbarMenu>
@@ -46,7 +46,7 @@ export default function ({
                 aria-label="Pages"
                 color="default"
                 className="p-4"
-                //   disabledKeys={[date]}
+                disabledKeys={[pathname]}
                 hideSelectedIcon
                 variant="flat"
               >
@@ -72,7 +72,7 @@ export default function ({
                 aria-label="Profile"
                 color="default"
                 className="p-4"
-                //   disabledKeys={[date]}
+                disabledKeys={[route]}
                 hideSelectedIcon
                 variant="flat"
               >
@@ -100,7 +100,7 @@ export default function ({
                 aria-label="Blog"
                 color="default"
                 className="p-4"
-                //   disabledKeys={[date]}
+                disabledKeys={[pathname]}
                 hideSelectedIcon
                 variant="flat"
               >
