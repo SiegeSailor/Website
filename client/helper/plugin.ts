@@ -1,10 +1,9 @@
 import { fromMarkdown } from "mdast-util-from-markdown";
-import { Plugin } from "unified";
 import { Root, RootContent } from "mdast";
 import { toMarkdown } from "mdast-util-to-markdown";
 
 export function remarkShowLineNumbers() {
-  return (tree: Root) => {
+  return function transformer(tree: Root) {
     for (const node of tree.children) {
       if (node.type === "code") {
         node.meta = node.meta + (node.meta ? " " : "") + "showLineNumbers";
@@ -13,8 +12,8 @@ export function remarkShowLineNumbers() {
   };
 }
 
-export const remarkRehypeCallout: Plugin<[], Root> = () => {
-  const createCallout = (): {
+export function remarkRehypeCallout() {
+  function createCallout(): {
     type: "paragraph";
     data: {
       hName: "callout";
@@ -24,19 +23,21 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       };
     };
     children: RootContent[];
-  } => ({
-    type: "paragraph",
-    data: {
-      hName: "callout",
-      hProperties: {
-        color: "",
-        title: "",
+  } {
+    return {
+      type: "paragraph",
+      data: {
+        hName: "callout",
+        hProperties: {
+          color: "",
+          title: "",
+        },
       },
-    },
-    children: [],
-  });
+      children: [],
+    };
+  }
 
-  const convertNodeMarkdown = (node: any): string => {
+  function convertNodeMarkdown(node: any): string {
     try {
       return toMarkdown(node);
     } catch {
@@ -66,12 +67,13 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
           .join("");
       return "";
     }
-  };
+  }
 
-  const reconstructMarkdown = (nodes: any[]): string =>
-    nodes.map((node) => convertNodeMarkdown(node)).join("\n\n");
+  function reconstructMarkdown(nodes: any[]): string {
+    return nodes.map((node) => convertNodeMarkdown(node)).join("\n\n");
+  }
 
-  const parseContent = (content: string): RootContent[] => {
+  function parseContent(content: string): RootContent[] {
     try {
       return fromMarkdown(content).children;
     } catch {
@@ -82,29 +84,30 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
         } as RootContent,
       ];
     }
-  };
+  }
 
-  const seeIsContentLike = (text: string): boolean =>
-    text.length > 50 ||
-    text.endsWith(":") ||
-    text.includes("*") ||
-    text.includes("`");
+  function seeIsContentLike(text: string): boolean {
+    return (
+      text.length > 50 ||
+      text.endsWith(":") ||
+      text.includes("*") ||
+      text.includes("`")
+    );
+  }
 
-  const addContent = (content: string, calloutNodes: any[]): void => {
+  function addContent(content: string, calloutNodes: any[]): void {
     if (!content) return;
-
     if (content.startsWith(":::")) return;
-
     calloutNodes.push(...parseContent(content));
-  };
+  }
 
-  return (tree: Root) => {
+  return function transformer(tree: Root) {
     const childrenTree: typeof tree.children = [];
     let isInCallout = false;
     let callout = createCallout();
     let calloutNodes: any[] = [];
 
-    const flushCallout = (): void => {
+    function flushCallout(): void {
       if (calloutNodes.length > 0) {
         const markdownContent = reconstructMarkdown(calloutNodes);
         try {
@@ -122,9 +125,9 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       isInCallout = false;
       callout = createCallout();
       calloutNodes = [];
-    };
+    }
 
-    const processSingleCallout = (match: RegExpMatchArray): void => {
+    function processSingleCallout(match: RegExpMatchArray): void {
       const singleCallout = createCallout();
       singleCallout.data.hProperties.color = match[1];
       singleCallout.data.hProperties.title = match[2]?.trim() || "";
@@ -135,9 +138,9 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       }
 
       childrenTree.push(singleCallout as (typeof tree.children)[0]);
-    };
+    }
 
-    const processCalloutStart = (match: RegExpMatchArray): void => {
+    function processCalloutStart(match: RegExpMatchArray): void {
       const calloutType = match[1];
       const potentialTitle = match[2]?.trim();
       const contentAfterNewline = match[3]?.trim();
@@ -153,7 +156,7 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
       }
 
       addContent(contentAfterNewline, calloutNodes);
-    };
+    }
 
     for (const node of tree.children) {
       let nodeText = "";
@@ -206,4 +209,4 @@ export const remarkRehypeCallout: Plugin<[], Root> = () => {
 
     tree.children = childrenTree;
   };
-};
+}
