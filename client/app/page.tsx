@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
 import { ROUTE_TITLE } from "@/setting/site";
@@ -19,7 +18,7 @@ export default async function () {
   const { metadata } = await getProfile();
 
   return (
-    <section className={clsx("max-w-compact mx-auto p-4")}>
+    <section className="max-w-compact mx-auto p-4">
       <div className="flex flex-col gap-24">
         <ContentHero />
         <ContentArticles />

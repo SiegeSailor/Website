@@ -39,15 +39,9 @@ export default async function ({
         className={clsx(FontRoboto.className, "overscroll-none")}
       >
         <Provider>
-          <Header />
-          <div className="relative flex flex-col">
-            <main
-              className={clsx(
-                "container max-w-8xl",
-                "mx-auto pt-4 sm:pt-8 px-4",
-                "overflow-hidden"
-              )}
-            >
+          <div className="h-screen flex flex-col">
+            <Header />
+            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 flex-grow">
               {children}
             </main>
           </div>
