@@ -8,11 +8,13 @@ export default function ({ ...props }: ComponentProps<typeof Link>) {
   return (
     <Link
       color="foreground"
-      underline="always"
-      showAnchorIcon={isExternal}
+      download
       isExternal={isExternal}
+      showAnchorIcon={isExternal}
       target={isExternal ? "_blank" : "_self"}
+      underline="always"
       {...props}
+      rel={props.rel || (isExternal ? "noopener noreferrer" : undefined)}
       className={clsx(
         !props.color && "text-default-500 hover:text-default-400",
         "font-light",

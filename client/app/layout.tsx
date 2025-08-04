@@ -5,8 +5,6 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { generateTitle } from "@/helper/utility";
-import { getArticles } from "@/helper/server/article";
-import { getProfile } from "@/helper/server/document";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
 
@@ -34,9 +32,6 @@ export default async function ({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const articles = await getArticles();
-  const profile = await getProfile();
-
   return (
     <html suppressHydrationWarning lang="en">
       <body
@@ -44,7 +39,7 @@ export default async function ({
         className={clsx(FontRoboto.className, "overscroll-none")}
       >
         <Provider>
-          <Header articles={articles} profile={profile} />
+          <Header />
           <div className="relative flex flex-col">
             <main
               className={clsx(

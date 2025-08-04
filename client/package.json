@@ -24,7 +24,8 @@
     "remark-gfm": "4.0.1",
     "remark-html": "16.0.1",
     "sharp": "0.34.1",
-    "shiki": "3.7.0"
+    "shiki": "3.7.0",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@types/mdx": "2.0.13",
