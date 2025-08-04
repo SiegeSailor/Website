@@ -12,8 +12,8 @@ import {
 import { useState } from "react";
 
 import { generateTitle } from "@/helper/utility";
-import { getArticles } from "@/helper/article";
-import { getProfile } from "@/helper/document";
+import { getArticles } from "@/helper/server/article";
+import { getProfile } from "@/helper/server/document";
 import Link from "@/component/Link";
 import Menu from "@/component/Header/Menu";
 import Search from "@/component/Search";

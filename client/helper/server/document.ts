@@ -1,10 +1,13 @@
+"use server";
+
 import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 
 import { DOMAIN_PATH, AUTHOR, TITLE_ROUTE } from "@/setting/site";
-import { getAnchorsByContent, getSlugByTitle } from "@/helper/article";
-import { getStatisticByFilePath } from "@/helper/file";
+import { getAnchorsByContent } from "@/helper/article";
+import { getSlugByTitle } from "@/helper/utility";
+import { getStatisticByFilePath } from "@/helper/server/file";
 
 const REGEX_URL = /^https?:\/\/.+/;
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;

@@ -3,7 +3,7 @@
 import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import { ROUTE_ICON } from "@/setting/icon";
 import { ROUTE_TITLE } from "@/setting/site";
 

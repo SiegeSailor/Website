@@ -9,7 +9,7 @@ import CardSkill from "@/component/CardSkill";
 import CardSummary from "@/component/CardSummary";
 import ContentArticles from "@/component/ContentArticles";
 import ContentHero from "@/component/ContentHero";
-import { getProfile } from "@/helper/document";
+import { getProfile } from "@/helper/server/document";
 
 export const metadata: Metadata = {
   title: generateTitle(ROUTE_TITLE["/"]),

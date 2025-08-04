@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import dynamic from "next/dynamic";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import CardBlock from "@/component/CardBlock";
 import SpinnerCenter from "@/component/SpinnerCenter";
 

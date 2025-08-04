@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import CardArticle from "@/component/CardArticle";
 import CardBlog from "@/component/CardBlog";
 

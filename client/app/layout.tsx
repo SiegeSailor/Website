@@ -5,8 +5,8 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { generateTitle } from "@/helper/utility";
-import { getArticles } from "@/helper/article";
-import { getProfile } from "@/helper/document";
+import { getArticles } from "@/helper/server/article";
+import { getProfile } from "@/helper/server/document";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
 

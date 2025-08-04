@@ -1,3 +1,5 @@
+"use server";
+
 import { execSync } from "child_process";
 
 export async function getStatisticByFilePath(filePath: string) {

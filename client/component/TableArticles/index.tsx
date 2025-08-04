@@ -22,7 +22,7 @@ import {
 } from "@heroui/react";
 import { SearchIcon, ChevronDownIcon } from "lucide-react";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import { STATUS_COLOR } from "@/setting/site";
 import DropdownMetadata from "@/component/TableArticles/DropdownMetadata";
 import Link from "@/component/Link";

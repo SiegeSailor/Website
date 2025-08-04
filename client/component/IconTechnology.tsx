@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import { IconType } from "@icons-pack/react-simple-icons";
 
-import { getArticleByFilename } from "@/helper/article";
+import { getArticleByFilename } from "@/helper/server/article";
 import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export default function ({

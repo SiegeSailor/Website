@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle, getEntries } from "@/helper/utility";
-import { getProfile } from "@/helper/document";
-import { getSlugByTitle } from "@/helper/article";
+import { getProfile } from "@/helper/server/document";
+import { getSlugByTitle } from "@/helper/utility";
 import Heading from "@/component/Heading";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";

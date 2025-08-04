@@ -4,9 +4,9 @@ import { Card, Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import { getEntries } from "@/helper/utility";
-import { getProfile } from "@/helper/document";
+import { getProfile } from "@/helper/server/document";
 import { NavbarMenu } from "@heroui/react";
 import { ROUTE_ICON } from "@/setting/icon";
 import { TITLE_ROUTE } from "@/setting/site";

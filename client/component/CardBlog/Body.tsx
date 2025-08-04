@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import NextImage from "next/image";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import FloatingDivision from "@/component/FloatingDivision";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 

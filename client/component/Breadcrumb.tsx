@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import { ROUTE_TITLE } from "@/setting/site";
 
 export default function ({

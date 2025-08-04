@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 import { ROUTE_TITLE } from "@/setting/site";
 import TableArticles from "@/component/TableArticles";
 

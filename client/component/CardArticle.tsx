@@ -5,7 +5,7 @@ import { Card } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
-import { getArticleByFilename } from "@/helper/article";
+import { getArticleByFilename } from "@/helper/server/article";
 
 export default function ({
   article,

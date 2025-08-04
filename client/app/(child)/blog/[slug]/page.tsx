@@ -3,11 +3,8 @@ import { Metadata } from "next";
 import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
-import {
-  getArticles,
-  getArticleByDate,
-  getSlugByTitle,
-} from "@/helper/article";
+import { getArticles, getArticleByDate } from "@/helper/server/article";
+import { getSlugByTitle } from "@/helper/utility";
 import Heading from "@/component/Heading";
 import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";

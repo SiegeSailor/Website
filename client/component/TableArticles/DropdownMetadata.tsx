@@ -9,7 +9,7 @@ import {
 } from "@heroui/react";
 import { ChevronDownIcon } from "lucide-react";
 
-import { getArticles } from "@/helper/article";
+import { getArticles } from "@/helper/server/article";
 
 export default function ({
   items,

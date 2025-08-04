@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { getArticleByFilename } from "@/helper/article";
+import { getArticleByFilename } from "@/helper/server/article";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
 import IconTechnology from "@/component/IconTechnology";
 

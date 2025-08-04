@@ -4,6 +4,19 @@ export function generateTitle(...content: string[]) {
   return [...content, TITLE].join(" | ");
 }
 
+export function getDateStringByDate(date: Date) {
+  return date.toISOString().split("T")[0];
+}
+
+export function getSlugByTitle(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim();
+}
+
 export function getCSSVariable(variable: string) {
   const root = document.documentElement;
   return getComputedStyle(root).getPropertyValue(variable);
@@ -21,8 +34,4 @@ export function getValues<T extends object>(entity: T) {
 
 export function getKeys<T extends object>(entity: T) {
   return Object.keys(entity) as (keyof T)[];
-}
-
-export function getDateStringByDate(date: Date) {
-  return date.toISOString().split("T")[0];
 }
