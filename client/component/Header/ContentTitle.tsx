@@ -2,10 +2,8 @@
 
 import { NavbarContent, NavbarBrand } from "@heroui/react";
 
-import { generateTitle } from "@/helper/utility";
+import { TITLE } from "@/setting/site";
 import Link from "@/component/Link";
-
-const TITLE = generateTitle();
 
 export default async function () {
   return (
