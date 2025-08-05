@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps } from "react";
 import { IconType } from "@icons-pack/react-simple-icons";
 
@@ -14,5 +16,6 @@ export default function ({
     >["metadata"]["technologies"][number];
   }>) {
   const Icon = TECHNOLOGY_ICON[technology];
+
   return <Icon size="1rem" title={technology} {...props} />;
 }

@@ -20,32 +20,32 @@ export default function ({
 
   useEffect(() => {
     const currentWord = words[indexCurrentWord];
-    let timeoutId: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
       if (indexCharacter < currentWord.length) {
-        timeoutId = setTimeout(() => {
+        timeout = setTimeout(() => {
           setText(currentWord.substring(0, indexCharacter + 1));
           setCharacterIndex((prev) => prev + 1);
         }, speedTyping);
       } else {
-        timeoutId = setTimeout(() => setIsDeleting(true), timePause);
+        timeout = setTimeout(() => setIsDeleting(true), timePause);
       }
     } else {
       if (indexCharacter > 0) {
-        timeoutId = setTimeout(() => {
+        timeout = setTimeout(() => {
           setText(currentWord.substring(0, indexCharacter - 1));
           setCharacterIndex((prev) => prev - 1);
         }, speedDeleting);
       } else {
-        timeoutId = setTimeout(() => {
+        timeout = setTimeout(() => {
           setIsDeleting(false);
           setIndexCurrentWord((prev) => (prev + 1) % words.length);
         }, timePause / 2);
       }
     }
 
-    return () => clearTimeout(timeoutId);
+    return () => clearTimeout(timeout);
   }, [
     indexCharacter,
     isDeleting,

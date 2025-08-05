@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps } from "react";
 
 import { getArticleByFilename } from "@/helper/server/article";
@@ -5,8 +7,8 @@ import ScrollShadowChips from "@/component/ScrollShadowChips";
 import IconTechnology from "@/component/IconTechnology";
 
 export default function ({
-  technologies,
   propsIcon,
+  technologies,
   ...props
 }: Omit<ComponentProps<typeof ScrollShadowChips>, "row"> &
   Readonly<{
@@ -20,7 +22,13 @@ export default function ({
       {...props}
       row={technologies.map((technology) => ({
         name: technology,
-        icon: <IconTechnology {...propsIcon} technology={technology} />,
+        icon: (
+          <IconTechnology
+            key={technology}
+            {...propsIcon}
+            technology={technology}
+          />
+        ),
       }))}
     />
   );

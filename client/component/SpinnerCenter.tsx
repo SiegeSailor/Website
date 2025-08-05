@@ -1,8 +1,10 @@
+"use server";
+
 import { HTMLAttributes } from "react";
 import { Spinner } from "@heroui/react";
 import clsx from "clsx";
 
-export default function ({ ...props }: HTMLAttributes<HTMLDivElement>) {
+export default async function ({ ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}

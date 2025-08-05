@@ -1,4 +1,4 @@
-import clsx from "clsx";
+"use server";
 
 import { getArticles } from "@/helper/server/article";
 import CardArticle from "@/component/CardArticle";
@@ -10,14 +10,7 @@ export default async function () {
   return (
     <div>
       <div className="flex flex-col gap-2 mb-12">
-        <h4
-          className={clsx(
-            "text-2xl sm:text-3xl",
-            "font-light text-default-600",
-            "w-full",
-            "text-left"
-          )}
-        >
+        <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
           Let's Talk About Tech
         </h4>
         <p className="text-medium text-default-400">
@@ -30,14 +23,12 @@ export default async function () {
       <div className="flex flex-wrap md:flex-nowrap gap-4 items-center">
         <div className="w-full md:w-1/2 flex flex-col gap-2">
           {articles.slice(0, 4).map((article, index) => {
-            return <CardArticle key={index} article={article} />;
+            return <CardArticle key={index} filename={article.filename} />;
           })}
         </div>
         <CardBlog
           articles={articles.slice(4)}
-          className={clsx(
-            "w-full md:w-1/2 h-[300px] min-w-[200px] flex-shrink-0"
-          )}
+          className="w-full md:w-1/2 h-[300px] min-w-[200px] flex-shrink-0"
         />
       </div>
     </div>

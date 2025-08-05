@@ -1,32 +1,29 @@
-"use client";
+"use server";
 
-import { ComponentProps, useEffect } from "react";
+import { ComponentProps } from "react";
 import { Link } from "@heroui/react";
-import { Route } from "next";
-import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import NextLink from "next/link";
 
-export default function ({ ...props }: ComponentProps<typeof Link>) {
+export default async function ({
+  isPlain,
+  ...props
+}: ComponentProps<typeof Link> & Readonly<{ isPlain?: boolean }>) {
   const isExternal = props.href?.startsWith("http");
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isExternal) router.prefetch(props.href as Route);
-  }, [isExternal, props.href, router]);
 
   return (
     <Link
+      as={NextLink}
       color="foreground"
       isExternal={isExternal}
+      prefetch
       showAnchorIcon={isExternal}
-      target={isExternal ? "_blank" : "_self"}
-      underline="always"
+      underline={isPlain ? "none" : "always"}
       {...props}
-      rel={props.rel || (isExternal ? "noopener noreferrer" : undefined)}
       className={clsx(
         !props.color && "text-default-500 hover:text-default-400",
         "font-light",
+        isPlain ? "block" : "inline-flex",
         props.className
       )}
     />

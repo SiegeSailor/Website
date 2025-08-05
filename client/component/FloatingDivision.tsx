@@ -1,9 +1,8 @@
+"use client";
+
 import { motion, HTMLMotionProps } from "framer-motion";
-import clsx from "clsx";
 
 export default function ({
-  children,
-  className,
   volume = 6.5,
   duration = 1.5,
   direction,
@@ -39,9 +38,6 @@ export default function ({
         },
       }}
       {...props}
-      className={clsx(className)}
-    >
-      {children}
-    </motion.div>
+    />
   );
 }

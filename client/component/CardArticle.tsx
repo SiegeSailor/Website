@@ -1,47 +1,28 @@
-"use client";
+"use server";
 
-import { ComponentProps } from "react";
 import { Card } from "@heroui/react";
-import { useRouter } from "next/navigation";
-import clsx from "clsx";
 
 import { getArticleByFilename } from "@/helper/server/article";
+import Link from "@/component/Link";
 
-export default function ({
-  article,
-  ...props
-}: ComponentProps<typeof Card> &
-  Readonly<{
-    article: Awaited<ReturnType<typeof getArticleByFilename>>;
-  }>) {
-  const router = useRouter();
+export default async function ({ filename }: Readonly<{ filename: string }>) {
+  const article = await getArticleByFilename(filename);
 
   return (
-    <Card
-      {...props}
-      className={clsx(props.className)}
-      isHoverable
-      isPressable
-      onPress={() => router.push(`/blog/${article.metadata.date}`)}
-    >
-      <div className="flex flex-nowrap justify-between items-center whitespace-nowrap p-4">
-        <p
-          className={clsx("opacity-60 text-sm text-left", "truncate w-[5rem]")}
-        >
-          {article.metadata.category}
-        </p>
-        <h3
-          className={clsx(
-            "text-left text-medium font-light",
-            "truncate w-[calc(100%-10rem)]"
-          )}
-        >
-          {article.metadata.title}
-        </h3>
-        <p className={clsx("opacity-60 text-sm text-right", "w-[5rem]")}>
-          {article.metadata.date}
-        </p>
-      </div>
+    <Card isHoverable isPressable>
+      <Link href={article.metadata.route} isPlain>
+        <div className="flex flex-nowrap justify-between items-center whitespace-nowrap p-4">
+          <p className="opacity-60 text-sm text-left truncate w-[5rem]">
+            {article.metadata.category}
+          </p>
+          <h3 className="text-left text-medium font-light truncate w-[calc(100%-10rem)]">
+            {article.metadata.title}
+          </h3>
+          <p className="opacity-60 text-sm text-right w-[5rem]">
+            {article.metadata.date}
+          </p>
+        </div>
+      </Link>
     </Card>
   );
 }
