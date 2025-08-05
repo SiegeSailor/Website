@@ -82,6 +82,7 @@ export default function () {
           {
             data: PORTIONS,
             backgroundColor: colorDefault200,
+            hoverBackgroundColor: colorDefault200,
             borderRadius: {
               bottomRight: 8,
               topRight: 8,

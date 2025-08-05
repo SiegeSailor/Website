@@ -21,7 +21,6 @@ export default async function ({
       underline={isPlain ? "none" : "always"}
       {...props}
       className={clsx(
-        !props.color && "text-default-500 hover:text-default-400",
         "font-light",
         isPlain ? "block w-full h-full" : "inline-flex",
         props.className
