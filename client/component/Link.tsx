@@ -23,7 +23,7 @@ export default async function ({
       className={clsx(
         !props.color && "text-default-500 hover:text-default-400",
         "font-light",
-        isPlain ? "block" : "inline-flex",
+        isPlain ? "block w-full h-full" : "inline-flex",
         props.className
       )}
     />

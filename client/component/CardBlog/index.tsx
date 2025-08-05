@@ -3,8 +3,8 @@
 import { ComponentProps } from "react";
 
 import { getArticles } from "@/helper/server/article";
-import Body from "@/component/CardBlog/Body";
 import CardBlock from "@/component/CardBlock";
+import ContentBody from "@/component/CardBlog/ContentBody";
 
 export default async function ({
   articles,
@@ -16,10 +16,10 @@ export default async function ({
   }>) {
   return (
     <CardBlock
+      contentBody={<ContentBody articles={articles} />}
       href="/blog"
       title="More Insights on My Blog"
       {...props}
-      contentBody={<Body articles={articles} />}
     />
   );
 }
