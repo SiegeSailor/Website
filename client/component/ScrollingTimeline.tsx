@@ -26,12 +26,12 @@ export default function ({
             container.scrollTop + container.clientHeight >=
             container.scrollHeight
           ) {
-            setScrollDirection("up");
+            setScrollDirection(() => "up");
           }
         } else {
           container.scrollTop -= 1;
           if (container.scrollTop <= 0) {
-            setScrollDirection("down");
+            setScrollDirection(() => "down");
           }
         }
       }
