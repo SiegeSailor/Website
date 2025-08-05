@@ -1,9 +1,8 @@
-"use server";
+// "use server";
 
 import { Metadata } from "next";
 
 import { generateTitle } from "@/helper/utility";
-import { getProfile } from "@/helper/server/document";
 import { ROUTE_TITLE } from "@/setting/site";
 import CardExperience from "@/component/CardExperience";
 import CardProject from "@/component/CardProject";
@@ -17,19 +16,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function () {
-  const { metadata } = await getProfile();
-
   return (
     <section className="max-w-compact mx-auto p-4">
       <div className="flex flex-col gap-24">
         <ContentHero />
         <ContentArticles />
+
         <div className="gap-4 grid grid-cols-12 grid-rows-1">
-          {/* <CardSummary
-            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
-            experience={metadata.status.experience}
-          />
-          <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          {/* <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardProject className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" /> */}
         </div>
