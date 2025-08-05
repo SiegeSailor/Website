@@ -11,6 +11,10 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     dangerouslyAllowSVG: true,
   },
+  logging: {
+    fetches: { fullUrl: true, hmrRefreshes: true },
+    incomingRequests: true,
+  },
   output: "standalone",
   pageExtensions: ["ts", "tsx"],
   redirects: async () => [],
