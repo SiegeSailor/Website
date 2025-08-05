@@ -24,8 +24,8 @@ export default async function () {
 
         <div className="gap-4 grid grid-cols-12 grid-rows-1">
           <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-          {/* <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-          <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardExperience className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          {/* <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardProject className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" /> */}
         </div>
       </div>

@@ -1,7 +1,6 @@
 "use server";
 
 import { Button } from "@heroui/react";
-import clsx from "clsx";
 
 import { AUTHOR } from "@/setting/site";
 import { ROUTE_ICON } from "@/setting/icon";
@@ -10,11 +9,9 @@ import TypingText from "@/component/TypingText";
 
 const IconProfile = ROUTE_ICON["/profile"];
 
-export default async function ({
-  className,
-}: Readonly<{ className?: string }>) {
+export default async function () {
   return (
-    <div className={clsx("text-left w-full", className)}>
+    <div className="text-left w-full">
       <div className="space-y-2">
         <h2 className="text-3xl sm:text-4xl font-light text-default-600 flex flex-col gap-1">
           <span className="text-nowrap">

@@ -13,14 +13,17 @@ Chart.register(ChartDataLabels);
 
 export default async function ({
   ...props
-}: Omit<ComponentProps<typeof CardBlock>, "href" | "title" | "contentHeader">) {
+}: Omit<
+  ComponentProps<typeof CardBlock>,
+  "children" | "contentHeader" | "href" | "title"
+>) {
   const { metadata } = await getProfile();
 
   return (
     <CardBlock
+      contentHeader={<ContentHeader experience={metadata.status.experience} />}
       href="/profile#summary"
       title="What I Bring to the Table"
-      contentHeader={<ContentHeader experience={metadata.status.experience} />}
       {...props}
     >
       <Bar />
