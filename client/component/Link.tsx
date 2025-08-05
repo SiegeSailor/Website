@@ -22,7 +22,7 @@ export default function ({
       {...props}
       className={clsx(
         "font-light",
-        isPlain ? "block w-full h-full" : "inline-flex",
+        isPlain ? "flex w-full h-full" : "inline-flex",
         props.className
       )}
     />

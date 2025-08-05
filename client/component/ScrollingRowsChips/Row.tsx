@@ -46,7 +46,7 @@ export default function ({
         ref={refRow}
         key={widthRow}
         className={clsx(
-          "flex gap-2 nowrap w-full. transition-opacity duration-1000 ease-in-out",
+          "flex gap-2 nowrap w-full. transition-opacity duration-2000 ease-in-out",
           widthRow > 0 ? "opacity-100" : "opacity-0"
         )}
         animate={["scrolling", "visible"]}

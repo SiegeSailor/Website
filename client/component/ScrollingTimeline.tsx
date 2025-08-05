@@ -1,11 +1,14 @@
 "use client";
 
+import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
 
 export default function ({
+  classNameHeight = "h-full",
   items,
-  speedScroll = 30,
+  speedScroll = 20,
 }: Readonly<{
+  classNameHeight?: string;
   items: Readonly<{ title: string; time: string }[]>;
   speedScroll?: number;
 }>) {
@@ -43,7 +46,10 @@ export default function ({
   return (
     <div
       ref={refContainer}
-      className="w-full h-full relative overflow-hidden opacity-0 transition-opacity duration-1000 ease-in-out"
+      className={clsx(
+        "w-full flex-grow relative overflow-hidden opacity-0 transition-opacity duration-2000 ease-in-out",
+        classNameHeight
+      )}
     >
       <ol className="pb-16">
         {items.map((item) => (
