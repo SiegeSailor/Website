@@ -1,6 +1,6 @@
 "use client";
 
-export default async function ({
+export default function ({
   error,
   reset,
 }: Readonly<{ error: Error; reset: () => void }>) {

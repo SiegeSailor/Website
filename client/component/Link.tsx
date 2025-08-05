@@ -1,11 +1,11 @@
-"use server";
+"use client";
 
 import { ComponentProps } from "react";
 import { Link } from "@heroui/react";
 import clsx from "clsx";
 import NextLink from "next/link";
 
-export default async function ({
+export default function ({
   isPlain,
   ...props
 }: ComponentProps<typeof Link> & Readonly<{ isPlain?: boolean }>) {

@@ -9,7 +9,7 @@ import ContentBody from "@/component/CardBlog/ContentBody";
 export default async function ({
   articles,
   ...props
-}: Omit<ComponentProps<typeof CardBlock>, "href" | "title"> &
+}: Omit<ComponentProps<typeof CardBlock>, "contentBody" | "href" | "title"> &
   Readonly<{
     className?: string;
     articles: Awaited<ReturnType<typeof getArticles>>;

@@ -5,9 +5,9 @@ import { Tabs, Tab, Progress } from "@heroui/react";
 import { useState, useEffect } from "react";
 
 import { PROJECT } from "@/setting/home";
-import ContentTab from "@/component/CardProject/ContentTab";
+import ContentTab from "@/component/CardProject/Body/ContentTab";
 
-export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
+export default function () {
   const [indexItem, setIndexItem] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -23,7 +23,7 @@ export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
 
   useEffect(() => {
     if (progress === 100)
-      setIndexItem((previous) => (previous + 1) % items.length);
+      setIndexItem((previous) => (previous + 1) % PROJECT.length);
   }, [progress]);
 
   return (
@@ -37,15 +37,17 @@ export default function ({ items }: Readonly<{ items: typeof PROJECT }>) {
         aria-label="Options"
         fullWidth
         placement="bottom"
-        selectedKey={items[indexItem].title}
+        selectedKey={PROJECT[indexItem].title}
         radius="md"
         size="md"
         onSelectionChange={(key) => {
-          setIndexItem(items.map((item) => item.title).indexOf(key.toString()));
-          setProgress(0);
+          setIndexItem(() =>
+            PROJECT.map((item) => item.title).indexOf(key.toString())
+          );
+          setProgress(() => 0);
         }}
       >
-        {items.map((item) => {
+        {PROJECT.map((item) => {
           return (
             <Tab key={item.title} title={item.title}>
               <ContentTab isLeaving={progress >= 95} item={item} />

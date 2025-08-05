@@ -1,28 +1,20 @@
 "use client";
 
-import { HTMLAttributes } from "react";
 import { Spacer, ScrollShadow } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
-import clsx from "clsx";
 
 import { PROJECT } from "@/setting/home";
 import Link from "@/component/Link";
 
 export default function ({
-  children,
   item,
   isLeaving,
-  ...props
-}: HTMLAttributes<HTMLDivElement> &
-  Readonly<{
-    item: (typeof PROJECT)[number];
-    isLeaving: boolean;
-  }>) {
+}: Readonly<{
+  item: (typeof PROJECT)[number];
+  isLeaving: boolean;
+}>) {
   return (
-    <div
-      {...props}
-      className={clsx(props.className, "flex flex-col gap-2", "h-40")}
-    >
+    <div className="flex flex-col gap-2 h-40">
       <Spacer y={2} />
       <AnimatePresence>
         {!isLeaving && (
@@ -42,7 +34,7 @@ export default function ({
                 <Link href={item.href}>Read More</Link>
               </div>
               <ScrollShadow className="h-full sm:h-16 md:h-28">
-                <p className={clsx("text-medium font-normal text-default-400")}>
+                <p className="text-medium font-normal text-default-400">
                   {item.description}
                 </p>
               </ScrollShadow>

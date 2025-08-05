@@ -18,6 +18,23 @@ export default async function ({
     contentBody?: ReactNode;
     href?: Route;
   }>) {
+  const content = (
+    <>
+      <CardHeader className="absolute z-20 top-0 flex-col items-start">
+        <div className="items-start z-20">
+          <Chip variant="bordered" size="sm" className="p-4 bg-background">
+            <span className="font-medium">{props.title}</span>
+          </Chip>
+        </div>
+        {contentHeader}
+      </CardHeader>
+      {contentBody}
+      {props.children && (
+        <CardBody className="mt-12 overflow-hidden">{props.children}</CardBody>
+      )}
+    </>
+  );
+
   return (
     <Card
       isHoverable
@@ -28,22 +45,13 @@ export default async function ({
         props.className
       )}
     >
-      <Link href={href} isPlain>
-        <CardHeader className="absolute z-20 top-0 flex-col items-start">
-          <div className="items-start z-20">
-            <Chip variant="bordered" size="sm" className="p-4 bg-background">
-              <span className="font-medium">{props.title}</span>
-            </Chip>
-          </div>
-          {contentHeader}
-        </CardHeader>
-        {contentBody}
-        {props.children && (
-          <CardBody className="mt-12 overflow-hidden">
-            {props.children}
-          </CardBody>
-        )}
-      </Link>
+      {href ? (
+        <Link href={href} isPlain>
+          {content}
+        </Link>
+      ) : (
+        content
+      )}
     </Card>
   );
 }

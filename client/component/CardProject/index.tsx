@@ -1,23 +1,16 @@
-import clsx from "clsx";
-import dynamic from "next/dynamic";
+"use server";
 
-import { PROJECT } from "@/setting/home";
+import { ComponentProps } from "react";
+
+import Body from "@/component/CardProject/Body";
 import CardBlock from "@/component/CardBlock";
-import SpinnerCenter from "@/component/SpinnerCenter";
 
-const Body = dynamic(
-  () => import("@/component/CardProject/Body").then((module) => module.default),
-  { ssr: true, loading: () => <SpinnerCenter /> }
-);
-
-export default function ({ className }: Readonly<{ className?: string }>) {
+export default async function ({
+  ...props
+}: Omit<ComponentProps<typeof CardBlock>, "children" | "href" | "title">) {
   return (
-    <CardBlock
-      className={clsx(className)}
-      title="My Side Projects"
-      isPressable={false}
-    >
-      <Body items={PROJECT} />
+    <CardBlock {...props} isPressable={false} title="My Side Projects">
+      <Body />
     </CardBlock>
   );
 }

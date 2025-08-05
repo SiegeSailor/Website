@@ -13,13 +13,14 @@ export default async function () {
   return (
     <div className="text-left w-full">
       <div className="space-y-2">
-        <h2 className="text-3xl sm:text-4xl font-light text-default-600 flex flex-col gap-1">
+        <h2 className="text-3xl sm:text-4xl font-light text-default-400 flex flex-col gap-1">
           <span className="text-nowrap">
-            Hi, I'm <span className="text-foreground">{AUTHOR}</span>!
+            Hi, I'm{" "}
+            <span className="text-foreground font-normal">{AUTHOR}</span>!
           </span>
           <span className="flex flex-col sm:block sm:text-nowrap">
             <span>I’m a Senior</span>
-            <span className="h-9 sm:h-auto sm:px-2 font-light text-primary">
+            <span className="h-9 sm:h-auto sm:px-2 font-normal text-primary">
               <TypingText
                 words={["Software", "Full-Stack", "DevOps"]}
                 speedDeleting={125}
@@ -30,13 +31,15 @@ export default async function () {
           </span>
           <span>
             <span className="pr-3">Engineer at</span>
-            <Link
-              className="text-2xl sm:text-3xl text-default-600"
-              href="https://www.coopersurgical.com/"
-            >
-              CooperSurgical
-            </Link>
-            .
+            <span className="text-nowrap">
+              <Link
+                className="text-2xl sm:text-3xl font-light text-default-400"
+                href="https://www.coopersurgical.com/"
+              >
+                CooperSurgical
+              </Link>
+              .
+            </span>
           </span>
         </h2>
       </div>
