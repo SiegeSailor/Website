@@ -12,6 +12,22 @@ export const SUMMARY: Readonly<{ title: string; portion: number }>[] = [
 
 export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
   {
+    title: "Game Development Intern at DY Game",
+    time: "May 2014 - Aug 2014",
+  },
+  {
+    title: "Software Engineering Intern at Servicetech International",
+    time: "Jun 2016 - Jan 2017",
+  },
+  {
+    title: "Software Engineer at Servicetech International",
+    time: "Jun 2017 - Nov 2018",
+  },
+  {
+    title: "Software Engineer at Edallianz",
+    time: "Jan 2019 - Nov 2019",
+  },
+  {
     title: "Software Engineer at Shopee",
     time: "Jan 2022 - Feb 2022",
   },
