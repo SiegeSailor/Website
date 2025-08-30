@@ -3,7 +3,7 @@ import { Selection, SortDescriptor } from "@heroui/react";
 
 import { getArticles } from "@/helper/server/article";
 
-type TState = {
+export type TState = {
   articles: Awaited<ReturnType<typeof getArticles>>;
   uniqueCategories: string[];
   uniqueStatuses: string[];

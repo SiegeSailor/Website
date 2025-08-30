@@ -1,31 +1,55 @@
 "use client";
 
-import { ComponentProps } from "react";
 import {
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Selection,
 } from "@heroui/react";
 import { ChevronDownIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/server/article";
+import { useBlogStore, TState as TBlogState } from "@/store/blog";
+
+const METADATA_SET_ITEMS: Readonly<
+  Record<
+    Extract<
+      keyof Awaited<ReturnType<typeof getArticles>>[number]["metadata"],
+      "category" | "status" | "technologies"
+    >,
+    Extract<keyof TBlogState, "setCategory" | "setStatus" | "setTechnologies">
+  >
+> = {
+  category: "setCategory",
+  status: "setStatus",
+  technologies: "setTechnologies",
+} as const;
+
+const METADATA_UNIQUES: Readonly<
+  Record<
+    keyof typeof METADATA_SET_ITEMS,
+    Extract<
+      keyof TBlogState,
+      "uniqueCategories" | "uniqueStatuses" | "uniqueTechnologies"
+    >
+  >
+> = {
+  category: "uniqueCategories",
+  status: "uniqueStatuses",
+  technologies: "uniqueTechnologies",
+} as const;
 
 export default function ({
-  items,
-  setItems,
-  columns,
   metadata,
-  uniques,
 }: Readonly<{
-  items: ComponentProps<typeof DropdownMenu>["selectedKeys"];
-  setItems: ComponentProps<typeof DropdownMenu>["onSelectionChange"];
-  columns: Selection;
-  metadata: keyof Awaited<ReturnType<typeof getArticles>>[number]["metadata"];
-  uniques: string[];
+  metadata: keyof typeof METADATA_SET_ITEMS;
 }>) {
+  const columns = useBlogStore((state) => state.columns);
+  const items = useBlogStore((state) => state[metadata]);
+  const setItems = useBlogStore((state) => state[METADATA_SET_ITEMS[metadata]]);
+  const uniques = useBlogStore((state) => state[METADATA_UNIQUES[metadata]]);
+
   return (
     <Dropdown
       isDisabled={

@@ -2,13 +2,9 @@ import { Button, Pagination } from "@heroui/react";
 
 import { useBlogStore } from "@/store/blog";
 
-export default function () {
+export default function ({ pageTotal }: Readonly<{ pageTotal: number }>) {
   const page = useBlogStore((state) => state.page);
-  const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
   const setPage = useBlogStore((state) => state.setPage);
-
-  const itemsFiltered = 10;
-  const pageTotal = Math.max(1, Math.ceil(itemsFiltered / rowsPerPage));
 
   return (
     <div className="py-2 px-2 flex justify-between items-center">
@@ -22,7 +18,7 @@ export default function () {
       />
       <div className="hidden sm:flex w-[30%] justify-end gap-2">
         <Button
-          isDisabled={pageTotal === 1}
+          isDisabled={page === 1}
           size="md"
           variant="flat"
           onPress={() => {
@@ -32,7 +28,7 @@ export default function () {
           Previous
         </Button>
         <Button
-          isDisabled={pageTotal === 1}
+          isDisabled={page === pageTotal}
           size="md"
           variant="flat"
           onPress={() => {
