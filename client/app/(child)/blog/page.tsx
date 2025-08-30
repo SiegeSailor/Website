@@ -1,20 +1,21 @@
+"use server";
+
 import { Metadata } from "next";
-import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
 import { getArticles } from "@/helper/server/article";
 import { ROUTE_TITLE } from "@/setting/site";
-import TableArticles from "@/component/TableArticles";
+import TableArticles from "./TableArticles";
 
-export const metadata: Metadata = {
-  title: generateTitle(ROUTE_TITLE["/blog"]),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: generateTitle(ROUTE_TITLE["/blog"]) };
+}
 
 export default async function () {
   const articles = await getArticles();
 
   return (
-    <section className={clsx("max-w-content mx-auto p-4")}>
+    <section className="max-w-content mx-auto p-4">
       <TableArticles articles={articles} />
     </section>
   );

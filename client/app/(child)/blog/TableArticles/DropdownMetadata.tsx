@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps } from "react";
 import {
   Button,
@@ -22,7 +24,7 @@ export default function ({
   setItems: ComponentProps<typeof DropdownMenu>["onSelectionChange"];
   columns: Selection;
   metadata: keyof Awaited<ReturnType<typeof getArticles>>[number]["metadata"];
-  uniques: { key: string; label: string }[];
+  uniques: string[];
 }>) {
   return (
     <Dropdown
@@ -45,7 +47,7 @@ export default function ({
         onSelectionChange={setItems}
       >
         {uniques.map((unique) => (
-          <DropdownItem key={unique.key}>{unique.label}</DropdownItem>
+          <DropdownItem key={unique}>{unique}</DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>

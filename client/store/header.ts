@@ -6,7 +6,7 @@ type TState = {
   hideMenu: () => void;
 };
 
-export const useHeaderStore = create<TState>((set, get) => ({
+export const useHeaderStore = create<TState>((set) => ({
   isMenuOpen: false,
   setIsMenuOpen: (isOpen) => set({ isMenuOpen: isOpen }),
   hideMenu: () => set({ isMenuOpen: false }),
