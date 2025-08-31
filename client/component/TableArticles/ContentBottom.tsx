@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Pagination } from "@heroui/react";
 
 import { useBlogStore } from "@/store/blog";

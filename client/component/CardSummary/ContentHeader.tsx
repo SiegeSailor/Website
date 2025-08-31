@@ -1,6 +1,10 @@
+"use server";
+
 import FloatingDivision from "@/component/FloatingDivision";
 
-export default function ({ experience }: Readonly<{ experience: string }>) {
+export default async function ({
+  experience,
+}: Readonly<{ experience: string }>) {
   return (
     <FloatingDivision
       volume={2.5}

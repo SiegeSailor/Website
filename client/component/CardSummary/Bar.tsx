@@ -1,10 +1,10 @@
 "use client";
 
 import "chart.js/auto";
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { getCSSVariable } from "@/helper/utility";

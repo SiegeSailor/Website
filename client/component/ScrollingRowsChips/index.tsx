@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef, useState, useEffect, useCallback } from "react";
 
-import Row from "@/component/ScrollingRowsChips/Row";
+import Row from "./Row";
 
 export default function ({
   rows,

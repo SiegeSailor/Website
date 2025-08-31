@@ -5,12 +5,12 @@ import clsx from "clsx";
 import { generateTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
 import { getSlugByTitle } from "@/helper/utility";
+import { STATUS_COLOR } from "@/setting/site";
 import Heading from "@/component/Heading";
 import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
-import { STATUS_COLOR } from "@/setting/site";
 
 export const dynamicParams = false;
 
@@ -87,7 +87,6 @@ export default async function ({
               >
                 {metadata.status}
               </Chip>
-              {/* <Divider orientation="vertical" className="h-[1.75rem]" /> */}
               <span>·</span>
               <ScrollShadowTechnologies
                 technologies={metadata.technologies}
