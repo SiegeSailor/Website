@@ -41,7 +41,7 @@ export default function ({
             return (
               <ListboxItem
                 classNames={{ title: "font-light" }}
-                href={`/blog/${item.metadata.date}`}
+                href={item.metadata.route}
                 key={item.metadata.date}
                 title={item.metadata.title}
               />
@@ -54,7 +54,7 @@ export default function ({
             <ListboxItem
               classNames={{ title: "font-light truncate" }}
               description={item.metadata.title}
-              href={`/blog/${item.metadata.date}`}
+              href={item.metadata.route}
               key={item.metadata.date}
               title={item.metadata.date}
             />

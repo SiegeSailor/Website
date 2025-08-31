@@ -65,7 +65,7 @@ function renderCell(
       const title = article.metadata[keyColumn];
       return (
         <ScrollShadow className="w-96" orientation="horizontal">
-          <Link href={`/blog/${article.metadata.date}`}>{title}</Link>
+          <Link href={article.metadata.route}>{title}</Link>
         </ScrollShadow>
       );
     case "minutes":
