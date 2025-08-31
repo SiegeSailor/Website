@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { Tabs, Tab, Progress } from "@heroui/react";
 import { useState, useEffect } from "react";
 
-import { PROJECT } from "@/setting/home";
-import ContentTab from "@/component/CardProject/Body/ContentTab";
+import { PUBLICATION } from "@/setting/home";
+import ContentTab from "./ContentTab";
 
 export default function () {
   const [indexItem, setIndexItem] = useState(0);
@@ -23,7 +23,7 @@ export default function () {
 
   useEffect(() => {
     if (progress === 100)
-      setIndexItem((previous) => (previous + 1) % PROJECT.length);
+      setIndexItem((previous) => (previous + 1) % PUBLICATION.length);
   }, [progress]);
 
   return (
@@ -37,17 +37,17 @@ export default function () {
         aria-label="Options"
         fullWidth
         placement="bottom"
-        selectedKey={PROJECT[indexItem].title}
+        selectedKey={PUBLICATION[indexItem].title}
         radius="md"
         size="md"
         onSelectionChange={(key) => {
           setIndexItem(() =>
-            PROJECT.map((item) => item.title).indexOf(key.toString())
+            PUBLICATION.map((item) => item.title).indexOf(key.toString())
           );
           setProgress(() => 0);
         }}
       >
-        {PROJECT.map((item) => {
+        {PUBLICATION.map((item) => {
           return (
             <Tab key={item.title} title={item.title}>
               <ContentTab isLeaving={progress >= 95} item={item} />

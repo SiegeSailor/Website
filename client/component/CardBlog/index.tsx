@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 
 import { getArticles } from "@/helper/server/article";
 import CardBlock from "@/component/CardBlock";
-import ContentBody from "@/component/CardBlog/ContentBody";
+import ContentBody from "./ContentBody";
 
 export default async function ({
   articles,

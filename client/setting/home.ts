@@ -76,19 +76,20 @@ export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
   ],
 ] as const;
 
-export const PROJECT: Readonly<
+export const PUBLICATION: Readonly<
   { title: string; description: string; href: Route }[]
 > = [
   {
-    title: "Dynamic Account Hub",
+    title: "Quantitative DevSecOps Metrics for Cloud-Based Web Microservices",
     description:
-      "Scalable Cloud-Based Web Microservices that allows users to manage their accounts and settings. The CBWMs provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
-    href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
+      "The widespread adoption of CBWMs and DevSecOps methodologies has significantly improved modern software development, particularly regarding scalability, agility, and security. However, the true success of these implementations hinges on the ability to measure their effectiveness accurately. Metrics serve as a critical tool in this process, providing quantifiable data on service performance, security, and operational efficiency. By leveraging these metrics, organizations can better assess the efficiency of their DevSecOps practices, making them invaluable for informed decision-making, trend analysis, process management, and continuous improvement. This paper introduces 12 key quantitative metrics specifically designed to evaluate the quality of CBWMs developed through DevSecOps practices. These metrics were identified using a Multi-Vocal Literature Review methodology, sourcing information from 92 relevant studies (2018-2023) on IEEE Xplore, Springer, and Google Scholar. The selected metrics are widely applicable across CBWMs and are easy to measure with existing tools, offering a comprehensive framework for thorough assessment.",
+    href: "https://ieeexplore.ieee.org/document/10735195",
   },
   {
-    title: "Cryptography CLI",
+    title:
+      "A Quantitative DevSecOps Assessment Framework for Cloud-Based Web Microservices",
     description:
-      "A Command-Line Interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
-    href: "https://github.com/SiegeSailor/OpenSource.Formulas",
+      "As DevSecOps practices become increasingly standardized in software development, there is a growing emphasis on consistently providing quantitative metrics for CBWMs. To achieve this, adopting an iterative workflow with a feedback loop becomes a crucial strategy for incorporating security throughout the SDLC of CBWMs. This approach effectively integrates DevSecOps principles, which are essential for the continuous provision of quantitative metrics in CBWMs. It aligns with the fundamental tenets of DevSecOps, which prioritize the direct integration of security measures into the SDLC. Consequently, the goal is to establish a continuous, metrics-driven framework that not only enhances security but also caters to the dynamic requirements of CBWMs in DevSecOps environments. Our proposed assessment flow follows the principles and concepts of DevSecOps, and it is not only a guideline for team members to follow but also a culture focusing on automating, monitoring, evaluating, and providing feedback continuously.",
+    href: "https://www.proquest.com/openview/0da942d980b35cc6e5e421a32d71ba5d/1?pq-origsite=gscholar&cbl=18750&diss=y",
   },
 ] as const;

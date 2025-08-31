@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 
 import { EXPERIENCE } from "@/setting/home";
 import CardBlock from "@/component/CardBlock";
-import ContentHeader from "@/component/CardExperience/ContentHeader";
+import ContentHeader from "./ContentHeader";
 import ScrollingTimeline from "@/component/ScrollingTimeline";
 
 export default async function ({

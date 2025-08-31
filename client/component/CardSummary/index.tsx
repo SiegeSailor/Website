@@ -5,9 +5,9 @@ import { Chart } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { getProfile } from "@/helper/server/document";
-import Bar from "@/component/CardSummary/Bar";
+import Bar from "./Bar";
 import CardBlock from "@/component/CardBlock";
-import ContentHeader from "@/component/CardSummary/ContentHeader";
+import ContentHeader from "./ContentHeader";
 
 Chart.register(ChartDataLabels);
 

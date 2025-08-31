@@ -2,14 +2,14 @@
 
 import { ComponentProps } from "react";
 
-import Body from "@/component/CardProject/Body";
+import Body from "./Body";
 import CardBlock from "@/component/CardBlock";
 
 export default async function ({
   ...props
 }: Omit<ComponentProps<typeof CardBlock>, "children" | "href" | "title">) {
   return (
-    <CardBlock {...props} isPressable={false} title="My Side Projects">
+    <CardBlock {...props} isPressable={false} title="My Publications">
       <Body />
     </CardBlock>
   );

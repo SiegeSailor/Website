@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { generateTitle } from "@/helper/utility";
 import { ROUTE_TITLE } from "@/setting/site";
 import CardExperience from "@/component/CardExperience";
-import CardProject from "@/component/CardProject";
+import CardPublication from "@/component/CardPublication";
 import CardSkill from "@/component/CardSkill";
 import CardSummary from "@/component/CardSummary";
 import ContentArticles from "@/component/ContentArticles";
@@ -29,7 +29,7 @@ export default async function () {
             classNameScrollingTimelineHeight="h-[268px]"
           />
           <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-          <CardProject className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
+          <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
         </div>
       </div>
     </section>

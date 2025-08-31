@@ -3,9 +3,9 @@
 import { getArticles } from "@/helper/server/article";
 import { getProfile } from "@/helper/server/document";
 import { NavbarMenu } from "@heroui/react";
-import CardArticles from "@/component/Header/Menu/CardArticles";
-import CardPages from "@/component/Header/Menu/CardPages";
-import CardProfile from "@/component/Header/Menu/CardProfile";
+import CardArticles from "./CardArticles";
+import CardPages from "./CardPages";
+import CardProfile from "./CardProfile";
 import Search from "@/component/Search";
 
 export default async function () {

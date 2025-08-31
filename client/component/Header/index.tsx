@@ -1,9 +1,9 @@
 "use server";
 
-import Bar from "@/component/Header/Bar";
-import ContentActions from "@/component/Header/ContentActions";
-import ContentTitle from "@/component/Header/ContentTitle";
-import Menu from "@/component/Header/Menu";
+import Bar from "./Bar";
+import ContentActions from "./ContentActions";
+import ContentTitle from "./ContentTitle";
+import Menu from "./Menu";
 
 export default async function () {
   return (

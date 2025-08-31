@@ -3,14 +3,14 @@
 import { Spacer, ScrollShadow } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { PROJECT } from "@/setting/home";
+import { PUBLICATION } from "@/setting/home";
 import Link from "@/component/Link";
 
 export default function ({
   item,
   isLeaving,
 }: Readonly<{
-  item: (typeof PROJECT)[number];
+  item: (typeof PUBLICATION)[number];
   isLeaving: boolean;
 }>) {
   return (
