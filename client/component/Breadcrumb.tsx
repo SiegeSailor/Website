@@ -2,10 +2,11 @@
 
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { ComponentProps, useMemo } from "react";
+import { Route } from "next";
 import { usePathname } from "next/navigation";
 
 import { getArticles } from "@/helper/server/article";
-import { ROUTE_TITLE } from "@/setting/site";
+import { ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
 
 export default function ({
   propsContainer,
@@ -19,28 +20,44 @@ export default function ({
   const pathname = usePathname();
 
   const breadcrumbs = useMemo(() => {
+    const results: { name: string; href: Route }[] = [
+      { name: ROUTE_TITLE["/"], href: TITLE_ROUTE["Home"] },
+    ];
+
     const paths = pathname.split("/");
+    paths.forEach((path) => {
+      if (path === "") return;
 
-    return paths.map((path, index) => {
-      const href = (index != 0 ? paths[index - 1] : "") + "/" + path;
-      let name = path;
-      if (href in ROUTE_TITLE) {
-        name = ROUTE_TITLE[href as keyof typeof ROUTE_TITLE];
+      if (path in ROUTE_TITLE) {
+        const name = ROUTE_TITLE[path as keyof typeof ROUTE_TITLE];
+        results.push({ name, href: TITLE_ROUTE[name] });
+        return;
       }
+
       if (/^\d{4}-\d{2}-\d{2}$/.test(path)) {
-        name =
-          articles.find((article) => article.metadata.date === path)?.metadata
-            .title || path;
-      }
+        const article = articles.find((article) => {
+          return article?.metadata.date === path;
+        });
+        if (!article) return;
 
-      return { name, href };
+        results.push({
+          name: article.metadata.title,
+          href: article.metadata.route,
+        });
+        return;
+      }
     });
+
+    return results;
   }, [pathname, articles]);
 
   return (
     <Breadcrumbs
-      classNames={{ list: "overflow-hidden flex-nowrap" }}
       {...propsContainer}
+      classNames={{
+        list: "overflow-hidden flex-nowrap",
+        ...propsContainer?.classNames,
+      }}
     >
       {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem
@@ -49,6 +66,7 @@ export default function ({
           {...propsItem}
           classNames={{
             item: "block truncate max-w-40 sm:max-w-[28rem] md:max-w-[36rem] lg:max-w-[52rem]",
+            ...propsItem?.classNames,
           }}
         >
           {breadcrumb.name}
