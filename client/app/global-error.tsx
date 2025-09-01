@@ -7,6 +7,7 @@ import clsx from "clsx";
 import "@/style/global.css";
 import { createPageTitle } from "@/helper/utility";
 import { DESCRIPTION } from "@/setting/site";
+import DivisionCenter from "@/component/DivisionCenter";
 import Error from "./error";
 import Provider from "@/component/Provider";
 
@@ -33,16 +34,14 @@ export default function ({
     <html suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
-        className={clsx(FontRoboto.className, "overscroll-none")}
+        className={clsx(FontRoboto.className, "bg-danger-100 overscroll-none")}
       >
         <Provider>
-          <div className="h-screen flex flex-col">
-            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
-              <div className="w-full flex items-center justify-center">
-                <Error error={error} reset={reset} />
-              </div>
-            </main>
-          </div>
+          <main className="h-screen container max-w-8xl mx-auto px-4">
+            <DivisionCenter>
+              <Error error={error} reset={reset} />
+            </DivisionCenter>
+          </main>
         </Provider>
       </body>
     </html>

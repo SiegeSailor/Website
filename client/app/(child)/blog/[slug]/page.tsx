@@ -41,9 +41,10 @@ export async function generateMetadata({
 export default async function ({
   params,
 }: Readonly<{ params: Promise<TParams> }>) {
-  const articles = await getArticles();
   const { slug } = await params;
   const { content, metadata } = await getArticleByDate(slug);
+
+  const articles = await getArticles();
 
   return (
     <section className="max-w-content mx-auto p-4">

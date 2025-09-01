@@ -3,6 +3,7 @@
 import { Alert, Button } from "@heroui/react";
 
 import { ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
+import DivisionCenter from "@/component/DivisionCenter";
 import Link from "@/component/Link";
 
 export default function ({
@@ -10,7 +11,7 @@ export default function ({
   reset,
 }: Readonly<{ error: Error & { digest?: string }; reset: () => void }>) {
   return (
-    <div className="w-full flex items-center justify-center">
+    <DivisionCenter>
       <Alert
         color="danger"
         description={error.message}
@@ -29,6 +30,6 @@ export default function ({
         title={`${error.name}: ${error.digest}`}
         variant="faded"
       />
-    </div>
+    </DivisionCenter>
   );
 }

@@ -7,7 +7,8 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { createPageTitle } from "@/helper/utility";
-import { DESCRIPTION, ROUTE_TITLE, TITLE, TITLE_ROUTE } from "@/setting/site";
+import { DESCRIPTION, ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
+import DivisionCenter from "@/component/DivisionCenter";
 import Link from "@/component/Link";
 import Provider from "@/component/Provider";
 import TextRoute from "@/component/TextRoute";
@@ -36,32 +37,30 @@ export default async function () {
     <html suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
-        className={clsx(FontRoboto.className, "overscroll-none")}
+        className={clsx(FontRoboto.className, "bg-warning-100 overscroll-none")}
       >
         <Provider>
-          <div className="h-screen flex flex-col">
-            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
-              <div className="w-full flex items-center justify-center">
-                <Alert
-                  color="warning"
-                  description={`This page couldn’t be found. Double-check the address or go back to the home page.`}
-                  endContent={
-                    <Link href={TITLE_ROUTE["Home"]} underline="none">
-                      <Button color="warning" size="md" variant="solid">
-                        {ROUTE_TITLE["/"]}
-                      </Button>
-                    </Link>
-                  }
-                  title={
-                    <>
-                      Not Found: <TextRoute />
-                    </>
-                  }
-                  variant="faded"
-                />
-              </div>
-            </main>
-          </div>
+          <main className="h-screen container max-w-8xl mx-auto px-4">
+            <DivisionCenter>
+              <Alert
+                color="warning"
+                description={`This page couldn’t be found. Double-check the address or go back to the home page.`}
+                endContent={
+                  <Link href={TITLE_ROUTE["Home"]} underline="none">
+                    <Button color="warning" size="md" variant="solid">
+                      {ROUTE_TITLE["/"]}
+                    </Button>
+                  </Link>
+                }
+                title={
+                  <>
+                    Not Found: <TextRoute />
+                  </>
+                }
+                variant="faded"
+              />
+            </DivisionCenter>
+          </main>
         </Provider>
       </body>
     </html>
