@@ -16,7 +16,7 @@ export default async function () {
         <h2 className="text-3xl sm:text-4xl font-light text-default-400 flex flex-col gap-1">
           <span className="text-nowrap">
             Hi, I'm{" "}
-            <span className="text-foreground font-normal">{AUTHOR}</span>!
+            <span className="text-foreground font-normal">{AUTHOR}</span>
           </span>
           <span className="flex flex-col sm:block sm:text-nowrap">
             <span>I’m a Senior</span>

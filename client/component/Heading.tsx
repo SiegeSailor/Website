@@ -1,3 +1,5 @@
+"use server";
+
 import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
 import clsx from "clsx";
@@ -11,7 +13,7 @@ const LEVEL_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
   6: "text-lg",
 } as const;
 
-export default function ({
+export default async function ({
   level,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement> &

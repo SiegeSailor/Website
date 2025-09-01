@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
+import clsx from "clsx";
 
 export default function ({
   classNameHeight = "h-full",

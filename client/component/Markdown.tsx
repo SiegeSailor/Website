@@ -1,3 +1,5 @@
+"use server";
+
 import { Children, isValidElement } from "react";
 import { Code, ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -14,9 +16,9 @@ import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
 import ModalImage from "@/component/ModalImage";
 
-const SPACE = "my-4 first:mt-0 last:mb-0";
+const SPACE = "my-4 first:mt-0 last:mb-0" as const;
 
-export default function ({ source }: Readonly<{ source: string }>) {
+export default async function ({ source }: Readonly<{ source: string }>) {
   return (
     <MDXRemote
       source={source}

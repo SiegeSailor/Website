@@ -5,11 +5,10 @@ import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-const SCALE = 1;
+const SCALE = 1 as const;
 const ELEMENT_STYLE_WRAPPER =
-  "display: flex; align-items: center; " +
-  "justify-content: center; min-height: 32rem; padding: 0 18rem;";
-const ELEMENT_STYLE_INNER = "display: inline-block; padding: 4rem 0;";
+  "display: flex; align-items: center; justify-content: center; min-height: 32rem; padding: 0 18rem;" as const;
+const ELEMENT_STYLE_INNER = "display: inline-block; padding: 4rem 0;" as const;
 
 mermaid.initialize({
   theme: "neutral",

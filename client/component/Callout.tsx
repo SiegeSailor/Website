@@ -1,3 +1,5 @@
+"use server";
+
 import {
   ComponentProps,
   createElement,
@@ -30,7 +32,7 @@ const COLOR_ICON: Readonly<
   secondary: BadgeHelpIcon,
   success: BadgeCheckIcon,
   warning: BadgeAlertIcon,
-};
+} as const;
 
 const COLOR_TITLE: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
@@ -41,7 +43,7 @@ const COLOR_TITLE: Readonly<
   secondary: "Note",
   success: "Success",
   warning: "Warning",
-};
+} as const;
 
 const COLOR_FRAME: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
@@ -54,7 +56,7 @@ const COLOR_FRAME: Readonly<
     "bg-green-50 border-green-300 dark:bg-green-950 dark:border-green-700",
   warning:
     "bg-orange-50 border-orange-300 dark:bg-orange-950 dark:border-orange-700",
-};
+} as const;
 
 const COLOR_COLOR: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
@@ -65,9 +67,9 @@ const COLOR_COLOR: Readonly<
   secondary: "text-gray-500 dark:text-gray-400",
   success: "text-green-500 dark:text-green-400",
   warning: "text-orange-500 dark:text-orange-400",
-};
+} as const;
 
-export default function ({
+export default async function ({
   color,
   children,
   className,
