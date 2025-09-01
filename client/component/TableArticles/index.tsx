@@ -3,7 +3,6 @@
 import { useEffect, useMemo } from "react";
 import {
   Chip,
-  ScrollShadow,
   Table,
   TableBody,
   TableCell,
@@ -51,7 +50,6 @@ function renderCell(
       const technologies = article.metadata[keyColumn];
       return (
         <ScrollShadowTechnologies
-          propsContainer={{ className: "w-64" }}
           technologies={technologies}
           propsItem={{
             className: "text-foreground",
@@ -63,11 +61,7 @@ function renderCell(
       );
     case "title":
       const title = article.metadata[keyColumn];
-      return (
-        <ScrollShadow className="w-96" orientation="horizontal">
-          <Link href={article.metadata.route}>{title}</Link>
-        </ScrollShadow>
-      );
+      return <Link href={article.metadata.route}>{title}</Link>;
     case "minutes":
       const minutes = article.metadata[keyColumn];
       return <div>{minutes} Minutes</div>;

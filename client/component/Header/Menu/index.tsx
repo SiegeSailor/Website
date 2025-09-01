@@ -1,8 +1,9 @@
 "use server";
 
+import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
+
 import { getArticles } from "@/helper/server/article";
 import { getProfile } from "@/helper/server/document";
-import { NavbarMenu } from "@heroui/react";
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
 import CardProfile from "./CardProfile";
@@ -13,23 +14,25 @@ export default async function () {
   const profile = await getProfile();
 
   return (
-    <NavbarMenu>
-      <div className="max-w-compact w-full mx-auto">
-        <div className="sm:hidden mb-4">
-          <Search />
-        </div>
-
-        <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full">
-          <div className="sm:col-span-6 flex flex-col gap-4 p-1">
-            <CardPages />
-            <CardProfile profile={profile} />
+    <NavbarMenu className="h-full pt-14 pb-4">
+      <NavbarMenuItem>
+        <div className="max-w-compact w-full mx-auto">
+          <div className="sm:hidden mb-4">
+            <Search />
           </div>
 
-          <div className="sm:col-span-6 p-1">
-            <CardArticles articles={articles} />
+          <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full">
+            <div className="sm:col-span-6 flex flex-col gap-4 p-1">
+              <CardPages />
+              <CardProfile profile={profile} />
+            </div>
+
+            <div className="sm:col-span-6 p-1">
+              <CardArticles articles={articles} />
+            </div>
           </div>
         </div>
-      </div>
+      </NavbarMenuItem>
     </NavbarMenu>
   );
 }

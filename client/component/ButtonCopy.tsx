@@ -23,11 +23,6 @@ export default function ({
 
   return (
     <Button
-      className={clsx(
-        "absolute top-2 right-2",
-        "text-default-500 hover:text-default-700",
-        "dark:text-default-400 dark:hover:text-default-200"
-      )}
       onPress={() => {
         navigator.clipboard.writeText(parseContentRecursively(content));
 
@@ -41,6 +36,11 @@ export default function ({
       variant="light"
       radius="full"
       {...props}
+      className={clsx(
+        "text-default-500 hover:text-default-700",
+        "dark:text-default-400 dark:hover:text-default-200",
+        props.className
+      )}
     >
       {isCopied ? <CheckIcon size="1.25rem" /> : <CopyIcon size="1.25rem" />}
     </Button>

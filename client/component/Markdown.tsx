@@ -42,6 +42,7 @@ export default async function ({ source }: Readonly<{ source: string }>) {
         },
       }}
       components={{
+        a: (element) => <Link {...element} />,
         h1: (element) => (
           <Heading {...element} level={1} className={clsx(element.className)} />
         ),
@@ -113,7 +114,7 @@ export default async function ({ source }: Readonly<{ source: string }>) {
           return (
             <Code
               {...element}
-              className={clsx(element.className, "py-[0.05rem] !bg-gray-700")}
+              className={clsx(element.className, "py-[0.05rem] bg-gray-700!")}
             />
           );
         },
@@ -132,14 +133,18 @@ export default async function ({ source }: Readonly<{ source: string }>) {
             );
 
           return (
-            <pre
-              {...element.children.props}
-              className={clsx(element.className, "relative")}
-            >
-              <ButtonCopy content={element.children.props.children} />
-
-              {element.children.props.children}
-            </pre>
+            <>
+              <ButtonCopy
+                className="absolute top-0.5 right-2 z-1"
+                content={element.children.props.children}
+              />
+              <pre
+                {...element.children.props}
+                className={clsx(element.className, "relative")}
+              >
+                {element.children.props.children}
+              </pre>
+            </>
           );
         },
         p: (element) => {
@@ -163,7 +168,6 @@ export default async function ({ source }: Readonly<{ source: string }>) {
             />
           );
         },
-        a: (element) => <Link {...element} />,
         table: (element) => (
           <ScrollShadow orientation="horizontal" size={0}>
             <table

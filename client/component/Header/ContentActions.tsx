@@ -23,10 +23,10 @@ export default async function () {
       <Divider orientation="vertical" className="hidden sm:flex h-6" />
       <SquareTerminalIcon
         size="1.45rem"
-        className="text-default-500 text-opacity-disabled translate-y-px"
+        className="text-default-500/40 translate-y-px"
       />
       <ThemeSwitch />
-      <NavbarMenuToggle />
+      <NavbarMenuToggle className="h-6" />
     </NavbarContent>
   );
 }

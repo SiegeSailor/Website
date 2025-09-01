@@ -26,7 +26,7 @@ export default function () {
         startContent={
           <SearchIcon
             size="1.45rem"
-            className="text-base text-default-400 pointer-events-none flex-shrink-0"
+            className="text-base text-default-400 pointer-events-none shrink-0"
           />
         }
         variant="bordered"
@@ -48,14 +48,14 @@ export default function () {
                   labelPlacement="outside"
                   placeholder="Type to search"
                   startContent={
-                    <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+                    <SearchIcon className="text-base text-default-400 pointer-events-none shrink-0" />
                   }
                   disabled
                   type="search"
                 />
                 <Divider />
                 <p className="opacity-disabled">
-                  Searching is currently Unavailable.
+                  Searching is currently unavailable.
                 </p>
               </ModalBody>
               <ModalFooter>

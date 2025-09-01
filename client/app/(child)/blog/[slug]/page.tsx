@@ -1,6 +1,5 @@
 import { Card, Chip, Divider } from "@heroui/react";
 import { Metadata } from "next";
-import clsx from "clsx";
 
 import { generateTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
@@ -11,6 +10,7 @@ import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import DivisionSticky from "@/component/DivisionSticky";
 
 export const dynamicParams = false;
 
@@ -46,31 +46,17 @@ export default async function ({
   const { content, metadata } = await getArticleByDate(slug);
 
   return (
-    <section className={clsx("max-w-content mx-auto p-4")}>
-      <div
-        className={clsx(
-          "gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1",
-          "w-full"
-        )}
-      >
+    <section className="max-w-content mx-auto p-4">
+      <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1 w-full">
         <div
           id={IDENTIFIER}
-          className={clsx(
-            "md:col-span-8 lg:col-span-9",
-            "max-h-[calc(100vh-12rem)] overflow-y-auto"
-          )}
+          className="md:col-span-8 lg:col-span-9 overflow-y-auto"
         >
           <div className="flex flex-col gap-4 mb-16">
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
-            <div
-              className={clsx(
-                "flex flex-wrap gap-1 items-center",
-                "text-nowrap font-normal text-sm",
-                "opacity-60"
-              )}
-            >
+            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm opacity-60">
               <span>{metadata.date} (Drafted)</span>
               <span>·</span>
               <span>{metadata.createdOn} (Created)</span>
@@ -105,17 +91,11 @@ export default async function ({
             <Divider />
           </div>
 
-          <article>
+          <article className="w-full overflow-x-hidden">
             <Markdown source={content} />
           </article>
         </div>
-        <div
-          className={clsx(
-            "hidden md:block md:col-span-4 lg:col-span-3",
-            "max-h-[calc(100vh-12rem)] overflow-y-auto",
-            "p-1"
-          )}
-        >
+        <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
           {[
             <Card shadow="sm">
               <ListboxContents anchors={metadata.anchors} />
@@ -124,11 +104,11 @@ export default async function ({
               <ListboxArticles date={metadata.date} articles={articles} />
             </Card>,
           ].map((item, index) => (
-            <div key={index} className="mb-4">
+            <div key={index} className="not-last:mb-4">
               {item}
             </div>
           ))}
-        </div>
+        </DivisionSticky>
       </div>
     </section>
   );

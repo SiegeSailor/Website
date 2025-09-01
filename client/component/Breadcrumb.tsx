@@ -20,16 +20,13 @@ export default function ({
   const pathname = usePathname();
 
   const breadcrumbs = useMemo(() => {
-    const results: { name: string; href: Route }[] = [
-      { name: ROUTE_TITLE["/"], href: TITLE_ROUTE["Home"] },
-    ];
+    const results: { name: string; href: Route }[] = [];
 
     const paths = pathname.split("/");
     paths.forEach((path) => {
-      if (path === "") return;
-
-      if (path in ROUTE_TITLE) {
-        const name = ROUTE_TITLE[path as keyof typeof ROUTE_TITLE];
+      const pathWithSlash = `/${path}`;
+      if (pathWithSlash in ROUTE_TITLE) {
+        const name = ROUTE_TITLE[pathWithSlash as keyof typeof ROUTE_TITLE];
         results.push({ name, href: TITLE_ROUTE[name] });
         return;
       }
@@ -65,7 +62,7 @@ export default function ({
           key={breadcrumb.name}
           {...propsItem}
           classNames={{
-            item: "block truncate max-w-40 sm:max-w-[28rem] md:max-w-[36rem] lg:max-w-[52rem]",
+            item: "block truncate max-w-56 sm:max-w-md md:max-w-xl lg:max-w-208",
             ...propsItem?.classNames,
           }}
         >

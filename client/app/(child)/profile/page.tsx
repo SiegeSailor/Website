@@ -6,11 +6,12 @@ import clsx from "clsx";
 import { generateTitle, getEntries } from "@/helper/utility";
 import { getProfile } from "@/helper/server/document";
 import { getSlugByTitle } from "@/helper/utility";
+import DivisionSticky from "@/component/DivisionSticky";
 import Heading from "@/component/Heading";
+import Link from "@/component/Link";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ModalImage from "@/component/ModalImage";
-import Link from "@/component/Link";
 
 export const metadata: Metadata = {
   title: generateTitle("Profile"),
@@ -29,10 +30,7 @@ export default async function () {
       >
         <div
           id={IDENTIFIER}
-          className={clsx(
-            "md:col-span-8 lg:col-span-9",
-            "max-h-[calc(100vh-12rem)] overflow-y-auto"
-          )}
+          className="md:col-span-8 lg:col-span-9 overflow-y-auto"
         >
           <div className="flex flex-col gap-2 mb-16">
             <ModalImage
@@ -140,17 +138,11 @@ export default async function () {
             <Markdown source={content} />
           </article>
         </div>
-        <div
-          className={clsx(
-            "hidden md:block md:col-span-4 lg:col-span-3",
-            "max-h-[calc(100vh-12rem)] overflow-y-auto",
-            "p-1"
-          )}
-        >
+        <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
           <Card shadow="sm">
             <ListboxContents anchors={metadata.anchors} />
           </Card>
-        </div>
+        </DivisionSticky>
       </div>
     </section>
   );

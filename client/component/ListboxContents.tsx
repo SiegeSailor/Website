@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MoveLeftIcon, MoveUpIcon } from "lucide-react";
 import { Listbox, ListboxItem, ListboxSection, Skeleton } from "@heroui/react";
@@ -21,9 +21,7 @@ const LEVEL_PADDING: Readonly<Record<number, string>> = {
 
 export default function ({
   anchors,
-  propsContainer,
 }: Readonly<{
-  propsContainer?: ComponentProps<typeof Skeleton>;
   anchors: ReturnType<typeof getAnchorsByContent>;
 }>) {
   const [identifier, setIdentifier] = useState<string | null>(null);
@@ -44,66 +42,61 @@ export default function ({
       }
     };
 
-    const article = document.getElementById(IDENTIFIER);
-    if (article) {
-      article.addEventListener("scroll", handleScroll, { passive: true });
-      handleScroll();
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
-      return () => article.removeEventListener("scroll", handleScroll);
-    }
+    return () => document.removeEventListener("scroll", handleScroll);
   }, [anchors]);
 
   return (
-    <Skeleton isLoaded={!!identifier} {...propsContainer}>
-      <Listbox
-        aria-label="Table of Contents"
-        color="default"
-        className="p-4"
-        onAction={(key) => setIdentifier(() => String(key))}
-        selectedKeys={identifier ? [identifier] : []}
-        hideSelectedIcon
-        variant="flat"
-      >
-        <ListboxSection title="Table of Contents" showDivider>
-          {anchors.map((anchor) => {
-            const isBrowsing = anchor.identifier === identifier;
+    <Listbox
+      aria-label="Table of Contents"
+      color="default"
+      className="p-4"
+      onAction={(key) => setIdentifier(() => String(key))}
+      selectedKeys={identifier ? [identifier] : []}
+      hideSelectedIcon
+      variant="flat"
+    >
+      <ListboxSection title="Table of Contents" showDivider>
+        {anchors.map((anchor) => {
+          const isBrowsing = anchor.identifier === identifier;
 
-            return (
-              <ListboxItem
-                classNames={{
-                  base: clsx(LEVEL_PADDING[anchor.level]),
-                  title: isBrowsing ? "font-normal" : "font-light",
-                }}
-                endContent={
-                  <AnimatePresence>
-                    {isBrowsing && (
-                      <motion.span
-                        key="eye"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        <MoveLeftIcon size="1rem" strokeWidth="0.1rem" />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                }
-                href={`#${anchor.identifier}`}
-                key={anchor.identifier}
-                title={anchor.title}
-              />
-            );
-          })}
-        </ListboxSection>
-        <ListboxItem
-          classNames={{ title: "font-light" }}
-          endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
-          href={`#${anchors[0].identifier}`}
-          onPress={() => setIdentifier(anchors[0].identifier)}
-          title="Back to Top"
-        />
-      </Listbox>
-    </Skeleton>
+          return (
+            <ListboxItem
+              classNames={{
+                base: clsx(LEVEL_PADDING[anchor.level]),
+                title: isBrowsing ? "font-normal" : "font-light",
+              }}
+              endContent={
+                <AnimatePresence>
+                  {isBrowsing && (
+                    <motion.span
+                      key="eye"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <MoveLeftIcon size="1rem" strokeWidth="0.1rem" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              }
+              href={`#${anchor.identifier}`}
+              key={anchor.identifier}
+              title={anchor.title}
+            />
+          );
+        })}
+      </ListboxSection>
+      <ListboxItem
+        classNames={{ title: "font-light" }}
+        endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
+        href={`#${anchors[0].identifier}`}
+        onPress={() => setIdentifier(anchors[0].identifier)}
+        title="Back to Top"
+      />
+    </Listbox>
   );
 }

@@ -59,14 +59,7 @@ export default function ({
   };
 
   return (
-    <div
-      className={clsx(
-        "bg-default-100 dark:bg-default-50",
-        "rounded-md shadow-md",
-        "inline-block",
-        "markdown-modal-image"
-      )}
-    >
+    <div className="bg-default-100 dark:bg-default-50 rounded-md shadow-md inline-block markdown-modal-image">
       <Image
         src={source}
         alt={alt}
@@ -87,7 +80,7 @@ export default function ({
             <>
               <ModalHeader>{alt.replaceAll("-", " ")}</ModalHeader>
               <ModalBody>
-                <div className={clsx("h-[65vh] w-full", "overflow-auto")}>
+                <div className="h-full w-full overflow-auto">
                   <Image
                     removeWrapper
                     src={source}
@@ -96,8 +89,7 @@ export default function ({
                     shadow="none"
                     {...propsImageThumbnail}
                     className={clsx(
-                      "block w-auto h-auto",
-                      "transition-transform duration-200 origin-top-left",
+                      "max-h-[65vh] transition-transform duration-200 origin-top-left",
                       propsImageModal?.className
                     )}
                     style={{ transform: `scale(${zoom})` }}
@@ -105,7 +97,7 @@ export default function ({
                 </div>
               </ModalBody>
               <ModalFooter>
-                <div className={clsx("flex items-center justify-center gap-2")}>
+                <div className="flex items-center justify-center gap-2">
                   <Button
                     size="sm"
                     variant="light"
@@ -116,8 +108,7 @@ export default function ({
                     <MinusIcon
                       size="1.25rem"
                       className={clsx(
-                        zoom <= ZOOM_MIN &&
-                          "text-default-500 text-opacity-disabled"
+                        zoom <= ZOOM_MIN && "text-default-500/40"
                       )}
                     />
                   </Button>
@@ -139,8 +130,7 @@ export default function ({
                     <PlusIcon
                       size="1.25rem"
                       className={clsx(
-                        zoom >= ZOOM_MAX &&
-                          "text-default-500 text-opacity-disabled"
+                        zoom >= ZOOM_MAX && "text-default-500/40"
                       )}
                     />
                   </Button>

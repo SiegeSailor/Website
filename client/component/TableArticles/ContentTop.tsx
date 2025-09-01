@@ -41,7 +41,7 @@ export default function () {
           }}
           startContent={
             <SearchIcon
-              className="text-default-400 flex-shrink-0"
+              className="text-default-400 shrink-0"
               size="1.45rem"
             />
           }

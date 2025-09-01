@@ -28,7 +28,7 @@ export default async function () {
         </div>
         <CardBlog
           articles={articles.slice(4)}
-          className="w-full md:w-[calc(50%-1rem)] h-[300px] min-w-[200px] flex-shrink-0"
+          className="w-full md:w-[calc(50%-1rem)] h-[300px] min-w-[200px] shrink-0"
         />
       </div>
     </div>

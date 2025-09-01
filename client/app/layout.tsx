@@ -43,7 +43,7 @@ export default async function ({
         <Provider>
           <div className="h-screen flex flex-col">
             <Header />
-            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 flex-grow">
+            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
               {children}
             </main>
           </div>

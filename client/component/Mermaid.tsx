@@ -122,7 +122,7 @@ export default ({ source }: { source: string }) => {
         <div
           id={identity}
           ref={refMermaid}
-          className={clsx("overflow-auto", "w-full h-[32rem] min-h-[32rem]")}
+          className={clsx("overflow-auto", "w-full h-128 min-h-128")}
         />
       </div>
     </Skeleton>

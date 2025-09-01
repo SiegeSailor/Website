@@ -3,9 +3,6 @@ const nextConfig = {
   allowedDevOrigins: ["localhost", "127.0.0.1"],
   compress: true,
   distDir: ".next",
-  experimental: {
-    typedRoutes: true,
-  },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -44,6 +41,7 @@ const nextConfig = {
       },
     },
   },
+  typedRoutes: true,
   webpack: (config) => {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")

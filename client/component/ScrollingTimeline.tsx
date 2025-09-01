@@ -47,7 +47,7 @@ export default function ({
     <div
       ref={refContainer}
       className={clsx(
-        "w-full flex-grow relative overflow-hidden opacity-0 transition-opacity duration-2000 ease-in-out",
+        "w-full grow relative overflow-hidden opacity-0 transition-opacity duration-2000 ease-in-out",
         classNameHeight
       )}
     >

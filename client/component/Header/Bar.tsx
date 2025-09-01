@@ -17,14 +17,13 @@ export default function ({ children }: Readonly<{ children: ReactNode }>) {
 
   return (
     <Navbar
-      className="border-b-1 border-default-300 border-opacity-60"
       disableAnimation
+      isBlurred
       isBordered
-      isBlurred={false}
       isMenuOpen={isMenuOpen}
       maxWidth="md"
       onMenuOpenChange={setIsMenuOpen}
-      position="sticky"
+      position="static"
     >
       {children}
     </Navbar>
