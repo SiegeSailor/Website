@@ -166,6 +166,7 @@ export default function ({
       return sortDescriptor.direction === "descending" ? -result : result;
     });
   }, [sortDescriptor, itemsCurrentPage]);
+
   const pageTotal = useMemo(() => {
     return Math.max(1, Math.ceil(itemsFiltered.length / rowsPerPage));
   }, [itemsFiltered.length, rowsPerPage]);

@@ -4,11 +4,11 @@ import { Selection, SortDescriptor } from "@heroui/react";
 import { getArticles } from "@/helper/server/article";
 
 export type TState = {
-  articles: Awaited<ReturnType<typeof getArticles>>;
+  lengthTotal: number;
   uniqueCategories: string[];
   uniqueStatuses: string[];
   uniqueTechnologies: string[];
-  parseArticles: (articles: TState["articles"]) => void;
+  parseArticles: (articles: Awaited<ReturnType<typeof getArticles>>) => void;
   filter: string;
   setFilter: (filter: string) => void;
   category: Selection;
@@ -31,7 +31,7 @@ export type TState = {
 };
 
 export const useBlogStore = create<TState>((set, get) => ({
-  articles: [],
+  lengthTotal: 0,
   uniqueCategories: [],
   uniqueStatuses: [],
   uniqueTechnologies: [],
@@ -49,7 +49,7 @@ export const useBlogStore = create<TState>((set, get) => ({
     });
 
     set({
-      articles,
+      lengthTotal: articles.length,
       uniqueCategories: Array.from(categories),
       uniqueStatuses: Array.from(statuses),
       uniqueTechnologies: Array.from(technologies),

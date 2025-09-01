@@ -17,7 +17,7 @@ import DropdownMetadata from "./DropdownMetadata";
 export default function () {
   const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
-  const length = useBlogStore((state) => state.articles.length);
+  const lengthTotal = useBlogStore((state) => state.lengthTotal);
   const resetPage = useBlogStore((state) => state.resetPage);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
   const setColumns = useBlogStore((state) => state.setColumns);
@@ -74,7 +74,7 @@ export default function () {
       </div>
       <div className="flex justify-between items-center">
         <span className="text-default-400 text-small">
-          Total {length} articles
+          Total {lengthTotal} articles
         </span>
         <label className="flex items-center text-default-400 text-small">
           Rows per page:
