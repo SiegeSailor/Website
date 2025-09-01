@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { generateTitle } from "@/helper/utility";
+import { createPageTitle } from "@/helper/utility";
 import { ROUTE_TITLE } from "@/setting/site";
 import CardExperience from "@/component/CardExperience";
 import CardPublication from "@/component/CardPublication";
@@ -10,7 +10,7 @@ import ContentArticles from "@/component/ContentArticles";
 import ContentHero from "@/component/ContentHero";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: generateTitle(ROUTE_TITLE["/"]) };
+  return { title: createPageTitle(ROUTE_TITLE["/"]) };
 }
 
 export default async function () {

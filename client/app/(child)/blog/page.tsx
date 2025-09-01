@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 
-import { generateTitle } from "@/helper/utility";
+import { createPageTitle } from "@/helper/utility";
 import { getArticles } from "@/helper/server/article";
 import { ROUTE_TITLE } from "@/setting/site";
 import TableArticles from "@/component/TableArticles";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: generateTitle(ROUTE_TITLE["/blog"]) };
+  return { title: createPageTitle(ROUTE_TITLE["/blog"]) };
 }
 
 export default async function () {

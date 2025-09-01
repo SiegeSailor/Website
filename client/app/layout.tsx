@@ -1,3 +1,5 @@
+"use server";
+
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";

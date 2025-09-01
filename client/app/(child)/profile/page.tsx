@@ -2,7 +2,7 @@ import { Button, Card, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 
-import { generateTitle, getEntries } from "@/helper/utility";
+import { createPageTitle, getEntries } from "@/helper/utility";
 import { getProfile } from "@/helper/server/document";
 import { getSlugByTitle } from "@/helper/utility";
 import DivisionSticky from "@/component/DivisionSticky";
@@ -13,7 +13,7 @@ import Markdown from "@/component/Markdown";
 import ModalImage from "@/component/ModalImage";
 
 export const metadata: Metadata = {
-  title: generateTitle("Profile"),
+  title: createPageTitle("Profile"),
 };
 
 export default async function () {

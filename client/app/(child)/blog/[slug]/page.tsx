@@ -1,7 +1,7 @@
 import { Card, Chip, Divider } from "@heroui/react";
 import { Metadata } from "next";
 
-import { generateTitle } from "@/helper/utility";
+import { createPageTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
 import { getSlugByTitle } from "@/helper/utility";
 import { STATUS_COLOR } from "@/setting/site";
@@ -33,7 +33,7 @@ export async function generateMetadata({
   const article = await getArticleByDate(slug);
 
   return {
-    title: generateTitle(article.metadata.title, "Blog"),
+    title: createPageTitle(article.metadata.title, "Blog"),
     description: article.metadata.description,
   };
 }

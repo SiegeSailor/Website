@@ -1,6 +1,6 @@
 import { TITLE } from "@/setting/site";
 
-export function generateTitle(...content: string[]) {
+export function createPageTitle(...content: string[]) {
   return [...content, TITLE].join(" | ");
 }
 
