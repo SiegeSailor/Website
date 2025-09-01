@@ -1,12 +1,12 @@
 "use server";
 
-import FloatingDivision from "@/component/FloatingDivision";
+import DivisionFloating from "@/component/DivisionFloating";
 
 export default async function ({
   experience,
 }: Readonly<{ experience: string }>) {
   return (
-    <FloatingDivision
+    <DivisionFloating
       volume={2.5}
       direction="horizontal"
       className="absolute top-28 right-4 w-1/2"
@@ -17,6 +17,6 @@ export default async function ({
           Software Engineering
         </div>
       </div>
-    </FloatingDivision>
+    </DivisionFloating>
   );
 }

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import NextImage from "next/image";
 
 import { getArticles } from "@/helper/server/article";
-import FloatingDivision from "@/component/FloatingDivision";
+import DivisionFloating from "@/component/DivisionFloating";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
 const DURATION = 4000;
@@ -59,7 +59,7 @@ export default function ({
           transition={{ duration: 0.5 }}
           key={indexArticle}
         >
-          <FloatingDivision
+          <DivisionFloating
             direction="vertical"
             duration={2}
             className="absolute top-20 left-4 z-10 justify-start w-11/12"
@@ -73,7 +73,7 @@ export default function ({
             </p>
             <Spacer y={4} />
             <ScrollShadowTechnologies technologies={technologies} />
-          </FloatingDivision>
+          </DivisionFloating>
         </motion.div>
       </AnimatePresence>
       <Progress

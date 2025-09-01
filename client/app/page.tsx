@@ -25,7 +25,7 @@ export default async function () {
           <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardExperience
             className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
-            classNameScrollingTimelineHeight="h-[268px]"
+            classNameHeight="h-[268px]"
           />
           <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />

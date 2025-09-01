@@ -5,7 +5,7 @@ import { Button } from "@heroui/react";
 import { AUTHOR } from "@/setting/site";
 import { ROUTE_ICON } from "@/setting/icon";
 import Link from "@/component/Link";
-import TypingText from "@/component/TypingText";
+import TextTyping from "@/component/TextTyping";
 
 const IconProfile = ROUTE_ICON["/profile"];
 
@@ -21,7 +21,7 @@ export default async function () {
           <span className="flex flex-col sm:block sm:text-nowrap">
             <span>I’m a Senior</span>
             <span className="h-9 sm:h-auto sm:px-2 font-normal text-primary">
-              <TypingText
+              <TextTyping
                 words={["Software", "Full-Stack", "DevOps"]}
                 speedDeleting={125}
                 speedTyping={100}

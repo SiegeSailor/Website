@@ -9,7 +9,7 @@ import {
 } from "@heroui/react";
 
 import Search from "@/component/Search";
-import ThemeSwitch from "@/component/ThemeSwitch";
+import IconTheme from "@/component/IconTheme";
 
 export default async function () {
   return (
@@ -25,7 +25,7 @@ export default async function () {
         size="1.45rem"
         className="text-default-500/40 translate-y-px"
       />
-      <ThemeSwitch />
+      <IconTheme />
       <NavbarMenuToggle className="h-6" />
     </NavbarContent>
   );

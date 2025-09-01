@@ -5,20 +5,16 @@ import { ComponentProps } from "react";
 import { EXPERIENCE } from "@/setting/home";
 import CardBlock from "@/component/CardBlock";
 import ContentHeader from "./ContentHeader";
-import ScrollingTimeline from "@/component/ScrollingTimeline";
+import TimelineScrolling from "@/component/TimelineScrolling";
 
 export default async function ({
-  classNameScrollingTimelineHeight,
+  classNameHeight,
   ...props
 }: Omit<
   ComponentProps<typeof CardBlock>,
   "children" | "contentHeader" | "href" | "title"
 > &
-  Readonly<{
-    classNameScrollingTimelineHeight: ComponentProps<
-      typeof ScrollingTimeline
-    >["classNameHeight"];
-  }>) {
+  Pick<ComponentProps<typeof TimelineScrolling>, "classNameHeight">) {
   return (
     <CardBlock
       contentHeader={<ContentHeader />}
@@ -26,10 +22,7 @@ export default async function ({
       title="My Experience"
       {...props}
     >
-      <ScrollingTimeline
-        classNameHeight={classNameScrollingTimelineHeight}
-        items={EXPERIENCE}
-      />
+      <TimelineScrolling classNameHeight={classNameHeight} items={EXPERIENCE} />
     </CardBlock>
   );
 }
