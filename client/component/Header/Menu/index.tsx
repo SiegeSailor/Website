@@ -14,14 +14,14 @@ export default async function () {
   const profile = await getProfile();
 
   return (
-    <NavbarMenu className="h-full pt-14 pb-4">
+    <NavbarMenu className="h-full pt-4 pb-4">
       <NavbarMenuItem>
         <div className="max-w-compact w-full mx-auto">
           <div className="sm:hidden mb-4">
             <Search />
           </div>
 
-          <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full">
+          <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)]">
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
               <CardProfile profile={profile} />
