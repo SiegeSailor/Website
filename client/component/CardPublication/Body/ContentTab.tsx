@@ -32,23 +32,24 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <ScrollShadow className="flex flex-row gap-2 w-full h-full mb-1">
+            <div className="flex flex-row gap-2 w-full h-full mb-1">
               <div className="w-1/2 md:w-1/3">
                 <h4 className="text-xl sm:text-lg md:text-xl font-medium mb-2 line-clamp-4">
                   {item.title}
                 </h4>
                 <Link href={item.href}>Read More</Link>
               </div>
-              <p
+              <ScrollShadow
                 {...props}
                 className={clsx(
-                  "w-1/2 md:w-2/3 text-medium font-normal text-default-400 h-full overflow-y-auto",
+                  "w-1/2 md:w-2/3 text-medium font-normal text-default-400 h-full",
                   props.className
                 )}
+                orientation="vertical"
               >
                 {item.description}
-              </p>
-            </ScrollShadow>
+              </ScrollShadow>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
