@@ -37,8 +37,7 @@ export default function ({
       radius="full"
       {...props}
       className={clsx(
-        "text-default-500 hover:text-default-700",
-        "dark:text-default-400 dark:hover:text-default-200",
+        "text-default-500 hover:text-default-700 dark:text-default-400 dark:hover:text-default-200",
         props.className
       )}
     >

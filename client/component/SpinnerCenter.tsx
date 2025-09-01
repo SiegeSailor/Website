@@ -9,8 +9,7 @@ export default async function ({ ...props }: HTMLAttributes<HTMLDivElement>) {
     <div
       {...props}
       className={clsx(
-        "w-full h-full",
-        "flex justify-center items-center",
+        "w-full h-full flex justify-center items-center",
         props.className
       )}
     >

@@ -27,9 +27,7 @@ export default function ({
           variant="flat"
           {...propsItem}
           className={clsx(
-            "text-background dark:text-foreground",
-            "font-normal text-sm text-left",
-            "px-2 py-1",
+            "text-background dark:text-foreground font-normal text-sm text-left px-2 py-1",
             propsItem?.className
           )}
         >

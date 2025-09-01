@@ -82,19 +82,9 @@ export default async function ({
 }>) {
   return (
     <div
-      className={clsx(
-        "rounded-md p-4",
-        COLOR_FRAME[color],
-        "border-1",
-        className
-      )}
+      className={clsx("rounded-md p-4 border-1", COLOR_FRAME[color], className)}
     >
-      <div
-        className={clsx(
-          "flex items-center justify-start gap-2 mb-2",
-          "font-semibold"
-        )}
-      >
+      <div className="flex items-center justify-start gap-2 mb-2 font-semibold">
         {createElement(COLOR_ICON[color], {
           size: "1.25rem",
           className: COLOR_COLOR[color],

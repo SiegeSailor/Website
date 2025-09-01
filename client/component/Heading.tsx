@@ -23,10 +23,8 @@ export default async function ({
     {
       ...props,
       className: clsx(
+        "font-light mb-4 last:mb-0 mt-12 first:mt-0 break-words",
         LEVEL_CLASSNAMES[level],
-        "font-light",
-        "mb-4 last:mb-0 mt-12 first:mt-0",
-        "break-words",
         props.className
       ),
     },

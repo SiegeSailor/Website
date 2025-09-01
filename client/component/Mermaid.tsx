@@ -117,12 +117,12 @@ export default ({ source }: { source: string }) => {
   }, []);
 
   return (
-    <Skeleton isLoaded={isMounted} className={clsx("w-full", "rounded-md")}>
-      <div className={clsx("bg-default-100 dark:bg-default-50", "rounded-md")}>
+    <Skeleton isLoaded={isMounted} className="w-full rounded-md">
+      <div className="bg-default-100 dark:bg-default-50 rounded-md">
         <div
           id={identity}
           ref={refMermaid}
-          className={clsx("overflow-auto", "w-full h-128 min-h-128")}
+          className="overflow-auto w-full h-128 min-h-128"
         />
       </div>
     </Skeleton>

@@ -21,13 +21,8 @@ export default async function () {
   const { content, metadata } = await getProfile();
 
   return (
-    <section className={clsx("max-w-content mx-auto p-4")}>
-      <div
-        className={clsx(
-          "gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1",
-          "w-full"
-        )}
-      >
+    <section className="max-w-content mx-auto p-4">
+      <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1 w-full">
         <div
           id={IDENTIFIER}
           className="md:col-span-8 lg:col-span-9 overflow-y-auto"
@@ -43,24 +38,12 @@ export default async function () {
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
-            <div
-              className={clsx(
-                "flex flex-wrap gap-1 items-center",
-                "text-nowrap font-normal text-sm",
-                "opacity-60"
-              )}
-            >
+            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm opacity-60">
               <span>{metadata.createdOn} (Created)</span>
               <span>·</span>
               <span>{metadata.updatedOn} (Updated)</span>
             </div>
-            <div
-              className={clsx(
-                "flex flex-wrap gap-1 items-center",
-                "text-nowrap font-light text-xl leading-6",
-                "mb-2"
-              )}
-            >
+            <div className="flex flex-wrap gap-1 items-center text-nowrap font-light text-xl leading-6 mb-2">
               {metadata.headlines.map((headline, index) => (
                 <span key={headline}>
                   {headline}
@@ -69,18 +52,13 @@ export default async function () {
               ))}
             </div>
 
-            <div className={clsx("gap-2 grid grid-cols-12", "mt-4")}>
+            <div className="gap-2 grid grid-cols-12 mt-4">
               {getEntries(metadata.status).map(([key, value]) => {
                 return (
                   <Card
                     shadow="none"
                     key={key}
-                    className={clsx(
-                      "col-span-12 sm:col-span-6 lg:col-span-3",
-                      "border-1 border-gray-300 dark:border-gray-700 rounded-md",
-                      "px-4 py-2",
-                      "flex flex-col gap-1"
-                    )}
+                    className="col-span-12 sm:col-span-6 lg:col-span-3 border-1 border-gray-300 dark:border-gray-700 rounded-md px-4 py-2 flex flex-col gap-1"
                   >
                     <p className="text-small opacity-60 capitalize">{key}</p>
                     <p className="text-medium">{value}</p>
@@ -88,7 +66,7 @@ export default async function () {
                 );
               })}
             </div>
-            <div className={clsx("flex gap-2 items-center")}>
+            <div className="flex gap-2 items-center">
               {[
                 {
                   Icon: GithubIcon,

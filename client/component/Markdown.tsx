@@ -43,24 +43,12 @@ export default async function ({ source }: Readonly<{ source: string }>) {
       }}
       components={{
         a: (element) => <Link {...element} />,
-        h1: (element) => (
-          <Heading {...element} level={1} className={clsx(element.className)} />
-        ),
-        h2: (element) => (
-          <Heading {...element} level={2} className={clsx(element.className)} />
-        ),
-        h3: (element) => (
-          <Heading {...element} level={3} className={clsx(element.className)} />
-        ),
-        h4: (element) => (
-          <Heading {...element} level={4} className={clsx(element.className)} />
-        ),
-        h5: (element) => (
-          <Heading {...element} level={5} className={clsx(element.className)} />
-        ),
-        h6: (element) => (
-          <Heading {...element} level={6} className={clsx(element.className)} />
-        ),
+        h1: (element) => <Heading {...element} level={1} />,
+        h2: (element) => <Heading {...element} level={2} />,
+        h3: (element) => <Heading {...element} level={3} />,
+        h4: (element) => <Heading {...element} level={4} />,
+        h5: (element) => <Heading {...element} level={5} />,
+        h6: (element) => <Heading {...element} level={6} />,
         blockquote: (element) => (
           <blockquote
             {...element}
@@ -76,8 +64,7 @@ export default async function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-outside pl-4 my-1 last:my-0",
-              "markdown-list"
+              "list-disc list-outside pl-4 my-1 last:my-0 markdown-list"
             )}
           />
         ),
@@ -86,8 +73,7 @@ export default async function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-outside pl-4 my-1 last:my-0",
-              "markdown-list"
+              "list-decimal list-outside pl-4 my-1 last:my-0 markdown-list"
             )}
           />
         ),
@@ -96,8 +82,7 @@ export default async function ({ source }: Readonly<{ source: string }>) {
             {...element}
             className={clsx(
               element.className,
-              "text-medium font-light my-1 last:my-0",
-              "markdown-list-item"
+              "text-medium font-light my-1 last:my-0 markdown-list-item"
             )}
           />
         ),
