@@ -95,7 +95,7 @@ export default function ({
         endContent={<MoveUpIcon size="1rem" strokeWidth="0.1rem" />}
         href={`#${anchors[0].identifier}`}
         onPress={() => setIdentifier(anchors[0].identifier)}
-        title="Back to Top"
+        title="Go Back to Top"
       />
     </Listbox>
   );

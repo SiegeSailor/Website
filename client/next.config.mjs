@@ -3,6 +3,9 @@ const nextConfig = {
   allowedDevOrigins: ["localhost", "127.0.0.1"],
   compress: true,
   distDir: ".next",
+  experimental: {
+    globalNotFound: true,
+  },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

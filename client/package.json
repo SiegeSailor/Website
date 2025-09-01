@@ -28,7 +28,6 @@
     "zustand": "5.0.8"
   },
   "devDependencies": {
-    "@tailwindcss/line-clamp": "0.4.4",
     "@tailwindcss/postcss": "4.1.12",
     "@types/mdx": "2.0.13",
     "@types/node": "24.3.0",

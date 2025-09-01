@@ -71,7 +71,7 @@ export default function ({
               endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
               key={route}
               href={route}
-              title={`Back to ${ROUTE_TITLE[route]}`}
+              title={`Go Back to ${ROUTE_TITLE[route]}`}
             />
           );
         })}
