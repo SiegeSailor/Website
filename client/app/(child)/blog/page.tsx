@@ -1,5 +1,3 @@
-"use server";
-
 import { Metadata } from "next";
 
 import { generateTitle } from "@/helper/utility";

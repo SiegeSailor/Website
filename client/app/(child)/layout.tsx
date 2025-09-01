@@ -1,5 +1,3 @@
-"use server";
-
 import { getArticles } from "@/helper/server/article";
 import Breadcrumb from "@/component/Breadcrumb";
 
