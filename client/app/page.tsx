@@ -20,7 +20,6 @@ export default async function () {
     <section className="max-w-compact mx-auto p-4">
       <div className="flex flex-col gap-24">
         <ContentHero />
-        <ContentArticles />
 
         <div className="gap-4 grid grid-cols-12 grid-rows-1">
           <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
@@ -31,6 +30,8 @@ export default async function () {
           <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
         </div>
+
+        <ContentArticles />
       </div>
     </section>
   );

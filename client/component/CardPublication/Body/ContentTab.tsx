@@ -1,7 +1,9 @@
 "use client";
 
-import { Spacer, ScrollShadow } from "@heroui/react";
+import { ComponentProps } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ScrollShadow } from "@heroui/react";
+import clsx from "clsx";
 
 import { PUBLICATION } from "@/setting/home";
 import Link from "@/component/Link";
@@ -9,13 +11,17 @@ import Link from "@/component/Link";
 export default function ({
   item,
   isLeaving,
-}: Readonly<{
-  item: (typeof PUBLICATION)[number];
-  isLeaving: boolean;
-}>) {
+  ...props
+}: ComponentProps<"div"> &
+  Readonly<{
+    item: (typeof PUBLICATION)[number];
+    isLeaving: boolean;
+  }>) {
   return (
-    <div className="flex flex-col gap-2 h-40">
-      <Spacer y={2} />
+    <div
+      {...props}
+      className={clsx("flex flex-col gap-2 h-40 pt-2", props.className)}
+    >
       <AnimatePresence>
         {!isLeaving && (
           <motion.div
@@ -26,20 +32,23 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <div className="flex flex-col gap-4 h-full">
-              <div className="flex gap-2 sm:gap-1 md:gap-2 flex-wrap whitespace-nowrap">
-                <h4 className="text-2xl sm:text-xl md:text-2xl font-medium">
+            <ScrollShadow className="flex flex-row gap-2 w-full h-full mb-1">
+              <div className="w-1/2">
+                <h4 className="text-xl sm:text-lg md:text-xl font-medium mb-2 line-clamp-3">
                   {item.title}
                 </h4>
                 <Link href={item.href}>Read More</Link>
               </div>
-              <ScrollShadow className="h-full sm:h-16 md:h-28">
-                <p className="text-medium font-normal text-default-400">
-                  {item.description}
-                </p>
-              </ScrollShadow>
-              <Spacer y={1} />
-            </div>
+              <p
+                {...props}
+                className={clsx(
+                  "w-1/2 text-medium font-normal text-default-400 h-full overflow-y-auto",
+                  props.className
+                )}
+              >
+                {item.description}
+              </p>
+            </ScrollShadow>
           </motion.div>
         )}
       </AnimatePresence>

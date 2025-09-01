@@ -2,6 +2,7 @@
 const processor = {
   plugins: {
     "@tailwindcss/postcss": {},
+    "@tailwindcss/line-clamp": {},
   },
 };
 

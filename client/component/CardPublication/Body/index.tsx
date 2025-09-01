@@ -35,22 +35,31 @@ export default function () {
     >
       <Tabs
         aria-label="Options"
+        classNames={{
+          tab: "truncate",
+          tabContent: "truncate",
+        }}
         fullWidth
-        placement="bottom"
-        selectedKey={PUBLICATION[indexItem].title}
-        radius="md"
-        size="md"
         onSelectionChange={(key) => {
           setIndexItem(() =>
             PUBLICATION.map((item) => item.title).indexOf(key.toString())
           );
           setProgress(() => 0);
         }}
+        placement="bottom"
+        radius="md"
+        selectedKey={PUBLICATION[indexItem].title}
+        size="md"
       >
         {PUBLICATION.map((item) => {
           return (
             <Tab key={item.title} title={item.title}>
-              <ContentTab isLeaving={progress >= 95} item={item} />
+              <ContentTab
+                onClick={() => setProgress(0)}
+                onScroll={() => setProgress(0)}
+                isLeaving={progress >= 95}
+                item={item}
+              />
             </Tab>
           );
         })}
