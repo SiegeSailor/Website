@@ -3,9 +3,7 @@ const nextConfig = {
   allowedDevOrigins: ["localhost", "127.0.0.1"],
   compress: true,
   distDir: ".next",
-  experimental: {
-    globalNotFound: true,
-  },
+  experimental: { globalNotFound: true },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -17,8 +15,8 @@ const nextConfig = {
   },
   output: "standalone",
   pageExtensions: ["ts", "tsx"],
-  redirects: async () => [],
   reactStrictMode: process.env.NODE_ENV === "development",
+  redirects: async () => [],
   turbopack: {
     rules: {
       "*.svg": {
