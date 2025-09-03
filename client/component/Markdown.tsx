@@ -92,7 +92,7 @@ export default async function ({
         strong: (element) => (
           <strong
             {...element}
-            className={clsx(element.className, "font-bold!")}
+            className={clsx(element.className, "font-semibold!")}
           />
         ),
         callout: (element) => (

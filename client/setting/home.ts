@@ -104,28 +104,28 @@ export const PROJECTS: Readonly<
   {
     title: "Cryptography CLI",
     description:
-      "A *Rust* Command-Line Interface for executing cryptographic algorithms, available on `brew`. The CLI provides a collection of functions and simulated secured communications between two parties.",
+      "Available on `brew`, a *Rust* Command-Line Interface for executing cryptographic algorithms. The CLI provides a collection of functions and simulated secured communications between two parties.",
     href: "https://github.com/SiegeSailor/OpenSource.Formulas",
     stage: "Development",
   },
   {
     title: "AI-Driven Development Tools Integration",
     description:
-      "*macOS*-specific integration of AI-driven development tools for automating workflows with *MCPs* and *Agents*, including onboarding environment setup, credential management, **Slack** and **GitLab** registration, and **Gmail** and *Webhooks* triggers.",
+      "*macOS*-specific desktop integration of AI-driven development tools for automating workflows with *MCPs* and *Agents*, including onboarding environment setup, credential management, **Slack** and **GitLab** integration, image, icon, and sprite sheet generation, and **Gmail** and *Webhooks* triggers.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
     title: "Concurrency Toolkit",
     description:
-      "A *Python* concurrent class wrapper for managing multiple tasks with error handling and logging, available on `pip`. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
+      "Available on `pip`, a *Python* concurrent class wrapper for managing multiple tasks with error handling and logging. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
-    title: "Account Management CBWM",
+    title: "Account Management CBWMs",
     description:
-      "Scalable *OWASP*-Complied Cloud-Based Microservice that allows users to manage their accounts and settings. It provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
+      "Scalable *OWASP*-Complied Cloud-Based Microservice that allows users to manage their accounts and settings. It provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases and CBWMs.",
     href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
     stage: "Development",
   },
@@ -139,22 +139,22 @@ export const PROJECTS: Readonly<
   {
     title: "Deployable UI Library Boilerplate",
     description:
-      "A project boilerplate that provides a set of team-oriented development tools, such as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*, *Stylelint*, and *Ladle*, and best practices for building shared *React* components.",
+      "Quick start for deploying *React* components on `npm`. A project boilerplate that provides a set of team-oriented development tools, such as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*, *Stylelint*, and *Ladle*, and best practices.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
     title: "Self-Development Assistant",
     description:
-      "A customizable application that comes with often-used self-development and assistance features, such as the tomato timer, quick file storage, goals, notes, reminders, calendar, and more.",
+      "An *iOS* application built with *Godot* that comes with often-used self-development and assistance features, such as the tomato timer, diet tracking, goals-oriented schedules, and everyday-motivating quotes, to help users build confidence and assertiveness.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
-    title: "Be An Alpha Male",
+    title: "Jin Yu Zhang's Website",
     description:
-      "A mobile application that helps users build confidence and assertiveness.",
-    href: "https://github.com/SiegeSailor",
-    stage: "Prototype",
+      "This website. A SSR that provides *GitHub* integration, markdown file handling, and in-website search. It is built with *Next.js*, *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Framer Motion*, *Mermaid*, *Zustand*, and *Chart.js*.",
+    href: "https://github.com/SiegeSailor/Website",
+    stage: "Development",
   },
 ] as const;
