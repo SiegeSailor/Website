@@ -32,11 +32,13 @@ export default function ({
             transition={{ duration: 0.5, type: "spring", bounce: 0.15 }}
             exit={{ x: "-100%", opacity: 0 }}
           >
-            <div className="flex flex-row gap-2 w-full h-full mb-1">
-              <div className="w-1/2 md:w-1/3 flex flex-col gap-2">
-                <h4 className="text-xl sm:text-lg md:text-xl font-medium line-clamp-4">
-                  {item.title}
-                </h4>
+            <div className="flex flex-row gap-4 w-full h-full mb-1">
+              <div className="pb-2 w-1/2 md:w-1/3 flex flex-col gap-2 justify-between items-end">
+                <ScrollShadow {...props} orientation="vertical">
+                  <h4 className="text-xl sm:text-lg md:text-xl font-medium text-right">
+                    {item.title}
+                  </h4>
+                </ScrollShadow>
                 <Link href={item.href}>Read More</Link>
               </div>
               <ScrollShadow
