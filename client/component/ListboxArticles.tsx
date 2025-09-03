@@ -53,10 +53,10 @@ export default function ({
           return (
             <ListboxItem
               classNames={{ title: "font-light truncate" }}
-              description={item.metadata.title}
+              description={item.metadata.date}
               href={item.metadata.route}
               key={item.metadata.date}
-              title={item.metadata.date}
+              title={item.metadata.title}
             />
           );
         })}

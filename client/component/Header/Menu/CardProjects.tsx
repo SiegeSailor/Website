@@ -14,14 +14,20 @@ export default function () {
         className="p-4"
         hideSelectedIcon
         variant="flat"
+        disabledKeys={PROJECTS.filter(
+          (project) => project.stage === "Prototype"
+        ).map((project) => project.title)}
       >
         <ListboxSection title="Projects">
           {PROJECTS.map((project) => {
+            const isPrototype = project.stage === "Prototype";
             return (
               <ListboxItem
                 classNames={{ title: "font-light truncate" }}
                 endContent={
-                  <ExternalLinkIcon size="1rem" strokeWidth="0.075rem" />
+                  !isPrototype && (
+                    <ExternalLinkIcon size="1rem" strokeWidth="0.075rem" />
+                  )
                 }
                 href={project.href}
                 key={project.title}

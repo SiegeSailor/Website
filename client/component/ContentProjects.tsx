@@ -7,6 +7,7 @@ import { PROJECTS } from "@/setting/home";
 import { STAGE_COLOR } from "@/setting/site";
 import Link from "@/component/Link";
 import Markdown from "./Markdown";
+import clsx from "clsx";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (
@@ -24,6 +25,8 @@ export default async function ({ ...props }: ComponentProps<"div">) {
 
       <div className="gap-4 grid grid-cols-12 grid-rows-1">
         {PROJECTS.map((project) => {
+          const isPrototype = project.stage === "Prototype";
+
           return (
             <Card
               key={project.title}
@@ -45,19 +48,18 @@ export default async function ({ ...props }: ComponentProps<"div">) {
                 <Markdown
                   source={project.description}
                   p={{
-                    className:
-                      "text-foreground/50 text-medium font-normal line-clamp-5 text-center line-clamp-5",
+                    className: clsx(
+                      "text-foreground/50 text-center",
+                      !isPrototype ? "line-clamp-5" : "line-clamp-7"
+                    ),
                   }}
                 />
               </CardBody>
-              <CardFooter className="flex justify-center">
-                <Link
-                  href={project.href}
-                  isDisabled={project.stage === "Development"}
-                >
-                  Read More
-                </Link>
-              </CardFooter>
+              {!isPrototype && (
+                <CardFooter className="flex justify-center">
+                  <Link href={project.href}>Read More</Link>{" "}
+                </CardFooter>
+              )}
             </Card>
           );
         })}

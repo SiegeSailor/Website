@@ -104,41 +104,42 @@ export const PROJECTS: Readonly<
   {
     title: "Cryptography CLI",
     description:
-      "A Command-Line Interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
+      "A *Rust* Command-Line Interface for executing cryptographic algorithms, available on `brew`. The CLI provides a collection of functions and simulated secured communications between two parties.",
     href: "https://github.com/SiegeSailor/OpenSource.Formulas",
     stage: "Development",
   },
   {
-    title: "AI-Driven Open-World Incremental Game",
+    title: "AI-Driven Development Tools Integration",
     description:
-      "An AI-driven open-world incremental game that adapts to players' behavior. Players get to choose the next years actions for their characters, and the game evolves based on those choices.",
+      "*macOS*-specific integration of AI-driven development tools for automating workflows with *MCPs* and *Agents*, including onboarding environment setup, credential management, **Slack** and **GitLab** registration, and **Gmail** and *Webhooks* triggers.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
-    title: "Concurrent Wrapper",
+    title: "Concurrency Toolkit",
     description:
-      "A Python concurrent wrapper for managing multiple tasks. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
+      "A *Python* concurrent class wrapper for managing multiple tasks with error handling and logging, available on `pip`. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
   {
-    title: "OWASP-Complied Account Management Microservice",
+    title: "Account Management CBWM",
     description:
-      "Scalable Cloud-Based Web Microservices that allows users to manage their accounts and settings. The CBWMs provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
+      "Scalable *OWASP*-Complied Cloud-Based Microservice that allows users to manage their accounts and settings. It provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
     href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
     stage: "Development",
   },
   {
-    title: "Deployable Automated Containerized Bucket",
+    title: "Configurable Bucket CBWM Boilerplate",
     description:
-      "A a backend service project that provides a RESTful interface for AWS S3 using Flask. Following the Microservices Principle, this project has been wrapped with Docker, LocalStack, and Terraform to isolate the running/deploying-environments with a fully configurable layer that support development on the local laptops, testing in CI/CD pipelines, and deployment to the AWS services.",
+      "A project boilerplate that provides a *RESTful* interface for *AWS S3* using *Flask*. Following the microservices principle, this project has been wrapped with *Docker*, *LocalStack*, and *Terraform* to isolate the running/deploying environments with a fully configurable layer that supports development on local laptops, testing in *GitHub Actions* CI/CD pipelines, and deployment to *AWS*.",
     href: "https://github.com/SiegeSailor/OpenSource.Bucket",
     stage: "Development",
   },
   {
-    title: "Warhammer 40,000",
-    description: "Professional Networking Site",
+    title: "Deployable UI Library Boilerplate",
+    description:
+      "A project boilerplate that provides a set of team-oriented development tools, such as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*, *Stylelint*, and *Ladle*, and best practices for building shared *React* components.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
