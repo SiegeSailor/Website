@@ -21,10 +21,13 @@ export default async function () {
         <ContentHero className="w-full max-w-compact mx-auto" />
 
         <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
-          <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+          <CardSummary
+            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
+            classNameHeight="h-[228px]"
+          />
           <CardExperience
             className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
-            classNameHeight="h-[268px]"
+            classNameHeight="h-[228px]"
           />
           <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />

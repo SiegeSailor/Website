@@ -12,11 +12,13 @@ import ContentHeader from "./ContentHeader";
 Chart.register(ChartDataLabels);
 
 export default async function ({
+  classNameHeight = "h-full",
   ...props
 }: Omit<
   ComponentProps<typeof CardBlock>,
   "children" | "contentHeader" | "href" | "title"
->) {
+> &
+  Readonly<{ classNameHeight?: string }>) {
   const { metadata } = await getProfile();
 
   return (
@@ -26,7 +28,9 @@ export default async function ({
       title="What I Bring to the Table"
       {...props}
     >
-      <Bar />
+      <div className={classNameHeight}>
+        <Bar />
+      </div>
     </CardBlock>
   );
 }

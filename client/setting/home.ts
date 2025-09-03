@@ -11,36 +11,12 @@ export const SUMMARY: Readonly<{ title: string; portion: number }>[] = [
 
 export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
   {
-    title: "Game Development Intern at DY Game",
-    time: "May 2014 - Aug 2014",
+    title: "Senior Software Engineer at CooperSurgical",
+    time: "Jun 2025 - Present",
   },
   {
-    title: "Software Engineering Intern at Servicetech International",
-    time: "Jun 2016 - Jan 2017",
-  },
-  {
-    title: "Software Engineer at Servicetech International",
-    time: "Jun 2017 - Nov 2018",
-  },
-  {
-    title: "Software Engineer at Edallianz",
-    time: "Jan 2019 - Nov 2019",
-  },
-  {
-    title: "Software Engineer at Shopee",
-    time: "Jan 2022 - Feb 2022",
-  },
-  {
-    title: "Software Engineer at StageSource",
-    time: "Sep 2022 - Dec 2022",
-  },
-  {
-    title: "Master in Computer Science at Boston University",
-    time: "May 2022 - Jan 2024",
-  },
-  {
-    title: "Software Engineering Intern at CooperSurgical",
-    time: "May 2023 - Aug 2023",
+    title: "Software Engineer at CooperSurgical",
+    time: "Jan 2024 - May 2025",
   },
   {
     title:
@@ -48,12 +24,36 @@ export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
     time: "Aug 2023 - Nov 2023",
   },
   {
-    title: "Software Engineer at CooperSurgical",
-    time: "Jan 2024 - May 2025",
+    title: "Software Engineering Intern at CooperSurgical",
+    time: "May 2023 - Aug 2023",
   },
   {
-    title: "Senior Software Engineer at CooperSurgical",
-    time: "Jun 2025 - Present",
+    title: "Master in Computer Science at Boston University",
+    time: "May 2022 - Jan 2024",
+  },
+  {
+    title: "Software Engineer at StageSource",
+    time: "Sep 2022 - Dec 2022",
+  },
+  {
+    title: "Software Engineer at Shopee",
+    time: "Jan 2022 - Feb 2022",
+  },
+  {
+    title: "Software Engineer at Edallianz",
+    time: "Jan 2019 - Nov 2019",
+  },
+  {
+    title: "Software Engineer at Servicetech International",
+    time: "Jun 2017 - Nov 2018",
+  },
+  {
+    title: "Software Engineering Intern at Servicetech International",
+    time: "Jun 2016 - Jan 2017",
+  },
+  {
+    title: "Game Development Intern at DY Game",
+    time: "May 2014 - Aug 2014",
   },
 ] as const;
 
