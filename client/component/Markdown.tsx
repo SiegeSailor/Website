@@ -1,6 +1,6 @@
 "use server";
 
-import { Children, isValidElement } from "react";
+import { Children, ComponentProps, isValidElement } from "react";
 import { Code, ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
@@ -18,7 +18,10 @@ import ModalImage from "@/component/ModalImage";
 
 const SPACE = "my-4 first:mt-0 last:mb-0" as const;
 
-export default async function ({ source }: Readonly<{ source: string }>) {
+export default async function ({
+  source,
+  p,
+}: Readonly<{ source: string; p?: ComponentProps<"p"> }>) {
   return (
     <MDXRemote
       source={source}
@@ -145,10 +148,12 @@ export default async function ({ source }: Readonly<{ source: string }>) {
           return (
             <p
               {...element}
+              {...p}
               className={clsx(
                 element.className,
                 "font-light text-medium leading-6",
-                SPACE
+                SPACE,
+                p?.className
               )}
             />
           );

@@ -6,6 +6,7 @@ import { CardHeader, Chip, Card, CardBody, CardFooter } from "@heroui/react";
 import { PROJECTS } from "@/setting/home";
 import { STAGE_COLOR } from "@/setting/site";
 import Link from "@/component/Link";
+import Markdown from "./Markdown";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (
@@ -41,9 +42,13 @@ export default async function ({ ...props }: ComponentProps<"div">) {
                 </h4>
               </CardHeader>
               <CardBody className="py-0">
-                <p className="opacity-60 text-medium font-normal line-clamp-5 text-center">
-                  {project.description}
-                </p>
+                <Markdown
+                  source={project.description}
+                  p={{
+                    className:
+                      "text-foreground/50 text-medium font-normal line-clamp-5 text-center line-clamp-5",
+                  }}
+                />
               </CardBody>
               <CardFooter className="flex justify-center">
                 <Link

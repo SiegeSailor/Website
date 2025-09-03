@@ -117,7 +117,8 @@ export const PROJECTS: Readonly<
   },
   {
     title: "Concurrent Wrapper",
-    description: "Microblogging Platform",
+    description:
+      "A Python concurrent wrapper for managing multiple tasks. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
     href: "https://github.com/SiegeSailor",
     stage: "Prototype",
   },
