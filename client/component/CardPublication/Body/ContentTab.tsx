@@ -44,7 +44,7 @@ export default function ({
               <ScrollShadow
                 {...props}
                 className={clsx(
-                  "w-1/2 md:w-2/3 text-medium font-normal text-default-400 h-full",
+                  "w-1/2 md:w-2/3 text-medium font-normal text-foreground/50 h-full",
                   props.className
                 )}
                 orientation="vertical"

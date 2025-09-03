@@ -57,7 +57,7 @@ export default async function ({
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
-            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm opacity-60">
+            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm text-foreground/50">
               <span>{metadata.date} (Drafted)</span>
               <span>·</span>
               <span>{metadata.createdOn} (Created)</span>

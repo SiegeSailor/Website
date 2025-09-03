@@ -37,7 +37,7 @@ export default async function () {
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
-            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm opacity-60">
+            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-sm text-foreground/50">
               <span>{metadata.createdOn} (Created)</span>
               <span>·</span>
               <span>{metadata.updatedOn} (Updated)</span>
@@ -59,7 +59,9 @@ export default async function () {
                     key={key}
                     className="col-span-12 sm:col-span-6 lg:col-span-3 border-1 border-gray-300 dark:border-gray-700 rounded-md px-4 py-2 flex flex-col gap-1"
                   >
-                    <p className="text-small opacity-60 capitalize">{key}</p>
+                    <p className="text-small text-foreground/50 capitalize">
+                      {key}
+                    </p>
                     <p className="text-medium">{value}</p>
                   </Card>
                 );
