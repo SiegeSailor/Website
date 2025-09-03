@@ -1,14 +1,16 @@
 "use server";
 
+import { ComponentProps } from "react";
+
 import { getArticles } from "@/helper/server/article";
 import CardArticle from "@/component/CardArticle";
 import CardBlog from "@/component/CardBlog";
 
-export default async function () {
+export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();
 
   return (
-    <div>
+    <div {...props}>
       <div className="flex flex-col gap-2 mb-12">
         <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
           Let's Talk About Tech

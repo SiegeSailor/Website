@@ -8,6 +8,7 @@ import CardSkill from "@/component/CardSkill";
 import CardSummary from "@/component/CardSummary";
 import ContentArticles from "@/component/ContentArticles";
 import ContentHero from "@/component/ContentHero";
+import ContentProjects from "@/component/ContentProjects";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: createPageTitle(ROUTE_TITLE["/"]) };
@@ -15,11 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function () {
   return (
-    <section className="max-w-compact mx-auto p-4">
+    <section className="w-full max-w-content mx-auto p-4">
       <div className="flex flex-col gap-24">
-        <ContentHero />
+        <ContentHero className="w-full max-w-compact mx-auto" />
 
-        <div className="gap-4 grid grid-cols-12 grid-rows-1">
+        <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
           <CardSummary className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
           <CardExperience
             className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
@@ -29,7 +30,8 @@ export default async function () {
           <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
         </div>
 
-        <ContentArticles />
+        <ContentProjects className="mx-auto" />
+        <ContentArticles className="w-full max-w-compact mx-auto" />
       </div>
     </section>
   );

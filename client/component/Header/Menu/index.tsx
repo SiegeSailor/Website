@@ -7,6 +7,7 @@ import { getProfile } from "@/helper/server/document";
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
 import CardProfile from "./CardProfile";
+import CardProjects from "./CardProjects";
 import Search from "@/component/Search";
 
 export default async function () {
@@ -25,6 +26,7 @@ export default async function () {
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
               <CardProfile profile={profile} />
+              <CardProjects />
             </div>
 
             <div className="sm:col-span-6 p-1">

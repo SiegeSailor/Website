@@ -7,13 +7,18 @@ import { TECHNOLOGY_ICON } from "@/setting/icon";
 
 export const STATUS = ["Draft", "Ready", "Archived"] as const;
 export const STATUS_SET = new Set(STATUS);
-export const STATUS_COLOR: Readonly<
-  Record<string, ComponentProps<typeof Chip>["color"]>
-> = {
+export const STATUS_COLOR = {
   Draft: "warning",
   Ready: "success",
   Archived: "default",
-} as const;
+} satisfies Readonly<Record<string, ComponentProps<typeof Chip>["color"]>>;
+
+export const STAGE = ["Prototype", "Development", "Production"] as const;
+export const STAGE_COLOR = {
+  Prototype: "default",
+  Development: "primary",
+  Production: "success",
+} satisfies Readonly<Record<string, ComponentProps<typeof Chip>["color"]>>;
 
 export const TECHNOLOGIES = getEntries(TECHNOLOGY_ICON).map(([key]) => key);
 export const TECHNOLOGY_SET = new Set(TECHNOLOGIES);

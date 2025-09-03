@@ -23,14 +23,14 @@ export default function ({
         variant="flat"
       >
         <ListboxSection title="Blog">
-          {articles.map((item) => {
+          {articles.map((article) => {
             return (
               <ListboxItem
                 classNames={{ title: "font-light truncate" }}
-                description={item.metadata.title}
-                href={item.metadata.route}
-                key={item.metadata.route}
-                title={item.metadata.date}
+                description={article.metadata.title}
+                href={article.metadata.route}
+                key={article.metadata.route}
+                title={article.metadata.date}
               />
             );
           })}

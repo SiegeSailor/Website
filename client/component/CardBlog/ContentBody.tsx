@@ -3,10 +3,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Progress, Spacer } from "@heroui/react";
 import { useEffect, useState } from "react";
-import NextImage from "next/image";
 
 import { getArticles } from "@/helper/server/article";
 import DivisionFloating from "@/component/DivisionFloating";
+import ImageBackground from "@/component/ImageBackground";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
 const DURATION = 4000;
@@ -42,14 +42,9 @@ export default function ({
 
   return (
     <div className="relative w-full h-full">
-      <NextImage
+      <ImageBackground
         alt="Photo by Kevin Ku on Unsplash"
-        className="z-0 w-full h-full object-cover brightness-75 contrast-100 grayscale"
         src="/image/Glasses-Code.jpg"
-        loading="eager"
-        priority
-        width={640}
-        height={480}
       />
       <AnimatePresence mode="wait">
         <motion.div
@@ -68,9 +63,9 @@ export default function ({
               <span>{date}</span>·<span>{category}</span>
             </p>
             <Spacer y={1} />
-            <p className="text-background dark:text-foreground font-light text-2xl text-left text-wrap w-full">
+            <h4 className="text-background dark:text-foreground font-light text-2xl text-left text-wrap w-full">
               {title}
-            </p>
+            </h4>
             <Spacer y={4} />
             <ScrollShadowTechnologies technologies={technologies} />
           </DivisionFloating>

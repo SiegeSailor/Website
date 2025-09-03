@@ -33,8 +33,8 @@ export default function ({
             exit={{ x: "-100%", opacity: 0 }}
           >
             <div className="flex flex-row gap-2 w-full h-full mb-1">
-              <div className="w-1/2 md:w-1/3">
-                <h4 className="text-xl sm:text-lg md:text-xl font-medium mb-2 line-clamp-4">
+              <div className="w-1/2 md:w-1/3 flex flex-col gap-2">
+                <h4 className="text-xl sm:text-lg md:text-xl font-medium line-clamp-4">
                   {item.title}
                 </h4>
                 <Link href={item.href}>Read More</Link>

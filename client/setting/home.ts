@@ -1,6 +1,5 @@
-import { Route } from "next";
-
 import { TECHNOLOGY_ICON } from "@/setting/icon";
+import { STAGE } from "@/setting/site";
 
 export const SUMMARY: Readonly<{ title: string; portion: number }>[] = [
   { title: "DevOps", portion: 1.75 },
@@ -77,7 +76,7 @@ export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
 ] as const;
 
 export const PUBLICATION: Readonly<
-  { title: string; description: string; href: Route }[]
+  { title: string; description: string; href: string }[]
 > = [
   {
     title: "Quantitative DevSecOps Metrics for Cloud-Based Web Microservices",
@@ -91,5 +90,69 @@ export const PUBLICATION: Readonly<
     description:
       "As DevSecOps practices become increasingly standardized in software development, there is a growing emphasis on consistently providing quantitative metrics for CBWMs. To achieve this, adopting an iterative workflow with a feedback loop becomes a crucial strategy for incorporating security throughout the SDLC of CBWMs. This approach effectively integrates DevSecOps principles, which are essential for the continuous provision of quantitative metrics in CBWMs. It aligns with the fundamental tenets of DevSecOps, which prioritize the direct integration of security measures into the SDLC. Consequently, the goal is to establish a continuous, metrics-driven framework that not only enhances security but also caters to the dynamic requirements of CBWMs in DevSecOps environments. Our proposed assessment flow follows the principles and concepts of DevSecOps, and it is not only a guideline for team members to follow but also a culture focusing on automating, monitoring, evaluating, and providing feedback continuously.",
     href: "https://www.proquest.com/openview/0da942d980b35cc6e5e421a32d71ba5d/1?pq-origsite=gscholar&cbl=18750&diss=y",
+  },
+] as const;
+
+export const PROJECTS: Readonly<
+  {
+    title: string;
+    description: string;
+    href: string;
+    stage: (typeof STAGE)[number];
+  }[]
+> = [
+  {
+    title: "Cryptography CLI",
+    description:
+      "A Command-Line Interface for encrypting and decrypting files using various algorithms. The CLI also provides demonstration of the secured communication between two parties using different algorithms and methods.",
+    href: "https://github.com/SiegeSailor/OpenSource.Formulas",
+    stage: "Development",
+  },
+  {
+    title: "AI-Driven Open-World Incremental Game",
+    description:
+      "An AI-driven open-world incremental game that adapts to players' behavior. Players get to choose the next years actions for their characters, and the game evolves based on those choices.",
+    href: "https://github.com/SiegeSailor",
+    stage: "Prototype",
+  },
+  {
+    title: "Concurrent Wrapper",
+    description: "Microblogging Platform",
+    href: "https://github.com/SiegeSailor",
+    stage: "Prototype",
+  },
+  {
+    title: "OWASP-Complied Account Management Microservice",
+    description:
+      "Scalable Cloud-Based Web Microservices that allows users to manage their accounts and settings. The CBWMs provides an event-driven architecture comes with a eventual consistency model and various communication protocols for different use cases.",
+    href: "https://github.com/SiegeSailor/OpenSource.AccountHub",
+    stage: "Development",
+  },
+  {
+    title: "Deployable Automated Containerized Bucket",
+    description:
+      "A a backend service project that provides a RESTful interface for AWS S3 using Flask. Following the Microservices Principle, this project has been wrapped with Docker, LocalStack, and Terraform to isolate the running/deploying-environments with a fully configurable layer that support development on the local laptops, testing in CI/CD pipelines, and deployment to the AWS services.",
+    href: "https://github.com/SiegeSailor/OpenSource.Bucket",
+    stage: "Development",
+  },
+  {
+    title: "Warhammer 40,000",
+    description: "Professional Networking Site",
+    href: "https://github.com/SiegeSailor",
+    stage: "Prototype",
+  },
+  {
+    title: "Self-Development Assistant",
+    description:
+      "A customizable application that comes with often-used self-development and assistance features, such as the tomato timer, quick file storage, goals, notes, reminders, calendar, and more.",
+    href: "https://github.com/SiegeSailor",
+    stage: "Prototype",
+  },
+  {
+    title: "Be An Alpha Male",
+    description:
+      "A mobile application that helps users build confidence and assertiveness.",
+    href: "https://github.com/SiegeSailor",
+    stage: "Prototype",
   },
 ] as const;
