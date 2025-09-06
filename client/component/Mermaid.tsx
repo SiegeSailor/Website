@@ -129,6 +129,19 @@ export default ({
           refMermaid.current.innerHTML = `<div class="flex justify-center items-center min-h-128 px-72"><div class="inline-block py-16">${element.outerHTML}</div></div>`;
           bindFunctions?.(refMermaid.current);
 
+          setTimeout(() => {
+            if (refMermaid.current) {
+              refMermaid.current.scrollLeft =
+                (refMermaid.current.scrollWidth -
+                  refMermaid.current.clientWidth) /
+                2;
+              refMermaid.current.scrollTop =
+                (refMermaid.current.scrollHeight -
+                  refMermaid.current.clientHeight) /
+                2;
+            }
+          }, 0);
+
           setIsRendered(true);
         });
     }
