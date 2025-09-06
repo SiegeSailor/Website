@@ -15,7 +15,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
           Let's Talk About Tech
         </h4>
-        <p className="text-medium text-default-400">
+        <p className="text-medium text-foreground/50">
           Here, I share real experiences from my journey in software
           engineering—lessons learned, challenges faced, and thoughts on the
           ever-changing world of technology.
