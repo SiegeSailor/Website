@@ -33,8 +33,8 @@ export default async function () {
           <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
         </div>
 
-        <ContentProjects className="mx-auto" />
-        <ContentArticles className="w-full max-w-compact mx-auto" />
+        <ContentProjects className="w-full mx-auto" />
+        <ContentArticles className="w-full mx-auto" />
       </div>
     </section>
   );

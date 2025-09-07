@@ -1,15 +1,19 @@
 "use server";
 
 import { Card } from "@heroui/react";
+import { ComponentProps } from "react";
 
 import { getArticleByFilename } from "@/helper/server/article";
 import Link from "@/component/Link";
 
-export default async function ({ filename }: Readonly<{ filename: string }>) {
+export default async function ({
+  filename,
+  ...props
+}: ComponentProps<typeof Card> & Readonly<{ filename: string }>) {
   const article = await getArticleByFilename(filename);
 
   return (
-    <Card isHoverable isPressable>
+    <Card isHoverable isPressable {...props}>
       <Link href={article.metadata.route} isPlain>
         <div className="flex flex-nowrap justify-between items-center whitespace-nowrap p-4">
           <p className="text-foreground/50 text-sm text-left truncate w-20">

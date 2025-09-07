@@ -1,17 +1,32 @@
 "use server";
 
 import { ComponentProps } from "react";
+import clsx from "clsx";
 
 import { getArticles } from "@/helper/server/article";
 import CardArticle from "@/component/CardArticle";
 import CardBlog from "@/component/CardBlog";
+import Mermaid from "@/component/Mermaid";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();
 
+  const countCategory = articles.reduce((accumulator, article) => {
+    const category = article.metadata.category;
+    accumulator[category] = (accumulator[category] || 0) + 1;
+    return accumulator;
+  }, {} as Record<string, number>);
+
+  const sourceMermaidPie =
+    "pie\n" +
+    Object.entries(countCategory)
+      .sort(([, valuePrevious], [, valueNext]) => valueNext - valuePrevious)
+      .map(([category, count]) => `"${category}" : ${count}`)
+      .join("\n");
+
   return (
-    <div {...props}>
-      <div className="flex flex-col gap-2 mb-12">
+    <div {...props} className={clsx("flex flex-col gap-12", props.className)}>
+      <div className="flex flex-col gap-2 max-w-compact mx-auto">
         <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
           Let's Talk About Tech
         </h4>
@@ -22,16 +37,29 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         </p>
       </div>
 
-      <div className="flex flex-wrap md:flex-nowrap gap-4 items-center">
-        <div className="w-full md:w-1/2 flex flex-col gap-2">
+      <div className="gap-4 grid grid-cols-12 grid-rows-2 md:grid-rows-1">
+        <div className="col-span-12 sm:col-span-6 flex items-end flex-col justify-center gap-4">
           {articles.slice(0, 4).map((article, index) => {
-            return <CardArticle key={index} filename={article.filename} />;
+            return (
+              <CardArticle
+                className="w-full"
+                key={index}
+                filename={article.filename}
+              />
+            );
           })}
         </div>
         <CardBlog
           articles={articles.slice(4)}
-          className="w-full md:w-[calc(50%-1rem)] h-[300px] min-w-[200px] shrink-0"
+          className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]"
         />
+      </div>
+
+      <div className="w-full flex flex-col gap-6 max-w-compact mx-auto">
+        <p className="text-medium text-foreground/50">
+          See the articles published by category distribution, as illustrated.
+        </p>
+        <Mermaid source={sourceMermaidPie} />
       </div>
     </div>
   );
