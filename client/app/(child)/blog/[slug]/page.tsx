@@ -99,12 +99,12 @@ export default async function ({
         <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
           {[
             <Card shadow="sm">
-              <ScrollShadow className="max-h-[35vh]">
+              <ScrollShadow className="max-h-[35vh]" size={80}>
                 <ListboxContents anchors={metadata.anchors} />
               </ScrollShadow>
             </Card>,
             <Card shadow="sm">
-              <ScrollShadow className="max-h-[35vh]">
+              <ScrollShadow className="max-h-[35vh]" size={80}>
                 <ListboxArticles date={metadata.date} articles={articles} />
               </ScrollShadow>
             </Card>,

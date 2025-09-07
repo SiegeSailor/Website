@@ -118,11 +118,11 @@ export default async function () {
           </article>
         </div>
         <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
-          <ScrollShadow className="max-h-[35vh]">
-            <Card shadow="sm">
+          <Card shadow="sm">
+            <ScrollShadow className="max-h-[35vh]" size={80}>
               <ListboxContents anchors={metadata.anchors} />
-            </Card>
-          </ScrollShadow>
+            </ScrollShadow>
+          </Card>
         </DivisionSticky>
       </div>
     </section>
