@@ -24,7 +24,7 @@ export default function ({
 }: Readonly<{
   anchors: ReturnType<typeof getAnchorsByContent>;
 }>) {
-  const [identifier, setIdentifier] = useState<string | null>(null);
+  const [identifier, setIdentifier] = useState(anchors[0].identifier);
 
   useEffect(() => {
     const handleScroll = () => {
