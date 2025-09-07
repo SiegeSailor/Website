@@ -88,7 +88,7 @@ export default function ({
                     shadow="none"
                     {...propsImageThumbnail}
                     className={clsx(
-                      "max-h-[65vh] transition-transform duration-200 origin-top-left",
+                      "w-auto max-h-[65vh] transition-transform duration-200 origin-top-left",
                       propsImageModal?.className
                     )}
                     style={{ transform: `scale(${zoom})` }}
