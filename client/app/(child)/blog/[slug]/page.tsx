@@ -1,16 +1,16 @@
-import { Card, Chip, Divider } from "@heroui/react";
+import { Card, Chip, Divider, ScrollShadow } from "@heroui/react";
 import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
 import { getSlugByTitle } from "@/helper/utility";
 import { STATUS_COLOR } from "@/setting/site";
+import DivisionSticky from "@/component/DivisionSticky";
 import Heading from "@/component/Heading";
 import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
-import DivisionSticky from "@/component/DivisionSticky";
 
 export const dynamicParams = false;
 
@@ -99,10 +99,14 @@ export default async function ({
         <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
           {[
             <Card shadow="sm">
-              <ListboxContents anchors={metadata.anchors} />
+              <ScrollShadow className="max-h-[35vh]">
+                <ListboxContents anchors={metadata.anchors} />
+              </ScrollShadow>
             </Card>,
             <Card shadow="sm">
-              <ListboxArticles date={metadata.date} articles={articles} />
+              <ScrollShadow className="max-h-[35vh]">
+                <ListboxArticles date={metadata.date} articles={articles} />
+              </ScrollShadow>
             </Card>,
           ].map((item, index) => (
             <div key={index} className="not-last:mb-4">

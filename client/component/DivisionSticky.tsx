@@ -1,38 +1,26 @@
 "use client";
 
-import { ComponentProps, useEffect, useRef, useState } from "react";
+import { ComponentProps } from "react";
 import clsx from "clsx";
 
-export default function ({ ...props }: ComponentProps<"div"> & Readonly<{}>) {
-  const refContainer = useRef<HTMLDivElement>(null);
+import { HEIGHT } from "@/component/Header/Bar";
 
-  const [isSticky, setIsSticky] = useState(false);
+const OFFSET = "2rem" as const;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!refContainer.current) return;
-      const rect = refContainer.current.getBoundingClientRect();
-      setIsSticky(rect.top <= 16);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
+export default function ({ ...props }: ComponentProps<"div">) {
+  const height = `calc(100vh - ${HEIGHT} - ${OFFSET} * 4)`;
 
   return (
     <div
-      ref={refContainer}
       {...props}
       className={clsx(
-        "sticky h-fit top-4 overflow-y-auto transition-[max-height] duration-350",
-        isSticky ? "max-h-[calc(100vh-2rem)]" : "max-h-[calc(100vh-12rem)]",
+        "sticky h-full overflow-y-auto transition-[max-height] duration-250",
         props.className
       )}
+      style={{
+        maxHeight: height,
+        top: `calc(${OFFSET} + ${HEIGHT})`,
+      }}
     />
   );
 }

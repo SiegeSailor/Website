@@ -6,6 +6,8 @@ import { Navbar } from "@heroui/react";
 import { useHeaderStore } from "@/store/header";
 import { useRoute } from "@/helper/client/history";
 
+export const HEIGHT = "4rem" as const;
+
 export default function ({ children }: Readonly<{ children: ReactNode }>) {
   const { isMenuOpen, setIsMenuOpen, hideMenu } = useHeaderStore();
 
@@ -18,12 +20,14 @@ export default function ({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <Navbar
       disableAnimation
-      isBlurred
+      disableScrollHandler
+      height={HEIGHT}
+      isBlurred={false}
       isBordered
       isMenuOpen={isMenuOpen}
       maxWidth="md"
       onMenuOpenChange={setIsMenuOpen}
-      position="static"
+      style={{ position: "fixed" }}
     >
       {children}
     </Navbar>

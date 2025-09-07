@@ -1,4 +1,4 @@
-import { Button, Card, Divider } from "@heroui/react";
+import { Button, Card, Divider, ScrollShadow } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 
@@ -118,9 +118,11 @@ export default async function () {
           </article>
         </div>
         <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
-          <Card shadow="sm">
-            <ListboxContents anchors={metadata.anchors} />
-          </Card>
+          <ScrollShadow className="max-h-[35vh]">
+            <Card shadow="sm">
+              <ListboxContents anchors={metadata.anchors} />
+            </Card>
+          </ScrollShadow>
         </DivisionSticky>
       </div>
     </section>
