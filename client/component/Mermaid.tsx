@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useId, useState, ComponentProps } from "react";
 import { Skeleton } from "@heroui/react";
-import mermaid from "mermaid";
+import { useEffect, useRef, useId, useState, ComponentProps } from "react";
 import clsx from "clsx";
+import mermaid from "mermaid";
 
 mermaid.initialize({
   startOnLoad: true,
@@ -78,6 +78,34 @@ mermaid.initialize({
     }
     .nodeLabel p {
       color: hsl(var(--heroui-background)) !important;
+    }
+    
+    text.slice:nth-of-type(1), text.slice:nth-of-type(2), text.slice:nth-of-type(3), text.slice:nth-of-type(4) {
+      fill: hsl(var(--heroui-background)) !important;
+    }
+    g.legend:nth-of-type(1) rect, path.pieCircle:nth-of-type(1) {
+      fill: hsl(var(--heroui-default-700)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
+    }
+    g.legend:nth-of-type(2) rect, path.pieCircle:nth-of-type(2) {
+      fill: hsl(var(--heroui-default-600)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
+    }
+    g.legend:nth-of-type(3) rect, path.pieCircle:nth-of-type(3) {
+      fill: hsl(var(--heroui-default-500)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
+    }
+    g.legend:nth-of-type(4) rect, path.pieCircle:nth-of-type(4) {
+      fill: hsl(var(--heroui-default-400)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
+    }
+    g.legend:nth-of-type(5) rect, path.pieCircle:nth-of-type(5) {
+      fill: hsl(var(--heroui-default-300)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
+    }
+    g.legend:nth-of-type(6) rect, path.pieCircle:nth-of-type(6) {
+      fill: hsl(var(--heroui-default-200)) !important;
+      stroke: hsl(var(--heroui-default-700)) !important;
     }
   `,
   gitGraph: {
