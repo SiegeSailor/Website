@@ -32,8 +32,11 @@ function getExperienceYears(): string {
     );
   }, 0);
 
-  const years = ((timeTotal - timeExcluded) / MILLISECOND_ONE_YEAR).toFixed(1);
-  return `${years} Years`;
+  const [year, month] = ((timeTotal - timeExcluded) / MILLISECOND_ONE_YEAR)
+    .toFixed(1)
+    .split(".");
+  const monthFloor = Math.floor((Number(month) / 10) * 12);
+  return `${year} Years ${month === "0" ? "" : `${monthFloor} Months`}`.trim();
 }
 
 export async function getProfile() {
