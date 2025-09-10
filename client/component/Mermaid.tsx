@@ -5,120 +5,7 @@ import { useEffect, useRef, useId, useState, ComponentProps } from "react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-mermaid.initialize({
-  startOnLoad: true,
-  theme: "null",
-  themeVariables: {
-    commitLabelFontSize: "1rem",
-    fontFamily: "Roboto",
-    fontSize: "1rem",
-    tagLabelFontSize: "1rem",
-  },
-  themeCSS: `
-    p, text, .commit-label, .tag-label {
-      color: hsl(var(--heroui-default-700));
-      fill: hsl(var(--heroui-default-700));
-    }
-    path {
-      stroke-width: 2px !important;
-      stroke: hsl(var(--heroui-foreground)) !important;
-    }
-
-    .commit-label, .tag-label {
-      font-weight: 500;
-    }
-    .commit-label {
-      transform: translateY(0.3125rem);
-    }
-    .commit-label-bkg {
-      fill: hsl(var(--heroui-default-700) / 0.2) !important;
-    }
-    .tag-label {
-      transform: translateY(0.125rem);
-    }
-    .tag-label-bkg {
-      fill: hsl(var(--heroui-default-50)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-      stroke-width: 2px !important;
-    }
-    .branch {
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    .branch-label0 text, .branch-label1 text, .branch-label2 text, .branch-label3 text {
-      fill: hsl(var(--heroui-background)) !important;
-    }
-    .branchLabelBkg.label0, .commit0 {
-      fill: hsl(var(--heroui-default-700)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    .branchLabelBkg.label1, .commit1 {
-      fill: hsl(var(--heroui-default-600)) !important;
-      stroke: hsl(var(--heroui-default-600)) !important;
-    }
-    .branchLabelBkg.label2, .commit2 {
-      fill: hsl(var(--heroui-default-500)) !important;
-      stroke: hsl(var(--heroui-default-500)) !important;
-    }
-    .branchLabelBkg.label3, .commit3 {
-      fill: hsl(var(--heroui-default-400)) !important;
-      stroke: hsl(var(--heroui-default-400)) !important;
-    }
-    .branchLabelBkg.label4, .commit4 {
-      fill: hsl(var(--heroui-default-300)) !important;
-      stroke: hsl(var(--heroui-default-300)) !important;
-    }
-    .branchLabelBkg.label5, .commit5 {
-      fill: hsl(var(--heroui-default-200)) !important;
-      stroke: hsl(var(--heroui-default-200)) !important;
-    }
-
-    .label-container path {
-      fill: hsl(var(--heroui-default-700)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    .nodeLabel p {
-      color: hsl(var(--heroui-background)) !important;
-    }
-    
-    text.slice:nth-of-type(1), text.slice:nth-of-type(2), text.slice:nth-of-type(3), text.slice:nth-of-type(4) {
-      fill: hsl(var(--heroui-background)) !important;
-    }
-    g.legend:nth-of-type(1) rect, path.pieCircle:nth-of-type(1) {
-      fill: hsl(var(--heroui-default-700)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    g.legend:nth-of-type(2) rect, path.pieCircle:nth-of-type(2) {
-      fill: hsl(var(--heroui-default-600)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    g.legend:nth-of-type(3) rect, path.pieCircle:nth-of-type(3) {
-      fill: hsl(var(--heroui-default-500)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    g.legend:nth-of-type(4) rect, path.pieCircle:nth-of-type(4) {
-      fill: hsl(var(--heroui-default-400)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    g.legend:nth-of-type(5) rect, path.pieCircle:nth-of-type(5) {
-      fill: hsl(var(--heroui-default-300)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-    g.legend:nth-of-type(6) rect, path.pieCircle:nth-of-type(6) {
-      fill: hsl(var(--heroui-default-200)) !important;
-      stroke: hsl(var(--heroui-default-700)) !important;
-    }
-  `,
-  gitGraph: {
-    showBranches: true,
-    showCommitLabel: true,
-    parallelCommits: true,
-  },
-  flowchart: {
-    nodeSpacing: 25,
-    rankSpacing: 50,
-    curve: "basis",
-  },
-});
+import { useChartStore } from "@/store/chart";
 
 export default ({
   source,
@@ -127,6 +14,10 @@ export default ({
   const refMermaid = useRef<HTMLDivElement>(null);
 
   const identity = useId();
+
+  const countMermaidInitialize = useChartStore(
+    (state) => state.countMermaidInitialize
+  );
 
   const [isRendered, setIsRendered] = useState(false);
 
@@ -173,12 +64,11 @@ export default ({
                   refMermaid.current.clientHeight) /
                 2;
             }
+            setIsRendered(true);
           }, 0);
-
-          setIsRendered(true);
         });
     }
-  }, [source, identity]);
+  }, [source, identity, countMermaidInitialize]);
 
   return (
     <Skeleton

@@ -1,0 +1,157 @@
+"use client";
+
+import { Chart, registerables } from "chart.js";
+import { useEffect } from "react";
+import { useTheme } from "next-themes";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import mermaid from "mermaid";
+
+import { getCSSVariable } from "@/helper/utility";
+import { useChartStore } from "@/store/chart";
+
+const CSS_VARIABLE_COLORS = [
+  "--heroui-background",
+  "--heroui-default-50",
+  "--heroui-default-100",
+  "--heroui-default-200",
+  "--heroui-default-300",
+  "--heroui-default-400",
+  "--heroui-default-500",
+  "--heroui-default-600",
+  "--heroui-default-700",
+  "--heroui-default-800",
+  "--heroui-default-900",
+  "--heroui-foreground",
+];
+
+export function useColorTheme() {
+  const { theme } = useTheme();
+
+  const setColors = useChartStore((state) => state.setColors);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setColors(
+        Object.fromEntries(
+          CSS_VARIABLE_COLORS.map((variable) => {
+            const value = getCSSVariable(variable);
+            return [
+              variable.replace("--heroui-", "").replaceAll("-", ""),
+              `hsl(${value})`,
+            ];
+          })
+        )
+      );
+    }, 0);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [theme]);
+}
+
+export function useChart() {
+  useEffect(() => {
+    Chart.register(ChartDataLabels, ...registerables);
+  }, []);
+}
+
+export function useMermaid() {
+  const colors = useChartStore((state) => state.colors);
+  const incrementCountMermaidInitialize = useChartStore(
+    (state) => state.incrementCountMermaidInitialize
+  );
+
+  useEffect(() => {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "null",
+      themeVariables: {
+        fontFamily: "Roboto",
+        fontSize: "1rem",
+        primaryColor: colors.default700,
+        git0: colors.default700,
+        git1: colors.default600,
+        git2: colors.default500,
+        git3: colors.default400,
+        git4: colors.default300,
+        git5: colors.default200,
+        git6: colors.default100,
+        gitBranchLabel0: colors.background,
+        gitBranchLabel1: colors.background,
+        gitBranchLabel2: colors.background,
+        gitBranchLabel3: colors.background,
+        gitBranchLabel4: colors.default700,
+        gitBranchLabel5: colors.default700,
+        gitBranchLabel6: colors.default700,
+        commitLabelFontSize: "1rem",
+        commitLabelColor: colors.default700,
+        commitLabelBackground: colors.default200,
+        tagLabelFontSize: "1rem",
+        tagLabelColor: colors.default700,
+        tagLabelBackground: colors.default50,
+        tagLabelBorder: colors.default700,
+        pie1: colors.default700,
+        pie2: colors.default600,
+        pie3: colors.default500,
+        pie4: colors.default400,
+        pie5: colors.default300,
+        pie6: colors.default200,
+        pieSectionTextColor: colors.foreground,
+        pieLegendTextColor: colors.foreground,
+        pieOpacity: 1,
+        nodeBorder: colors.default700,
+        edgeLabelBackground: colors.default700,
+        defaultLinkColor: colors.default700,
+        clusterBkg: colors.default50,
+        clusterBorder: colors.default200,
+        nodeTextColor: colors.foreground,
+      },
+      themeCSS: `
+        .commit-merge {
+            fill: hsl(var(--heroui-default-50));
+            stroke: hsl(var(--heroui-default-50));
+        }
+        .commit-label {
+            transform: translateY(0.3125rem);
+        }
+        .tag-label {
+            transform: translateY(0.125rem);
+        }
+        .branch {
+            stroke: hsl(var(--heroui-default-700)) !important;
+        }
+        path, .tag-label-bkg {
+            stroke-width: 2px !important;
+        }
+
+        .flowchart-link {
+            stroke: hsl(var(--heroui-default-700)) !important;
+        }
+        .marker, .label-container path {
+            fill: hsl(var(--heroui-default-700)) !important;
+            stroke: hsl(var(--heroui-default-700)) !important;
+        }
+        .nodeLabel p {
+            color: hsl(var(--heroui-background)) !important;
+        }
+
+        text.slice:nth-of-type(1), text.slice:nth-of-type(2), text.slice:nth-of-type(3), text.slice:nth-of-type(4) {
+            fill: hsl(var(--heroui-background)) !important;
+        }
+      `,
+      gitGraph: {
+        showBranches: true,
+        showCommitLabel: true,
+        parallelCommits: true,
+      },
+      flowchart: {
+        nodeSpacing: 25,
+        rankSpacing: 50,
+        curve: "basis",
+      },
+    });
+
+    incrementCountMermaidInitialize();
+  }, [colors]);
+}

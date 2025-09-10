@@ -1,6 +1,8 @@
 import { heroui } from "@heroui/react";
 
 export default heroui({
+  defaultTheme: "light",
+  defaultExtendTheme: "light",
   layout: {
     disabledOpacity: "0.4",
     borderWidth: {

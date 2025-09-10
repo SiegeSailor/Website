@@ -1,31 +1,19 @@
 "use client";
 
-import "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { Chart } from "chart.js";
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 
-import { getCSSVariable } from "@/helper/utility";
 import { SUMMARY } from "@/setting/home";
-
-Chart.register(ChartDataLabels);
+import { useChartStore } from "@/store/chart";
 
 const TITLES = SUMMARY.map((item) => item.title);
 const PORTIONS = SUMMARY.map((item) => item.portion);
 const PORTION_MAX = Math.max(...PORTIONS);
 
 export default function () {
-  const [colorDefault200, setColorDefault200] = useState("transparent");
-  const [colorDefault700, setColorDefault700] = useState("transparent");
+  const colors = useChartStore((state) => state.colors);
+  const isColorsSet = useChartStore((state) => state.isColorsSet);
 
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    setColorDefault200(() => `hsl(${getCSSVariable("--heroui-default-200")})`);
-    setColorDefault700(() => `hsl(${getCSSVariable("--heroui-default-700")})`);
-  }, [theme]);
+  if (!isColorsSet) return null;
 
   return (
     <Bar
@@ -44,7 +32,7 @@ export default function () {
             ticks: { display: false },
             grid: {
               display: true,
-              color: colorDefault200,
+              color: colors.default200,
               lineWidth: 1.5,
               tickWidth: 1.5,
             },
@@ -53,7 +41,7 @@ export default function () {
             ticks: { display: false },
             grid: {
               display: true,
-              color: colorDefault200,
+              color: colors.default200,
               lineWidth: 1.5,
               tickWidth: 1.5,
             },
@@ -64,7 +52,7 @@ export default function () {
           datalabels: {
             anchor: "start",
             align: "end",
-            color: colorDefault700,
+            color: colors.default700,
             font: {
               size: 14,
               weight: "normal",
@@ -81,8 +69,8 @@ export default function () {
         datasets: [
           {
             data: PORTIONS,
-            backgroundColor: colorDefault200,
-            hoverBackgroundColor: colorDefault200,
+            backgroundColor: colors.default200,
+            hoverBackgroundColor: colors.default200,
             borderRadius: {
               bottomRight: 8,
               topRight: 8,
