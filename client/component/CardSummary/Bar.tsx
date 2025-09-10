@@ -11,9 +11,11 @@ const PORTION_MAX = Math.max(...PORTIONS);
 
 export default function () {
   const colors = useChartStore((state) => state.colors);
-  const isColorsSet = useChartStore((state) => state.isColorsSet);
+  const isColorsInitialized = useChartStore(
+    (state) => state.isColorsInitialized
+  );
 
-  if (!isColorsSet) return null;
+  if (!isColorsInitialized) return null;
 
   return (
     <Bar

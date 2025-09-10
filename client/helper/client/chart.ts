@@ -58,11 +58,13 @@ export function useChart() {
 
 export function useMermaid() {
   const colors = useChartStore((state) => state.colors);
-  const incrementCountMermaidInitialize = useChartStore(
-    (state) => state.incrementCountMermaidInitialize
+  const setIsMermaidInitializing = useChartStore(
+    (state) => state.setIsMermaidInitializing
   );
 
   useEffect(() => {
+    setIsMermaidInitializing(true);
+
     mermaid.initialize({
       startOnLoad: true,
       theme: "null",
@@ -152,6 +154,12 @@ export function useMermaid() {
       },
     });
 
-    incrementCountMermaidInitialize();
+    const timeout = setTimeout(() => {
+      setIsMermaidInitializing(false);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [colors]);
 }

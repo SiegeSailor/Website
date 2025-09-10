@@ -15,14 +15,23 @@ export default ({
 
   const identity = useId();
 
-  const countMermaidInitialize = useChartStore(
-    (state) => state.countMermaidInitialize
+  const isMermaidInitializing = useChartStore(
+    (state) => state.isMermaidInitializing
   );
 
   const [isRendered, setIsRendered] = useState(false);
+  const refPreviousScroll = useRef<{ left: number | null; top: number | null }>(
+    {
+      left: null,
+      top: null,
+    }
+  );
 
   useEffect(() => {
-    if (refMermaid.current) {
+    let timeout: NodeJS.Timeout;
+    if (refMermaid.current && !isMermaidInitializing) {
+      setIsRendered(false);
+
       refMermaid.current.innerHTML = source;
       void mermaid
         .render(`mermaid-diagram-${identity}`, source)
@@ -53,22 +62,36 @@ export default ({
           </div>`;
           bindFunctions?.(refMermaid.current);
 
-          setTimeout(() => {
-            if (refMermaid.current) {
-              refMermaid.current.scrollLeft =
+          if (refMermaid.current) {
+            if (
+              refPreviousScroll.current.left === null ||
+              refPreviousScroll.current.top === null
+            ) {
+              refPreviousScroll.current.left =
                 (refMermaid.current.scrollWidth -
                   refMermaid.current.clientWidth) /
                 2;
-              refMermaid.current.scrollTop =
+              refPreviousScroll.current.top =
                 (refMermaid.current.scrollHeight -
                   refMermaid.current.clientHeight) /
                 2;
             }
-            setIsRendered(true);
-          }, 0);
+
+            refMermaid.current.scrollLeft = refPreviousScroll.current.left;
+
+            refMermaid.current.scrollTop = refPreviousScroll.current.top;
+
+            timeout = setTimeout(() => {
+              setIsRendered(true);
+            }, 0);
+          }
         });
     }
-  }, [source, identity, countMermaidInitialize]);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [source, identity, isMermaidInitializing]);
 
   return (
     <Skeleton
@@ -85,6 +108,12 @@ export default ({
             "w-full rounded-md bg-default-50 h-128 min-h-128 overflow-auto",
             props.className
           )}
+          onScroll={() => {
+            if (refMermaid.current && refPreviousScroll.current) {
+              refPreviousScroll.current.left = refMermaid.current.scrollLeft;
+              refPreviousScroll.current.top = refMermaid.current.scrollTop;
+            }
+          }}
         />
       </figure>
     </Skeleton>
