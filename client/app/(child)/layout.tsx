@@ -1,9 +1,11 @@
+import { ReactNode } from "react";
+
 import { getArticles } from "@/helper/server/article";
 import Breadcrumb from "@/component/Breadcrumb";
 
 export default async function ({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{ children: ReactNode }>) {
   const articles = await getArticles();
 
   return (

@@ -7,6 +7,8 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { DESCRIPTION, TITLE } from "@/setting/site";
+import { getArticles } from "@/helper/server/article";
+import { useBlogStore } from "@/store/blog";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
 
@@ -29,6 +31,14 @@ export async function generateViewport(): Promise<Viewport> {
   };
 }
 
+async function Wrapper({ children }: Readonly<{ children: ReactNode }>) {
+  const articles = await getArticles();
+
+  useBlogStore.getState().parseArticles(articles);
+
+  return <>{children}</>;
+}
+
 export default async function ({
   children,
 }: Readonly<{
@@ -44,7 +54,7 @@ export default async function ({
           <div className="h-screen flex flex-col">
             <Header />
             <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
-              {children}
+              <Wrapper>{children}</Wrapper>
             </main>
           </div>
         </Provider>
