@@ -36,10 +36,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
             );
           })}
         </div>
-        <CardBlog
-          articles={articles.slice(4)}
-          className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]"
-        />
+        <CardBlog className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]" />
       </div>
 
       <div className="w-full flex flex-col gap-6 max-w-compact mx-auto">
@@ -47,7 +44,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           See the articles published by category distribution, as illustrated.
         </p>
         <div className="h-[300px]">
-          <Chart articles={articles} />
+          <Chart />
         </div>
       </div>
     </div>

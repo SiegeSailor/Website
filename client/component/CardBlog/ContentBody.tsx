@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Progress, Spacer } from "@heroui/react";
 import { useEffect, useState } from "react";
 
-import { getArticles } from "@/helper/server/article";
+import { useArticleStore } from "@/store/article";
 import DivisionFloating from "@/component/DivisionFloating";
 import ImageBackground from "@/component/ImageBackground";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
@@ -14,11 +14,9 @@ const PROGRESS_INTERVAL = 20;
 const PROGRESS_INCREMENT = 0.5;
 const PROGRESS_MAX = (DURATION / PROGRESS_INTERVAL) * PROGRESS_INCREMENT;
 
-export default function ({
-  articles,
-}: Readonly<{
-  articles: Awaited<ReturnType<typeof getArticles>>;
-}>) {
+export default function () {
+  const articles = useArticleStore((state) => state.articles.slice(4));
+
   const [indexArticle, setIndexArticle] = useState(0);
   const [progress, setProgress] = useState(0);
 

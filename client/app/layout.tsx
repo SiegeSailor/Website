@@ -8,9 +8,9 @@ import clsx from "clsx";
 import "@/style/global.css";
 import { DESCRIPTION, TITLE } from "@/setting/site";
 import { getArticles } from "@/helper/server/article";
-import { useBlogStore } from "@/store/blog";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
+import { useArticleStore } from "@/store/article";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
@@ -34,7 +34,7 @@ export async function generateViewport(): Promise<Viewport> {
 async function Wrapper({ children }: Readonly<{ children: ReactNode }>) {
   const articles = await getArticles();
 
-  useBlogStore.getState().parseArticles(articles);
+  useArticleStore.getState().parseArticles(articles);
 
   return <>{children}</>;
 }

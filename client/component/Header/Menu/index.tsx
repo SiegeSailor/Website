@@ -2,7 +2,6 @@
 
 import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
 
-import { getArticles } from "@/helper/server/article";
 import { getProfile } from "@/helper/server/document";
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
@@ -11,7 +10,6 @@ import CardProjects from "./CardProjects";
 import Search from "@/component/Search";
 
 export default async function () {
-  const articles = await getArticles();
   const profile = await getProfile();
 
   return (
@@ -30,7 +28,7 @@ export default async function () {
             </div>
 
             <div className="sm:col-span-6 p-1">
-              <CardArticles articles={articles} />
+              <CardArticles />
             </div>
           </div>
         </div>

@@ -11,13 +11,14 @@ import {
 import { SearchIcon, ChevronDownIcon } from "lucide-react";
 
 import { COLUMNS } from ".";
+import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
 import DropdownMetadata from "./DropdownMetadata";
 
 export default function () {
+  const lengthArticles = useArticleStore((state) => state.articles.length);
   const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
-  const lengthTotal = useBlogStore((state) => state.lengthTotal);
   const resetPage = useBlogStore((state) => state.resetPage);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
   const setColumns = useBlogStore((state) => state.setColumns);
@@ -40,10 +41,7 @@ export default function () {
             if (value) resetPage();
           }}
           startContent={
-            <SearchIcon
-              className="text-default-400 shrink-0"
-              size="1.45rem"
-            />
+            <SearchIcon className="text-default-400 shrink-0" size="1.45rem" />
           }
           value={filter}
         />
@@ -74,7 +72,7 @@ export default function () {
       </div>
       <div className="flex justify-between items-center">
         <span className="text-default-400 text-small">
-          Total {lengthTotal} articles
+          Total {lengthArticles} articles
         </span>
         <label className="flex items-center text-default-400 text-small">
           Rows per page:

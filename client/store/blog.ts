@@ -1,14 +1,7 @@
 import { create } from "zustand";
 import { Selection, SortDescriptor } from "@heroui/react";
 
-import { getArticles } from "@/helper/server/article";
-
 export type TState = {
-  lengthTotal: number;
-  uniqueCategories: string[];
-  uniqueStatuses: string[];
-  uniqueTechnologies: string[];
-  parseArticles: (articles: Awaited<ReturnType<typeof getArticles>>) => void;
   filter: string;
   setFilter: (filter: string) => void;
   category: Selection;
@@ -31,30 +24,6 @@ export type TState = {
 };
 
 export const useBlogStore = create<TState>((set, get) => ({
-  lengthTotal: 0,
-  uniqueCategories: [],
-  uniqueStatuses: [],
-  uniqueTechnologies: [],
-  parseArticles: (articles) => {
-    const categories = new Set<string>(),
-      statuses = new Set<string>(),
-      technologies = new Set<string>();
-
-    articles.forEach((article) => {
-      categories.add(article.metadata.category);
-      statuses.add(article.metadata.status);
-      article.metadata.technologies.forEach((technology) =>
-        technologies.add(technology)
-      );
-    });
-
-    set({
-      lengthTotal: articles.length,
-      uniqueCategories: Array.from(categories),
-      uniqueStatuses: Array.from(statuses),
-      uniqueTechnologies: Array.from(technologies),
-    });
-  },
   filter: "",
   setFilter: (filter) => set({ filter }),
   category: "all",

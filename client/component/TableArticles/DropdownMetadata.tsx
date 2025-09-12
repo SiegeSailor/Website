@@ -10,6 +10,7 @@ import {
 import { ChevronDownIcon } from "lucide-react";
 
 import { getArticles } from "@/helper/server/article";
+import { useArticleStore, TState as TArticleState } from "@/store/article";
 import { useBlogStore, TState as TBlogState } from "@/store/blog";
 
 const METADATA_SET_ITEMS: Readonly<
@@ -30,7 +31,7 @@ const METADATA_UNIQUES: Readonly<
   Record<
     keyof typeof METADATA_SET_ITEMS,
     Extract<
-      keyof TBlogState,
+      keyof TArticleState,
       "uniqueCategories" | "uniqueStatuses" | "uniqueTechnologies"
     >
   >
@@ -48,7 +49,7 @@ export default function ({
   const columns = useBlogStore((state) => state.columns);
   const items = useBlogStore((state) => state[metadata]);
   const setItems = useBlogStore((state) => state[METADATA_SET_ITEMS[metadata]]);
-  const uniques = useBlogStore((state) => state[METADATA_UNIQUES[metadata]]);
+  const uniques = useArticleStore((state) => state[METADATA_UNIQUES[metadata]]);
 
   return (
     <Dropdown

@@ -2,14 +2,12 @@
 
 import { usePathname } from "next/navigation";
 
-import { getArticles } from "@/helper/server/article";
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
+import { useArticleStore } from "@/store/article";
 
-export default function ({
-  articles,
-}: Readonly<{
-  articles: Awaited<ReturnType<typeof getArticles>>;
-}>) {
+export default function () {
+  const articles = useArticleStore((state) => state.articles);
+
   const pathname = usePathname();
 
   return (

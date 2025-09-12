@@ -1,17 +1,14 @@
 import { ReactNode } from "react";
 
-import { getArticles } from "@/helper/server/article";
 import Breadcrumb from "@/component/Breadcrumb";
 
 export default async function ({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const articles = await getArticles();
-
   return (
     <div className="w-full h-full">
       <div className="max-w-content mx-auto p-4">
-        <Breadcrumb articles={articles} />
+        <Breadcrumb />
       </div>
 
       {children}

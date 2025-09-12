@@ -13,6 +13,7 @@ import {
 
 import { getArticles } from "@/helper/server/article";
 import { STATUS_COLOR } from "@/setting/site";
+import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
 import ContentBottom from "./ContentBottom";
 import ContentTop from "./ContentTop";
@@ -70,26 +71,22 @@ function renderCell(
   }
 }
 
-export default function ({
-  articles,
-}: Readonly<{ articles: Awaited<ReturnType<typeof getArticles>> }>) {
+export default function () {
+  const articles = useArticleStore((state) => state.articles);
   const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
-  const parseArticles = useBlogStore((state) => state.parseArticles);
   const setSortDescriptor = useBlogStore((state) => state.setSortDescriptor);
   const sortDescriptor = useBlogStore((state) => state.sortDescriptor);
   const category = useBlogStore((state) => state.category);
   const status = useBlogStore((state) => state.status);
   const technologies = useBlogStore((state) => state.technologies);
-  const uniqueCategories = useBlogStore((state) => state.uniqueCategories);
-  const uniqueStatuses = useBlogStore((state) => state.uniqueStatuses);
-  const uniqueTechnologies = useBlogStore((state) => state.uniqueTechnologies);
+  const uniqueCategories = useArticleStore((state) => state.uniqueCategories);
+  const uniqueStatuses = useArticleStore((state) => state.uniqueStatuses);
+  const uniqueTechnologies = useArticleStore(
+    (state) => state.uniqueTechnologies
+  );
   const page = useBlogStore((state) => state.page);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
-
-  useEffect(() => {
-    parseArticles(articles);
-  }, [articles, parseArticles]);
 
   const headers = useMemo(() => {
     if (columns === "all") return COLUMNS;

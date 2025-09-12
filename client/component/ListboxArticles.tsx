@@ -6,16 +6,17 @@ import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 import { getArticles } from "@/helper/server/article";
 import { ROUTE_ICON } from "@/setting/icon";
 import { ROUTE_TITLE } from "@/setting/site";
+import { useArticleStore } from "@/store/article";
 
 const ROUTES: Route[] = ["/blog"];
 
 export default function ({
-  articles,
   date,
 }: Readonly<{
-  articles: Awaited<ReturnType<typeof getArticles>>;
   date: Awaited<ReturnType<typeof getArticles>>[number]["metadata"]["date"];
 }>) {
+  const articles = useArticleStore((state) => state.articles);
+
   const article = articles.find((article) => article.metadata.date === date);
 
   if (!article) return null;

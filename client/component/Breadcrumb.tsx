@@ -5,18 +5,18 @@ import { ComponentProps, useMemo } from "react";
 import { Route } from "next";
 import { usePathname } from "next/navigation";
 
-import { getArticles } from "@/helper/server/article";
 import { ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
+import { useArticleStore } from "@/store/article";
 
 export default function ({
   propsContainer,
   propsItem,
-  articles,
 }: Readonly<{
   propsContainer?: ComponentProps<typeof Breadcrumbs>;
   propsItem?: ComponentProps<typeof BreadcrumbItem>;
-  articles: Awaited<ReturnType<typeof getArticles>>;
 }>) {
+  const articles = useArticleStore((state) => state.articles);
+
   const pathname = usePathname();
 
   const breadcrumbs = useMemo(() => {

@@ -3,25 +3,21 @@
 import { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 
-import { getArticles } from "@/helper/server/article";
-import { useBlogStore } from "@/store/blog";
 import { useChartStore } from "@/store/chart";
+import { useArticleStore } from "@/store/article";
 
 export default function ({
-  articles,
   countDates = 12,
 }: Readonly<{
-  articles: Awaited<ReturnType<typeof getArticles>>;
   countDates?: number;
 }>) {
+  const articles = useArticleStore((state) => state.articles);
+  const uniqueCategories = useArticleStore((state) => state.uniqueCategories);
+
   const colors = useChartStore((state) => state.colors);
   const isColorsInitialized = useChartStore(
     (state) => state.isColorsInitialized
   );
-
-  const categories = [
-    ...new Set(articles.map((article) => article.metadata.category)),
-  ];
 
   const dates = useMemo(() => {
     const results = [
@@ -39,7 +35,7 @@ export default function ({
   }, [articles, countDates]);
 
   const datasets = useMemo(() => {
-    return categories.map((category, index) => {
+    return uniqueCategories.map((category, index) => {
       const categoryData = dates.map((monthYear) => {
         return articles.filter((article) => {
           const date = new Date(article.metadata.date);
@@ -74,7 +70,7 @@ export default function ({
         pointHoverRadius: 6,
       };
     });
-  }, [articles, dates, categories, colors]);
+  }, [articles, dates, uniqueCategories, colors]);
 
   if (!isColorsInitialized) return null;
 
