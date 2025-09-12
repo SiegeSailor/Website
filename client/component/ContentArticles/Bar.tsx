@@ -1,11 +1,11 @@
 "use client";
 
-import { Bar } from "react-chartjs-2";
+import { useMemo } from "react";
+import { Line } from "react-chartjs-2";
 
 import { getArticles } from "@/helper/server/article";
 import { useBlogStore } from "@/store/blog";
 import { useChartStore } from "@/store/chart";
-import { getKeys, getValues } from "@/helper/utility";
 
 export default function ({
   articles,
@@ -15,17 +15,65 @@ export default function ({
     (state) => state.isColorsInitialized
   );
 
-  if (!isColorsInitialized) return null;
-  // maybe reuse blog store (useArticles)
+  const categories = [
+    ...new Set(articles.map((article) => article.metadata.category)),
+  ];
 
-  const countCategory = articles.reduce((accumulator, article) => {
-    const category = article.metadata.category;
-    accumulator[category] = (accumulator[category] || 0) + 1;
-    return accumulator;
-  }, {} as Record<string, number>);
+  const monthYears = useMemo(() => {
+    return [
+      ...new Set(
+        articles.map((article) => {
+          const date = new Date(article.metadata.date);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          return `${year}-${month}`;
+        })
+      ),
+    ].sort();
+  }, [articles]);
+
+  const datasets = useMemo(() => {
+    return categories.map((category, index) => {
+      const categoryData = monthYears.map((monthYear) => {
+        return articles.filter((article) => {
+          const date = new Date(article.metadata.date);
+          const articleMonthYear = `${date.getFullYear()}-${String(
+            date.getMonth() + 1
+          ).padStart(2, "0")}`;
+          return (
+            article.metadata.category === category &&
+            articleMonthYear === monthYear
+          );
+        }).length;
+      });
+
+      const colorVariants = [
+        colors.default700,
+        colors.default600,
+        colors.default500,
+        colors.default400,
+        colors.default300,
+        colors.default800,
+        colors.default900,
+      ];
+
+      return {
+        label: category,
+        data: categoryData,
+        borderColor: colorVariants[index % colorVariants.length],
+        backgroundColor: colorVariants[index % colorVariants.length],
+        fill: false,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+      };
+    });
+  }, [articles, monthYears, categories, colors]);
+
+  if (!isColorsInitialized) return null;
 
   return (
-    <Bar
+    <Line
       redraw
       width="100%"
       height="100%"
@@ -34,60 +82,64 @@ export default function ({
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          datalabels: {
-            anchor: "start",
-            align: "end",
-            color: colors.default700,
-            font: {
-              size: 14,
-              weight: "normal",
-              family: "Roboto",
-            },
-            formatter: (_value, context) =>
-              context.chart.data.labels?.[context.dataIndex],
+          datalabels: { display: false },
+          tooltip: {
+            enabled: true,
+            backgroundColor: colors.background,
+            titleColor: colors.default700,
+            bodyColor: colors.default700,
+            borderColor: colors.default200,
+            borderWidth: 1,
           },
-          tooltip: { enabled: false },
         },
         responsive: true,
         scales: {
           x: {
-            ticks: { display: false },
+            ticks: {
+              display: true,
+              color: colors.default700,
+              font: {
+                size: 14,
+                family: "Roboto",
+              },
+              maxRotation: 45,
+            },
             grid: {
               display: true,
               color: colors.default200,
-              lineWidth: 1.5,
-              tickWidth: 1.5,
+              lineWidth: 1,
             },
           },
           y: {
-            ticks: { display: false },
+            max:
+              Math.max(...datasets.map((dataset) => dataset.data).flat()) + 1,
+            title: {
+              display: true,
+              text: "Number of Articles",
+              color: colors.default700,
+              font: {
+                size: 14,
+                family: "Roboto",
+              },
+            },
+            ticks: {
+              display: true,
+              color: colors.default700,
+              font: {
+                size: 10,
+                family: "Roboto",
+              },
+              stepSize: 1,
+            },
             grid: {
               display: true,
               color: colors.default200,
-              lineWidth: 1.5,
-              tickWidth: 1.5,
+              lineWidth: 1,
             },
           },
         },
-        color: colors.default700,
-        borderColor: colors.background,
-        ["borderWidth" as any]: 4,
       }}
-      data={{
-        labels: getKeys(countCategory),
-        datasets: [
-          {
-            borderRadius: {
-              topLeft: 8,
-              topRight: 8,
-            },
-            backgroundColor: [colors.default200],
-            data: getValues(countCategory),
-            hoverBackgroundColor: [colors.default200],
-            hoverBorderColor: "transparent",
-          },
-        ],
-      }}
+      data={{ labels: monthYears, datasets }}
     />
   );
 }
