@@ -48,6 +48,7 @@ export default function ({
       });
 
       const colorVariants = [
+        colors.default500,
         colors.default400,
         colors.default300,
         colors.default200,
@@ -105,7 +106,8 @@ export default function ({
             grid: {
               display: true,
               color: colors.default200,
-              lineWidth: 1,
+              lineWidth: 1.5,
+              tickWidth: 1.5,
             },
           },
           y: {
@@ -124,7 +126,7 @@ export default function ({
               display: true,
               color: colors.default700,
               font: {
-                size: 10,
+                size: 12,
                 family: "Roboto",
               },
               stepSize: 1,
