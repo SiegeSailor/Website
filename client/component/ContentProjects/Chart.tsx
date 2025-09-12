@@ -6,13 +6,6 @@ import { Line } from "react-chartjs-2";
 import { useChartStore } from "@/store/chart";
 import { useArticleStore } from "@/store/article";
 
-function parseMonthYear(input: string) {
-  const date = new Date(input);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  return `${year}-${month}`;
-}
-
 export default function ({
   countDates = 12,
 }: Readonly<{
@@ -29,7 +22,12 @@ export default function ({
   const dates = useMemo(() => {
     const results = [
       ...new Set(
-        articles.map((article) => parseMonthYear(article.metadata.date))
+        articles.map((article) => {
+          const date = new Date(article.metadata.date);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          return `${year}-${month}`;
+        })
       ),
     ].sort();
 
@@ -38,21 +36,27 @@ export default function ({
 
   const datasets = useMemo(() => {
     return uniqueCategories.map((category, index) => {
-      const categoryData = dates.map((item) => {
+      const categoryData = dates.map((monthYear) => {
         return articles.filter((article) => {
+          const date = new Date(article.metadata.date);
+          const articleMonthYear = `${date.getFullYear()}-${String(
+            date.getMonth() + 1
+          ).padStart(2, "0")}`;
           return (
             article.metadata.category === category &&
-            parseMonthYear(article.metadata.date) === item
+            articleMonthYear === monthYear
           );
         }).length;
       });
 
       const colorVariants = [
+        colors.default700,
+        colors.default600,
+        colors.default500,
         colors.default400,
         colors.default300,
-        colors.default200,
-        colors.default100,
-        colors.default50,
+        colors.default800,
+        colors.default900,
       ];
 
       return {
