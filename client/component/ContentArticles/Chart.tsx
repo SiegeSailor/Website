@@ -9,7 +9,11 @@ import { useChartStore } from "@/store/chart";
 
 export default function ({
   articles,
-}: Readonly<{ articles: Awaited<ReturnType<typeof getArticles>> }>) {
+  countDates = 12,
+}: Readonly<{
+  articles: Awaited<ReturnType<typeof getArticles>>;
+  countDates?: number;
+}>) {
   const colors = useChartStore((state) => state.colors);
   const isColorsInitialized = useChartStore(
     (state) => state.isColorsInitialized
@@ -19,8 +23,8 @@ export default function ({
     ...new Set(articles.map((article) => article.metadata.category)),
   ];
 
-  const monthYears = useMemo(() => {
-    return [
+  const dates = useMemo(() => {
+    const results = [
       ...new Set(
         articles.map((article) => {
           const date = new Date(article.metadata.date);
@@ -30,11 +34,13 @@ export default function ({
         })
       ),
     ].sort();
-  }, [articles]);
+
+    return results.slice(-countDates);
+  }, [articles, countDates]);
 
   const datasets = useMemo(() => {
     return categories.map((category, index) => {
-      const categoryData = monthYears.map((monthYear) => {
+      const categoryData = dates.map((monthYear) => {
         return articles.filter((article) => {
           const date = new Date(article.metadata.date);
           const articleMonthYear = `${date.getFullYear()}-${String(
@@ -68,7 +74,7 @@ export default function ({
         pointHoverRadius: 6,
       };
     });
-  }, [articles, monthYears, categories, colors]);
+  }, [articles, dates, categories, colors]);
 
   if (!isColorsInitialized) return null;
 
@@ -139,7 +145,7 @@ export default function ({
           },
         },
       }}
-      data={{ labels: monthYears, datasets }}
+      data={{ labels: dates, datasets }}
     />
   );
 }
