@@ -9,13 +9,13 @@ import DivisionFloating from "@/component/DivisionFloating";
 import ImageBackground from "@/component/ImageBackground";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
-const DURATION = 4000;
-const PROGRESS_INTERVAL = 20;
-const PROGRESS_INCREMENT = 0.5;
+const DURATION = 4000 as const;
+const PROGRESS_INTERVAL = 20 as const;
+const PROGRESS_INCREMENT = 0.5 as const;
 const PROGRESS_MAX = (DURATION / PROGRESS_INTERVAL) * PROGRESS_INCREMENT;
 
 export default function () {
-  const articles = useArticleStore((state) => state.articles.slice(4));
+  const articles = useArticleStore((state) => state.articles).slice(4);
 
   const [indexArticle, setIndexArticle] = useState(0);
   const [progress, setProgress] = useState(0);

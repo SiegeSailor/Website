@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { useColorTheme, useChart, useMermaid } from "@/helper/client/chart";
 
-function WrapperChildren({ children }: Readonly<{ children: ReactNode }>) {
+function Initializer({ children }: Readonly<{ children: ReactNode }>) {
   useColorTheme();
   useChart();
   useMermaid();
@@ -23,7 +23,7 @@ export default function ({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <HeroUIProvider navigate={push}>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <WrapperChildren>{children}</WrapperChildren>
+        <Initializer>{children}</Initializer>
       </ThemeProvider>
     </HeroUIProvider>
   );
