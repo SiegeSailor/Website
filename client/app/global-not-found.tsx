@@ -44,21 +44,23 @@ export default async function () {
             <DivisionCenter>
               <Alert
                 color="warning"
+                classNames={{ title: "font-medium!" }}
                 description={`This page couldn’t be found. Double-check the address or go back to the home page.`}
-                endContent={
-                  <Link href={TITLE_ROUTE["Home"]} underline="none">
-                    <Button color="warning" size="md" variant="solid">
-                      {ROUTE_TITLE["/"]}
-                    </Button>
-                  </Link>
-                }
                 title={
                   <>
                     Not Found: <TextRoute />
                   </>
                 }
                 variant="faded"
-              />
+              >
+                <div className="flex gap-2 mt-3">
+                  <Link href={TITLE_ROUTE["Home"]} underline="none">
+                    <Button color="warning" size="md" variant="solid">
+                      {ROUTE_TITLE["/"]}
+                    </Button>
+                  </Link>
+                </div>
+              </Alert>
             </DivisionCenter>
           </main>
         </Provider>
