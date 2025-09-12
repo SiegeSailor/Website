@@ -2,20 +2,27 @@
 
 import { Bar } from "react-chartjs-2";
 
-import { SUMMARY } from "@/setting/home";
+import { getArticles } from "@/helper/server/article";
+import { useBlogStore } from "@/store/blog";
 import { useChartStore } from "@/store/chart";
+import { getKeys, getValues } from "@/helper/utility";
 
-const TITLES = SUMMARY.map((item) => item.title);
-const PORTIONS = SUMMARY.map((item) => item.portion);
-const PORTION_MAX = Math.max(...PORTIONS);
-
-export default function () {
+export default function ({
+  articles,
+}: Readonly<{ articles: Awaited<ReturnType<typeof getArticles>> }>) {
   const colors = useChartStore((state) => state.colors);
   const isColorsInitialized = useChartStore(
     (state) => state.isColorsInitialized
   );
 
   if (!isColorsInitialized) return null;
+  // maybe reuse blog store (useArticles)
+
+  const countCategory = articles.reduce((accumulator, article) => {
+    const category = article.metadata.category;
+    accumulator[category] = (accumulator[category] || 0) + 1;
+    return accumulator;
+  }, {} as Record<string, number>);
 
   return (
     <Bar
@@ -24,7 +31,6 @@ export default function () {
       height="100%"
       options={{
         animation: { duration: 1500, easing: "easeOutElastic" },
-        indexAxis: "y",
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
@@ -45,8 +51,6 @@ export default function () {
         responsive: true,
         scales: {
           x: {
-            min: 0,
-            max: PORTION_MAX,
             ticks: { display: false },
             grid: {
               display: true,
@@ -65,19 +69,22 @@ export default function () {
             },
           },
         },
+        color: colors.default700,
+        borderColor: colors.background,
+        ["borderWidth" as any]: 4,
       }}
       data={{
-        labels: TITLES,
+        labels: getKeys(countCategory),
         datasets: [
           {
-            barThickness: 28,
             borderRadius: {
-              bottomRight: 8,
+              topLeft: 8,
               topRight: 8,
             },
-            backgroundColor: colors.default200,
-            data: PORTIONS,
-            hoverBackgroundColor: colors.default200,
+            backgroundColor: [colors.default200],
+            data: getValues(countCategory),
+            hoverBackgroundColor: [colors.default200],
+            hoverBorderColor: "transparent",
           },
         ],
       }}

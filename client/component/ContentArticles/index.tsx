@@ -4,25 +4,12 @@ import { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { getArticles } from "@/helper/server/article";
+import Bar from "./Bar";
 import CardArticle from "@/component/CardArticle";
 import CardBlog from "@/component/CardBlog";
-import Mermaid from "@/component/Mermaid";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();
-
-  const countCategory = articles.reduce((accumulator, article) => {
-    const category = article.metadata.category;
-    accumulator[category] = (accumulator[category] || 0) + 1;
-    return accumulator;
-  }, {} as Record<string, number>);
-
-  const sourceMermaidPie =
-    "pie\n" +
-    Object.entries(countCategory)
-      .sort(([, valuePrevious], [, valueNext]) => valueNext - valuePrevious)
-      .map(([category, count]) => `"${category}" : ${count}`)
-      .join("\n");
 
   return (
     <div {...props} className={clsx("flex flex-col gap-12", props.className)}>
@@ -59,7 +46,9 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <p className="text-medium text-foreground/50">
           See the articles published by category distribution, as illustrated.
         </p>
-        <Mermaid source={sourceMermaidPie} />
+        <div className="h-[300px]">
+          <Bar articles={articles} />
+        </div>
       </div>
     </div>
   );

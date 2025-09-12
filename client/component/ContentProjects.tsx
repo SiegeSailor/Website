@@ -74,19 +74,12 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           Some of these projects have dependencies on each other, as
           illustrated.
         </p>
+        {/* TODO timeline for projects */}
+        {/* TODO polarArea for articles */}
         <Mermaid
           source="
-      graph TD;
-      B(AI-Driven Development Tools Integration);
-      C(Concurrency Toolkit);
-      D(Account Management CBWMs);
-      E(Configurable Bucket CBWM Boilerplate);
-      G(Self-Development Assistant);
-      B --> C;
-      B --> E;
-      C --> D;
-      E --> D;
-      D --> G;
+      timeline
+        2002 : LinkedIn
       "
         />
       </div>
