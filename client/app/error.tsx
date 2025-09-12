@@ -19,7 +19,7 @@ export default function ({
         title={`${error.name}: ${error.digest}`}
         variant="faded"
       >
-        <div className="flex gap-2 mt-3">
+        <div className="flex gap-2 mt-2">
           <Button color="danger" size="md" variant="solid" onPress={reset}>
             Retry
           </Button>

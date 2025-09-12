@@ -53,7 +53,7 @@ export default async function () {
                 }
                 variant="faded"
               >
-                <div className="flex gap-2 mt-3">
+                <div className="flex gap-2 mt-2">
                   <Link href={TITLE_ROUTE["Home"]} underline="none">
                     <Button color="warning" size="md" variant="solid">
                       {ROUTE_TITLE["/"]}
