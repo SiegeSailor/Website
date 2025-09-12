@@ -4,9 +4,9 @@ import { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { getArticles } from "@/helper/server/article";
-import Bar from "./Bar";
 import CardArticle from "@/component/CardArticle";
 import CardBlog from "@/component/CardBlog";
+import Chart from "./Chart";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();
@@ -47,7 +47,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           See the articles published by category distribution, as illustrated.
         </p>
         <div className="h-[300px]">
-          <Bar articles={articles} />
+          <Chart articles={articles} />
         </div>
       </div>
     </div>
