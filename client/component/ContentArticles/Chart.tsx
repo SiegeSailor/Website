@@ -6,10 +6,8 @@ import { Line } from "react-chartjs-2";
 import { useChartStore } from "@/store/chart";
 import { useArticleStore } from "@/store/article";
 
-function parseMonthYear(input: string) {
-  const date = new Date(input);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
+function renderDate(input: string) {
+  const [year, month] = input.split("-");
   return `${year}-${month}`;
 }
 
@@ -28,9 +26,7 @@ export default function ({
 
   const dates = useMemo(() => {
     const results = [
-      ...new Set(
-        articles.map((article) => parseMonthYear(article.metadata.date))
-      ),
+      ...new Set(articles.map((article) => renderDate(article.metadata.date))),
     ].sort();
 
     return results.slice(-countDates);
@@ -42,7 +38,7 @@ export default function ({
         return articles.filter((article) => {
           return (
             article.metadata.category === category &&
-            parseMonthYear(article.metadata.date) === item
+            renderDate(article.metadata.date) === item
           );
         }).length;
       });
