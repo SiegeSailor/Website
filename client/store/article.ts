@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-import { getArticles } from "@/helper/server/article";
+import { TArticle } from "@/helper/server/article";
 
 export type TState = {
-  articles: Awaited<ReturnType<typeof getArticles>>;
+  articles: TArticle[];
   uniqueCategories: string[];
   uniqueStatuses: string[];
   uniqueTechnologies: string[];
-  parseArticles: (articles: Awaited<ReturnType<typeof getArticles>>) => void;
+  parseArticles: (articles: TArticle[]) => void;
 };
 
 export const useArticleStore = create<TState>((set) => ({

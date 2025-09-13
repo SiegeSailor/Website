@@ -9,16 +9,13 @@ import {
 } from "@heroui/react";
 import { ChevronDownIcon } from "lucide-react";
 
-import { getArticles } from "@/helper/server/article";
+import { TArticle } from "@/helper/server/article";
 import { useArticleStore, TState as TArticleState } from "@/store/article";
 import { useBlogStore, TState as TBlogState } from "@/store/blog";
 
 const METADATA_SET_ITEMS: Readonly<
   Record<
-    Extract<
-      keyof Awaited<ReturnType<typeof getArticles>>[number]["metadata"],
-      "category" | "status" | "technologies"
-    >,
+    Extract<keyof TArticle["metadata"], "category" | "status" | "technologies">,
     Extract<keyof TBlogState, "setCategory" | "setStatus" | "setTechnologies">
   >
 > = {

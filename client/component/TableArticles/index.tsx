@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import {
   Chip,
   Table,
@@ -11,8 +11,8 @@ import {
   TableRow,
 } from "@heroui/react";
 
-import { getArticles } from "@/helper/server/article";
 import { STATUS_COLOR } from "@/setting/site";
+import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
 import ContentBottom from "./ContentBottom";
@@ -21,7 +21,7 @@ import Link from "@/component/Link";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
 
 export const COLUMNS: {
-  key: keyof Awaited<ReturnType<typeof getArticles>>[number]["metadata"];
+  key: keyof TArticle["metadata"];
   label: string;
   isSortable: boolean;
 }[] = [
@@ -34,7 +34,7 @@ export const COLUMNS: {
 ] as const;
 
 function renderCell(
-  article: Awaited<ReturnType<typeof getArticles>>[number],
+  article: TArticle,
   keyColumn: (typeof COLUMNS)[number]["key"]
 ) {
   switch (keyColumn) {
@@ -191,9 +191,7 @@ export default function () {
         {(item) => (
           <TableRow key={item.filename}>
             {(column) => {
-              const key = column as keyof Awaited<
-                ReturnType<typeof getArticles>
-              >[number]["metadata"];
+              const key = column as keyof TArticle["metadata"];
               return <TableCell>{renderCell(item, key)}</TableCell>;
             }}
           </TableRow>

@@ -2,14 +2,14 @@
 
 import { ReactNode, useEffect, useState } from "react";
 
-import { getArticles } from "@/helper/server/article";
+import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 
 export default function Wrapper({
   articles,
   children,
 }: Readonly<{
-  articles: Awaited<ReturnType<typeof getArticles>>;
+  articles: TArticle[];
   children: ReactNode;
 }>) {
   const parseArticles = useArticleStore((state) => state.parseArticles);

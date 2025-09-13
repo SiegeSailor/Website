@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { Selection, SortDescriptor } from "@heroui/react";
 
+import { TArticle } from "@/helper/server/article";
+
 export type TState = {
   filter: string;
   setFilter: (filter: string) => void;
@@ -28,7 +30,7 @@ export const useBlogStore = create<TState>((set, get) => ({
   setFilter: (filter) => set({ filter }),
   category: "all",
   setCategory: (category) => set({ category }),
-  status: "all",
+  status: new Set(["Ready"] satisfies TArticle["metadata"]["status"][]),
   setStatus: (status) => set({ status }),
   technologies: "all",
   setTechnologies: (technologies) => set({ technologies }),

@@ -3,9 +3,9 @@
 import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
-import { getArticles } from "@/helper/server/article";
 import { ROUTE_ICON } from "@/setting/icon";
 import { ROUTE_TITLE } from "@/setting/site";
+import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 
 const ROUTES: Route[] = ["/blog"];
@@ -13,7 +13,7 @@ const ROUTES: Route[] = ["/blog"];
 export default function ({
   date,
 }: Readonly<{
-  date: Awaited<ReturnType<typeof getArticles>>[number]["metadata"]["date"];
+  date: TArticle["metadata"]["date"];
 }>) {
   const articles = useArticleStore((state) => state.articles);
 

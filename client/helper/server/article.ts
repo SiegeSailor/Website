@@ -17,6 +17,8 @@ import {
   TITLE_ROUTE,
 } from "@/setting/site";
 
+export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
+
 export async function getArticles() {
   const directory = join(process.cwd(), DOMAIN_PATH.article);
   const filenames = readdirSync(directory);
