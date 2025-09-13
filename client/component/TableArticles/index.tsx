@@ -73,11 +73,12 @@ function renderCell(
 
 export default function () {
   const articles = useArticleStore((state) => state.articles);
+  const category = useBlogStore((state) => state.category);
   const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
+  const setLengthMatched = useBlogStore((state) => state.setLengthMatched);
   const setSortDescriptor = useBlogStore((state) => state.setSortDescriptor);
   const sortDescriptor = useBlogStore((state) => state.sortDescriptor);
-  const category = useBlogStore((state) => state.category);
   const status = useBlogStore((state) => state.status);
   const technologies = useBlogStore((state) => state.technologies);
   const uniqueCategories = useArticleStore((state) => state.uniqueCategories);
@@ -94,7 +95,7 @@ export default function () {
   }, [columns]);
 
   const isFiltering = filter.trim().length > 0;
-  const itemsFiltered = useMemo(() => {
+  const itemMatched = useMemo(() => {
     let results = articles;
 
     if (isFiltering) {
@@ -124,6 +125,8 @@ export default function () {
         )
       );
 
+    setLengthMatched(results.length);
+
     return results;
   }, [
     articles,
@@ -139,8 +142,8 @@ export default function () {
   const itemsCurrentPage = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-    return itemsFiltered.slice(start, end);
-  }, [itemsFiltered, page, rowsPerPage]);
+    return itemMatched.slice(start, end);
+  }, [itemMatched, page, rowsPerPage]);
   const itemsSorted = useMemo(() => {
     return itemsCurrentPage.sort((left, right) => {
       const first =
@@ -159,8 +162,8 @@ export default function () {
   }, [sortDescriptor, itemsCurrentPage]);
 
   const pageTotal = useMemo(() => {
-    return Math.max(1, Math.ceil(itemsFiltered.length / rowsPerPage));
-  }, [itemsFiltered.length, rowsPerPage]);
+    return Math.max(1, Math.ceil(itemMatched.length / rowsPerPage));
+  }, [itemMatched.length, rowsPerPage]);
 
   return (
     <Table

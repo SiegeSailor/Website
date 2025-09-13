@@ -17,6 +17,7 @@ import DropdownMetadata from "./DropdownMetadata";
 
 export default function () {
   const lengthArticles = useArticleStore((state) => state.articles.length);
+  const lengthMatched = useBlogStore((state) => state.lengthMatched);
   const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
   const resetPage = useBlogStore((state) => state.resetPage);
@@ -72,7 +73,7 @@ export default function () {
       </div>
       <div className="flex justify-between items-center">
         <span className="text-default-400 text-small">
-          Total {lengthArticles} articles
+          {lengthMatched} of {lengthArticles} matched
         </span>
         <label className="flex items-center text-default-400 text-small">
           Rows per page:
