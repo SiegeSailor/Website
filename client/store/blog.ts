@@ -4,6 +4,8 @@ import { Selection, SortDescriptor } from "@heroui/react";
 import { STATUS } from "@/setting/site";
 
 export type TState = {
+  lengthMatched: number;
+  setLengthMatched: (length: number) => void;
   filter: string;
   setFilter: (filter: string) => void;
   category: Selection;
@@ -26,6 +28,8 @@ export type TState = {
 };
 
 export const useBlogStore = create<TState>((set, get) => ({
+  lengthMatched: 0,
+  setLengthMatched: (length) => set({ lengthMatched: length }),
   filter: "",
   setFilter: (filter) => set({ filter }),
   category: "all",
