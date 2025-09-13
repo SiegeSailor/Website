@@ -58,7 +58,7 @@ export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
 ] as const;
 
 export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
-  ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET", "Go"],
+  ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET"],
   ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
   ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],
   ["Django", "Flask", "Express.js", "Next.js", "React.js"],
