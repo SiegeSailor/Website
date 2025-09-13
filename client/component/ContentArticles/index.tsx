@@ -24,7 +24,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         </p>
       </div>
 
-      <div className="gap-4 grid grid-cols-12 grid-rows-2 md:grid-rows-1">
+      <div className="gap-4 grid grid-cols-12 grid-rows-2 md:grid-rows-1 max-w-compact mx-auto">
         <div className="col-span-12 sm:col-span-6 flex items-end flex-col justify-center gap-4">
           {articles.slice(0, 4).map((article, index) => {
             return (
@@ -39,8 +39,8 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <CardBlog className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]" />
       </div>
 
-      <div className="w-full flex flex-col gap-6 max-w-compact mx-auto">
-        <p className="text-medium text-foreground/50">
+      <div className="w-full flex flex-col gap-6 max-w-content mx-auto">
+        <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
           See the articles published by category distribution, as illustrated.
         </p>
         <div className="h-[300px]">

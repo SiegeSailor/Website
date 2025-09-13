@@ -6,7 +6,6 @@ import clsx from "clsx";
 
 import { PROJECTS } from "@/setting/home";
 import { STAGE_COLOR } from "@/setting/site";
-import Chart from "./Chart";
 import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
 
@@ -67,15 +66,6 @@ export default async function ({ ...props }: ComponentProps<"div">) {
             </Card>
           );
         })}
-      </div>
-
-      <div className="flex flex-col gap-6 w-full max-w-compact mx-auto">
-        <p className="text-medium text-foreground/50">
-          See the timeline of my projects development, as illustrated.
-        </p>
-        <div className="h-[300px]">
-          <Chart />
-        </div>
       </div>
     </div>
   );
