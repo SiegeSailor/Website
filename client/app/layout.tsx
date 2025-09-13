@@ -8,9 +8,10 @@ import clsx from "clsx";
 import "@/style/global.css";
 import { DESCRIPTION, TITLE } from "@/setting/site";
 import { getArticles } from "@/helper/server/article";
+import { getProfile } from "@/helper/server/document";
+import Entry from "@/component/Entry";
 import Header from "@/component/Header";
 import Provider from "@/component/Provider";
-import Entry from "@/component/Entry";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default async function ({
   children: ReactNode;
 }>) {
   const articles = await getArticles();
+  const profile = await getProfile();
 
   return (
     <html suppressHydrationWarning lang="en">
@@ -48,7 +50,9 @@ export default async function ({
           <div className="h-screen flex flex-col">
             <Header />
             <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
-              <Entry articles={articles}>{children}</Entry>
+              <Entry articles={articles} profile={profile}>
+                {children}
+              </Entry>
             </main>
           </div>
         </Provider>

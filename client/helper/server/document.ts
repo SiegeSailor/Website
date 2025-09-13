@@ -39,6 +39,8 @@ function getExperienceYears(): string {
   return `${year} Years ${month === "0" ? "" : `${monthFloor} Months`}`.trim();
 }
 
+export type TProfile = Awaited<ReturnType<typeof getProfile>>;
+
 export async function getProfile() {
   const filename = "Profile.md";
 

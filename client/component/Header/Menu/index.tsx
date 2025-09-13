@@ -2,7 +2,6 @@
 
 import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
 
-import { getProfile } from "@/helper/server/document";
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
 import CardProfile from "./CardProfile";
@@ -10,8 +9,6 @@ import CardProjects from "./CardProjects";
 import Search from "@/component/Search";
 
 export default async function () {
-  const profile = await getProfile();
-
   return (
     <NavbarMenu className="h-full pt-4 pb-4">
       <NavbarMenuItem>
@@ -23,7 +20,7 @@ export default async function () {
           <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)]">
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
-              <CardProfile profile={profile} />
+              <CardProfile />
               <CardProjects />
             </div>
 
