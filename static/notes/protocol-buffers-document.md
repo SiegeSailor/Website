@@ -10,7 +10,7 @@ This article aims to utilize [Protoc-Gen-Doc](https://github.com/pseudomuto/prot
 
 Ideally, we will want to generate a single `index.html` file for multiple `*.proto` files. Let's assume we have the similar files structure as below:
 
-```shell
+```plaintext
 └── 📁schemas
     └── 📁nested
         └── bar.proto
