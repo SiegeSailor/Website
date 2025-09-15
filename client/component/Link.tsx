@@ -39,7 +39,7 @@ export default function ({
         props.className
       )}
     >
-      {isArticle ? <ChildrenArticle {...props} /> : props.children}
+      {isArticle && !isPlain ? <ChildrenArticle {...props} /> : props.children}
     </Link>
   );
 }
