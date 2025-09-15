@@ -18,7 +18,7 @@ export function remarkRehypeCallout() {
     data: {
       hName: "callout";
       hProperties: {
-        color: string;
+        type: string;
         title: string;
       };
     };
@@ -29,7 +29,7 @@ export function remarkRehypeCallout() {
       data: {
         hName: "callout",
         hProperties: {
-          color: "",
+          type: "",
           title: "",
         },
       },
@@ -129,7 +129,7 @@ export function remarkRehypeCallout() {
 
     function processSingleCallout(match: RegExpMatchArray): void {
       const singleCallout = createCallout();
-      singleCallout.data.hProperties.color = match[1];
+      singleCallout.data.hProperties.type = match[1];
       singleCallout.data.hProperties.title = match[2]?.trim() || "";
 
       const content = match[3].trim();
@@ -146,7 +146,7 @@ export function remarkRehypeCallout() {
       const contentAfterNewline = match[3]?.trim();
 
       isInCallout = true;
-      callout.data.hProperties.color = calloutType;
+      callout.data.hProperties.type = calloutType;
 
       if (potentialTitle && seeIsContentLike(potentialTitle)) {
         callout.data.hProperties.title = "";

@@ -18,6 +18,16 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 
+const TYPE_COLOR = {
+  danger: "danger",
+  fact: "primary",
+  note: "secondary",
+  success: "success",
+  warning: "warning",
+} satisfies Readonly<
+  Record<string, NonNullable<ComponentProps<typeof Code>["color"]>>
+>;
+
 const COLOR_ICON: Readonly<
   Record<
     NonNullable<ComponentProps<typeof Code>["color"]>,
@@ -70,16 +80,19 @@ const COLOR_COLOR: Readonly<
 } as const;
 
 export default async function ({
-  color,
+  type,
   children,
   className,
   title,
 }: Readonly<{
-  color: NonNullable<ComponentProps<typeof Code>["color"]>;
+  type: keyof typeof TYPE_COLOR;
   children: ReactNode;
   className?: string;
   title?: string;
 }>) {
+  const color: NonNullable<ComponentProps<typeof Code>["color"]> =
+    TYPE_COLOR[type] ?? "default";
+
   return (
     <div
       className={clsx("rounded-md p-4 border-1", COLOR_FRAME[color], className)}
