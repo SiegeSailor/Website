@@ -65,7 +65,10 @@ export default function () {
               {title}
             </h4>
             <Spacer y={4} />
-            <ScrollShadowTechnologies technologies={technologies} />
+            <ScrollShadowTechnologies
+              isLink={false}
+              technologies={technologies}
+            />
           </DivisionFloating>
         </motion.div>
       </AnimatePresence>

@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
+import { useSearchParams } from "next/navigation";
 
 import { STATUS_COLOR } from "@/setting/site";
 import { TArticle } from "@/helper/server/article";
@@ -71,6 +72,13 @@ function renderCell(
   }
 }
 
+function useSearch() {
+  const searchParams = useSearchParams();
+
+  const technologies = searchParams.get("technologies");
+  console.log(technologies);
+}
+
 export default function () {
   const articles = useArticleStore((state) => state.articles);
   const category = useBlogStore((state) => state.category);
@@ -88,6 +96,8 @@ export default function () {
   );
   const page = useBlogStore((state) => state.page);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
+
+  useSearch();
 
   const headers = useMemo(() => {
     if (columns === "all") return COLUMNS;

@@ -11,7 +11,7 @@ export default function ({
 }: Readonly<{
   propsContainer?: ComponentProps<typeof ScrollShadow>;
   propsItem?: ComponentProps<typeof Chip>;
-  row: { name: string; icon: ReactNode }[];
+  row: { name: ReactNode; icon: ReactNode }[];
 }>) {
   return (
     <ScrollShadow
@@ -19,9 +19,9 @@ export default function ({
       {...propsContainer}
       className={clsx("flex gap-2", propsContainer?.className)}
     >
-      {row.map((item) => (
+      {row.map((item, index) => (
         <Chip
-          key={item.name}
+          key={index}
           size="lg"
           startContent={item.icon}
           variant="flat"
