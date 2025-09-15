@@ -1,6 +1,7 @@
 "use client";
 
 import { ComponentProps } from "react";
+import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
 import { HEIGHT } from "@/component/Header/Bar";
@@ -11,7 +12,7 @@ export default function ({ ...props }: ComponentProps<"div">) {
   const height = `calc(100vh - ${HEIGHT} - ${OFFSET} * 4)`;
 
   return (
-    <div
+    <ScrollShadow
       {...props}
       className={clsx(
         "sticky h-full overflow-y-auto transition-[max-height] duration-250",
