@@ -34,7 +34,9 @@ export default function ({
       {...props}
       className={clsx(
         "font-light",
-        isPlain ? "block w-full h-full" : "inline-flex",
+        isPlain
+          ? "block w-full h-full text-inherit text-[size:inherit] font-[weight:inherit]"
+          : "inline-flex",
         isArticle && "inline",
         props.className
       )}
