@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import {
   Chip,
   Table,
@@ -72,11 +72,16 @@ function renderCell(
   }
 }
 
-function useSearch() {
+function useSearchDropdowns() {
   const searchParams = useSearchParams();
 
-  const technologies = searchParams.get("technologies");
-  console.log(technologies);
+  const technology = searchParams.get("technology");
+
+  const setTechnologies = useBlogStore((state) => state.setTechnologies);
+
+  useEffect(() => {
+    if (technology) setTechnologies(new Set([technology]));
+  }, [setTechnologies, technology]);
 }
 
 export default function () {
@@ -97,7 +102,7 @@ export default function () {
   const page = useBlogStore((state) => state.page);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
 
-  useSearch();
+  useSearchDropdowns();
 
   const headers = useMemo(() => {
     if (columns === "all") return COLUMNS;
@@ -135,8 +140,6 @@ export default function () {
         )
       );
 
-    setLengthMatched(results.length);
-
     return results;
   }, [
     articles,
@@ -149,11 +152,17 @@ export default function () {
     uniqueStatuses,
     uniqueTechnologies,
   ]);
+
+  useEffect(() => {
+    setLengthMatched(itemMatched.length);
+  }, [itemMatched.length, setLengthMatched]);
+
   const itemsCurrentPage = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
     return itemMatched.slice(start, end);
   }, [itemMatched, page, rowsPerPage]);
+
   const itemsSorted = useMemo(() => {
     return itemsCurrentPage.sort((left, right) => {
       const first =

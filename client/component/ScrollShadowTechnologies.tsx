@@ -33,7 +33,7 @@ export default function ({
           />
         ),
         name: isLink ? (
-          <Link href={`/blog?technologies=${technology}`} isPlain>
+          <Link href={`/blog?technology=${technology}`} isPlain>
             {technology}
           </Link>
         ) : (
