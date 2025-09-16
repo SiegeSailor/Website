@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo } from "react";
 import {
-  Chip,
   Table,
   TableBody,
   TableCell,
@@ -10,12 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
-import { useSearchParams } from "next/navigation";
 
-import { STATUS_COLOR } from "@/setting/site";
 import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
+import ChipStatus from "@/component/ChipStatus";
 import ContentBottom from "./ContentBottom";
 import ContentTop from "./ContentTop";
 import Link from "@/component/Link";
@@ -43,11 +41,7 @@ function renderCell(
       return <div>{article.metadata.date}</div>;
     case "status":
       const status = article.metadata[keyColumn];
-      return (
-        <Chip size="md" variant="flat" color={STATUS_COLOR[status]}>
-          {status}
-        </Chip>
-      );
+      return <ChipStatus status={status} />;
     case "technologies":
       const technologies = article.metadata[keyColumn];
       return (
@@ -72,18 +66,6 @@ function renderCell(
   }
 }
 
-function useSearchDropdowns() {
-  const searchParams = useSearchParams();
-
-  const technology = searchParams.get("technology");
-
-  const setTechnologies = useBlogStore((state) => state.setTechnologies);
-
-  useEffect(() => {
-    if (technology) setTechnologies(new Set([technology]));
-  }, [setTechnologies, technology]);
-}
-
 export default function () {
   const articles = useArticleStore((state) => state.articles);
   const category = useBlogStore((state) => state.category);
@@ -101,8 +83,6 @@ export default function () {
   );
   const page = useBlogStore((state) => state.page);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
-
-  useSearchDropdowns();
 
   const headers = useMemo(() => {
     if (columns === "all") return COLUMNS;

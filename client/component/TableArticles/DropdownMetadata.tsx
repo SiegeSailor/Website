@@ -8,6 +8,8 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { ChevronDownIcon } from "lucide-react";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { TArticle } from "@/helper/server/article";
 import { useArticleStore, TState as TArticleState } from "@/store/article";
@@ -47,6 +49,12 @@ export default function ({
   const items = useBlogStore((state) => state[metadata]);
   const setItems = useBlogStore((state) => state[METADATA_SET_ITEMS[metadata]]);
   const uniques = useArticleStore((state) => state[METADATA_UNIQUES[metadata]]);
+
+  const searchParam = useSearchParams().get(metadata);
+
+  useEffect(() => {
+    if (searchParam) setItems(new Set([searchParam]));
+  }, [searchParam, setItems]);
 
   return (
     <Dropdown

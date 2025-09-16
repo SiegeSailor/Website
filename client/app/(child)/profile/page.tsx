@@ -1,4 +1,4 @@
-import { Button, Card, Divider, ScrollShadow } from "@heroui/react";
+import { Button, Card, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 

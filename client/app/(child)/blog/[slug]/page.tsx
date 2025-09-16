@@ -1,16 +1,16 @@
-import { Card, Chip, Divider, ScrollShadow } from "@heroui/react";
+import { Card, Divider } from "@heroui/react";
 import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
 import { getSlugByTitle } from "@/helper/utility";
-import { STATUS_COLOR } from "@/setting/site";
 import DivisionSticky from "@/component/DivisionSticky";
 import Heading from "@/component/Heading";
 import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import ChipStatus from "@/component/ChipStatus";
 
 export const dynamicParams = false;
 
@@ -65,13 +65,7 @@ export default async function ({
               <span>{metadata.minutes} min read</span>
             </div>
             <div className="flex gap-2 items-center">
-              <Chip
-                size="md"
-                variant="flat"
-                color={STATUS_COLOR[metadata.status]}
-              >
-                {metadata.status}
-              </Chip>
+              <ChipStatus status={metadata.status} />
               <span>·</span>
               <ScrollShadowTechnologies
                 technologies={metadata.technologies}
