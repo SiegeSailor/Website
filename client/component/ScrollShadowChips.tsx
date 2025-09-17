@@ -11,7 +11,7 @@ export default function ({
 }: Readonly<{
   propsContainer?: ComponentProps<typeof ScrollShadow>;
   propsItem?: ComponentProps<typeof Chip>;
-  row: { name: ReactNode; icon: ReactNode }[];
+  row: ComponentProps<typeof Chip>[];
 }>) {
   return (
     <ScrollShadow
@@ -23,16 +23,15 @@ export default function ({
         <Chip
           key={index}
           size="lg"
-          startContent={item.icon}
           variant="flat"
           {...propsItem}
+          {...item}
           className={clsx(
             "text-background dark:text-foreground font-normal text-sm text-left px-2 py-1",
-            propsItem?.className
+            propsItem?.className,
+            item.className
           )}
-        >
-          {item.name}
-        </Chip>
+        />
       ))}
     </ScrollShadow>
   );
