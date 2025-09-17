@@ -4,13 +4,14 @@ import { Metadata } from "next";
 import { createPageTitle } from "@/helper/utility";
 import { getArticles, getArticleByDate } from "@/helper/server/article";
 import { getSlugByTitle } from "@/helper/utility";
+import ChipCategory from "@/component/ChipCategory";
+import ChipStatus from "@/component/ChipStatus";
 import DivisionSticky from "@/component/DivisionSticky";
 import Heading from "@/component/Heading";
 import ListboxArticles from "@/component/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
 import Markdown from "@/component/Markdown";
 import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
-import ChipStatus from "@/component/ChipStatus";
 
 export const dynamicParams = false;
 
@@ -65,6 +66,7 @@ export default async function ({
               <span>{metadata.minutes} min read</span>
             </div>
             <div className="flex gap-2 items-center">
+              <ChipCategory category={metadata.category} />
               <ChipStatus status={metadata.status} />
               <span>·</span>
               <ScrollShadowTechnologies

@@ -10,7 +10,7 @@ export const STATUS_SET = new Set(STATUS);
 export const STATUS_COLOR = {
   Draft: "warning",
   Ready: "success",
-  Archived: "default",
+  Archived: "secondary",
 } satisfies Readonly<Record<string, ComponentProps<typeof Chip>["color"]>>;
 
 export const STAGE = ["Prototype", "Development", "Production"] as const;

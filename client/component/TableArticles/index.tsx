@@ -13,6 +13,7 @@ import {
 import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
+import ChipCategory from "@/component/ChipCategory";
 import ChipStatus from "@/component/ChipStatus";
 import ContentBottom from "./ContentBottom";
 import ContentTop from "./ContentTop";
@@ -37,6 +38,8 @@ function renderCell(
   keyColumn: (typeof COLUMNS)[number]["key"]
 ) {
   switch (keyColumn) {
+    case "category":
+      return <ChipCategory category={article.metadata.category} />;
     case "date":
       return <div>{article.metadata.date}</div>;
     case "status":
