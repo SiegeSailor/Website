@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-function getCurrentHash() {
+function getHash() {
   return typeof window !== "undefined" ? window.location.hash : "";
 }
 
@@ -11,7 +11,7 @@ export function useHash() {
   const [hash, setHash] = useState("");
 
   useEffect(() => {
-    const handleHashChange = () => setHash(() => getCurrentHash());
+    const handleHashChange = () => setHash(() => getHash());
 
     handleHashChange();
 
@@ -19,11 +19,11 @@ export function useHash() {
 
     window.history.pushState = function (...args) {
       pushState.apply(window.history, args);
-      setTimeout(() => setHash(() => getCurrentHash()));
+      setTimeout(() => setHash(() => getHash()));
     };
     window.history.replaceState = function (...args) {
       replaceState.apply(window.history, args);
-      setTimeout(() => setHash(() => getCurrentHash()));
+      setTimeout(() => setHash(() => getHash()));
     };
 
     window.addEventListener("hashchange", handleHashChange);

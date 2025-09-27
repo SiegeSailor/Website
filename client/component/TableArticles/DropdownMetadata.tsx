@@ -16,7 +16,7 @@ import { TArticle } from "@/helper/server/article";
 import { useArticleStore, TState as TArticleState } from "@/store/article";
 import { useBlogStore, TState as TBlogState } from "@/store/blog";
 
-type TMetadata = Extract<
+export type TMetadata = Extract<
   keyof TArticle["metadata"],
   "category" | "status" | "technologies"
 >;
