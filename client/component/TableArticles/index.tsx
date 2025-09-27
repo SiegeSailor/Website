@@ -37,16 +37,18 @@ function renderCell(
   article: TArticle,
   keyColumn: (typeof COLUMNS)[number]["key"]
 ) {
+  const { metadata } = article;
+  const { category, date, status, technologies, title, minutes, route } =
+    metadata;
+
   switch (keyColumn) {
     case "category":
-      return <ChipCategory category={article.metadata.category} />;
+      return <ChipCategory category={category} />;
     case "date":
-      return <div>{article.metadata.date}</div>;
+      return <p>{date}</p>;
     case "status":
-      const status = article.metadata[keyColumn];
       return <ChipStatus status={status} />;
     case "technologies":
-      const technologies = article.metadata[keyColumn];
       return (
         <ScrollShadowTechnologies
           technologies={technologies}
@@ -59,13 +61,11 @@ function renderCell(
         />
       );
     case "title":
-      const title = article.metadata[keyColumn];
-      return <Link href={article.metadata.route}>{title}</Link>;
+      return <Link href={route}>{title}</Link>;
     case "minutes":
-      const minutes = article.metadata[keyColumn];
-      return <div>{minutes} Minutes</div>;
+      return <p>{minutes} Minutes</p>;
     default:
-      return <div>{String(article.metadata[keyColumn])}</div>;
+      return <p>{String(metadata[keyColumn])}</p>;
   }
 }
 
