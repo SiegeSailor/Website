@@ -1,36 +1,35 @@
 "use client";
 
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Input,
-} from "@heroui/react";
-import { SearchIcon, ChevronDownIcon } from "lucide-react";
+import { Button, Input } from "@heroui/react";
+import { ChevronDownIcon, SearchIcon } from "lucide-react";
+import { ComponentProps } from "react";
 
-import { COLUMNS } from ".";
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
+import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
+
+export const PROPS_BUTTON: ComponentProps<typeof Button> = {
+  className:
+    "w-[calc(50%-0.25rem)] md:w-28 lg:w-36 xl:w-48 flex justify-between",
+  endContent: <ChevronDownIcon size="1.25rem" />,
+  variant: "flat",
+};
 
 export default function () {
   const lengthArticles = useArticleStore((state) => state.articles.length);
   const lengthMatched = useBlogStore((state) => state.lengthMatched);
-  const columns = useBlogStore((state) => state.columns);
   const filter = useBlogStore((state) => state.filter);
   const resetPage = useBlogStore((state) => state.resetPage);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
-  const setColumns = useBlogStore((state) => state.setColumns);
   const setFilter = useBlogStore((state) => state.setFilter);
   const setRowsPerPage = useBlogStore((state) => state.setRowsPerPage);
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between gap-3 items-end flex-wrap">
+      <div className="flex justify-between gap-2 lg:gap-24 items-end flex-wrap md:flex-nowrap">
         <Input
-          className="w-full md:w-1/4"
+          className="w-full md:w-auto lg:w-full"
           isClearable
           placeholder="Search by Title"
           onClear={() => {
@@ -46,29 +45,11 @@ export default function () {
           }
           value={filter}
         />
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-wrap md:flex-nowrap">
           <DropdownMetadata metadata="category" />
           <DropdownMetadata metadata="status" />
           <DropdownMetadata metadata="technologies" />
-          <Dropdown>
-            <DropdownTrigger className="hidden sm:flex">
-              <Button endContent={<ChevronDownIcon />} variant="flat">
-                Columns
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              disallowEmptySelection
-              aria-label="Table Columns"
-              closeOnSelect={false}
-              selectedKeys={columns}
-              selectionMode="multiple"
-              onSelectionChange={setColumns}
-            >
-              {COLUMNS.map((column) => (
-                <DropdownItem key={column.key}>{column.label}</DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
+          <DropdownColumns />
         </div>
       </div>
       <div className="flex justify-between items-center">
