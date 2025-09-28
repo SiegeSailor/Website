@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
 
@@ -7,12 +7,18 @@ import CardPages from "./CardPages";
 import CardProfile from "./CardProfile";
 import CardProjects from "./CardProjects";
 import Search from "@/component/Search";
+import { useHeaderStore } from "@/store/header";
 
-export default async function () {
+export default function () {
+  const hideMenu = useHeaderStore((state) => state.hideMenu);
+
   return (
-    <NavbarMenu className="h-full pt-4 pb-4">
+    <NavbarMenu className="h-full pt-4 pb-4" onClick={hideMenu}>
       <NavbarMenuItem>
-        <div className="max-w-compact w-full mx-auto">
+        <div
+          className="max-w-compact w-full mx-auto"
+          onClick={(event) => event.stopPropagation()}
+        >
           <div className="sm:hidden mb-4">
             <Search />
           </div>

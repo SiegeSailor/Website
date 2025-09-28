@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 
 import { STATUS_COLOR } from "@/setting/site";
 import { TArticle } from "@/helper/server/article";
-import { useHref } from "@/helper/client/blog";
+import { useSearchByMetadata } from "@/helper/client/blog";
 import Link from "@/component/Link";
 
 export default function ({
@@ -13,7 +13,7 @@ export default function ({
   ...props
 }: ComponentProps<typeof Chip> &
   Readonly<{ status: TArticle["metadata"]["status"] }>) {
-  const href = useHref("status", status);
+  const href = useSearchByMetadata("status", status);
 
   return (
     <Chip size="md" variant="flat" color={STATUS_COLOR[status]} {...props}>

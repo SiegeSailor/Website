@@ -70,8 +70,11 @@ export default function ({
   const searchParam = useSearchParams().get(metadata);
 
   useEffect(() => {
-    if (searchParam)
-      setItems(searchParam === "all" ? "all" : new Set([searchParam]));
+    setItems(
+      searchParam === null || searchParam === "all"
+        ? "all"
+        : new Set(searchParam.split(","))
+    );
   }, [searchParam, setItems]);
 
   const title = METADATA_TITLE[metadata];

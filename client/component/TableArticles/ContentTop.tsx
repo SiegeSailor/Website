@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Input } from "@heroui/react";
+import {
+  Button,
+  Input,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@heroui/react";
 import { ChevronDownIcon, SearchIcon } from "lucide-react";
 import { ComponentProps } from "react";
 
@@ -8,6 +14,7 @@ import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
+import Link from "@/component/Link";
 
 export const PROPS_BUTTON: ComponentProps<typeof Button> = {
   className:
@@ -21,6 +28,7 @@ export default function () {
   const lengthMatched = useBlogStore((state) => state.lengthMatched);
   const filter = useBlogStore((state) => state.filter);
   const resetPage = useBlogStore((state) => state.resetPage);
+  const resetSearch = useBlogStore((state) => state.resetSearch);
   const rowsPerPage = useBlogStore((state) => state.rowsPerPage);
   const setFilter = useBlogStore((state) => state.setFilter);
   const setRowsPerPage = useBlogStore((state) => state.setRowsPerPage);
@@ -52,27 +60,43 @@ export default function () {
           <DropdownColumns />
         </div>
       </div>
+
       <div className="flex justify-between items-center">
-        <span className="text-default-400 text-small">
+        <span className="text-default-400 text-small flex flex-row items-center flex-nowrap gap-2">
           {lengthMatched} of {lengthArticles} matched
-        </span>
-        <label className="flex items-center text-default-400 text-small">
-          Rows per page:
-          <select
-            className="bg-transparent text-default-400 text-small"
-            onChange={(event) => {
-              setRowsPerPage(Number(event.target.value));
-              resetPage();
-            }}
-            value={rowsPerPage}
+          <Link
+            href="/blog"
+            onClick={resetSearch}
+            size="sm"
+            isDisabled={lengthMatched === lengthArticles}
           >
-            {[10, 20, 30].map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </label>
+            Clear
+          </Link>
+        </span>
+        <Popover showArrow placement="bottom-start">
+          <PopoverTrigger>
+            <div className="text-default-400 text-small cursor-pointer flex flex-row items-center flex-nowrap gap-2">
+              Rows per page: {rowsPerPage} <ChevronDownIcon size="1rem" />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="flex flex-col gap-2">
+              {[10, 20, 30].map((value) => (
+                <Button
+                  key={value}
+                  size="sm"
+                  variant="light"
+                  onPress={() => {
+                    setRowsPerPage(value);
+                    resetPage();
+                  }}
+                >
+                  {value}
+                </Button>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
     </div>
   );

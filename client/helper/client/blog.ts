@@ -4,9 +4,23 @@ import { useSearchParams } from "next/navigation";
 
 import { TMetadata } from "@/component/TableArticles/DropdownMetadata";
 
-export function useHref(metadata: TMetadata, value: string) {
-  const searchParam = useSearchParams().get(metadata);
-  const isSelected = searchParam === value;
+export function useSearchByMetadata(metadata: TMetadata, value: string) {
+  const searchParams = useSearchParams();
+  const paramConstructor = new URLSearchParams(searchParams.toString());
+  const paramCurrent = paramConstructor.get(metadata);
 
-  return `/blog?${metadata}=${isSelected ? "all" : value}`;
+  const isSelected = paramCurrent && value && paramCurrent.includes(value);
+  if (isSelected) {
+    const filtered = paramCurrent.split(",").filter((item) => item !== value);
+    filtered.length
+      ? paramConstructor.set(metadata, filtered.join(","))
+      : paramConstructor.delete(metadata);
+  } else {
+    paramConstructor.set(
+      metadata,
+      [paramCurrent, value].filter(Boolean).join(",")
+    );
+  }
+
+  return `/blog?${paramConstructor.toString()}`;
 }

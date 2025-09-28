@@ -3,13 +3,13 @@
 import { ComponentProps, ReactNode } from "react";
 
 import { getArticleByFilename } from "@/helper/server/article";
-import { useHref } from "@/helper/client/blog";
+import { useSearchByMetadata } from "@/helper/client/blog";
 import IconTechnology from "@/component/IconTechnology";
 import Link from "@/component/Link";
 import ScrollShadowChips from "@/component/ScrollShadowChips";
 
 function renderItem(item: ReactNode, isLink: boolean, technology: string) {
-  const href = useHref("technologies", technology);
+  const href = useSearchByMetadata("technologies", technology);
 
   return isLink ? (
     <Link href={href} isPlain>
