@@ -61,7 +61,7 @@ export default function () {
         </div>
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-2 flex-wrap">
         <span className="text-default-400 text-small flex flex-row items-center flex-nowrap gap-2">
           {lengthMatched} of {lengthArticles} matched
           <Link
