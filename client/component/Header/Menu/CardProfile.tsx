@@ -27,7 +27,7 @@ export default function () {
               .map((item) => {
                 return (
                   <ListboxItem
-                    classNames={{ title: "font-light truncate" }}
+                    classNames={{ title: "font-light truncate text-medium" }}
                     href={item.route}
                     key={item.route}
                     title={item.title}

@@ -26,7 +26,7 @@ export default function () {
 
             return (
               <ListboxItem
-                classNames={{ title: "font-light" }}
+                classNames={{ title: "font-light text-medium" }}
                 endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
                 href={route}
                 key={route}

@@ -41,7 +41,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
 
       <div className="w-full flex flex-col gap-6 max-w-content mx-auto">
         <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
-          See the articles published by category distribution, as illustrated.
+          See the articles categorized by publish dates, as illustrated.
         </p>
         <div className="h-[300px]">
           <Chart />

@@ -23,7 +23,7 @@ export default function () {
             const isPrototype = project.stage === "Prototype";
             return (
               <ListboxItem
-                classNames={{ title: "font-light truncate" }}
+                classNames={{ title: "font-light truncate text-medium" }}
                 endContent={
                   !isPrototype && (
                     <ExternalLinkIcon size="1rem" strokeWidth="0.075rem" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
+import { NavbarMenu, NavbarMenuItem, ScrollShadow } from "@heroui/react";
 
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
@@ -23,7 +23,7 @@ export default function () {
             <Search />
           </div>
 
-          <div className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)]">
+          <ScrollShadow className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)]">
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
               <CardProfile />
@@ -33,7 +33,7 @@ export default function () {
             <div className="sm:col-span-6 p-1">
               <CardArticles />
             </div>
-          </div>
+          </ScrollShadow>
         </div>
       </NavbarMenuItem>
     </NavbarMenu>
