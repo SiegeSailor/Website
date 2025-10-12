@@ -103,7 +103,7 @@ export function useMermaid() {
         pieLegendTextColor: colors.foreground,
         pieOpacity: 1,
         nodeBorder: colors.default700,
-        edgeLabelBackground: colors.default700,
+        edgeLabelBackground: colors.default50,
         defaultLinkColor: colors.default700,
         clusterBkg: colors.default50,
         clusterBorder: colors.default200,
@@ -136,6 +136,13 @@ export function useMermaid() {
         }
         .nodeLabel p {
             color: hsl(var(--heroui-background)) !important;
+            white-space: nowrap;
+        }
+        .cluster .nodeLabel p {
+            color: hsl(var(--heroui-foreground)) !important;
+            font-size: 0.9rem;
+            padding-top: 50%;
+            transform: translateY(-50%);
         }
 
         text.slice:nth-of-type(1), text.slice:nth-of-type(2), text.slice:nth-of-type(3), text.slice:nth-of-type(4) {

@@ -54,12 +54,7 @@ export default ({
             `width: ${width}px; height: ${height}px; display: block;`
           );
 
-          refMermaid.current.innerHTML = `
-          <div class="flex justify-center items-center min-h-128 px-72">
-            <div class="inline-block py-16">
-              ${element.outerHTML}
-            </div>
-          </div>`;
+          refMermaid.current.innerHTML = element.outerHTML;
           bindFunctions?.(refMermaid.current);
 
           if (refMermaid.current) {
@@ -78,7 +73,6 @@ export default ({
             }
 
             refMermaid.current.scrollLeft = refPreviousScroll.current.left;
-
             refMermaid.current.scrollTop = refPreviousScroll.current.top;
 
             timeout = setTimeout(() => {
@@ -105,7 +99,7 @@ export default ({
           id={identity}
           ref={refMermaid}
           className={clsx(
-            "w-full rounded-md bg-default-50 h-128 min-h-128 overflow-auto",
+            "w-full rounded-md bg-default-50 overflow-auto py-16 px-36",
             props.className
           )}
           onScroll={() => {
