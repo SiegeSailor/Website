@@ -45,7 +45,12 @@ export default async function ({
         },
       }}
       components={{
-        a: (element) => <Link {...element} />,
+        a: (element) => (
+          <Link
+            {...element}
+            className={clsx(element.className, "text-blue-900")}
+          />
+        ),
         h1: (element) => <Heading {...element} level={1} />,
         h2: (element) => <Heading {...element} level={2} />,
         h3: (element) => <Heading {...element} level={3} />,
