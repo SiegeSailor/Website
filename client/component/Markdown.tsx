@@ -114,7 +114,9 @@ export default async function ({
                   .map((child: any) =>
                     typeof child === "string"
                       ? child
-                      : child.props.children.props.children
+                      : child.props?.children
+                      ? child.props?.children?.props?.children
+                      : child
                   )
                   .join("")}
               />
