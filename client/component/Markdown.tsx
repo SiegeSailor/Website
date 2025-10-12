@@ -48,7 +48,10 @@ export default async function ({
         a: (element) => (
           <Link
             {...element}
-            className={clsx(element.className, "text-blue-900")}
+            className={clsx(
+              element.className,
+              "text-blue-600 dark:text-blue-300"
+            )}
           />
         ),
         h1: (element) => <Heading {...element} level={1} />,
