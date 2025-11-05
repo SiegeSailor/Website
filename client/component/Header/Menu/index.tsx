@@ -24,7 +24,7 @@ export default function () {
             <Search />
           </div>
 
-          <ScrollShadow className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)]">
+          <ScrollShadow className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)] sm:max-h-[calc(100vh-5rem)] md:max-h-[calc(100vh-8rem)]">
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
               <CardProfile />
