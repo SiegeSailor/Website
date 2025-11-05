@@ -1,5 +1,3 @@
-"use server";
-
 import { Alert, Button } from "@heroui/react";
 import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
@@ -15,24 +13,20 @@ import TextRoute from "@/component/TextRoute";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: createPageTitle("Not Found"),
-    description: DESCRIPTION,
-    icons: { icon: "/image/favicon.ico" },
-  };
-}
+export const metadata: Metadata = {
+  title: createPageTitle("Not Found"),
+  description: DESCRIPTION,
+  icons: { icon: "/image/favicon.ico" },
+};
 
-export async function generateViewport(): Promise<Viewport> {
-  return {
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "white" },
-      { media: "(prefers-color-scheme: dark)", color: "black" },
-    ],
-  };
-}
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 
-export default async function () {
+export default function () {
   return (
     <html suppressHydrationWarning lang="en">
       <body

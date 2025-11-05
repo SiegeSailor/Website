@@ -10,11 +10,11 @@ import ContentArticles from "@/component/ContentArticles";
 import ContentHero from "@/component/ContentHero";
 import ContentProjects from "@/component/ContentProjects";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return { title: createPageTitle(ROUTE_TITLE["/"]) };
-}
+export const metadata: Metadata = {
+  title: createPageTitle(ROUTE_TITLE["/"]),
+};
 
-export default async function () {
+export default function () {
   return (
     <section className="w-full max-w-content mx-auto p-4">
       <div className="flex flex-col gap-24">

@@ -1,11 +1,11 @@
-FROM node:23.11.0-alpine3.21 AS stage-base
+FROM node:22.21.1-alpine3.21 AS stage-base
 
 
 # [Stage] Prepare system level dependencies and install packages
 FROM stage-base AS stage-dependencies
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
-LABEL org.opencontainers.image.title="website-client"
+LABEL org.opencontainers.image.title="website"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 

@@ -2,12 +2,13 @@
 
 import { NavbarMenu, NavbarMenuItem, ScrollShadow } from "@heroui/react";
 
+import { useHeaderStore } from "@/store/header";
+import Search from "@/component/Search";
+
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";
 import CardProfile from "./CardProfile";
 import CardProjects from "./CardProjects";
-import Search from "@/component/Search";
-import { useHeaderStore } from "@/store/header";
 
 export default function () {
   const hideMenu = useHeaderStore((state) => state.hideMenu);

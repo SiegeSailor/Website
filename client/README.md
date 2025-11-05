@@ -38,6 +38,7 @@ Through being a full-stack application, **Client** will be mainly a UI serving n
 6. Contact
    - External links and email
    - Website mails
+   - Footprints
 7. Review and authentication
 8. Footer
    1. No AI generated content
