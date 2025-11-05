@@ -59,7 +59,7 @@ export default function ({
   };
 
   return (
-    <div className="bg-default-100 dark:bg-default-50 rounded-md inline-block markdown-modal-image">
+    <div className="w-full bg-default-100 dark:bg-default-50 rounded-md inline-block markdown-modal-image">
       <Image
         src={source}
         alt={alt}
