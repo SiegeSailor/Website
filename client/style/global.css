@@ -6,7 +6,7 @@
 * {
   @apply font-light;
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 5rem;
 
   *::-webkit-scrollbar {
     display: none;
