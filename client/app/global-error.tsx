@@ -37,7 +37,7 @@ export default function ({
         className={clsx(FontRoboto.className, "bg-danger-100 overscroll-none")}
       >
         <Provider>
-          <main className="h-screen container max-w-8xl mx-auto px-4">
+          <main className="h-screen mx-auto px-4">
             <DivisionCenter>
               <Error error={error} reset={reset} />
             </DivisionCenter>

@@ -47,7 +47,7 @@ export default async function ({
         <Provider>
           <div className="h-screen flex flex-col">
             <Header />
-            <main className="container max-w-8xl mx-auto pt-4 sm:pt-8 px-4 grow">
+            <main className="mx-auto px-4 grow pt-4 sm:pt-8">
               <Entry articles={articles} profile={profile}>
                 {children}
               </Entry>
