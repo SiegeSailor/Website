@@ -16,8 +16,6 @@
 @theme {
   --spacing-compact: 880px;
   --spacing-content: 1280px;
-  --container-compact: 880px;
-  --container-content: 1280px;
 }
 
 @layer base {
