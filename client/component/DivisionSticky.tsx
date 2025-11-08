@@ -6,11 +6,9 @@ import clsx from "clsx";
 
 import { HEIGHT } from "@/component/Header/Bar";
 
-const OFFSET = "2rem" as const;
+const OFFSET = "1.75rem" as const;
 
 export default function ({ ...props }: ComponentProps<"div">) {
-  const height = `calc(100vh - ${HEIGHT} - ${OFFSET} * 4)`;
-
   return (
     <ScrollShadow
       {...props}
@@ -19,7 +17,7 @@ export default function ({ ...props }: ComponentProps<"div">) {
         props.className
       )}
       style={{
-        maxHeight: height,
+        maxHeight: `calc(100vh - ${HEIGHT} - ${OFFSET} * 4)`,
         top: `calc(${OFFSET} + ${HEIGHT})`,
       }}
     />
