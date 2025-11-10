@@ -1,57 +1,42 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
 export default function ({
   classNameHeight = "h-full",
   items,
-  speedScroll = 20,
+  speedScroll = 2.5,
 }: Readonly<{
   classNameHeight?: string;
   items: Readonly<{ title: string; time: string }[]>;
   speedScroll?: number;
 }>) {
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
-
   const refContainer = useRef<HTMLDivElement>(null);
+  const refContent = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
-    if (refContainer.current)
+    if (refContainer.current) {
       refContainer.current.classList.remove("opacity-0");
-
-    const interval = setInterval(() => {
-      if (refContainer.current) {
-        const container = refContainer.current;
-        if (scrollDirection === "down") {
-          container.scrollTop += 1;
-          if (
-            container.scrollTop + container.clientHeight >=
-            container.scrollHeight
-          ) {
-            setScrollDirection(() => "up");
-          }
-        } else {
-          container.scrollTop -= 1;
-          if (container.scrollTop <= 0) {
-            setScrollDirection(() => "down");
-          }
-        }
-      }
-    }, speedScroll);
-
-    return () => clearInterval(interval);
-  }, [scrollDirection, speedScroll]);
+    }
+  }, []);
 
   return (
-    <div
+    <ScrollShadow
       ref={refContainer}
       className={clsx(
-        "w-full grow relative overflow-hidden opacity-0 transition-opacity duration-2000 ease-in-out",
+        "w-full grow relative opacity-0 transition-opacity duration-2000 ease-in-out",
         classNameHeight
       )}
     >
-      <ol className="pb-16">
+      <ol
+        ref={refContent}
+        className="animate-scroll-timeline"
+        style={{
+          animationDuration: `${(items.length * 2) / speedScroll}s`,
+        }}
+      >
         {items.map((item) => (
           <li
             key={item.title}
@@ -67,6 +52,6 @@ export default function ({
           </li>
         ))}
       </ol>
-    </div>
+    </ScrollShadow>
   );
 }

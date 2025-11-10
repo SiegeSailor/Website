@@ -16,6 +16,17 @@
 @theme {
   --spacing-compact: 880px;
   --spacing-content: 1280px;
+
+  --animate-scroll-timeline: scroll-timeline infinite linear alternate;
+
+  @keyframes scroll-timeline {
+    0% {
+      transform: translateY(-85%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
 }
 
 @layer base {
