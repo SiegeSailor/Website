@@ -98,7 +98,7 @@
   }
 
   .markdown-table th {
-    @apply p-4 font-semibold;
+    @apply p-4 font-semibold text-nowrap;
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-950;
@@ -125,5 +125,9 @@
 
   .markdown-list-item .markdown-modal-image {
     @apply translate-y-[6px];
+  }
+
+  .markdown-table td .markdown-modal-image img {
+    @apply max-h-[300px];
   }
 }
