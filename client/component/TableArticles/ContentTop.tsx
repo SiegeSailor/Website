@@ -63,15 +63,16 @@ export default function () {
 
       <div className="flex justify-between items-center gap-2 flex-wrap">
         <span className="text-default-400 text-small flex flex-row items-center flex-nowrap gap-2">
-          {lengthMatched} of {lengthArticles} matched
-          <Link
-            href="/blog"
-            onClick={resetSearch}
-            size="sm"
-            isDisabled={lengthMatched === lengthArticles}
-          >
-            Clear
-          </Link>
+          {lengthMatched === lengthArticles ? (
+            <>{lengthArticles} articles in total</>
+          ) : (
+            <>
+              {lengthMatched} of {lengthArticles} matched
+              <Link href="/blog" onClick={resetSearch} size="sm">
+                Clear
+              </Link>
+            </>
+          )}
         </span>
         <Popover showArrow placement="bottom-start">
           <PopoverTrigger>
