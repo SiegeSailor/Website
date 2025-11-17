@@ -103,10 +103,10 @@ export function useMermaid() {
         pieLegendTextColor: colors.foreground,
         pieOpacity: 1,
         nodeBorder: colors.default700,
-        edgeLabelBackground: colors.default50,
+        edgeLabelBackground: colors.default200,
         defaultLinkColor: colors.default700,
-        clusterBkg: colors.default50,
-        clusterBorder: colors.default200,
+        clusterBkg: colors.default100,
+        clusterBorder: "transparent",
         nodeTextColor: colors.foreground,
       },
       themeCSS: `
@@ -130,7 +130,7 @@ export function useMermaid() {
         .flowchart-link {
             stroke: hsl(var(--heroui-default-700)) !important;
         }
-        .marker, .label-container path {
+        .marker, .label-container, .label-container path {
             fill: hsl(var(--heroui-default-700)) !important;
             stroke: hsl(var(--heroui-default-700)) !important;
         }
