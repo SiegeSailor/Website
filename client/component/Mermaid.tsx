@@ -78,7 +78,7 @@ export default ({
           id={identity}
           ref={refMermaid}
           className={clsx(
-            "w-full rounded-md bg-default-50 overflow-x-auto py-8 px-36 mx-auto scroll-auto!",
+            "w-full rounded-md bg-default-50 overflow-x-auto py-16 px-36 mx-auto scroll-auto!",
             props.className
           )}
         />
