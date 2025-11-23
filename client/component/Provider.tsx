@@ -12,7 +12,7 @@ function Initializer({ children }: Readonly<{ children: ReactNode }>) {
   useChart();
   useMermaid();
 
-  return <>{children}</>;
+  return children;
 }
 
 export default function ({ children }: Readonly<{ children: ReactNode }>) {

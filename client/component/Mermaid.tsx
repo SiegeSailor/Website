@@ -1,7 +1,13 @@
 "use client";
 
 import { Skeleton } from "@heroui/react";
-import { useEffect, useRef, useId, useState, ComponentProps } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useId,
+  useState,
+  ComponentProps,
+} from "react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 
@@ -15,77 +21,68 @@ export default ({
 
   const identity = useId();
 
-  const isMermaidInitializing = useChartStore(
-    (state) => state.isMermaidInitializing
-  );
-
   const [isRendered, setIsRendered] = useState(false);
+
   const refPreviousScroll = useRef<{ left: number | null; top: number | null }>(
-    {
-      left: null,
-      top: null,
-    }
+    { left: null, top: null }
   );
 
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (refMermaid.current && !isMermaidInitializing) {
-      setIsRendered(false);
+  const colors = useChartStore((state) => state.colors);
 
-      refMermaid.current.innerHTML = source;
-      void mermaid
-        .render(`mermaid-diagram-${identity}`, source)
-        .then(({ svg, bindFunctions }) => {
-          if (!refMermaid.current) return;
+  useLayoutEffect(() => {
+    setIsRendered(false);
 
-          const element = new DOMParser()
-            .parseFromString(svg, "image/svg+xml")
-            .querySelector("svg");
-          if (!element) return;
+    requestAnimationFrame(() => {
+      if (refMermaid.current) {
+        refMermaid.current.innerHTML = source;
+        void mermaid
+          .render(`mermaid-diagram-${identity}`, source)
+          .then(async ({ svg, bindFunctions }) => {
+            if (!refMermaid.current) return;
+            console.log("Rendered");
+            const element = new DOMParser()
+              .parseFromString(svg, "image/svg+xml")
+              .querySelector("svg");
+            if (!element) return;
 
-          const viewBox = element.getAttribute("viewBox");
-          if (!viewBox) return;
+            const viewBox = element.getAttribute("viewBox");
+            if (!viewBox) return;
 
-          const [x, y, width, height] = viewBox.split(" ").map(Number);
-          element.setAttribute("width", width.toString());
-          element.setAttribute("height", height.toString());
-          element.setAttribute(
-            "style",
-            `width: ${width}px; height: ${height}px; display: block;`
-          );
+            const [x, y, width, height] = viewBox.split(" ").map(Number);
+            element.setAttribute("width", width.toString());
+            element.setAttribute("height", height.toString());
+            element.setAttribute(
+              "style",
+              `width: ${width}px; height: ${height}px; display: block;`
+            );
 
-          refMermaid.current.innerHTML = element.outerHTML;
-          bindFunctions?.(refMermaid.current);
+            refMermaid.current.innerHTML = element.outerHTML;
+            bindFunctions?.(refMermaid.current);
 
-          if (refMermaid.current) {
-            if (
-              refPreviousScroll.current.left === null ||
-              refPreviousScroll.current.top === null
-            ) {
-              refPreviousScroll.current.left =
-                (refMermaid.current.scrollWidth -
-                  refMermaid.current.clientWidth) /
-                2;
-              refPreviousScroll.current.top =
-                (refMermaid.current.scrollHeight -
-                  refMermaid.current.clientHeight) /
-                2;
-            }
+            if (refMermaid.current) {
+              if (
+                refPreviousScroll.current.left === null ||
+                refPreviousScroll.current.top === null
+              ) {
+                refPreviousScroll.current.left =
+                  (refMermaid.current.scrollWidth -
+                    refMermaid.current.clientWidth) /
+                  2;
+                refPreviousScroll.current.top =
+                  (refMermaid.current.scrollHeight -
+                    refMermaid.current.clientHeight) /
+                  2;
+              }
 
-            refMermaid.current.scrollLeft = refPreviousScroll.current.left;
-            refMermaid.current.scrollTop = refPreviousScroll.current.top;
+              refMermaid.current.scrollLeft = refPreviousScroll.current.left;
+              refMermaid.current.scrollTop = refPreviousScroll.current.top;
 
-            timeout = setTimeout(() => {
               setIsRendered(true);
-            }, 0);
-          }
-        });
-    }
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [source, identity, isMermaidInitializing]);
+            }
+          });
+      }
+    });
+  }, [source, identity, colors]);
 
   return (
     <Skeleton

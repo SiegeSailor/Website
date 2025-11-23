@@ -20,9 +20,6 @@ export default function ({
   const uniqueCategories = useArticleStore((state) => state.uniqueCategories);
 
   const colors = useChartStore((state) => state.colors);
-  const isColorsInitialized = useChartStore(
-    (state) => state.isColorsInitialized
-  );
 
   const dates = useMemo(() => {
     const results = [
@@ -64,8 +61,6 @@ export default function ({
       };
     });
   }, [articles, dates, uniqueCategories, colors]);
-
-  if (!isColorsInitialized) return null;
 
   return (
     <Line

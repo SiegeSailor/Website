@@ -30,7 +30,7 @@ export function useColorTheme() {
   const setColors = useChartStore((state) => state.setColors);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    requestAnimationFrame(() => {
       setColors(
         Object.fromEntries(
           CSS_VARIABLE_COLORS.map((variable) => {
@@ -42,11 +42,7 @@ export function useColorTheme() {
           })
         )
       );
-    }, 0);
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    });
   }, [theme]);
 }
 
@@ -58,13 +54,8 @@ export function useChart() {
 
 export function useMermaid() {
   const colors = useChartStore((state) => state.colors);
-  const setIsMermaidInitializing = useChartStore(
-    (state) => state.setIsMermaidInitializing
-  );
 
   useEffect(() => {
-    setIsMermaidInitializing(true);
-
     mermaid.initialize({
       startOnLoad: true,
       theme: "null",
@@ -160,13 +151,5 @@ export function useMermaid() {
         curve: "basis",
       },
     });
-
-    const timeout = setTimeout(() => {
-      setIsMermaidInitializing(false);
-    }, 0);
-
-    return () => {
-      clearTimeout(timeout);
-    };
   }, [colors]);
 }
