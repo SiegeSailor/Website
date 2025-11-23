@@ -23,10 +23,6 @@ export default ({
 
   const [isRendered, setIsRendered] = useState(false);
 
-  const refPreviousScroll = useRef<{ left: number | null; top: number | null }>(
-    { left: null, top: null }
-  );
-
   const colors = useChartStore((state) => state.colors);
 
   useLayoutEffect(() => {
@@ -39,7 +35,7 @@ export default ({
           .render(`mermaid-diagram-${identity}`, source)
           .then(async ({ svg, bindFunctions }) => {
             if (!refMermaid.current) return;
-            console.log("Rendered");
+
             const element = new DOMParser()
               .parseFromString(svg, "image/svg+xml")
               .querySelector("svg");
@@ -53,32 +49,18 @@ export default ({
             element.setAttribute("height", height.toString());
             element.setAttribute(
               "style",
-              `width: ${width}px; height: ${height}px; display: block;`
+              `width: ${width}px; height: ${height}px; display: block; margin: 0 auto;`
             );
 
             refMermaid.current.innerHTML = element.outerHTML;
             bindFunctions?.(refMermaid.current);
 
-            if (refMermaid.current) {
-              if (
-                refPreviousScroll.current.left === null ||
-                refPreviousScroll.current.top === null
-              ) {
-                refPreviousScroll.current.left =
-                  (refMermaid.current.scrollWidth -
-                    refMermaid.current.clientWidth) /
-                  2;
-                refPreviousScroll.current.top =
-                  (refMermaid.current.scrollHeight -
-                    refMermaid.current.clientHeight) /
-                  2;
-              }
+            refMermaid.current.scrollLeft =
+              (refMermaid.current.scrollWidth -
+                refMermaid.current.clientWidth) /
+              2;
 
-              refMermaid.current.scrollLeft = refPreviousScroll.current.left;
-              refMermaid.current.scrollTop = refPreviousScroll.current.top;
-
-              setIsRendered(true);
-            }
+            setIsRendered(true);
           });
       }
     });
@@ -96,15 +78,9 @@ export default ({
           id={identity}
           ref={refMermaid}
           className={clsx(
-            "w-full rounded-md bg-default-50 overflow-auto py-16 px-36",
+            "w-full rounded-md bg-default-50 overflow-x-auto py-8 px-36 mx-auto scroll-auto!",
             props.className
           )}
-          onScroll={() => {
-            if (refMermaid.current && refPreviousScroll.current) {
-              refPreviousScroll.current.left = refMermaid.current.scrollLeft;
-              refPreviousScroll.current.top = refMermaid.current.scrollTop;
-            }
-          }}
         />
       </figure>
     </Skeleton>
