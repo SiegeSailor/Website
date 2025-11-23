@@ -114,7 +114,7 @@ export function useMermaid() {
         .branch {
             stroke: hsl(var(--heroui-default-700)) !important;
         }
-        path, .tag-label-bkg {
+        .arrow, .tag-label-bkg {
             stroke-width: 2px !important;
         }
 
@@ -122,12 +122,13 @@ export function useMermaid() {
             stroke: hsl(var(--heroui-default-700)) !important;
         }
         .marker, .label-container, .label-container path {
-            fill: hsl(var(--heroui-default-700)) !important;
+            fill: hsl(var(--heroui-primary-50)) !important;
             stroke: hsl(var(--heroui-default-700)) !important;
         }
         .nodeLabel p {
-            color: hsl(var(--heroui-background)) !important;
+            color: hsl(var(--heroui-foreground)) !important;
             white-space: nowrap;
+            font-weight: 400;
         }
         .cluster .nodeLabel p {
             color: hsl(var(--heroui-foreground)) !important;
