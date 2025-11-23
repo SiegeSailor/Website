@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@heroui/react";
+import { Skeleton, ScrollShadow } from "@heroui/react";
 import {
   useLayoutEffect,
   useRef,
@@ -70,19 +70,20 @@ export default ({
     <Skeleton
       {...props}
       isLoaded={isRendered}
-      className={clsx("w-full rounded-md", props.className)}
+      className={clsx(
+        "w-full rounded-md border-1 border-default-200",
+        props.className
+      )}
     >
-      <figure>
-        <div
-          {...props}
-          id={identity}
-          ref={refMermaid}
-          className={clsx(
-            "w-full rounded-md bg-default-50 overflow-x-auto py-16 px-36 mx-auto scroll-auto!",
-            props.className
-          )}
-        />
-      </figure>
+      <div
+        {...props}
+        id={identity}
+        ref={refMermaid}
+        className={clsx(
+          "w-full rounded-md bg-default-50 overflow-x-auto py-16 px-36 mx-auto scroll-auto!",
+          props.className
+        )}
+      />
     </Skeleton>
   );
 };
