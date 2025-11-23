@@ -17,8 +17,6 @@ type TState = {
       | "foreground"]: string;
   };
   setColors: (colors: Partial<TState["colors"]>) => void;
-  isMermaidInitializing: boolean;
-  setIsMermaidInitializing: (isMermaidInitializing: boolean) => void;
 };
 
 export const useChartStore = create<TState>((set) => ({
@@ -41,7 +39,4 @@ export const useChartStore = create<TState>((set) => ({
       colors: { ...state.colors, ...colors },
       isColorsInitialized: true,
     })),
-  isMermaidInitializing: true,
-  setIsMermaidInitializing: (isMermaidInitializing) =>
-    set({ isMermaidInitializing }),
 }));
