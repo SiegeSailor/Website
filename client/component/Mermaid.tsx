@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton, ScrollShadow } from "@heroui/react";
+import { Skeleton } from "@heroui/react";
 import {
   useLayoutEffect,
   useRef,

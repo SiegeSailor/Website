@@ -21,6 +21,16 @@ const CSS_VARIABLE_COLORS = [
   "--heroui-default-700",
   "--heroui-default-800",
   "--heroui-default-900",
+  "--heroui-primary-50",
+  "--heroui-primary-100",
+  "--heroui-primary-200",
+  "--heroui-primary-300",
+  "--heroui-primary-400",
+  "--heroui-primary-500",
+  "--heroui-primary-600",
+  "--heroui-primary-700",
+  "--heroui-primary-800",
+  "--heroui-primary-900",
   "--heroui-foreground",
 ];
 
@@ -62,6 +72,11 @@ export function useMermaid() {
       themeVariables: {
         fontFamily: "Roboto",
         fontSize: "1rem",
+        mainBkg: colors.primary50,
+        textColor: colors.foreground,
+        primaryBorderColor: colors.default700,
+        primaryTextColor: colors.foreground,
+        secondaryColor: colors.default500,
         primaryColor: colors.default700,
         git0: colors.default700,
         git1: colors.default600,
@@ -99,6 +114,12 @@ export function useMermaid() {
         clusterBkg: colors.default100,
         clusterBorder: "transparent",
         nodeTextColor: colors.foreground,
+        actorBkg: colors.primary50,
+        actorBorder: colors.default700,
+        actorTextColor: colors.foreground,
+        actorLineColor: colors.default700,
+        sequenceNumberColor: colors.background,
+        labelBoxBorderColor: colors.default700,
       },
       themeCSS: `
         .commit-merge {
@@ -122,8 +143,11 @@ export function useMermaid() {
             stroke: hsl(var(--heroui-default-700)) !important;
         }
         .marker, .label-container, .label-container path {
-            fill: hsl(var(--heroui-primary-50)) !important;
+            fill: hsl(var(--heroui-default-700));
             stroke: hsl(var(--heroui-default-700)) !important;
+        }
+        .node.default path {
+            fill: hsl(var(--heroui-primary-50)) !important;
         }
         .nodeLabel p {
             color: hsl(var(--heroui-foreground)) !important;
