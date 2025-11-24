@@ -17,6 +17,7 @@ import {
   SiGitlab,
   SiGnubash,
   SiGo,
+  SiGoogle,
   SiGooglechrome,
   SiGooglecloud,
   SiGulp,
@@ -42,9 +43,16 @@ import {
   SiTerraform,
   SiThreedotjs,
   SiTypescript,
+  SiWayland,
   SiWebpack,
 } from "@icons-pack/react-simple-icons";
-import { HomeIcon, LucideProps, NewspaperIcon, UserIcon } from "lucide-react";
+import {
+  DatabaseIcon,
+  HomeIcon,
+  LucideProps,
+  NewspaperIcon,
+  UserIcon,
+} from "lucide-react";
 
 export const ROUTE_ICON: Readonly<
   Record<
@@ -64,6 +72,7 @@ export const TECHNOLOGY_ICON = {
   "C++": SiCplusplus,
   "Express.js": SiExpress,
   "Next.js": SiNextdotjs,
+  "Protocol Buffers": SiGoogle,
   "React.js": SiReact,
   "Tailwind CSS": SiTailwindcss,
   "Three.js": SiThreedotjs,
@@ -81,6 +90,7 @@ export const TECHNOLOGY_ICON = {
   GitHub: SiGithub,
   GitLab: SiGitlab,
   Go: SiGo,
+  gRPC: SiGoogle,
   Gulp: SiGulp,
   HTML: SiHtml5,
   Ionic: SiIonic,
@@ -100,6 +110,8 @@ export const TECHNOLOGY_ICON = {
   SemanticRelease: SiSemanticrelease,
   Terraform: SiTerraform,
   TypeScript: SiTypescript,
+  Wayland: SiWayland,
   WebKit: SiGooglechrome,
   Webpack: SiWebpack,
+  SQL: DatabaseIcon,
 } as const;
