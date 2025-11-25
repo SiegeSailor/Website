@@ -44,7 +44,7 @@ export const useBlogStore = create<TState>((set, get) => ({
   resetPage: () => set({ page: 1 }),
   forwardPage: () => set({ page: get().page + 1 }),
   backwardPage: () => set({ page: get().page - 1 }),
-  rowsPerPage: 5,
+  rowsPerPage: 8,
   setRowsPerPage: (rows) => set({ rowsPerPage: rows }),
   sortDescriptor: { column: "date", direction: "descending" },
   setSortDescriptor: (sortDescriptor) => set({ sortDescriptor }),
