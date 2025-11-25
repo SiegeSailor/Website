@@ -172,14 +172,16 @@ export default function () {
       aria-label="Articles"
       bottomContent={<ContentBottom pageTotal={pageTotal} />}
       bottomContentPlacement="outside"
-      classNames={{ td: "whitespace-nowrap h-12" }}
+      classNames={{
+        base: "w-[calc(100vw-4rem)]",
+        td: "whitespace-nowrap h-12",
+      }}
       isHeaderSticky
       layout="auto"
       onSortChange={setSortDescriptor}
       sortDescriptor={sortDescriptor}
       topContent={<ContentTop />}
       topContentPlacement="outside"
-      maxTableHeight={800}
     >
       <TableHeader columns={headers}>
         {(column) => (
