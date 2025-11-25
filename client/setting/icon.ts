@@ -63,7 +63,7 @@ export const LUCIDE_ICON = {
   UserIcon,
 } as const;
 
-export const ROUTE_ICON: Readonly<
+export const ROUTE_TO_ICON: Readonly<
   Record<
     Route,
     ForwardRefExoticComponent<
@@ -76,7 +76,7 @@ export const ROUTE_ICON: Readonly<
   "/profile": UserIcon,
 } as const;
 
-export const TECHNOLOGY_ICON = {
+export const TECHNOLOGY_TO_ICON = {
   ".NET": SiDotnet,
   "C++": SiCplusplus,
   "Express.js": SiExpress,

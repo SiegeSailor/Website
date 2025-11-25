@@ -9,18 +9,18 @@ import { getSlugByTitle } from "@/helper/utility";
 import { getStatisticByFilePath } from "@/helper/server/file";
 import { getAnchorsByContent } from "@/helper/article";
 import {
-  DOMAIN_PATH,
+  DOMAIN_TO_PATH,
   TECHNOLOGIES,
   TECHNOLOGY_SET,
   STATUS,
   STATUS_SET,
-  TITLE_ROUTE,
+  TITLE_TO_ROUTE,
 } from "@/setting/site";
 
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
 
 export async function getArticles() {
-  const directory = join(process.cwd(), DOMAIN_PATH.article);
+  const directory = join(process.cwd(), DOMAIN_TO_PATH.article);
   const filenames = readdirSync(directory);
 
   const articles = await Promise.all(
@@ -39,7 +39,7 @@ export async function getArticles() {
 export async function getArticleByFilename(filename: string) {
   try {
     const date = filename.split(".")[0];
-    const filePath = join(process.cwd(), DOMAIN_PATH.article, filename);
+    const filePath = join(process.cwd(), DOMAIN_TO_PATH.article, filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 
@@ -73,9 +73,9 @@ export async function getArticleByFilename(filename: string) {
         level: 1,
         title: data.title,
         identifier: identifierArticle,
-        route: `${TITLE_ROUTE.Blog}#${identifierArticle}`,
+        route: `${TITLE_TO_ROUTE.Blog}#${identifierArticle}`,
       },
-      ...getAnchorsByContent(content, TITLE_ROUTE.Blog),
+      ...getAnchorsByContent(content, TITLE_TO_ROUTE.Blog),
     ];
 
     const statistics = await getStatisticByFilePath(filePath);
@@ -90,7 +90,7 @@ export async function getArticleByFilename(filename: string) {
         date,
         description,
         minutes: Math.ceil((source.split(" ").length + 1) / 150),
-        route: `${TITLE_ROUTE.Blog}/${date}` as Route,
+        route: `${TITLE_TO_ROUTE.Blog}/${date}` as Route,
         status,
         technologies,
         title: data.title,

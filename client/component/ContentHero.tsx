@@ -5,11 +5,11 @@ import { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { AUTHOR } from "@/setting/site";
-import { ROUTE_ICON } from "@/setting/icon";
+import { ROUTE_TO_ICON } from "@/setting/icon";
 import Link from "@/component/Link";
 import TextTyping from "@/component/TextTyping";
 
-const IconProfile = ROUTE_ICON["/profile"];
+const IconProfile = ROUTE_TO_ICON["/profile"];
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (

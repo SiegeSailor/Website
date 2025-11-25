@@ -1,4 +1,4 @@
-import { TECHNOLOGY_ICON } from "@/setting/icon";
+import { TECHNOLOGY_TO_ICON } from "@/setting/icon";
 import { STAGE } from "@/setting/site";
 
 export const SUMMARY: Readonly<{ title: string; portion: number }>[] = [
@@ -57,7 +57,7 @@ export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
   },
 ] as const;
 
-export const SKILL: (keyof typeof TECHNOLOGY_ICON)[][] = [
+export const SKILL: (keyof typeof TECHNOLOGY_TO_ICON)[][] = [
   ["Python", "TypeScript", "JavaScript", "Bash", "C++", ".NET"],
   ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
   ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],

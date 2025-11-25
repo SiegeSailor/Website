@@ -5,7 +5,7 @@ import { ComponentProps, useMemo } from "react";
 import { Route } from "next";
 import { usePathname } from "next/navigation";
 
-import { ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
+import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/site";
 import { useArticleStore } from "@/store/article";
 
 export default function ({
@@ -25,9 +25,10 @@ export default function ({
     const paths = pathname.split("/");
     paths.forEach((path) => {
       const pathWithSlash = `/${path}`;
-      if (pathWithSlash in ROUTE_TITLE) {
-        const name = ROUTE_TITLE[pathWithSlash as keyof typeof ROUTE_TITLE];
-        results.push({ name, href: TITLE_ROUTE[name] });
+      if (pathWithSlash in ROUTE_TO_TITLE) {
+        const name =
+          ROUTE_TO_TITLE[pathWithSlash as keyof typeof ROUTE_TO_TITLE];
+        results.push({ name, href: TITLE_TO_ROUTE[name] });
         return;
       }
 

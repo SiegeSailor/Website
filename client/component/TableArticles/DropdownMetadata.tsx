@@ -21,7 +21,7 @@ export type TMetadata = Extract<
   "category" | "status" | "technologies"
 >;
 
-const METADATA_SET_ITEMS: Readonly<
+const METADATA_TO_SET_ITEMS: Readonly<
   Record<
     TMetadata,
     Extract<keyof TBlogState, "setCategory" | "setStatus" | "setTechnologies">
@@ -32,7 +32,7 @@ const METADATA_SET_ITEMS: Readonly<
   technologies: "setTechnologies",
 } as const;
 
-const METADATA_UNIQUES: Readonly<
+const METADATA_TO_UNIQUES: Readonly<
   Record<
     TMetadata,
     Extract<
@@ -46,7 +46,7 @@ const METADATA_UNIQUES: Readonly<
   technologies: "uniqueTechnologies",
 } as const;
 
-const METADATA_TITLE: Readonly<Record<TMetadata, string>> = {
+const METADATA_TO_TITLE: Readonly<Record<TMetadata, string>> = {
   category: "Categories",
   status: "Statuses",
   technologies: "Technologies",
@@ -64,8 +64,12 @@ export default function ({
 }>) {
   const columns = useBlogStore((state) => state.columns);
   const items = useBlogStore((state) => state[metadata]);
-  const setItems = useBlogStore((state) => state[METADATA_SET_ITEMS[metadata]]);
-  const uniques = useArticleStore((state) => state[METADATA_UNIQUES[metadata]]);
+  const setItems = useBlogStore(
+    (state) => state[METADATA_TO_SET_ITEMS[metadata]]
+  );
+  const uniques = useArticleStore(
+    (state) => state[METADATA_TO_UNIQUES[metadata]]
+  );
 
   const searchParam = useSearchParams().get(metadata);
 
@@ -77,7 +81,7 @@ export default function ({
     );
   }, [searchParam, setItems]);
 
-  const title = METADATA_TITLE[metadata];
+  const title = METADATA_TO_TITLE[metadata];
 
   return (
     <Dropdown

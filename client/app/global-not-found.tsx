@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { createPageTitle } from "@/helper/utility";
-import { DESCRIPTION, ROUTE_TITLE, TITLE_ROUTE } from "@/setting/site";
+import { DESCRIPTION, ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/site";
 import DivisionCenter from "@/component/DivisionCenter";
 import Link from "@/component/Link";
 import Provider from "@/component/Provider";
@@ -48,9 +48,9 @@ export default function () {
                 variant="faded"
               >
                 <div className="flex gap-2 mt-2">
-                  <Link href={TITLE_ROUTE["Home"]} underline="none">
+                  <Link href={TITLE_TO_ROUTE["Home"]} underline="none">
                     <Button color="warning" size="md" variant="solid">
-                      {ROUTE_TITLE["/"]}
+                      {ROUTE_TO_TITLE["/"]}
                     </Button>
                   </Link>
                 </div>

@@ -10,7 +10,7 @@ import { getAnchorsByContent } from "@/helper/article";
 
 export const IDENTIFIER = "table-of-contents" as const;
 
-const LEVEL_PADDING: Readonly<Record<number, string>> = {
+const LEVEL_TO_PADDING: Readonly<Record<number, string>> = {
   1: "pl-2",
   2: "pl-4",
   3: "pl-8",
@@ -65,7 +65,7 @@ export default function ({
           return (
             <ListboxItem
               classNames={{
-                base: clsx(LEVEL_PADDING[anchor.level]),
+                base: clsx(LEVEL_TO_PADDING[anchor.level]),
                 title: isBrowsing ? "font-normal" : "font-light",
               }}
               endContent={

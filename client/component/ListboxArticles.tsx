@@ -3,8 +3,8 @@
 import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
-import { ROUTE_ICON } from "@/setting/icon";
-import { ROUTE_TITLE } from "@/setting/site";
+import { ROUTE_TO_ICON } from "@/setting/icon";
+import { ROUTE_TO_TITLE } from "@/setting/site";
 import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 
@@ -64,7 +64,7 @@ export default function ({
       </ListboxSection>
       <>
         {ROUTES.map((route) => {
-          const Icon = ROUTE_ICON[route];
+          const Icon = ROUTE_TO_ICON[route];
 
           return (
             <ListboxItem
@@ -72,7 +72,7 @@ export default function ({
               endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
               key={route}
               href={route}
-              title={`Go Back to ${ROUTE_TITLE[route]}`}
+              title={`Go Back to ${ROUTE_TO_TITLE[route]}`}
             />
           );
         })}

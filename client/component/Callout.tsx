@@ -28,7 +28,7 @@ const TYPE_COLOR = {
   Record<string, NonNullable<ComponentProps<typeof Code>["color"]>>
 >;
 
-const COLOR_ICON: Readonly<
+const COLOR_TO_ICON: Readonly<
   Record<
     NonNullable<ComponentProps<typeof Code>["color"]>,
     ForwardRefExoticComponent<
@@ -44,7 +44,7 @@ const COLOR_ICON: Readonly<
   warning: BadgeAlertIcon,
 } as const;
 
-const COLOR_TITLE: Readonly<
+const COLOR_TO_TITLE: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "Danger",
@@ -55,7 +55,7 @@ const COLOR_TITLE: Readonly<
   warning: "Warning",
 } as const;
 
-const COLOR_FRAME: Readonly<
+const COLOR_TO_FRAME: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
@@ -68,7 +68,7 @@ const COLOR_FRAME: Readonly<
     "bg-orange-50 border-orange-300 dark:bg-orange-950 dark:border-orange-700",
 } as const;
 
-const COLOR_COLOR: Readonly<
+const COLOR_TO_COLOR: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "text-red-500 dark:text-red-400",
@@ -95,14 +95,18 @@ export default async function ({
 
   return (
     <div
-      className={clsx("rounded-md p-4 border-1", COLOR_FRAME[color], className)}
+      className={clsx(
+        "rounded-md p-4 border-1",
+        COLOR_TO_FRAME[color],
+        className
+      )}
     >
       <div className="flex items-center justify-start gap-2 mb-2">
-        {createElement(COLOR_ICON[color], {
+        {createElement(COLOR_TO_ICON[color], {
           size: "1.25rem",
-          className: COLOR_COLOR[color],
+          className: COLOR_TO_COLOR[color],
         })}
-        <div className="font-semibold!">{title || COLOR_TITLE[color]}</div>
+        <div className="font-semibold!">{title || COLOR_TO_TITLE[color]}</div>
       </div>
 
       {children}

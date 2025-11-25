@@ -5,7 +5,7 @@ import { CardHeader, Chip, Card, CardBody, CardFooter } from "@heroui/react";
 import clsx from "clsx";
 
 import { PROJECTS } from "@/setting/home";
-import { STAGE_COLOR } from "@/setting/site";
+import { STAGE_TO_COLOR } from "@/setting/site";
 import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
 
@@ -39,7 +39,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
                 <Chip
                   size="md"
                   variant="bordered"
-                  color={STAGE_COLOR[project.stage]}
+                  color={STAGE_TO_COLOR[project.stage]}
                 >
                   {project.stage}
                 </Chip>

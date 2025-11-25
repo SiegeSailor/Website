@@ -4,7 +4,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_PATH, AUTHOR, TITLE_ROUTE } from "@/setting/site";
+import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/setting/site";
 import { getAnchorsByContent } from "@/helper/article";
 import { getSlugByTitle } from "@/helper/utility";
 import { getStatisticByFilePath } from "@/helper/server/file";
@@ -45,7 +45,7 @@ export async function getProfile() {
   const filename = "Profile.md";
 
   try {
-    const filePath = join(process.cwd(), DOMAIN_PATH.document, filename);
+    const filePath = join(process.cwd(), DOMAIN_TO_PATH.document, filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 
@@ -96,9 +96,9 @@ export async function getProfile() {
         level: 1,
         title: AUTHOR,
         identifier: identifierProfile,
-        route: `${TITLE_ROUTE.Profile}#${identifierProfile}`,
+        route: `${TITLE_TO_ROUTE.Profile}#${identifierProfile}`,
       },
-      ...getAnchorsByContent(content, TITLE_ROUTE.Profile),
+      ...getAnchorsByContent(content, TITLE_TO_ROUTE.Profile),
     ];
 
     const statistics = await getStatisticByFilePath(filePath);

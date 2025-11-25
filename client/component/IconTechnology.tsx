@@ -6,7 +6,7 @@ import { LucideProps } from "lucide-react";
 
 import { getArticleByFilename } from "@/helper/server/article";
 import { getValues } from "@/helper/utility";
-import { TECHNOLOGY_ICON, LUCIDE_ICON } from "@/setting/icon";
+import { TECHNOLOGY_TO_ICON, LUCIDE_ICON } from "@/setting/icon";
 
 function IconLucide({
   Component,
@@ -33,7 +33,7 @@ export default function ({
       ReturnType<typeof getArticleByFilename>
     >["metadata"]["technologies"][number];
   }>) {
-  const Icon = TECHNOLOGY_ICON[technology];
+  const Icon = TECHNOLOGY_TO_ICON[technology];
 
   const propsBase: TIconProps = {
     size: "1rem",

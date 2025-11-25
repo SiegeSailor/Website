@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
-import { ROUTE_TITLE } from "@/setting/site";
+import { ROUTE_TO_TITLE } from "@/setting/site";
 import TableArticles from "@/component/TableArticles";
 
 export const metadata: Metadata = {
-  title: createPageTitle(ROUTE_TITLE["/blog"]),
+  title: createPageTitle(ROUTE_TO_TITLE["/blog"]),
 };
 
 export default function () {

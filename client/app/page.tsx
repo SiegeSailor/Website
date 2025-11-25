@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
-import { ROUTE_TITLE } from "@/setting/site";
+import { ROUTE_TO_TITLE } from "@/setting/site";
 import CardExperience from "@/component/CardExperience";
 import CardPublication from "@/component/CardPublication";
 import CardSkill from "@/component/CardSkill";
@@ -11,7 +11,7 @@ import ContentHero from "@/component/ContentHero";
 import ContentProjects from "@/component/ContentProjects";
 
 export const metadata: Metadata = {
-  title: createPageTitle(ROUTE_TITLE["/"]),
+  title: createPageTitle(ROUTE_TO_TITLE["/"]),
 };
 
 export default function () {

@@ -4,7 +4,7 @@ import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
 import clsx from "clsx";
 
-const LEVEL_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
+const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
   1: "text-5xl leading-[1.25]",
   2: "text-4xl",
   3: "text-3xl",
@@ -17,14 +17,14 @@ export default async function ({
   level,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement> &
-  Readonly<{ level: keyof typeof LEVEL_CLASSNAMES }>) {
+  Readonly<{ level: keyof typeof LEVEL_TO_CLASSNAMES }>) {
   return createElement(
     `h${level}`,
     {
       ...props,
       className: clsx(
         "font-light mb-4 last:mb-0 mt-12 first:mt-0 break-words",
-        LEVEL_CLASSNAMES[level],
+        LEVEL_TO_CLASSNAMES[level],
         props.className
       ),
     },

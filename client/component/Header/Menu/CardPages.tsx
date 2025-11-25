@@ -4,8 +4,8 @@ import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
 import { getEntries } from "@/helper/utility";
-import { ROUTE_ICON } from "@/setting/icon";
-import { TITLE_ROUTE } from "@/setting/site";
+import { ROUTE_TO_ICON } from "@/setting/icon";
+import { TITLE_TO_ROUTE } from "@/setting/site";
 
 export default function () {
   const pathname = usePathname();
@@ -21,8 +21,8 @@ export default function () {
         variant="flat"
       >
         <ListboxSection title="Pages">
-          {getEntries(TITLE_ROUTE).map(([title, route]) => {
-            const Icon = ROUTE_ICON[route];
+          {getEntries(TITLE_TO_ROUTE).map(([title, route]) => {
+            const Icon = ROUTE_TO_ICON[route];
 
             return (
               <ListboxItem
