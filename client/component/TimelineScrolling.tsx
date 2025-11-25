@@ -5,11 +5,11 @@ import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
 export default function ({
-  classNameHeight = "h-full",
+  classNameScrollHeight = "h-full",
   items,
   speedScroll = 2.5,
 }: Readonly<{
-  classNameHeight?: string;
+  classNameScrollHeight?: string;
   items: Readonly<{ title: string; time: string }[]>;
   speedScroll?: number;
 }>) {
@@ -27,7 +27,7 @@ export default function ({
       ref={refContainer}
       className={clsx(
         "w-full grow relative opacity-0 transition-opacity duration-2000 ease-in-out",
-        classNameHeight
+        classNameScrollHeight
       )}
     >
       <ol

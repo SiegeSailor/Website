@@ -2,6 +2,7 @@
 
 import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
+import { Route } from "next";
 import clsx from "clsx";
 
 const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
@@ -15,9 +16,10 @@ const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
 
 export default async function ({
   level,
+  href,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement> &
-  Readonly<{ level: keyof typeof LEVEL_TO_CLASSNAMES }>) {
+  Readonly<{ level: keyof typeof LEVEL_TO_CLASSNAMES; href?: Route }>) {
   return createElement(
     `h${level}`,
     {
@@ -29,7 +31,7 @@ export default async function ({
       ),
     },
     <a
-      href={`#${props.id}`}
+      href={href ?? `#${props.id}`}
       className="hover:text-default-700 dark:hover:text-default-600"
     >
       <span className="pr-2">{props.children}</span>

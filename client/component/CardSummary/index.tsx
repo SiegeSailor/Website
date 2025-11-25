@@ -8,13 +8,13 @@ import Chart from "./Chart";
 import ContentHeader from "./ContentHeader";
 
 export default async function ({
-  classNameHeight = "h-full",
+  classNameScrollHeight = "h-full",
   ...props
 }: Omit<
   ComponentProps<typeof CardBlock>,
   "children" | "contentHeader" | "href" | "title"
 > &
-  Readonly<{ classNameHeight?: string }>) {
+  Readonly<{ classNameScrollHeight?: string }>) {
   const { metadata } = await getProfile();
 
   return (
@@ -24,7 +24,7 @@ export default async function ({
       title="What I Bring to the Table"
       {...props}
     >
-      <div className={classNameHeight}>
+      <div className={classNameScrollHeight}>
         <Chart />
       </div>
     </CardBlock>

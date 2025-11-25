@@ -20,7 +20,7 @@ export default async function ({
   }>) {
   const content = (
     <>
-      <CardHeader className="absolute z-20 top-0 flex-col items-start">
+      <CardHeader className="absolute z-20 top-0 flex flex-col items-start">
         <div className="items-start z-20">
           <Chip variant="bordered" size="sm" className="p-4 bg-background">
             <span className="font-medium">{props.title}</span>

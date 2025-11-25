@@ -8,13 +8,13 @@ import ContentHeader from "./ContentHeader";
 import TimelineScrolling from "@/component/TimelineScrolling";
 
 export default async function ({
-  classNameHeight,
+  classNameScrollHeight,
   ...props
 }: Omit<
   ComponentProps<typeof CardBlock>,
   "children" | "contentHeader" | "href" | "title"
 > &
-  Pick<ComponentProps<typeof TimelineScrolling>, "classNameHeight">) {
+  Pick<ComponentProps<typeof TimelineScrolling>, "classNameScrollHeight">) {
   return (
     <CardBlock
       contentHeader={<ContentHeader />}
@@ -22,7 +22,10 @@ export default async function ({
       title="My Experience"
       {...props}
     >
-      <TimelineScrolling classNameHeight={classNameHeight} items={EXPERIENCE} />
+      <TimelineScrolling
+        classNameScrollHeight={classNameScrollHeight}
+        items={EXPERIENCE}
+      />
     </CardBlock>
   );
 }
