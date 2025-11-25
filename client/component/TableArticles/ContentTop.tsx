@@ -82,7 +82,7 @@ export default function () {
           </PopoverTrigger>
           <PopoverContent>
             <div className="flex flex-col gap-2">
-              {[10, 20, 30].map((value) => (
+              {[5, 10, 25].map((value) => (
                 <Button
                   key={value}
                   size="sm"
