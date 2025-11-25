@@ -173,7 +173,7 @@ export default function () {
       bottomContent={<ContentBottom pageTotal={pageTotal} />}
       bottomContentPlacement="outside"
       classNames={{
-        base: "w-[calc(100vw-4rem)]",
+        base: "w-[calc(100vw-4rem)] max-w-full",
         td: "whitespace-nowrap h-12",
       }}
       isHeaderSticky

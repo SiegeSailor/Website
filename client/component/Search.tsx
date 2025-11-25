@@ -43,7 +43,7 @@ export default function () {
                   aria-label="Search"
                   classNames={{
                     inputWrapper: "bg-default-100",
-                    input: "text-sm",
+                    input: "text-small",
                   }}
                   labelPlacement="outside"
                   placeholder="Type to search"

@@ -57,7 +57,7 @@ export default function () {
             duration={2}
             className="absolute top-20 left-4 z-10 justify-start w-11/12"
           >
-            <p className="text-background/50 dark:text-foreground/50 font-normal text-sm text-left flex gap-1 items-center text-nowrap">
+            <p className="text-background/50 dark:text-foreground/50 font-normal text-small text-left flex gap-1 items-center text-nowrap">
               <span>{date}</span>·<span>{category}</span>
             </p>
             <Spacer y={1} />

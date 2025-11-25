@@ -31,17 +31,18 @@ export default async function ({
       className={clsx("relative overflow-hidden", props.className)}
       shadow="sm"
     >
-      <CardHeader>
-        <Heading level={6} href={article.metadata.route}>
-          {article.metadata.title}
-        </Heading>
-      </CardHeader>
-
-      <CardBody className="overflow-hidden flex flex-col gap-4">
+      <CardHeader className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <ChipCategory category={article.metadata.category} />
           <ChipStatus status={article.metadata.status} />
         </div>
+        <p className="text-small">{article.metadata.date}</p>
+      </CardHeader>
+
+      <CardBody className="overflow-hidden flex flex-col gap-4">
+        <Heading level={6} href={article.metadata.route} className="mb-0!">
+          {article.metadata.title}
+        </Heading>
 
         <ScrollShadow>
           <div className="mb-2">

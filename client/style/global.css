@@ -42,7 +42,7 @@
 
   figure[data-rehype-pretty-code-figure] {
     @apply flex flex-col items-start justify-start;
-    @apply text-sm;
+    @apply text-small;
     @apply my-4 first:mt-0 last:mb-0;
     @apply relative;
   }
