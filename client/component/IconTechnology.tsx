@@ -2,20 +2,27 @@
 
 import { ComponentProps, ComponentType } from "react";
 import { IconType } from "@icons-pack/react-simple-icons";
-import * as lucide from "lucide-react";
+import { LucideProps } from "lucide-react";
 
 import { getArticleByFilename } from "@/helper/server/article";
-import { TECHNOLOGY_ICON } from "@/setting/icon";
+import { getValues } from "@/helper/utility";
+import { TECHNOLOGY_ICON, LUCIDE_ICON } from "@/setting/icon";
 
 function IconLucide({
   Component,
-}: Readonly<{ Component: ComponentType<Omit<lucide.LucideProps, "ref">> }>) {
+}: Readonly<{ Component: ComponentType<Omit<LucideProps, "ref">> }>) {
   return (
-    <Component color="hsl(var(--heroui-default-700))" strokeWidth={0.75} />
+    <Component
+      color="hsl(var(--heroui-default-700))"
+      strokeWidth={1.15}
+      size="1.15rem"
+      width="1.15rem"
+      height="1.15rem"
+    />
   );
 }
 
-type TIconProps = ComponentProps<IconType> & lucide.LucideProps;
+type TIconProps = ComponentProps<IconType> & LucideProps;
 
 export default function ({
   technology,
@@ -28,9 +35,15 @@ export default function ({
   }>) {
   const Icon = TECHNOLOGY_ICON[technology];
 
-  const propsBase: TIconProps = { size: "1rem", title: technology, ...props };
+  const propsBase: TIconProps = {
+    size: "1rem",
+    width: "1rem",
+    height: "1rem",
+    title: technology,
+    ...props,
+  };
 
-  if ((Icon.displayName ?? "") in lucide)
+  if (getValues(LUCIDE_ICON).includes(Icon))
     return (
       <IconLucide
         Component={(propsOverride) => (

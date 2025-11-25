@@ -51,8 +51,17 @@ import {
   HomeIcon,
   LucideProps,
   NewspaperIcon,
+  NotebookIcon,
   UserIcon,
 } from "lucide-react";
+
+export const LUCIDE_ICON = {
+  DatabaseIcon,
+  HomeIcon,
+  NewspaperIcon,
+  NotebookIcon,
+  UserIcon,
+} as const;
 
 export const ROUTE_ICON: Readonly<
   Record<
@@ -114,4 +123,5 @@ export const TECHNOLOGY_ICON = {
   WebKit: SiGooglechrome,
   Webpack: SiWebpack,
   SQL: DatabaseIcon,
+  Supervisord: NotebookIcon,
 } as const;
