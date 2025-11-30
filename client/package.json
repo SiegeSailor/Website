@@ -42,7 +42,7 @@
   "scripts": {
     "build": "next build --turbopack",
     "start": "next start --turbopack",
-    "watch": "NODE_OPTIONS='--inspect' next dev"
+    "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev"
   },
   "type": "module",
   "version": "1.0.0"
