@@ -28,9 +28,9 @@ export const COLUMNS: {
   { key: "date", label: "Date", isSortable: true },
   { key: "status", label: "Status", isSortable: false },
   { key: "category", label: "Category", isSortable: true },
+  { key: "minutes", label: "Read Time", isSortable: true },
   { key: "title", label: "Title", isSortable: true },
   { key: "technologies", label: "Technologies", isSortable: false },
-  { key: "minutes", label: "Read Time", isSortable: true },
 ] as const;
 
 function renderCell(

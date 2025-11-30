@@ -76,20 +76,21 @@ export const SKILL: (keyof typeof TECHNOLOGY_TO_ICON)[][] = [
 ] as const;
 
 export const PUBLICATION: Readonly<
-  { title: string; description: string; href: string }[]
+  { title: string; description: string; href: string; isDraft: boolean }[]
 > = [
   {
     title: "Quantitative DevSecOps Metrics for Cloud-Based Web Microservices",
     description:
       "The widespread adoption of CBWMs and DevSecOps methodologies has significantly improved modern software development, particularly regarding scalability, agility, and security. However, the true success of these implementations hinges on the ability to measure their effectiveness accurately. Metrics serve as a critical tool in this process, providing quantifiable data on service performance, security, and operational efficiency. By leveraging these metrics, organizations can better assess the efficiency of their DevSecOps practices, making them invaluable for informed decision-making, trend analysis, process management, and continuous improvement. This paper introduces 12 key quantitative metrics specifically designed to evaluate the quality of CBWMs developed through DevSecOps practices. These metrics were identified using a Multi-Vocal Literature Review methodology, sourcing information from 92 relevant studies (2018-2023) on IEEE Xplore, Springer, and Google Scholar. The selected metrics are widely applicable across CBWMs and are easy to measure with existing tools, offering a comprehensive framework for thorough assessment.",
     href: "https://ieeexplore.ieee.org/document/10735195",
+    isDraft: false,
   },
   {
-    title:
-      "A Quantitative DevSecOps Assessment Framework for Cloud-Based Web Microservices",
+    title: "DevOps-Enabled Digital Platforms for Dementia Nursing Care",
     description:
-      "As DevSecOps practices become increasingly standardized in software development, there is a growing emphasis on consistently providing quantitative metrics for CBWMs. To achieve this, adopting an iterative workflow with a feedback loop becomes a crucial strategy for incorporating security throughout the SDLC of CBWMs. This approach effectively integrates DevSecOps principles, which are essential for the continuous provision of quantitative metrics in CBWMs. It aligns with the fundamental tenets of DevSecOps, which prioritize the direct integration of security measures into the SDLC. Consequently, the goal is to establish a continuous, metrics-driven framework that not only enhances security but also caters to the dynamic requirements of CBWMs in DevSecOps environments. Our proposed assessment flow follows the principles and concepts of DevSecOps, and it is not only a guideline for team members to follow but also a culture focusing on automating, monitoring, evaluating, and providing feedback continuously.",
+      "This paper explores how DevOps practices can transform the development, deployment, and continuous improvement of digital platforms for dementia nursing care. It examines the integration of automated testing, continuous integration and delivery (CI/CD), and rapid feedback loops to enhance the reliability, scalability, and security of healthcare applications. The study highlights how DevOps enables interdisciplinary collaboration between nurses, developers, and IT staff, resulting in more responsive and user-centered solutions. Real-world case studies and technical frameworks are presented to demonstrate how DevOps accelerates innovation in remote monitoring, patient management, and family communication tools for dementia care. The paper also discusses challenges such as regulatory compliance, data privacy, and change management, offering recommendations for successful DevOps adoption in healthcare environments.",
     href: "https://www.proquest.com/openview/0da942d980b35cc6e5e421a32d71ba5d/1?pq-origsite=gscholar&cbl=18750&diss=y",
+    isDraft: true,
   },
 ] as const;
 
