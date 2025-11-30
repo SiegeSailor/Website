@@ -1,5 +1,5 @@
 ---
-picture: /image/Jin-Yu-Zhang-Cropped.jpg
+picture: /image/Jin-Yu-Zhang-Profile.jpg
 headlines:
   - "Full-Stack Development"
   - "DevOps"
