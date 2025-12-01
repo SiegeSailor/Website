@@ -1,13 +1,18 @@
 "use server";
 
 import { ComponentProps } from "react";
-import { Card, CardBody, CardHeader, ScrollShadow } from "@heroui/react";
+import { Card } from "@heroui/react";
 import clsx from "clsx";
 
 import { getArticleByDate } from "@/helper/server/article";
-import ChipCategory from "@/component/ChipCategory";
-import Heading from "@/component/Heading";
-import Markdown from "@/component/Markdown";
+import Link from "@/component/Link";
+
+const METADATA_TO_CLASSNAMES = {
+  category: "text-foreground/50 text-small font-light",
+  date: "text-foreground/50 text-small font-light text-right",
+  minutes: "text-foreground/50 text-small font-light",
+  title: "text-medium font-normal",
+} as const;
 
 export default async function ({
   date,
@@ -16,37 +21,25 @@ export default async function ({
   const article = await getArticleByDate(date);
 
   return (
-    <Card
-      {...props}
-      className={clsx("relative overflow-hidden", props.className)}
-      shadow="sm"
-    >
-      <CardHeader className="flex flex-col gap-2">
-        <div className="flex w-full justify-between items-center flex-wrap gap-2">
-          <ChipCategory category={article.metadata.category} />
-          <p className="md:w-full lg:w-auto text-small font-light">
-            {article.metadata.date}
+    <Card isHoverable isPressable shadow="sm" {...props}>
+      <Link className="text-left p-4" href={article.metadata.route} isPlain>
+        <div className="flex flex-wrap gap-1 justify-start">
+          <div className="w-full flex flex-nowrap justify-between items-center">
+            <p className={METADATA_TO_CLASSNAMES.category}>
+              {article.metadata.category}
+            </p>
+            <p className={METADATA_TO_CLASSNAMES.date}>
+              {article.metadata.date}
+            </p>
+          </div>
+          <h3 className={clsx(METADATA_TO_CLASSNAMES.title, "line-clamp-2")}>
+            {article.metadata.title}
+          </h3>
+          <p className={METADATA_TO_CLASSNAMES.minutes}>
+            {article.metadata.minutes} Minutes Read
           </p>
         </div>
-        <Heading
-          level={6}
-          href={article.metadata.route}
-          className="w-full mb-0! mt-0! line-clamp-2"
-        >
-          {article.metadata.title}
-        </Heading>
-      </CardHeader>
-
-      <CardBody>
-        <ScrollShadow size={20}>
-          <div className="mb-2">
-            <Markdown
-              source={article.metadata.description}
-              p={{ className: "text-foreground/50" }}
-            />
-          </div>
-        </ScrollShadow>
-      </CardBody>
+      </Link>
     </Card>
   );
 }

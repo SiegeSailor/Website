@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { Selection, SortDescriptor } from "@heroui/react";
 
+import { ROWS_PER_PAGE } from "@/setting/site";
+
 export type TState = {
   lengthMatched: number;
   setLengthMatched: (length: number) => void;
@@ -19,8 +21,8 @@ export type TState = {
   resetPage: () => void;
   forwardPage: () => void;
   backwardPage: () => void;
-  rowsPerPage: number;
-  setRowsPerPage: (rows: number) => void;
+  rowsPerPage: (typeof ROWS_PER_PAGE)[number];
+  setRowsPerPage: (rows: (typeof ROWS_PER_PAGE)[number]) => void;
   sortDescriptor: SortDescriptor;
   setSortDescriptor: (sortDescriptor: SortDescriptor) => void;
   resetSearch: () => void;
@@ -44,7 +46,7 @@ export const useBlogStore = create<TState>((set, get) => ({
   resetPage: () => set({ page: 1 }),
   forwardPage: () => set({ page: get().page + 1 }),
   backwardPage: () => set({ page: get().page - 1 }),
-  rowsPerPage: 15,
+  rowsPerPage: ROWS_PER_PAGE[0],
   setRowsPerPage: (rows) => set({ rowsPerPage: rows }),
   sortDescriptor: { column: "date", direction: "descending" },
   setSortDescriptor: (sortDescriptor) => set({ sortDescriptor }),

@@ -30,13 +30,6 @@ export default async function ({
       shadow="sm"
     >
       <CardHeader className="flex flex-col gap-4">
-        <div className="w-full flex justify-between items-center">
-          <div className="flex gap-2 items-center">
-            <ChipCategory category={article.metadata.category} />
-            <ChipStatus status={article.metadata.status} />
-          </div>
-          <p className="text-small font-light">{article.metadata.date}</p>
-        </div>
         <Heading
           level={5}
           href={article.metadata.route}
@@ -44,6 +37,15 @@ export default async function ({
         >
           {article.metadata.title}
         </Heading>
+        <div className="w-full flex flex-wrap gap-2 justify-between items-center">
+          <div className="flex gap-2 items-center">
+            <ChipCategory category={article.metadata.category} />
+            <ChipStatus status={article.metadata.status} />
+          </div>
+          <p className="w-full sm:w-auto text-small font-light">
+            {article.metadata.date}
+          </p>
+        </div>
       </CardHeader>
 
       <CardBody className="h-3/7">

@@ -24,14 +24,15 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         </p>
       </div>
 
-      <div className="gap-4 grid grid-cols-12 grid-rows-2 md:grid-rows-1 max-w-compact mx-auto">
+      <div className="gap-4 grid grid-cols-12 grid-rows-2 sm:grid-rows-1 max-w-compact mx-auto">
         <div className="col-span-12 sm:col-span-6 flex items-end flex-col justify-center gap-4">
           {articles.slice(0, 4).map((article, index) => {
             return (
               <CardArticleSimple
                 className="w-full"
-                key={index}
                 filename={article.filename}
+                isMultiple={false}
+                key={index}
                 shadow="md"
               />
             );

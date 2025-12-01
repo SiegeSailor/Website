@@ -45,3 +45,5 @@ export const ROUTE_TO_TITLE: Readonly<Record<Route, TTitle>> = {
 export const TITLE_TO_ROUTE = Object.fromEntries(
   getEntries(ROUTE_TO_TITLE).map(([route, title]) => [title, route])
 ) as Readonly<Record<TTitle, Route>>;
+
+export const ROWS_PER_PAGE = [10, 25, 50] as const;

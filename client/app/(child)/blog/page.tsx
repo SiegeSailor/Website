@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { ScrollShadow } from "@heroui/react";
 
 import { createPageTitle } from "@/helper/utility";
 import { getArticles } from "@/helper/server/article";
@@ -9,6 +8,7 @@ import CardArticleHighlight from "@/component/CardArticleHighlight";
 import CardArticleSimple from "@/component/CardArticleSimple";
 import ScrollShadowTechnologiesFlatten from "@/component/ScrollShadowTechnologiesFlatten";
 import TableArticles from "@/component/TableArticles";
+import DivisionSticky from "@/component/DivisionSticky";
 
 export const metadata: Metadata = {
   title: createPageTitle(ROUTE_TO_TITLE["/blog"]),
@@ -19,6 +19,7 @@ const HIGHLIGHTS = ["2025-11-02", "2025-10-01"] as const;
 // TODO: check font
 // TODO: homepage layout
 // TODO: highligh technology
+// TODO: CardDetail
 export default async function () {
   const articles = await getArticles();
 
@@ -39,13 +40,13 @@ export default async function () {
           <TableArticles />
         </div>
 
-        <div className="col-span-4 flex flex-col gap-8">
+        <DivisionSticky className="col-span-4 flex flex-col gap-8 p-1 max-h-[calc(100vh-8rem)]">
           <div className="flex flex-col gap-4">
             <h4 className="text-medium font-semibold">Highlights</h4>
-            <div className="grid gap-2 grid-cols-12 grid-rows-2">
+            <div className="flex flex-col gap-2">
               {HIGHLIGHTS.map((date) => (
                 <CardArticleHighlight
-                  className="col-span-12 h-[200px]"
+                  className="w-full"
                   date={date}
                   key={date}
                 />
@@ -71,7 +72,7 @@ export default async function () {
               ))}
             </div>
           </div>
-        </div>
+        </DivisionSticky>
       </div>
     </section>
   );

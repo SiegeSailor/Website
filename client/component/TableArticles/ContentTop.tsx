@@ -12,6 +12,7 @@ import { ComponentProps } from "react";
 
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
+import { ROWS_PER_PAGE } from "@/setting/site";
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
 import Link from "@/component/Link";
@@ -82,7 +83,7 @@ export default function () {
           </PopoverTrigger>
           <PopoverContent>
             <div className="flex flex-col gap-2">
-              {[15, 25, 50].map((value) => (
+              {ROWS_PER_PAGE.map((value) => (
                 <Button
                   key={value}
                   size="sm"
