@@ -7,6 +7,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
+import { CheckIcon } from "lucide-react";
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
@@ -45,7 +46,12 @@ export default function ({
         selectionMode="multiple"
       >
         {COLUMNS.map((column) => (
-          <DropdownItem key={column.key}>{column.label}</DropdownItem>
+          <DropdownItem
+            key={column.key}
+            selectedIcon={<CheckIcon size="0.75rem" />}
+          >
+            {column.label}
+          </DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>

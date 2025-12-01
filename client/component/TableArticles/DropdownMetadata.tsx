@@ -8,6 +8,7 @@ import {
   DropdownTrigger,
   Selection,
 } from "@heroui/react";
+import { CheckIcon } from "lucide-react";
 import { ComponentProps, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
@@ -111,7 +112,12 @@ export default function ({
         selectionMode="multiple"
       >
         {uniques.map((unique) => (
-          <DropdownItem key={unique}>{unique}</DropdownItem>
+          <DropdownItem
+            key={unique}
+            selectedIcon={<CheckIcon size="0.75rem" />}
+          >
+            {unique}
+          </DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
