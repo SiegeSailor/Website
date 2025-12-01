@@ -34,10 +34,9 @@ export default function ({
       underline={isPlain ? "none" : "always"}
       {...props}
       className={clsx(
-        "font-light",
         isPlain
           ? "block w-full h-full text-inherit text-[size:inherit] font-[weight:inherit]"
-          : "inline-flex",
+          : "font-light inline-flex",
         isArticle && "inline",
         props.className
       )}

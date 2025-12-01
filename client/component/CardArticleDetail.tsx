@@ -19,8 +19,17 @@ import Heading from "@/component/Heading";
 
 export default async function ({
   date,
+  propsChipCategory,
+  propsChipStatus,
+  propsHeading,
   ...props
-}: ComponentProps<typeof Card> & Readonly<{ date: string }>) {
+}: ComponentProps<typeof Card> &
+  Readonly<{
+    date: string;
+    propsChipCategory?: Partial<ComponentProps<typeof ChipCategory>>;
+    propsChipStatus?: Partial<ComponentProps<typeof ChipStatus>>;
+    propsHeading?: Partial<ComponentProps<typeof Heading>>;
+  }>) {
   const article = await getArticleByDate(date);
 
   return (
@@ -46,12 +55,16 @@ export default async function ({
           level={6}
           href={article.metadata.route}
           className="w-full mb-0! mt-0! line-clamp-2"
+          {...propsHeading}
         >
           {article.metadata.title}
         </Heading>
         <div className="w-full flex gap-2 justify-start items-center">
-          <ChipCategory category={article.metadata.category} />
-          <ChipStatus status={article.metadata.status} />
+          <ChipCategory
+            category={article.metadata.category}
+            {...propsChipCategory}
+          />
+          <ChipStatus status={article.metadata.status} {...propsChipStatus} />
         </div>
       </CardHeader>
 
