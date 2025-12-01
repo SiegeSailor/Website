@@ -106,7 +106,7 @@ export default async function ({
           size: "1.25rem",
           className: COLOR_TO_COLOR[color],
         })}
-        <div className="font-semibold!">{title || COLOR_TO_TITLE[color]}</div>
+        <div className="font-semibold">{title || COLOR_TO_TITLE[color]}</div>
       </div>
 
       {children}

@@ -14,7 +14,7 @@ export default function ({
     <DivisionCenter>
       <Alert
         color="danger"
-        classNames={{ title: "font-medium!" }}
+        classNames={{ title: "font-medium" }}
         description={error.message}
         title={`${error.name}: ${error.digest}`}
         variant="faded"

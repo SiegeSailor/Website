@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 
 const HIGHLIGHTS = ["2025-11-02", "2025-10-01"] as const;
 
-// TODO: check font
 // TODO: homepage layout
 // TODO: highligh technology
 export default async function () {

@@ -38,7 +38,7 @@ export default function () {
             <DivisionCenter>
               <Alert
                 color="warning"
-                classNames={{ title: "font-medium!" }}
+                classNames={{ title: "font-medium" }}
                 description={`This page couldn’t be found. Double-check the address or go back to the home page.`}
                 title={
                   <>

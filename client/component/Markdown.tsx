@@ -100,7 +100,7 @@ export default async function ({
         strong: (element) => (
           <strong
             {...element}
-            className={clsx(element.className, "font-semibold!")}
+            className={clsx(element.className, "font-semibold")}
           />
         ),
         callout: (element) => (
@@ -131,18 +131,16 @@ export default async function ({
             );
 
           return (
-            <>
-              <pre
-                {...element.children.props}
-                className={clsx(element.className, "relative")}
-              >
-                <ButtonCopy
-                  className="absolute top-2.5 right-2 z-1"
-                  content={element.children.props.children}
-                />
-                {element.children.props.children}
-              </pre>
-            </>
+            <pre
+              {...element.children.props}
+              className={clsx(element.className, "relative")}
+            >
+              <ButtonCopy
+                className="absolute top-2.5 right-2 z-1"
+                content={element.children.props.children}
+              />
+              {element.children.props.children}
+            </pre>
           );
         },
         p: (element) => {
@@ -153,7 +151,7 @@ export default async function ({
             typeof (children[0] as any).props?.src === "string" &&
             typeof (children[0] as any).props?.alt === "string";
 
-          if (isHaveOnlyImage) return <>{element.children}</>;
+          if (isHaveOnlyImage) return element.children;
 
           return (
             <p
