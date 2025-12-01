@@ -5,17 +5,14 @@ import { Line } from "react-chartjs-2";
 
 import { useChartStore } from "@/store/chart";
 import { useArticleStore } from "@/store/article";
+import { getEntries } from "@/helper/utility";
 
 function renderDate(input: string) {
   const [year, month] = input.split("-");
   return `${year}-${month}`;
 }
 
-export default function ({
-  countDates = 12,
-}: Readonly<{
-  countDates?: number;
-}>) {
+export default function ({ xRotation }: Readonly<{ xRotation: number }>) {
   const articles = useArticleStore((state) => state.articles);
   const uniqueCategories = useArticleStore((state) => state.uniqueCategories);
 
@@ -26,40 +23,51 @@ export default function ({
       ...new Set(articles.map((article) => renderDate(article.metadata.date))),
     ].sort();
 
-    return results.slice(-countDates);
-  }, [articles, countDates]);
+    return results;
+  }, [articles]);
 
   const datasets = useMemo(() => {
-    return uniqueCategories.map((category, index) => {
-      const categoryData = dates.map((item) => {
-        return articles.filter((article) => {
-          return (
-            article.metadata.category === category &&
-            renderDate(article.metadata.date) === item
-          );
-        }).length;
-      });
+    const colorVariants = [
+      colors.default500,
+      colors.default400,
+      colors.default300,
+      colors.default200,
+      colors.default100,
+      colors.default50,
+    ];
 
-      const colorVariants = [
-        colors.default500,
-        colors.default400,
-        colors.default300,
-        colors.default200,
-        colors.default100,
-        colors.default50,
-      ];
-
-      return {
-        label: category,
-        data: categoryData,
-        borderColor: colorVariants[index % colorVariants.length],
-        backgroundColor: colorVariants[index % colorVariants.length],
-        fill: false,
-        tension: 0.3,
-        pointRadius: 4,
-        pointHoverRadius: 6,
-      };
+    const categoryToData: Record<string, number> = {};
+    const dateSet = new Set<string>(dates);
+    articles.forEach((article) => {
+      if (!dateSet.has(renderDate(article.metadata.date))) return;
+      categoryToData[article.metadata.category] =
+        (categoryToData[article.metadata.category] || 0) + 1;
     });
+
+    return getEntries(categoryToData)
+      .sort((left, right) => right[1] - left[1])
+      .map(([category], index) => {
+        const categoryData = dates.map((item) => {
+          return articles.filter((article) => {
+            return (
+              article.metadata.category === category &&
+              renderDate(article.metadata.date) === item
+            );
+          }).length;
+        });
+
+        return {
+          label: category,
+          data: categoryData,
+          borderColor: colorVariants[index % colorVariants.length],
+          backgroundColor: colorVariants[index % colorVariants.length],
+          fill: false,
+          pointHoverRadius: 6,
+          pointRadius: 4,
+          pointStyle: "circle",
+          tension: 0.5,
+        };
+      });
   }, [articles, dates, uniqueCategories, colors]);
 
   return (
@@ -71,7 +79,7 @@ export default function ({
         animation: { duration: 1500, easing: "easeOutElastic" },
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: true, align: "center", position: "chartArea" },
+          legend: { display: true, align: "start", position: "chartArea" },
           datalabels: { display: false },
           tooltip: {
             enabled: true,
@@ -92,7 +100,8 @@ export default function ({
                 size: 14,
                 family: "Roboto",
               },
-              maxRotation: 45,
+              maxRotation: xRotation,
+              minRotation: xRotation,
             },
             grid: {
               display: true,
@@ -103,9 +112,9 @@ export default function ({
           },
           y: {
             max:
-              Math.max(...datasets.map((dataset) => dataset.data).flat()) + 0.5,
+              Math.max(...datasets.map((dataset) => dataset.data).flat()) + 1,
             title: {
-              display: true,
+              display: false,
               text: "Number of Articles",
               color: colors.default700,
               font: {
@@ -114,7 +123,7 @@ export default function ({
               },
             },
             ticks: {
-              display: true,
+              display: false,
               color: colors.default700,
               font: {
                 size: 12,

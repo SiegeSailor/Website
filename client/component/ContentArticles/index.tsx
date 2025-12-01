@@ -34,8 +34,11 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
           See the articles categorized by publish dates, as illustrated.
         </p>
-        <div className="h-[350px] sm:h-[300px]">
-          <Chart />
+        <div className="block sm:hidden h-[300px]">
+          <Chart xRotation={90} />
+        </div>
+        <div className="hidden sm:block h-[300px]">
+          <Chart xRotation={0} />
         </div>
       </div>
     </div>
