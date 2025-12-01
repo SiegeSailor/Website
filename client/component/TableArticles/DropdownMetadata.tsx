@@ -8,8 +8,9 @@ import {
   DropdownTrigger,
   Selection,
 } from "@heroui/react";
-import { useEffect } from "react";
+import { ComponentProps, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import clsx from "clsx";
 
 import { PROPS_BUTTON } from "./ContentTop";
 import { TArticle } from "@/helper/server/article";
@@ -59,9 +60,11 @@ export function renderSelection(items: Selection, uniques: string[]) {
 
 export default function ({
   metadata,
-}: Readonly<{
-  metadata: TMetadata;
-}>) {
+  ...props
+}: Omit<ComponentProps<typeof Dropdown>, "children"> &
+  Readonly<{
+    metadata: TMetadata;
+  }>) {
   const columns = useBlogStore((state) => state.columns);
   const items = useBlogStore((state) => state[metadata]);
   const setItems = useBlogStore(
@@ -89,8 +92,9 @@ export default function ({
         columns !== "all" &&
         !Array.from(columns).find((column) => column === metadata)
       }
+      {...props}
     >
-      <DropdownTrigger className="hidden sm:flex">
+      <DropdownTrigger className={clsx("flex", props.className)}>
         <Button {...PROPS_BUTTON}>
           <div className="flex justify-between w-full">
             <span className="capitalize truncate max-w-2/3">{title}</span>

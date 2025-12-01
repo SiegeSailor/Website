@@ -45,7 +45,7 @@ function renderCell(
     case "category":
       return <ChipCategory category={category} />;
     case "date":
-      return <p>{date}</p>;
+      return <p className="font-light">{date}</p>;
     case "status":
       return <ChipStatus status={status} />;
     case "technologies":
@@ -61,9 +61,13 @@ function renderCell(
         />
       );
     case "title":
-      return <Link href={route}>{title}</Link>;
+      return (
+        <Link className="font-normal" href={route}>
+          {title}
+        </Link>
+      );
     case "minutes":
-      return <p>{minutes} Minutes</p>;
+      return <p className="font-light">{minutes} Minutes</p>;
     default:
       return <p>{String(metadata[keyColumn])}</p>;
   }
@@ -172,10 +176,7 @@ export default function () {
       aria-label="Articles"
       bottomContent={<ContentBottom pageTotal={pageTotal} />}
       bottomContentPlacement="outside"
-      classNames={{
-        base: "w-[calc(100vw-4rem)] max-w-full",
-        td: "whitespace-nowrap h-12",
-      }}
+      classNames={{ td: "whitespace-nowrap h-12" }}
       isHeaderSticky
       layout="auto"
       onSortChange={setSortDescriptor}

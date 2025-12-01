@@ -1,12 +1,13 @@
 import { create } from "zustand";
 
 import { TArticle } from "@/helper/server/article";
+import { TECHNOLOGIES } from "@/setting/site";
 
 export type TState = {
   articles: TArticle[];
   uniqueCategories: string[];
   uniqueStatuses: string[];
-  uniqueTechnologies: string[];
+  uniqueTechnologies: (typeof TECHNOLOGIES)[number][];
   parseArticles: (articles: TArticle[]) => void;
 };
 
@@ -18,7 +19,7 @@ export const useArticleStore = create<TState>((set) => ({
   parseArticles: (articles) => {
     const categories = new Set<string>(),
       statuses = new Set<string>(),
-      technologies = new Set<string>();
+      technologies = new Set<TState["uniqueTechnologies"][number]>();
 
     articles.forEach((article) => {
       categories.add(article.metadata.category);

@@ -27,7 +27,7 @@ export default function ({
   }, [handleUpdateWidth]);
 
   return (
-    <div ref={refContainer} className="w-full h-full flex flex-col gap-5">
+    <div ref={refContainer} className="w-full h-full flex flex-col gap-4">
       {rows.map((row, index) => {
         const isEven = index % 2 === 0;
 

@@ -22,7 +22,7 @@ export default async function ({
 >) {
   return (
     <CardBlock href="/profile#skills" title="My Skills" {...props}>
-      <div className="w-full h-full flex flex-col gap-5">
+      <div className="w-full h-full flex flex-col gap-4">
         <ScrollingRowsChips rows={ROWS} />
       </div>
     </CardBlock>

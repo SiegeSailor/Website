@@ -34,7 +34,7 @@ export default async function ({
       href={href ?? `#${props.id}`}
       className="hover:text-default-700 dark:hover:text-default-600"
     >
-      <span className="pr-2">{props.children}</span>
+      <span className="pr-2 font-normal">{props.children}</span>
       <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
     </a>
   );

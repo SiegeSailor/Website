@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { getArticles } from "@/helper/server/article";
-import CardArticle from "@/component/CardArticle";
+import CardArticleSimple from "@/component/CardArticleSimple";
 import CardBlog from "@/component/CardBlog";
 import Chart from "./Chart";
 
@@ -28,10 +28,11 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <div className="col-span-12 sm:col-span-6 flex items-end flex-col justify-center gap-4">
           {articles.slice(0, 4).map((article, index) => {
             return (
-              <CardArticle
+              <CardArticleSimple
                 className="w-full"
                 key={index}
                 filename={article.filename}
+                shadow="md"
               />
             );
           })}

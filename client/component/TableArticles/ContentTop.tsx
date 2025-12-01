@@ -35,9 +35,9 @@ export default function () {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between gap-2 lg:gap-24 items-end flex-wrap md:flex-nowrap">
+      <div className="flex gap-2 items-start flex-wrap">
         <Input
-          className="w-full md:w-auto lg:w-full"
+          className="w-full"
           isClearable
           placeholder="Search by Title"
           onClear={() => {
@@ -53,11 +53,11 @@ export default function () {
           }
           value={filter}
         />
-        <div className="flex gap-2 flex-wrap md:flex-nowrap">
-          <DropdownMetadata metadata="category" />
-          <DropdownMetadata metadata="status" />
-          <DropdownMetadata metadata="technologies" />
-          <DropdownColumns />
+        <div className="w-full flex gap-2 flex-nowrap">
+          <DropdownMetadata className="grow" metadata="category" />
+          <DropdownMetadata className="grow" metadata="status" />
+          <DropdownMetadata className="grow" metadata="technologies" />
+          <DropdownColumns className="grow" />
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export default function () {
           </PopoverTrigger>
           <PopoverContent>
             <div className="flex flex-col gap-2">
-              {[8, 16, 24].map((value) => (
+              {[15, 25, 50].map((value) => (
                 <Button
                   key={value}
                   size="sm"
