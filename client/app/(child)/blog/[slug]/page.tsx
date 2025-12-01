@@ -52,18 +52,18 @@ export default async function ({
           id={IDENTIFIER}
           className="md:col-span-8 lg:col-span-9 overflow-y-auto"
         >
-          <div className="flex flex-col gap-4 mb-16">
+          <div className="flex flex-col gap-2 mb-16">
             <Heading level={1} id={getSlugByTitle(metadata.title)}>
               {metadata.title}
             </Heading>
             <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-small text-foreground/50">
-              <span>{metadata.date} (Drafted)</span>
+              <span>{metadata.date} (drafted)</span>
               <span>·</span>
-              <span>{metadata.createdOn} (Created)</span>
+              <span>{metadata.createdOn} (created)</span>
               <span>·</span>
-              <span>{metadata.updatedOn} (Updated)</span>
+              <span>{metadata.updatedOn} (updated)</span>
               <span>·</span>
-              <span>{metadata.minutes} Minutes Read</span>
+              <span>{metadata.minutes} mins read</span>
             </div>
             <div className="flex gap-2 items-center">
               <ChipCategory category={metadata.category} />

@@ -26,31 +26,41 @@ export default async function ({
   return (
     <Card
       {...props}
-      className={clsx("relative overflow-hidden", props.className)}
+      className={clsx(
+        "relative overflow-hidden border-default-50 border-2",
+        props.className
+      )}
       shadow="sm"
     >
-      <CardHeader className="flex flex-col gap-4">
+      <CardHeader className="flex flex-col gap-2 justify-center items-center">
+        <div className="w-full flex gap-2 justify-start items-center">
+          <span className="text-left text-small font-light">
+            {article.metadata.date}
+          </span>
+          <span>·</span>
+          <span className="text-right text-small font-light">
+            {article.metadata.minutes} mins read
+          </span>
+        </div>
         <Heading
-          level={5}
+          level={6}
           href={article.metadata.route}
           className="w-full mb-0! mt-0! line-clamp-2"
         >
           {article.metadata.title}
         </Heading>
-        <div className="w-full flex flex-wrap gap-2 justify-between items-center">
-          <div className="flex gap-2 items-center">
-            <ChipCategory category={article.metadata.category} />
-            <ChipStatus status={article.metadata.status} />
-          </div>
-          <p className="w-full sm:w-auto text-small font-light">
-            {article.metadata.date}
-          </p>
+        <div className="w-full flex gap-2 justify-start items-center">
+          <ChipCategory category={article.metadata.category} />
+          <ChipStatus status={article.metadata.status} />
         </div>
       </CardHeader>
 
       <CardBody className="h-3/7">
-        <ScrollShadow size={20}>
-          <Markdown source={article.metadata.description} />
+        <ScrollShadow>
+          <Markdown
+            source={article.metadata.description}
+            p={{ className: "text-foreground/50" }}
+          />
         </ScrollShadow>
       </CardBody>
 

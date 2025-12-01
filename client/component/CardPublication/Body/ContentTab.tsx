@@ -39,9 +39,7 @@ export default function ({
                     {item.title}
                   </h4>
                 </ScrollShadow>
-                <Link href={item.href} isDisabled={item.isDraft}>
-                  Read More
-                </Link>
+                {!item.isDraft && <Link href={item.href}>Read More</Link>}
               </div>
               <ScrollShadow
                 {...props}

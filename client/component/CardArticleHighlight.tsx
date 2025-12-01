@@ -36,7 +36,7 @@ export default async function ({
             {article.metadata.title}
           </h3>
           <p className={METADATA_TO_CLASSNAMES.minutes}>
-            {article.metadata.minutes} Minutes Read
+            {article.metadata.minutes} mins read
           </p>
         </div>
       </Link>

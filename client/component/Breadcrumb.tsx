@@ -63,7 +63,7 @@ export default function ({
           key={breadcrumb.name}
           {...propsItem}
           classNames={{
-            item: "block truncate max-w-56 sm:max-w-md md:max-w-xl lg:max-w-208",
+            item: "block truncate max-w-[calc(100vw-12rem)] sm:max-w-md md:max-w-xl lg:max-w-208",
             ...propsItem?.classNames,
           }}
         >

@@ -19,7 +19,6 @@ const HIGHLIGHTS = ["2025-11-02", "2025-10-01"] as const;
 // TODO: check font
 // TODO: homepage layout
 // TODO: highligh technology
-// TODO: CardDetail
 export default async function () {
   const articles = await getArticles();
 
@@ -28,7 +27,7 @@ export default async function () {
       <div className="md:hidden gap-4 grid grid-cols-12 grid-rows-1 w-full mx-auto">
         {articles.map((article) => (
           <CardArticleDetail
-            className="col-span-12 h-[300px]"
+            className="col-span-12 sm:col-span-6 h-[300px]"
             date={article.metadata.date}
             key={article.metadata.date}
           />
