@@ -30,8 +30,8 @@ export default function () {
             </h4>
             <p className="text-medium text-foreground/50">
               A brief overview of my professional background, skills, and
-              accomplishments. You can find more details{" "}
-              <Link href="/about">here</Link>.
+              accomplishments. You can find more details in my{" "}
+              <Link href="/profile">Profile</Link>.
             </p>
           </div>
 

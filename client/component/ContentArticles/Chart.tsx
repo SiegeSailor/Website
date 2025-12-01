@@ -79,7 +79,16 @@ export default function ({ xRotation }: Readonly<{ xRotation: number }>) {
         animation: { duration: 1500, easing: "easeOutElastic" },
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: true, align: "start", position: "chartArea" },
+          legend: {
+            title: { text: "", padding: 0, display: true },
+            display: true,
+            align: "start",
+            position: "chartArea",
+            labels: {
+              borderRadius: 4,
+              useBorderRadius: true,
+            },
+          },
           datalabels: { display: false },
           tooltip: {
             enabled: true,
