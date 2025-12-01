@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { getArticles } from "@/helper/server/article";
 import CardArticleSimple from "@/component/CardArticleSimple";
 import CardBlog from "@/component/CardBlog";
-import Chart from "./Chart";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();
@@ -28,18 +27,6 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           })}
         </div>
         <CardBlog className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]" />
-      </div>
-
-      <div className="w-full flex flex-col gap-6 max-w-content mx-auto">
-        <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
-          See the articles categorized by publish dates, as illustrated.
-        </p>
-        <div className="block sm:hidden h-[300px]">
-          <Chart xRotation={90} />
-        </div>
-        <div className="hidden sm:block h-[300px]">
-          <Chart xRotation={0} />
-        </div>
       </div>
     </div>
   );

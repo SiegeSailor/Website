@@ -10,7 +10,7 @@ import Link from "@/component/Link";
 const METADATA_TO_CLASSNAMES = {
   category: "text-foreground/50 text-small font-light",
   date: "text-foreground/50 text-small font-light text-right",
-  title: "text-medium font-normal",
+  title: "text-medium font-medium",
 } as const;
 
 function ChildrenMultiple({ article }: { article: TArticle }) {

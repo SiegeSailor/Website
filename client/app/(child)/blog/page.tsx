@@ -2,6 +2,7 @@ import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
 import { getArticles } from "@/helper/server/article";
+import { HIGHLIGHTS } from "@/setting/home";
 import { ROUTE_TO_TITLE } from "@/setting/site";
 import CardArticleDetail from "@/component/CardArticleDetail";
 import CardArticleHighlight from "@/component/CardArticleHighlight";
@@ -13,8 +14,6 @@ import DivisionSticky from "@/component/DivisionSticky";
 export const metadata: Metadata = {
   title: createPageTitle(ROUTE_TO_TITLE["/blog"]),
 };
-
-const HIGHLIGHTS = ["2025-11-02", "2025-10-01"] as const;
 
 export default async function () {
   const articles = await getArticles();

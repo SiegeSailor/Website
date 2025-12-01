@@ -11,7 +11,7 @@ const METADATA_TO_CLASSNAMES = {
   category: "text-foreground/50 text-small font-light",
   date: "text-foreground/50 text-small font-light text-right",
   minutes: "text-foreground/50 text-small font-light",
-  title: "text-medium font-normal",
+  title: "text-medium font-medium",
 } as const;
 
 export default async function ({

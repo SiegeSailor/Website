@@ -1,6 +1,8 @@
 import { TECHNOLOGY_TO_ICON } from "@/setting/icon";
 import { STAGE } from "@/setting/site";
 
+export const HIGHLIGHTS = ["2025-11-02", "2025-10-01", "2025-09-14"] as const;
+
 export const SUMMARY: Readonly<{ title: string; portion: number }>[] = [
   { title: "DevOps", portion: 1.75 },
   { title: "Back-End", portion: 3.5 },

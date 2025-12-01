@@ -6,12 +6,12 @@ import { Route } from "next";
 import clsx from "clsx";
 
 const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
-  1: "text-5xl leading-[1.25]",
-  2: "text-4xl",
-  3: "text-3xl",
-  4: "text-2xl",
-  5: "text-xl",
-  6: "text-lg",
+  1: "text-5xl leading-[1.25] font-bold",
+  2: "text-4xl font-bold",
+  3: "text-3xl font-semibold",
+  4: "text-2xl font-semibold",
+  5: "text-xl font-medium",
+  6: "text-lg font-medium",
 } as const;
 
 export default async function ({
@@ -26,15 +26,17 @@ export default async function ({
       ...props,
       className: clsx(
         "font-light mb-4 last:mb-0 mt-12 first:mt-0 break-words",
-        LEVEL_TO_CLASSNAMES[level],
         props.className
       ),
     },
     <a
       href={href ?? `#${props.id}`}
-      className="hover:text-default-700 dark:hover:text-default-600"
+      className={clsx(
+        "hover:text-default-700 dark:hover:text-default-600",
+        LEVEL_TO_CLASSNAMES[level]
+      )}
     >
-      <span className="pr-2 font-semibold">{props.children}</span>
+      <span className="pr-2">{props.children}</span>
       <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
     </a>
   );
