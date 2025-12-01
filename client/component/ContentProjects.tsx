@@ -6,6 +6,7 @@ import clsx from "clsx";
 
 import { PROJECTS } from "@/setting/home";
 import { STAGE_TO_COLOR } from "@/setting/site";
+import DivisionTitle from "@/component/DivisionTitle";
 import Link from "@/component/Link";
 import Markdown from "@/component/Markdown";
 
@@ -15,16 +16,10 @@ export default async function ({ ...props }: ComponentProps<"div">) {
       {...props}
       className={clsx("flex flex-col gap-12 text-center", props.className)}
     >
-      <div className="flex flex-col gap-2 mx-auto max-w-compact">
-        <h4 className="text-2xl sm:text-3xl font-light text-default-600">
-          What I'm Building
-        </h4>
-        <p className="text-medium text-foreground/50">
-          Here, you'll find a selection of my side projects. Each project
-          reflects my passion for building, learning, and solving real-world
-          problems through technology.
-        </p>
-      </div>
+      <DivisionTitle
+        description=" Here, you'll find a selection of my side projects. Each project reflects my passion for building, learning, and solving real-world problems through technology."
+        title="What I'm Building"
+      />
 
       <div className="gap-4 grid grid-cols-12 grid-rows-1">
         {PROJECTS.map((project) => {
