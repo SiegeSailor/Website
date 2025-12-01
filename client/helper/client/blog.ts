@@ -22,5 +22,5 @@ export function useSearchByMetadata(metadata: TMetadata, value: string) {
     );
   }
 
-  return `/blog?${paramConstructor.toString()}`;
+  return { href: `/blog?${paramConstructor.toString()}`, isSelected };
 }

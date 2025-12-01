@@ -1,7 +1,7 @@
 "use client";
 
 import { Chip, ScrollShadow } from "@heroui/react";
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps } from "react";
 import clsx from "clsx";
 
 export default function ({

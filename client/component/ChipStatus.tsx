@@ -13,7 +13,7 @@ export default function ({
   ...props
 }: ComponentProps<typeof Chip> &
   Readonly<{ status: TArticle["metadata"]["status"] }>) {
-  const href = useSearchByMetadata("status", status);
+  const { href } = useSearchByMetadata("status", status);
 
   return (
     <Chip size="md" variant="flat" color={STATUS_TO_COLOR[status]} {...props}>

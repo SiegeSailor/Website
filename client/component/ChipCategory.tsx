@@ -12,7 +12,7 @@ export default function ({
   ...props
 }: ComponentProps<typeof Chip> &
   Readonly<{ category: TArticle["metadata"]["category"] }>) {
-  const href = useSearchByMetadata("category", category);
+  const { href } = useSearchByMetadata("category", category);
 
   return (
     <Chip size="md" variant="flat" color="default" {...props}>
