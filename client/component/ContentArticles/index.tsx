@@ -13,17 +13,6 @@ export default async function ({ ...props }: ComponentProps<"div">) {
 
   return (
     <div {...props} className={clsx("flex flex-col gap-12", props.className)}>
-      <div className="flex flex-col gap-2 max-w-compact mx-auto">
-        <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
-          Let's Talk About Tech
-        </h4>
-        <p className="text-medium text-foreground/50">
-          Here, I share real experiences from my journey in software
-          engineering—lessons learned, challenges faced, and thoughts on the
-          ever-changing world of technology.
-        </p>
-      </div>
-
       <div className="gap-4 grid grid-cols-12 grid-rows-2 sm:grid-rows-1 max-w-compact mx-auto">
         <div className="col-span-12 sm:col-span-6 flex items-end flex-col justify-center gap-4">
           {articles.slice(0, 4).map((article, index) => {
@@ -45,7 +34,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
           See the articles categorized by publish dates, as illustrated.
         </p>
-        <div className="h-[300px]">
+        <div className="h-[350px] sm:h-[300px]">
           <Chart />
         </div>
       </div>

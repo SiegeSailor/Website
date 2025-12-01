@@ -39,24 +39,31 @@ export default function ({
           technology
         );
 
-        return (
+        const chip = (
+          <Chip
+            key={index}
+            size="lg"
+            startContent={
+              <IconTechnology {...propsIcon} technology={technology} />
+            }
+            classNames={{ base: isSelected ? "bg-default-100" : null }}
+            {...propsItem}
+            className={clsx(
+              "text-background dark:text-foreground font-normal text-small text-left px-2 py-1",
+              propsItem?.className
+            )}
+            variant={isSelected ? "solid" : propsItem?.variant ?? "flat"}
+          >
+            {technology}
+          </Chip>
+        );
+
+        return isLink ? (
           <Link className="w-auto h-auto" href={href} isPlain key={index}>
-            <Chip
-              size="lg"
-              startContent={
-                <IconTechnology {...propsIcon} technology={technology} />
-              }
-              classNames={{ base: isSelected ? "bg-default-100" : null }}
-              {...propsItem}
-              className={clsx(
-                "text-background dark:text-foreground font-normal text-small text-left px-2 py-1",
-                propsItem?.className
-              )}
-              variant={isSelected ? "solid" : propsItem?.variant ?? "flat"}
-            >
-              {technology}
-            </Chip>
+            {chip}
           </Link>
+        ) : (
+          chip
         );
       })}
     </ScrollShadow>

@@ -9,6 +9,7 @@ import CardSummary from "@/component/CardSummary";
 import ContentArticles from "@/component/ContentArticles";
 import ContentHero from "@/component/ContentHero";
 import ContentProjects from "@/component/ContentProjects";
+import Link from "@/component/Link";
 
 export const metadata: Metadata = {
   title: createPageTitle(ROUTE_TO_TITLE["/"]),
@@ -20,21 +21,35 @@ export default function () {
       <div className="flex flex-col gap-24">
         <ContentHero className="w-full max-w-compact mx-auto" />
 
-        <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
-          <CardSummary
-            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
-            classNameScrollHeight="h-[228px]"
-          />
-          <CardExperience
-            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
-            classNameScrollHeight="h-[228px]"
-          />
-          <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-          <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
+        <ContentArticles className="w-full mx-auto" />
+
+        <div className="flex flex-col gap-12">
+          <div className="w-full flex flex-col gap-2 max-w-compact mx-auto">
+            <h4 className="text-2xl sm:text-3xl font-light text-default-600 w-full text-left">
+              First Glance at Me
+            </h4>
+            <p className="text-medium text-foreground/50">
+              A brief overview of my professional background, skills, and
+              accomplishments. You can find more details{" "}
+              <Link href="/about">here</Link>.
+            </p>
+          </div>
+
+          <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
+            <CardSummary
+              className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
+              classNameScrollHeight="h-[228px]"
+            />
+            <CardExperience
+              className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
+              classNameScrollHeight="h-[228px]"
+            />
+            <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
+            <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
+          </div>
         </div>
 
         <ContentProjects className="w-full mx-auto" />
-        <ContentArticles className="w-full mx-auto" />
       </div>
     </section>
   );

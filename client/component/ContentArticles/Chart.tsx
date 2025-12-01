@@ -71,7 +71,7 @@ export default function ({
         animation: { duration: 1500, easing: "easeOutElastic" },
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false },
+          legend: { display: true, align: "center", position: "chartArea" },
           datalabels: { display: false },
           tooltip: {
             enabled: true,
@@ -103,7 +103,7 @@ export default function ({
           },
           y: {
             max:
-              Math.max(...datasets.map((dataset) => dataset.data).flat()) + 1,
+              Math.max(...datasets.map((dataset) => dataset.data).flat()) + 0.5,
             title: {
               display: true,
               text: "Number of Articles",
