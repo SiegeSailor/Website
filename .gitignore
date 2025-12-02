@@ -3,5 +3,6 @@
 .env
 .next/
 build-cache
+input/
 next-env.d.ts
 node_modules/
