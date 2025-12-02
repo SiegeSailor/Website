@@ -32,7 +32,6 @@
 - Use `## <heading>` for main sections within the article (not `###`)
 - You may use `### <heading>` as the first section if needed
 - Keep section headings concise and descriptive
-- Use numbered lists for process descriptions (e.g., "1. **HR Screening**: description")
 - Group related content under logical headings
 
 ### Professional Tone and Voice
@@ -48,20 +47,14 @@
 - Use ` `` ` to wrap inline code and mathematical expressions
 - Use callout `:::<type>` when needed (see `component/Callout.tsx` for available types)
 - Use code snippet ` ```<language> ` with proper syntax highlighting
-- Add `title="/path/to/<filename>"` to a code snippet where a file is being referenced (Prefer a relative path from root unless no file structure mentioned)
-- Use `[<title>](/blog/YYYY-MM-DD#anchor)` for internal articles, where `#anchor` is optional and `<title>` is a placeholder (it will be parsed to the actual titles in `component/Link.tsx`)
+- Add `title="/path/to/<filename>"` to a code snippet where a file is being referenced
+- Use `[<title>](/blog/YYYY-MM-DD#anchor)` for internal articles, where `#anchor` is optional and `<title>` is a placeholder
 - Draw diagrams using Mermaid syntax if needed
-
-### Code Examples and Technical Content
-
-- Include problem descriptions with proper formatting using **bold** for labels
-- Show example inputs/outputs in code blocks with comments explaining the expected results
-- Use descriptive function names that match the problem context
-- Use backticks for inline code, variable names, and technical terms
 
 ### Formatting Consistency
 
 - Use `[Company Name](URL)` format for company references
+- Prefer a relative path from root unless no file structure mentioned
 - Use proper spacing around code blocks and sections
 - Maintain consistent indentation in nested lists
 
@@ -70,6 +63,7 @@
 - Use `- **<title>**: <description>` if you can generalize the common topic of the bullet points
 - Use `- [title](link): <description>` if you can find a reference link
 - Use `- <description>` if the bullet points contain sentences that are not easily generalized
+- Use `1. ` instead of `- ` for process descriptions
 
 ### Don'ts
 
@@ -80,7 +74,7 @@
 
 ## Testing the Syntax
 
-- Always review and fix the syntax and writing style following [Writing the Article](#writing-the-article)
+- Always review and fix the article following [Writing the Article](#writing-the-article)
 - Run `npm run watch` to start a local development server
 - Run Playwright to test `http://localhost:3000/blog/<YYYY-MM-DD>`
 - Make sure there is no error console logs in the terminal
