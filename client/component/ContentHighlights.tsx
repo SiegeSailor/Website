@@ -28,10 +28,11 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           <CardArticleDetail
             className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"
             date={date}
+            key={date}
             propsChipCategory={{ variant: "bordered", size: "md" }}
             propsChipStatus={{ variant: "bordered", size: "md" }}
             propsHeading={{ level: 6 }}
-            key={date}
+            shadow="md"
           />
         ))}
       </div>

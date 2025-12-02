@@ -34,15 +34,15 @@ export default async function ({
 
   return (
     <Card
+      shadow="sm"
       {...props}
       className={clsx(
         "relative overflow-hidden border-default-50 border-2",
         props.className
       )}
-      shadow="sm"
     >
       <CardHeader className="flex flex-col gap-2 justify-center items-center">
-        <div className="w-full flex gap-2 justify-start items-center">
+        <div className="w-full flex gap-1 justify-start items-center">
           <span className="text-left text-small font-light">
             {article.metadata.date}
           </span>
