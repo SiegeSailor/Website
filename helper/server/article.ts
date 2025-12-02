@@ -25,7 +25,7 @@ export async function getArticles() {
 
   const articles = await Promise.all(
     filenames
-      .filter((filename) => filename.endsWith(".md"))
+      .filter((filename) => /^\d{4}-\d{2}-\d{2}\.md$/.test(filename))
       .map(async (filename) => await getArticleByFilename(filename))
   );
 
