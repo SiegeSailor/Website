@@ -16,7 +16,7 @@
 ### Front-Matter Fields
 
 - Check `getArticleByFilename` in `helper/server/article.ts` for required front-matter fields
-- Don't use special characters in the `title` field
+- Don't use any symbols in the `title` field
 - If the article mentions new technologies, find suitable icons from `@icons-pack/react-simple-icons` and map them accordingly in `setting/icon.ts`
 - If not found, use a generic icon from `lucide-react` and re-export them in `LUCIDE_ICON` so that `component/IconTechnology.tsx` can use it to filter and style correctly
 
@@ -40,18 +40,20 @@
 
 ### Bullet Points
 
-- Use `- **<title>**: <description>` or `- [title](link): <description>` if you can generalize the common topic of the bullet points
+- Use `- **<title>**: <description>` if you can generalize the common topic of the bullet points
+- Use `- [title](link): <description>` if you can find a reference link
 - Use `- <description>` if the bullet points contain sentences that are not easily generalized
 
 ### Don'ts
 
-- Don't use `**<title>**` as headings, such as `**<title>**:` followed by a paragraph or a list of bullet points. Use `#`, `##`, `###`, etc. instead
+- Don't use `**<title>**` as headings
 - Don't end bullet points with `.`
-- Don't use special characters in headings
+- Don't use any symbols in headings
 - Don't be too verbose
 
 ## Testing the Syntax
 
 - Always review and fix the syntax and writing style following [Writing the Article](#writing-the-article)
-- Run `npm run watch` and go to the local development server at `http://localhost:3000/blog/<YYYY-MM-DD>`
+- Run `npm run watch` to start a local development server
+- Run Playwright to test `http://localhost:3000/blog/<YYYY-MM-DD>`
 - Make sure there is no error console logs in the terminal
