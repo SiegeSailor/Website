@@ -176,7 +176,7 @@ export default function () {
       aria-label="Articles"
       bottomContent={<ContentBottom pageTotal={pageTotal} />}
       bottomContentPlacement="outside"
-      classNames={{ td: "whitespace-nowrap h-12" }}
+      classNames={{ wrapper: "min-h-[557px]", td: "whitespace-nowrap h-12" }}
       isHeaderSticky
       layout="auto"
       onSortChange={setSortDescriptor}
