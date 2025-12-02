@@ -35,4 +35,4 @@ The project is structured as follows. All the folder and file names are in kebab
 
 ## Add an Article
 
-See `public/article/AGENT.md` for instructions on adding a new article.
+See `public/article/AGENTS.md` for instructions on adding a new article.

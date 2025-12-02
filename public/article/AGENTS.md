@@ -38,12 +38,12 @@
 - Use `[<title>](/blog/YYYY-MM-DD#anchor)` for internal articles, where `#anchor` is optional and `<title>` is a placeholder (it is converted into `<a />` in `component/Markdown.tsx` and gets the actual titles from `component/Link.tsx`)
 - Draw diagrams using Mermaid syntax if needed (see `component/Mermaid.tsx` and `helper/client/chart.ts` for details)
 
-#### Bullet Points
+### Bullet Points
 
 - Use `- **<title>**: <description>` or `- [title](link): <description>` if you can generalize the common topic of the bullet points
 - Use `- <description>` if the bullet points contain sentences that are not easily generalized
 
-#### Don'ts
+### Don'ts
 
 - Don't use `**<title>**` as headings, such as `**<title>**:` followed by a paragraph or a list of bullet points. Use `#`, `##`, `###`, etc. instead
 - Don't end bullet points with `.`
