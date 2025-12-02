@@ -4,7 +4,7 @@ import { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
 import { ROUTE_TO_ICON } from "@/setting/icon";
-import { ROUTE_TO_TITLE } from "@/setting/site";
+import { ROUTE_TO_TITLE } from "@/setting/constant";
 import { TArticle } from "@/helper/server/article";
 import { useArticleStore } from "@/store/article";
 

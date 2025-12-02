@@ -5,7 +5,7 @@ import { ComponentProps, useMemo } from "react";
 import { Route } from "next";
 import { usePathname } from "next/navigation";
 
-import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/site";
+import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/constant";
 import { useArticleStore } from "@/store/article";
 
 export default function ({

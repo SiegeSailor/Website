@@ -2,7 +2,7 @@
 
 import { NavbarContent, NavbarBrand } from "@heroui/react";
 
-import { TITLE } from "@/setting/site";
+import { TITLE } from "@/setting/constant";
 import Link from "@/component/Link";
 
 export default async function () {

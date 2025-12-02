@@ -4,7 +4,7 @@ import { Button } from "@heroui/react";
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
-import { AUTHOR } from "@/setting/site";
+import { AUTHOR } from "@/setting/constant";
 import { ROUTE_TO_ICON } from "@/setting/icon";
 import Link from "@/component/Link";
 import TextTyping from "@/component/TextTyping";

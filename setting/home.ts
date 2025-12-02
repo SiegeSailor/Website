@@ -1,5 +1,5 @@
 import { TECHNOLOGY_TO_ICON } from "@/setting/icon";
-import { STAGE } from "@/setting/site";
+import { STAGE } from "@/setting/constant";
 
 export const HIGHLIGHTS = ["2025-11-02", "2025-10-01", "2025-09-14"] as const;
 

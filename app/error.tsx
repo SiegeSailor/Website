@@ -2,7 +2,7 @@
 
 import { Alert, Button } from "@heroui/react";
 
-import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/site";
+import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/constant";
 import DivisionCenter from "@/component/DivisionCenter";
 import Link from "@/component/Link";
 

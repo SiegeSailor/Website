@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { createPageTitle } from "@/helper/utility";
 import { getArticles } from "@/helper/server/article";
 import { HIGHLIGHTS } from "@/setting/home";
-import { ROUTE_TO_TITLE } from "@/setting/site";
+import { ROUTE_TO_TITLE } from "@/setting/constant";
 import CardArticleDetail from "@/component/CardArticleDetail";
 import CardArticleHighlight from "@/component/CardArticleHighlight";
 import CardArticleSimple from "@/component/CardArticleSimple";

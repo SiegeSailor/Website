@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Selection, SortDescriptor } from "@heroui/react";
 
-import { ROWS_PER_PAGE } from "@/setting/site";
+import { ROWS_PER_PAGE } from "@/setting/constant";
 
 export type TState = {
   lengthMatched: number;

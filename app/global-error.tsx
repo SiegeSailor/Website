@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { createPageTitle } from "@/helper/utility";
-import { DESCRIPTION } from "@/setting/site";
+import { DESCRIPTION } from "@/setting/constant";
 import DivisionCenter from "@/component/DivisionCenter";
 import Error from "./error";
 import Provider from "@/component/Provider";

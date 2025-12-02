@@ -5,7 +5,11 @@ import clsx from "clsx";
 
 import "@/style/global.css";
 import { createPageTitle } from "@/helper/utility";
-import { DESCRIPTION, ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/site";
+import {
+  DESCRIPTION,
+  ROUTE_TO_TITLE,
+  TITLE_TO_ROUTE,
+} from "@/setting/constant";
 import DivisionCenter from "@/component/DivisionCenter";
 import Link from "@/component/Link";
 import Provider from "@/component/Provider";

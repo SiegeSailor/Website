@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { getEntries } from "@/helper/utility";
 import { ROUTE_TO_ICON } from "@/setting/icon";
-import { TITLE_TO_ROUTE } from "@/setting/site";
+import { TITLE_TO_ROUTE } from "@/setting/constant";
 
 export default function () {
   const pathname = usePathname();

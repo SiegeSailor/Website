@@ -15,7 +15,7 @@ import {
   STATUS,
   STATUS_SET,
   TITLE_TO_ROUTE,
-} from "@/setting/site";
+} from "@/setting/constant";
 
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
 

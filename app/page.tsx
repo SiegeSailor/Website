@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import { createPageTitle } from "@/helper/utility";
-import { ROUTE_TO_TITLE } from "@/setting/site";
+import { ROUTE_TO_TITLE } from "@/setting/constant";
 import ContentArticles from "@/component/ContentArticles";
 import ContentProfile from "@/component/ContentProfile";
 import ContentHighlights from "@/component/ContentHighlights";

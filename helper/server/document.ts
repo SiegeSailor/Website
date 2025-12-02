@@ -4,7 +4,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/setting/site";
+import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/setting/constant";
 import { getAnchorsByContent } from "@/helper/article";
 import { getSlugByTitle } from "@/helper/utility";
 import { getStatisticByFilePath } from "@/helper/server/file";

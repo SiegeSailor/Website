@@ -4,7 +4,7 @@ import { Viewport, Metadata } from "next";
 import clsx from "clsx";
 
 import "@/style/global.css";
-import { DESCRIPTION, TITLE } from "@/setting/site";
+import { DESCRIPTION, TITLE } from "@/setting/constant";
 import { getArticles } from "@/helper/server/article";
 import { getProfile } from "@/helper/server/document";
 import Entry from "@/component/Entry";

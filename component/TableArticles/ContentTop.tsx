@@ -12,7 +12,7 @@ import { ComponentProps } from "react";
 
 import { useArticleStore } from "@/store/article";
 import { useBlogStore } from "@/store/blog";
-import { ROWS_PER_PAGE } from "@/setting/site";
+import { ROWS_PER_PAGE } from "@/setting/constant";
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
 import Link from "@/component/Link";
