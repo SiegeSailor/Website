@@ -1,0 +1,122 @@
+{
+  "bugs": "https://gitlab.com/csi-engineering/csi-platform/vista-design/-/issues",
+  "browserslist": ["Chrome >= 134", "Safari >= 18.3", "Firefox >= 136"],
+  "dependencies": {
+    "react": ">=19.2.0",
+    "react-dom": ">=19.2.0",
+    "react-simple-keyboard": "3.8.125"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "20.1.0",
+    "@commitlint/config-conventional": "20.0.0",
+    "@commitlint/types": "20.0.0",
+    "@eslint/js": "9.36.0",
+    "@ladle/react": "5.1.1",
+    "@ls-lint/ls-lint": "2.3.1",
+    "@svgr/plugin-jsx": "8.1.0",
+    "@svgr/plugin-svgo": "8.1.0",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@types/eslint-plugin-jsx-a11y": "6.10.0",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.6.2",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "autoprefixer": "10.4.22",
+    "eslint": "9.36.0",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jsdoc": "60.7.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "6.1.0",
+    "husky": "9.1.7",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "30.2.0",
+    "jest-environment-jsdom": "30.2.0",
+    "jest-junit": "16.0.0",
+    "jest-transform-stub": "2.0.0",
+    "jest-transformer-svg": "2.1.0",
+    "lint-staged": "16.2.3",
+    "prettier": "3.6.2",
+    "sass": "1.93.2",
+    "stylelint": "16.24.0",
+    "stylelint-config-css-modules": "4.5.1",
+    "stylelint-config-recommended": "17.0.0",
+    "stylelint-config-standard": "39.0.0",
+    "stylelint-config-standard-scss": "16.0.0",
+    "stylelint-scss": "6.12.1",
+    "ts-jest": "29.4.4",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.45.0",
+    "typescript-plugin-css-modules": "5.2.0",
+    "vite": "7.2.2",
+    "vite-plugin-dts": "4.5.4",
+    "vite-plugin-svgr": "4.5.0"
+  },
+  "description": "UI components for the ATLAS-Linux platform.",
+  "engines": {
+    "node": ">=22.18.0",
+    "npm": ">=10.9.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.es.js",
+      "require": "./dist/client.umd.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.es.js",
+      "require": "./dist/server.umd.js"
+    },
+    "./index.css": "./dist/index.css",
+    "./*": "./dist/*"
+  },
+  "files": ["./dist/**/*"],
+  "homepage": "https://gitlab.com/csi-engineering/csi-platform/vista-design",
+  "lint-staged": {
+    "**/*": ["prettier --check --ignore-unknown", "ls-lint"],
+    "./source/**/*.{css,sass,scss}": ["stylelint"],
+    "./.ladle/components.scss": ["stylelint"],
+    "./source/**/*.{js,jsx,ts,tsx,d.ts}": ["sh -c 'tsc'", "eslint", "jest"]
+  },
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "name": "@csi-engineering/vista-design",
+  "type": "module",
+  "peerDependencies": {
+    "react": ">=19.2.0",
+    "react-dom": ">=19.2.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "@csi-engineering:registry": "https://gitlab.com/api/v4/projects/71558203/packages/npm/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:csi-engineering/csi-platform/vista-design.git"
+  },
+  "scripts": {
+    "prepare": "node './.husky/install.mjs'",
+    "serve": "ladle serve",
+    "ci:validate-format": "prettier --check --ignore-unknown *",
+    "ci:validate-types": "tsc",
+    "ci:lint-file-system": "ls-lint",
+    "ci:lint-code": "eslint './source/' --ext '.js,.jsx,.ts,.tsx,.d.ts'",
+    "ci:lint-style": "stylelint './source/**/*.{css,sass,scss}' './.ladle/components.scss'",
+    "ci:run-unit-tests": "jest",
+    "ci:build-vite": "NODE_ENV=production vite build",
+    "preci:build-ladle": "rm -f ./.env && touch ./.env && echo \"VITE_CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME}\" >> ./.env && echo \"VITE_CI_COMMIT_SHORT_SHA=${CI_COMMIT_SHORT_SHA}\" >> ./.env",
+    "ci:build-ladle": "NODE_ENV=production ladle build",
+    "ci:publish-registry-release": "npx --yes --package semantic-release@24.2.9 --package @semantic-release/exec@7.1.0 --package @semantic-release/gitlab@13.2.9 --package conventional-changelog-conventionalcommits@7.0.2 semantic-release",
+    "ci:create-deploy-pages-release": "node ./.gitlab/create-deploy-pages-release.js"
+  },
+  "version": "1.3.0"
+}
