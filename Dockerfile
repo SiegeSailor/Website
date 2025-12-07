@@ -1,11 +1,13 @@
-FROM node:22.21.1-alpine3.21 AS stage-base
+FROM node:25.2.1-bullseye AS stage-base
 
 
 # [Stage] Prepare system level dependencies and install packages
 FROM stage-base AS stage-dependencies
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
-LABEL org.opencontainers.image.title="website"
+LABEL org.opencontainers.image.title="siegesailor-website/client"
+LABEL org.opencontainers.image.description="SiegeSailor's personal website client image."
+LABEL org.opencontainers.image.version="0.0.0"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
@@ -45,6 +47,6 @@ COPY --from=stage-build --chown=user:group /main/.next/static ./.next/static
 
 USER user
 
-EXPOSE "3000"
+EXPOSE 3000
 
 CMD ["node", "server.js"]

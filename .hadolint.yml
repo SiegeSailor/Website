@@ -1,0 +1,12 @@
+failure-threshold: error
+format: tty
+ignored:
+  - DL3049
+  - DL3050
+label-schema:
+  author: text
+  contact: email
+  title: text
+strict-labels: true
+trustedRegistries:
+  - docker.io
