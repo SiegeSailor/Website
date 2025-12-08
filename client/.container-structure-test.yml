@@ -5,71 +5,33 @@ containerRunOptions:
   privileged: false
 
 commandTests:
-  - name: "Check python version"
-    command: "python"
-    args: ["--version"]
-    expectedOutput: [".*3.10.12"]
-    exitCode: 0
-  - name: "Check pip version"
-    command: "pip"
-    args: ["--version"]
-    expectedOutput: [".*22.0.2"]
-    exitCode: 0
-  - name: "Check nvm version"
-    command: "bash"
-    args: ["-c", "nvm --version"]
-    expectedOutput: [".*0.40.3"]
-    exitCode: 0
   - name: "Check node version"
-    command: "bash"
-    args: ["-c", "node --version"]
-    expectedOutput: [".*22.18.0"]
-    exitCode: 0
-  - name: "Check npm version"
-    command: "bash"
-    args: ["-c", "npm --version"]
-    expectedOutput: [".*10.9.3"]
-    exitCode: 0
-
-  - name: "Check protoc version"
-    command: "protoc"
+    command: "node"
     args: ["--version"]
-    expectedOutput: [".*3.12.4"]
+    expectedOutput: [".*25.2.1"]
     exitCode: 0
-  - name: "Verify grpc_tools.protoc"
-    command: "python"
-    args: ["-m", "grpc_tools.protoc"]
-    exitCode: 1
-  - name: "Verify grpc_tools_node_protoc"
-    command: "bash"
-    args: ["-c", "grpc_tools_node_protoc"]
-    exitCode: 1
-  - name: "Verify proto-loader-gen-types"
-    command: "bash"
-    args: ["-c", "proto-loader-gen-types"]
-    exitCode: 1
-
   - name: "Check the default user"
     command: "whoami"
     args: []
     expectedOutput: ["user"]
     exitCode: 0
 
-fileExistenceTests:
-  - name: "Check user home directory"
-    path: "/home/user"
-    shouldExist: true
-    permissions: "drwxr-xr-x"
-  - name: "Check ts-protoc-gen"
-    path: "/home/user/.local/lib/.nvm/versions/node/v22.18.0/lib/node_modules/ts-protoc-gen"
-    shouldExist: true
-    permissions: "drwxr-xr-x"
+envVarTests:
+  - name: "Check customized environment variables"
+    envVars:
+      - key: "LOCAL_COMMIT_SHORT"
+        present: true
 
-fileContentTests:
-  - name: "Check OS release"
-    path: "/etc/os-release"
-    expectedContents: [".*22.04.5"]
+fileExistenceTests:
+  - name: "Check the Next.js standalone build"
+    path: "/app/.next/standalone"
+    shouldExist: true
+    permissions: "drwxr-xr-x"
+  - name: "Check the Next.js start script"
+    path: "/app/server.js"
+    shouldExist: true
+    permissions: "rwxr-xr-x"
 
 metadataTest:
-  workdir: "/main/"
+  workdir: "/app/"
   user: "user"
