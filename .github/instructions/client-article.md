@@ -1,5 +1,5 @@
 ---
-applyTo: "client/public/article/\*.md"
+applyTo: "client/public/article/*.md"
 ---
 
 # Writing Articles
