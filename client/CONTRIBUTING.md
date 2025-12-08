@@ -2,9 +2,6 @@
 
 This is a containerized Next.js client for the SiegeSailor website. To contribute to this project, please follow the guidelines below.
 
-> [!tip]
-> Go to the root folder first before executing any commands.
-
 ### Prerequisites
 
 - [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`
@@ -14,6 +11,16 @@ This is a containerized Next.js client for the SiegeSailor website. To contribut
 - [Node.js](https://nodejs.org/): `25.2.1`
 - [Terraform](https://developer.hashicorp.com/terraform): `1.14.1`
 
+## Development
+
+To set up the development environment, run the following commands:
+
+```shell
+cd ./client/
+npm ci
+npm run watch
+```
+
 ## Building and Testing the Docker Image
 
 Build the Docker image with the following command:
@@ -22,6 +29,7 @@ Build the Docker image with the following command:
 docker build \
     --build-arg COMMIT_SHORT=$(git rev-parse --short HEAD) \
     --tag siegesailor-website/client \
+    --file ./client/Dockerfile \
     .
 ```
 
@@ -50,8 +58,8 @@ Lint the Dockerfile with Hadolint:
 
 ```shell
 hadolint \
-    --config .hadolint.yml \
-    ./Dockerfile
+    --config ./client/.hadolint.yml \
+    ./client/Dockerfile
 ```
 
 Test the Docker image structure with Container Structure Test:
@@ -59,5 +67,5 @@ Test the Docker image structure with Container Structure Test:
 ```shell
 container-structure-test test \
     --image siegesailor-website/client \
-    --config .container-structure-test.yml
+    --config ./client/.container-structure-test.yml
 ```

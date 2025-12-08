@@ -1,8 +1,8 @@
 schemaVersion: "2.0.0"
 
 containerRunOptions:
-  user: "user"
   privileged: false
+  user: "user"
 
 commandTests:
   - name: "Check node version"
@@ -16,22 +16,22 @@ commandTests:
     expectedOutput: ["user"]
     exitCode: 0
 
-envVarTests:
-  - name: "Check customized environment variables"
-    envVars:
-      - key: "LOCAL_COMMIT_SHORT"
-        present: true
+  - name: "Check LOCAL_COMMIT_SHORT"
+    command: "echo"
+    args: ["$LOCAL_COMMIT_SHORT", "|", "wc", "-m"]
+    expectedOutput: ["8"]
 
 fileExistenceTests:
   - name: "Check the Next.js standalone build"
-    path: "/app/.next/standalone"
+    path: "/app/client/.next/static/"
     shouldExist: true
     permissions: "drwxr-xr-x"
   - name: "Check the Next.js start script"
-    path: "/app/server.js"
+    path: "/app/client/server.js"
     shouldExist: true
-    permissions: "rwxr-xr-x"
+    permissions: "-rw-r--r--"
 
 metadataTest:
-  workdir: "/app/"
+  exposedPorts: ["3000"]
   user: "user"
+  workdir: "/app/client/"
