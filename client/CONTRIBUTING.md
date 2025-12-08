@@ -2,6 +2,9 @@
 
 This is a containerized Next.js client for the SiegeSailor website. To contribute to this project, please follow the guidelines below.
 
+> [!tip]
+> Stay in the project root folder for any commands.
+
 ### Prerequisites
 
 - [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`

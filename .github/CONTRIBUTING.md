@@ -1,11 +1,8 @@
 # Contributing
 
-Read through the instructions below to ensure you follow the correct procedures when contributing to this project:
-
-- [Article Workflow](./instructions/article.instructions.md#workflow)
-- [General](./copilot-instructions.md)
-
-> [!tip]
-> Stay in the root folder for any commands.
+This is a monorepo for the SiegeSailor's website. To contribute to this project, please follow the guidelines for each service below:
 
 - [Client](./../client/CONTRIBUTING.md)
+
+> [!tip]
+> Stay in the project root folder for any commands.
