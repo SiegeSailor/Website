@@ -1,7 +1,7 @@
 "use server";
 
 import { Children, ComponentProps, isValidElement } from "react";
-import { Code, ScrollShadow } from "@heroui/react";
+import { ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";
 import rehypeSlug from "rehype-slug";
@@ -11,6 +11,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { remarkShowLineNumbers, remarkRehypeCallout } from "@/helper/plugin";
 import ButtonCopy from "@/component/ButtonCopy";
 import Callout from "@/component/Callout";
+import Code from "@/component/Code";
 import Heading from "@/component/Heading";
 import Link from "@/component/Link";
 import Mermaid from "@/component/Mermaid";
@@ -107,12 +108,7 @@ export default async function ({
           <Callout {...element} className={clsx(element.className, SPACE)} />
         ),
         code: (element) => {
-          return (
-            <Code
-              {...element}
-              className={clsx(element.className, "py-[0.05rem] bg-gray-700!")}
-            />
-          );
+          return <Code {...element} />;
         },
         pre: (element) => {
           if (element["data-language"] === "mermaid")
