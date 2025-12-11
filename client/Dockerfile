@@ -1,4 +1,4 @@
-FROM node:25.2.1-bullseye AS stage-base
+FROM node:25.2.1-bullseye AS base
 
 ARG COMMIT_SHORT
 
@@ -7,7 +7,7 @@ ENV LOCAL_COMMIT_SHORT="${COMMIT_SHORT}"
 ENV DEBIAN_FRONTEND="noninteractive"
 
 # [Stage] Prepare system level dependencies and install packages
-FROM stage-base AS stage-dependencies
+FROM base AS dependencies
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
 LABEL org.opencontainers.image.title="siegesailor-website/client"
@@ -24,11 +24,11 @@ RUN npm ci
 
 
 # [Stage] Build the application
-FROM stage-dependencies AS stage-build
+FROM dependencies AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-COPY --from=stage-dependencies /app/client/node_modules/. /app/client/node_modules/
+COPY --from=dependencies /app/client/node_modules/. /app/client/node_modules/
 COPY "./client/." /app/client/
 COPY "./.git/." /app/.git/
 
@@ -38,7 +38,7 @@ RUN npm run build
 
 
 # [Stage] Prepare the application and run the container
-FROM stage-base AS stage-production
+FROM base AS production
 
 ENV LOCAL_COMMIT_SHORT="${COMMIT_SHORT}"
 
@@ -51,10 +51,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN addgroup --system --gid 1001 group && \
     adduser --system --uid 1001 user
 
-COPY --from=stage-build --chown=user:group /app/client/public/. /app/client/public/
-COPY --from=stage-build --chown=user:group /app/client/.next/standalone/. /app/client/
-COPY --from=stage-build --chown=user:group /app/client/.next/static/. /app/client/.next/static/
-COPY --from=stage-build --chown=user:group /app/.git/. /app/.git/
+COPY --from=build --chown=user:group /app/client/public/. /app/client/public/
+COPY --from=build --chown=user:group /app/client/.next/standalone/. /app/client/
+COPY --from=build --chown=user:group /app/client/.next/static/. /app/client/.next/static/
+COPY --from=build --chown=user:group /app/.git/. /app/.git/
 
 USER user
 
