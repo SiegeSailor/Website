@@ -18,24 +18,8 @@ commandTests:
 
   - name: "Check $LOCAL_COMMIT_SHORT"
     command: "bash"
-    args: ["-c", "echo $LOCAL_COMMIT_SHORT | wc -m"]
+    args: ["-c", "echo -n $LOCAL_COMMIT_SHORT | wc -m"]
     expectedOutput: ["8"]
-  - name: "Check $LOCAL_GROUP"
-    command: "echo"
-    args: ["$LOCAL_GROUP"]
-    expectedOutput: [".*"]
-  - name: "Check $LOCAL_GROUP_ID"
-    command: "echo"
-    args: ["$LOCAL_GROUP_ID"]
-    expectedOutput: [".*"]
-  - name: "Check $LOCAL_USER"
-    command: "echo"
-    args: ["$LOCAL_USER"]
-    expectedOutput: [".*"]
-  - name: "Check $LOCAL_USER_ID"
-    command: "echo"
-    args: ["$LOCAL_USER_ID"]
-    expectedOutput: [".*"]
 
 fileExistenceTests:
   - name: "Check the Next.js standalone build"

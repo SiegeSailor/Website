@@ -1,5 +1,5 @@
 # [Stage] Define variables
-FROM node:25.2.1-bullseye AS base
+FROM node:25.2.1-bullseye@sha256:72d57f156e8f03e98b0d9a6fef7d76c64a4ed197404a40c2d7119eb6357e78ce AS base
 
 ARG COMMIT_SHORT
 
@@ -41,8 +41,10 @@ RUN npm run build
 # [Stage] Prepare the application and run the container
 FROM base AS production
 
-ENV LOCAL_GROUP_ID="1001"
-ENV LOCAL_USER_ID="1001"
+ENV LOCAL_GROUP_NAME="group"
+ENV LOCAL_USER_GID="1001"
+ENV LOCAL_USER_UID="1001"
+ENV LOCAL_USERNAME="user"
 
 ENV HOSTNAME="0.0.0.0"
 ENV NODE_ENV="production"
@@ -50,17 +52,17 @@ ENV PORT="3000"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN addgroup --system --gid "${LOCAL_GROUP_ID}" group && \
-    adduser --system --uid "${LOCAL_USER_ID}" user
+RUN addgroup --system --gid "${LOCAL_USER_GID}" "${LOCAL_GROUP_NAME}" && \
+    adduser --system --uid "${LOCAL_USER_UID}" "${LOCAL_USERNAME}"
 
-COPY --from=build --chown=user:group /app/client/public/. /app/client/public/
-COPY --from=build --chown=user:group /app/client/.next/standalone/. /app/client/
-COPY --from=build --chown=user:group /app/client/.next/static/. /app/client/.next/static/
-COPY --from=build --chown=user:group /app/.git/. /app/.git/
+COPY --from=build --chown="${LOCAL_USERNAME}:${LOCAL_GROUP_NAME}" /app/client/public/. /app/client/public/
+COPY --from=build --chown="${LOCAL_USERNAME}:${LOCAL_GROUP_NAME}" /app/client/.next/standalone/. /app/client/
+COPY --from=build --chown="${LOCAL_USERNAME}:${LOCAL_GROUP_NAME}" /app/client/.next/static/. /app/client/.next/static/
+COPY --from=build --chown="${LOCAL_USERNAME}:${LOCAL_GROUP_NAME}" /app/.git/. /app/.git/
 
-USER user
+USER "${LOCAL_USERNAME}"
 
-EXPOSE 3000
+EXPOSE "${PORT}"
 
 WORKDIR /app/client/
 

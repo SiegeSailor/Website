@@ -27,7 +27,7 @@ Build the Docker image with the following command:
 
 ```shell
 docker build \
-    --build-arg COMMIT_SHORT=$(git rev-parse --short HEAD) \
+    --build-arg COMMIT_SHORT=$(git rev-parse --short=8 HEAD) \
     --tag siegesailor-website/client \
     --file ./client/Dockerfile \
     .
