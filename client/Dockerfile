@@ -41,14 +41,17 @@ RUN npm run build
 # [Stage] Prepare the application and run the container
 FROM base AS production
 
+ENV LOCAL_GROUP_ID="1001"
+ENV LOCAL_USER_ID="1001"
+
 ENV HOSTNAME="0.0.0.0"
 ENV NODE_ENV="production"
 ENV PORT="3000"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN addgroup --system --gid 1001 group && \
-    adduser --system --uid 1001 user
+RUN addgroup --system --gid "${LOCAL_GROUP_ID}" group && \
+    adduser --system --uid "${LOCAL_USER_ID}" user
 
 COPY --from=build --chown=user:group /app/client/public/. /app/client/public/
 COPY --from=build --chown=user:group /app/client/.next/standalone/. /app/client/

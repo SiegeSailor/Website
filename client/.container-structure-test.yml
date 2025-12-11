@@ -20,6 +20,14 @@ commandTests:
     command: "bash"
     args: ["-c", "echo $LOCAL_COMMIT_SHORT | wc -m"]
     expectedOutput: ["8"]
+  - name: "Check $LOCAL_GROUP_ID"
+    command: "echo"
+    args: ["$LOCAL_GROUP_ID"]
+    expectedOutput: [".*"]
+  - name: "Check $LOCAL_USER_ID"
+    command: "echo"
+    args: ["$LOCAL_USER_ID"]
+    expectedOutput: [".*"]
 
 fileExistenceTests:
   - name: "Check the Next.js standalone build"
