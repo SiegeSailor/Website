@@ -16,9 +16,9 @@ commandTests:
     expectedOutput: ["user"]
     exitCode: 0
 
-  - name: "Check LOCAL_COMMIT_SHORT"
-    command: "echo"
-    args: ["$LOCAL_COMMIT_SHORT", "|", "wc", "-m"]
+  - name: "Check $LOCAL_COMMIT_SHORT"
+    command: "bash"
+    args: ["-c", "echo $LOCAL_COMMIT_SHORT | wc -m"]
     expectedOutput: ["8"]
 
 fileExistenceTests:

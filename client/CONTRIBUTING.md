@@ -7,14 +7,11 @@ This is a containerized Next.js client for the SiegeSailor website. To contribut
 
 ### Prerequisites
 
-- [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`
-- [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test): `1.19.3`
-- [Docker](https://www.docker.com/): `28.5.2`
-- [Hadolint](https://github.com/hadolint/hadolint): `2.14.0`
-- [Node.js](https://nodejs.org/): `25.2.1`
-- [Terraform](https://developer.hashicorp.com/terraform): `1.14.1`
+Required software for the client module:
 
-## Development
+- [Node.js](https://nodejs.org/): `25.2.1`
+
+## Local Development
 
 To set up the development environment, run the following commands:
 
@@ -24,7 +21,7 @@ npm ci
 npm run watch
 ```
 
-## Building and Testing the Docker Image
+### Building and Testing the Docker Image
 
 Build the Docker image with the following command:
 
@@ -71,4 +68,35 @@ Test the Docker image structure with Container Structure Test:
 container-structure-test test \
     --image siegesailor-website/client \
     --config ./client/.container-structure-test.yml
+```
+
+### Deployment
+
+Retrieve AWS Access Key ID and Security Access Key from [IAM - Security Credentials - Create Access Key](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and configure AWS CLI by running the following to store credentials in `~/.aws/credentials`. This will allow Terraform to use the credentials automatically for `aws` provider:
+
+```shell
+aws configure
+```
+
+You can verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
+
+```shell
+aws configure export-credentials \
+    --profile default
+```
+
+> [!note]
+> Run `aws sts get-caller-identity` to verify that the account and user identities.
+
+#### Workflow
+
+Roughly the deployment workflow is as follows:
+
+```shell
+terraform init
+terraform fmt
+tflint
+terraform validate
+terraform plan
+terraform apply
 ```

@@ -1,3 +1,4 @@
+# [Stage] Define variables
 FROM node:25.2.1-bullseye AS base
 
 ARG COMMIT_SHORT
@@ -14,9 +15,9 @@ LABEL org.opencontainers.image.title="siegesailor-website/client"
 LABEL org.opencontainers.image.description="SiegeSailor's personal website client image."
 LABEL org.opencontainers.image.version="0.0.0"
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 COPY "./client/package.json" "./client/package-lock.json" /app/client/
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 WORKDIR /app/client/
 
@@ -26,11 +27,11 @@ RUN npm ci
 # [Stage] Build the application
 FROM dependencies AS build
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 COPY --from=dependencies /app/client/node_modules/. /app/client/node_modules/
 COPY "./client/." /app/client/
 COPY "./.git/." /app/.git/
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 WORKDIR /app/client/
 
@@ -39,8 +40,6 @@ RUN npm run build
 
 # [Stage] Prepare the application and run the container
 FROM base AS production
-
-ENV LOCAL_COMMIT_SHORT="${COMMIT_SHORT}"
 
 ENV HOSTNAME="0.0.0.0"
 ENV NODE_ENV="production"
