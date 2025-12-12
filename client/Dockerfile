@@ -62,7 +62,7 @@ COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.git/. /app/.git/
 
 USER "${USERNAME}"
 
-EXPOSE "${PORT}"
+EXPOSE 3000
 
 WORKDIR /app/client/
 

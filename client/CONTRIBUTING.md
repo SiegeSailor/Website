@@ -23,6 +23,14 @@ npm run watch
 
 ### Building and Testing the Docker Image
 
+Lint the Dockerfile with Hadolint:
+
+```shell
+hadolint \
+    --config ./client/.hadolint.yml \
+    ./client/Dockerfile
+```
+
 Build the Docker image with the following command:
 
 ```shell
@@ -52,14 +60,6 @@ docker run \
     --rm \
     --name siegesailor-website-client \
     siegesailor-website/client
-```
-
-Lint the Dockerfile with Hadolint:
-
-```shell
-hadolint \
-    --config ./client/.hadolint.yml \
-    ./client/Dockerfile
 ```
 
 Test the Docker image structure with Container Structure Test:

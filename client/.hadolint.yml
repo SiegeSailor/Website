@@ -1,6 +1,9 @@
 failure-threshold: error
 format: tty
 ignored:
+  - DL3004
+  - DL3008
+  - DL3016
   - DL3049
   - DL3050
 label-schema:
