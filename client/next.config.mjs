@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   allowedDevOrigins: ["localhost", "127.0.0.1"],
+  compiler: { removeConsole: false },
   compress: true,
   distDir: ".next",
-  experimental: { globalNotFound: true },
+  experimental: { browserDebugInfoInTerminal: true, globalNotFound: true },
+  generateBuildId: async () => {
+    console.log("Generating build ID: " + process.env.COMMIT_SHORT);
+    return process.env.COMMIT_SHORT;
+  },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -15,6 +20,7 @@ const nextConfig = {
   },
   output: "standalone",
   pageExtensions: ["ts", "tsx"],
+  productionBrowserSourceMaps: true,
   reactStrictMode: process.env.NODE_ENV === "development",
   redirects: async () => [],
   turbopack: {
