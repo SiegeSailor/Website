@@ -1,10 +1,10 @@
 {
   "bugs": "https://github.com/SiegeSailor/Website/issues",
   "browserslist": [
-    "Chrome>=111",
-    "Edge>=111",
-    "Firefox>=111",
-    "Safari>=16.4"
+    "Chrome >= 111",
+    "Edge >= 111",
+    "Firefox >= 111",
+    "Safari >= 16.4"
   ],
   "dependencies": {
     "@heroui/react": "2.8.5",
@@ -46,8 +46,8 @@
   },
   "description": "SiegeSailor's personal website client application.",
   "engines": {
-    "node": ">=25.2.1",
-    "npm": ">=11.6.2"
+    "node": ">= 25.2.1",
+    "npm": ">= 11.6.2"
   },
   "name": "@siegesailor-website/client",
   "private": true,

@@ -1,8 +1,12 @@
-.coverage
-.DS_Store
-.env
-.next/
-build-cache
+# Module
 input/
+
+# Next.js
+.next/
 next-env.d.ts
+
+# Node.js
 node_modules/
+
+# TypeScript
+build-cache
