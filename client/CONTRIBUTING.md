@@ -1,9 +1,6 @@
-# Contributing
+# Contributing Client
 
 This is a containerized Next.js client for the SiegeSailor website. To contribute to this project, please follow the guidelines below.
-
-> [!tip]
-> Stay in the project root folder for any commands.
 
 ### Prerequisites
 
@@ -16,7 +13,6 @@ Required software for the client module:
 To set up the development environment, run the following commands:
 
 ```shell
-cd ./client/
 npm ci
 npm run watch
 ```
@@ -27,18 +23,20 @@ Lint the Dockerfile with Hadolint:
 
 ```shell
 hadolint \
-    --config ./client/.hadolint.yml \
-    ./client/Dockerfile
+    --config .hadolint.yml \
+    Dockerfile
 ```
 
 Build the Docker image with the following command:
 
 ```shell
+cp -r ../.git .git
 docker build \
     --build-arg COMMIT_SHORT=$(git rev-parse --short=8 HEAD) \
     --tag siegesailor-website/client \
-    --file ./client/Dockerfile \
+    --file Dockerfile \
     .
+rm -rf .git
 ```
 
 Run the Docker container with the following command:
@@ -67,36 +65,5 @@ Test the Docker image structure with Container Structure Test:
 ```shell
 container-structure-test test \
     --image siegesailor-website/client \
-    --config ./client/.container-structure-test.yml
-```
-
-### Deployment
-
-Retrieve AWS Access Key ID and Security Access Key from [IAM - Security Credentials - Create Access Key](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and configure AWS CLI by running the following to store credentials in `~/.aws/credentials`. This will allow Terraform to use the credentials automatically for `aws` provider:
-
-```shell
-aws configure
-```
-
-You can verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
-
-```shell
-aws configure export-credentials \
-    --profile default
-```
-
-> [!note]
-> Run `aws sts get-caller-identity` to verify that the account and user identities.
-
-#### Workflow
-
-Roughly the deployment workflow is as follows:
-
-```shell
-terraform init
-terraform fmt
-tflint
-terraform validate
-terraform plan
-terraform apply
+    --config .container-structure-test.yml
 ```
