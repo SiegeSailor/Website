@@ -5,16 +5,30 @@ module "route53" {
   name = local.domain
 
   records = {
-    cloudfront = {
-      name = "cloudfront"
+    root = {
       type = "A"
       alias = {
         name    = module.cloudfront.cloudfront_distribution_domain_name
         zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
       }
     }
-    cloudfront_ipv6 = {
-      name = "cloudfront"
+    root_ipv6 = {
+      type = "AAAA"
+      alias = {
+        name    = module.cloudfront.cloudfront_distribution_domain_name
+        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
+      }
+    }
+    www = {
+      name = "www"
+      type = "A"
+      alias = {
+        name    = module.cloudfront.cloudfront_distribution_domain_name
+        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
+      }
+    }
+    www_ipv6 = {
+      name = "www"
       type = "AAAA"
       alias = {
         name    = module.cloudfront.cloudfront_distribution_domain_name
@@ -61,7 +75,7 @@ module "cloudfront" {
   aliases = [module.route53.name, "*.${module.route53.name}"]
 
   logging_config = {
-    bucket = "${local.project}-${var.environment}-cloudfront"
+    bucket = module.cloudfront_log_s3_bucket.s3_bucket_id
   }
 
   origin = {
@@ -130,11 +144,11 @@ module "alb" {
   }
 
   access_logs = {
-    bucket = "${local.project}-${var.environment}-alb"
+    bucket = module.alb_log_s3_bucket.s3_bucket_id
   }
 
   listeners = {
-    ex-http-https-redirect = {
+    http-https-redirect = {
       port     = 80
       protocol = "HTTP"
       redirect = {
@@ -143,24 +157,38 @@ module "alb" {
         status_code = "HTTP_301"
       }
     }
-    ex-https = {
+    https = {
       port            = 443
       protocol        = "HTTPS"
       certificate_arn = module.acm.acm_certificate_arn
 
       forward = {
-        target_group_key = "ex-instance"
+        target_group_key = local.module
       }
     }
   }
 
   target_groups = {
-    ex-instance = {
-      name_prefix = "h1"
-      protocol    = "HTTP"
-      port        = 80
-      target_type = "instance"
-      target_id   = "i-0f6d38a07d50d080f"
+    "${local.module}" = {
+      name_prefix          = "alb-"
+      protocol             = "HTTP"
+      port                 = local.port
+      target_type          = "ip"
+      deregistration_delay = 30
+
+      health_check = {
+        enabled             = true
+        interval            = 30
+        path                = "/health"
+        port                = "traffic-port"
+        healthy_threshold   = 2
+        unhealthy_threshold = 2
+        timeout             = 5
+        protocol            = "HTTP"
+        matcher             = "200"
+      }
+
+      create_attachment = false
     }
   }
 
