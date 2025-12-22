@@ -1,6 +1,8 @@
 # [Stage] Define variables
 FROM node:25.2.1-bullseye@sha256:72d57f156e8f03e98b0d9a6fef7d76c64a4ed197404a40c2d7119eb6357e78ce AS base
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ARG COMMIT_SHORT
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
@@ -12,14 +14,12 @@ ENV COMMIT_SHORT="${COMMIT_SHORT}"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
+WORKDIR /app/client
+
 # [Stage] Prepare system level dependencies and install packages
 FROM base AS dependencies
 
-COPY "./client/package.json" "./client/package-lock.json" /app/client/
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-WORKDIR /app/client/
+COPY "package.json" "package-lock.json" ./
 
 RUN npm ci
 
@@ -27,13 +27,9 @@ RUN npm ci
 # [Stage] Build the application
 FROM dependencies AS build
 
-COPY --from=dependencies /app/client/node_modules/. /app/client/node_modules/
-COPY "./client/." /app/client/
-COPY "./.git/." /app/.git/
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-WORKDIR /app/client/
+COPY --from=dependencies /app/client/node_modules/. ./node_modules/
+COPY "." ./
+COPY "./.git/". ../.git/
 
 RUN npm run build
 
@@ -50,20 +46,16 @@ ENV HOSTNAME="0.0.0.0"
 ENV NODE_ENV="production"
 ENV PORT="3000"
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 RUN addgroup --system --gid "${USER_GID}" "${GROUP_NAME}" && \
     adduser --system --uid "${USER_UID}" "${USERNAME}"
 
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/public/. /app/client/public/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/standalone/. /app/client/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/static/. /app/client/.next/static/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.git/. /app/.git/
-
 USER "${USERNAME}"
 
-EXPOSE 3000
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/public/. ./public/
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/standalone/. ./
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/static/. ./.next/static/
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.git/. ../.git/
 
-WORKDIR /app/client/
+EXPOSE 3000
 
 CMD ["node", "server.js"]
