@@ -2,32 +2,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-#######################################
-# General
-#######################################
-locals {
-  cost_center = "personal"
-  managed_by  = "terraform"
-  project     = "siegesailor-website"
-}
-
-#######################################
-# Module
-#######################################
-locals {
-  module = "client"
-  port   = 3000
-}
-
-#######################################
-# AWS
-#######################################
-locals {
-  # Manually purchased on Route 53
-  domain    = "jinyu-zhang.com"
-  domain_id = "Z06609791UEGJRGM599P7"
-}
-
 module "tfstate_backend" {
   source  = "cloudposse/tfstate-backend/aws"
   version = "~> 1.8.0"

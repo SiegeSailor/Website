@@ -1,174 +1,194 @@
-# module "acm" {
-#   source  = "terraform-aws-modules/acm/aws"
-#   version = "~> 6.2.0"
+module "route53" {
+  source  = "terraform-aws-modules/route53/aws"
+  version = "~> 6.1.1"
 
-#   domain_name = local.domain
-#   zone_id     = local.domain_id
+  name = local.domain
 
-#   validation_method = "DNS"
+  records = {
+    cloudfront = {
+      name = "cloudfront"
+      type = "A"
+      alias = {
+        name    = module.cloudfront.cloudfront_distribution_domain_name
+        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
+      }
+    }
+    cloudfront_ipv6 = {
+      name = "cloudfront"
+      type = "AAAA"
+      alias = {
+        name    = module.cloudfront.cloudfront_distribution_domain_name
+        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
+      }
+    }
+  }
 
-#   subject_alternative_names = [
-#     "*.${local.domain}"
-#   ]
+  tags = {
+    CostCenter  = local.cost_center
+    Environment = var.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+}
 
-#   wait_for_validation = true
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 6.2.0"
 
-#   tags = {
-#     CostCenter  = local.cost_center
-#     Environment = var.environment
-#     ManagedBy   = local.managed_by
-#     Project     = local.project
-#   }
-# }
+  domain_name = module.route53.name
+  zone_id     = module.route53.id
 
-# module "cloudfront" {
-#   source  = "terraform-aws-modules/cloudfront/aws"
-#   version = "~> 6.0.2"
+  validation_method = "DNS"
 
-#   aliases = [local.domain, "*.${local.domain}"]
+  subject_alternative_names = [
+    "*.${module.route53.name}"
+  ]
 
-#   logging_config = {
-#     bucket = "${local.project}-${var.environment}-cloudfront"
-#   }
+  wait_for_validation = true
 
-#   origin = {
-#     something = {
-#       domain_name = module.alb.dns_name
-#       custom_origin_config = {
-#         http_port              = 80
-#         https_port             = 443
-#         origin_protocol_policy = "match-viewer"
-#         origin_ssl_protocols   = ["TLSv1.2"]
-#       }
-#     }
-#   }
+  tags = {
+    CostCenter  = local.cost_center
+    Environment = var.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+}
 
-#   default_cache_behavior = {
-#     target_origin_id       = "something"
-#     viewer_protocol_policy = "allow-all"
+module "cloudfront" {
+  source  = "terraform-aws-modules/cloudfront/aws"
+  version = "~> 6.0.2"
 
-#     allowed_methods = ["GET", "HEAD", "OPTIONS"]
-#     cached_methods  = ["GET", "HEAD"]
-#     compress        = true
-#     query_string    = true
-#   }
+  aliases = [module.route53.name, "*.${module.route53.name}"]
 
-#   ordered_cache_behavior = [
-#     {
-#       path_pattern           = "/static/*"
-#       target_origin_id       = "s3"
-#       viewer_protocol_policy = "redirect-to-https"
+  logging_config = {
+    bucket = "${local.project}-${var.environment}-cloudfront"
+  }
 
-#       allowed_methods = ["GET", "HEAD", "OPTIONS"]
-#       cached_methods  = ["GET", "HEAD"]
-#       compress        = true
-#       query_string    = true
-#     }
-#   ]
+  origin = {
+    alb = {
+      domain_name = module.alb.dns_name
+      custom_origin_config = {
+        http_port              = 80
+        https_port             = 443
+        origin_protocol_policy = "https-only"
+        origin_ssl_protocols   = ["TLSv1.2"]
+      }
+    }
+  }
 
-#   viewer_certificate = {
-#     acm_certificate_arn = "arn:aws:acm:us-east-1:135367859851:certificate/1032b155-22da-4ae0-9f69-e206f825458b"
-#     ssl_support_method  = "sni-only"
-#   }
+  default_cache_behavior = {
+    target_origin_id       = "alb"
+    viewer_protocol_policy = "allow-all"
 
-#   tags = {
-#     CostCenter  = local.cost_center
-#     Environment = var.environment
-#     ManagedBy   = local.managed_by
-#     Project     = local.project
-#   }
-# }
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    cached_methods  = ["GET", "HEAD"]
+    compress        = true
+    query_string    = true
+  }
 
-# module "vpc" {
-#   source  = "terraform-aws-modules/vpc/aws"
-#   version = "~> 6.5.1"
+  viewer_certificate = {
+    acm_certificate_arn = module.acm.acm_certificate_arn
+    ssl_support_method  = "sni-only"
+  }
 
-#   name = "${local.project}-${var.environment}"
-#   cidr = "10.0.0.0/16"
+  tags = {
+    CostCenter  = local.cost_center
+    Environment = var.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+}
 
-#   azs             = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
-#   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-#   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+module "alb" {
+  source = "terraform-aws-modules/alb/aws"
 
-#   enable_nat_gateway = true
+  name    = "${local.project}-${var.environment}"
+  vpc_id  = module.vpc.vpc_id
+  subnets = module.vpc.public_subnets
 
-#   tags = {
-#     CostCenter  = local.cost_center
-#     Environment = var.environment
-#     ManagedBy   = local.managed_by
-#     Project     = local.project
-#   }
-# }
+  security_group_ingress_rules = {
+    http = {
+      from_port   = 80
+      to_port     = 80
+      ip_protocol = "tcp"
+      description = "Captures HTTP traffic."
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+    https = {
+      from_port   = 443
+      to_port     = 443
+      ip_protocol = "tcp"
+      description = "Captures HTTPS traffic."
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
+  security_group_egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "10.0.0.0/16"
+    }
+  }
 
-# module "alb" {
-#   source = "terraform-aws-modules/alb/aws"
+  access_logs = {
+    bucket = "${local.project}-${var.environment}-alb"
+  }
 
-#   name    = "${local.project}-${var.environment}"
-#   vpc_id  = module.vpc.vpc_id
-#   subnets = module.vpc.public_subnets
+  listeners = {
+    ex-http-https-redirect = {
+      port     = 80
+      protocol = "HTTP"
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
+    }
+    ex-https = {
+      port            = 443
+      protocol        = "HTTPS"
+      certificate_arn = module.acm.acm_certificate_arn
 
-#   security_group_ingress_rules = {
-#     http = {
-#       from_port   = 80
-#       to_port     = 80
-#       ip_protocol = "tcp"
-#       description = "Captures HTTP traffic."
-#       cidr_ipv4   = "0.0.0.0/0"
-#     }
-#     https = {
-#       from_port   = 443
-#       to_port     = 443
-#       ip_protocol = "tcp"
-#       description = "Captures HTTPS traffic."
-#       cidr_ipv4   = "0.0.0.0/0"
-#     }
-#   }
-#   security_group_egress_rules = {
-#     all = {
-#       ip_protocol = "-1"
-#       cidr_ipv4   = "10.0.0.0/16"
-#     }
-#   }
+      forward = {
+        target_group_key = "ex-instance"
+      }
+    }
+  }
 
-#   access_logs = {
-#     bucket = "${local.project}-${var.environment}-alb"
-#   }
+  target_groups = {
+    ex-instance = {
+      name_prefix = "h1"
+      protocol    = "HTTP"
+      port        = 80
+      target_type = "instance"
+      target_id   = "i-0f6d38a07d50d080f"
+    }
+  }
 
-#   listeners = {
-#     ex-http-https-redirect = {
-#       port     = 80
-#       protocol = "HTTP"
-#       redirect = {
-#         port        = "443"
-#         protocol    = "HTTPS"
-#         status_code = "HTTP_301"
-#       }
-#     }
-#     ex-https = {
-#       port            = 443
-#       protocol        = "HTTPS"
-#       certificate_arn = "arn:aws:iam::123456789012:server-certificate/test_cert-123456789012"
+  tags = {
+    CostCenter  = local.cost_center
+    Environment = var.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+}
 
-#       forward = {
-#         target_group_key = "ex-instance"
-#       }
-#     }
-#   }
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 6.5.1"
 
-#   target_groups = {
-#     ex-instance = {
-#       name_prefix = "h1"
-#       protocol    = "HTTP"
-#       port        = 80
-#       target_type = "instance"
-#       target_id   = "i-0f6d38a07d50d080f"
-#     }
-#   }
+  name = "${local.project}-${var.environment}"
+  cidr = "10.0.0.0/16"
 
-#   tags = {
-#     CostCenter  = local.cost_center
-#     Environment = var.environment
-#     ManagedBy   = local.managed_by
-#     Project     = local.project
-#   }
-# }
+  azs             = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+  enable_nat_gateway = true
+
+  tags = {
+    CostCenter  = local.cost_center
+    Environment = var.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+}
