@@ -39,7 +39,7 @@ export default async function ({
   const profile = await getProfile();
 
   return (
-    <html suppressHydrationWarning lang="en">
+    <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
         className={clsx(FontRoboto.className, "overscroll-none")}
