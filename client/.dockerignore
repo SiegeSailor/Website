@@ -1,0 +1,17 @@
+#######################################
+# General
+#######################################
+.container-structure-test.yml
+.gitignore
+.hadolint.yml
+CONTRIBUTING.md
+Dockerfile
+README.md
+
+#######################################
+# Module
+#######################################
+.next/
+input/
+next-env.d.ts
+node_modules/
