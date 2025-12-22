@@ -157,6 +157,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 - ![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff) ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?logo=dotnet&logoColor=fff)
 - ![Supervisord](https://img.shields.io/badge/Supervisord-8BC34A?logo=supervisor&logoColor=fff)
 - ![CMake](https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=fff)
+- Envoy
 
 ### Databases
 
@@ -190,6 +191,7 @@ In my past work, I committed to developing developer tools, such as libraries an
 - ![Electron](https://img.shields.io/badge/Electron-2B2E3A?logo=electron&logoColor=fff)
 - ![Ant Design](https://img.shields.io/badge/Ant%20Design-0170FE?logo=antdesign&logoColor=fff) ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff) ![Material UI](https://img.shields.io/badge/Material%20UI-007FFF?logo=mui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-8B5CF6?logo=headlessui&logoColor=fff) ![Semantic UI](https://img.shields.io/badge/Semantic%20UI-35BDB2?logo=semanticuireact&logoColor=fff) ![Ionic](https://img.shields.io/badge/Ionic-3880FF?logo=ionic&logoColor=white) ![Chakra UI](https://img.shields.io/badge/Chakra%20UI-319795?logo=chakraui&logoColor=fff) ![Hero UI](https://img.shields.io/badge/Hero%20UI-000000?logo=heroui&logoColor=fff)
 - ![Cypress](https://img.shields.io/badge/Cypress-69D3A7?logo=cypress&logoColor=fff) ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=fff)
+- Vite
 
 ### Team Collaboration
 
