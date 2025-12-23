@@ -40,7 +40,6 @@ export const ROUTE_TO_TITLE: Readonly<Record<Route, TTitle>> = {
   "/": "Home",
   "/blog": "Blog",
   "/profile": "Profile",
-  "/api/health": "_",
 } as const;
 
 export const TITLE_TO_ROUTE = Object.fromEntries(

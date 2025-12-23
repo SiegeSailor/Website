@@ -55,7 +55,6 @@ import {
   NewspaperIcon,
   NotebookIcon,
   UserIcon,
-  FileIcon,
 } from "lucide-react";
 
 export const LUCIDE_ICON = {
@@ -64,7 +63,6 @@ export const LUCIDE_ICON = {
   NewspaperIcon,
   NotebookIcon,
   UserIcon,
-  FileIcon,
 } as const;
 
 export const ROUTE_TO_ICON: Readonly<
@@ -78,7 +76,6 @@ export const ROUTE_TO_ICON: Readonly<
   "/": HomeIcon,
   "/blog": NewspaperIcon,
   "/profile": UserIcon,
-  "/api/health": FileIcon,
 } as const;
 
 export const TECHNOLOGY_TO_ICON = {
