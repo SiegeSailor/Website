@@ -34,12 +34,13 @@ export const DOMAIN_TO_PATH = {
   document: "public/document",
 } as const;
 
-type TTitle = "Home" | "Blog" | "Profile";
+type TTitle = "Home" | "Blog" | "Profile" | "_";
 
 export const ROUTE_TO_TITLE: Readonly<Record<Route, TTitle>> = {
   "/": "Home",
   "/blog": "Blog",
   "/profile": "Profile",
+  "/api/health": "_",
 } as const;
 
 export const TITLE_TO_ROUTE = Object.fromEntries(
