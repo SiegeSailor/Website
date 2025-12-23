@@ -2,7 +2,8 @@ module "ecr" {
   source  = "terraform-aws-modules/ecr/aws"
   version = "~> 3.1.0"
 
-  repository_name = "${local.project}-${var.environment}-${local.module}"
+  repository_name         = "${local.project}-${local.environment}-${local.module}"
+  repository_force_delete = true
   repository_lifecycle_policy = jsonencode({
     rules = [
       {
@@ -21,11 +22,5 @@ module "ecr" {
     ]
   })
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Module      = local.module
-    Project     = local.project
-  }
+  tags = local.shared_tags
 }

@@ -2,50 +2,30 @@ provider "aws" {
   region = var.aws_region
 }
 
-module "tfstate_backend" {
-  source  = "cloudposse/tfstate-backend/aws"
-  version = "~> 1.8.0"
-
-  namespace  = local.project
-  stage      = var.environment
-  name       = local.module
-  attributes = ["state"]
-
-  terraform_backend_config_file_path = "."
-  terraform_backend_config_file_name = "backend.tf"
-  force_destroy                      = false
-
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Module      = local.module
-    Project     = local.project
-  }
-}
-
 # resource "aws_service_discovery_http_namespace" "this" {
-#   name = "${local.project}-${var.environment}"
+#   name = "${local.project}-${local.environment}"
 
 #   tags = {
 #     CostCenter  = local.cost_center
-#     Environment = var.environment
+#     Environment = local.environment
 #     ManagedBy   = local.managed_by
 #     Project     = local.project
 #   }
 # }
 
+# =====
+
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "~> 6.10.0"
 
-  cluster_name = "${local.project}-${var.environment}"
+  cluster_name = "${local.project}-${local.environment}"
 
   cluster_configuration = {
     execute_command_configuration = {
       logging = "OVERRIDE"
       log_configuration = {
-        cloud_watch_log_group_name = "/${local.project}-${var.environment}"
+        cloud_watch_log_group_name = "/${local.project}-${local.environment}"
       }
     }
   }
@@ -61,9 +41,9 @@ module "ecs" {
   }
 
   services = {
-    "${local.module}" = {
-      cpu    = 1024
-      memory = 4096
+    (local.module) = {
+      cpu    = 512
+      memory = 2048
 
       container_definitions = {
         fluent-bit = {
@@ -77,7 +57,7 @@ module "ecs" {
           memoryReservation = 50
         }
 
-        "${local.module}" = {
+        (local.module) = {
           cpu       = 256
           memory    = 512
           essential = true
@@ -100,7 +80,7 @@ module "ecs" {
             options = {
               name                    = "firehose"
               region                  = var.aws_region
-              delivery_stream         = "${local.project}-${var.environment}-${local.module}-stream"
+              delivery_stream         = "${local.project}-${local.environment}-${local.module}-stream"
               log-driver-buffer-limit = "2000000"
             }
           }
@@ -109,14 +89,14 @@ module "ecs" {
       }
 
       service_connect_configuration = {
-        namespace = "${local.project}-${var.environment}"
+        namespace = "${local.project}-${local.environment}"
         service = [{
           client_alias = {
             port     = local.port
             dns_name = local.module
           }
           port_name      = local.module
-          discovery_name = "${local.project}-${var.environment}-${local.module}"
+          discovery_name = "${local.project}-${local.environment}-${local.module}"
         }]
       }
 
@@ -146,11 +126,5 @@ module "ecs" {
     }
   }
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    Project     = local.project
-    Module      = local.module
-    ManagedBy   = local.managed_by
-  }
+  tags = local.module_tags
 }

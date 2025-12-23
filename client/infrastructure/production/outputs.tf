@@ -5,7 +5,7 @@ output "aws_region" {
 
 output "environment" {
   description = "The deployment environment."
-  value       = var.environment
+  value       = local.environment
 }
 
 output "ecr_repository_arn" {

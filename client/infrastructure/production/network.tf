@@ -1,82 +1,29 @@
-module "route53" {
-  source  = "terraform-aws-modules/route53/aws"
-  version = "~> 6.1.1"
-
-  name = local.domain
-
-  records = {
-    root = {
-      type = "A"
-      alias = {
-        name    = module.cloudfront.cloudfront_distribution_domain_name
-        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
-      }
-    }
-    root_ipv6 = {
-      type = "AAAA"
-      alias = {
-        name    = module.cloudfront.cloudfront_distribution_domain_name
-        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
-      }
-    }
-    www = {
-      name = "www"
-      type = "A"
-      alias = {
-        name    = module.cloudfront.cloudfront_distribution_domain_name
-        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
-      }
-    }
-    www_ipv6 = {
-      name = "www"
-      type = "AAAA"
-      alias = {
-        name    = module.cloudfront.cloudfront_distribution_domain_name
-        zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
-      }
-    }
-  }
-
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Project     = local.project
-  }
-}
-
 module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 6.2.0"
 
-  domain_name = module.route53.name
-  zone_id     = module.route53.id
+  domain_name = data.aws_route53_zone.this.name
+  zone_id     = data.aws_route53_zone.this.zone_id
 
-  # The ACM certificate for CloudFront must be created in us-east-1.
-  # See https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-and-https-requirements.html#https-requirements-certificate-issuer  
+  # ACM for CloudFront must be created in `us-east-1`.
   region = "us-east-1"
 
   validation_method = "DNS"
 
   subject_alternative_names = [
-    "*.${module.route53.name}"
+    "*.${data.aws_route53_zone.this.name}"
   ]
 
   wait_for_validation = true
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Project     = local.project
-  }
+  tags = local.shared_tags
 }
 
 module "cloudfront" {
   source  = "terraform-aws-modules/cloudfront/aws"
   version = "~> 6.0.2"
 
-  aliases = [module.route53.name, "*.${module.route53.name}"]
+  aliases = [data.aws_route53_zone.this.name, "*.${data.aws_route53_zone.this.name}"]
 
   logging_config = {
     bucket = module.cloudfront_log_s3_bucket.s3_bucket_bucket_domain_name
@@ -109,20 +56,17 @@ module "cloudfront" {
     ssl_support_method  = "sni-only"
   }
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Project     = local.project
-  }
+  tags = local.shared_tags
 }
 
 module "alb" {
   source = "terraform-aws-modules/alb/aws"
 
-  name    = "${local.project}-${var.environment}"
+  name    = "${local.project}-${local.environment}"
   vpc_id  = module.vpc.vpc_id
   subnets = module.vpc.public_subnets
+
+  enable_deletion_protection = false
 
   security_group_ingress_rules = {
     http = {
@@ -173,7 +117,7 @@ module "alb" {
   }
 
   target_groups = {
-    "${local.module}" = {
+    (local.module) = {
       name_prefix          = "alb-"
       protocol             = "HTTP"
       port                 = local.port
@@ -196,19 +140,14 @@ module "alb" {
     }
   }
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Project     = local.project
-  }
+  tags = local.shared_tags
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 6.5.1"
 
-  name = "${local.project}-${var.environment}"
+  name = "${local.project}-${local.environment}"
   cidr = "10.0.0.0/16"
 
   azs             = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
@@ -217,10 +156,5 @@ module "vpc" {
 
   enable_nat_gateway = true
 
-  tags = {
-    CostCenter  = local.cost_center
-    Environment = var.environment
-    ManagedBy   = local.managed_by
-    Project     = local.project
-  }
+  tags = local.shared_tags
 }

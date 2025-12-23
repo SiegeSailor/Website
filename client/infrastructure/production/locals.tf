@@ -1,8 +1,9 @@
 #######################################
-# General
+# Shared
 #######################################
 locals {
   cost_center = "personal"
+  environment = "production"
   managed_by  = "terraform"
   project     = "siegesailor-website"
 }
@@ -13,12 +14,22 @@ locals {
 locals {
   module = "client"
   port   = 3000
+  # Purchased via AWS Route 53 manually
+  domain = "jinyu-zhang.com"
 }
 
 #######################################
-# AWS
+# Composite
 #######################################
 locals {
-  # Manually purchased on Route 53
-  domain = "jinyu-zhang.com"
+  shared_tags = {
+    CostCenter  = local.cost_center
+    Environment = local.environment
+    ManagedBy   = local.managed_by
+    Project     = local.project
+  }
+
+  module_tags = merge(local.shared_tags, {
+    Module = local.module
+  })
 }

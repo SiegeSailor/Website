@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 echo -e "${GREEN}Starting Docker image push to ECR...${NC}"
 
 # Get ECR repository URL
-cd /Users/user/Documents/Website/client/terraform
+cd /Users/user/Documents/Website/client/infrastructure/production
 ECR_URL=$(terraform output -raw ecr_repository_url 2>/dev/null || echo "")
 
 if [ -z "$ECR_URL" ]; then
@@ -31,7 +31,7 @@ echo -e "${GREEN}Authenticating Docker to ECR...${NC}"
 aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URL
 
 # Tag local image with ECR repository URL
-LOCAL_IMAGE="siegesailor-website/client"
+LOCAL_IMAGE="siegesailor-website-client"
 IMAGE_TAG="${1:-latest}"
 
 echo -e "${GREEN}Tagging image $LOCAL_IMAGE as $ECR_URL:$IMAGE_TAG${NC}"
