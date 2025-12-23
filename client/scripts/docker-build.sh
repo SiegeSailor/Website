@@ -33,7 +33,7 @@ main() {
   fi
 
   echo "[INFO] Building Docker image ${image}"
-  cp -r ../../.git docker-context/.git
+  cp -r ../.git docker-context/.git
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
     --build-arg IMAGE="${image}" \
