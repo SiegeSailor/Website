@@ -4,6 +4,7 @@ FROM node:25.2.1-bullseye@sha256:72d57f156e8f03e98b0d9a6fef7d76c64a4ed197404a40c
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG COMMIT_SHORT
+ARG IMAGE
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
 LABEL org.opencontainers.image.title="siegesailor-website/client"
@@ -11,6 +12,7 @@ LABEL org.opencontainers.image.description="SiegeSailor's personal website clien
 LABEL org.opencontainers.image.version="0.0.0"
 
 ENV COMMIT_SHORT="${COMMIT_SHORT}"
+ENV IMAGE="${IMAGE}"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 

@@ -17,53 +17,73 @@ npm ci
 npm run watch
 ```
 
-### Building and Testing the Docker Image
-
-Lint the Dockerfile with Hadolint:
+Build the client application to verify everything is working correctly:
 
 ```shell
-hadolint \
-    --config .hadolint.yml \
-    Dockerfile
+npm run build
 ```
 
-Build the Docker image with the following command:
+### Testing the Docker Image
+
+Lint the Dockerfile using Hadolint:
 
 ```shell
-cp -r ../.git .git
-docker build \
-    --build-arg COMMIT_SHORT=$(git rev-parse --short=8 HEAD) \
-    --tag siegesailor-website/client \
-    --file Dockerfile \
-    .
-rm -rf .git
+bash scripts/hadolint.sh
 ```
 
-Run the Docker container with the following command:
+Create a `.env` file in the project root. Fill in the values as needed:
 
 ```shell
-docker run \
-    --network host \
-    --rm \
-    --name siegesailor-website-client \
-    siegesailor-website/client
+cp .env.example .env
 ```
 
-You can also run the container in detached mode:
+Build the image:
 
 ```shell
-docker run \
-    --detach \
-    --publish 3000:3000 \
-    --rm \
-    --name siegesailor-website-client \
-    siegesailor-website/client
+bash scripts/docker-build.sh
 ```
 
 Test the Docker image structure with Container Structure Test:
 
 ```shell
-container-structure-test test \
-    --image siegesailor-website/client \
-    --config .container-structure-test.yml
+bash scripts/container-structure-test.sh
+```
+
+Run the container:
+
+```shell
+bash scripts/docker-run.sh
+```
+
+## Deployment
+
+Retrieve AWS Access Key ID and Security Access Key from [IAM - Security Credentials - Create Access Key](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and configure AWS CLI by running the following to store credentials in `~/.aws/credentials`. This will allow Terraform to use the credentials automatically for `aws` provider:
+
+```shell
+aws configure
+```
+
+You can verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
+
+```shell
+aws configure export-credentials \
+    --profile default
+```
+
+> [!note]
+> Run `aws sts get-caller-identity` to verify that the account and user identities.
+
+### Workflow
+
+Roughly the deployment workflow is as follows:
+
+```shell
+export ENVIRONMENT="development"
+
+terraform init -backend-config="${ENVIRONMENT}.tfbackend"
+terraform fmt
+tflint
+terraform validate
+terraform plan -var "environment=${ENVIRONMENT}"
+terraform apply -var "environment=${ENVIRONMENT}"
 ```
