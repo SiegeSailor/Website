@@ -6,7 +6,7 @@ const nextConfig = {
   distDir: ".next",
   experimental: { browserDebugInfoInTerminal: true, globalNotFound: true },
   generateBuildId: async () => {
-    console.log("Generating build ID: " + process.env.COMMIT_SHORT);
+    console.log("Generating build ID: " + process.env.COMMIT_SHORT || "local");
     return process.env.COMMIT_SHORT;
   },
   images: {
