@@ -4,32 +4,34 @@
 
 set -o errexit
 
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly NC='\033[0m' # No Color
+readonly COLOR_BLUE='\033[0;34m'
+readonly COLOR_GREEN='\033[0;32m'
+readonly COLOR_YELLOW='\033[1;33m'
+readonly COLOR_NONE='\033[0m'
 
 #######################################
 # Get ECR repository URL from Terraform output.
 # Arguments:
-#   None
+#   $1 - Environment (default: production)
 # Outputs:
 #   Writes ECR repository URL to stdout
 # Returns:
 #   0 if successful, 1 otherwise
 #######################################
 get_ecr_url() {
-  local -r terraform_dir="/Users/user/Documents/Website/client/infrastructure/production"
+  local -r environment="${1:-production}"
+  local -r path_to_infrastructure="infrastructure/${environment}"
   
-  if [ ! -d "${terraform_dir}" ]; then
-    echo -e "${YELLOW}[ERROR] Terraform directory not found: ${terraform_dir}${NC}" >&2
+  if [ ! -d "${path_to_infrastructure}" ]; then
+    echo -e "${COLOR_YELLOW}[ERROR] Terraform directory not found: ${path_to_infrastructure}${COLOR_NONE}" >&2
     return 1
   fi
 
   local ecr_url
-  ecr_url=$(cd "${terraform_dir}" && terraform output -raw ecr_repository_url 2>/dev/null || echo "")
+  ecr_url=$(cd "${path_to_infrastructure}" && terraform output -raw ecr_repository_url 2>/dev/null || echo "")
 
   if [ -z "${ecr_url}" ]; then
-    echo -e "${YELLOW}[ERROR] ECR repository not found in Terraform outputs. Run 'terraform apply' first.${NC}" >&2
+    echo -e "${COLOR_YELLOW}[ERROR] ECR repository not found in Terraform outputs. Run 'terraform apply' first.${COLOR_NONE}" >&2
     return 1
   fi
 
@@ -54,13 +56,13 @@ get_aws_region() {
 #   $1 - AWS region
 #   $2 - ECR repository URL
 # Returns:
-#   0 if successful, 1 otherwise
+#   `0` if successful, `1` otherwise
 #######################################
-authenticate_docker() {
+authenticate_ecr() {
   local -r aws_region="$1"
   local -r ecr_url="$2"
 
-  echo -e "${GREEN}[INFO] Authenticating Docker to ECR...${NC}"
+  echo -e "${COLOR_GREEN}[INFO] Authenticating to ECR${COLOR_NONE}"
   aws ecr get-login-password --region "${aws_region}" | \
     docker login --username AWS --password-stdin "${ecr_url}"
 }
@@ -68,40 +70,36 @@ authenticate_docker() {
 #######################################
 # Main function.
 # Arguments:
-#   $1 - Image tag (default: latest)
+#   $1 - Repository (default: siegesailor-website-client)
+#   $2 - Tag (default: latest)
+#   $3 - Environment (default: production)
 # Outputs:
-#   Pushes Docker image to ECR with specified tag ($1)
+#   Pushes Docker image to ECR with specified tag ($2)
 #######################################
 main() {
-  local -r local_image="siegesailor-website-client"
-  local -r image_tag="${1:-latest}"
+  local -r repository="${1:-siegesailor-website-client}"
+  local -r tag="${2:-latest}"
+  local -r environment="${3:-production}"
 
-  echo -e "${GREEN}[INFO] Starting Docker image push to ECR...${NC}"
-
-  local ecr_url
-  ecr_url=$(get_ecr_url) || exit 1
-
-  echo -e "${GREEN}[INFO] ECR Repository: ${ecr_url}${NC}"
-
+  local -r image_tag="${repository}:${tag}"
+  local -r ecr_url=$(get_ecr_url "${environment}") || exit 1
   local -r aws_region=$(get_aws_region "${ecr_url}")
-  echo -e "${GREEN}[INFO] AWS Region: ${aws_region}${NC}"
 
-  authenticate_docker "${aws_region}" "${ecr_url}" || exit 1
+  authenticate_ecr "${aws_region}" "${ecr_url}" || exit 1
 
-  echo -e "${GREEN}[INFO] Tagging image ${local_image} as ${ecr_url}:${image_tag}${NC}"
-  docker tag "${local_image}:latest" "${ecr_url}:${image_tag}"
+  echo -e "${COLOR_GREEN}[INFO] Tagging image ${image_tag} as ${ecr_url}:${tag}${COLOR_NONE}"
+  docker tag "${image_tag}" "${ecr_url}:${tag}"
 
-  echo -e "${GREEN}[INFO] Pushing image to ECR...${NC}"
-  docker push "${ecr_url}:${image_tag}"
+  echo -e "${COLOR_GREEN}[INFO] Pushing image ${ecr_url}:${tag} to ${aws_region}${COLOR_NONE}"
+  docker push "${ecr_url}:${tag}"
 
-  if [ "${image_tag}" != "latest" ]; then
-    echo -e "${GREEN}[INFO] Also tagging and pushing as 'latest'...${NC}"
-    docker tag "${local_image}:latest" "${ecr_url}:latest"
+  if [ "${tag}" != "latest" ]; then
+    echo -e "${COLOR_GREEN}[INFO] Also tagging and pushing the latest tag${COLOR_NONE}"
+    docker tag "${image_tag}" "${ecr_url}:latest"
     docker push "${ecr_url}:latest"
   fi
 
-  echo -e "${GREEN}[DONE] Successfully pushed image to ECR!${NC}"
-  echo -e "${GREEN}[INFO] Image: ${ecr_url}:${image_tag}${NC}"
+  echo -e "${COLOR_BLUE}[DONE] Pushed image ${ecr_url}:${tag}${COLOR_NONE}"
 }
 
 main "$@"
