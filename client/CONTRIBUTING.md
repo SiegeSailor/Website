@@ -46,7 +46,7 @@ cp .env.example .env
 Build the image:
 
 ```shell
-bash scripts/docker-build.sh
+bash scripts/docker-build.sh "" "linux/arm64"
 ```
 
 Test the Docker image structure with Container Structure Test:
