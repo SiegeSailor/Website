@@ -2,6 +2,7 @@
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 import { getEntries } from "@/helper/utility";
 import { ROUTE_TO_ICON } from "@/setting/icon";
@@ -16,7 +17,6 @@ export default function () {
         aria-label="Pages"
         color="default"
         className="p-4"
-        disabledKeys={[pathname]}
         hideSelectedIcon
         variant="flat"
       >
@@ -26,7 +26,11 @@ export default function () {
 
             return (
               <ListboxItem
-                classNames={{ title: "font-light text-medium" }}
+                classNames={{
+                  title: clsx("font-light text-medium", {
+                    "font-semibold": pathname === route,
+                  }),
+                }}
                 endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
                 href={route}
                 key={route}

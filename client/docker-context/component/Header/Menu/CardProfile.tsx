@@ -4,6 +4,7 @@ import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 
 import { useDocumentStore } from "@/store/document";
 import { useRoute } from "@/helper/client/history";
+import clsx from "clsx";
 
 export default function () {
   const profile = useDocumentStore((state) => state.profile);
@@ -16,7 +17,6 @@ export default function () {
         aria-label="Profile"
         color="default"
         className="p-4"
-        disabledKeys={[route]}
         hideSelectedIcon
         variant="flat"
       >
@@ -27,7 +27,11 @@ export default function () {
               .map((item) => {
                 return (
                   <ListboxItem
-                    classNames={{ title: "font-light truncate text-medium" }}
+                    classNames={{
+                      title: clsx("font-light truncate text-medium", {
+                        "font-semibold": route === item.route,
+                      }),
+                    }}
                     href={item.route}
                     key={item.route}
                     title={item.title}

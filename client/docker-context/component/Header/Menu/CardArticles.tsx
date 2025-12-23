@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { useArticleStore } from "@/store/article";
@@ -16,7 +17,6 @@ export default function () {
         aria-label="Blog"
         color="default"
         className="p-4"
-        disabledKeys={[pathname]}
         hideSelectedIcon
         variant="flat"
       >
@@ -24,7 +24,11 @@ export default function () {
           {articles.map((article) => {
             return (
               <ListboxItem
-                classNames={{ title: "font-light truncate text-medium" }}
+                classNames={{
+                  title: clsx("font-light truncate text-medium", {
+                    "font-semibold": pathname === article.metadata.route,
+                  }),
+                }}
                 description={article.metadata.date}
                 href={article.metadata.route}
                 key={article.metadata.route}
