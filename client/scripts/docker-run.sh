@@ -20,7 +20,6 @@ main() {
   docker run \
     --rm \
     --network "host" \
-    --name "${image}" \
     "${docker_flags[@]}" \
     "${image}"
 

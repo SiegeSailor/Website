@@ -81,21 +81,21 @@ main() {
   local -r tag="${2:-latest}"
   local -r environment="${3:-production}"
 
-  local -r image_tag="${repository}:${tag}"
+  local -r image="${repository}:${tag}"
   local -r ecr_url=$(get_ecr_url "${environment}") || exit 1
   local -r aws_region=$(get_aws_region "${ecr_url}")
 
   authenticate_ecr "${aws_region}" "${ecr_url}" || exit 1
 
-  echo -e "${COLOR_GREEN}[INFO] Tagging image ${image_tag} as ${ecr_url}:${tag}${COLOR_NONE}"
-  docker tag "${image_tag}" "${ecr_url}:${tag}"
+  echo -e "${COLOR_GREEN}[INFO] Tagging image ${image} as ${ecr_url}:${tag}${COLOR_NONE}"
+  docker tag "${image}" "${ecr_url}:${tag}"
 
   echo -e "${COLOR_GREEN}[INFO] Pushing image ${ecr_url}:${tag} to ${aws_region}${COLOR_NONE}"
   docker push "${ecr_url}:${tag}"
 
   if [ "${tag}" != "latest" ]; then
     echo -e "${COLOR_GREEN}[INFO] Also tagging and pushing the latest tag${COLOR_NONE}"
-    docker tag "${image_tag}" "${ecr_url}:latest"
+    docker tag "${image}" "${ecr_url}:latest"
     docker push "${ecr_url}:latest"
   fi
 
