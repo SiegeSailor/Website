@@ -2,18 +2,11 @@ provider "aws" {
   region = var.aws_region
 }
 
-# resource "aws_service_discovery_http_namespace" "this" {
-#   name = "${local.project}-${local.environment}"
+resource "aws_service_discovery_http_namespace" "this" {
+  name = "${local.project}-${local.environment}"
 
-#   tags = {
-#     CostCenter  = local.cost_center
-#     Environment = local.environment
-#     ManagedBy   = local.managed_by
-#     Project     = local.project
-#   }
-# }
-
-# =====
+  tags = local.shared_tags
+}
 
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
@@ -89,7 +82,7 @@ module "ecs" {
       }
 
       service_connect_configuration = {
-        namespace = "${local.project}-${local.environment}"
+        namespace = aws_service_discovery_http_namespace.this.name
         service = [{
           client_alias = {
             port     = local.port
