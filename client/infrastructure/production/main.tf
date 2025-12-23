@@ -25,11 +25,11 @@ module "ecs" {
 
   default_capacity_provider_strategy = {
     FARGATE = {
-      base   = 8
-      weight = 40
+      base   = 1
+      weight = 50
     }
     FARGATE_SPOT = {
-      weight = 60
+      weight = 50
     }
   }
 
@@ -37,6 +37,13 @@ module "ecs" {
     (local.module) = {
       cpu    = 512
       memory = 2048
+
+      desired_count = 1
+
+      deployment_minimum_healthy_percent = 100
+      deployment_maximum_percent         = 200
+
+      health_check_grace_period_seconds = 30
 
       tags = local.module_tags
 
