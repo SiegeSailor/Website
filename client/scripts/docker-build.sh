@@ -4,6 +4,11 @@
 
 set -o errexit
 
+readonly BLUE="\033[0;34m"
+readonly GREEN="\033[0;32m"
+readonly YELLOW="\033[1;33m"
+readonly NONE="\033[0m"
+
 #######################################
 # Main function.
 # Arguments:
@@ -15,7 +20,7 @@ set -o errexit
 #######################################
 main() {
   if [ ! -d "docker-context" ]; then
-    echo "[ERROR] This script must be run from the root directory" >&2
+    echo -e "${YELLOW}[ERROR] This script must be run from the root directory${NONE}" >&2
     exit 1
   fi
 
@@ -29,10 +34,10 @@ main() {
     source ".env"
     set +a
   else
-    echo "[WARN] .env file not found"
+    echo -e "${YELLOW}[WARN] .env file not found${NONE}"
   fi
 
-  echo "[INFO] Building Docker image ${image}"
+  echo -e "${GREEN}[INFO] Building Docker image ${image}${NONE}"
   cp -r ../.git docker-context/.git
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
@@ -43,7 +48,7 @@ main() {
     docker-context
   rm -rf docker-context/.git
 
-  echo "[DONE] Built Docker image ${image}"
+  echo -e "${BLUE}[DONE] Built Docker image ${image}${NONE}"
 }
 
 main "$@"
