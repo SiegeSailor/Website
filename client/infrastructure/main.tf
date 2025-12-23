@@ -24,6 +24,17 @@ module "tfstate_backend" {
   }
 }
 
+# resource "aws_service_discovery_http_namespace" "this" {
+#   name = "${local.project}-${var.environment}"
+
+#   tags = {
+#     CostCenter  = local.cost_center
+#     Environment = var.environment
+#     ManagedBy   = local.managed_by
+#     Project     = local.project
+#   }
+# }
+
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "~> 6.10.0"

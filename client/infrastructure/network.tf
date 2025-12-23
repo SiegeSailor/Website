@@ -52,6 +52,10 @@ module "acm" {
   domain_name = module.route53.name
   zone_id     = module.route53.id
 
+  # The ACM certificate for CloudFront must be created in us-east-1.
+  # See https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-and-https-requirements.html#https-requirements-certificate-issuer  
+  region = "us-east-1"
+
   validation_method = "DNS"
 
   subject_alternative_names = [
@@ -75,7 +79,7 @@ module "cloudfront" {
   aliases = [module.route53.name, "*.${module.route53.name}"]
 
   logging_config = {
-    bucket = module.cloudfront_log_s3_bucket.s3_bucket_id
+    bucket = module.cloudfront_log_s3_bucket.s3_bucket_bucket_domain_name
   }
 
   origin = {
