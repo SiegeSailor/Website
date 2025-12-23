@@ -41,22 +41,11 @@ module "ecs" {
       tags = local.module_tags
 
       container_definitions = {
-        fluent-bit = {
-          cpu       = 256
-          memory    = 512
-          essential = true
-          image     = "906394416424.dkr.ecr.${var.aws_region}.amazonaws.com/aws-for-fluent-bit:stable"
-          firelensConfiguration = {
-            type = "fluentbit"
-          }
-          memoryReservation = 50
-        }
-
         (local.module) = {
           cpu       = 256
           memory    = 512
           essential = true
-          image     = data.aws_ecr_image.latest_image.image_digest
+          image     = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
           portMappings = [
             {
               name          = local.module
@@ -64,22 +53,20 @@ module "ecs" {
             }
           ]
 
-          dependsOn = [{
-            containerName = "fluent-bit"
-            condition     = "START"
-          }]
+          # Commented out due to none of the methods working. ALB health check is sufficient for routing:
+          #   - Using `curl` with `127.0.0.1` and `localhost` shows Unknown, Unhealthy with `0.0.0.0`.
+          #   - Using `wget` with `localhost` shows Unhealthy.
+          #   - Using `ss -ltn` with `:3000` shows Unhealthy.
+          # healthCheck = {
+          #   command     = ["CMD-SHELL", "ss -ltn | grep -q ':3000 ' || exit 1"]
+          #   interval    = 30
+          #   timeout     = 5
+          #   retries     = 3
+          #   startPeriod = 60
+          # }
 
-          enable_cloudwatch_logging = false
-          logConfiguration = {
-            logDriver = "awsfirelens"
-            options = {
-              name                    = "firehose"
-              region                  = var.aws_region
-              delivery_stream         = "${local.project}-${local.environment}-${local.module}-stream"
-              log-driver-buffer-limit = "2000000"
-            }
-          }
-          memoryReservation = 128
+          enable_cloudwatch_logging = true
+          memoryReservation         = 128
         }
       }
 

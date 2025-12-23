@@ -35,7 +35,7 @@ module "cloudfront" {
       custom_origin_config = {
         http_port              = 80
         https_port             = 443
-        origin_protocol_policy = "https-only"
+        origin_protocol_policy = "http-only"
         origin_ssl_protocols   = ["TLSv1.2"]
       }
     }
@@ -43,7 +43,7 @@ module "cloudfront" {
 
   default_cache_behavior = {
     target_origin_id       = "alb"
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
 
     allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods  = ["GET", "HEAD"]
@@ -73,14 +73,7 @@ module "alb" {
       from_port   = 80
       to_port     = 80
       ip_protocol = "tcp"
-      description = "Captures HTTP traffic."
-      cidr_ipv4   = "0.0.0.0/0"
-    }
-    https = {
-      from_port   = 443
-      to_port     = 443
-      ip_protocol = "tcp"
-      description = "Captures HTTPS traffic."
+      description = "Captures HTTP traffic from CloudFront."
       cidr_ipv4   = "0.0.0.0/0"
     }
   }
@@ -96,19 +89,9 @@ module "alb" {
   }
 
   listeners = {
-    http-https-redirect = {
+    http = {
       port     = 80
       protocol = "HTTP"
-      redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
-      }
-    }
-    https = {
-      port            = 443
-      protocol        = "HTTPS"
-      certificate_arn = module.acm.acm_certificate_arn
 
       forward = {
         target_group_key = local.module
@@ -127,13 +110,13 @@ module "alb" {
       health_check = {
         enabled             = true
         interval            = 30
-        path                = "/api/health"
+        path                = "/"
         port                = "traffic-port"
         healthy_threshold   = 2
         unhealthy_threshold = 2
         timeout             = 5
         protocol            = "HTTP"
-        matcher             = "200"
+        matcher             = "200-399"
       }
 
       create_attachment = false
