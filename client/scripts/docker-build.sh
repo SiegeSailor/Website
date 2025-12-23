@@ -38,6 +38,7 @@ main() {
     --build-arg COMMIT_SHORT="${commit_short}" \
     --build-arg IMAGE="${image}" \
     --tag "${image}" \
+    --platform "linux/amd64" \
     "${docker_flags[@]}" \
     docker-context
   rm -rf docker-context/.git
