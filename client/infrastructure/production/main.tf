@@ -38,6 +38,8 @@ module "ecs" {
       cpu    = 512
       memory = 2048
 
+      tags = local.module_tags
+
       container_definitions = {
         fluent-bit = {
           cpu       = 256
@@ -90,6 +92,7 @@ module "ecs" {
           }
           port_name      = local.module
           discovery_name = "${local.project}-${local.environment}-${local.module}"
+          tags           = local.module_tags
         }]
       }
 
