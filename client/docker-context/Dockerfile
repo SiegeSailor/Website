@@ -16,7 +16,7 @@ ENV IMAGE="${IMAGE}"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
-WORKDIR /app/client
+WORKDIR /app
 
 # [Stage] Prepare system level dependencies and install packages
 FROM base AS dependencies
@@ -29,7 +29,7 @@ RUN npm ci
 # [Stage] Build the application
 FROM dependencies AS build
 
-COPY --from=dependencies /app/client/node_modules/. ./node_modules/
+COPY --from=dependencies /app/node_modules/. ./node_modules/
 COPY "." ./
 COPY "./.git/". ../.git/
 
@@ -53,10 +53,10 @@ RUN addgroup --system --gid "${USER_GID}" "${GROUP_NAME}" && \
 
 USER "${USERNAME}"
 
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/public/. ./public/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/standalone/. ./
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/client/.next/static/. ./.next/static/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.git/. ../.git/
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/public/. ./public/
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/standalone/. ./
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/static/. ./.next/static/
+COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /.git/. ../.git/
 
 EXPOSE 3000
 
