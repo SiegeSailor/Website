@@ -27,3 +27,8 @@ output "ecr_repository_url" {
   description = "The URL of the repository."
   value       = module.ecr.repository_url
 }
+
+output "ecr_latest_image_digest" {
+  description = "The image digest of the latest image."
+  value       = data.aws_ecr_image.latest_image.image_digest
+}

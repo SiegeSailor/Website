@@ -16,19 +16,20 @@ readonly NONE="\033[0m"
 # Outputs:
 #   Writes ECR repository URL to stdout
 # Returns:
-#   0 if successful, 1 otherwise
+#   `0` if successful, `1` otherwise
 #######################################
 get_ecr_url() {
   local -r environment="${1:-production}"
   local -r path_to_infrastructure="infrastructure/${environment}"
   
   if [ ! -d "${path_to_infrastructure}" ]; then
-    echo -e "${YELLOW}[ERROR] Terraform directory not found: ${path_to_infrastructure}${NONE}" >&2
+    echo -e "${YELLOW}[ERROR] Terraform directory not found${NONE}" >&2
     return 1
   fi
 
   local ecr_url
   ecr_url=$(cd "${path_to_infrastructure}" && terraform output -raw ecr_repository_url 2>/dev/null || echo "")
+  readonly ecr_url
 
   if [ -z "${ecr_url}" ]; then
     echo -e "${YELLOW}[ERROR] ECR repository not found in Terraform outputs. Run 'terraform apply' first.${NONE}" >&2
@@ -36,6 +37,36 @@ get_ecr_url() {
   fi
 
   echo "${ecr_url}"
+}
+
+#######################################
+# Get the latest image digest from Terraform output.
+# Arguments:
+#   $1 - Environment (default: production)
+# Outputs:
+#   Writes image digest to stdout
+# Returns:
+#   `0` if successful, `1` otherwise
+#######################################
+get_ecr_latest_image_digest() {
+  local -r environment="${1:-production}"
+  local -r path_to_infrastructure="infrastructure/${environment}"
+  
+  if [ ! -d "${path_to_infrastructure}" ]; then
+    echo -e "${YELLOW}[ERROR] Terraform directory not found${NONE}" >&2
+    return 1
+  fi
+
+  local ecr_latest_image_digest
+  ecr_latest_image_digest=$(cd "${path_to_infrastructure}" && terraform output -raw ecr_latest_image_digest 2>/dev/null || echo "")
+  readonly ecr_latest_image_digest
+
+  if [ -z "${ecr_latest_image_digest}" ]; then
+    echo -e "${YELLOW}[ERROR] ECR repository not found in Terraform outputs. Run 'terraform apply' first.${NONE}" >&2
+    return 1
+  fi
+
+  echo "${ecr_latest_image_digest}"
 }
 
 #######################################
@@ -99,7 +130,7 @@ main() {
     docker push "${ecr_url}:latest"
   fi
 
-  echo -e "${BLUE}[DONE] Pushed image ${ecr_url}:${tag}${NONE}"
+  echo -e "${BLUE}[DONE] Pushed image ${ecr_url}:${tag}@$(get_ecr_latest_image_digest "${environment}" || exit 1)${NONE}"
 }
 
 main "$@"
