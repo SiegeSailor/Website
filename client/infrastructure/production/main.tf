@@ -61,7 +61,7 @@ module "ecs" {
           cpu       = 256
           memory    = 512
           essential = true
-          image     = "${module.ecr.repository_url}:latest"
+          image     = data.aws_ecr_image.latest_image.image_digest
           portMappings = [
             {
               name          = local.module
