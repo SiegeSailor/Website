@@ -4,12 +4,31 @@ module "ecr" {
 
   repository_name                 = "${local.project}-${local.environment}-${local.module}"
   repository_force_delete         = true
-  repository_image_tag_mutability = "MUTABLE"
+  repository_image_tag_mutability = "MUTABLE_WITH_EXCLUSION"
+  repository_image_tag_mutability_exclusion_filter = [
+    {
+      filter      = "latest"
+      filter_type = "WILDCARD"
+    },
+  ]
   repository_lifecycle_policy = jsonencode({
     rules = [
       {
-        rulePriority = 1,
-        description  = "Keep last 5 images.",
+        rulePriority = 1
+        description  = "Expire untagged images older than 1 day."
+        selection = {
+          tagStatus   = "untagged"
+          countType   = "sinceImagePushed"
+          countUnit   = "days"
+          countNumber = 1
+        }
+        action = {
+          type = "expire"
+        }
+      },
+      {
+        rulePriority = 2,
+        description  = "Expire tagged images if more than 5 exist.",
         selection = {
           tagStatus     = "tagged",
           tagPrefixList = ["v"],
