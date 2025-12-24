@@ -62,7 +62,7 @@ module "ecs" {
 
           environment = [
             {
-              name  = "HOST"
+              name  = "HOSTNAME"
               value = "0.0.0.0"
             },
             {
