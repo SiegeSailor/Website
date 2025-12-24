@@ -31,7 +31,7 @@ Required software for the every modules:
 - [~] Add cards: Git commits, LeetCode commits, articles number
 - [x] Add feature articles in /blog
 - [ ] Review feature (AI automated reviewers)
-- [x] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production.
+- [ ] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production. Only the first time after pushing-refresh (cache invalid due to file changes, hence online website updates automatically)
 - [x] article view scrollbar
 - [x] table view 100%
 - [x] issue board and Change log for features: subscribe for email notifications, articles, paper with Emma, compiling repo
