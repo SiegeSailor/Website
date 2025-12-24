@@ -4,11 +4,11 @@ import { ComponentProps } from "react";
 import { CardHeader, Chip, Card, CardBody, CardFooter } from "@heroui/react";
 import clsx from "clsx";
 
-import { PROJECTS } from "@/setting/home";
-import { STAGE_TO_COLOR } from "@/setting/constant";
-import DivisionTitle from "@/component/DivisionTitle";
-import Link from "@/component/Link";
-import Markdown from "@/component/Markdown";
+import { PROJECTS } from "@/settings/home";
+import { STAGE_TO_COLOR } from "@/settings/constant";
+import DivisionTitle from "@/components/DivisionTitle";
+import Link from "@/components/Link";
+import Markdown from "@/components/Markdown";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (

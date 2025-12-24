@@ -2,7 +2,7 @@
 
 import { Button, Pagination } from "@heroui/react";
 
-import { useBlogStore } from "@/store/blog";
+import { useBlogStore } from "@/stores/blog";
 
 export default function ({ pageTotal }: Readonly<{ pageTotal: number }>) {
   const page = useBlogStore((state) => state.page);

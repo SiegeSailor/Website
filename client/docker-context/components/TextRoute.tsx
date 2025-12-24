@@ -1,6 +1,6 @@
 "use client";
 
-import { useRoute } from "@/helper/client/history";
+import { useRoute } from "@/helpers/client/history";
 
 export default function () {
   const { route } = useRoute();

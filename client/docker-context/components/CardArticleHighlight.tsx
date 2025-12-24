@@ -4,8 +4,8 @@ import { ComponentProps } from "react";
 import { Card } from "@heroui/react";
 import clsx from "clsx";
 
-import { getArticleByDate } from "@/helper/server/article";
-import Link from "@/component/Link";
+import { getArticleByDate } from "@/helpers/server/article";
+import Link from "@/components/Link";
 
 const METADATA_TO_CLASSNAMES = {
   category: "text-foreground/50 text-small font-light",

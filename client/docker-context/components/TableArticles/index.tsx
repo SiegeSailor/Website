@@ -10,15 +10,15 @@ import {
   TableRow,
 } from "@heroui/react";
 
-import { TArticle } from "@/helper/server/article";
-import { useArticleStore } from "@/store/article";
-import { useBlogStore } from "@/store/blog";
-import ChipCategory from "@/component/ChipCategory";
-import ChipStatus from "@/component/ChipStatus";
+import { TArticle } from "@/helpers/server/article";
+import { useArticleStore } from "@/stores/article";
+import { useBlogStore } from "@/stores/blog";
+import ChipCategory from "@/components/ChipCategory";
+import ChipStatus from "@/components/ChipStatus";
 import ContentBottom from "./ContentBottom";
 import ContentTop from "./ContentTop";
-import Link from "@/component/Link";
-import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import Link from "@/components/Link";
+import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
 export const COLUMNS: {
   key: keyof TArticle["metadata"];

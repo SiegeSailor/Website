@@ -1,8 +1,8 @@
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
-import DivisionTitle from "@/component/DivisionTitle";
-import Link from "@/component/Link";
+import DivisionTitle from "@/components/DivisionTitle";
+import Link from "@/components/Link";
 
 import CardExperience from "./CardExperience";
 import CardPublication from "./CardPublication";

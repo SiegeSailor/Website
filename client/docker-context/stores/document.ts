@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { TProfile } from "@/helper/server/document";
+import { TProfile } from "@/helpers/server/document";
 
 export type TState = {
   profile: TProfile | null;

@@ -10,12 +10,12 @@ import {
 import { ChevronDownIcon, SearchIcon } from "lucide-react";
 import { ComponentProps } from "react";
 
-import { useArticleStore } from "@/store/article";
-import { useBlogStore } from "@/store/blog";
-import { ROWS_PER_PAGE } from "@/setting/constant";
+import { useArticleStore } from "@/stores/article";
+import { useBlogStore } from "@/stores/blog";
+import { ROWS_PER_PAGE } from "@/settings/constant";
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
-import Link from "@/component/Link";
+import Link from "@/components/Link";
 
 export const PROPS_BUTTON: ComponentProps<typeof Button> = {
   className:

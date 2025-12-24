@@ -1,7 +1,7 @@
 "use client";
 
-import { useArticleStore } from "@/store/article";
-import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import { useArticleStore } from "@/stores/article";
+import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
 export default function () {
   const uniqueTechnologies = useArticleStore(

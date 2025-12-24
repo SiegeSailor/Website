@@ -3,9 +3,9 @@
 import { Chip } from "@heroui/react";
 import { ComponentProps } from "react";
 
-import { TArticle } from "@/helper/server/article";
-import { useSearchByMetadata } from "@/helper/client/blog";
-import Link from "@/component/Link";
+import { TArticle } from "@/helpers/server/article";
+import { useSearchByMetadata } from "@/helpers/client/blog";
+import Link from "@/components/Link";
 
 export default function ({
   category,

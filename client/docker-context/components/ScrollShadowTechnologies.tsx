@@ -4,11 +4,11 @@ import { ComponentProps } from "react";
 import { Chip, ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
-import { getArticleByFilename } from "@/helper/server/article";
-import { useSearchByMetadata } from "@/helper/client/blog";
-import IconTechnology from "@/component/IconTechnology";
-import Link from "@/component/Link";
-import ScrollShadowChips from "@/component/ScrollShadowChips";
+import { getArticleByFilename } from "@/helpers/server/article";
+import { useSearchByMetadata } from "@/helpers/client/blog";
+import IconTechnology from "@/components/IconTechnology";
+import Link from "@/components/Link";
+import ScrollShadowChips from "@/components/ScrollShadowChips";
 
 export default function ({
   isLink = true,

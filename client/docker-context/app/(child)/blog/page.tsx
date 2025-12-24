@@ -1,15 +1,15 @@
 import { Metadata } from "next";
 
-import { createPageTitle } from "@/helper/utility";
-import { getArticles } from "@/helper/server/article";
-import { HIGHLIGHTS } from "@/setting/home";
-import { ROUTE_TO_TITLE } from "@/setting/constant";
-import CardArticleDetail from "@/component/CardArticleDetail";
-import CardArticleHighlight from "@/component/CardArticleHighlight";
-import CardArticleSimple from "@/component/CardArticleSimple";
-import ScrollShadowTechnologiesFlatten from "@/component/ScrollShadowTechnologiesFlatten";
-import TableArticles from "@/component/TableArticles";
-import DivisionSticky from "@/component/DivisionSticky";
+import { createPageTitle } from "@/helpers/utility";
+import { getArticles } from "@/helpers/server/article";
+import { HIGHLIGHTS } from "@/settings/home";
+import { ROUTE_TO_TITLE } from "@/settings/constant";
+import CardArticleDetail from "@/components/CardArticleDetail";
+import CardArticleHighlight from "@/components/CardArticleHighlight";
+import CardArticleSimple from "@/components/CardArticleSimple";
+import ScrollShadowTechnologiesFlatten from "@/components/ScrollShadowTechnologiesFlatten";
+import TableArticles from "@/components/TableArticles";
+import DivisionSticky from "@/components/DivisionSticky";
 
 export const metadata: Metadata = {
   title: createPageTitle(ROUTE_TO_TITLE["/blog"]),

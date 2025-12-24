@@ -3,11 +3,11 @@
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
-import { HIGHLIGHTS } from "@/setting/home";
-import CardArticleDetail from "@/component/CardArticleDetail";
-import ChartLineArticle from "@/component/ChartLineArticle";
-import DivisionTitle from "@/component/DivisionTitle";
-import Link from "@/component/Link";
+import { HIGHLIGHTS } from "@/settings/home";
+import CardArticleDetail from "@/components/CardArticleDetail";
+import ChartLineArticle from "@/components/ChartLineArticle";
+import DivisionTitle from "@/components/DivisionTitle";
+import Link from "@/components/Link";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (

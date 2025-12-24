@@ -5,7 +5,7 @@ import { ComponentProps, ReactNode } from "react";
 import { Route } from "next";
 import clsx from "clsx";
 
-import Link from "@/component/Link";
+import Link from "@/components/Link";
 
 export default async function ({
   contentHeader,

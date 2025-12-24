@@ -3,17 +3,17 @@ import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
 import clsx from "clsx";
 
-import "@/style/global.css";
-import { createPageTitle } from "@/helper/utility";
+import "@/styles/global.css";
+import { createPageTitle } from "@/helpers/utility";
 import {
   DESCRIPTION,
   ROUTE_TO_TITLE,
   TITLE_TO_ROUTE,
-} from "@/setting/constant";
-import DivisionCenter from "@/component/DivisionCenter";
-import Link from "@/component/Link";
-import Provider from "@/component/Provider";
-import TextRoute from "@/component/TextRoute";
+} from "@/settings/constant";
+import DivisionCenter from "@/components/DivisionCenter";
+import Link from "@/components/Link";
+import Provider from "@/components/Provider";
+import TextRoute from "@/components/TextRoute";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 

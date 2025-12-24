@@ -4,9 +4,9 @@ import { ComponentProps, ComponentType } from "react";
 import { IconType } from "@icons-pack/react-simple-icons";
 import { LucideProps } from "lucide-react";
 
-import { getArticleByFilename } from "@/helper/server/article";
-import { getValues } from "@/helper/utility";
-import { TECHNOLOGY_TO_ICON, LUCIDE_ICON } from "@/setting/icon";
+import { getArticleByFilename } from "@/helpers/server/article";
+import { getValues } from "@/helpers/utility";
+import { TECHNOLOGY_TO_ICON, LUCIDE_ICON } from "@/settings/icon";
 
 function IconLucide({
   Component,

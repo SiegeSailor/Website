@@ -3,7 +3,7 @@
 import { ComponentProps } from "react";
 
 import Body from "./Body";
-import CardBlock from "@/component/CardBlock";
+import CardBlock from "@/components/CardBlock";
 
 export default async function ({
   ...props

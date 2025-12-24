@@ -14,7 +14,7 @@ import clsx from "clsx";
 import { COLUMNS } from ".";
 import { PROPS_BUTTON } from "./ContentTop";
 import { renderSelection } from "./DropdownMetadata";
-import { useBlogStore } from "@/store/blog";
+import { useBlogStore } from "@/stores/blog";
 
 export default function ({
   ...props

@@ -14,9 +14,9 @@ import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 
 import { PROPS_BUTTON } from "./ContentTop";
-import { TArticle } from "@/helper/server/article";
-import { useArticleStore, TState as TArticleState } from "@/store/article";
-import { useBlogStore, TState as TBlogState } from "@/store/blog";
+import { TArticle } from "@/helpers/server/article";
+import { useArticleStore, TState as TArticleState } from "@/stores/article";
+import { useBlogStore, TState as TBlogState } from "@/stores/blog";
 
 export type TMetadata = Extract<
   keyof TArticle["metadata"],

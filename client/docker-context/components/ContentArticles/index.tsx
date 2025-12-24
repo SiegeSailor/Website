@@ -3,9 +3,9 @@
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
-import { getArticles } from "@/helper/server/article";
-import CardArticleSimple from "@/component/CardArticleSimple";
-import CardBlog from "@/component/CardBlog";
+import { getArticles } from "@/helpers/server/article";
+import CardArticleSimple from "@/components/CardArticleSimple";
+import CardBlog from "@/components/CardBlog";
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   const articles = await getArticles();

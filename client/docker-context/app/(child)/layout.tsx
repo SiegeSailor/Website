@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import Breadcrumb from "@/component/Breadcrumb";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default async function ({
   children,

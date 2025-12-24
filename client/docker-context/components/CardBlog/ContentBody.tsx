@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Progress, Spacer } from "@heroui/react";
 import { useEffect, useState } from "react";
 
-import { useArticleStore } from "@/store/article";
-import DivisionFloating from "@/component/DivisionFloating";
-import ImageBackground from "@/component/ImageBackground";
-import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import { useArticleStore } from "@/stores/article";
+import DivisionFloating from "@/components/DivisionFloating";
+import ImageBackground from "@/components/ImageBackground";
+import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
 const DURATION = 4000 as const;
 const PROGRESS_INTERVAL = 20 as const;

@@ -2,8 +2,8 @@
 
 import { ComponentProps } from "react";
 
-import { getProfile } from "@/helper/server/document";
-import CardBlock from "@/component/CardBlock";
+import { getProfile } from "@/helpers/server/document";
+import CardBlock from "@/components/CardBlock";
 import Chart from "./Chart";
 import ContentHeader from "./ContentHeader";
 

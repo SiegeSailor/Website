@@ -2,15 +2,15 @@ import { Button, Card, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
 import { Metadata } from "next";
 
-import { createPageTitle, getEntries } from "@/helper/utility";
-import { getProfile } from "@/helper/server/document";
-import { getSlugByTitle } from "@/helper/utility";
-import DivisionSticky from "@/component/DivisionSticky";
-import Heading from "@/component/Heading";
-import Link from "@/component/Link";
-import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
-import Markdown from "@/component/Markdown";
-import ModalImage from "@/component/ModalImage";
+import { createPageTitle, getEntries } from "@/helpers/utility";
+import { getProfile } from "@/helpers/server/document";
+import { getSlugByTitle } from "@/helpers/utility";
+import DivisionSticky from "@/components/DivisionSticky";
+import Heading from "@/components/Heading";
+import Link from "@/components/Link";
+import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
+import Markdown from "@/components/Markdown";
+import ModalImage from "@/components/ModalImage";
 
 export const metadata: Metadata = {
   title: createPageTitle("Profile"),

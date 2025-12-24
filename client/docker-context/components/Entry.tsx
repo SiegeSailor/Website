@@ -2,10 +2,10 @@
 
 import { ReactNode, useEffect, useState } from "react";
 
-import { TArticle } from "@/helper/server/article";
-import { TProfile } from "@/helper/server/document";
-import { useArticleStore } from "@/store/article";
-import { useDocumentStore } from "@/store/document";
+import { TArticle } from "@/helpers/server/article";
+import { TProfile } from "@/helpers/server/document";
+import { useArticleStore } from "@/stores/article";
+import { useDocumentStore } from "@/stores/document";
 
 export default function ({
   articles,

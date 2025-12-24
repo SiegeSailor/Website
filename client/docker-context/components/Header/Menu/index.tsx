@@ -2,8 +2,8 @@
 
 import { NavbarMenu, NavbarMenuItem, ScrollShadow } from "@heroui/react";
 
-import { useHeaderStore } from "@/store/header";
-import Search from "@/component/Search";
+import { useHeaderStore } from "@/stores/header";
+import Search from "@/components/Search";
 
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";

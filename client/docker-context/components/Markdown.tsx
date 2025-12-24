@@ -8,14 +8,14 @@ import rehypeSlug from "rehype-slug";
 import remarkGFM from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 
-import { remarkShowLineNumbers, remarkRehypeCallout } from "@/helper/plugin";
-import ButtonCopy from "@/component/ButtonCopy";
-import Callout from "@/component/Callout";
-import Code from "@/component/Code";
-import Heading from "@/component/Heading";
-import Link from "@/component/Link";
-import Mermaid from "@/component/Mermaid";
-import ModalImage from "@/component/ModalImage";
+import { remarkShowLineNumbers, remarkRehypeCallout } from "@/helpers/plugin";
+import ButtonCopy from "@/components/ButtonCopy";
+import Callout from "@/components/Callout";
+import Code from "@/components/Code";
+import Heading from "@/components/Heading";
+import Link from "@/components/Link";
+import Mermaid from "@/components/Mermaid";
+import ModalImage from "@/components/ModalImage";
 
 const SPACE = "my-4 first:mt-0 last:mb-0" as const;
 

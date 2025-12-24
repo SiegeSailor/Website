@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
-import { HEIGHT } from "@/component/Header/Bar";
+import { HEIGHT } from "@/components/Header/Bar";
 
 const OFFSET = "1.75rem" as const;
 

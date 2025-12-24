@@ -6,8 +6,8 @@ import { useTheme } from "next-themes";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import mermaid from "mermaid";
 
-import { getCSSVariable } from "@/helper/utility";
-import { useChartStore } from "@/store/chart";
+import { getCSSVariable } from "@/helpers/utility";
+import { useChartStore } from "@/stores/chart";
 
 const CSS_VARIABLE_COLORS = [
   "--heroui-background",

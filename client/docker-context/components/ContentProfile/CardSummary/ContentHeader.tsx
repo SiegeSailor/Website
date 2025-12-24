@@ -1,6 +1,6 @@
 "use server";
 
-import DivisionFloating from "@/component/DivisionFloating";
+import DivisionFloating from "@/components/DivisionFloating";
 
 export default async function ({
   experience,

@@ -4,12 +4,12 @@ import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
 import clsx from "clsx";
 
-import "@/style/global.css";
-import { createPageTitle } from "@/helper/utility";
-import { DESCRIPTION } from "@/setting/constant";
-import DivisionCenter from "@/component/DivisionCenter";
+import "@/styles/global.css";
+import { createPageTitle } from "@/helpers/utility";
+import { DESCRIPTION } from "@/settings/constant";
+import DivisionCenter from "@/components/DivisionCenter";
 import Error from "./error";
-import Provider from "@/component/Provider";
+import Provider from "@/components/Provider";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 

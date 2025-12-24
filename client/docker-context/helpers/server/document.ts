@@ -4,10 +4,10 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/setting/constant";
-import { getAnchorsByContent } from "@/helper/article";
-import { getSlugByTitle } from "@/helper/utility";
-import { getStatisticByFilePath } from "@/helper/server/file";
+import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/settings/constant";
+import { getAnchorsByContent } from "@/helpers/article";
+import { getSlugByTitle } from "@/helpers/utility";
+import { getStatisticByFilePath } from "@/helpers/server/file";
 
 const REGEX_URL = /^https?:\/\/.+/;
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;

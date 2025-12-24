@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { TMetadata } from "@/component/TableArticles/DropdownMetadata";
+import { TMetadata } from "@/components/TableArticles/DropdownMetadata";
 
 export function useSearchByMetadata(metadata: TMetadata, value: string) {
   const searchParams = useSearchParams();

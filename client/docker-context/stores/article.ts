@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-import { TArticle } from "@/helper/server/article";
-import { TECHNOLOGIES } from "@/setting/constant";
+import { TArticle } from "@/helpers/server/article";
+import { TECHNOLOGIES } from "@/settings/constant";
 
 export type TState = {
   articles: TArticle[];

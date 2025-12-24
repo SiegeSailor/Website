@@ -5,7 +5,7 @@ import { Link } from "@heroui/react";
 import clsx from "clsx";
 import NextLink from "next/link";
 
-import { useArticleStore } from "@/store/article";
+import { useArticleStore } from "@/stores/article";
 
 function ChildrenArticle({
   ...props

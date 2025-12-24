@@ -4,9 +4,9 @@ import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { getEntries } from "@/helper/utility";
-import { ROUTE_TO_ICON } from "@/setting/icon";
-import { TITLE_TO_ROUTE } from "@/setting/constant";
+import { getEntries } from "@/helpers/utility";
+import { ROUTE_TO_ICON } from "@/settings/icon";
+import { TITLE_TO_ROUTE } from "@/settings/constant";
 
 export default function () {
   const pathname = usePathname();

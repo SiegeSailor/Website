@@ -3,9 +3,9 @@
 import { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 
-import { getEntries } from "@/helper/utility";
-import { useArticleStore } from "@/store/article";
-import { useChartStore } from "@/store/chart";
+import { getEntries } from "@/helpers/utility";
+import { useArticleStore } from "@/stores/article";
+import { useChartStore } from "@/stores/chart";
 
 function renderDate(input: string) {
   const [year, month] = input.split("-");

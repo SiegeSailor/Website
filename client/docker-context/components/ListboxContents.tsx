@@ -6,7 +6,7 @@ import { MoveLeftIcon, MoveUpIcon } from "lucide-react";
 import { Listbox, ListboxItem, ListboxSection, Skeleton } from "@heroui/react";
 import clsx from "clsx";
 
-import { getAnchorsByContent } from "@/helper/article";
+import { getAnchorsByContent } from "@/helpers/article";
 
 export const IDENTIFIER = "table-of-contents" as const;
 

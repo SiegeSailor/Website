@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
-import { useArticleStore } from "@/store/article";
+import { useArticleStore } from "@/stores/article";
 
 export default function () {
   const articles = useArticleStore((state) => state.articles);

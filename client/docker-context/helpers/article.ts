@@ -1,6 +1,6 @@
 import { Route } from "next";
 
-import { getSlugByTitle } from "@/helper/utility";
+import { getSlugByTitle } from "@/helpers/utility";
 
 export function getAnchorsByContent(content: string, prefixRoute: Route) {
   const lines = content.split("\n");

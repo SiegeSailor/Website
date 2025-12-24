@@ -8,8 +8,8 @@ import {
   Divider,
 } from "@heroui/react";
 
-import Search from "@/component/Search";
-import IconTheme from "@/component/IconTheme";
+import Search from "@/components/Search";
+import IconTheme from "@/components/IconTheme";
 
 export default async function () {
   return (

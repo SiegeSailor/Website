@@ -2,10 +2,10 @@
 
 import { ComponentProps } from "react";
 
-import { EXPERIENCE } from "@/setting/home";
-import CardBlock from "@/component/CardBlock";
+import { EXPERIENCE } from "@/settings/home";
+import CardBlock from "@/components/CardBlock";
 import ContentHeader from "./ContentHeader";
-import TimelineScrolling from "@/component/TimelineScrolling";
+import TimelineScrolling from "@/components/TimelineScrolling";
 
 export default async function ({
   classNameScrollHeight,

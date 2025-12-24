@@ -3,8 +3,8 @@
 import { ReactNode, useEffect } from "react";
 import { Navbar } from "@heroui/react";
 
-import { useHeaderStore } from "@/store/header";
-import { useRoute } from "@/helper/client/history";
+import { useHeaderStore } from "@/stores/header";
+import { useRoute } from "@/helpers/client/history";
 
 export const HEIGHT = "4rem" as const;
 

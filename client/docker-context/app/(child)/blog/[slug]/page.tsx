@@ -1,17 +1,17 @@
 import { Card, Divider } from "@heroui/react";
 import { Metadata } from "next";
 
-import { createPageTitle } from "@/helper/utility";
-import { getArticles, getArticleByDate } from "@/helper/server/article";
-import { getSlugByTitle } from "@/helper/utility";
-import ChipCategory from "@/component/ChipCategory";
-import ChipStatus from "@/component/ChipStatus";
-import DivisionSticky from "@/component/DivisionSticky";
-import Heading from "@/component/Heading";
-import ListboxArticles from "@/component/ListboxArticles";
-import ListboxContents, { IDENTIFIER } from "@/component/ListboxContents";
-import Markdown from "@/component/Markdown";
-import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
+import { createPageTitle } from "@/helpers/utility";
+import { getArticles, getArticleByDate } from "@/helpers/server/article";
+import { getSlugByTitle } from "@/helpers/utility";
+import ChipCategory from "@/components/ChipCategory";
+import ChipStatus from "@/components/ChipStatus";
+import DivisionSticky from "@/components/DivisionSticky";
+import Heading from "@/components/Heading";
+import ListboxArticles from "@/components/ListboxArticles";
+import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
+import Markdown from "@/components/Markdown";
+import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
 export const dynamicParams = false;
 

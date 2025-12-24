@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 
-import { createPageTitle } from "@/helper/utility";
-import { ROUTE_TO_TITLE } from "@/setting/constant";
-import ContentArticles from "@/component/ContentArticles";
-import ContentProfile from "@/component/ContentProfile";
-import ContentHighlights from "@/component/ContentHighlights";
-import ContentHero from "@/component/ContentHero";
-import ContentProjects from "@/component/ContentProjects";
+import { createPageTitle } from "@/helpers/utility";
+import { ROUTE_TO_TITLE } from "@/settings/constant";
+import ContentArticles from "@/components/ContentArticles";
+import ContentProfile from "@/components/ContentProfile";
+import ContentHighlights from "@/components/ContentHighlights";
+import ContentHero from "@/components/ContentHero";
+import ContentProjects from "@/components/ContentProjects";
 
 export const metadata: Metadata = {
   title: createPageTitle(ROUTE_TO_TITLE["/"]),

@@ -11,7 +11,7 @@ import {
 import clsx from "clsx";
 import mermaid from "mermaid";
 
-import { useChartStore } from "@/store/chart";
+import { useChartStore } from "@/stores/chart";
 
 export default ({
   source,

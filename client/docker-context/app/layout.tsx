@@ -3,13 +3,13 @@ import { Roboto } from "next/font/google";
 import { Viewport, Metadata } from "next";
 import clsx from "clsx";
 
-import "@/style/global.css";
-import { DESCRIPTION, TITLE } from "@/setting/constant";
-import { getArticles } from "@/helper/server/article";
-import { getProfile } from "@/helper/server/document";
-import Entry from "@/component/Entry";
-import Header from "@/component/Header";
-import Provider from "@/component/Provider";
+import "@/styles/global.css";
+import { DESCRIPTION, TITLE } from "@/settings/constant";
+import { getArticles } from "@/helpers/server/article";
+import { getProfile } from "@/helpers/server/document";
+import Entry from "@/components/Entry";
+import Header from "@/components/Header";
+import Provider from "@/components/Provider";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 

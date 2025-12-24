@@ -2,7 +2,7 @@
 
 import { Spinner } from "@heroui/react";
 
-import DivisionCenter from "@/component/DivisionCenter";
+import DivisionCenter from "@/components/DivisionCenter";
 
 export default async function () {
   return (

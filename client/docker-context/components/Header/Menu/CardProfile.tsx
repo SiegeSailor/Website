@@ -2,8 +2,8 @@
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 
-import { useDocumentStore } from "@/store/document";
-import { useRoute } from "@/helper/client/history";
+import { useDocumentStore } from "@/stores/document";
+import { useRoute } from "@/helpers/client/history";
 import clsx from "clsx";
 
 export default function () {

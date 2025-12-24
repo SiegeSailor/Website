@@ -1,4 +1,4 @@
-import { TITLE } from "@/setting/constant";
+import { TITLE } from "@/settings/constant";
 
 export function createPageTitle(...content: string[]) {
   return [...content, TITLE].join(" | ");

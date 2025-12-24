@@ -10,12 +10,12 @@ import {
 } from "@heroui/react";
 import clsx from "clsx";
 
-import { getArticleByDate } from "@/helper/server/article";
-import Markdown from "@/component/Markdown";
-import ChipCategory from "@/component/ChipCategory";
-import ChipStatus from "@/component/ChipStatus";
-import ScrollShadowTechnologies from "@/component/ScrollShadowTechnologies";
-import Heading from "@/component/Heading";
+import { getArticleByDate } from "@/helpers/server/article";
+import Markdown from "@/components/Markdown";
+import ChipCategory from "@/components/ChipCategory";
+import ChipStatus from "@/components/ChipStatus";
+import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
+import Heading from "@/components/Heading";
 
 export default async function ({
   date,

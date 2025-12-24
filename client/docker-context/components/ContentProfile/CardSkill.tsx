@@ -2,10 +2,10 @@
 
 import { ComponentProps } from "react";
 
-import { SKILL } from "@/setting/home";
-import CardBlock from "@/component/CardBlock";
-import IconTechnology from "@/component/IconTechnology";
-import ScrollingRowsChips from "@/component/ScrollingRowsChips";
+import { SKILL } from "@/settings/home";
+import CardBlock from "@/components/CardBlock";
+import IconTechnology from "@/components/IconTechnology";
+import ScrollingRowsChips from "@/components/ScrollingRowsChips";
 
 const ROWS = SKILL.map((row) =>
   row.map((skill) => ({

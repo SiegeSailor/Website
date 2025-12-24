@@ -2,8 +2,8 @@ import { ComponentProps } from "react";
 import { Route } from "next";
 import { Chip } from "@heroui/react";
 
-import { getEntries } from "@/helper/utility";
-import { TECHNOLOGY_TO_ICON } from "@/setting/icon";
+import { getEntries } from "@/helpers/utility";
+import { TECHNOLOGY_TO_ICON } from "@/settings/icon";
 
 export const STATUS = ["Draft", "Ready", "Archived"] as const;
 export const STATUS_SET = new Set(STATUS);

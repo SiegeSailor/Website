@@ -5,8 +5,8 @@ import { ComponentProps, useMemo } from "react";
 import { Route } from "next";
 import { usePathname } from "next/navigation";
 
-import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/setting/constant";
-import { useArticleStore } from "@/store/article";
+import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
+import { useArticleStore } from "@/stores/article";
 
 export default function ({
   propsContainer,

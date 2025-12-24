@@ -5,9 +5,9 @@ import { readFileSync, readdirSync } from "fs";
 import { Route } from "next";
 import matter from "gray-matter";
 
-import { getSlugByTitle } from "@/helper/utility";
-import { getStatisticByFilePath } from "@/helper/server/file";
-import { getAnchorsByContent } from "@/helper/article";
+import { getSlugByTitle } from "@/helpers/utility";
+import { getStatisticByFilePath } from "@/helpers/server/file";
+import { getAnchorsByContent } from "@/helpers/article";
 import {
   DOMAIN_TO_PATH,
   TECHNOLOGIES,
@@ -15,7 +15,7 @@ import {
   STATUS,
   STATUS_SET,
   TITLE_TO_ROUTE,
-} from "@/setting/constant";
+} from "@/settings/constant";
 
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
 
