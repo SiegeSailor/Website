@@ -64,10 +64,10 @@ export default function ({
 
   return (
     <div
-      className={clsx("inline-block overflow-hidden markdown-modal-image", {
-        "w-full border-1 border-default-200 rounded-md bg-default-100 dark:bg-default-50":
-          !isShieldsBadge,
-      })}
+      className={clsx(
+        "relative inline-block overflow-hidden markdown-modal-image border-1 border-default-200 rounded-md",
+        { "w-full bg-default-100 dark:bg-default-50": !isShieldsBadge }
+      )}
     >
       <Image
         src={source}
@@ -82,6 +82,7 @@ export default function ({
           propsImageThumbnail?.className
         )}
       />
+      <span className="opacity-0 absolute left-0 top-0">{alt}</span>
       <Modal isOpen={isOpen} onClose={handleClose} size="5xl">
         <ModalContent>
           {(onClose) => (
