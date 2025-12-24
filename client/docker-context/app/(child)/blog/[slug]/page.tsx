@@ -36,6 +36,14 @@ export async function generateMetadata({
   return {
     title: createPageTitle(article.metadata.title, "Blog"),
     description: article.metadata.description,
+    openGraph: {
+      title: article.metadata.title,
+      description: article.metadata.description,
+    },
+    twitter: {
+      title: article.metadata.title,
+      description: article.metadata.description,
+    },
   };
 }
 
