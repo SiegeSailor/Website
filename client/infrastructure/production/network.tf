@@ -113,8 +113,8 @@ module "alb" {
         path                = "/"
         port                = "traffic-port"
         healthy_threshold   = 2
-        unhealthy_threshold = 3
-        timeout             = 10
+        unhealthy_threshold = 5
+        timeout             = 15
         protocol            = "HTTP"
         matcher             = "200-399"
       }

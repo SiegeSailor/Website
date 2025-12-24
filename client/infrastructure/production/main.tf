@@ -43,7 +43,7 @@ module "ecs" {
       deployment_minimum_healthy_percent = 100
       deployment_maximum_percent         = 200
 
-      health_check_grace_period_seconds = 30
+      health_check_grace_period_seconds = 120
 
       tags = local.module_tags
 
@@ -57,6 +57,21 @@ module "ecs" {
             {
               name          = local.module
               containerPort = local.port
+            }
+          ]
+
+          environment = [
+            {
+              name  = "HOST"
+              value = "0.0.0.0"
+            },
+            {
+              name  = "NODE_ENV"
+              value = "production"
+            },
+            {
+              name  = "PORT"
+              value = tostring(local.port)
             }
           ]
 
