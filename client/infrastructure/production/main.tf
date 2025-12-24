@@ -60,6 +60,7 @@ module "ecs" {
             }
           ]
 
+          # Defining `ENV` in `Dockerfile` isn't sufficient.
           environment = [
             {
               name  = "HOSTNAME"
@@ -75,17 +76,13 @@ module "ecs" {
             }
           ]
 
-          # Commented out due to none of the methods working. ALB health check is sufficient for routing:
-          #   - Using `curl` with `127.0.0.1` and `localhost` shows Unknown, Unhealthy with `0.0.0.0`.
-          #   - Using `wget` with `localhost` shows Unhealthy.
-          #   - Using `ss -ltn` with `:3000` shows Unhealthy.
-          # healthCheck = {
-          #   command     = ["CMD-SHELL", "ss -ltn | grep -q ':3000 ' || exit 1"]
-          #   interval    = 30
-          #   timeout     = 5
-          #   retries     = 3
-          #   startPeriod = 60
-          # }
+          healthCheck = {
+            command     = ["CMD-SHELL", "curl -f http://127.0.0.1:${local.port} || exit 1"]
+            interval    = 30
+            timeout     = 5
+            retries     = 3
+            startPeriod = 60
+          }
 
           enable_cloudwatch_logging = true
           memoryReservation         = 128

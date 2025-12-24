@@ -14,7 +14,7 @@ locals {
 locals {
   module = "client"
   port   = 3000
-  # Purchased via AWS Route 53 manually
+  # Purchased via AWS Route 53 manually.
   domain = "jinyu-zhang.com"
 }
 
