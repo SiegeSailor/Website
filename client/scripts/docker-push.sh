@@ -93,7 +93,7 @@ authenticate_ecr() {
   local -r aws_region="$1"
   local -r ecr_url="$2"
 
-  echo -e "${GREEN}[INFO] Authenticating to ECR${NONE}"
+  echo -e "${GREEN}[INFO] Authenticating ${ecr_url}${NONE}"
   aws ecr get-login-password --region "${aws_region}" | \
     docker login --username AWS --password-stdin "${ecr_url}"
 }

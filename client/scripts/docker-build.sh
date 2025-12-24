@@ -39,7 +39,7 @@ main() {
     echo -e "${YELLOW}[WARN] .env file not found${NONE}"
   fi
 
-  echo -e "${GREEN}[INFO] Building Docker image ${image}${NONE}"
+  echo -e "${GREEN}[INFO] Building Docker image ${image} for ${build_platform}${NONE}"
   cp -r ../.git docker-context/.git
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
