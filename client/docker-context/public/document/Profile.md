@@ -14,9 +14,9 @@ status:
   visa: "STEM OPT (GC ~06/27)"
 ---
 
-I'm a software engineer who loves building scalable, reuseable, and maintainable solutions. I specialize in full-stack development and DevOps, working with everything from cloud-based microservices to medical device software.
+I'm a software engineer who loves building scalable, reuseable, and maintainable solutions. I specialize in DevOps and full-stack development, working with everything from cloud-based microservices to offline kiosks.
 
-I've been fortunate to work across different industries - from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (I've managed up to 6 developers) and boosting productivity across the entire development lifecycle.
+I've been fortunate to work across different industries - from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (5+ vendors with 20+ developers simultaneously) and boosting productivity across the entire development lifecycle.
 
 In my past work, I committed to developing developer tools, such as libraries and SDKs, and high-volume tolerance real-time applications, including backend services and frontend interfaces. I've also committed to CI/CD pipelines, automation tools, codebase management, infrastructure configuration, and testing plans for the products I developed.
 
