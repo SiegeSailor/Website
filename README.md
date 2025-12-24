@@ -18,3 +18,25 @@ Required software for the every modules:
 ## Modules
 
 - [Client](./client/README.md): A SSR Web application
+
+## Todos
+
+- [ ] Add lint and checks
+- [ ] Share OG images
+- [ ] Tokenize articles for search
+- [ ] Metadata files
+- [x] Update profile: Vite, lints
+- [ ] Finish drafts
+- [~] Move page-only components to pages
+- [~] Add cards: Git commits, LeetCode commits, articles number
+- [x] Add feature articles in /blog
+- [ ] Review feature (AI automated reviewers)
+- [x] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production.
+- [x] article view scrollbar
+- [x] table view 100%
+- [x] issue board and Change log for features: subscribe for email notifications, articles, paper with Emma, compiling repo
+- [x] AI documents
+- [ ] Move this to README.md
+- [ ] Change `-` to `/` for links
+- [ ] Change `()` start word
+- [ ] Cloudfront for Next.js static files
