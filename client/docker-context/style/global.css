@@ -123,7 +123,7 @@
   }
 
   .markdown-list-item .markdown-modal-image {
-    @apply translate-y-[6px];
+    @apply translate-y-1.5;
   }
 
   .markdown-table td .markdown-modal-image img {

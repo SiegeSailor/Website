@@ -14,6 +14,8 @@ import {
 import { PlusIcon, MinusIcon } from "lucide-react";
 import clsx from "clsx";
 
+const REGEX_SHIELDS_BADGE =
+  /img\.shields\.io\/badge|custom-icon-badges\.demolab\.com/;
 const ZOOM_MAX = 10 as const;
 const ZOOM_MIN = 1 as const;
 const ZOOM_STEP = 0.25 as const;
@@ -58,8 +60,15 @@ export default function ({
     onClose();
   };
 
+  const isShieldsBadge = REGEX_SHIELDS_BADGE.test(source);
+
   return (
-    <div className="w-full bg-default-100 dark:bg-default-50 border-1 border-default-200 rounded-md inline-block overflow-hidden markdown-modal-image">
+    <div
+      className={clsx("inline-block overflow-hidden markdown-modal-image", {
+        "w-full border-1 border-default-200 rounded-md bg-default-100 dark:bg-default-50":
+          !isShieldsBadge,
+      })}
+    >
       <Image
         src={source}
         alt={alt}
