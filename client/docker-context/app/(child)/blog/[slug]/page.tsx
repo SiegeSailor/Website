@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { createPageTitle } from "@/helpers/utility";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { getSlugByTitle } from "@/helpers/utility";
+import { metadata } from "@/app/layout";
 import ChipCategory from "@/components/ChipCategory";
 import ChipStatus from "@/components/ChipStatus";
 import DivisionSticky from "@/components/DivisionSticky";
@@ -34,13 +35,16 @@ export async function generateMetadata({
   const article = await getArticleByDate(slug);
 
   return {
+    ...metadata,
     title: createPageTitle(article.metadata.title, "Blog"),
     description: article.metadata.description,
     openGraph: {
+      ...metadata.openGraph,
       title: article.metadata.title,
       description: article.metadata.description,
     },
     twitter: {
+      ...metadata.twitter,
       title: article.metadata.title,
       description: article.metadata.description,
     },
