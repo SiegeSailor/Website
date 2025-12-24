@@ -7,7 +7,7 @@ module "ecr" {
   repository_image_tag_mutability = "MUTABLE_WITH_EXCLUSION"
   repository_image_tag_mutability_exclusion_filter = [
     {
-      filter      = "latest"
+      filter      = "v*"
       filter_type = "WILDCARD"
     },
   ]
