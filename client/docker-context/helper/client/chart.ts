@@ -117,7 +117,7 @@ export function useMermaid() {
         actorBkg: colors.primary50,
         actorBorder: colors.default700,
         actorTextColor: colors.foreground,
-        actorLineColor: colors.default700,
+        actorLineColor: colors.default200,
         sequenceNumberColor: colors.background,
         labelBoxBorderColor: colors.default700,
       },
