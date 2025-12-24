@@ -4,7 +4,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 
-import { DOMAIN_TO_PATH, AUTHOR, TITLE_TO_ROUTE } from "@/settings/constant";
+import { AUTHOR, TITLE_TO_ROUTE } from "@/settings/constant";
 import { getAnchorsByContent } from "@/helpers/article";
 import { getSlugByTitle } from "@/helpers/utility";
 import { getStatisticByFilePath } from "@/helpers/server/file";
@@ -45,7 +45,7 @@ export async function getProfile() {
   const filename = "Profile.md";
 
   try {
-    const filePath = join(process.cwd(), DOMAIN_TO_PATH.document, filename);
+    const filePath = join(process.cwd(), "public/document", filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 

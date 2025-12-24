@@ -26,7 +26,7 @@ Required software for the every modules:
 - [ ] Tokenize articles for search
 - [ ] Metadata files
 - [x] Update profile: Vite, lints
-- [ ] Finish drafts
+- [x] Finish drafts
 - [~] Move page-only components to pages
 - [~] Add cards: Git commits, LeetCode commits, articles number
 - [x] Add feature articles in /blog

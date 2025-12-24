@@ -9,7 +9,6 @@ import { getSlugByTitle } from "@/helpers/utility";
 import { getStatisticByFilePath } from "@/helpers/server/file";
 import { getAnchorsByContent } from "@/helpers/article";
 import {
-  DOMAIN_TO_PATH,
   TECHNOLOGIES,
   TECHNOLOGY_SET,
   STATUS,
@@ -20,7 +19,7 @@ import {
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
 
 export async function getArticles() {
-  const directory = join(process.cwd(), DOMAIN_TO_PATH.article);
+  const directory = join(process.cwd(), "public/article");
   const filenames = readdirSync(directory);
 
   const articles = await Promise.all(
@@ -39,7 +38,7 @@ export async function getArticles() {
 export async function getArticleByFilename(filename: string) {
   try {
     const date = filename.split(".")[0];
-    const filePath = join(process.cwd(), DOMAIN_TO_PATH.article, filename);
+    const filePath = join(process.cwd(), "public/article", filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 

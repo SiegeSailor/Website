@@ -4,7 +4,7 @@ import { Viewport, Metadata } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
-import { DESCRIPTION, TITLE } from "@/settings/constant";
+import { DESCRIPTION, DOMAIN, TITLE } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
 import { getProfile } from "@/helpers/server/document";
 import Entry from "@/components/Entry";
@@ -13,22 +13,40 @@ import Provider from "@/components/Provider";
 
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  icons: { icon: "/image/favicon.ico" },
+  openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    icons: { icon: "/image/favicon.ico" },
-  };
-}
-
-export async function generateViewport(): Promise<Viewport> {
-  return {
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "white" },
-      { media: "(prefers-color-scheme: dark)", color: "black" },
+    url: `https://${DOMAIN}`,
+    siteName: TITLE,
+    images: [
+      {
+        url: `https://${DOMAIN}/image/Jin-Yu-Zhang-Profile.jpg`,
+        width: 1200,
+        height: 630,
+        alt: TITLE,
+      },
     ],
-  };
-}
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [`https://${DOMAIN}/image/Jin-Yu-Zhang-Profile.jpg`],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 
 export default async function ({
   children,
