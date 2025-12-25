@@ -1,9 +1,24 @@
 import { Alert, Button } from "@heroui/react";
+import { Metadata } from "next";
 
+import {
+  metadata as rootLayoutMetadata,
+  viewport as rootLayoutViewport,
+} from "@/app/layout";
+import { createPageTitle } from "@/helpers/utility";
 import { TITLE_TO_ROUTE, ROUTE_TO_TITLE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 import TextRoute from "@/components/TextRoute";
+
+// TODO: Subject to change once https://github.com/vercel/next.js/issues/45620 is resolved.
+//       Currently, `metadata` doesn't work here, neither inherited.
+export const metadata: Metadata = {
+  ...rootLayoutMetadata,
+  title: createPageTitle("Not Found"),
+};
+
+export const viewport = rootLayoutViewport;
 
 export default function () {
   return (
