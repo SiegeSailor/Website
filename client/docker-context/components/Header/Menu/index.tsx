@@ -14,7 +14,7 @@ export default function () {
   const hideMenu = useHeaderStore((state) => state.hideMenu);
 
   return (
-    <NavbarMenu className="h-full pt-4 pb-4" onClick={hideMenu}>
+    <NavbarMenu className="h-full pt-4" onClick={hideMenu}>
       <NavbarMenuItem>
         <div
           className="max-w-compact w-full mx-auto"
@@ -24,7 +24,7 @@ export default function () {
             <Search />
           </div>
 
-          <ScrollShadow className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-10rem)] sm:max-h-[calc(100vh-5rem)] md:max-h-[calc(100vh-8rem)]">
+          <ScrollShadow className="gap-2 grid grid-cols-1 sm:grid-cols-12 gird-rows-1 w-full overflow-y-auto max-h-[calc(100vh-12rem)] sm:max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-8rem)]">
             <div className="sm:col-span-6 flex flex-col gap-4 p-1">
               <CardPages />
               <CardProfile />

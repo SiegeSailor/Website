@@ -110,7 +110,7 @@ export default async function ({
             <Markdown source={content} />
           </article>
         </div>
-        <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1 max-h-[calc(100vh-8rem)]">
+        <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1 max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-8rem)]">
           {[
             <Card shadow="sm">
               <ListboxContents anchors={metadata.anchors} />
