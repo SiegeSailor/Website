@@ -3,13 +3,13 @@ import { Roboto } from "next/font/google";
 
 import { TITLE, DESCRIPTION, DOMAIN } from "./constant";
 
-// [~] use metadata constants for each page.
-// [ ] use title/etc elements in global-error
+// [x] use metadata constants for each page.
+// [x] use title/etc elements in global-error (figure out how to tirgger)
 // [x] make sure not found blog page renders not-found page
-// [ ] check viewports
-// [ ] mobile Images
+// [x] check viewports
+// [x] mobile Images
 // [ ] Cache public folder
-// [ ] Bottom padding for article and mobile menu
+// [x] Bottom padding for article and mobile menu
 // [ ] slug > date
 
 export const globalFontRoboto = Roboto({ subsets: ["latin"] });

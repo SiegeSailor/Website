@@ -15,13 +15,13 @@ import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
 import Markdown from "@/components/Markdown";
 import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
-type TParams = Readonly<{ slug: string }>;
+type TParams = Readonly<{ date: string }>;
 
 export async function generateStaticParams(): Promise<TParams[]> {
   const articles = await getArticles();
 
   return articles.map((article) => ({
-    slug: article.metadata.date,
+    date: article.metadata.date,
   }));
 }
 
@@ -30,8 +30,8 @@ export async function generateMetadata({
 }: Readonly<{
   params: Promise<TParams>;
 }>): Promise<Metadata> {
-  const { slug } = await params;
-  const article = await getArticleByDate(slug);
+  const { date } = await params;
+  const article = await getArticleByDate(date);
 
   const title = createPageTitle(article.metadata.title, "Blog");
 
@@ -54,11 +54,11 @@ export async function generateMetadata({
 export default async function ({
   params,
 }: Readonly<{ params: Promise<TParams> }>) {
-  const { slug } = await params;
+  const { date } = await params;
 
   let article = null;
   try {
-    article = await getArticleByDate(slug);
+    article = await getArticleByDate(date);
   } catch {
     notFound();
   }
