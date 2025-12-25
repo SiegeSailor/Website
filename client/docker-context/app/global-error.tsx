@@ -11,9 +11,10 @@ import {
 } from "@/settings/head";
 import { createPageTitle } from "@/helpers/utility";
 import DivisionCenter from "@/components/DivisionCenter";
-import Error from "./error";
+import Error from "@/app/error";
 import Provider from "@/components/Provider";
 
+// `metadata` and `viewport` don't work. They are manually inserted below in `<head />`.
 export const metadata: Metadata = {
   ...globalMetadata,
   title: createPageTitle("Error"),
@@ -27,6 +28,22 @@ export default function ({
 }: Readonly<{ error: Error & { digest: string }; reset: () => void }>) {
   return (
     <html suppressHydrationWarning lang="en">
+      <head>
+        <title>{String(metadata.title)}</title>
+        <meta name="description" content={String(metadata.description)} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="next-size-adjust" content="" />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="white"
+        />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: dark)"
+          content="black"
+        />
+      </head>
       <body
         suppressHydrationWarning
         className={clsx(
@@ -37,7 +54,6 @@ export default function ({
         <Provider>
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>
-              Global
               <Error error={error} reset={reset} />
             </DivisionCenter>
           </main>
