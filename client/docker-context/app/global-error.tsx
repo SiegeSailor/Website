@@ -1,30 +1,25 @@
 "use client";
 
-import { Roboto } from "next/font/google";
-import { Viewport, Metadata } from "next";
+import { Metadata } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
+import {
+  globalFontRoboto,
+  globalMetadata,
+  globalViewport,
+} from "@/settings/head";
 import { createPageTitle } from "@/helpers/utility";
-import { DESCRIPTION } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Error from "./error";
 import Provider from "@/components/Provider";
 
-const FontRoboto = Roboto({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
+  ...globalMetadata,
   title: createPageTitle("Error"),
-  description: DESCRIPTION,
-  icons: { icon: "/image/favicon.ico" },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
+export const viewport = globalViewport;
 
 export default function ({
   error,
@@ -34,11 +29,15 @@ export default function ({
     <html suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
-        className={clsx(FontRoboto.className, "bg-danger-100 overscroll-none")}
+        className={clsx(
+          globalFontRoboto.className,
+          "bg-danger-100 overscroll-none"
+        )}
       >
         <Provider>
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>
+              Global
               <Error error={error} reset={reset} />
             </DivisionCenter>
           </main>

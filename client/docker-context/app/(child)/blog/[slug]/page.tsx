@@ -1,10 +1,11 @@
 import { Card, Divider } from "@heroui/react";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
+import { globalMetadata } from "@/settings/head";
 import { createPageTitle } from "@/helpers/utility";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { getSlugByTitle } from "@/helpers/utility";
-import { metadata } from "@/app/layout";
 import ChipCategory from "@/components/ChipCategory";
 import ChipStatus from "@/components/ChipStatus";
 import DivisionSticky from "@/components/DivisionSticky";
@@ -13,8 +14,6 @@ import ListboxArticles from "@/components/ListboxArticles";
 import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
 import Markdown from "@/components/Markdown";
 import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
-
-export const dynamicParams = false;
 
 type TParams = Readonly<{ slug: string }>;
 
@@ -34,18 +33,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = await getArticleByDate(slug);
 
+  const title = createPageTitle(article.metadata.title, "Blog");
+
   return {
-    ...metadata,
-    title: createPageTitle(article.metadata.title, "Blog"),
+    title,
     description: article.metadata.description,
     openGraph: {
-      ...metadata.openGraph,
-      title: article.metadata.title,
+      ...globalMetadata.openGraph,
+      title,
       description: article.metadata.description,
     },
     twitter: {
-      ...metadata.twitter,
-      title: article.metadata.title,
+      ...globalMetadata.twitter,
+      title,
       description: article.metadata.description,
     },
   };
@@ -55,7 +55,15 @@ export default async function ({
   params,
 }: Readonly<{ params: Promise<TParams> }>) {
   const { slug } = await params;
-  const { content, metadata } = await getArticleByDate(slug);
+
+  let article = null;
+  try {
+    article = await getArticleByDate(slug);
+  } catch {
+    notFound();
+  }
+
+  const { metadata, content } = article;
 
   return (
     <section className="max-w-content mx-auto p-4">

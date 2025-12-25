@@ -1,13 +1,13 @@
 import { Alert, Button } from "@heroui/react";
-import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
 import {
-  metadata as rootLayoutMetadata,
-  viewport as rootLayoutViewport,
-} from "@/app/layout";
+  globalFontRoboto,
+  globalMetadata,
+  globalViewport,
+} from "@/settings/head";
 import { createPageTitle } from "@/helpers/utility";
 import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
@@ -15,21 +15,22 @@ import Link from "@/components/Link";
 import Provider from "@/components/Provider";
 import TextRoute from "@/components/TextRoute";
 
-const FontRoboto = Roboto({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  ...rootLayoutMetadata,
+  ...globalMetadata,
   title: createPageTitle("Not Found"),
 };
 
-export const viewport = rootLayoutViewport;
+export const viewport = globalViewport;
 
 export default function () {
   return (
     <html suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
-        className={clsx(FontRoboto.className, "bg-warning-100 overscroll-none")}
+        className={clsx(
+          globalFontRoboto.className,
+          "bg-warning-100 overscroll-none"
+        )}
       >
         <Provider>
           <main className="h-screen mx-auto px-4">

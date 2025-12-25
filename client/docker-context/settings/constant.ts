@@ -30,7 +30,7 @@ export const TITLE = `${AUTHOR}'s Website` as const;
 export const DESCRIPTION =
   `${AUTHOR}'s personal website, showcasing my profile, projects, blog, and notes.` as const;
 
-type TTitle = "Home" | "Blog" | "Profile" | "_";
+type TTitle = "Home" | "Blog" | "Profile";
 
 export const ROUTE_TO_TITLE: Readonly<Record<Route, TTitle>> = {
   "/": "Home",
