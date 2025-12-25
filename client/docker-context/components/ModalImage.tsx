@@ -78,7 +78,7 @@ export default function ({
         {...propsImageThumbnail}
         onClick={handleOpen}
         className={clsx(
-          "cursor-pointer w-max h-max",
+          "cursor-pointer w-max",
           { "mx-auto": !isShieldsBadge },
           propsImageThumbnail?.className
         )}
