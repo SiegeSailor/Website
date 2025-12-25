@@ -1,15 +1,15 @@
 import { Alert, Button } from "@heroui/react";
 import { Roboto } from "next/font/google";
-import { Viewport, Metadata } from "next";
+import { Metadata } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
-import { createPageTitle } from "@/helpers/utility";
 import {
-  DESCRIPTION,
-  ROUTE_TO_TITLE,
-  TITLE_TO_ROUTE,
-} from "@/settings/constant";
+  metadata as rootLayoutMetadata,
+  viewport as rootLayoutViewport,
+} from "@/app/layout";
+import { createPageTitle } from "@/helpers/utility";
+import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 import Provider from "@/components/Provider";
@@ -18,17 +18,11 @@ import TextRoute from "@/components/TextRoute";
 const FontRoboto = Roboto({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  ...rootLayoutMetadata,
   title: createPageTitle("Not Found"),
-  description: DESCRIPTION,
-  icons: { icon: "/image/favicon.ico" },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
+export const viewport = rootLayoutViewport;
 
 export default function () {
   return (
