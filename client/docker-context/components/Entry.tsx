@@ -6,6 +6,7 @@ import { TArticle } from "@/helpers/server/article";
 import { TProfile } from "@/helpers/server/document";
 import { useArticleStore } from "@/stores/article";
 import { useDocumentStore } from "@/stores/document";
+import SpinnerCenter from "@/components/SpinnerCenter";
 
 export default function ({
   articles,
@@ -28,7 +29,7 @@ export default function ({
     setIsParsed(true);
   }, [articles]);
 
-  if (!isParsed) return null;
+  if (!isParsed) return <SpinnerCenter />;
 
   return children;
 }
