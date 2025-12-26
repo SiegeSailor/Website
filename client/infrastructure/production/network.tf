@@ -61,9 +61,9 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
-    default_ttl     = 60
+    default_ttl     = 3600
     min_ttl         = 0
-    max_ttl         = 3600
+    max_ttl         = 86400
   }]
 
   viewer_certificate = {
