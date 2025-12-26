@@ -6,18 +6,18 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     // The value is `--heroui-background`.
     background_color: "hsl(0 0% 100%)",
-    description: globalMetadata.description?.toString(),
+    description: String(globalMetadata.description),
     display: "standalone",
     icons: [
       {
-        src: globalMetadata.icons?.toString() || "/image/favicon.ico",
+        src: String(globalMetadata.icons),
         sizes: "any",
         type: "image/x-icon",
       },
     ],
-    name: globalMetadata.title?.toString(),
+    name: String(globalMetadata.title),
     orientation: "natural",
-    short_name: globalMetadata.title?.toString(),
+    short_name: String(globalMetadata.title),
     start_url: "/",
     // The value is `--heroui-primary`.
     theme_color: "hsl(212.01999999999998 100% 46.67%)",
