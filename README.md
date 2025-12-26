@@ -22,6 +22,7 @@ Required software for the every modules:
 ## Todos
 
 - [ ] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
+- [ ] Use import type
 - [ ] Add lint and checks
 - [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
 - [ ] Tokenize articles for search

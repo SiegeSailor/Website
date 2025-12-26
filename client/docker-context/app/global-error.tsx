@@ -29,8 +29,8 @@ export default function ({
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        <title>{String(metadata.title)}</title>
-        <meta name="description" content={String(metadata.description)} />
+        <title>{metadata.title?.toString()}</title>
+        <meta name="description" content={metadata.description?.toString()} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="next-size-adjust" content="" />
         <meta
