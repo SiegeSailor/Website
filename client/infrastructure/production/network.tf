@@ -49,6 +49,11 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
+    # 1 day
+    default_ttl = 86400
+    min_ttl     = 0
+    # 1 year
+    max_ttl = 31536000
   }
 
   # This doesn't instruct browsers to cache it locally, but CloudFront will cache it.
@@ -61,9 +66,11 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
-    default_ttl     = 3600
-    min_ttl         = 0
-    max_ttl         = 86400
+    # 1 day
+    default_ttl = 86400
+    min_ttl     = 0
+    # 1 year
+    max_ttl = 31536000
   }]
 
   viewer_certificate = {
