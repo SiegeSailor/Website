@@ -51,6 +51,20 @@ module "cloudfront" {
     query_string    = true
   }
 
+  ordered_cache_behavior = [{
+    path_pattern           = "/image/*"
+    target_origin_id       = "alb"
+    viewer_protocol_policy = "redirect-to-https"
+
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    cached_methods  = ["GET", "HEAD"]
+    compress        = true
+    query_string    = true
+    default_ttl     = 60
+    min_ttl         = 0
+    max_ttl         = 3600
+  }]
+
   viewer_certificate = {
     acm_certificate_arn = module.acm.acm_certificate_arn
     ssl_support_method  = "sni-only"
