@@ -35,7 +35,7 @@ export default async function () {
           <TableArticles />
         </div>
 
-        <DivisionSticky className="col-span-4 flex flex-col gap-8 p-1 max-h-[calc(100vh-12rem)] md:max-h-[calc(100vh-8rem)]">
+        <DivisionSticky className="col-span-4 flex flex-col gap-8 p-1">
           <div className="flex flex-col gap-4">
             <h4 className="text-medium font-semibold">Highlights</h4>
             <div className="flex flex-col gap-2">
