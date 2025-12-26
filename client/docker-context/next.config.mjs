@@ -10,6 +10,19 @@ const nextConfig = {
     console.log("Generating build ID: " + buildID);
     return buildID;
   },
+  headers: async () => {
+    return [
+      {
+        source: "/image/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
