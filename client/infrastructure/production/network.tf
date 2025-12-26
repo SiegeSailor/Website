@@ -51,6 +51,7 @@ module "cloudfront" {
     query_string    = true
   }
 
+  # This doesn't instruct browsers to cache it locally, but CloudFront will cache it.
   ordered_cache_behavior = [{
     path_pattern           = "/image/*"
     target_origin_id       = "alb"
