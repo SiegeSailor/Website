@@ -9,6 +9,7 @@ import {
 } from "@/settings/head";
 import { getArticles } from "@/helpers/server/article";
 import { getProfile } from "@/helpers/server/document";
+import { AUTHOR } from "@/settings/constant";
 import Entry from "@/components/Entry";
 import Header from "@/components/Header";
 import Provider from "@/components/Provider";
@@ -25,6 +26,8 @@ export default async function ({
   const articles = await getArticles();
   const profile = await getProfile();
 
+  const year = new Date().getFullYear();
+
   return (
     <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
       <body
@@ -39,6 +42,11 @@ export default async function ({
                 {children}
               </Entry>
             </main>
+            <div className="text-center p-2 bg-default-100 text-small font-light">
+              <p>
+                © {year} {AUTHOR}
+              </p>
+            </div>
           </div>
         </Provider>
       </body>

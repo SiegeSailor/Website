@@ -26,8 +26,9 @@ Required software for the every modules:
 - [ ] Add lint and checks
 - [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
 - [ ] Tokenize articles for search
-- [ ] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
-- [ ] Footer
+- [x] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
+- [x] Footer
+- [ ] No AI badge
 - [ ] Realtime logs for Cloudfront
 - [ ] Change `-` to `/` for links
 - [ ] Change `()` start word
