@@ -41,6 +41,9 @@ main() {
 
   echo -e "${GREEN}[INFO] Building Docker image ${image} for ${build_platform}${NONE}"
   cp -r ../.git docker-context/.git
+
+  trap "rm -rf docker-context/.git" EXIT
+
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
     --build-arg IMAGE="${image}" \
@@ -48,7 +51,6 @@ main() {
     --platform "${build_platform}" \
     "${docker_flags[@]}" \
     docker-context
-  rm -rf docker-context/.git
 
   echo -e "${BLUE}[DONE] Built Docker image ${image}${NONE}"
 }
