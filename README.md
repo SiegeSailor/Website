@@ -26,6 +26,7 @@ Required software for the every modules:
 - [ ] Tokenize articles for search
 - [ ] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
 - [ ] Footer
+- [ ] Realtime logs for Cloudfront
 - [ ] Change `-` to `/` for links
 - [ ] Change `()` start word
 - [ ] Review feature (AI automated reviewers)
