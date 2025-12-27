@@ -53,9 +53,9 @@
   "private": true,
   "homepage": "https://github.com/SiegeSailor/Website",
   "scripts": {
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev"
+    "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack"
   },
   "type": "module",
   "version": "0.0.0"
