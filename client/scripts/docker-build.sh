@@ -40,9 +40,6 @@ main() {
   fi
 
   echo -e "${GREEN}[INFO] Building Docker image ${image} for ${build_platform}${NONE}"
-  cp -r ../.git docker-context/.git
-
-  trap "rm -rf docker-context/.git" EXIT
 
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
