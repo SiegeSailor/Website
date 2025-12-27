@@ -8,7 +8,7 @@ export const globalFontRoboto = Roboto({ subsets: ["latin"] });
 export const globalMetadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  icons: "/image/favicon.ico",
+  icons: "/images/favicon.ico",
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -16,7 +16,7 @@ export const globalMetadata: Metadata = {
     siteName: TITLE,
     images: [
       {
-        url: `https://${DOMAIN}/image/Jin-Yu-Zhang-Profile.jpg`,
+        url: `https://${DOMAIN}/images/Jin-Yu-Zhang-Profile.jpg`,
         width: 1200,
         height: 630,
         alt: TITLE,
@@ -32,7 +32,7 @@ export const globalMetadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: `https://${DOMAIN}/image/Jin-Yu-Zhang-Profile.jpg`,
+        url: `https://${DOMAIN}/images/Jin-Yu-Zhang-Profile.jpg`,
         width: 1200,
         height: 630,
         alt: TITLE,

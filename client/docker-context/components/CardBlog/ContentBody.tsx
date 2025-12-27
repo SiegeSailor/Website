@@ -42,7 +42,7 @@ export default function () {
     <div className="relative w-full h-full">
       <ImageBackground
         alt="Photo by Kevin Ku on Unsplash"
-        src="/image/Glasses-Code.jpg"
+        src="/images/Glasses-Code.jpg"
       />
       <AnimatePresence mode="wait">
         <motion.div

@@ -30,7 +30,7 @@ You will follow each steps below and will not skip any of them.
 ### Creating the Article
 
 - Create a file in `public/article/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
-- Copy images in `input/` that are used in the article to `public/image/<YYYY-MM-DD>/` and name them in `Pascal-Case.ext`, e.g., `Branch-Name-LTS.png`
+- Copy images in `input/` that are used in the article to `public/images/<YYYY-MM-DD>/` and name them in `Pascal-Case.ext`, e.g., `Branch-Name-LTS.png`
 
 #### Front-Matter Fields
 

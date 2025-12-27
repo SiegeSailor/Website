@@ -42,8 +42,8 @@ Static assets. While these files can be accessed directly via `/<folder>/<file>`
 
 - `public/article/`: Markdown files that follow the naming convention of `YYYY-MM-DD.md`, where the filename represents the publication date. The articles uses some special front-matter fields and syntaxes (see `getArticleByFilename` in `helper/server/article.ts` for details)
 - `public/document/`: Other markdown files. Every file has its own formatting and front-matter fields (see `getProfile` in `helper/server/document.ts` for details)
-- `public/image/`: Images used in the website:
-  - Article scoped images are stored in `public/image/<YYYY-MM-DD>/` and named in the `Pascal-Case.ext` way, e.g., `public/image/2024-08-19/Branch-Name-LTS.png`
+- `public/images/`: Images used in the website:
+  - Article scoped images are stored in `public/images/<YYYY-MM-DD>/` and named in the `Pascal-Case.ext` way, e.g., `public/images/2024-08-19/Branch-Name-LTS.png`
 
 ### `setting/`
 

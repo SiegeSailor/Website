@@ -55,7 +55,7 @@ module "cloudfront" {
 
   # This doesn't instruct browsers to cache it locally, but CloudFront will cache it.
   ordered_cache_behavior = [{
-    path_pattern           = "/image/*"
+    path_pattern           = "/images/*"
     target_origin_id       = "alb"
     viewer_protocol_policy = "redirect-to-https"
 

@@ -13,7 +13,7 @@ const nextConfig = {
   headers: async () => {
     return [
       {
-        source: "/image/:path*",
+        source: "/images/:path*",
         headers: [
           {
             key: "Cache-Control",
