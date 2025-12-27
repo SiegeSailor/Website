@@ -1,17 +1,18 @@
 "use server";
 
-import { execSync } from "child_process";
+import { promises } from "fs";
+
+const DEFAULT = "2018-11-17" as const;
 
 export async function getStatisticByFilePath(filePath: string) {
-  const createdOn = execSync(
-    `git log --diff-filter=A --format="%ad" --date=short "${filePath}" | tail -1`,
-    { encoding: "utf8" }
-  ).trim();
+  try {
+    const stats = await promises.stat(filePath);
 
-  const updatedOn = execSync(
-    `git log -1 --format="%ad" --date=short "${filePath}"`,
-    { encoding: "utf8" }
-  ).trim();
+    const createdOn = stats.birthtime.toISOString().split("T")[0];
+    const updatedOn = stats.mtime.toISOString().split("T")[0];
 
-  return { createdOn, updatedOn };
+    return { createdOn, updatedOn };
+  } catch (error) {
+    return { createdOn: DEFAULT, updatedOn: DEFAULT };
+  }
 }
