@@ -42,10 +42,11 @@ export default async function ({
                 {children}
               </Entry>
             </main>
-            <div className="text-center p-2 bg-default-100 text-small font-light">
+            <div className="text-center px-4 py-2 bg-default-100 text-small font-light flex flex-row flex-wrap justify-between gap-2">
               <p>
                 © {year} {AUTHOR}
               </p>
+              <p>Not A.I. generated</p>
             </div>
           </div>
         </Provider>

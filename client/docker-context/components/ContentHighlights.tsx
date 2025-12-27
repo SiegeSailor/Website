@@ -26,7 +26,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
       <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
         {HIGHLIGHTS.map((date) => (
           <CardArticleDetail
-            className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px] border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"
+            className="col-span-12 sm:col-span-4 h-[300px] border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"
             date={date}
             key={date}
             propsChipCategory={{ variant: "bordered", size: "md" }}
