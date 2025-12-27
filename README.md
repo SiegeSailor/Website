@@ -21,6 +21,10 @@ Required software for the every modules:
 
 ## Todos
 
+- [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
+- [x] Check next.js cache headers for images
+- [x] Check cloudfront cache headers for images and all other files
+- [ ] No AI badge
 - [ ] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
 - [ ] Use import type
 - [ ] Add lint and checks
@@ -28,7 +32,6 @@ Required software for the every modules:
 - [ ] Tokenize articles for search
 - [x] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
 - [x] Footer
-- [ ] No AI badge
 - [ ] Realtime logs for Cloudfront
 - [ ] Change `-` to `/` for links
 - [ ] Change `()` start word
