@@ -31,7 +31,6 @@ FROM dependencies AS build
 
 COPY --from=dependencies /app/node_modules/. ./node_modules/
 COPY "." ./
-COPY "./.git/". ../.git/
 
 RUN npm run build
 
@@ -56,7 +55,6 @@ USER "${USERNAME}"
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/public/. ./public/
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/standalone/. ./
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/static/. ./.next/static/
-COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /.git/. ../.git/
 
 EXPOSE 3000
 
