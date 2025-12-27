@@ -45,7 +45,7 @@ export async function getProfile() {
   const filename = "Profile.md";
 
   try {
-    const filePath = join(process.cwd(), "public/document", filename);
+    const filePath = join(process.cwd(), "files/documents", filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 
