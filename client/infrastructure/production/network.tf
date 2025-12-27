@@ -49,11 +49,8 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
-    # 1 day
-    default_ttl = 86400
-    min_ttl     = 0
-    # 1 year
-    max_ttl = 31536000
+
+    # `*_ttl` values here will result in caching Next.js dynamic responses.
   }
 
   # This doesn't instruct browsers to cache it locally, but CloudFront will cache it.
@@ -66,8 +63,8 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
     query_string    = true
-    # 1 day
-    default_ttl = 86400
+    # 30 days
+    default_ttl = 2592000
     min_ttl     = 0
     # 1 year
     max_ttl = 31536000
