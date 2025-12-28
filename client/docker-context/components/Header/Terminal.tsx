@@ -18,7 +18,6 @@ import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 
 import { getEntries, getPublicEnv } from "@/helpers/utility";
-import { TITLE } from "@/settings/constant";
 
 export default function () {
   const env = getPublicEnv();
@@ -48,8 +47,7 @@ export default function () {
       {
         type: "system",
         value:
-          `${TITLE} ${datetime.split(", ").join(" ")}\n` +
-          `${navigator.userAgent} (${window.screen.width}x${window.screen.height})\n` +
+          `${datetime.split(", ").join(" ")}\n` +
           `Welcome. Run help for available commands\n`,
       },
     ]);
@@ -83,9 +81,13 @@ export default function () {
           case "show":
             outputs.push({
               type: "output",
-              value: getEntries(env)
-                .map(([key, value]) => `${key}: ${value}`)
-                .join("\n"),
+              value:
+                "User Agent:\n" +
+                `\t${navigator.userAgent} (${window.screen.width}x${window.screen.height})\n` +
+                "Build Information:\n" +
+                getEntries(env)
+                  .map(([key, value]) => `\t${key}: ${value}`)
+                  .join("\n"),
             });
             break;
           case "help":
@@ -132,7 +134,7 @@ export default function () {
         strokeWidth="0.075rem"
         onClick={handleOpen}
       />
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="lg">
         <ModalContent>
           {(onClose) => (
             <>
