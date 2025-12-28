@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { createPageTitle } from "@/helpers/utility";
 import { getArticles } from "@/helpers/server/article";

@@ -24,7 +24,6 @@ Required software for the every modules:
 - [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
 - [x] Check next.js cache headers for images
 - [x] Check cloudfront cache headers for images and all other files
-- [ ] No AI badge
 - [ ] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
 - [ ] Use import type
 - [ ] Add lint and checks

@@ -1,5 +1,5 @@
 import { Alert, Button } from "@heroui/react";
-import { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: createPageTitle("Not Found"),
 };
 
-export const viewport = globalViewport;
+export const viewport: Viewport = globalViewport;
 
 export default function () {
   return (

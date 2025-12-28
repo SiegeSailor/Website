@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
 import "@/styles/global.css";
@@ -14,9 +15,9 @@ import Entry from "@/components/Entry";
 import Header from "@/components/Header";
 import Provider from "@/components/Provider";
 
-export const metadata = globalMetadata;
+export const metadata: Metadata = globalMetadata;
 
-export const viewport = globalViewport;
+export const viewport: Viewport = globalViewport;
 
 export default async function ({
   children,

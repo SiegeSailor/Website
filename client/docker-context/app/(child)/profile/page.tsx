@@ -1,6 +1,6 @@
 import { Button, Card, Divider } from "@heroui/react";
 import { GithubIcon, LinkedinIcon, DownloadCloudIcon } from "lucide-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { createPageTitle, getEntries } from "@/helpers/utility";
 import { getProfile } from "@/helpers/server/document";

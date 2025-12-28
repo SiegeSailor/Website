@@ -1,4 +1,4 @@
-import { Viewport, Metadata } from "next";
+import type { Viewport, Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 import { TITLE, DESCRIPTION, DOMAIN } from "./constant";
