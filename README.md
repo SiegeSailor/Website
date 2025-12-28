@@ -25,15 +25,15 @@ Required software for the every modules:
 - [x] Check next.js cache headers for images
 - [x] Check cloudfront cache headers for images and all other files
 - [ ] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
-- [ ] Use import type
+- [x] Use import type
 - [ ] Add lint and checks
 - [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
 - [ ] Tokenize articles for search
 - [x] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
 - [x] Footer
 - [ ] Realtime logs for Cloudfront
-- [ ] Change `-` to `/` for links
-- [ ] Change `()` start word
+- [x] Change `-` to `/` for links
+- [x] Change `()` start word
 - [ ] Review feature (AI automated reviewers)
 - [ ] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production. Only the first time after pushing-refresh (cache invalid due to file changes, hence online website updates automatically)
 - [x] Share OG images
