@@ -73,6 +73,10 @@ module "ecs" {
             {
               name  = "PORT"
               value = tostring(local.port)
+            },
+            {
+              name  = "NEXT_PUBLIC_CLOUDFRONT_IMAGE"
+              value = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
             }
           ]
 

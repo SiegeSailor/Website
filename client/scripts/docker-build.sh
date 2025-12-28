@@ -43,7 +43,6 @@ main() {
 
   docker build \
     --build-arg COMMIT_SHORT="${commit_short}" \
-    --build-arg IMAGE="${image}" \
     --tag "${image}" \
     --platform "${build_platform}" \
     "${docker_flags[@]}" \

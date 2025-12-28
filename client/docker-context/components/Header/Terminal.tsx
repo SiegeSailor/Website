@@ -54,7 +54,10 @@ export default function () {
           case "show":
             outputs.push({
               type: "output",
-              value: `COMMIT_SHORT: ${process.env.NEXT_PUBLIC_COMMIT_SHORT}`,
+              value:
+                `NEXT_PUBLIC_DOCKERFILE_COMMIT_SHORT: ${process.env.NEXT_PUBLIC_DOCKERFILE_COMMIT_SHORT}\n` +
+                `NEXT_PUBLIC_CLOUDFRONT_IMAGE: ${process.env.NEXT_PUBLIC_CLOUDFRONT_IMAGE}\n` +
+                `NODE_ENV: ${process.env.NODE_ENV}\n`,
             });
             break;
           case "help":
