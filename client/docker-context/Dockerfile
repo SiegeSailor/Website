@@ -34,7 +34,6 @@ COPY "." ./
 
 RUN touch ".env" && \
     echo "NEXT_PUBLIC_COMMIT_SHORT=${COMMIT_SHORT}" >> ".env" && \
-    echo "NEXT_PUBLIC_IMAGE=${IMAGE}" >> ".env" && \
     npm run build
 
 
