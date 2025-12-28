@@ -1,12 +1,12 @@
 "use server";
 
-import {
+import type {
   ComponentProps,
-  createElement,
   ForwardRefExoticComponent,
   ReactNode,
   RefAttributes,
 } from "react";
+import { createElement } from "react";
 import { Code } from "@heroui/react";
 import {
   BadgeAlertIcon,
