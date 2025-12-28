@@ -44,7 +44,8 @@ export default function () {
                   aria-label="Search"
                   classNames={{
                     inputWrapper: "bg-default-100",
-                    input: "text-small",
+                    // See https://github.com/heroui-inc/heroui/issues/5326.
+                    input: "text-medium",
                   }}
                   labelPlacement="outside"
                   placeholder="Type to search"
