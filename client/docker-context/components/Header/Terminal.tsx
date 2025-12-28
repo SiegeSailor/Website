@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import type { ComponentProps } from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 
 import { getEntries, getPublicEnv } from "@/helpers/utility";
@@ -29,8 +29,34 @@ export default function () {
 
   const [command, setCommand] = useState("");
   const [results, setResults] = useState<
-    { type: "command" | "output"; value: string }[]
+    { type: "system" | "command" | "output"; value: string }[]
   >([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setResults([
+      {
+        type: "system",
+        value:
+          "###################################\n" +
+          `${(
+            navigator.userAgent +
+            ". (" +
+            window.screen.width +
+            "x" +
+            window.screen.height +
+            ")"
+          )
+            .match(/.{1,41}/g)
+            ?.map((chunk) => `# ${chunk}`)
+            .join("\n")}\n` +
+          `# Welcome. Run help for available commands.\n` +
+          "###################################",
+      },
+    ]);
+
+    setIsMounted(true);
+  }, []);
 
   const handleOpen = () => {
     onOpen();
@@ -80,7 +106,7 @@ export default function () {
           default:
             outputs.push({
               type: "output",
-              value: `Command not found: ${value}\nRun help for available commands`,
+              value: `Command not found: ${value}`,
             });
             break;
         }
@@ -99,7 +125,10 @@ export default function () {
   return (
     <>
       <SquareTerminalIcon
-        className="transition-opacity hover:opacity-80 cursor-pointer text-foreground"
+        className={clsx(
+          "transition-opacity hover:opacity-80 cursor-pointer text-foreground",
+          { "opacity-disabled cursor-none pointer-none:": !isMounted }
+        )}
         size="1.45rem"
         strokeWidth="0.075rem"
         onClick={handleOpen}
@@ -123,7 +152,10 @@ export default function () {
                         key={index}
                         className={clsx(
                           "w-full grow-0 text-small leading-normal whitespace-pre-wrap",
-                          { "font-bold": type === "command" }
+                          {
+                            "font-bold": type === "command",
+                            "font-light text-default-400": type === "system",
+                          }
                         )}
                       >
                         {value}
