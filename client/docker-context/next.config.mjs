@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: { removeConsole: false },
   compress: true,
   distDir: ".next",
+  enablePrerenderSourceMaps: true,
   experimental: { browserDebugInfoInTerminal: true, globalNotFound: true },
   generateBuildId: async () => {
     const buildID = process.env.COMMIT_SHORT || "local";
