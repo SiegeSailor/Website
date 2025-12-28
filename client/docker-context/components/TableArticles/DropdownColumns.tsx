@@ -8,7 +8,7 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { CheckIcon } from "lucide-react";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { COLUMNS } from ".";

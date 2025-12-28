@@ -2,7 +2,7 @@
 
 import { join } from "path";
 import { readFileSync, readdirSync } from "fs";
-import { Route } from "next";
+import type { Route } from "next";
 import matter from "gray-matter";
 
 import { getSlugByTitle } from "@/helpers/utility";

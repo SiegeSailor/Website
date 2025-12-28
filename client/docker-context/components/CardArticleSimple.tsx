@@ -1,7 +1,7 @@
 "use server";
 
 import { Card } from "@heroui/react";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { getArticleByFilename, TArticle } from "@/helpers/server/article";

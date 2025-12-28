@@ -1,6 +1,6 @@
 "use client";
 
-import { Route } from "next";
+import type { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
 import { ROUTE_TO_ICON } from "@/settings/icon";

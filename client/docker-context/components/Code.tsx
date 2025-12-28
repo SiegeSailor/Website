@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { Code } from "@heroui/react";
 import clsx from "clsx";
 

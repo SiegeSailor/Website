@@ -1,6 +1,6 @@
 "use server";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import Body from "./Body";
 import CardBlock from "@/components/CardBlock";

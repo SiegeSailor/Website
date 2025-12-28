@@ -1,6 +1,7 @@
 "use client";
 
-import { ComponentProps, isValidElement, useState } from "react";
+import type { ComponentProps } from "react";
+import { isValidElement, useState } from "react";
 import { CopyIcon, CheckIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import clsx from "clsx";

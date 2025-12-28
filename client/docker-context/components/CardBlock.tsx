@@ -1,8 +1,8 @@
 "use server";
 
 import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
-import { ComponentProps, ReactNode } from "react";
-import { Route } from "next";
+import type { ComponentProps, ReactNode } from "react";
+import type { Route } from "next";
 import clsx from "clsx";
 
 import Link from "@/components/Link";

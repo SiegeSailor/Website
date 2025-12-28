@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { Link } from "@heroui/react";
 import clsx from "clsx";
 import NextLink from "next/link";

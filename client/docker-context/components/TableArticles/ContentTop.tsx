@@ -8,7 +8,7 @@ import {
   PopoverContent,
 } from "@heroui/react";
 import { ChevronDownIcon, SearchIcon } from "lucide-react";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import { useArticleStore } from "@/stores/article";
 import { useBlogStore } from "@/stores/blog";

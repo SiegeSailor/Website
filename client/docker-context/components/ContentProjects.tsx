@@ -1,6 +1,6 @@
 "use server";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { CardHeader, Chip, Card, CardBody, CardFooter } from "@heroui/react";
 import clsx from "clsx";
 

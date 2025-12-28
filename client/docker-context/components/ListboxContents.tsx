@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MoveLeftIcon, MoveUpIcon } from "lucide-react";
-import { Listbox, ListboxItem, ListboxSection, Skeleton } from "@heroui/react";
+import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 import clsx from "clsx";
 
 import { getAnchorsByContent } from "@/helpers/article";

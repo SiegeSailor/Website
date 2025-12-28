@@ -1,7 +1,7 @@
 "use client";
 
 import { Chip } from "@heroui/react";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import { STATUS_TO_COLOR } from "@/settings/constant";
 import { TArticle } from "@/helpers/server/article";

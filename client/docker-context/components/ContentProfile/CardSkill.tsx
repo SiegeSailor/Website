@@ -1,6 +1,6 @@
 "use server";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import { SKILL } from "@/settings/home";
 import CardBlock from "@/components/CardBlock";

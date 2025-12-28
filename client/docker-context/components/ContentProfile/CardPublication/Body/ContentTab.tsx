@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";

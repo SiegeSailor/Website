@@ -1,6 +1,6 @@
 "use server";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { HIGHLIGHTS } from "@/settings/home";

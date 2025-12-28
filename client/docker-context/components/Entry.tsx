@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 import { TArticle } from "@/helpers/server/article";
 import { TProfile } from "@/helpers/server/document";

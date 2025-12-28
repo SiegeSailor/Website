@@ -1,6 +1,7 @@
 "use client";
 
-import { ComponentProps, useState, Fragment, ReactNode } from "react";
+import type { ReactNode, ComponentProps } from "react";
+import { useState, Fragment } from "react";
 import { ScrollShadow } from "@heroui/react";
 
 export default function ({

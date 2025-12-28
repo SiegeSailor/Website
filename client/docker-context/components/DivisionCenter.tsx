@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import clsx from "clsx";
 
 export default function ({ ...props }: ComponentProps<"div">) {

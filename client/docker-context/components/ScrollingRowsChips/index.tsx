@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useRef, useState, useEffect, useCallback } from "react";
+import type { ReactNode } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 import Row from "./Row";
 

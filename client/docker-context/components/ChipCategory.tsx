@@ -1,7 +1,7 @@
 "use client";
 
 import { Chip } from "@heroui/react";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import { TArticle } from "@/helpers/server/article";
 import { useSearchByMetadata } from "@/helpers/client/blog";

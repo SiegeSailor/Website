@@ -1,6 +1,6 @@
 "use server";
 
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 import { getProfile } from "@/helpers/server/document";
 import CardBlock from "@/components/CardBlock";

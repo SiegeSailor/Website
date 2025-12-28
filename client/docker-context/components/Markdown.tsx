@@ -1,6 +1,7 @@
 "use server";
 
-import { Children, ComponentProps, isValidElement } from "react";
+import type { ComponentProps } from "react";
+import { Children, isValidElement } from "react";
 import { ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import clsx from "clsx";

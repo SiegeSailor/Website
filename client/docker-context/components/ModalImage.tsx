@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import { useState } from "react";
 import {
   useDisclosure,
   Modal,

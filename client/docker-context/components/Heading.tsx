@@ -2,7 +2,7 @@
 
 import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
-import { Route } from "next";
+import type { Route } from "next";
 import clsx from "clsx";
 
 const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {

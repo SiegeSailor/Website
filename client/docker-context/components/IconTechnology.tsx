@@ -1,8 +1,8 @@
 "use client";
 
-import { ComponentProps, ComponentType } from "react";
-import { IconType } from "@icons-pack/react-simple-icons";
-import { LucideProps } from "lucide-react";
+import type { ComponentProps, ComponentType } from "react";
+import type { IconType } from "@icons-pack/react-simple-icons";
+import type { LucideProps } from "lucide-react";
 
 import { getArticleByFilename } from "@/helpers/server/article";
 import { getValues } from "@/helpers/utility";

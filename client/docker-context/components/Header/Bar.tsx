@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { Navbar } from "@heroui/react";
 
 import { useHeaderStore } from "@/stores/header";

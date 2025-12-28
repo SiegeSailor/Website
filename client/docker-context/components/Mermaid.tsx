@@ -1,13 +1,8 @@
 "use client";
 
 import { Skeleton } from "@heroui/react";
-import {
-  useLayoutEffect,
-  useRef,
-  useId,
-  useState,
-  ComponentProps,
-} from "react";
+import type { ComponentProps } from "react";
+import { useLayoutEffect, useRef, useId, useState } from "react";
 import clsx from "clsx";
 import mermaid from "mermaid";
 

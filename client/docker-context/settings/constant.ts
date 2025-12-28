@@ -1,5 +1,5 @@
-import { ComponentProps } from "react";
-import { Route } from "next";
+import type { ComponentProps } from "react";
+import type { Route } from "next";
 import { Chip } from "@heroui/react";
 
 import { getEntries } from "@/helpers/utility";
