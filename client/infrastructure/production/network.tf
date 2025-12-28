@@ -159,5 +159,74 @@ module "vpc" {
   # Save budget.
   # enable_nat_gateway = true
 
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = local.shared_tags
+}
+
+resource "aws_security_group" "vpc_endpoints" {
+  name        = "${local.project}-${local.environment}"
+  description = "Security group for VPC endpoints."
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    description = "HTTPS from VPC."
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [module.vpc.vpc_cidr_block]
+  }
+
+  egress {
+    description = "Allow all outbound."
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = local.shared_tags
+}
+
+resource "aws_vpc_endpoint" "ecr_api" {
+  vpc_id              = module.vpc.vpc_id
+  service_name        = "com.amazonaws.${var.aws_region}.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = module.vpc.private_subnets
+  security_group_ids  = [aws_security_group.vpc_endpoints.id]
+  private_dns_enabled = true
+
+  tags = local.shared_tags
+}
+
+resource "aws_vpc_endpoint" "ecr_dkr" {
+  vpc_id              = module.vpc.vpc_id
+  service_name        = "com.amazonaws.${var.aws_region}.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = module.vpc.private_subnets
+  security_group_ids  = [aws_security_group.vpc_endpoints.id]
+  private_dns_enabled = true
+
+  tags = local.shared_tags
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id            = module.vpc.vpc_id
+  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = module.vpc.private_route_table_ids
+
+  tags = local.shared_tags
+}
+
+resource "aws_vpc_endpoint" "logs" {
+  vpc_id              = module.vpc.vpc_id
+  service_name        = "com.amazonaws.${var.aws_region}.logs"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = module.vpc.private_subnets
+  security_group_ids  = [aws_security_group.vpc_endpoints.id]
+  private_dns_enabled = true
+
   tags = local.shared_tags
 }
