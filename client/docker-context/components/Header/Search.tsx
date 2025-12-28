@@ -42,11 +42,9 @@ export default function () {
               <ModalBody>
                 <Input
                   aria-label="Search"
-                  classNames={{
-                    inputWrapper: "bg-default-100",
-                    // See https://github.com/heroui-inc/heroui/issues/5326.
-                    input: "text-medium",
-                  }}
+                  classNames={{ inputWrapper: "bg-default-100" }}
+                  // See https://github.com/heroui-inc/heroui/issues/5326.
+                  size="lg"
                   labelPlacement="outside"
                   placeholder="Type to search"
                   startContent={

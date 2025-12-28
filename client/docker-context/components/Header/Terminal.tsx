@@ -167,11 +167,9 @@ export default function () {
                 <Divider />
                 <Input
                   aria-label="Terminal"
-                  classNames={{
-                    inputWrapper: "bg-default-100",
-                    // See https://github.com/heroui-inc/heroui/issues/5326.
-                    input: "text-medium",
-                  }}
+                  classNames={{ inputWrapper: "bg-default-100" }}
+                  // See https://github.com/heroui-inc/heroui/issues/5326.
+                  size="lg"
                   isClearable
                   labelPlacement="outside"
                   onKeyUp={handleCommand}
