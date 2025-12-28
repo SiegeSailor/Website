@@ -17,7 +17,11 @@ import type { ComponentProps } from "react";
 import { useState, useRef } from "react";
 import clsx from "clsx";
 
+import { getEntries, getPublicEnv } from "@/helpers/utility";
+
 export default function () {
+  const env = getPublicEnv();
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const refInput = useRef<HTMLInputElement>(null);
@@ -54,10 +58,9 @@ export default function () {
           case "show":
             outputs.push({
               type: "output",
-              value:
-                `NEXT_PUBLIC_DOCKERFILE_COMMIT_SHORT: ${process.env.NEXT_PUBLIC_DOCKERFILE_COMMIT_SHORT}\n` +
-                `NEXT_PUBLIC_CLOUDFRONT_IMAGE: ${process.env.NEXT_PUBLIC_CLOUDFRONT_IMAGE}\n` +
-                `NODE_ENV: ${process.env.NODE_ENV}\n`,
+              value: getEntries(env)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join("\n"),
             });
             break;
           case "help":

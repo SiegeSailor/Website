@@ -8,9 +8,10 @@ import {
   globalMetadata,
   globalViewport,
 } from "@/settings/head";
+import { AUTHOR } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
 import { getProfile } from "@/helpers/server/document";
-import { AUTHOR } from "@/settings/constant";
+import { PublicEnv } from "@/helpers/utility";
 import Entry from "@/components/Entry";
 import Header from "@/components/Header";
 import Provider from "@/components/Provider";
@@ -36,6 +37,8 @@ export default async function ({
         className={clsx(globalFontRoboto.className, "overscroll-none")}
       >
         <Provider>
+          <PublicEnv />
+
           <div className="h-screen flex flex-col">
             <Header />
             <main className="w-full mx-auto px-4 grow pt-4 sm:pt-8">

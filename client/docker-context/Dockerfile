@@ -30,9 +30,7 @@ FROM dependencies AS build
 COPY --from=dependencies /app/node_modules/. ./node_modules/
 COPY "." ./
 
-RUN touch ".env" && \
-    echo "NEXT_PUBLIC_DOCKERFILE_COMMIT_SHORT=${COMMIT_SHORT}" >> ".env" && \
-    npm run build
+RUN npm run build
 
 
 # [Stage] Prepare the application and run the container
