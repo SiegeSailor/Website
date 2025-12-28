@@ -18,6 +18,7 @@ import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 
 import { getEntries, getPublicEnv } from "@/helpers/utility";
+import { TITLE } from "@/settings/constant";
 
 export default function () {
   const env = getPublicEnv();
@@ -34,24 +35,22 @@ export default function () {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    const datetime = new Date().toLocaleString("en-US", {
+      hour12: false,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
     setResults([
       {
         type: "system",
         value:
-          "###################################\n" +
-          `${(
-            navigator.userAgent +
-            ". (" +
-            window.screen.width +
-            "x" +
-            window.screen.height +
-            ")"
-          )
-            .match(/.{1,41}/g)
-            ?.map((chunk) => `# ${chunk}`)
-            .join("\n")}\n` +
-          `# Welcome. Run help for available commands.\n` +
-          "###################################",
+          `${TITLE} ${datetime.split(", ").join(" ")}\n` +
+          `${navigator.userAgent} (${window.screen.width}x${window.screen.height})\n` +
+          `Welcome. Run help for available commands\n`,
       },
     ]);
 
