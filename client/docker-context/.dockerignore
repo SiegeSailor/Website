@@ -7,6 +7,7 @@
 CONTRIBUTING.md
 Dockerfile
 README.md
+.env*
 
 #######################################
 # Module

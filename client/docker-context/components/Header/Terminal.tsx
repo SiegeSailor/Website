@@ -55,8 +55,8 @@ export default function () {
             outputs.push({
               type: "output",
               value:
-                `COMMIT_SHORT: ${process.env.COMMIT_SHORT}\n` +
-                `IMAGE: ${process.env.IMAGE}`,
+                `COMMIT_SHORT: ${process.env.NEXT_PUBLIC_COMMIT_SHORT}\n` +
+                `IMAGE: ${process.env.NEXT_PUBLIC_IMAGE}`,
             });
             break;
           case "help":
