@@ -52,15 +52,15 @@ export default function ({
         {...getWrapperProps()}
         className={slots.wrapper({
           class: clsx(
-            "w-auto h-auto bg-transparent rounded-lg flex items-center justify-center group-data-[selected=true]:bg-transparent text-default-500! px-0 mx-0",
+            "w-auto h-auto bg-transparent rounded-lg flex items-center justify-center group-data-[selected=true]:bg-transparent text-foreground! px-0 mx-0",
             classNames?.wrapper
           ),
         })}
       >
         {!isSelected || isSSR ? (
-          <SunIcon size="1.45rem" />
+          <SunIcon size="1.45rem" strokeWidth="0.075rem" />
         ) : (
-          <MoonIcon size="1.45rem" />
+          <MoonIcon size="1.45rem" strokeWidth="0.075rem" />
         )}
       </div>
     </Component>

@@ -15,10 +15,11 @@ import { useArticleStore } from "@/stores/article";
 import { useBlogStore } from "@/stores/blog";
 import ChipCategory from "@/components/ChipCategory";
 import ChipStatus from "@/components/ChipStatus";
-import ContentBottom from "./ContentBottom";
-import ContentTop from "./ContentTop";
 import Link from "@/components/Link";
 import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
+
+import ContentBottom from "./ContentBottom";
+import ContentTop from "./ContentTop";
 
 export const COLUMNS: {
   key: keyof TArticle["metadata"];

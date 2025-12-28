@@ -5,6 +5,7 @@ import { Tabs, Tab, Progress } from "@heroui/react";
 import { useState, useEffect } from "react";
 
 import { PUBLICATION } from "@/settings/home";
+
 import ContentTab from "./ContentTab";
 
 export default function () {

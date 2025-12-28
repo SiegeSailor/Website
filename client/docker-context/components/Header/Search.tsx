@@ -25,8 +25,9 @@ export default function () {
         radius="full"
         startContent={
           <SearchIcon
-            size="1.45rem"
             className="text-base text-default-400 pointer-events-none shrink-0"
+            size="1.45rem"
+            strokeWidth="0.075rem"
           />
         }
         variant="bordered"

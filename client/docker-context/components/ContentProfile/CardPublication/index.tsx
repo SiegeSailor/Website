@@ -2,8 +2,9 @@
 
 import type { ComponentProps } from "react";
 
-import Body from "./Body";
 import CardBlock from "@/components/CardBlock";
+
+import Body from "./Body";
 
 export default async function ({
   ...props

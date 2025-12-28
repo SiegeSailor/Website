@@ -9,14 +9,16 @@ import {
   Selection,
 } from "@heroui/react";
 import { CheckIcon } from "lucide-react";
-import { ComponentProps, useEffect } from "react";
+import type { ComponentProps } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 
-import { PROPS_BUTTON } from "./ContentTop";
 import { TArticle } from "@/helpers/server/article";
 import { useArticleStore, TState as TArticleState } from "@/stores/article";
 import { useBlogStore, TState as TBlogState } from "@/stores/blog";
+
+import { PROPS_BUTTON } from "./ContentTop";
 
 export type TMetadata = Extract<
   keyof TArticle["metadata"],

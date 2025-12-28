@@ -11,10 +11,11 @@ import { CheckIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import clsx from "clsx";
 
+import { useBlogStore } from "@/stores/blog";
+
 import { COLUMNS } from ".";
 import { PROPS_BUTTON } from "./ContentTop";
 import { renderSelection } from "./DropdownMetadata";
-import { useBlogStore } from "@/stores/blog";
 
 export default function ({
   ...props

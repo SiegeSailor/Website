@@ -3,7 +3,7 @@
 import { NavbarMenu, NavbarMenuItem } from "@heroui/react";
 
 import { useHeaderStore } from "@/stores/header";
-import Search from "@/components/Search";
+import Search from "@/components/Header/Search";
 
 import CardArticles from "./CardArticles";
 import CardPages from "./CardPages";

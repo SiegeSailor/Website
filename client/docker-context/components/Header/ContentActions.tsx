@@ -1,6 +1,5 @@
 "use server";
 
-import { SquareTerminalIcon } from "lucide-react";
 import {
   NavbarContent,
   NavbarMenuToggle,
@@ -8,8 +7,9 @@ import {
   Divider,
 } from "@heroui/react";
 
-import Search from "@/components/Search";
-import IconTheme from "@/components/IconTheme";
+import IconTheme from "./IconTheme";
+import Search from "./Search";
+import Terminal from "./Terminal";
 
 export default async function () {
   return (
@@ -21,10 +21,7 @@ export default async function () {
         <Search />
       </NavbarItem>
       <Divider orientation="vertical" className="hidden sm:flex h-6" />
-      <SquareTerminalIcon
-        size="1.45rem"
-        className="text-default-500/40 translate-y-px"
-      />
+      <Terminal />
       <IconTheme />
       <NavbarMenuToggle className="h-6" />
     </NavbarContent>

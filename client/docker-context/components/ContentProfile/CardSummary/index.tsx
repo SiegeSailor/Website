@@ -4,6 +4,7 @@ import type { ComponentProps } from "react";
 
 import { getProfile } from "@/helpers/server/document";
 import CardBlock from "@/components/CardBlock";
+
 import Chart from "./Chart";
 import ContentHeader from "./ContentHeader";
 
