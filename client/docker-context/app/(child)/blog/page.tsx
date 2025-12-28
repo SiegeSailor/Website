@@ -20,7 +20,7 @@ export default async function () {
 
   return (
     <section className="max-w-content mx-auto p-4">
-      <div className="md:hidden gap-4 grid grid-cols-12 grid-rows-1 w-full mx-auto">
+      <div className="md:hidden gap-4 grid grid-cols-12 grid-rows-1 mx-auto">
         {articles.map((article) => (
           <CardArticleDetail
             className="col-span-12 sm:col-span-6 h-[300px]"
@@ -40,11 +40,7 @@ export default async function () {
             <h4 className="text-medium font-semibold">Highlights</h4>
             <div className="flex flex-col gap-2">
               {HIGHLIGHTS.map((date) => (
-                <CardArticleHighlight
-                  className="w-full"
-                  date={date}
-                  key={date}
-                />
+                <CardArticleHighlight date={date} key={date} />
               ))}
             </div>
           </div>
@@ -59,7 +55,6 @@ export default async function () {
             <div className="flex flex-col gap-2">
               {articles.slice(0, 4).map((article) => (
                 <CardArticleSimple
-                  className="w-full"
                   filename={article.filename}
                   isMultiple
                   key={article.filename}

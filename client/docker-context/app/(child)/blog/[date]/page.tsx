@@ -106,7 +106,7 @@ export default async function ({
             <Divider />
           </div>
 
-          <article className="w-full overflow-x-hidden">
+          <article>
             <Markdown source={content} />
           </article>
         </div>

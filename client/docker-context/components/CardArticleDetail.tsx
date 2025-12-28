@@ -72,7 +72,7 @@ export default async function ({
         <ScrollShadow>
           <Markdown
             source={article.metadata.description}
-            p={{ className: "text-foreground/50" }}
+            p={{ className: "text-foreground/85" }}
           />
         </ScrollShadow>
       </CardBody>

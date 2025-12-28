@@ -61,7 +61,7 @@ export default function () {
               <span>{date}</span>·<span>{category}</span>
             </p>
             <Spacer y={1} />
-            <h4 className="text-background dark:text-foreground font-light text-2xl text-left text-wrap w-full">
+            <h4 className="text-background dark:text-foreground font-light text-2xl text-left text-wrap w-full line-clamp-3">
               {title}
             </h4>
             <Spacer y={4} />

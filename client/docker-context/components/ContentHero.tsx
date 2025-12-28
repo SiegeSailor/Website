@@ -13,7 +13,7 @@ const IconProfile = ROUTE_TO_ICON["/profile"];
 
 export default async function ({ ...props }: ComponentProps<"div">) {
   return (
-    <div {...props} className={clsx("text-left w-full", props.className)}>
+    <div {...props} className={clsx("text-left", props.className)}>
       <div className="flex flex-col gap-2">
         <h2 className="text-3xl sm:text-4xl font-light text-default-400 flex flex-col gap-1">
           <span className="text-nowrap">

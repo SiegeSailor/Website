@@ -21,7 +21,7 @@ export default async function () {
 
   return (
     <section className="max-w-content mx-auto p-4">
-      <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1 w-full">
+      <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1">
         <div
           id={IDENTIFIER}
           className="md:col-span-8 lg:col-span-9 overflow-y-auto"

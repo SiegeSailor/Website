@@ -41,7 +41,7 @@ export default async function ({
 
           <div className="h-screen flex flex-col">
             <Header />
-            <main className="w-full mx-auto px-4 grow pt-4 sm:pt-8">
+            <main className="mx-auto px-4 grow pt-4 sm:pt-8">
               <Entry articles={articles} profile={profile}>
                 {children}
               </Entry>

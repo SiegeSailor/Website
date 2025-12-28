@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 
 export default function () {
   return (
-    <section className="w-full max-w-content mx-auto p-4">
+    <section className="max-w-content mx-auto p-4">
       <div className="flex flex-col gap-24">
-        <ContentHero className="w-full max-w-compact mx-auto" />
-        <ContentArticles className="w-full mx-auto" />
-        <ContentProfile className="w-full mx-auto" />
-        <ContentProjects className="w-full mx-auto" />
-        <ContentHighlights className="w-full mx-auto" />
+        <ContentHero className="max-w-compact mx-auto" />
+        <ContentArticles className="mx-auto" />
+        <ContentProfile className="mx-auto" />
+        <ContentProjects className="mx-auto" />
+        <ContentHighlights className="mx-auto" />
       </div>
     </section>
   );
