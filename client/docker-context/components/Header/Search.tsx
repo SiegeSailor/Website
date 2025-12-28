@@ -34,7 +34,7 @@ export default function () {
       >
         Search
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="lg">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
         <ModalContent>
           {(onClose) => (
             <>
@@ -52,6 +52,7 @@ export default function () {
                     <SearchIcon className="text-base text-default-400 pointer-events-none shrink-0" />
                   }
                   disabled
+                  isClearable
                   type="search"
                 />
                 <Divider />

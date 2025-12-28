@@ -6,7 +6,7 @@ import type { Route } from "next";
 import clsx from "clsx";
 
 const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
-  1: "text-5xl leading-[1.25] font-bold",
+  1: "text-5xl leading-tight font-bold",
   2: "text-4xl font-bold",
   3: "text-3xl font-semibold",
   4: "text-2xl font-semibold",
