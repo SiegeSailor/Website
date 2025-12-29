@@ -37,6 +37,10 @@ Required software for the every modules:
 - [x] Change `()` start word
 - [ ] Review feature (AI automated reviewers)
 - [ ] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production. Only the first time after pushing-refresh (cache invalid due to file changes, hence online website updates automatically)
+- [ ] CI:
+  - [ ] Streamline GitHub profile README.md
+  - [ ] Deploy flow
+- [ ] Refine projects and edit sponsor profile
 - [x] Share OG images
 - [x] Update profile: Vite, lints
 - [x] Finish drafts
@@ -49,3 +53,21 @@ Required software for the every modules:
 - [x] AI documents
 - [x] Move this to README.md
 - [x] Cloudfront for Next.js static files
+
+## Articles
+
+- [ ] Message Queue vs Event Bus (Pub/Sub) within a distributed system
+- [ ] gRPC flow
+- [x] Next.js misleading route error
+- [ ] custom proxy server:
+      gRPC server only accepts HTTP/2
+      Proxy server only accepts HTTP/1.1
+      Client UI needs HTTP/2 for streaming
+      Hence, we have nginx to bridge HTTP/2 to HTTP/1.1, and use the proxy server to convert HTTP request to gRPC format
+- [ ] Phone and Tablet Tabs
+- [ ] Vault to Profile
+- [ ] iPad Tabs to Profile
+- [ ] Discreet Math Notes
+- [ ] Resolve Formulas Issues
+- [ ] Concurrency Toolkit
+- [ ] Move Keep and GitBook
