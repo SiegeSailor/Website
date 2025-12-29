@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     // The value is `--heroui-background`.
     background_color: "hsl(0 0% 100%)",
-    description: String(globalMetadata.description),
+    description: globalMetadata.description?.toString(),
     display: "standalone",
     icons: [
       {
@@ -15,9 +15,9 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/x-icon",
       },
     ],
-    name: String(globalMetadata.title),
+    name: globalMetadata.title?.toString(),
     orientation: "natural",
-    short_name: String(globalMetadata.title),
+    short_name: globalMetadata.title?.toString(),
     start_url: "/",
     // The value is `--heroui-primary`.
     theme_color: "hsl(212.01999999999998 100% 46.67%)",

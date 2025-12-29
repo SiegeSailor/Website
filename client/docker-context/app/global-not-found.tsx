@@ -24,7 +24,7 @@ export const viewport: Viewport = globalViewport;
 
 export default function () {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
       <body
         suppressHydrationWarning
         className={clsx(

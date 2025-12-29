@@ -27,7 +27,7 @@ export default function ({
   reset,
 }: Readonly<{ error: Error & { digest: string }; reset: () => void }>) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
       <head>
         <title>{metadata.title?.toString()}</title>
         <meta name="description" content={metadata.description?.toString()} />
