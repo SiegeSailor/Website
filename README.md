@@ -21,6 +21,7 @@ Required software for the every modules:
 
 ## Todos
 
+- [ ] Loading, Input modal focus, word break for image
 - [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
 - [x] Check next.js cache headers for images
 - [x] Check cloudfront cache headers for images and all other files

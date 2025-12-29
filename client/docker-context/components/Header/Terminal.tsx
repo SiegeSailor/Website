@@ -83,7 +83,7 @@ export default function () {
               type: "output",
               value:
                 "User Agent:\n" +
-                `\t${navigator.userAgent} (${window.screen.width}x${window.screen.height})\n` +
+                `\t(${window.screen.width}x${window.screen.height}) ${navigator.userAgent}\n` +
                 "Build Information:\n" +
                 getEntries(env)
                   .map(([key, value]) => `\t${key}: ${value}`)
@@ -152,7 +152,7 @@ export default function () {
                       <p
                         key={index}
                         className={clsx(
-                          "w-full grow-0 text-small leading-normal whitespace-pre-wrap",
+                          "w-full grow-0 text-small leading-normal whitespace-pre-wrap break-all",
                           {
                             "font-bold": type === "command",
                             "font-light text-default-400": type === "system",

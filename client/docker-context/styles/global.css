@@ -12,6 +12,11 @@
   }
 }
 
+/* See https://github.com/heroui-inc/heroui/issues/5326. */
+input {
+  font-size: 16px;
+}
+
 @theme {
   --spacing-compact: 880px;
   --spacing-content: 1280px;
