@@ -66,65 +66,63 @@ export default async function ({
   const { metadata, content } = article;
 
   return (
-    <section className="max-w-content mx-auto p-4">
-      <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1">
-        <div
-          id={IDENTIFIER}
-          className="md:col-span-8 lg:col-span-9 overflow-y-auto"
-        >
-          <div className="flex flex-col gap-2 mb-16">
-            <Heading level={1} id={getSlugByTitle(metadata.title)}>
-              {metadata.title}
-            </Heading>
-            <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-small text-foreground/50">
-              <span>{metadata.date} (drafted)</span>
-              <span>·</span>
-              <span>{metadata.createdOn} (created)</span>
-              <span>·</span>
-              <span>{metadata.updatedOn} (updated)</span>
-              <span>·</span>
-              <span>{metadata.minutes} mins read</span>
-            </div>
-            <div className="flex gap-2 items-center">
-              <ChipCategory category={metadata.category} />
-              <ChipStatus status={metadata.status} />
-              <span>·</span>
-              <ScrollShadowTechnologies
-                technologies={metadata.technologies}
-                propsItem={{
-                  className: "text-foreground",
-                  variant: "bordered",
-                  size: "md",
-                }}
-                propsIcon={{ color: "default" }}
-              />
-            </div>
-            <Divider className="mt-4" />
-            <div className="my-2">
-              <Markdown source={metadata.description} />
-            </div>
-            <Divider />
+    <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1">
+      <div
+        id={IDENTIFIER}
+        className="md:col-span-8 lg:col-span-9 overflow-y-auto"
+      >
+        <div className="flex flex-col gap-2 mb-16">
+          <Heading level={1} id={getSlugByTitle(metadata.title)}>
+            {metadata.title}
+          </Heading>
+          <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-small text-foreground/50">
+            <span>{metadata.date} (drafted)</span>
+            <span>·</span>
+            <span>{metadata.createdOn} (created)</span>
+            <span>·</span>
+            <span>{metadata.updatedOn} (updated)</span>
+            <span>·</span>
+            <span>{metadata.minutes} mins read</span>
           </div>
-
-          <article>
-            <Markdown source={content} />
-          </article>
+          <div className="flex gap-2 items-center">
+            <ChipCategory category={metadata.category} />
+            <ChipStatus status={metadata.status} />
+            <span>·</span>
+            <ScrollShadowTechnologies
+              technologies={metadata.technologies}
+              propsItem={{
+                className: "text-foreground",
+                variant: "bordered",
+                size: "md",
+              }}
+              propsIcon={{ color: "default" }}
+            />
+          </div>
+          <Divider className="mt-4" />
+          <div className="my-2">
+            <Markdown source={metadata.description} />
+          </div>
+          <Divider />
         </div>
-        <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
-          {[
-            <Card shadow="sm">
-              <ListboxContents anchors={metadata.anchors} />
-            </Card>,
-            <Card shadow="sm">
-              <ListboxArticles date={metadata.date} />
-            </Card>,
-          ].map((item, index) => (
-            <div key={index} className="not-last:mb-4">
-              {item}
-            </div>
-          ))}
-        </DivisionSticky>
+
+        <article>
+          <Markdown source={content} />
+        </article>
       </div>
-    </section>
+      <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
+        {[
+          <Card shadow="sm">
+            <ListboxContents anchors={metadata.anchors} />
+          </Card>,
+          <Card shadow="sm">
+            <ListboxArticles date={metadata.date} />
+          </Card>,
+        ].map((item, index) => (
+          <div key={index} className="not-last:mb-4">
+            {item}
+          </div>
+        ))}
+      </DivisionSticky>
+    </div>
   );
 }

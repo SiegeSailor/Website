@@ -19,7 +19,7 @@ export default async function () {
   const articles = await getArticles();
 
   return (
-    <section className="max-w-content mx-auto p-4">
+    <>
       <div className="md:hidden gap-4 grid grid-cols-12 grid-rows-1 mx-auto">
         {articles.map((article) => (
           <CardArticleDetail
@@ -64,6 +64,6 @@ export default async function () {
           </div>
         </DivisionSticky>
       </div>
-    </section>
+    </>
   );
 }
