@@ -48,7 +48,7 @@ export default function () {
         type: "system",
         value:
           `${datetime.split(", ").join(" ")}\n` +
-          `Welcome. Run help for available commands\n`,
+          `Welcome. Run help for available commands`,
       },
     ]);
 
@@ -82,8 +82,10 @@ export default function () {
             outputs.push({
               type: "output",
               value:
+                "Screen:\n" +
+                `\t${window.screen.width}x${window.screen.height}\n` +
                 "User Agent:\n" +
-                `\t(${window.screen.width}x${window.screen.height}) ${navigator.userAgent}\n` +
+                `\t${navigator.userAgent}\n` +
                 "Build Information:\n" +
                 getEntries(env)
                   .map(([key, value]) => `\t${key}: ${value}`)
