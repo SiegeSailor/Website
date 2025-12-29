@@ -8,8 +8,8 @@ import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 import TextRoute from "@/components/TextRoute";
 
-// TODO: Subject to change once https://github.com/vercel/next.js/issues/45620 is resolved.
-//       Currently, `metadata` doesn't work here, neither inherited.
+// TODO: Subject to use this once https://github.com/vercel/next.js/issues/45620 is resolved.
+//       Currently, `metadata` doesn't work here, neither inherited. `<title />` used instead.
 export const metadata: Metadata = {
   ...globalMetadata,
   title: createPageTitle("Not Found"),
@@ -20,6 +20,8 @@ export const viewport: Viewport = globalViewport;
 export default function () {
   return (
     <DivisionCenter>
+      <title>{metadata.title?.toString()}</title>
+
       <Alert
         color="warning"
         classNames={{ title: "font-medium" }}
