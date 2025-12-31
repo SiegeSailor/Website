@@ -16,11 +16,8 @@ export default function ({
   propsContainer,
   propsItem,
   technologies,
-  ...props
 }: Omit<ComponentProps<typeof ScrollShadowChips>, "row"> &
   Readonly<{
-    propsContainer?: ComponentProps<typeof ScrollShadow>;
-    propsItem?: ComponentProps<typeof Chip>;
     isLink?: boolean;
     propsIcon?: Omit<ComponentProps<typeof IconTechnology>, "technology">;
     technologies: Awaited<
