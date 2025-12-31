@@ -40,7 +40,7 @@ input {
   }
 
   img {
-    @apply w-full min-h-[22px];
+    @apply w-full min-h-5.5;
     @apply rounded-md shadow-md;
   }
 
