@@ -2,6 +2,7 @@
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { usePathname } from "next/navigation";
+import { useTopLoader } from "nextjs-toploader";
 import clsx from "clsx";
 
 import { getEntries } from "@/helpers/utility";
@@ -10,6 +11,8 @@ import { TITLE_TO_ROUTE } from "@/settings/constant";
 
 export default function () {
   const pathname = usePathname();
+
+  const loader = useTopLoader();
 
   return (
     <Card shadow="sm">
@@ -31,6 +34,7 @@ export default function () {
                     "font-semibold": pathname === route,
                   }),
                 }}
+                onClick={() => loader.start()}
                 endContent={<Icon size="1rem" strokeWidth="0.1rem" />}
                 href={route}
                 key={route}

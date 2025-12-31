@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
+import { useTopLoader } from "nextjs-toploader";
 
 import { useDocumentStore } from "@/stores/document";
 import { useRoute } from "@/helpers/client/history";
@@ -10,6 +11,8 @@ export default function () {
   const profile = useDocumentStore((state) => state.profile);
 
   const { route } = useRoute();
+
+  const loader = useTopLoader();
 
   return (
     <Card shadow="sm">
@@ -32,6 +35,7 @@ export default function () {
                         "font-semibold": route === item.route,
                       }),
                     }}
+                    onClick={() => loader.start()}
                     href={item.route}
                     key={item.route}
                     title={item.title}

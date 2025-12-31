@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useTopLoader } from "nextjs-toploader";
 import clsx from "clsx";
 
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
@@ -10,6 +11,8 @@ export default function () {
   const articles = useArticleStore((state) => state.articles);
 
   const pathname = usePathname();
+
+  const loader = useTopLoader();
 
   return (
     <Card shadow="sm">
@@ -29,6 +32,7 @@ export default function () {
                     "font-semibold": pathname === article.metadata.route,
                   }),
                 }}
+                onClick={() => loader.start()}
                 description={article.metadata.date}
                 href={article.metadata.route}
                 key={article.metadata.route}

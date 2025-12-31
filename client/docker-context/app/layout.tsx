@@ -40,12 +40,12 @@ export default async function ({
           <PublicEnv />
 
           <div className="w-full h-screen flex flex-col">
-            <Header />
-            <main className="w-full mx-auto px-4 grow pt-4 sm:pt-8">
-              <Entry articles={articles} profile={profile}>
+            <Entry articles={articles} profile={profile}>
+              <Header />
+              <main className="w-full mx-auto px-4 grow pt-4 sm:pt-8">
                 {children}
-              </Entry>
-            </main>
+              </main>
+            </Entry>
             <div className="text-center px-4 py-2 bg-default-100 text-small font-light flex flex-row flex-wrap justify-center gap-2">
               <p>
                 © {year} {AUTHOR}
