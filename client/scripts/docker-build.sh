@@ -36,7 +36,7 @@ main() {
     source ".env"
     set +a
   else
-    echo -e "${YELLOW}[WARN] .env file not found${NONE}"
+    echo -e "${YELLOW}[WARNING] .env file not found${NONE}"
   fi
 
   echo -e "${GREEN}[INFO] Building Docker image ${image} for ${build_platform}${NONE}"
