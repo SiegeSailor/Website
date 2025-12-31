@@ -1,8 +1,7 @@
 "use client";
 
 import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
-import type { ComponentProps } from "react";
-import { useMemo } from "react";
+import { type ComponentProps, useMemo } from "react";
 import type { Route } from "next";
 import { usePathname } from "next/navigation";
 
