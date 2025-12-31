@@ -19,7 +19,6 @@ export default async function ({ ...props }: ComponentProps<"div">) {
               <CardArticleSimple
                 className="w-full"
                 filename={article.filename}
-                isMultiple={false}
                 key={index}
                 shadow="md"
               />

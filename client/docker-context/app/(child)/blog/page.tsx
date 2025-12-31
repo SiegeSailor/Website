@@ -56,7 +56,6 @@ export default async function () {
               {articles.slice(0, 4).map((article) => (
                 <CardArticleSimple
                   filename={article.filename}
-                  isMultiple
                   key={article.filename}
                 />
               ))}

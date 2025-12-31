@@ -1,71 +1,35 @@
 "use server";
 
-import { Card } from "@heroui/react";
+import { Card, ScrollShadow } from "@heroui/react";
 import type { ComponentProps } from "react";
-import clsx from "clsx";
 
-import { getArticleByFilename, TArticle } from "@/helpers/server/article";
+import { getArticleByFilename } from "@/helpers/server/article";
 import Link from "@/components/Link";
-
-const METADATA_TO_CLASSNAMES = {
-  category: "text-foreground/50 text-small font-light",
-  date: "text-foreground/50 text-small font-light text-right",
-  title: "text-medium font-medium",
-} as const;
-
-function ChildrenMultiple({ article }: { article: TArticle }) {
-  const { category, date, title } = article.metadata;
-
-  return (
-    <div className="flex flex-wrap gap-1 justify-start">
-      <div className="w-full flex flex-nowrap justify-between items-center">
-        <p className={METADATA_TO_CLASSNAMES.category}>{category}</p>
-        <p className={METADATA_TO_CLASSNAMES.date}>{date}</p>
-      </div>
-      <h3 className={clsx(METADATA_TO_CLASSNAMES.title, "line-clamp-1")}>
-        {title}
-      </h3>
-    </div>
-  );
-}
-
-function ChildrenSingle({ article }: { article: TArticle }) {
-  const { category, date, title } = article.metadata;
-
-  return (
-    <div className="flex flex-nowrap justify-between items-center whitespace-nowrap">
-      <p className={clsx(METADATA_TO_CLASSNAMES.category, "truncate w-16")}>
-        {category}
-      </p>
-      <h3
-        className={clsx(
-          METADATA_TO_CLASSNAMES.title,
-          "truncate w-[calc(100%-10rem)]"
-        )}
-      >
-        {title}
-      </h3>
-      <p className={clsx(METADATA_TO_CLASSNAMES.date, "w-20")}>{date}</p>
-    </div>
-  );
-}
 
 export default async function ({
   filename,
-  isMultiple,
   ...props
-}: ComponentProps<typeof Card> &
-  Readonly<{ filename: string; isMultiple: boolean }>) {
+}: ComponentProps<typeof Card> & Readonly<{ filename: string }>) {
   const article = await getArticleByFilename(filename);
+
+  const { category, date, title } = article.metadata;
 
   return (
     <Card isHoverable isPressable shadow="sm" {...props}>
       <Link className="text-left p-4" href={article.metadata.route} isPlain>
-        {isMultiple ? (
-          <ChildrenMultiple article={article} />
-        ) : (
-          <ChildrenSingle article={article} />
-        )}
+        <div className="flex flex-nowrap justify-between items-center whitespace-nowrap">
+          <p className="text-foreground/50 text-small font-light truncate w-16">
+            {category}
+          </p>
+          <h3 className="text-medium font-medium w-[calc(100%-10rem)]">
+            <ScrollShadow className="w-full" size={20} orientation="horizontal">
+              {title}
+            </ScrollShadow>
+          </h3>
+          <p className="text-foreground/50 text-small font-light text-right w-20">
+            {date}
+          </p>
+        </div>
       </Link>
     </Card>
   );
