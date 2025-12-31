@@ -8,7 +8,7 @@ import {
   PopoverContent,
 } from "@heroui/react";
 import { ChevronDownIcon, SearchIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import { Suspense, type ComponentProps } from "react";
 
 import { useArticleStore } from "@/stores/article";
 import { useBlogStore } from "@/stores/blog";
@@ -17,6 +17,7 @@ import Link from "@/components/Link";
 
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
+import SpinnerCenter from "../SpinnerCenter";
 
 export const PROPS_BUTTON: ComponentProps<typeof Button> = {
   className:
@@ -56,9 +57,15 @@ export default function () {
           value={filter}
         />
         <div className="w-full flex gap-2 flex-nowrap">
-          <DropdownMetadata className="grow" metadata="category" />
-          <DropdownMetadata className="grow" metadata="status" />
-          <DropdownMetadata className="grow" metadata="technologies" />
+          <Suspense fallback={<SpinnerCenter />}>
+            <DropdownMetadata className="grow" metadata="category" />
+          </Suspense>
+          <Suspense fallback={<SpinnerCenter />}>
+            <DropdownMetadata className="grow" metadata="status" />
+          </Suspense>
+          <Suspense fallback={<SpinnerCenter />}>
+            <DropdownMetadata className="grow" metadata="technologies" />
+          </Suspense>
           <DropdownColumns className="grow" />
         </div>
       </div>
