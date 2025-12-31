@@ -9,6 +9,28 @@ readonly GREEN="\033[0;32m"
 readonly YELLOW="\033[1;33m"
 readonly NONE="\033[0m"
 
+readonly MAX_CONCURRENT=10
+
+#######################################
+# Make async HTTP request.
+# Arguments:
+#   $1 - URL to request
+# Outputs:
+#   HTTP status code or error message
+#######################################
+request_url() {
+  local -r url="$1"
+  local status
+  
+  echo -e "${BLUE}[INFO] Requesting ${url}${NONE}"
+  status=$(curl -s -o /dev/null -w "%{http_code}" "${url}" 2>&1)
+
+  if [ "$status" != "200" ]; then
+    echo -e "${YELLOW}[WARNING] Failed to request ${url} with status ${status}${NONE}" >&2
+    return 1
+  fi
+}
+
 #######################################
 # Main function.
 # Arguments:
@@ -31,15 +53,11 @@ main() {
 
   echo -e "${GREEN}[INFO] Warming up CloudFront cache for ${base_url}${NONE}"
 
-  local -ra static_pages=(
-    "/"
-    "/blog"
-    "/profile"
-  )
+  local -a urls=()
+  
+  local -ra static_pages=("/" "/blog" "/profile")
   for page in "${static_pages[@]}"; do
-    local url="${base_url}${page}"
-    echo -e "${BLUE}[INFO] Requesting ${url}${NONE}"
-    curl -s -o /dev/null -w "Status: %{http_code}\n" "${url}" || echo -e "${YELLOW}[WARNING] Failed to request ${url}${NONE}"
+    urls+=("${base_url}${page}")
   done
 
   for article_file in "${path_to_articles}"/*.md; do
@@ -48,13 +66,32 @@ main() {
       slug=$(basename "${article_file}" .md)
       
       if [[ "${slug}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-        local url="${base_url}/blog/${slug}"
-        echo -e "${BLUE}[INFO] Requesting ${url}${NONE}"
-        curl -s -o /dev/null -w "Status: %{http_code}\n" "${url}" || echo -e "${YELLOW}[WARNING] Failed to request ${url}${NONE}"
+        urls+=("${base_url}/blog/${slug}")
       else
         echo -e "${YELLOW}[WARNING] Skipping invalid slug ${slug}${NONE}"
       fi
     fi
+  done
+
+  local count=0
+  local -a pids=()
+  
+  for url in "${urls[@]}"; do
+    request_url "${url}" &
+    pids+=($!)
+    ((count++))
+    
+    if (( count >= MAX_CONCURRENT )); then
+      for pid in "${pids[@]}"; do
+        wait "${pid}" 2>/dev/null || true
+      done
+      pids=()
+      count=0
+    fi
+  done
+  
+  for pid in "${pids[@]}"; do
+    wait "${pid}" 2>/dev/null || true
   done
 
   echo -e "${GREEN}[DONE] Completed CloudFront cache warming up${NONE}"

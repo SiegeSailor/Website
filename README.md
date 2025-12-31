@@ -21,13 +21,14 @@ Required software for the every modules:
 
 ## Todos
 
-- [ ] Loading, Input modal focus, word break for image
+- [x] Loading, Input modal focus, word break for image
 - [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
 - [x] Check next.js cache headers for images
 - [x] Check cloudfront cache headers for images and all other files
 - [ ] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
 - [x] Use import type
 - [ ] Add lint and checks
+- [ ] Use server component to cache/replace `useSearchParams`
 - [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
 - [ ] Tokenize articles for search
 - [x] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
