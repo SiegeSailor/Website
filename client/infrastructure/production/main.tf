@@ -35,6 +35,9 @@ module "ecs" {
 
   services = {
     (local.module) = {
+      # Save budget.
+      # cpu    = 512
+      # memory = 2048
       cpu    = 256
       memory = 1024
 
@@ -49,8 +52,14 @@ module "ecs" {
 
       container_definitions = {
         (local.module) = {
-          cpu       = 128
-          memory    = 384
+          # Save budget.
+          # cpu       = 256
+          # memory    = 512
+          # Tune performance.
+          # cpu       = 128
+          # memory    = 384
+          cpu       = 256
+          memory    = 1024
           essential = true
           image     = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
           portMappings = [
@@ -59,6 +68,9 @@ module "ecs" {
               containerPort = local.port
             }
           ]
+
+          memoryReservation         = 512
+          enable_cloudwatch_logging = true
 
           # Defining `ENV` in `Dockerfile` isn't sufficient.
           environment = [
@@ -87,9 +99,6 @@ module "ecs" {
             retries     = 3
             startPeriod = 60
           }
-
-          enable_cloudwatch_logging = true
-          memoryReservation         = 128
         }
       }
 
