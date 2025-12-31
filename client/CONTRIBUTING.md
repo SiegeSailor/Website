@@ -85,15 +85,22 @@ aws configure export-credentials \
 
 ### Workflow
 
-Roughly the deployment workflow is as follows:
+Go to the desired infrastructure environment folder, such as `infrastructure/production`, and run the following commands to deploy the latest changes:
 
 ```shell
-export ENVIRONMENT="development"
-
-terraform init -backend-config="${ENVIRONMENT}.tfbackend"
+terraform init
 terraform fmt
 tflint
 terraform validate
-terraform plan -var "environment=${ENVIRONMENT}"
-terraform apply -var "environment=${ENVIRONMENT}"
+terraform plan
+terraform apply
+```
+
+A quick script:
+
+```shell
+bash scripts/docker-build.sh
+bash scripts/docker-push.sh
+(cd infrastructure/production && \
+    terraform apply -auto-approve)
 ```
