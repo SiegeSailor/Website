@@ -152,43 +152,21 @@ module "vpc" {
   name = "${local.project}-${local.environment}"
   cidr = "10.0.0.0/16"
 
-  azs             = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+  # Save budget.
+  # azs             = ["${var.aws_region}a", "${var.aws_region}b", "${var.aws_region}c"]
+  # private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  # public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+  azs             = ["${var.aws_region}a", "${var.aws_region}b"]
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
+  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24"]
 
   # Save budget.
   # enable_nat_gateway = true
+  # single_nat_gateway = true
+  map_public_ip_on_launch = true
 
   enable_dns_hostnames = true
   enable_dns_support   = true
-
-  tags = local.shared_tags
-}
-
-resource "aws_security_group" "vpc_endpoints" {
-  name        = "${local.project}-${local.environment}"
-  description = "Security group for VPC endpoints."
-  vpc_id      = module.vpc.vpc_id
-
-  ingress {
-    description = "HTTPS from VPC."
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [module.vpc.vpc_cidr_block]
-  }
-
-  egress {
-    description = "Allow all outbound."
-    # Save budget.
-    # from_port   = 0
-    # to_port     = 0
-    # protocol    = "-1"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 
   tags = local.shared_tags
 }
@@ -201,6 +179,31 @@ resource "aws_vpc_endpoint" "s3" {
 
   tags = local.shared_tags
 }
+
+# Save budget.
+# resource "aws_security_group" "vpc_endpoints" {
+#   name        = "${local.project}-${local.environment}"
+#   description = "Security group for VPC endpoints."
+#   vpc_id      = module.vpc.vpc_id
+
+#   ingress {
+#     description = "HTTPS from VPC."
+#     from_port   = 443
+#     to_port     = 443
+#     protocol    = "tcp"
+#     cidr_blocks = [module.vpc.vpc_cidr_block]
+#   }
+
+#   egress {
+#     description = "Allow all outbound."
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+
+#   tags = local.shared_tags
+# }
 
 # Save budget.
 # resource "aws_vpc_endpoint" "ecr_api" {

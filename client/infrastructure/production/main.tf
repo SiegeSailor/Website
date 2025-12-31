@@ -26,17 +26,17 @@ module "ecs" {
   default_capacity_provider_strategy = {
     FARGATE = {
       base   = 1
-      weight = 50
+      weight = 25
     }
     FARGATE_SPOT = {
-      weight = 50
+      weight = 75
     }
   }
 
   services = {
     (local.module) = {
-      cpu    = 512
-      memory = 2048
+      cpu    = 256
+      memory = 1024
 
       desired_count = 1
 
@@ -49,8 +49,8 @@ module "ecs" {
 
       container_definitions = {
         (local.module) = {
-          cpu       = 256
-          memory    = 512
+          cpu       = 128
+          memory    = 384
           essential = true
           image     = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
           portMappings = [
@@ -114,7 +114,9 @@ module "ecs" {
         }
       }
 
-      subnet_ids = module.vpc.private_subnets
+      # Save budget.
+      subnet_ids       = module.vpc.public_subnets
+      assign_public_ip = true
 
       security_group_ingress_rules = {
         alb = {
