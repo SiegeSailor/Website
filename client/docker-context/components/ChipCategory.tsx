@@ -16,7 +16,7 @@ export default function ({
 
   return (
     <Chip size="md" variant="flat" color="default" {...props}>
-      <Link href={href} isPlain>
+      <Link href={href} isPlain prefetch={false}>
         {category}
       </Link>
     </Chip>

@@ -14,10 +14,10 @@ import { useArticleStore } from "@/stores/article";
 import { useBlogStore } from "@/stores/blog";
 import { ROWS_PER_PAGE } from "@/settings/constant";
 import Link from "@/components/Link";
+import SpinnerCenter from "@/components/SpinnerCenter";
 
 import DropdownColumns from "./DropdownColumns";
 import DropdownMetadata from "./DropdownMetadata";
-import SpinnerCenter from "../SpinnerCenter";
 
 export const PROPS_BUTTON: ComponentProps<typeof Button> = {
   className:

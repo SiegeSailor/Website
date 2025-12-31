@@ -17,7 +17,7 @@ export default function ({
 
   return (
     <Chip size="md" variant="flat" color={STATUS_TO_COLOR[status]} {...props}>
-      <Link href={href} isPlain>
+      <Link href={href} isPlain prefetch={false}>
         {status}
       </Link>
     </Chip>

@@ -21,7 +21,9 @@ function ChildrenArticle({
 export default function ({
   isPlain,
   ...props
-}: ComponentProps<typeof Link> & Readonly<{ isPlain?: boolean }>) {
+}: ComponentProps<typeof Link> &
+  Omit<ComponentProps<typeof NextLink>, keyof ComponentProps<typeof Link>> &
+  Readonly<{ isPlain?: boolean }>) {
   const isArticle = props.href?.startsWith("/blog/");
   const isExternal = props.href?.startsWith("http");
 

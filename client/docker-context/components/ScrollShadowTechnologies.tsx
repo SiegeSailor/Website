@@ -56,7 +56,13 @@ export default function ({
         );
 
         return isLink ? (
-          <Link className="w-auto h-auto" href={href} isPlain key={index}>
+          <Link
+            className="w-auto h-auto"
+            href={href}
+            isPlain
+            key={index}
+            prefetch={false}
+          >
             {chip}
           </Link>
         ) : (
