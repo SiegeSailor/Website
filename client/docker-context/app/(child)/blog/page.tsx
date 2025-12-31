@@ -23,7 +23,7 @@ export default async function () {
       <div className="md:hidden gap-4 grid grid-cols-12 grid-rows-1 mx-auto">
         {articles.map((article) => (
           <CardArticleDetail
-            className="col-span-12 sm:col-span-6 h-[300px]"
+            className="col-span-12 sm:col-span-6 h-75"
             date={article.metadata.date}
             key={article.metadata.date}
           />
