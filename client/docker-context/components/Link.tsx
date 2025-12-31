@@ -6,6 +6,7 @@ import clsx from "clsx";
 import NextLink from "next/link";
 
 import { useArticleStore } from "@/stores/article";
+import { ExternalLinkIcon } from "lucide-react";
 
 function ChildrenArticle({
   ...props
@@ -31,12 +32,15 @@ export default function ({
       isExternal={isExternal}
       prefetch
       showAnchorIcon={isExternal}
+      anchorIcon={
+        <ExternalLinkIcon size="1rem" className="inline ml-1 -translate-y-px" />
+      }
       underline={isPlain ? "none" : "always"}
       {...props}
       className={clsx(
         isPlain
           ? "block w-full h-full text-inherit text-[size:inherit] font-[weight:inherit]"
-          : "font-light inline-flex",
+          : "font-light inline",
         isArticle && "inline",
         props.className
       )}
