@@ -26,7 +26,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
       <div className="gap-4 grid grid-cols-12 grid-rows-1 max-w-compact mx-auto">
         {HIGHLIGHTS.map((date) => (
           <CardArticleDetail
-            className="col-span-12 sm:col-span-4 h-[300px] border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"
+            className="col-span-12 sm:col-span-4 h-75 border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"
             date={date}
             key={date}
             propsChipCategory={{ variant: "bordered", size: "md" }}
@@ -41,10 +41,10 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         <p className="text-medium text-foreground/50 max-w-compact w-full mx-auto">
           See the articles categorized by publish dates, as illustrated.
         </p>
-        <div className="block sm:hidden h-[300px]">
+        <div className="block sm:hidden h-75">
           <ChartLineArticle xRotation={90} />
         </div>
-        <div className="hidden sm:block h-[300px]">
+        <div className="hidden sm:block h-75">
           <ChartLineArticle xRotation={0} />
         </div>
       </div>

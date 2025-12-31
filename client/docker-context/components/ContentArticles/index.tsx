@@ -26,7 +26,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
             );
           })}
         </div>
-        <CardBlog className="col-span-12 sm:col-span-6 flex items-center h-[300px] min-w-[200px]" />
+        <CardBlog className="col-span-12 sm:col-span-6 flex items-center h-75 min-w-50" />
       </div>
     </div>
   );

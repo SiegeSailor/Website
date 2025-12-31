@@ -25,15 +25,15 @@ export default function ({ ...props }: ComponentProps<"div">) {
 
       <div className="gap-4 grid grid-cols-12 grid-rows-1 w-full max-w-compact mx-auto">
         <CardSummary
-          className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
+          className="col-span-12 sm:col-span-6 md:col-span-4 h-75"
           classNameScrollHeight="h-[228px]"
         />
         <CardExperience
-          className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]"
+          className="col-span-12 sm:col-span-6 md:col-span-4 h-75"
           classNameScrollHeight="h-[228px]"
         />
-        <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-[300px]" />
-        <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-[300px]" />
+        <CardSkill className="col-span-12 sm:col-span-6 md:col-span-4 h-75" />
+        <CardPublication className="col-span-12 sm:col-span-6 md:col-span-12 h-75" />
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
           return (
             <Card
               key={project.title}
-              className="border-background dark:border-default-100 border-2 bg-default-50 col-span-6 sm:col-span-3 h-[300px]"
+              className="border-background dark:border-default-100 border-2 bg-default-50 col-span-6 sm:col-span-3 h-75"
             >
               <CardHeader className="flex flex-col justify-center items-center gap-2">
                 <Chip

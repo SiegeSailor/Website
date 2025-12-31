@@ -132,6 +132,6 @@ input {
   }
 
   .markdown-table td .markdown-modal-image img {
-    @apply max-h-[300px];
+    @apply max-h-75;
   }
 }
