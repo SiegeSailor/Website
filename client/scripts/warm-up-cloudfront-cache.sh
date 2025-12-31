@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Pre-warm CloudFront cache by making requests to all pages.
+# Warm up CloudFront cache by making requests to all static pages and articles.
 
 set -o errexit
 
