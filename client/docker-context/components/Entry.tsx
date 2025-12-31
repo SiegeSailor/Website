@@ -33,7 +33,7 @@ export default function ({
 
   return (
     <>
-      <NextTopLoader color="hsl(var(--heroui-primary))" />
+      <NextTopLoader color="hsl(var(--heroui-primary))" showSpinner={false} />
       {!isParsed ? <SpinnerCenter /> : children}
     </>
   );
