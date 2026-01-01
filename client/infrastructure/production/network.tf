@@ -79,7 +79,9 @@ module "cloudfront" {
 }
 
 module "alb" {
-  source = "terraform-aws-modules/alb/aws"
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 10.4.0"
+
 
   name    = "${local.project}-${local.environment}"
   vpc_id  = module.vpc.vpc_id
