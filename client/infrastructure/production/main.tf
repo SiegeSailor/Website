@@ -43,8 +43,21 @@ module "ecs" {
       memory = 1024
 
       # Save budget.
-      desired_count = 1
-
+      desired_count            = 1
+      enable_autoscaling       = true
+      autoscaling_min_capacity = 1
+      autoscaling_max_capacity = 4 # Default 10. Multiples of 2 for AZs.
+      autoscaling_policies = {
+        cpu = {
+          policy_type = "TargetTrackingScaling"
+          target_tracking_scaling_policy_configuration = {
+            predefined_metric_specification = {
+              predefined_metric_type = "ECSServiceAverageCPUUtilization"
+            }
+            target_value = 80.0 # Default 75.0.
+          }
+        }
+      }
       deployment_minimum_healthy_percent = 100
       deployment_maximum_percent         = 200
 
@@ -57,9 +70,6 @@ module "ecs" {
           # Save budget.
           # cpu       = 256
           # memory    = 512
-          # Tune performance.
-          # cpu       = 128
-          # memory    = 384
           cpu       = 256
           memory    = 1024
           essential = true
@@ -113,7 +123,11 @@ module "ecs" {
           }
           port_name      = local.module
           discovery_name = "${local.project}-${local.environment}-${local.module}"
-          tags           = local.module_tags
+
+          timeout_seconds  = 5
+          interval_seconds = 30
+
+          tags = local.module_tags
         }]
       }
 
