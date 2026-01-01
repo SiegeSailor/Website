@@ -69,6 +69,21 @@ module "cloudfront" {
     # 1 year
     max_ttl = 31536000
     }, {
+    path_pattern           = "/blog/*"
+    target_origin_id       = "alb"
+    viewer_protocol_policy = "redirect-to-https"
+
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    cached_methods  = ["GET", "HEAD"]
+    compress        = true
+    query_string    = false
+    # 30 days
+    default_ttl = 2592000
+    # 2 days
+    min_ttl = 172800
+    # 1 year
+    max_ttl = 31536000
+    }, {
     path_pattern           = "/*"
     target_origin_id       = "alb"
     viewer_protocol_policy = "redirect-to-https"
