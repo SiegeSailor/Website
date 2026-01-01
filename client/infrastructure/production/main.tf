@@ -36,6 +36,7 @@ module "ecs" {
   services = {
     (local.module) = {
       # Save budget.
+      # See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html.
       # cpu    = 512
       # memory = 2048
       cpu    = 256
