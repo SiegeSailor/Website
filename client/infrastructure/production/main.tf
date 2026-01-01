@@ -48,7 +48,7 @@ module "ecs" {
       deployment_minimum_healthy_percent = 100
       deployment_maximum_percent         = 200
 
-      health_check_grace_period_seconds = 120
+      health_check_grace_period_seconds = 60
 
       tags = local.module_tags
 
@@ -99,7 +99,7 @@ module "ecs" {
             interval    = 30
             timeout     = 5
             retries     = 3
-            startPeriod = 60
+            startPeriod = 30
           }
         }
       }
