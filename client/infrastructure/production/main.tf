@@ -41,6 +41,7 @@ module "ecs" {
       cpu    = 256
       memory = 1024
 
+      # Save budget.
       desired_count = 1
 
       deployment_minimum_healthy_percent = 100
