@@ -37,18 +37,23 @@ export async function generateMetadata({
   const titleSocial =
     title.length >= 60 ? title.slice(0, 57).trimEnd() + "..." : title;
 
+  const description = article.metadata.description;
+
   return {
     title,
-    description: article.metadata.description,
+    description,
     openGraph: {
       ...globalMetadata.openGraph,
       title: titleSocial,
-      description: article.metadata.description,
+      description,
     },
     twitter: {
       ...globalMetadata.twitter,
       title: titleSocial,
-      description: article.metadata.description,
+      description:
+        description.length >= 200
+          ? description.slice(0, 197).trimEnd() + "..."
+          : description,
     },
   };
 }
