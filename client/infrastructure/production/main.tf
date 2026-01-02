@@ -1,5 +1,9 @@
 provider "aws" {
   region = var.aws_region
+
+  default_tags {
+    tags = local.shared_tags
+  }
 }
 
 resource "aws_service_discovery_http_namespace" "this" {
@@ -115,6 +119,7 @@ module "ecs" {
       }
 
       service_connect_configuration = {
+        enabled   = true
         namespace = aws_service_discovery_http_namespace.this.name
         service = [{
           client_alias = {
@@ -123,11 +128,6 @@ module "ecs" {
           }
           port_name      = local.module
           discovery_name = "${local.project}-${local.environment}-${local.module}"
-
-          timeout_seconds  = 5
-          interval_seconds = 30
-
-          tags = local.module_tags
         }]
       }
 
