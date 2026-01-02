@@ -35,8 +35,7 @@ export async function generateMetadata({
   const article = await getArticleByDate(date);
 
   const title = createPageTitle(article.metadata.title);
-  const titleSocial =
-    title.length >= 60 ? title.slice(0, 57).trimEnd() + "..." : title;
+  const titleSocial = title.length >= 60 ? title.slice(0, 57) + "..." : title;
 
   const description = article.metadata.description;
 
@@ -54,7 +53,7 @@ export async function generateMetadata({
       title: titleSocial,
       description:
         description.length >= 199
-          ? description.slice(0, 196).trimEnd() + "..."
+          ? description.slice(0, 196) + "..."
           : description,
     },
   };
