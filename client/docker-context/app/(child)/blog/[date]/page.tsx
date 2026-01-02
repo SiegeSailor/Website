@@ -53,8 +53,8 @@ export async function generateMetadata({
       ...globalMetadata.twitter,
       title: titleSocial,
       description:
-        description.length >= 200
-          ? description.slice(0, 197).trimEnd() + "..."
+        description.length >= 199
+          ? description.slice(0, 196).trimEnd() + "..."
           : description,
     },
   };
