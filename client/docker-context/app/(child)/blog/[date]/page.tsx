@@ -1,11 +1,12 @@
 import { Card, Divider } from "@heroui/react";
-import type { Metadata } from "next";
+import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { globalMetadata } from "@/settings/head";
 import { createPageTitle } from "@/helpers/utility";
+import { DOMAIN } from "@/settings/constant";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { getSlugByTitle } from "@/helpers/utility";
+import { globalMetadata } from "@/settings/head";
 import ChipCategory from "@/components/ChipCategory";
 import ChipStatus from "@/components/ChipStatus";
 import DivisionSticky from "@/components/DivisionSticky";
@@ -46,6 +47,7 @@ export async function generateMetadata({
       ...globalMetadata.openGraph,
       title: titleSocial,
       description,
+      url: `https://${DOMAIN}${article.metadata.route}`,
     },
     twitter: {
       ...globalMetadata.twitter,
