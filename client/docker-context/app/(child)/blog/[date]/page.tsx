@@ -33,19 +33,21 @@ export async function generateMetadata({
   const { date } = await params;
   const article = await getArticleByDate(date);
 
-  const title = createPageTitle(article.metadata.title, "Blog");
+  const title = createPageTitle(article.metadata.title);
+  const titleSocial =
+    title.length >= 60 ? title.slice(0, 57).trimEnd() + "..." : title;
 
   return {
     title,
     description: article.metadata.description,
     openGraph: {
       ...globalMetadata.openGraph,
-      title,
+      title: titleSocial,
       description: article.metadata.description,
     },
     twitter: {
       ...globalMetadata.twitter,
-      title,
+      title: titleSocial,
       description: article.metadata.description,
     },
   };

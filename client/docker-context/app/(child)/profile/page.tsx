@@ -11,9 +11,10 @@ import Link from "@/components/Link";
 import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
 import Markdown from "@/components/Markdown";
 import ModalImage from "@/components/ModalImage";
+import { ROUTE_TO_TITLE } from "@/settings/constant";
 
 export const metadata: Metadata = {
-  title: createPageTitle("Profile"),
+  title: createPageTitle(ROUTE_TO_TITLE["/profile"]),
 };
 
 export default async function () {
