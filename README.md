@@ -21,7 +21,9 @@ Required software for the every modules:
 
 ## Todos
 
+- [ ] Display ALB active connections and historical connections
 - [ ] Table muptiple lines
+- [ ] Mathmatical formoulas style block
 - [x] Loading, Input modal focus, word break for image
 - [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
 - [x] Check next.js cache headers for images
