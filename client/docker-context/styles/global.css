@@ -114,12 +114,16 @@ input {
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-background;
-    @apply align-middle leading-none;
+    @apply align-top whitespace-nowrap;
     @apply sticky left-0 z-10;
   }
 
   .markdown-table tr:last-child td {
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
+  }
+
+  .markdown-table td span {
+    @apply whitespace-nowrap;
   }
 
   .markdown-table td img,
