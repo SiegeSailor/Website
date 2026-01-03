@@ -22,6 +22,7 @@ Required software for the every modules:
 ## Todos
 
 - [ ] Display ALB active connections and historical connections
+- [ ] Extract `configs.ts` to a remote source
 - [ ] Table muptiple lines
 - [ ] Mathmatical formoulas style block
 - [x] Loading, Input modal focus, word break for image
