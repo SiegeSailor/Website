@@ -1,7 +1,7 @@
 import { Alert, Button } from "@heroui/react";
 import type { Metadata, Viewport } from "next";
 
-import { globalMetadata, globalViewport } from "@/settings/head";
+import { globalMetadata, globalViewport } from "@/settings/heads";
 import { createPageTitle } from "@/helpers/utility";
 import { TITLE_TO_ROUTE, ROUTE_TO_TITLE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";

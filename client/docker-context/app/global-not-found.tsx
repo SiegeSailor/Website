@@ -7,7 +7,7 @@ import {
   globalFontRoboto,
   globalMetadata,
   globalViewport,
-} from "@/settings/head";
+} from "@/settings/heads";
 import { createPageTitle } from "@/helpers/utility";
 import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";

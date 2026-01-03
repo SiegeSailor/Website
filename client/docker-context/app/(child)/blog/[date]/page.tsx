@@ -6,7 +6,7 @@ import { createPageTitle } from "@/helpers/utility";
 import { DOMAIN } from "@/settings/constant";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { getSlugByTitle } from "@/helpers/utility";
-import { globalMetadata } from "@/settings/head";
+import { globalMetadata } from "@/settings/heads";
 import ChipCategory from "@/components/ChipCategory";
 import ChipStatus from "@/components/ChipStatus";
 import DivisionSticky from "@/components/DivisionSticky";

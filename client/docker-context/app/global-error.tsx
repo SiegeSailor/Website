@@ -8,7 +8,7 @@ import {
   globalFontRoboto,
   globalMetadata,
   globalViewport,
-} from "@/settings/head";
+} from "@/settings/heads";
 import { createPageTitle } from "@/helpers/utility";
 import DivisionCenter from "@/components/DivisionCenter";
 import Error from "@/app/error";

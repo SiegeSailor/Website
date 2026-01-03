@@ -7,7 +7,7 @@ import {
   globalFontRoboto,
   globalMetadata,
   globalViewport,
-} from "@/settings/head";
+} from "@/settings/heads";
 import { AUTHOR } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
 import { getProfile } from "@/helpers/server/document";
