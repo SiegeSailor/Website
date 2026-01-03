@@ -6,7 +6,7 @@ import { useTopLoader } from "nextjs-toploader";
 import clsx from "clsx";
 
 import { getEntries } from "@/helpers/utility";
-import { ROUTE_TO_ICON } from "@/settings/icon";
+import { ROUTE_TO_ICON } from "@/settings/icons";
 import { TITLE_TO_ROUTE } from "@/settings/constant";
 
 export default function () {

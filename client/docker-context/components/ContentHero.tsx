@@ -5,7 +5,7 @@ import type { ComponentProps } from "react";
 import clsx from "clsx";
 
 import { AUTHOR } from "@/settings/constant";
-import { ROUTE_TO_ICON } from "@/settings/icon";
+import { ROUTE_TO_ICON } from "@/settings/icons";
 import Link from "@/components/Link";
 import TextTyping from "@/components/TextTyping";
 

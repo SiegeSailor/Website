@@ -6,7 +6,7 @@ import type { LucideProps } from "lucide-react";
 
 import { getArticleByFilename } from "@/helpers/server/article";
 import { getValues } from "@/helpers/utility";
-import { TECHNOLOGY_TO_ICON, LUCIDE_ICON } from "@/settings/icon";
+import { TECHNOLOGY_TO_ICON, LUCIDE_ICON } from "@/settings/icons";
 
 function IconLucide({
   Component,

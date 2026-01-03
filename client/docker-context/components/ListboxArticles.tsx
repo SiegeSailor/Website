@@ -3,7 +3,7 @@
 import type { Route } from "next";
 import { Listbox, ListboxItem, ListboxSection } from "@heroui/react";
 
-import { ROUTE_TO_ICON } from "@/settings/icon";
+import { ROUTE_TO_ICON } from "@/settings/icons";
 import { ROUTE_TO_TITLE } from "@/settings/constant";
 import { TArticle } from "@/helpers/server/article";
 import { useArticleStore } from "@/stores/article";
