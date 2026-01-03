@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollShadow } from "@heroui/react";
 import clsx from "clsx";
 
-import { PUBLICATION } from "@/settings/home";
+import { PUBLICATION } from "@/settings/configs";
 import Link from "@/components/Link";
 
 export default function ({

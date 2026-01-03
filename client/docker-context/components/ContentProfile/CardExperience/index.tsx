@@ -2,7 +2,7 @@
 
 import type { ComponentProps } from "react";
 
-import { EXPERIENCE } from "@/settings/home";
+import { EXPERIENCE } from "@/settings/configs";
 import CardBlock from "@/components/CardBlock";
 import TimelineScrolling from "@/components/TimelineScrolling";
 

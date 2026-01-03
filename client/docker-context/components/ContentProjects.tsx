@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import { CardHeader, Chip, Card, CardBody, CardFooter } from "@heroui/react";
 import clsx from "clsx";
 
-import { PROJECTS } from "@/settings/home";
+import { PROJECTS } from "@/settings/configs";
 import { STAGE_TO_COLOR } from "@/settings/constant";
 import DivisionTitle from "@/components/DivisionTitle";
 import Link from "@/components/Link";

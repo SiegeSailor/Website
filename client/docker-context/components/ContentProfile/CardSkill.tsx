@@ -2,7 +2,7 @@
 
 import type { ComponentProps } from "react";
 
-import { SKILL } from "@/settings/home";
+import { SKILL } from "@/settings/configs";
 import CardBlock from "@/components/CardBlock";
 import IconTechnology from "@/components/IconTechnology";
 import ScrollingRowsChips from "@/components/ScrollingRowsChips";

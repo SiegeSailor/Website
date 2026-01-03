@@ -2,7 +2,7 @@
 
 import { Bar } from "react-chartjs-2";
 
-import { SUMMARY } from "@/settings/home";
+import { SUMMARY } from "@/settings/configs";
 import { useChartStore } from "@/stores/chart";
 
 const TITLES = SUMMARY.map((item) => item.title);
