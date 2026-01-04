@@ -43,25 +43,25 @@ I commit to have a broad range of experience in different technologies and pract
 
 ## Employment
 
-| Timeline            | Duration  | Company                   | Industry       | Location         | Role                        | Link                                                        |
-| ------------------- | --------- | ------------------------- | -------------- | ---------------- | --------------------------- | ----------------------------------------------------------- |
-| Jun 2025 - Present  | -         | CooperSurgical            | Medical Device | NJ, USA          | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| Jan 2024 - May 2025 | 16 months | CooperSurgical            | Medical Device | CT, USA          | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| May 2023 - Aug 2023 | 4 months  | CooperSurgical            | Medical Device | CT, USA          | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| Sep 2022 - Dec 2022 | 4 months  | StageSource               | Art Service    | MA, USA          | Software Engineer           | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
-| Jan 2020 - Feb 2022 | 25 months | Shopee                    | E-Commerce     | Taipei, Taiwan   | Software Engineer           | [shopee.tw](https://shopee.tw/)                             |
-| Jan 2019 - Nov 2019 | 11 months | Edallianz                 | E-Commerce     | Taipei, Taiwan   | Software Engineer           | [twincn.com](https://www.twincn.com/item.aspx?no=51236578)  |
-| Jun 2017 - Nov 2018 | 17 months | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineer           | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
-| Jun 2016 - Jan 2017 | 8 months  | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineering Intern | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
-| May 2014 - Aug 2014 | 4 months  | DY Game                   | Gaming         | Huwei, Taiwan    | Game Development Intern     | [dygame.cn](https://www.dygame.cn/)                         |
+| Timeline            | Company                   | Role                            | Industry       | Location         | Link                                                        |
+| ------------------- | ------------------------- | ------------------------------- | -------------- | ---------------- | ----------------------------------------------------------- |
+| Jun 2025 - Present  | CooperSurgical            | Senior Software Engineer        | Medical Device | NJ, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| Jan 2024 - May 2025 | CooperSurgical            | Software Engineer               | Medical Device | CT, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| May 2023 - Aug 2023 | CooperSurgical            | Software Engineering Intern     | Medical Device | CT, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| Sep 2022 - Dec 2022 | StageSource               | Software Engineering Freelancer | Art Service    | MA, USA          | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
+| Jan 2020 - Feb 2022 | Shopee                    | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [shopee.tw](https://shopee.tw/)                             |
+| Jan 2019 - Nov 2019 | Edallianz                 | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [twincn.com](https://www.twincn.com/item.aspx?no=51236578)  |
+| Jun 2017 - Nov 2018 | Servicetech International | Software Engineer               | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
+| Jun 2016 - Jan 2017 | Servicetech International | Software Engineering Intern     | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
+| May 2014 - Aug 2014 | DY Game                   | Game Development Intern         | Gaming         | Huwei, Taiwan    | [dygame.cn](https://www.dygame.cn/)                         |
 
 ### CooperSurgical
 
-| Timeline            | Duration  | Industry       | Location | Role                        | Link                                                  |
-| ------------------- | --------- | -------------- | -------- | --------------------------- | ----------------------------------------------------- |
-| Jun 2025 - Present  | -         | Medical Device | NJ, USA  | Senior Software Engineer    | [coopersurgical.com](https://www.coopersurgical.com/) |
-| Jan 2024 - May 2025 | 16 months | Medical Device | CT, USA  | Software Engineer           | [coopersurgical.com](https://www.coopersurgical.com/) |
-| May 2023 - Aug 2023 | 4 months  | Medical Device | CT, USA  | Software Engineering Intern | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Timeline            | Role                        | Location |
+| ------------------- | --------------------------- | -------- |
+| Jun 2025 - Present  | Senior Software Engineer    | NJ, USA  |
+| Jan 2024 - May 2025 | Software Engineer           | MA, USA  |
+| May 2023 - Aug 2023 | Software Engineering Intern | CT, USA  |
 
 > Medical Device R&D.
 
@@ -78,9 +78,9 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### StageSource
 
-| Timeline            | Duration | Company     | Industry    | Location | Role              | Link                                                        |
-| ------------------- | -------- | ----------- | ----------- | -------- | ----------------- | ----------------------------------------------------------- |
-| Sep 2022 - Dec 2022 | 4 months | StageSource | Art Service | MA, USA  | Software Engineer | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
+| Timeline            | Role                            | Location |
+| ------------------- | ------------------------------- | -------- |
+| Sep 2022 - Dec 2022 | Software Engineering Freelancer | MA, USA  |
 
 > DevOps and Leadership.
 
@@ -91,9 +91,9 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### Shopee
 
-| Timeline            | Duration  | Company | Industry   | Location       | Role              | Link                            |
-| ------------------- | --------- | ------- | ---------- | -------------- | ----------------- | ------------------------------- |
-| Jan 2020 - Feb 2022 | 25 months | Shopee  | E-Commerce | Taipei, Taiwan | Software Engineer | [shopee.tw](https://shopee.tw/) |
+| Timeline            | Role              | Location       |
+| ------------------- | ----------------- | -------------- |
+| Jan 2020 - Feb 2022 | Software Engineer | Taipei, Taiwan |
 
 > Mobile Web Games.
 
@@ -106,9 +106,9 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### Edallianz
 
-| Timeline            | Duration  | Company   | Industry   | Location       | Role              | Link                                                       |
-| ------------------- | --------- | --------- | ---------- | -------------- | ----------------- | ---------------------------------------------------------- |
-| Jan 2019 - Nov 2019 | 11 months | Edallianz | E-Commerce | Taipei, Taiwan | Software Engineer | [twincn.com](https://www.twincn.com/item.aspx?no=51236578) |
+| Timeline            | Role              | Location       |
+| ------------------- | ----------------- | -------------- |
+| Jan 2019 - Nov 2019 | Software Engineer | Taipei, Taiwan |
 
 > Cross-Platform UX Integration.
 
@@ -118,10 +118,10 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### Servicetech International
 
-| Timeline            | Duration  | Company                   | Industry       | Location         | Role                        | Link                                                  |
-| ------------------- | --------- | ------------------------- | -------------- | ---------------- | --------------------------- | ----------------------------------------------------- |
-| Jun 2017 - Nov 2018 | 17 months | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineer           | [servicetech.com.tw](https://www.servicetech.com.tw/) |
-| Jun 2016 - Jan 2017 | 8 months  | Servicetech International | Medical Device | Taichung, Taiwan | Software Engineering Intern | [servicetech.com.tw](https://www.servicetech.com.tw/) |
+| Timeline            | Role                        | Location         |
+| ------------------- | --------------------------- | ---------------- |
+| Jun 2017 - Nov 2018 | Software Engineer           | Taichung, Taiwan |
+| Jun 2016 - Jan 2017 | Software Engineering Intern | Taichung, Taiwan |
 
 > Digital Transformation.
 
@@ -131,9 +131,9 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### DY Game
 
-| Timeline            | Duration | Company | Industry | Location      | Role                    |
-| ------------------- | -------- | ------- | -------- | ------------- | ----------------------- |
-| May 2014 - Aug 2014 | 4 months | DY Game | Gaming   | Huwei, Taiwan | Game Development Intern |
+| Timeline            | Role                    | Location      |
+| ------------------- | ----------------------- | ------------- |
+| May 2014 - Aug 2014 | Game Development Intern | Huwei, Taiwan |
 
 > Motion Sensing Game.
 
