@@ -67,7 +67,8 @@ export default function ({
     <div
       className={clsx(
         "relative inline-block overflow-hidden markdown-modal-image border-1 border-default-200 rounded-md",
-        { "w-full bg-default-100 dark:bg-default-50": !isShieldsBadge }
+        { "w-full bg-default-100 dark:bg-default-50": !isShieldsBadge },
+        { "h-6": isShieldsBadge }
       )}
     >
       <Image

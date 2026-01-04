@@ -118,6 +118,10 @@ input {
     @apply sticky left-0 z-10;
   }
 
+  .markdown-table td .markdown-modal-image {
+    @apply align-middle;
+  }
+
   .markdown-table tr:last-child td {
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
   }
