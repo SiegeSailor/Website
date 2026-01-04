@@ -128,10 +128,7 @@ export default async function ({
             );
 
           return (
-            <pre
-              {...element.children.props}
-              className={clsx(element.className, "relative")}
-            >
+            <pre {...element.children.props}>
               <ButtonCopy
                 className="absolute top-2.5 right-2 z-1"
                 content={element.children.props.children}
