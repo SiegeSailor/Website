@@ -64,17 +64,7 @@ export const SKILL: (keyof typeof TECHNOLOGY_TO_ICON)[][] = [
   ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
   ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],
   ["Django", "Flask", "Express.js", "Next.js", "React.js"],
-  [
-    "Tailwind CSS",
-    "Three.js",
-    "Redux",
-    "HTML",
-    "CSS",
-    "Webpack",
-    "Gulp",
-    "Babel",
-    "Electron",
-  ],
+  ["Tailwind CSS", "Three.js", "Redux", "Webpack", "Gulp", "Babel", "Electron"],
 ] as const;
 
 export const PUBLICATION: Readonly<
