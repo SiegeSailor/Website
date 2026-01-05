@@ -12,6 +12,10 @@ resource "aws_service_discovery_http_namespace" "this" {
   tags = local.shared_tags
 }
 
+data "aws_ssm_parameter" "aws_service_fluentbit" {
+  name = "/aws/service/aws-for-fluent-bit/stable"
+}
+
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "~> 6.10.0"
@@ -46,6 +50,8 @@ module "ecs" {
       cpu    = 256
       memory = 1024
 
+      enable_execute_command = true
+
       # Save budget.
       desired_count            = 1
       enable_autoscaling       = true
@@ -70,12 +76,35 @@ module "ecs" {
       tags = local.module_tags
 
       container_definitions = {
+        fluent-bit = {
+          cpu       = 96
+          memory    = 256
+          essential = true
+          image     = nonsensitive(data.aws_ssm_parameter.aws_service_fluentbit.value)
+
+          firelensConfiguration = {
+            type = "fluentbit"
+          }
+
+          memoryReservation = 64
+          user              = "0"
+
+          enable_cloudwatch_logging              = true
+          cloudwatch_log_group_retention_in_days = 30
+
+          # Always unhealthy.
+          # healthCheck = {
+          #   command     = ["CMD-SHELL", "wget -q -O - http://127.0.0.1:2020/api/v1/health || exit 1"]
+          #   interval    = 30
+          #   timeout     = 15
+          #   retries     = 3
+          #   startPeriod = 15
+          # }
+        }
+
         (local.module) = {
-          # Save budget.
-          # cpu       = 256
-          # memory    = 512
-          cpu       = 256
-          memory    = 1024
+          cpu       = 160
+          memory    = 766 # 2 MB less from 768 to account for Fluent Bit.
           essential = true
           image     = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
           portMappings = [
@@ -85,8 +114,21 @@ module "ecs" {
             }
           ]
 
-          memoryReservation         = 512
-          enable_cloudwatch_logging = true
+          memoryReservation = 512
+
+          dependsOn = [{
+            containerName = "fluent-bit"
+            condition     = "START"
+          }]
+
+          enable_cloudwatch_logging = false
+          logConfiguration = {
+            logDriver = "awsfirelens"
+            options = {
+              Name                    = "stdout"
+              log-driver-buffer-limit = "2097152" # 2 MB. Default 1048576. Max 536870912.
+            }
+          }
 
           # Defining `ENV` in `Dockerfile` isn't sufficient.
           environment = [
