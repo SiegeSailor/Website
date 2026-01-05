@@ -168,7 +168,7 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### DevOps
 
-- ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)
 - ![GitLab CI](https://img.shields.io/badge/GitLab%20CI-FC6D26?logo=gitlab&logoColor=fff) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white) ![WindRiver Studio](https://img.shields.io/badge/WindRiver%20Studio-0052CC?logo=windriver&logoColor=fff)
 - ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?logo=ubuntu&logoColor=white) ![Debian](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff)
 - ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff) ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white) ![GitLab](https://img.shields.io/badge/GitLab-FC6D26?logo=gitlab&logoColor=fff) ![NPM](https://img.shields.io/badge/NPM-CB3837?logo=npm&logoColor=fff) ![NVM](https://img.shields.io/badge/NVM-4B32C3?logo=nvm&logoColor=fff) ![NuGet](https://img.shields.io/badge/NuGet-004880?logo=nuget&logoColor=fff)

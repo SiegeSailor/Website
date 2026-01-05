@@ -61,7 +61,7 @@ export const EXPERIENCE: Readonly<{ title: string; time: string }[]> = [
 
 export const SKILL: (keyof typeof TECHNOLOGY_TO_ICON)[][] = [
   ["Python", "TypeScript", "JavaScript", "Node.js", "Bash", "C++", ".NET"],
-  ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux", "Kubernetes"],
+  ["Docker", "AWS", "GCP", "GitHub", "GitLab", "Linux"],
   ["MongoDB", "MySQL", "Redis", "RabbitMQ", "Nginx", "Terraform"],
   ["Django", "Flask", "Express.js", "Next.js", "React.js"],
   ["Tailwind CSS", "Three.js", "Redux", "Webpack", "Gulp", "Babel", "Electron"],
