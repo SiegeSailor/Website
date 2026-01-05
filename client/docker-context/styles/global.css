@@ -114,7 +114,7 @@ input {
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-background;
-    @apply align-top;
+    @apply align-top whitespace-nowrap;
     @apply sticky left-0 z-10;
   }
 
@@ -126,7 +126,7 @@ input {
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
   }
 
-  .markdown-table td:first-child * {
+  .markdown-table td * {
     @apply whitespace-nowrap;
   }
 
