@@ -23,7 +23,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
 
       <div className="gap-4 grid grid-cols-12 grid-rows-1">
         {PROJECTS.map((project) => {
-          const isPrototype = project.stage === "Prototype";
+          const isPrototype = project.stage === "Planning";
 
           return (
             <Card

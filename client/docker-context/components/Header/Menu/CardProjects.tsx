@@ -15,12 +15,12 @@ export default function () {
         hideSelectedIcon
         variant="flat"
         disabledKeys={PROJECTS.filter(
-          (project) => project.stage === "Prototype"
+          (project) => project.stage === "Planning"
         ).map((project) => project.title)}
       >
         <ListboxSection title="Projects">
           {PROJECTS.map((project) => {
-            const isPrototype = project.stage === "Prototype";
+            const isPrototype = project.stage === "Planning";
             return (
               <ListboxItem
                 classNames={{ title: "font-light truncate text-medium" }}

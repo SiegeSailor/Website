@@ -13,9 +13,9 @@ export const STATUS_TO_COLOR = {
   Archived: "secondary",
 } satisfies Readonly<Record<string, ComponentProps<typeof Chip>["color"]>>;
 
-export const STAGE = ["Prototype", "Development", "Production"] as const;
+export const STAGE = ["Planning", "Development", "Production"] as const;
 export const STAGE_TO_COLOR = {
-  Prototype: "default",
+  Planning: "default",
   Development: "primary",
   Production: "success",
 } satisfies Readonly<Record<string, ComponentProps<typeof Chip>["color"]>>;

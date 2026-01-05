@@ -106,14 +106,14 @@ export const PROJECTS: Readonly<
     description:
       "*macOS*-specific desktop integration of AI-driven development tools for automating workflows with *MCPs* and *Agents*, including onboarding environment setup, credential management, **Slack** and **GitLab** integration, image, icon, and sprite sheet generation, and **Gmail** and *Webhooks* triggers.",
     href: "https://github.com/SiegeSailor",
-    stage: "Prototype",
+    stage: "Planning",
   },
   {
     title: "Concurrency Toolkit",
     description:
       "Available on `pip`, a *Python* concurrent class wrapper for managing multiple tasks with error handling and logging. Based on `asyncio`. This is a go-to solution for simplified asynchronous programming with easy-to-use abstractions.",
     href: "https://github.com/SiegeSailor",
-    stage: "Prototype",
+    stage: "Planning",
   },
   {
     title: "Account Management CBWMs",
@@ -134,20 +134,20 @@ export const PROJECTS: Readonly<
     description:
       "Quick start for deploying *React* components on `npm`. A project boilerplate that provides a set of team-oriented development tools, such as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*, *Stylelint*, and *Ladle*, and best practices.",
     href: "https://github.com/SiegeSailor",
-    stage: "Prototype",
+    stage: "Planning",
   },
   {
     title: "Self-Development Assistant",
     description:
       "An *iOS* application built with *Godot* that comes with often-used self-development and assistance features, such as the tomato timer, diet tracking, goals-oriented schedules, and everyday-motivating quotes, to help users build confidence and assertiveness.",
     href: "https://github.com/SiegeSailor",
-    stage: "Prototype",
+    stage: "Planning",
   },
   {
     title: "Jin Yu Zhang's Website",
     description:
       "This website. A SSR that provides *GitHub* integration, markdown file handling, and in-website search. It is built with *Next.js*, *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Framer Motion*, *Mermaid*, *Zustand*, and *Chart.js*.",
     href: "https://github.com/SiegeSailor/Website",
-    stage: "Development",
+    stage: "Production",
   },
 ] as const;
