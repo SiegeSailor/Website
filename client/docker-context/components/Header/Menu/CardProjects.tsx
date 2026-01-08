@@ -3,7 +3,7 @@
 import { Card, Listbox, ListboxSection, ListboxItem } from "@heroui/react";
 import { ExternalLinkIcon } from "lucide-react";
 
-import { PROJECTS } from "@/settings/configs";
+import { PROJECTS } from "@/settings/config";
 
 export default function () {
   return (

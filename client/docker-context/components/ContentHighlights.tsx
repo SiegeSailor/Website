@@ -3,7 +3,7 @@
 import type { ComponentProps } from "react";
 import clsx from "clsx";
 
-import { HIGHLIGHTS } from "@/settings/configs";
+import { HIGHLIGHTS } from "@/settings/config";
 import CardArticleDetail from "@/components/CardArticleDetail";
 import ChartLineArticle from "@/components/ChartLineArticle";
 import DivisionTitle from "@/components/DivisionTitle";

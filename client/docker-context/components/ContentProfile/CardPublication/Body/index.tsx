@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Tabs, Tab, Progress } from "@heroui/react";
 import { useState, useEffect } from "react";
 
-import { PUBLICATION } from "@/settings/configs";
+import { PUBLICATION } from "@/settings/config";
 
 import ContentTab from "./ContentTab";
 
