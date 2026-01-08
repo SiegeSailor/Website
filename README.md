@@ -21,6 +21,7 @@ Required software for the every modules:
 
 ## Todos
 
+- [ ] A vote system for projects
 - [ ] Display ALB active connections and historical connections
 - [ ] Extract `configs.ts` to a remote source
 - [ ] Table muptiple lines

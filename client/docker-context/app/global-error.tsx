@@ -9,7 +9,7 @@ import {
   globalMetadata,
   globalViewport,
 } from "@/settings/heads";
-import { createPageTitle, PublicEnv } from "@/helpers/utility";
+import { createPageTitle } from "@/helpers/utility";
 import DivisionCenter from "@/components/DivisionCenter";
 import Error from "@/app/error";
 import Provider from "@/components/Provider";
@@ -50,8 +50,6 @@ export default function ({
           "bg-danger-100 overscroll-none"
         )}
       >
-        <PublicEnv />
-
         <Provider>
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>
