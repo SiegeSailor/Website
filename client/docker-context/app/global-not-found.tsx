@@ -8,7 +8,7 @@ import {
   globalMetadata,
   globalViewport,
 } from "@/settings/heads";
-import { createPageTitle } from "@/helpers/utility";
+import { createPageTitle, PublicEnv } from "@/helpers/utility";
 import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
@@ -32,6 +32,8 @@ export default function () {
           "bg-warning-100 overscroll-none"
         )}
       >
+        <PublicEnv />
+
         <Provider>
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>

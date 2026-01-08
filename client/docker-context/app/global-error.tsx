@@ -9,7 +9,7 @@ import {
   globalMetadata,
   globalViewport,
 } from "@/settings/heads";
-import { createPageTitle } from "@/helpers/utility";
+import { createPageTitle, PublicEnv } from "@/helpers/utility";
 import DivisionCenter from "@/components/DivisionCenter";
 import Error from "@/app/error";
 import Provider from "@/components/Provider";
@@ -32,7 +32,6 @@ export default function ({
         <title>{metadata.title?.toString()}</title>
         <meta name="description" content={metadata.description?.toString()} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="next-size-adjust" content="" />
         <meta
           name="theme-color"
           media="(prefers-color-scheme: light)"
@@ -51,6 +50,8 @@ export default function ({
           "bg-danger-100 overscroll-none"
         )}
       >
+        <PublicEnv />
+
         <Provider>
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>

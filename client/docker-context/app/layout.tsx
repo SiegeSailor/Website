@@ -36,9 +36,9 @@ export default async function ({
         suppressHydrationWarning
         className={clsx(globalFontRoboto.className, "overscroll-none")}
       >
-        <Provider>
-          <PublicEnv />
+        <PublicEnv />
 
+        <Provider>
           <div className="w-full h-screen flex flex-col">
             <Entry articles={articles} profile={profile}>
               <Header />
