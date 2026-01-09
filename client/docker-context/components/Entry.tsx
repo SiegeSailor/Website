@@ -2,7 +2,6 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import NextTopLoader from "nextjs-toploader";
 
 import { TArticle } from "@/helpers/server/article";
 import { TProfile } from "@/helpers/server/document";
@@ -31,10 +30,5 @@ export default function ({
     setIsParsed(true);
   }, [articles]);
 
-  return (
-    <>
-      <NextTopLoader color="hsl(var(--heroui-primary))" showSpinner={false} />
-      {!isParsed ? <SpinnerCenter /> : children}
-    </>
-  );
+  return !isParsed ? <SpinnerCenter /> : children;
 }

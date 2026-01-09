@@ -1,6 +1,7 @@
 import { Alert, Button } from "@heroui/react";
 import type { Metadata, Viewport } from "next";
 import clsx from "clsx";
+import NextTopLoader from "nextjs-toploader";
 
 import "@/styles/global.css";
 import {
@@ -33,6 +34,11 @@ export default function () {
         )}
       >
         <Provider>
+          <NextTopLoader
+            color="hsl(var(--heroui-primary))"
+            showSpinner={false}
+          />
+
           <main className="h-screen mx-auto px-4">
             <DivisionCenter>
               <Alert
