@@ -55,10 +55,10 @@ resource "aws_apprunner_service" "this" {
   }
 
   instance_configuration {
-    # Minimum resources for cost optimization
-    # 0.25 vCPU = $0.007/hour when active, $0.000012/GB-second when paused
-    cpu    = "256" # 0.25 vCPU
-    memory = "512" # 0.5 GB
+    # Increased memory to prevent OOM kills
+    # 0.25 vCPU with 1GB memory for Next.js SSR
+    cpu    = "256"  # 0.25 vCPU
+    memory = "1024" # 1 GB (minimum for Next.js apps)
   }
 
   auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.this.arn

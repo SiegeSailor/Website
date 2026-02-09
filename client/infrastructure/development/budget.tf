@@ -7,7 +7,7 @@ resource "aws_budgets_budget" "ec2" {
   time_unit         = "MONTHLY"
 
   notification {
-    comparison_operator        = "EQUAL_TO"
+    comparison_operator        = "GREATER_THAN"
     threshold                  = 20
     threshold_type             = "ABSOLUTE_VALUE"
     notification_type          = "ACTUAL"
