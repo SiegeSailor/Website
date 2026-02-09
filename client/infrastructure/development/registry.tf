@@ -28,12 +28,12 @@ module "ecr" {
       },
       {
         rulePriority = 2,
-        description  = "Expire tagged images if more than 3 exist.",
+        description  = "Expire tagged images if more than 5 exist.",
         selection = {
           tagStatus     = "tagged",
           tagPrefixList = ["v"],
           countType     = "imageCountMoreThan",
-          countNumber   = 3 # Reduced from 5 to save storage
+          countNumber   = 5
         },
         action = {
           type = "expire"

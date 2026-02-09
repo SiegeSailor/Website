@@ -28,22 +28,7 @@ output "ecr_repository_url" {
   value       = module.ecr.repository_url
 }
 
-output "apprunner_service_url" {
-  description = "The URL of the App Runner service."
-  value       = aws_apprunner_service.this.service_url
-}
-
-output "apprunner_service_arn" {
-  description = "The ARN of the App Runner service."
-  value       = aws_apprunner_service.this.arn
-}
-
-output "custom_domain" {
-  description = "The custom domain for the website."
-  value       = local.domain
-}
-
-output "custom_domain_status" {
-  description = "The status of the custom domain association."
-  value       = aws_apprunner_custom_domain_association.this.status
+output "ecr_latest_image_digest" {
+  description = "The image digest of the latest image."
+  value       = data.aws_ecr_image.latest_image.image_digest
 }
