@@ -29,7 +29,7 @@ output "ecr_repository_url" {
 }
 
 output "apprunner_service_url" {
-  description = "The URL of the App Runner service."
+  description = "The default URL of the App Runner service."
   value       = aws_apprunner_service.this.service_url
 }
 
@@ -38,12 +38,17 @@ output "apprunner_service_arn" {
   value       = aws_apprunner_service.this.arn
 }
 
+output "cloudfront_distribution_id" {
+  description = "The ID of the CloudFront distribution."
+  value       = module.cloudfront.cloudfront_distribution_id
+}
+
+output "cloudfront_distribution_domain" {
+  description = "The domain name of the CloudFront distribution."
+  value       = module.cloudfront.cloudfront_distribution_domain_name
+}
+
 output "custom_domain" {
   description = "The custom domain for the website."
   value       = local.domain
-}
-
-output "custom_domain_status" {
-  description = "The status of the custom domain association."
-  value       = aws_apprunner_custom_domain_association.this.status
 }

@@ -33,7 +33,7 @@ module "ecr" {
           tagStatus     = "tagged",
           tagPrefixList = ["v"],
           countType     = "imageCountMoreThan",
-          countNumber   = 3 # Reduced from 5 to save storage
+          countNumber   = 3
         },
         action = {
           type = "expire"
@@ -43,9 +43,4 @@ module "ecr" {
   })
 
   tags = local.shared_tags
-}
-
-data "aws_ecr_image" "latest_image" {
-  repository_name = module.ecr.repository_name
-  image_tag       = "latest"
 }
