@@ -3,7 +3,7 @@
 #######################################
 module "tf_state_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 5.9.1"
+  version = "~> 5.10.0"
 
   bucket        = "${local.project}-${local.environment}-tf-state"
   force_destroy = true
