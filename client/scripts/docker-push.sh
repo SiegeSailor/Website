@@ -16,7 +16,7 @@ readonly NONE="\033[0m"
 # Outputs:
 #   Writes ECR repository URL to stdout
 # Returns:
-#   `0` if successful, `1` otherwise
+#   0 if successful, 1 otherwise
 #######################################
 get_ecr_url() {
   local -r environment="${1:-production}"
@@ -46,7 +46,7 @@ get_ecr_url() {
 # Outputs:
 #   Writes image digest to stdout
 # Returns:
-#   `0` if successful, `1` otherwise
+#   0 if successful, 1 otherwise
 #######################################
 get_ecr_latest_image_digest() {
   local -r environment="${1:-production}"
@@ -87,7 +87,7 @@ get_aws_region() {
 #   $1 - AWS region
 #   $2 - ECR repository URL
 # Returns:
-#   `0` if successful, `1` otherwise
+#   0 if successful, 1 otherwise
 #######################################
 authenticate_ecr() {
   local -r aws_region="$1"

@@ -1,5 +1,5 @@
 resource "aws_budgets_budget" "ec2" {
-  name              = "Expected-Spend Budget"
+  name              = "${local.project}-${local.environment}"
   budget_type       = "COST"
   limit_amount      = "20"
   limit_unit        = "USD"
