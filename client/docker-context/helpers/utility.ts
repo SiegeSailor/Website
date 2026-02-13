@@ -18,7 +18,7 @@ export const { getPublicEnv, PublicEnv } = createPublicEnv(
       NODE_ENV: zod.enum(["development", "production"]),
       PORT: zod.string().default("-"),
     }),
-  }
+  },
 );
 
 export function createPageTitle(...content: string[]) {
