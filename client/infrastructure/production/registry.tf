@@ -44,3 +44,8 @@ module "ecr" {
 
   tags = local.shared_tags
 }
+
+data "aws_ecr_image" "latest_image" {
+  repository_name = module.ecr.repository_name
+  image_tag       = "latest"
+}

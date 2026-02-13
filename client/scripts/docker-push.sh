@@ -37,6 +37,8 @@ get_ecr_url() {
   fi
 
   echo "${ecr_url}"
+
+  return 0
 }
 
 #######################################
@@ -67,6 +69,8 @@ get_ecr_latest_image_digest() {
   fi
 
   echo "${ecr_latest_image_digest}"
+
+  return 0
 }
 
 #######################################
@@ -96,6 +100,8 @@ authenticate_ecr() {
   echo -e "${GREEN}[INFO] Authenticating ${ecr_url}${NONE}"
   aws ecr get-login-password --region "${aws_region}" | \
     docker login --username AWS --password-stdin "${ecr_url}"
+
+  return 0
 }
 
 #######################################
