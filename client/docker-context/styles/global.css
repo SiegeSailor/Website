@@ -110,11 +110,11 @@ input {
   }
 
   .markdown-table td {
-    @apply p-4 text-nowrap;
+    @apply p-4;
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-background;
-    @apply align-top whitespace-nowrap;
+    @apply align-top;
     @apply sticky left-0 z-10;
   }
 
@@ -126,13 +126,9 @@ input {
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
   }
 
-  .markdown-table td * {
-    @apply whitespace-nowrap;
-  }
-
   .markdown-table td img,
   .markdown-list-item img {
-    @apply max-w-160 sm:max-w-none h-auto;
+    @apply max-w-[calc(100vw-8rem)] sm:max-w-none h-auto;
   }
 
   .markdown-list-item .markdown-modal-image {
