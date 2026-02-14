@@ -130,7 +130,7 @@ export default function () {
       <SquareTerminalIcon
         className={clsx(
           "transition-opacity hover:opacity-80 cursor-pointer text-foreground",
-          { "opacity-disabled cursor-none pointer-none:": !isMounted }
+          { "opacity-disabled cursor-none pointer-none:": !isMounted },
         )}
         size="1.45rem"
         strokeWidth="0.075rem"
@@ -158,7 +158,7 @@ export default function () {
                           {
                             "font-bold": type === "command",
                             "font-light text-default-400": type === "system",
-                          }
+                          },
                         )}
                       >
                         {value}

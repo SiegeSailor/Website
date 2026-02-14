@@ -45,7 +45,6 @@ export const globalMetadata: Metadata = {
 export const globalViewport: Viewport = {
   width: "device-width",
   initialScale: 1.0,
-  // See https://github.com/heroui-inc/heroui/issues/5326.
   userScalable: false,
   maximumScale: 1.0,
   themeColor: [

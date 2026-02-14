@@ -19,7 +19,7 @@ const REGEX_SHIELDS_BADGE =
   /img\.shields\.io\/badge|custom-icon-badges\.demolab\.com/;
 const ZOOM_MAX = 10 as const;
 const ZOOM_MIN = 1 as const;
-const ZOOM_STEP = 0.25 as const;
+const ZOOM_STEP = 0.5 as const;
 
 export default function ({
   alt,
@@ -37,7 +37,7 @@ export default function ({
   const [zoom, setZoom] = useState<number>(ZOOM_MIN);
 
   const handleOpen = (
-    event: Parameters<NonNullable<ComponentProps<typeof Image>["onClick"]>>[0]
+    event: Parameters<NonNullable<ComponentProps<typeof Image>["onClick"]>>[0],
   ) => {
     setZoom(ZOOM_MIN);
     if (propsImageThumbnail?.onClick) propsImageThumbnail.onClick(event);
@@ -67,7 +67,7 @@ export default function ({
     <div
       className={clsx(
         "relative inline-block overflow-hidden markdown-modal-image border-1 border-default-200 rounded-md",
-        { "w-full bg-default-100 dark:bg-default-50": !isShieldsBadge }
+        { "w-full bg-default-100 dark:bg-default-50": !isShieldsBadge },
       )}
     >
       <Image
@@ -81,7 +81,7 @@ export default function ({
         className={clsx(
           "cursor-pointer w-max",
           { "mx-auto": !isShieldsBadge },
-          propsImageThumbnail?.className
+          propsImageThumbnail?.className,
         )}
       />
       <span className="opacity-0 absolute left-0 top-0">{alt}</span>
@@ -101,7 +101,7 @@ export default function ({
                     {...propsImageThumbnail}
                     className={clsx(
                       "w-auto max-h-[65vh] transition-transform duration-200 origin-top-left",
-                      propsImageModal?.className
+                      propsImageModal?.className,
                     )}
                     style={{ transform: `scale(${zoom})` }}
                   />
@@ -119,7 +119,7 @@ export default function ({
                     <MinusIcon
                       size="1.25rem"
                       className={clsx(
-                        zoom <= ZOOM_MIN && "text-default-500/40"
+                        zoom <= ZOOM_MIN && "text-default-500/40",
                       )}
                     />
                   </Button>
@@ -141,7 +141,7 @@ export default function ({
                     <PlusIcon
                       size="1.25rem"
                       className={clsx(
-                        zoom >= ZOOM_MAX && "text-default-500/40"
+                        zoom >= ZOOM_MAX && "text-default-500/40",
                       )}
                     />
                   </Button>

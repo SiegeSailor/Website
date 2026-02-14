@@ -132,7 +132,7 @@ input {
 
   .markdown-table td img,
   .markdown-list-item img {
-    @apply max-w-none h-auto;
+    @apply max-w-160 sm:max-w-none h-auto;
   }
 
   .markdown-list-item .markdown-modal-image {
