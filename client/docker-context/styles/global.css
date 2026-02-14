@@ -131,6 +131,10 @@ input {
     @apply max-w-[calc(100vw-8rem)] sm:max-w-none h-auto;
   }
 
+  .markdown-list .markdown-list .markdown-list-item {
+    @apply list-[circle];
+  }
+
   .markdown-list-item .markdown-modal-image {
     @apply translate-y-1.5;
   }

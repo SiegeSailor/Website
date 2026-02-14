@@ -1,6 +1,6 @@
 "use server";
 
-import type { ComponentProps } from "react";
+import { type ComponentProps } from "react";
 import { Children, isValidElement } from "react";
 import { ScrollShadow } from "@heroui/react";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -52,7 +52,7 @@ export default async function ({
             {...element}
             className={clsx(
               element.className,
-              "text-blue-600 dark:text-blue-300"
+              "text-blue-600 dark:text-blue-300",
             )}
           />
         ),
@@ -68,7 +68,7 @@ export default async function ({
             className={clsx(
               element.className,
               "border-l-2 border-default-500 pl-2 italic text-medium",
-              SPACE
+              SPACE,
             )}
           />
         ),
@@ -77,7 +77,7 @@ export default async function ({
             {...element}
             className={clsx(
               element.className,
-              "list-disc list-outside pl-4 my-1 last:my-0 markdown-list"
+              "list-disc list-outside pl-4 my-1 last:my-0 markdown-list",
             )}
           />
         ),
@@ -86,7 +86,7 @@ export default async function ({
             {...element}
             className={clsx(
               element.className,
-              "list-decimal list-outside pl-4 my-1 last:my-0 markdown-list"
+              "list-decimal list-outside pl-4 my-1 last:my-0 markdown-list",
             )}
           />
         ),
@@ -95,7 +95,7 @@ export default async function ({
             {...element}
             className={clsx(
               element.className,
-              "text-medium font-light my-1 last:my-0 markdown-list-item"
+              "text-medium font-light my-1 last:my-0 markdown-list-item",
             )}
           />
         ),
@@ -120,8 +120,8 @@ export default async function ({
                     typeof child === "string"
                       ? child
                       : child.props?.children
-                      ? child.props?.children?.props?.children
-                      : child
+                        ? child.props?.children?.props?.children
+                        : child,
                   )
                   .join("")}
               />
@@ -155,7 +155,7 @@ export default async function ({
                 element.className,
                 "font-light text-medium leading-6",
                 SPACE,
-                p?.className
+                p?.className,
               )}
             />
           );
