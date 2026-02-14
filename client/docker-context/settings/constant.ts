@@ -1,5 +1,5 @@
-import type { ComponentProps } from "react";
-import type { Route } from "next";
+import { type ComponentProps } from "react";
+import { type Route } from "next";
 import { Chip } from "@heroui/react";
 
 import { getEntries } from "@/helpers/utility";
@@ -39,7 +39,61 @@ export const ROUTE_TO_TITLE: Readonly<Record<Route, TTitle>> = {
 } as const;
 
 export const TITLE_TO_ROUTE = Object.fromEntries(
-  getEntries(ROUTE_TO_TITLE).map(([route, title]) => [title, route])
+  getEntries(ROUTE_TO_TITLE).map(([route, title]) => [title, route]),
 ) as Readonly<Record<TTitle, Route>>;
 
 export const ROWS_PER_PAGE = [10, 25, 50] as const;
+
+export const SCRAPERS_AI = [
+  "AdsBot-Google",
+  "Amazonbot",
+  "anthropic-ai",
+  "Applebot-Extended",
+  "Bytespider",
+  "CCBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-Web",
+  "cohere-ai",
+  "cohere-training",
+  "Diffbot",
+  "FacebookBot",
+  "FriendlyCrawler",
+  "Google-Extended",
+  "GoogleOther",
+  "GoogleOther-Image",
+  "GoogleOther-Video",
+  "GPTBot",
+  "iaskspider/2.0",
+  "ICC-Crawler",
+  "ImagesiftBot",
+  "img2dataset",
+  "ISSCyberRiskCrawler",
+  "Kangaroo Bot",
+  "Meta-ExternalAgent",
+  "Meta-ExternalFetcher",
+  "OAI-SearchBot",
+  "omgili",
+  "omgilibot",
+  "PetalBot",
+  "Scrapy",
+  "Timpibot",
+  "VelenPublicWebCrawler",
+  "Webzio-Extended",
+  "YouBot",
+] as const;
+export const SCRAPERS_NON_AI = [
+  "AhrefsBot",
+  "Barkrowler",
+  "BLEXBot",
+  "DataForSeoBot",
+  "DotBot",
+  "Grapeshot",
+  "MJ12bot",
+  "PetalBot",
+  "SemrushBot",
+  "SeznamBot",
+  "sogou",
+  "Sogou",
+  "ZoominfoBot",
+] as const;

@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent, RefAttributes } from "react";
-import type { Route } from "next";
+import { type ForwardRefExoticComponent, type RefAttributes } from "react";
+import { type Route } from "next";
 import {
   SiAmazon,
   SiBabel,
