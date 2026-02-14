@@ -46,7 +46,7 @@ I commit to have a broad range of experience in different technologies and pract
 | Timeline            | Company                   | Role                            | Industry       | Location         | Link                                                        |
 | ------------------- | ------------------------- | ------------------------------- | -------------- | ---------------- | ----------------------------------------------------------- |
 | Jun 2025 - Present  | CooperSurgical            | Senior Software Engineer        | Medical Device | NJ, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| Jan 2024 - May 2025 | CooperSurgical            | Software Engineer               | Medical Device | CT, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
+| Jan 2024 - May 2025 | CooperSurgical            | Software Engineer               | Medical Device | MA, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
 | May 2023 - Aug 2023 | CooperSurgical            | Software Engineering Intern     | Medical Device | CT, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
 | Sep 2022 - Dec 2022 | StageSource               | Software Engineering Freelancer | Art Service    | MA, USA          | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
 | Jan 2020 - Feb 2022 | Shopee                    | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [shopee.tw](https://shopee.tw/)                             |
