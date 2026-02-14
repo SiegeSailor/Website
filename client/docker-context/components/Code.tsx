@@ -8,7 +8,7 @@ export default function ({ ...props }: ComponentProps<typeof Code>) {
       {...props}
       className={clsx(
         props.className,
-        "py-[0.15rem]! bg-gray-700! inline whitespace-break-spaces"
+        "py-[0.15rem]! bg-gray-700! inline whitespace-break-spaces break-all",
       )}
     />
   );

@@ -102,7 +102,7 @@ input {
   }
 
   .markdown-table th {
-    @apply p-4 font-semibold text-nowrap;
+    @apply p-4 font-semibold text-nowrap whitespace-nowrap;
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-950;
@@ -110,7 +110,7 @@ input {
   }
 
   .markdown-table td {
-    @apply p-4;
+    @apply p-4 text-nowrap whitespace-nowrap;
     @apply border-separate border-spacing-0;
     @apply border-b-1 border-l-1 first:rounded-tl-md last:rounded-tr-md first:border-l-0;
     @apply border-gray-300 dark:border-gray-700 bg-background;
