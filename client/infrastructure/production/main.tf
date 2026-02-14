@@ -37,12 +37,11 @@ module "app_runner_image_base" {
     }
   }
 
-  create_vpc_connector          = true
-  vpc_connector_subnets         = module.vpc.public_subnets
-  vpc_connector_security_groups = [module.vpc.default_security_group_id]
+  create_vpc_connector = false
   network_configuration = {
     egress_configuration = {
-      egress_type = "VPC"
+      egress_type       = "VPC"
+      vpc_connector_arn = aws_apprunner_vpc_connector.this.arn
     }
   }
 

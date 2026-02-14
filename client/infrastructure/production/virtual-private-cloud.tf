@@ -19,3 +19,35 @@ module "vpc" {
 
   tags = local.shared_tags
 }
+
+resource "aws_security_group" "vpc_connector" {
+  name_prefix = "${local.project}-${local.environment}-vpc-connector-"
+  description = "Security group for App Runner VPC connector."
+  vpc_id      = module.vpc.vpc_id
+
+  egress {
+    description = "Allow all outbound."
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = local.shared_tags
+}
+
+resource "aws_apprunner_vpc_connector" "this" {
+  vpc_connector_name = "${local.module}-${length(module.vpc.public_subnets)}az"
+  subnets            = module.vpc.public_subnets
+  security_groups    = [aws_security_group.vpc_connector.id]
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = local.shared_tags
+}
