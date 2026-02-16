@@ -53,7 +53,7 @@ I commit to have a broad range of experience in different technologies and pract
 | Jan 2019 - Nov 2019 | Edallianz                 | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [twincn.com](https://www.twincn.com/item.aspx?no=51236578)  |
 | Jun 2017 - Nov 2018 | Servicetech International | Software Engineer               | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
 | Jun 2016 - Jan 2017 | Servicetech International | Software Engineering Intern     | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
-| May 2014 - Aug 2014 | DY Game                   | Game Development Intern         | Gaming         | Huwei, Taiwan    | [dygame.cn](https://www.dygame.cn/)                         |
+| May 2014 - Aug 2014 | DY Game                   | Game Development Intern         | Gaming         | Yunlin, Taiwan   | [dygame.cn](https://www.dygame.cn/)                         |
 
 ### CooperSurgical
 
@@ -131,9 +131,9 @@ I commit to have a broad range of experience in different technologies and pract
 
 ### DY Game
 
-| Timeline            | Role                    | Location      |
-| ------------------- | ----------------------- | ------------- |
-| May 2014 - Aug 2014 | Game Development Intern | Huwei, Taiwan |
+| Timeline            | Role                    | Location       |
+| ------------------- | ----------------------- | -------------- |
+| May 2014 - Aug 2014 | Game Development Intern | Yunlin, Taiwan |
 
 > Motion Sensing Game.
 
