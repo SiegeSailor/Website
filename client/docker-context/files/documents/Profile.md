@@ -28,7 +28,7 @@ I commit to have a broad range of experience in different technologies and pract
 - Wide-ranging experience in **DevOps** practices for different sizes of teams and projects
 - Engagements in variant working environments
   - **Agile**, which entails scrum meetings, sprint planning meetings, and extreme programming for e-commerce software development
-  - **Waterfall**, which compiles FDA and EU MDR government regulations for medical device development
+  - **Waterfall**, which compiles US FDA and EU MDR government regulations for medical device development
 - Experience in **System Design** using Data Modeling with **ERD** and Data Flow with **DFD**
   - Extensive experience in various communication protocols, such as **REST**, **WebSocket**, **RPC**, and **Messaging**
   - Distributed **Cloud-Based Microservices** for e-commerce global and regional service integration
@@ -38,8 +38,12 @@ I commit to have a broad range of experience in different technologies and pract
     - Firmware integration with **RFID**
   - **Digital Transformation** for regulated businesses
 - Extensively worked with **Git** for version control in different workflows, such as **Long-Term Support (LTS)**, **Git Flow**, and **GitHub Flow**, so-called **Trunk-Based Flow**
-- Solid understanding of essential Data Structure and Algorithm, DSA
+- Solid understanding of essential Data Structure and Algorithm
   - **Concurrent Programming** for high I/O blocking tasks on medical devices, data ETL for e-commerce platforms worldwide, and high-volume tolerance multiple-player games
+- Collaborated with cross-functional teams
+  - Standards definition (Hardware, Firmware, Software)
+  - Hardware control loops to UX conversion
+  - Developer tooling strategy
 
 ## Employment
 
