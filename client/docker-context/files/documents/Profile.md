@@ -209,18 +209,10 @@ I commit to have a broad range of experience in different technologies and pract
 
 | Timeline            | Institution                           | Program                                              | Degree                |
 | ------------------- | ------------------------------------- | ---------------------------------------------------- | --------------------- |
-| Aug 2023 - Nov 2023 | Massachusetts Institute of Technology | Data Science and Machine Learning                    | Certificate           |
 | May 2022 - Jan 2024 | Boston University                     | Computer Science                                     | Master in Science     |
+| Aug 2023 - Nov 2023 | Massachusetts Institute of Technology | Data Science and Machine Learning                    | Certificate           |
 | Jan 2022 - May 2022 | New York University                   | Preparatory Course for Graduate Studies in Computing | Certificate           |
 | Sep 2013 - Jan 2017 | National Formosa University           | Multimedia Design                                    | Bachelor in Fine Arts |
-
-### Massachusetts Institute of Technology
-
-- **Program:** Data Science and Machine Learning
-- **Degree:** Certificate
-- **Timeline:** Aug 2023 - Nov 2023
-  - Ranked 15 out of 131 participants
-  - Score 579.5/600
 
 ### Boston University
 
@@ -231,16 +223,28 @@ I commit to have a broad range of experience in different technologies and pract
   - 1st Author for [Quantitative DevSecOps Metrics for Cloud-Based Web Microservices](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317-160342, 2024, doi: 10.1109/ACCESS.2024.3486314
   - Member of Cybersecurity Club
   - GPA 3.8/4.0
+  - Studied Cryptography, Computer Language Theory, Secure Software Development, and Analysis of Algorithms
+
+### Massachusetts Institute of Technology
+
+- **Program:** Data Science and Machine Learning
+- **Degree:** Certificate
+- **Timeline:** Aug 2023 - Nov 2023
+  - Ranked 15 out of 146 participants
+  - Score 579.5/600
+  - Studied Deep Learning, Recommendation Systems, Computer Vision, and Supervised & Unsupervised Learning
 
 ### New York University
 
 - **Program:** Preparatory Course for Graduate Studies in Computing
 - **Degree:** Certificate
 - **Timeline:** Jan 2022 - May 2022
+  - Studied Discrete Mathematics, C++, Data Structures, Networking, and Operating Systems
 
 ### National Formosa University
 
 - **Program:** Multimedia Design
 - **Degree:** Bachelor in Fine Arts
 - **Timeline:** Sep 2013 - Jan 2017
-  - Researched the integration of browser runtime and 3D modeling technology
+  - Earned dual concentrations in Computer Programming and Fine Arts
+  - Studied 2D Computer Graphics, 3D Advanced Computer Animation, Virtual Reality Design, Multimedia Programming, Computer Graphics & Image Processing, and Information Software Application
