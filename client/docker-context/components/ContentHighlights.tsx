@@ -23,7 +23,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
         title="My Highlighted Articles"
       />
 
-      <div className="gap-4 grid grid-cols-12 grid-rows-1 max-w-compact mx-auto">
+      <div className="gap-4 grid grid-cols-12 grid-rows-1 mx-auto">
         {HIGHLIGHTS.map((date) => (
           <CardArticleDetail
             className="col-span-12 sm:col-span-4 h-75 border-background dark:border-default-100 border-2 bg-default-50 overflow-hidden"

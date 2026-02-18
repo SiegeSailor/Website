@@ -17,10 +17,10 @@ export default function () {
     <section className="max-w-content mx-auto p-4">
       <div className="flex flex-col gap-24">
         <ContentHero className="max-w-compact mx-auto" />
-        <ContentArticles className="mx-auto" />
         <ContentProfile className="mx-auto" />
-        <ContentProjects className="mx-auto" />
         <ContentHighlights className="mx-auto" />
+        <ContentArticles className="mx-auto" />
+        <ContentProjects className="mx-auto" />
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
 
       <div className="gap-4 grid grid-cols-12 grid-rows-1">
         {PROJECTS.map((project) => {
-          const isPrototype = project.stage === "Planning";
+          const isPlanning = project.stage === "Planning";
 
           return (
             <Card
@@ -48,12 +48,12 @@ export default async function ({ ...props }: ComponentProps<"div">) {
                   p={{
                     className: clsx(
                       "text-foreground/50 text-center",
-                      !isPrototype ? "line-clamp-5" : "line-clamp-7"
+                      !isPlanning ? "line-clamp-5" : "line-clamp-7",
                     ),
                   }}
                 />
               </CardBody>
-              {!isPrototype && (
+              {!isPlanning && (
                 <CardFooter className="flex justify-center">
                   <Link href={project.href}>Read More</Link>{" "}
                 </CardFooter>
