@@ -26,8 +26,8 @@ export default async function ({ ...props }: ComponentProps<"div">) {
               <TextTyping
                 words={["Software", "Full-Stack", "DevOps"]}
                 speedDeleting={125}
-                speedTyping={100}
-                timePause={2000}
+                speedTyping={50}
+                timePause={1500}
               />
             </span>
           </span>
@@ -35,7 +35,7 @@ export default async function ({ ...props }: ComponentProps<"div">) {
             <span className="pr-3">Engineer at</span>
             <span className="text-nowrap">
               <Link
-                className="text-2xl sm:text-3xl font-light text-default-400"
+                className="text-3xl sm:text-4xl font-light text-default-400"
                 href="https://www.coopersurgical.com/"
               >
                 CooperSurgical
