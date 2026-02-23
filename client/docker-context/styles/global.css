@@ -95,7 +95,7 @@ input {
 
 @layer components {
   .markdown-table {
-    @apply my-4 text-left text-medium table table-auto;
+    @apply my-4 text-left text-medium table table-auto w-max;
     @apply border-separate border-spacing-0;
     @apply border-1 rounded-md;
     @apply border-gray-300 dark:border-gray-700;
@@ -116,6 +116,11 @@ input {
     @apply border-gray-300 dark:border-gray-700 bg-background;
     @apply align-top;
     @apply sticky left-0 z-10;
+    @apply overflow-hidden;
+  }
+
+  .markdown-table td * {
+    @apply text-nowrap whitespace-nowrap;
   }
 
   .markdown-table td .markdown-modal-image {
