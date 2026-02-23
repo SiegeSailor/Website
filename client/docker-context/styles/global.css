@@ -131,6 +131,10 @@ input {
     @apply border-b-0 first:rounded-bl-md last:rounded-br-md;
   }
 
+  .markdown-table td .markdown-modal-image img {
+    @apply max-h-75;
+  }
+
   .markdown-table td img,
   .markdown-list-item img {
     @apply max-w-[calc(100vw-8rem)] sm:max-w-none h-auto;
@@ -140,11 +144,11 @@ input {
     @apply list-[circle];
   }
 
-  .markdown-list-item .markdown-modal-image {
-    @apply translate-y-1.5;
+  .markdown-list-item p {
+    @apply mb-0!;
   }
 
-  .markdown-table td .markdown-modal-image img {
-    @apply max-h-75;
+  .markdown-list-item .markdown-modal-image {
+    @apply translate-y-1.5;
   }
 }
