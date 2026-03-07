@@ -1,8 +1,55 @@
+# Client
+
+A SSR Web application.
+
+## Non-Functional Requirements
+
+Through being a full-stack application, **Client** will be mainly a UI serving non-durable state and connecting to other services:
+
+1. Performance
+   - Streaming page loading
+   - Cache-first layouts
+   - Low first content paint time
+2. Accessibility
+   - Keyboard navigation
+3. Usability
+   - Application-wise user experience
+   - Mobile-first interaction
+   - Responsiveness
+
+## Functional Requirements
+
+1. Dashboard entry routing page
+   - Refer to iCloud Web
+2. Markdown file rendering
+   - Blog and Note
+3. Project showcase
+4. Search
+   - In text content
+   - Tags
+5. Profile and resume
+   1. Summary
+   2. Education
+   3. Experience
+   4. Skills
+   5. Area, salary, and VISA requirements
+   6. I am a full-stack engineer, knows DevOps
+   7. PDF preview and download
+6. Contact
+   - External links and email
+   - Website mails
+   - Footprints
+7. Review and authentication
+8. Footer
+   1. No AI generated content
+   2. No AI scraping allowed
+   3. Last updated date
+
 # Website
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-This is a monorepo for the SiegeSailor's personal website. Please see each modules' `README.md` for requirements, `CONTRIBUTING.md` for contribution guidelines, and [`instructions/`](./.github/instructions/) folder for detailed instructions on contributing to relevant parts of the project.
+This is a monorepo for my personal website. Please see each modules' `README.md` for requirements, `CONTRIBUTING.md` for contribution guidelines, and [`instructions/`](./.github/instructions/) folder for detailed instructions on contributing to relevant parts of the project.
 
 ## Prerequisites
 
@@ -29,42 +76,20 @@ Required software for the every modules:
 - [ ] Make this project public
   - [ ] Update README.md
   - [ ] Add CONTRIBUTING.md
-- [x] Loading, Input modal focus, word break for image
-- [x] Resolve timestamp build issue because of empty `updatedOn` and `createdOn` values from `git`
-- [x] Check next.js cache headers for images
-- [x] Check cloudfront cache headers for images and all other files
-- [x] Add fluent-bit back for ECS (https://github.com/terraform-aws-modules/terraform-aws-ecs/issues/381#event-21751869604)
-- [x] Use import type
 - [ ] Add lint and checks
 - [ ] Use server component to cache/replace `useSearchParams`
 - [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
 - [ ] Tokenize articles for search
-- [x] Metadata files (https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
-- [x] Footer
 - [ ] Realtime logs for Cloudfront
-- [x] Change `-` to `/` for links
-- [x] Change `()` start word
 - [ ] Review feature (AI automated reviewers)
-- [x] Mermaid charts are smaller if their size is bigger than the container and are not rendered as the first page (Maybe only in development). It is smaller when it is rendered as the first page in production. Only the first time after pushing-refresh (cache invalid due to file changes, hence online website updates automatically)
 - [ ] Refine projects and edit sponsor profile
-- [x] Share OG images
-- [x] Update profile: Vite, lints
-- [x] Finish drafts
 - [~] Move page-only components to pages
 - [~] Add cards: Git commits, LeetCode commits, articles number
-- [x] Add feature articles in /blog
-- [x] article view scrollbar
-- [x] table view 100%
-- [x] issue board and Change log for features: subscribe for email notifications, articles, paper with Emma, compiling repo
-- [x] AI documents
-- [x] Move this to README.md
-- [x] Cloudfront for Next.js static files
 
 ## Articles
 
 - [ ] Message Queue vs Event Bus (Pub/Sub) within a distributed system
 - [ ] gRPC flow
-- [x] Next.js misleading route error
 - [ ] custom proxy server:
       gRPC server only accepts HTTP/2
       Proxy server only accepts HTTP/1.1
