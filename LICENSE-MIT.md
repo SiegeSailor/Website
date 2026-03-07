@@ -1,18 +1,3 @@
-# License
-
-This project is licensed with two types of licenses:
-
-- [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): Project documentation and blog posts
-- [MIT](https://opensource.org/licenses/MIT): Project code and code snippets in blog posts
-
-## CC BY 4.0
-
-By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
-
-> See the Licensed Rights: https://creativecommons.org/licenses/by/4.0/
-
-## MIT
-
 Copyright (c) 2026 Jin Yu Zhang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

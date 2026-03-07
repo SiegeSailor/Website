@@ -1,120 +1,12 @@
-# Client
-
-A SSR Web application.
-
-## Non-Functional Requirements
-
-Through being a full-stack application, **Client** will be mainly a UI serving non-durable state and connecting to other services:
-
-1. Performance
-   - Streaming page loading
-   - Cache-first layouts
-   - Low first content paint time
-2. Accessibility
-   - Keyboard navigation
-3. Usability
-   - Application-wise user experience
-   - Mobile-first interaction
-   - Responsiveness
-
-## Functional Requirements
-
-1. Dashboard entry routing page
-   - Refer to iCloud Web
-2. Markdown file rendering
-   - Blog and Note
-3. Project showcase
-4. Search
-   - In text content
-   - Tags
-5. Profile and resume
-   1. Summary
-   2. Education
-   3. Experience
-   4. Skills
-   5. Area, salary, and VISA requirements
-   6. I am a full-stack engineer, knows DevOps
-   7. PDF preview and download
-6. Contact
-   - External links and email
-   - Website mails
-   - Footprints
-7. Review and authentication
-8. Footer
-   1. No AI generated content
-   2. No AI scraping allowed
-   3. Last updated date
-
 # Website
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-This is a monorepo for my personal website. Please see each modules' `README.md` for requirements, `CONTRIBUTING.md` for contribution guidelines, and [`instructions/`](./.github/instructions/) folder for detailed instructions on contributing to relevant parts of the project.
+My personal website. Please see `CONTRIBUTING.md` for development and deployment, and [`instructions/`](./.github/instructions/) folder for detailed instructions on contributing to relevant parts of the project.
 
-## Prerequisites
+## License
 
-Required software for the every modules:
+This project is licensed with dual licenses:
 
-- [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`
-- [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test): `1.19.3`
-- [Docker](https://www.docker.com/): `28.5.2`
-- [Hadolint](https://github.com/hadolint/hadolint): `2.14.0`
-- [Terraform](https://developer.hashicorp.com/terraform): `1.14.1`
-- [TFLint](https://github.com/terraform-linters/tflint): `0.60.0`
-
-## Modules
-
-- [Client](./client/README.md): A SSR Web application
-
-## Todos
-
-- [ ] Refactor home page and make client blog only
-- [ ] Extract unused components to other purposes
-- [ ] Display ALB active connections and historical connections
-- [ ] Extract `configs.ts` to a remote source
-- [ ] Mathmatical formoulas style block
-- [ ] Make this project public
-  - [ ] Update README.md
-  - [ ] Add CONTRIBUTING.md
-- [ ] Add lint and checks
-- [ ] Use server component to cache/replace `useSearchParams`
-- [ ] Slots for article and profile pages (https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes)
-- [ ] Tokenize articles for search
-- [ ] Realtime logs for Cloudfront
-- [ ] Review feature (AI automated reviewers)
-- [ ] Refine projects and edit sponsor profile
-- [~] Move page-only components to pages
-- [~] Add cards: Git commits, LeetCode commits, articles number
-
-## Articles
-
-- [ ] Message Queue vs Event Bus (Pub/Sub) within a distributed system
-- [ ] gRPC flow
-- [ ] custom proxy server:
-      gRPC server only accepts HTTP/2
-      Proxy server only accepts HTTP/1.1
-      Client UI needs HTTP/2 for streaming
-      Hence, we have nginx to bridge HTTP/2 to HTTP/1.1, and use the proxy server to convert HTTP request to gRPC format
-- [ ] Phone and Tablet Tabs
-- [ ] Vault to Profile
-- [ ] iPad Tabs to Profile
-- [ ] Discreet Math Notes
-- [ ] Resolve Formulas Issues
-- [ ] Concurrency Toolkit
-- [ ] Move Keep and GitBook
-
-## CI
-
-- [ ] Streamline GitHub profile README.md
-- [ ] Deploy flow
-
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)
-
-| Category                         | Items                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| :------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Programming Language             | ![C](https://img.shields.io/badge/C-777777?&logo=C) ![C%23](https://img.shields.io/badge/C%23-777777?&logo=c%2b%2b&logoColor=00599C) ![C++](https://img.shields.io/badge/C++-777777?&logo=c%2b%2b&logoColor=00599C) ![Java](https://img.shields.io/badge/Java-777777?&logo=OpenJDK&logoColor=004996) ![JavaScript](https://img.shields.io/badge/JavaScript-777777?&logo=JavaScript) ![Node.js](https://img.shields.io/badge/Node.js-777777?&logo=node.js) ![PHP](https://img.shields.io/badge/PHP-777777?&logo=PHP&logoColor=) ![Python](https://img.shields.io/badge/Python-777777?&logo=Python) ![Shell](https://img.shields.io/badge/Shell-777777?&logo=Shell) ![SQL](https://img.shields.io/badge/SQL-777777?&logo=SQLite&logoColor=003B57) ![TypeScript](https://img.shields.io/badge/TypeScript-777777?&logo=TypeScript)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Front-End Development            | ![Ant_Design](https://img.shields.io/badge/Ant_Design-777777?&logo=AntDesign&logoColor=0170FE) ![Bootstrap](https://img.shields.io/badge/Bootstrap-777777?&logo=Bootstrap&logoColor=) ![Celery](https://img.shields.io/badge/Celery-777777?&logo=Celery&logoColor=37814A) ![Chakra_UI](https://img.shields.io/badge/Chakra_UI-777777?&logo=ChakraUI&logoColor=) ![CSS3](https://img.shields.io/badge/CSS3-777777?&logo=CSS3&logoColor=1572B6) ![Cypress](https://img.shields.io/badge/Cypress-777777?&logo=Cypress&logoColor=) ![D3.js](https://img.shields.io/badge/D3.js-777777?&logo=D3.js&logoColor=) ![Electron](https://img.shields.io/badge/Electron-777777?&logo=Electron&logoColor=) ![Framer](https://img.shields.io/badge/Framer-777777?&logo=Framer&logoColor=0055FF) ![HTML5](https://img.shields.io/badge/HTML5-777777?&logo=HTML5&logoColor=) ![Ionic](https://img.shields.io/badge/Ionic-777777?&logo=Ionic&logoColor=) ![Jest](https://img.shields.io/badge/Jest-777777?&logo=Jest&logoColor=C21325) ![jQuery](https://img.shields.io/badge/jQuery-777777?&logo=jQuery&logoColor=8769AD) ![Material_Design](https://img.shields.io/badge/Material_Design-777777?&logo=MaterialDesign&logoColor=) ![Next_UI](https://img.shields.io/badge/Next_UI-777777?&logo=NextUI&logoColor=) ![Next.js](https://img.shields.io/badge/Next.js-777777?&logo=Next.js) ![Phaser](https://img.shields.io/badge/Phaser-777777?&logo=Framework&logoColor=) ![React](https://img.shields.io/badge/React-777777?&logo=React) ![Redux](https://img.shields.io/badge/Redux-777777?&logo=Redux&logoColor=764ABC) ![Sass](https://img.shields.io/badge/Sass-777777?&logo=Sass&logoColor=) ![Semantic_UI](https://img.shields.io/badge/Semantic_UI-777777?&logo=SemanticUI&logoColor=) ![Three.js](https://img.shields.io/badge/Three.js-777777?&logo=Three.js&logoColor=) |
-| Back-End Development and Servers | ![.NET_Core](https://img.shields.io/badge/.NET_Core-777777?&logo=.NET&logoColor=512BF4) ![Avahi](https://img.shields.io/badge/Avahi-777777?&logo=Airbrake&logoColor=75479C) ![Bats](https://img.shields.io/badge/Bats-777777?&logo=GNUBASH&logoColor=4EAA25) ![Django](https://img.shields.io/badge/Django-777777?&logo=Django) ![Envoy_Proxy](https://img.shields.io/badge/Envoy_Proxy-777777?&logo=EnvoyProxy&logoColor=) ![Express](https://img.shields.io/badge/Express-777777?&logo=Express&logoColor=) ![gRPC](https://img.shields.io/badge/gRPC-777777?&logo=tRPC&logoColor=) ![Linux](https://img.shields.io/badge/Linux-777777?&logo=Linux) ![MariaDB](https://img.shields.io/badge/MariaDB-777777?&logo=MariaDB&logoColor=003545) ![MySQL](https://img.shields.io/badge/MySQL-777777?&logo=MySQL) ![Nginx](https://img.shields.io/badge/Nginx-777777?&logo=Nginx&logoColor=809639) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-777777?&logo=PostgreSQL) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-777777?&logo=RabbitMQ&logoColor=) ![Redis](https://img.shields.io/badge/Redis-777777?&logo=Redis)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| DevOps and Cloud                 | ![AWS](https://img.shields.io/badge/AWS-777777?&logo=Amazon-Web-Services&logoColor=F90) ![Debian](https://img.shields.io/badge/Debian-777777?&logo=Debian&logoColor=AB1D33) ![Docker](https://img.shields.io/badge/Docker-777777?&logo=Docker) ![Firebase](https://img.shields.io/badge/Firebase-777777?&logo=Firebase&logoColor=DD2C00) ![GCP](https://img.shields.io/badge/GCP-777777?&logo=GoogleCloud&logoColor=4285F4) ![Git](https://img.shields.io/badge/Git-777777?&logo=Git) ![GitHub_Actions](https://img.shields.io/badge/GitHub_Actions-777777?&logo=GitHub-Actions) ![GitHub](https://img.shields.io/badge/GitHub-777777?&logo=GitHub) ![GitLab](https://img.shields.io/badge/GitLab-777777?&logo=GitLab&logoColor=FCA326) ![Kubernetes](https://img.shields.io/badge/Kubernetes-777777?&logo=Kubernetes) ![NPM](https://img.shields.io/badge/NPM-777777?&logo=NPM&logoColor=CB3837) ![NVM](https://img.shields.io/badge/NVM-777777?&logo=NVM&logoColor=) ![Sentry](https://img.shields.io/badge/Sentry-777777?&logo=Sentry&logoColor=362D59) ![Terraform](https://img.shields.io/badge/Terraform-777777?&logo=Terraform)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Utilities and Tools              | ![Babel](https://img.shields.io/badge/Babel-777777?&logo=Babel&logoColor=) ![CMake](https://img.shields.io/badge/CMake-777777?&logo=CMake&logoColor=064F8C) ![Gulp](https://img.shields.io/badge/Gulp-777777?&logo=Gulp&logoColor=) ![Mermaid](https://img.shields.io/badge/Mermaid-777777?&logo=Mermaid&logoColor=) ![Ngrok](https://img.shields.io/badge/Ngrok-777777?&logo=Ngrok&logoColor=1F1E37) ![Webpack](https://img.shields.io/badge/Webpack-777777?&logo=Webpack&logoColor=)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Communication                    | ![Asana](https://img.shields.io/badge/Asana-777777?&logo=Asana&logoColor=F06A6A) ![Jira](https://img.shields.io/badge/Jira-777777?&logo=Jira&logoColor=0052CC) ![Miro](https://img.shields.io/badge/Miro-777777?&logo=Miro&logoColor=050038) ![Slack](https://img.shields.io/badge/Slack-777777?&logo=Slack&logoColor=4A154B)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+- **Documentation and Blog Posts**: [CC BY 4.0](/LICENSE-CC-BY.md)
+- **Code and Code Snippets**: [MIT](/LICENSE-MIT.md)
