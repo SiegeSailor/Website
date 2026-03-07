@@ -2,10 +2,8 @@
 
 This project is licensed with two types of licenses:
 
-| Type                    | Applicable To                                |
-| ----------------------- | -------------------------------------------- |
-| [CC BY 4.0](#cc-by-4-0) | Project documentation and blog posts         |
-| [MIT](#mit)             | Project code and code snippets in blog posts |
+- [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): Project documentation and blog posts
+- [MIT](https://opensource.org/licenses/MIT): Project code and code snippets in blog posts
 
 ## CC BY 4.0
 
