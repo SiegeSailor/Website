@@ -1,6 +1,6 @@
 # Contributing
 
-This is a containerized Next.js client for the SiegeSailor website. To contribute to this project, please follow the guidelines below.
+This is a containerized Next.js web application. To contribute to this project, please follow the guidelines below.
 
 ## Prerequisites
 
@@ -14,6 +14,12 @@ Required software:
 - [TFLint](https://github.com/terraform-linters/tflint): `0.60.0`
 
 ## Local Development
+
+Work in the Next.js directory:
+
+```shell
+cd docker-context/
+```
 
 To set up the development environment, run the following commands:
 
@@ -84,7 +90,13 @@ aws configure export-credentials \
 
 ### Workflow
 
-Go to the desired infrastructure environment folder, such as `infrastructure/production`, and run the following commands to deploy the latest changes:
+Go to the desired infrastructure environment folder:
+
+```shell
+cd infrastructure/production/
+```
+
+Run the following commands to deploy the latest changes:
 
 ```shell
 terraform init
@@ -95,7 +107,7 @@ terraform plan
 terraform apply
 ```
 
-A quick script:
+If any changes are made to [`docker-context/`](./docker-context/), run the following commands to build and push the Docker image, and apply the Terraform configuration:
 
 ```shell
 bash scripts/docker-build.sh
