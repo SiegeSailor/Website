@@ -90,7 +90,7 @@ Retrieve AWS Access Key ID and Security Access Key from [IAM / Security Credenti
 aws configure
 ```
 
-You can verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
+Verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
 
 ```shell
 aws configure export-credentials \
@@ -119,7 +119,7 @@ terraform plan
 terraform apply
 ```
 
-If any changes are made to [`docker-context/`](./docker-context/), run the following commands to build and push the Docker image, and apply the Terraform configuration:
+If any changes are made to [`docker-context/`](./docker-context/), go to the root directory, run the following commands to build and push the Docker image, and apply the Terraform configuration:
 
 ```shell
 bash scripts/docker-build.sh
