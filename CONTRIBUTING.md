@@ -4,6 +4,16 @@
 
 This is a containerized Next.js web application. To contribute to this project, please follow the guidelines below.
 
+### Conventions
+
+Following conventions are used in this project:
+
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Terraform Style Guide](https://developer.hashicorp.com/terraform/language/style)
+- [Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+- [AWS Tagging Best Practices and Strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html)
+  - [Cost Visibility](https://aws.amazon.com/blogs/aws-cloud-financial-management/gs-create-and-enforce-your-tagging-strategy-for-more-granular-cost-visibility/)
+
 ## Prerequisites
 
 Required software:
