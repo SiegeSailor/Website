@@ -19,11 +19,37 @@ module "acm" {
   tags = local.shared_tags
 }
 
+resource "aws_cloudfront_cache_policy" "web_short_ttl" {
+  name        = "${local.project}-${local.environment}-${local.module}-web-short-ttl"
+  comment     = "Short TTL cache policy for HTML/Doc responses to reduce App Runner requests."
+  default_ttl = 300
+  max_ttl     = 3600
+  min_ttl     = 0
+
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config {
+      cookie_behavior = "none"
+    }
+
+    headers_config {
+      header_behavior = "none"
+    }
+
+    query_strings_config {
+      query_string_behavior = "none"
+    }
+
+    enable_accept_encoding_brotli = true
+    enable_accept_encoding_gzip   = true
+  }
+}
+
 module "cloudfront" {
   source  = "terraform-aws-modules/cloudfront/aws"
   version = "~> 6.0.2"
 
-  aliases = [data.aws_route53_zone.this.name, "*.${data.aws_route53_zone.this.name}"]
+  aliases     = [data.aws_route53_zone.this.name, "*.${data.aws_route53_zone.this.name}"]
+  price_class = "PriceClass_100"
 
   # No S3 origin. Disable default origin access control.
   origin_access_control = {}
@@ -44,14 +70,37 @@ module "cloudfront" {
     target_origin_id       = "apprunner"
     viewer_protocol_policy = "redirect-to-https"
 
-    allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods  = ["GET", "HEAD"]
     compress        = true
 
-    # Disable caching. Next.js SSR handles its own caching headers.
-    cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" # CachingDisabled
-    origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac" # AllViewerExceptHostHeader
+    # Keep HTML/Doc traffic cached briefly at edge to reduce repeated App Runner hits.
+    cache_policy_id            = aws_cloudfront_cache_policy.web_short_ttl.id
+    origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
   }
+
+  ordered_cache_behavior = [
+    {
+      path_pattern               = "/_next/static/*"
+      target_origin_id           = "apprunner"
+      viewer_protocol_policy     = "redirect-to-https"
+      allowed_methods            = ["GET", "HEAD", "OPTIONS"]
+      cached_methods             = ["GET", "HEAD"]
+      compress                   = true
+      cache_policy_id            = "658327ea-f89d-4fab-a63d-7e88639e58f6" # CachingOptimized
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+    },
+    {
+      path_pattern               = "/images/*"
+      target_origin_id           = "apprunner"
+      viewer_protocol_policy     = "redirect-to-https"
+      allowed_methods            = ["GET", "HEAD", "OPTIONS"]
+      cached_methods             = ["GET", "HEAD"]
+      compress                   = true
+      cache_policy_id            = "658327ea-f89d-4fab-a63d-7e88639e58f6" # CachingOptimized
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+    }
+  ]
 
   viewer_certificate = {
     acm_certificate_arn = module.acm.acm_certificate_arn

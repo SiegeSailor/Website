@@ -10,7 +10,8 @@ module "app_runner_image_base" {
   source  = "terraform-aws-modules/app-runner/aws"
   version = "~> 1.2.2"
 
-  service_name = local.module
+  service_name                   = local.module
+  auto_scaling_configuration_arn = module.app_runner_shared_configs.auto_scaling_configurations["cost_optimized"].arn
 
   domain_name                      = local.domain
   enable_www_subdomain             = true
@@ -40,12 +41,28 @@ module "app_runner_image_base" {
   create_vpc_connector = false
   network_configuration = {
     egress_configuration = {
-      egress_type       = "VPC"
-      vpc_connector_arn = aws_apprunner_vpc_connector.this.arn
+      egress_type = "DEFAULT"
     }
   }
-
   enable_observability_configuration = true
+
+  tags = local.module_tags
+}
+
+module "app_runner_shared_configs" {
+  source  = "terraform-aws-modules/app-runner/aws"
+  version = "~> 1.2.2"
+
+  create_service = false
+
+  auto_scaling_configurations = {
+    cost_optimized = {
+      name            = "ss-web-prod-client-costopt"
+      max_concurrency = 100
+      max_size        = 1
+      min_size        = 1
+    }
+  }
 
   tags = local.module_tags
 }
