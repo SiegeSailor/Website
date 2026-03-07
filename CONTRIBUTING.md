@@ -1,16 +1,15 @@
-# Contributing Client
+# Contributing
 
 This is a containerized Next.js client for the SiegeSailor website. To contribute to this project, please follow the guidelines below.
 
-### Prerequisites
+## Prerequisites
 
-Required software for the client module:
+Required software:
 
 - [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`
 - [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test): `1.19.3`
 - [Docker](https://www.docker.com/): `28.5.2`
 - [Hadolint](https://github.com/hadolint/hadolint): `2.14.0`
-- [Node.js](https://nodejs.org/): `25.2.1`
 - [Terraform](https://developer.hashicorp.com/terraform): `1.14.1`
 - [TFLint](https://github.com/terraform-linters/tflint): `0.60.0`
 
