@@ -13,13 +13,14 @@ on:
 jobs:
   deploy:
     name: Build and Deploy Static Environment
+    environment: static-production
     runs-on: ubuntu-latest
 
     permissions:
+      id-token: write
       contents: read
 
     env:
-      AWS_REGION: us-east-1
       TF_IN_AUTOMATION: "true"
       TF_VAR_aws_region: ${{ vars.AWS_REGION }}
       TF_VAR_github_branch: main
@@ -56,7 +57,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Terraform Initialize
         working-directory: infrastructure/static-production
