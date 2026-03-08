@@ -3,7 +3,7 @@
 #######################################
 locals {
   cost_center = "personal"
-  environment = "development"
+  environment = "server-development"
   managed_by  = "terraform"
   project     = "siegesailor-website"
 }

@@ -3,7 +3,7 @@
 #######################################
 locals {
   cost_center = "personal"
-  environment = "production"
+  environment = "static-production"
   managed_by  = "terraform"
   project     = "siegesailor-website"
 }
@@ -13,9 +13,6 @@ locals {
 #######################################
 locals {
   module = "client"
-  port   = 3000
-  # Purchased via AWS Route 53 manually.
-  domain = "jinyu-zhang.com"
 }
 
 #######################################
