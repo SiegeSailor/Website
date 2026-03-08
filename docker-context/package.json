@@ -55,7 +55,10 @@
   "private": true,
   "homepage": "https://github.com/SiegeSailor/Website",
   "scripts": {
-    "build": "next build --webpack",
+    "build:server": "NEXT_BUILD_TARGET='container' next build --webpack",
+    "prebuild:static": "node ./scripts/build-static.mjs prepare",
+    "build:static": "NEXT_BUILD_TARGET='static' NEXT_STATIC_EXPORT_OVERRIDE='1' next build --webpack || (node ./scripts/build-static.mjs restore && exit 1)",
+    "postbuild:static": "node ./scripts/build-static.mjs restore",
     "start": "next start",
     "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack"
   },
