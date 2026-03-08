@@ -27,6 +27,10 @@ Required software:
 
 ## Local Development
 
+### Local Development Branch
+
+Recommended branch intent: local development and feature iteration.
+
 Work in the Next.js directory:
 
 ```shell
@@ -43,7 +47,7 @@ npm run watch
 Build the client application to verify everything is working correctly:
 
 ```shell
-npm run build
+npm run build:server
 ```
 
 ### Testing the Docker Image
@@ -100,12 +104,14 @@ aws configure export-credentials \
 > [!note]
 > Run `aws sts get-caller-identity` to verify that the account and user identities.
 
-### Workflow
+### Server Deployment Branch
 
-Go to the desired infrastructure environment folder:
+Recommended branch intent: deploy server runtime infrastructure and container image.
+
+Go to the desired server infrastructure environment folder:
 
 ```shell
-cd infrastructure/production/
+cd infrastructure/server-production/
 ```
 
 Run the following commands to deploy the latest changes:
@@ -124,6 +130,52 @@ If any changes are made to [`docker-context/`](./docker-context/), go to the roo
 ```shell
 bash scripts/docker-build.sh
 bash scripts/docker-push.sh
-(cd infrastructure/production && \
-    terraform apply -auto-approve)
+(cd infrastructure/server-production && \
+  terraform apply -auto-approve)
+```
+
+### Static Deployment Branch
+
+Recommended branch intent: deploy static hosting infrastructure and static export.
+
+The static hosting environment is managed in [`infrastructure/static-production/`](./infrastructure/static-production/).
+
+Run the static client build and Terraform workflow locally:
+
+```shell
+(cd docker-context && npm run build:static)
+
+cd infrastructure/static-production/
+export TF_VAR_github_oauth_token="<AMPLIFY_GITHUB_OAUTH_TOKEN>"
+terraform init
+terraform fmt
+tflint
+terraform validate
+terraform plan
+terraform apply
+```
+
+The static export artifacts are generated in `docker-context/export/`.
+
+### Automatic Static Deployment
+
+GitHub Actions workflow [`terraform-static.yml`](./.github/workflows/terraform-static.yml) deploys the static environment on pushes to `main` when files under `docker-context/` or `infrastructure/static-production/` change.
+
+Configure these repository secrets:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AMPLIFY_GITHUB_OAUTH_TOKEN`
+
+### Server and Static Environment Workflow Reference
+
+If you need the base workflow command sequence for any environment:
+
+```shell
+terraform init
+terraform fmt
+tflint
+terraform validate
+terraform plan
+terraform apply
 ```
