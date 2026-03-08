@@ -26,18 +26,18 @@ export default async function ({
       ...props,
       className: clsx(
         "font-light mb-4 last:mb-0 mt-12 first:mt-0 break-words",
-        props.className
+        props.className,
       ),
     },
     <a
       href={href ?? `#${props.id}`}
       className={clsx(
         "hover:text-default-700 dark:hover:text-default-600",
-        LEVEL_TO_CLASSNAMES[level]
+        LEVEL_TO_CLASSNAMES[level],
       )}
     >
       <span className="pr-2">{props.children}</span>
       <Link2Icon className="inline" size="1rem" strokeWidth="0.1rem" />
-    </a>
+    </a>,
   );
 }

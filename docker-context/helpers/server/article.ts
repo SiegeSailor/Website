@@ -25,13 +25,13 @@ export async function getArticles() {
   const articles = await Promise.all(
     filenames
       .filter((filename) => /^\d{4}-\d{2}-\d{2}\.md$/.test(filename))
-      .map(async (filename) => await getArticleByFilename(filename))
+      .map(async (filename) => await getArticleByFilename(filename)),
   );
 
   return articles.sort(
     (left, right) =>
       new Date(right.metadata.date).getTime() -
-      new Date(left.metadata.date).getTime()
+      new Date(left.metadata.date).getTime(),
   );
 }
 
@@ -99,7 +99,7 @@ export async function getArticleByFilename(filename: string) {
   } catch (_) {
     const error = _ as Error;
     throw new Error(
-      `Article Parsing Error: ${error.message} (reading ${filename})`
+      `Article Parsing Error: ${error.message} (reading ${filename})`,
     );
   }
 }

@@ -2,9 +2,11 @@ import type { MetadataRoute } from "next";
 
 import { globalMetadata } from "@/settings/heads";
 
+export const revalidate = false;
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    // The value is `--heroui-background`.
+    // This value is `--heroui-background`.
     background_color: "hsl(0 0% 100%)",
     description: globalMetadata.description?.toString(),
     display: "standalone",
@@ -19,7 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "natural",
     short_name: globalMetadata.title?.toString(),
     start_url: "/",
-    // The value is `--heroui-primary`.
+    // This value is `--heroui-primary`.
     theme_color: "hsl(212.01999999999998 100% 46.67%)",
   };
 }

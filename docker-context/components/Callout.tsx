@@ -98,7 +98,7 @@ export default async function ({
       className={clsx(
         "rounded-md p-4 border-1",
         COLOR_TO_FRAME[color],
-        className
+        className,
       )}
     >
       <div className="flex items-center justify-start gap-2 mb-2">

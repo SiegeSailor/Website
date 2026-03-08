@@ -42,7 +42,7 @@ export default async function ({
       {...props}
       className={clsx(
         "border-background dark:border-default-100 border-2 bg-default-50 relative overflow-hidden",
-        props.className
+        props.className,
       )}
     >
       {href ? (

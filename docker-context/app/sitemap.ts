@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { DOMAIN } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
 
+export const revalidate = false;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await getArticles();
 

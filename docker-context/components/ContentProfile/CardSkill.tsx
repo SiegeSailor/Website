@@ -11,7 +11,7 @@ const ROWS = SKILL.map((row) =>
   row.map((skill) => ({
     name: skill,
     icon: <IconTechnology technology={skill} />,
-  }))
+  })),
 );
 
 export default async function ({

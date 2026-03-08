@@ -38,7 +38,7 @@ export default async function ({
       {...props}
       className={clsx(
         "relative overflow-hidden border-default-50 border-2",
-        props.className
+        props.className,
       )}
     >
       <CardHeader className="flex flex-col gap-2 justify-center items-center">

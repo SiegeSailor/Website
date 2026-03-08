@@ -2,6 +2,8 @@ import { type MetadataRoute } from "next";
 
 import { DOMAIN, SCRAPERS_AI, SCRAPERS_NON_AI } from "@/settings/constant";
 
+export const revalidate = false;
+
 export default function (): MetadataRoute.Robots {
   return {
     rules: [

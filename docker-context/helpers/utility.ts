@@ -1,25 +1,22 @@
-import { createPublicEnv } from "next-public-env";
+import type { ComponentType } from "react";
 
 import { TITLE } from "@/settings/constant";
 
-export const { getPublicEnv, PublicEnv } = createPublicEnv(
-  {
-    COMMIT_SHORT: process.env.COMMIT_SHORT,
-    HOSTNAME: process.env.HOSTNAME,
-    IMAGE: process.env.IMAGE,
-    NODE_ENV: process.env.NODE_ENV,
-    PORT: process.env.PORT,
-  },
-  {
-    schema: (zod) => ({
-      COMMIT_SHORT: zod.string().default("-"),
-      HOSTNAME: zod.string().default("-"),
-      IMAGE: zod.string().default("-"),
-      NODE_ENV: zod.enum(["development", "production"]),
-      PORT: zod.string().default("-"),
-    }),
-  },
-);
+const PUBLIC_ENV = {
+  COMMIT_SHORT: process.env.COMMIT_SHORT ?? "-",
+  HOSTNAME: process.env.HOSTNAME ?? "-",
+  IMAGE: process.env.IMAGE ?? "-",
+  NODE_ENV:
+    process.env.NODE_ENV === "development" ||
+    process.env.NODE_ENV === "production"
+      ? process.env.NODE_ENV
+      : "production",
+  PORT: process.env.PORT ?? "-",
+} as const;
+
+export const getPublicEnv = () => PUBLIC_ENV;
+
+export const PublicEnv: ComponentType = () => null;
 
 export function createPageTitle(...content: string[]) {
   return [...content, TITLE].join(" | ");

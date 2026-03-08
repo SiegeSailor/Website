@@ -124,7 +124,7 @@ export async function getProfile() {
   } catch (_) {
     const error = _ as Error;
     throw new Error(
-      `Document Parsing Error: ${error.message} (reading ${filename})`
+      `Document Parsing Error: ${error.message} (reading ${filename})`,
     );
   }
 }
