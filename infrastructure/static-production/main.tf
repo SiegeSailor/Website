@@ -6,38 +6,11 @@ provider "aws" {
   }
 }
 
-data "aws_iam_policy_document" "amplify_assume_role" {
-  statement {
-    actions = [
-      "sts:AssumeRole",
-      "sts:TagSession",
-    ]
-
-    principals {
-      type        = "Service"
-      identifiers = ["amplify.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role" "amplify_service" {
-  name               = "${local.project}-${local.environment}-${local.module}-amplify-service"
-  assume_role_policy = data.aws_iam_policy_document.amplify_assume_role.json
-
-  tags = local.module_tags
-}
-
-resource "aws_iam_role_policy_attachment" "amplify_service_admin" {
-  role       = aws_iam_role.amplify_service.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess-Amplify"
-}
-
 resource "aws_amplify_app" "this" {
-  name                 = "${local.project}-${local.environment}-${local.module}"
-  iam_service_role_arn = aws_iam_role.amplify_service.arn
-  platform             = "WEB"
-  repository           = "https://github.com/${var.github_repository}"
-  oauth_token          = var.github_oauth_token
+  name        = "${local.project}-${local.environment}-${local.module}"
+  platform    = "WEB"
+  repository  = "https://github.com/${var.github_repository}"
+  oauth_token = var.github_oauth_token
 
   enable_branch_auto_deletion = true
 
