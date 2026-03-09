@@ -9,13 +9,6 @@ locals {
 }
 
 #######################################
-# Module
-#######################################
-locals {
-  module = "client"
-}
-
-#######################################
 # Composite
 #######################################
 locals {
@@ -25,8 +18,4 @@ locals {
     ManagedBy   = local.managed_by
     Project     = local.project
   }
-
-  module_tags = merge(local.shared_tags, {
-    Module = local.module
-  })
 }

@@ -7,7 +7,7 @@ provider "aws" {
 }
 
 resource "aws_amplify_app" "this" {
-  name        = "${local.project}-${local.environment}-${local.module}"
+  name        = "${local.project}-${local.environment}"
   platform    = "WEB"
   repository  = "https://github.com/${var.github_repository}"
   oauth_token = var.github_oauth_token
@@ -44,7 +44,7 @@ EOT
     ignore_changes = [oauth_token]
   }
 
-  tags = local.module_tags
+  tags = local.shared_tags
 }
 
 resource "aws_amplify_branch" "main" {
@@ -55,7 +55,7 @@ resource "aws_amplify_branch" "main" {
 
   enable_auto_build = true
 
-  tags = local.module_tags
+  tags = local.shared_tags
 }
 
 resource "aws_amplify_domain_association" "this" {

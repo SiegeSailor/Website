@@ -145,14 +145,14 @@ Run the static client build and Terraform workflow locally:
 ```shell
 (cd docker-context && npm run build:static)
 
-cd infrastructure/static-production/
-export TF_VAR_github_oauth_token="<AMPLIFY_GITHUB_OAUTH_TOKEN>"
+(cd infrastructure/static-production/
+export TF_VAR_github_oauth_token="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"
 terraform init
 terraform fmt
 tflint
 terraform validate
 terraform plan
-terraform apply
+terraform apply)
 ```
 
 The static export artifacts are generated in `docker-context/export/`.
