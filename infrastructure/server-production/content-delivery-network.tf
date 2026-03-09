@@ -47,6 +47,7 @@ resource "aws_cloudfront_cache_policy" "web_short_ttl" {
 module "cloudfront" {
   source  = "terraform-aws-modules/cloudfront/aws"
   version = "~> 6.0.2"
+  count   = var.enable_cloudfront ? 1 : 0
 
   aliases     = [data.aws_route53_zone.this.name, "*.${data.aws_route53_zone.this.name}"]
   price_class = "PriceClass_100"

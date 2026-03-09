@@ -13,12 +13,12 @@ module "app_runner_image_base" {
   service_name                   = local.module
   auto_scaling_configuration_arn = module.app_runner_shared_configs.auto_scaling_configurations["cost_optimized"].arn
 
-  domain_name                      = local.domain
-  enable_www_subdomain             = true
-  create_custom_domain_association = true
+  domain_name                      = var.enable_apprunner_custom_domain ? local.domain : null
+  enable_www_subdomain             = var.enable_apprunner_custom_domain
+  create_custom_domain_association = var.enable_apprunner_custom_domain
 
   create_access_iam_role = true
-  private_ecr_arn        = module.ecr.repository_arn
+  private_ecr_arn        = local.ecr_repository_arn
 
   source_configuration = {
     auto_deployments_enabled     = false
@@ -30,10 +30,10 @@ module "app_runner_image_base" {
           HOSTNAME = "0.0.0.0",
           NODE_ENV = "production",
           PORT     = tostring(local.port),
-          IMAGE    = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
+          IMAGE    = "${local.ecr_repository_url}:latest"
         }
       }
-      image_identifier      = "${module.ecr.repository_url}@${data.aws_ecr_image.latest_image.image_digest}"
+      image_identifier      = "${local.ecr_repository_url}:latest"
       image_repository_type = "ECR"
     }
   }

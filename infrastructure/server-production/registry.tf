@@ -2,7 +2,7 @@ module "ecr" {
   source  = "terraform-aws-modules/ecr/aws"
   version = "~> 3.1.0"
 
-  repository_name                 = "${local.project}-${local.environment}-${local.module}"
+  repository_name                 = local.ecr_repository_name
   repository_force_delete         = true
   repository_image_tag_mutability = "MUTABLE_WITH_EXCLUSION"
   repository_image_tag_mutability_exclusion_filter = [
@@ -43,9 +43,4 @@ module "ecr" {
   })
 
   tags = local.shared_tags
-}
-
-data "aws_ecr_image" "latest_image" {
-  repository_name = module.ecr.repository_name
-  image_tag       = "latest"
 }
