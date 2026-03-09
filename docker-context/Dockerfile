@@ -30,7 +30,7 @@ FROM dependencies AS build
 COPY --from=dependencies /app/node_modules/. ./node_modules/
 COPY "." ./
 
-RUN npm run build
+RUN npm run build:server
 
 
 # [Stage] Prepare the application and run the container
