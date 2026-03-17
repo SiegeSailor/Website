@@ -21,7 +21,7 @@ module "acm" {
 
 resource "aws_cloudfront_cache_policy" "web_short_ttl" {
   name        = "${local.project}-${local.environment}-${local.module}-web-short-ttl"
-  comment     = "Short TTL cache policy for HTML/Doc responses to reduce App Runner requests."
+  comment     = "Short TTL cache policy for HTML/Doc responses. Kept to avoid replacement ordering issues."
   default_ttl = 300
   max_ttl     = 3600
   min_ttl     = 0
@@ -75,8 +75,8 @@ module "cloudfront" {
     cached_methods  = ["GET", "HEAD"]
     compress        = true
 
-    # Keep HTML/Doc traffic cached briefly at edge to reduce repeated App Runner hits.
-    cache_policy_id            = aws_cloudfront_cache_policy.web_short_ttl.id
+    # Disable default route caching to avoid mixing Next.js HTML and data responses.
+    cache_policy_id            = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" # CachingDisabled
     origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
   }
 
