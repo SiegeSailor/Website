@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Version and Publish Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "26"
+          cache: npm
+          cache-dependency-path: docker-context/package-lock.json
+
+      - name: Install dependencies
+        working-directory: docker-context
+        run: npm ci
+
+      - name: Delete legacy resume release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release delete resume --cleanup-tag --yes || true
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: ./docker-context/node_modules/.bin/semantic-release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: resume-${{ github.sha }}
+          path: docker-context/export/resume/
+          if-no-files-found: ignore
