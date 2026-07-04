@@ -27,7 +27,8 @@ get_docker_cmd() {
     return 0
   fi
 
-  if [ -t 0 ] && [ -t 1 ]; then
+  # Command substitution captures stdout, so only stdin can be tested.
+  if [ -t 0 ]; then
     echo "sudo docker"
     return 0
   fi
