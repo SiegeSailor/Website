@@ -57,6 +57,7 @@ main() {
   local -r build_platform="${2:-linux/amd64}"
   local -r image="${3:-siegesailor-website-client:latest}"
   local -ra docker_flags=("${@:4}")
+  local -r version="$(node -p "require('./docker-context/package.json').version")"
   local docker_cmd
   docker_cmd="$(get_docker_cmd)" || exit 1
   readonly docker_cmd
@@ -74,6 +75,7 @@ main() {
 
   ${docker_cmd} build \
     --build-arg COMMIT_SHORT="${commit_short}" \
+    --build-arg VERSION="${version}" \
     --tag "${image}" \
     --platform "${build_platform}" \
     "${docker_flags[@]}" \

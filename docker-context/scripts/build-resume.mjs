@@ -18,6 +18,7 @@ import {
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = load(readFileSync(join(ROOT, "files/resume/Resume.yaml"), "utf8"));
 const OUTPUT = join(ROOT, "export/resume");
+const VERSION = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")).version;
 
 const VARIANT_TO_LABEL = { professional: "Professional", academic: "Academic" };
 // The professional variant must stay within one US-Letter page.
@@ -205,6 +206,10 @@ const buildActivities = (v) => {
 
 const buildVariant = async (v) => {
   const doc = new Document({
+    title: `${clean(DATA.name)} — Resume (${VARIANT_TO_LABEL[v]})`,
+    creator: clean(DATA.name),
+    subject: `Resume (${VARIANT_TO_LABEL[v]})`,
+    keywords: `v${VERSION}`,
     styles: {
       default: {
         document: { run: { font: FONT, size: SZ.body }, paragraph: { spacing: { line: 230 } } },

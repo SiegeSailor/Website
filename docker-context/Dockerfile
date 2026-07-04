@@ -4,11 +4,12 @@ FROM node:26.4.0-bookworm@sha256:35d3b83382381e0e2f1d066b98aba486a4fab481a241c75
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG COMMIT_SHORT
+ARG VERSION="0.0.0"
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
 LABEL org.opencontainers.image.title="siegesailor-website/client"
 LABEL org.opencontainers.image.description="SiegeSailor's personal website client image."
-LABEL org.opencontainers.image.version="0.0.0"
+LABEL org.opencontainers.image.version="${VERSION}"
 
 ENV COMMIT_SHORT="${COMMIT_SHORT}"
 
