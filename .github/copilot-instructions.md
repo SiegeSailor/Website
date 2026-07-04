@@ -1,3 +1,3 @@
 # Copilot Instructions
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](./../CONTRIBUTING.md) for contribution guidelines.

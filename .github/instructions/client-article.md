@@ -1,5 +1,5 @@
 ---
-applyTo: "client/public/article/*.md"
+applyTo: "docker-context/files/articles/*.md"
 ---
 
 # Writing Articles
@@ -29,21 +29,21 @@ You will follow each steps below and will not skip any of them.
 
 ### Creating the Article
 
-- Create a file in `public/article/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
+- Create a file in `files/articles/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
 - Copy images in `input/` that are used in the article to `public/images/<YYYY-MM-DD>/` and name them in `Pascal-Case.ext`, e.g., `Branch-Name-LTS.png`
 
 #### Front-Matter Fields
 
-- Check `getArticleByFilename` in `helper/server/article.ts` for required front-matter fields
+- Check `getArticleByFilename` in `helpers/server/article.ts` for required front-matter fields
 - Don't use any symbols in the `title` field
-- Try to use one of the existing categories in `public/article/` (case-sensitive)
-- Check `setting/icon.ts` for existing technology icons and spelling (case-sensitive)
-- To add a technology, find suitable icons from `@icons-pack/react-simple-icons` and map them in `TECHNOLOGY_TO_ICON` in `setting/icon.ts`
-- If a technology is not found in `@icons-pack/react-simple-icons`, use a generic icon from `lucide-react` and re-export it in `LUCIDE_ICON` in `setting/icon.ts`
+- Try to use one of the existing categories in `files/articles/` (case-sensitive)
+- Check `settings/icons.ts` for existing technology icons and spelling (case-sensitive)
+- To add a technology, find suitable icons from `@icons-pack/react-simple-icons` and map them in `TECHNOLOGY_TO_ICON` in `settings/icons.ts`
+- If a technology is not found in `@icons-pack/react-simple-icons`, use a generic icon from `lucide-react` and re-export it in `LUCIDE_ICON` in `settings/icons.ts`
 
 ### Writing the Article
 
-- Check the other articles in `public/article/` for writing style
+- Check the other articles in `files/articles/` for writing style
 - Prior `<!-- description -->`, write a brief summary stating the behind history and conclusion
 - After `<!-- description -->`, write the main content
 - Conclusion or the last section should be brief. You may even skip it if not necessary
@@ -64,9 +64,9 @@ You will follow each steps below and will not skip any of them.
 
 #### Markdown Syntax
 
-- Check `helper/plugin.ts`, `component/Markdown.tsx`, and their dependencies for supported markdown features
+- Check `helpers/plugin.ts`, `components/Markdown.tsx`, and their dependencies for supported markdown features
 - Use ` `` ` to wrap inline code and mathematical expressions
-- Use callout `:::<type>` when needed (see `component/Callout.tsx` for available types)
+- Use callout `:::<type>` when needed (see `components/Callout.tsx` for available types)
 - Use code snippet ` ```<language> ` with proper syntax highlighting
 - Add `title="/path/to/<filename>"` to a code snippet where a file is being referenced
 - Use `[<title>](/blog/YYYY-MM-DD#anchor)` for internal articles, where `#anchor` is optional and `<title>` is a placeholder

@@ -13,6 +13,7 @@ Following conventions are used in this project:
 - [Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
 - [AWS Tagging Best Practices and Strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html)
   - [Cost Visibility](https://aws.amazon.com/blogs/aws-cloud-financial-management/gs-create-and-enforce-your-tagging-strategy-for-more-granular-cost-visibility/)
+- [GitHub Community Standards](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions) for community health files
 
 ## Prerequisites
 
@@ -26,8 +27,6 @@ Required software:
 - [TFLint](https://github.com/terraform-linters/tflint): `0.60.0`
 
 ## Local Development
-
-### Local Development Branch
 
 Recommended branch intent: local development and feature iteration.
 
@@ -49,6 +48,35 @@ Build the client application to verify everything is working correctly:
 ```shell
 npm run build:server
 ```
+
+### Building the Resume and Profile
+
+[`docker-context/files/resume/Resume.yaml`](./docker-context/files/resume/Resume.yaml) is the single source of truth for the resume documents and the data-driven sections of the profile page. Almost any node in it can carry a `variants:` list; a node without one appears everywhere. Current variants:
+
+- `professional`: one-page resume, impact and scale focus
+- `academic`: two-page resume, systems and leadership focus
+- `profile`: website profile page only
+
+After editing `Resume.yaml`, rebuild the resume documents and the profile document:
+
+```shell
+npm run build:resume
+npm run build:profile
+```
+
+`build:resume` writes `.docx` files to `export/resume/`, converting to `.pdf` (LibreOffice) and `.txt` (pandoc) when those tools are available, and verifies the page counts against the PDFs. `build:profile` regenerates the sections between the `generated` markers in [`files/documents/Profile.md`](./docker-context/files/documents/Profile.md), and runs automatically before `build:server` and `build:static`.
+
+To run the full pipeline without local LibreOffice and pandoc, generate through the Docker image from the root directory:
+
+```shell
+bash scripts/generate-resume.sh "docker-context/export/resume" "linux/arm64"
+```
+
+Resume constraints (see [`CLAUDE.md`](./CLAUDE.md) for the full list):
+
+- The `professional` variant must fit one US-Letter page; `academic` is two pages by design. The build fails otherwise.
+- Keep the layout ATS-safe: single column, no tables or text boxes, native Word bullets, dates right-aligned with tab stops.
+- Never flatten the stacked role lines (CooperSurgical, Servicetech) into a single title and date range.
 
 ### Testing the Docker Image
 
@@ -159,13 +187,17 @@ The static export artifacts are generated in `docker-context/export/`.
 
 ### Automatic Static Deployment
 
-GitHub Actions workflow [`terraform-static.yml`](./.github/workflows/terraform-static.yml) deploys the static environment on pushes to `main` when files under `docker-context/` or `infrastructure/static-production/` change.
+GitHub Actions workflow [`static-production.yml`](./.github/workflows/static-production.yml) deploys the static environment on pushes to `main` when files under `docker-context/` or `infrastructure/static-production/` change.
 
 Configure these repository secrets:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AMPLIFY_GITHUB_OAUTH_TOKEN`
+
+### Automatic Resume Publishing
+
+GitHub Actions workflow [`resume.yml`](./.github/workflows/resume.yml) builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh) on pushes to `main` that touch the resume source or build pipeline. Each run uploads the documents as workflow artifacts and republishes them to the rolling [`resume`](https://github.com/SiegeSailor/Website/releases/tag/resume) release, which the `README.md` badges and the profile page resume button link to.
 
 ### Server and Static Environment Workflow Reference
 
