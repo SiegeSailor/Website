@@ -1,8 +1,4 @@
----
-applyTo: "docker-context/files/articles/*.md"
----
-
-# Writing Articles
+# CLAUDE.md — Writing Articles
 
 Instructions for writing technical articles for the SiegeSailor website.
 

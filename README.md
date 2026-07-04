@@ -1,11 +1,11 @@
 # Website
 
-[![Static Production](https://github.com/SiegeSailor/Website/actions/workflows/static-production.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/static-production.yml)
+[![Production](https://github.com/SiegeSailor/Website/actions/workflows/production.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/production.yml)
 [![Release](https://github.com/SiegeSailor/Website/actions/workflows/release.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/release.yml)
 [![Resume: Professional](https://img.shields.io/badge/Resume-Professional-0078D4?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf)
 [![Resume: Academic](https://img.shields.io/badge/Resume-Academic-A31F34?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf)
 
-My personal website. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and [`instructions/`](./.github/instructions/) folder for detailed instructions on contributing to relevant parts of the project.
+My personal website — a statically exported Next.js site served from S3 behind CloudFront. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and the `CLAUDE.md` files ([root](./CLAUDE.md), [application](./docker-context/CLAUDE.md), [articles](./docker-context/files/articles/CLAUDE.md)) for detailed instructions on contributing to relevant parts of the project.
 
 ## Resume
 

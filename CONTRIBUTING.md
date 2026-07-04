@@ -2,7 +2,7 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-This is a containerized Next.js web application. To contribute to this project, please follow the guidelines below.
+This is a statically exported Next.js website served from S3 behind CloudFront. To contribute to this project, please follow the guidelines below.
 
 ### Conventions
 
@@ -20,15 +20,12 @@ Following conventions are used in this project:
 Required software:
 
 - [AWS CLI](https://aws.amazon.com/cli/): `2.32.11`
-- [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test): `1.19.3`
 - [Docker](https://www.docker.com/): `28.5.2`
 - [Hadolint](https://github.com/hadolint/hadolint): `2.14.0`
 - [Terraform](https://developer.hashicorp.com/terraform): `1.14.1`
 - [TFLint](https://github.com/terraform-linters/tflint): `0.60.0`
 
 ## Local Development
-
-Recommended branch intent: local development and feature iteration.
 
 Work in the Next.js directory:
 
@@ -43,10 +40,10 @@ npm ci
 npm run watch
 ```
 
-Build the client application to verify everything is working correctly:
+Build the static export to verify everything is working correctly; the artifacts are generated in `docker-context/export/`:
 
 ```shell
-npm run build:server
+npm run build
 ```
 
 ### Building the Resume and Profile
@@ -64,7 +61,7 @@ npm run build:resume
 npm run build:profile
 ```
 
-`build:resume` writes `.docx` files to `export/resume/`, converting to `.pdf` (LibreOffice) and `.txt` (pandoc) when those tools are available, and verifies the page counts against the PDFs. `build:profile` regenerates the sections between the `generated` markers in [`files/documents/Profile.md`](./docker-context/files/documents/Profile.md), and runs automatically before `build:server` and `build:static`.
+`build:resume` writes `.docx` files to `export/resume/`, converting to `.pdf` (LibreOffice) and `.txt` (pandoc) when those tools are available, and verifies the page counts against the PDFs. `build:profile` regenerates the sections between the `generated` markers in [`files/documents/Profile.md`](./docker-context/files/documents/Profile.md), and runs automatically before `build`.
 
 To run the full pipeline without local LibreOffice and pandoc, generate through the Docker image from the root directory:
 
@@ -78,36 +75,12 @@ Resume constraints (see [`CLAUDE.md`](./CLAUDE.md) for the full list):
 - Keep the layout ATS-safe: single column, no tables or text boxes, native Word bullets, dates right-aligned with tab stops.
 - Never flatten the stacked role lines (CooperSurgical, Servicetech) into a single title and date range.
 
-### Testing the Docker Image
+### Linting the Dockerfile
 
-Lint the Dockerfile using Hadolint:
+The Docker image only builds the resume documents. Lint the Dockerfile using Hadolint from the root directory:
 
 ```shell
 bash scripts/hadolint.sh
-```
-
-Create a `.env` file in the project root. Fill in the values as needed:
-
-```shell
-cp .env.example .env
-```
-
-Build the image:
-
-```shell
-bash scripts/docker-build.sh "" "linux/arm64"
-```
-
-Test the Docker image structure with Container Structure Test:
-
-```shell
-bash scripts/container-structure-test.sh
-```
-
-Run the container:
-
-```shell
-bash scripts/docker-run.sh
 ```
 
 ### Troubleshooting
@@ -116,66 +89,25 @@ Next.js doesn't render `<title />` tags in `<head />` when there is an error in 
 
 ## Deployment
 
-Retrieve AWS Access Key ID and Security Access Key from [IAM / Security Credentials / Create Access Key](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and configure AWS CLI by running the following to store credentials in `~/.aws/credentials`. This will allow Terraform to use the credentials automatically for `aws` provider:
+The website is a static export stored in S3 and served by CloudFront; the deployment is defined in [`infrastructure/`](./infrastructure/) (a single flat Terraform environment) and applied automatically by CI.
+
+### AWS Credentials
+
+Retrieve AWS Access Key ID and Security Access Key from [IAM / Security Credentials / Create Access Key](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and configure AWS CLI by running the following to store credentials in `~/.aws/credentials`. This will allow Terraform to use the credentials automatically for the `aws` provider:
 
 ```shell
 aws configure
 ```
 
-Verify the `AccessKeyId`, `SecretAccessKey` from your local default AWS CLI profile by running:
-
-```shell
-aws configure export-credentials \
-    --profile default
-```
-
 > [!note]
-> Run `aws sts get-caller-identity` to verify that the account and user identities.
+> Run `aws sts get-caller-identity` to verify the account and user identities.
 
-### Server Deployment Branch
+### Manual Deployment
 
-Recommended branch intent: deploy server runtime infrastructure and container image.
-
-Go to the desired server infrastructure environment folder:
+Run the Terraform workflow from the infrastructure directory:
 
 ```shell
-cd infrastructure/server-production/
-```
-
-Run the following commands to deploy the latest changes:
-
-```shell
-terraform init
-terraform fmt
-tflint
-terraform validate
-terraform plan
-terraform apply
-```
-
-If any changes are made to [`docker-context/`](./docker-context/), go to the root directory, run the following commands to build and push the Docker image with the released version, and apply the Terraform configuration:
-
-```shell
-version="v$(node -p "require('./docker-context/package.json').version")"
-bash scripts/docker-build.sh "" "linux/amd64" "siegesailor-website-client:${version}"
-bash scripts/docker-push.sh "siegesailor-website-client" "${version}"
-(cd infrastructure/server-production && \
-  terraform apply -auto-approve)
-```
-
-### Static Deployment Branch
-
-Recommended branch intent: deploy static hosting infrastructure and static export.
-
-The static hosting environment is managed in [`infrastructure/static-production/`](./infrastructure/static-production/).
-
-Run the static client build and Terraform workflow locally:
-
-```shell
-(cd docker-context && npm run build:static)
-
-(cd infrastructure/static-production/
-export TF_VAR_github_oauth_token="$(gh auth token)"
+(cd infrastructure/
 terraform init
 terraform fmt
 tflint
@@ -184,17 +116,24 @@ terraform plan
 terraform apply)
 ```
 
-The static export artifacts are generated in `docker-context/export/`.
+To deploy content changes, build the site and resume documents, then sync to the site bucket and invalidate the cache:
 
-### Automatic Static Deployment
+```shell
+(cd docker-context && npm run build)
+bash scripts/generate-resume.sh "docker-context/export/documents"
+(cd infrastructure/
+aws s3 sync ../docker-context/export "s3://$(terraform output -raw site_bucket_name)" --delete --exclude "*.DS_Store"
+aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cloudfront_distribution_id)" --paths "/*")
+```
 
-GitHub Actions workflow [`static-production.yml`](./.github/workflows/static-production.yml) deploys the static environment on pushes to `main` when files under `docker-context/` or `infrastructure/static-production/` change.
+### Automatic Production Deployment
 
-Configure these secrets on the `static-production` environment:
+GitHub Actions workflow [`production.yml`](./.github/workflows/production.yml) deploys on pushes to `main` when files under `docker-context/` or `infrastructure/` change: it builds the static site and resume documents, applies Terraform, syncs the export to S3, and invalidates the CloudFront cache.
 
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `AMPLIFY_GITHUB_OAUTH_TOKEN` — a GitHub personal access token (classic) with the `repo` and `admin:repo_hook` scopes; Amplify uses it to read the repository and manage its webhooks. The workflow `GITHUB_TOKEN` cannot manage webhooks, so a personal access token is required.
+Configure these on the `production` environment:
+
+- Secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
+- Variables: `AWS_REGION`
 
 ### Releases
 
@@ -203,17 +142,4 @@ GitHub Actions workflow [`release.yml`](./.github/workflows/release.yml) runs [s
 - Tags the commit `vX.Y.Z` and updates [`CHANGELOG.md`](./CHANGELOG.md), `package.json`, and `package-lock.json` back on `main`
 - Builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
 
-The production Docker image also bakes the resume documents into `public/documents/`, so the website serves them at `https://jinyu-zhang.com/documents/<document>` — the URL the `README.md` badges and the profile page resume button link to. The repository is private, so release asset URLs only work for authenticated collaborators.
-
-### Server and Static Environment Workflow Reference
-
-If you need the base workflow command sequence for any environment:
-
-```shell
-terraform init
-terraform fmt
-tflint
-terraform validate
-terraform plan
-terraform apply
-```
+The deployed site serves the resume documents at `https://jinyu-zhang.com/documents/<document>` — the URL the `README.md` badges and the profile page resume button link to. The repository is private, so release asset URLs only work for authenticated collaborators.
