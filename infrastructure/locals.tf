@@ -3,9 +3,20 @@
 #######################################
 locals {
   cost_center = "personal"
-  environment = "static-production"
+  environment = "production"
   managed_by  = "terraform"
   project     = "siegesailor-website"
+}
+
+#######################################
+# Module
+#######################################
+locals {
+  module = "client"
+  # Purchased via AWS Route 53 manually.
+  domain = "jinyu-zhang.com"
+
+  site_bucket_name = "${local.project}-${local.environment}-${local.module}"
 }
 
 #######################################
@@ -18,4 +29,8 @@ locals {
     ManagedBy   = local.managed_by
     Project     = local.project
   }
+
+  module_tags = merge(local.shared_tags, {
+    Module = local.module
+  })
 }
