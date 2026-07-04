@@ -1,5 +1,3 @@
-"use server";
-
 import type { ComponentProps } from "react";
 
 import CardBlock from "@/components/CardBlock";

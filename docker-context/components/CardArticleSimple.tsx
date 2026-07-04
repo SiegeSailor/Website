@@ -1,5 +1,3 @@
-"use server";
-
 import { Card, ScrollShadow } from "@heroui/react";
 import type { ComponentProps } from "react";
 

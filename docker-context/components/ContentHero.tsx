@@ -1,5 +1,3 @@
-"use server";
-
 import { Button } from "@heroui/react";
 import type { ComponentProps } from "react";
 import clsx from "clsx";

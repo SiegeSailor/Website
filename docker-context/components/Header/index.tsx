@@ -1,5 +1,3 @@
-"use server";
-
 import Bar, { HEIGHT } from "./Bar";
 import ContentActions from "./ContentActions";
 import ContentTitle from "./ContentTitle";

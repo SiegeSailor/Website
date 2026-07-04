@@ -1,5 +1,3 @@
-"use server";
-
 import type { ComponentProps } from "react";
 
 import { EXPERIENCE } from "@/settings/config";

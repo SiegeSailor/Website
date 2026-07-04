@@ -4,14 +4,11 @@ import { TITLE } from "@/settings/constant";
 
 const PUBLIC_ENV = {
   COMMIT_SHORT: process.env.COMMIT_SHORT ?? "-",
-  HOSTNAME: process.env.HOSTNAME ?? "-",
-  IMAGE: process.env.IMAGE ?? "-",
   NODE_ENV:
     process.env.NODE_ENV === "development" ||
     process.env.NODE_ENV === "production"
       ? process.env.NODE_ENV
       : "production",
-  PORT: process.env.PORT ?? "-",
 } as const;
 
 export const getPublicEnv = () => PUBLIC_ENV;

@@ -1,5 +1,3 @@
-"use server";
-
 import { createElement } from "react";
 import { Link2Icon } from "lucide-react";
 import type { Route } from "next";

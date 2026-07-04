@@ -1,5 +1,3 @@
-"use server";
-
 import type { ComponentProps } from "react";
 
 import { getProfile } from "@/helpers/server/document";

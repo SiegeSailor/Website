@@ -1,5 +1,3 @@
-"use server";
-
 import { promises } from "fs";
 
 const DEFAULT = "2018-11-17" as const;

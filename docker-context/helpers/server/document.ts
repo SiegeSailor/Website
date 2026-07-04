@@ -1,5 +1,3 @@
-"use server";
-
 import { join } from "path";
 import { readFileSync } from "fs";
 import matter from "gray-matter";

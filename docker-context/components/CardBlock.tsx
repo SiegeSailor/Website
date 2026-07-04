@@ -1,5 +1,3 @@
-"use server";
-
 import { Card, CardBody, CardHeader, Chip } from "@heroui/react";
 import type { ComponentProps, ReactNode } from "react";
 import type { Route } from "next";

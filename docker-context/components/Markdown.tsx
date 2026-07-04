@@ -1,5 +1,3 @@
-"use server";
-
 import { type ComponentProps } from "react";
 import { Children, isValidElement } from "react";
 import { ScrollShadow } from "@heroui/react";

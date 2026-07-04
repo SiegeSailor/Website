@@ -1,5 +1,3 @@
-"use server";
-
 import DivisionFloating from "@/components/DivisionFloating";
 
 export default async function ({

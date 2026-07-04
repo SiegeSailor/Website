@@ -1,5 +1,3 @@
-"use server";
-
 import type { ComponentProps } from "react";
 import { Card } from "@heroui/react";
 import clsx from "clsx";

@@ -1,5 +1,3 @@
-"use server";
-
 import { NavbarContent, NavbarBrand } from "@heroui/react";
 
 import { TITLE } from "@/settings/constant";

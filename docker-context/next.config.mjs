@@ -1,14 +1,9 @@
-import { resolveBuildTargetConfig } from "./build-target.mjs";
-
 /** @type {import('next').NextConfig} */
-const buildTargetConfig = resolveBuildTargetConfig();
-const isStaticBuild = buildTargetConfig.output === "export";
-
 const nextConfig = {
   allowedDevOrigins: ["localhost", "127.0.0.1"],
   compiler: { removeConsole: false },
   compress: true,
-  distDir: buildTargetConfig.distDir,
+  distDir: "export",
   enablePrerenderSourceMaps: true,
   experimental: { browserDebugInfoInTerminal: true, globalNotFound: true },
   generateBuildId: async () => {
@@ -16,36 +11,20 @@ const nextConfig = {
     console.log("Generating build ID: " + buildID);
     return buildID;
   },
-  headers: isStaticBuild
-    ? undefined
-    : async () => {
-        return [
-          {
-            source: "/images/:path*",
-            headers: [
-              {
-                key: "Cache-Control",
-                value: "public, max-age=31536000, immutable",
-              },
-            ],
-          },
-        ];
-      },
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     dangerouslyAllowSVG: true,
-    unoptimized: buildTargetConfig.images.unoptimized,
+    unoptimized: true,
   },
   logging: {
     fetches: { fullUrl: true, hmrRefreshes: true },
     incomingRequests: true,
   },
-  output: buildTargetConfig.output,
+  output: "export",
   pageExtensions: ["ts", "tsx"],
   productionBrowserSourceMaps: true,
   reactStrictMode: process.env.NODE_ENV === "development",
-  redirects: isStaticBuild ? undefined : async () => [],
   turbopack: {
     rules: {
       "*.svg": {

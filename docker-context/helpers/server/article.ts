@@ -1,5 +1,3 @@
-"use server";
-
 import { join } from "path";
 import { readFileSync, readdirSync } from "fs";
 import type { Route } from "next";
