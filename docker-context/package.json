@@ -73,5 +73,5 @@
     "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack"
   },
   "type": "module",
-  "version": "0.0.0"
+  "version": "1.0.0"
 }
