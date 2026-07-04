@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Resume
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/resume.yml
+      - docker-context/Dockerfile
+      - docker-context/files/resume/**
+      - docker-context/package-lock.json
+      - docker-context/package.json
+      - docker-context/scripts/build-resume.mjs
+      - scripts/generate-resume.sh
+  workflow_dispatch:
+
+concurrency:
+  group: resume
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Build and Publish Resume Documents
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Generate resume documents
+        run: bash scripts/generate-resume.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: resume-${{ github.sha }}
+          path: docker-context/export/resume/
+          if-no-files-found: error
+
+      - name: Update rolling release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete resume --cleanup-tag --yes || true
+          gh release create resume docker-context/export/resume/* \
+            --title "Resume" \
+            --notes "Resume documents generated from [\`docker-context/files/resume/Resume.yaml\`](https://github.com/${{ github.repository }}/blob/main/docker-context/files/resume/Resume.yaml)." \
+            --latest
