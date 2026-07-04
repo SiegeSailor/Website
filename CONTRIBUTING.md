@@ -190,11 +190,11 @@ The static export artifacts are generated in `docker-context/export/`.
 
 GitHub Actions workflow [`static-production.yml`](./.github/workflows/static-production.yml) deploys the static environment on pushes to `main` when files under `docker-context/` or `infrastructure/static-production/` change.
 
-Configure these repository secrets:
+Configure these secrets on the `static-production` environment:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
-- `AMPLIFY_GITHUB_OAUTH_TOKEN`
+- `AMPLIFY_GITHUB_OAUTH_TOKEN` — a GitHub personal access token (classic) with the `repo` and `admin:repo_hook` scopes; Amplify uses it to read the repository and manage its webhooks. The workflow `GITHUB_TOKEN` cannot manage webhooks, so a personal access token is required.
 
 ### Releases
 

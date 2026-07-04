@@ -7,10 +7,10 @@ provider "aws" {
 }
 
 resource "aws_amplify_app" "this" {
-  name        = "${local.project}-${local.environment}"
-  platform    = "WEB"
-  repository  = "https://github.com/${var.github_repository}"
-  oauth_token = var.github_oauth_token
+  name         = "${local.project}-${local.environment}"
+  platform     = "WEB"
+  repository   = "https://github.com/${var.github_repository}"
+  access_token = var.github_oauth_token
 
   enable_branch_auto_deletion = true
 
@@ -41,7 +41,7 @@ applications:
 EOT
 
   lifecycle {
-    ignore_changes = [oauth_token]
+    ignore_changes = [access_token]
   }
 
   tags = local.shared_tags
