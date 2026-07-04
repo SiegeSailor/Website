@@ -153,11 +153,12 @@ terraform plan
 terraform apply
 ```
 
-If any changes are made to [`docker-context/`](./docker-context/), go to the root directory, run the following commands to build and push the Docker image, and apply the Terraform configuration:
+If any changes are made to [`docker-context/`](./docker-context/), go to the root directory, run the following commands to build and push the Docker image with the released version, and apply the Terraform configuration:
 
 ```shell
-bash scripts/docker-build.sh
-bash scripts/docker-push.sh
+version="v$(node -p "require('./docker-context/package.json').version")"
+bash scripts/docker-build.sh "" "linux/amd64" "siegesailor-website-client:${version}"
+bash scripts/docker-push.sh "siegesailor-website-client" "${version}"
 (cd infrastructure/server-production && \
   terraform apply -auto-approve)
 ```
@@ -195,9 +196,13 @@ Configure these repository secrets:
 - `AWS_SECRET_ACCESS_KEY`
 - `AMPLIFY_GITHUB_OAUTH_TOKEN`
 
-### Automatic Resume Publishing
+### Releases
 
-GitHub Actions workflow [`resume.yml`](./.github/workflows/resume.yml) builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh) on pushes to `main` that touch the resume source or build pipeline. Each run uploads the documents as workflow artifacts and republishes them to the rolling [`resume`](https://github.com/SiegeSailor/Website/releases/tag/resume) release, which the `README.md` badges and the profile page resume button link to.
+GitHub Actions workflow [`release.yml`](./.github/workflows/release.yml) runs [semantic-release](https://semantic-release.gitbook.io/) (configured in [`release.config.mjs`](./release.config.mjs)) on every push to `main`. Commit messages determine the version bump per Conventional Commits: `fix:` patches, `feat:` minors, and `BREAKING CHANGE` majors; other types cut no release. Each release:
+
+- Tags the commit `vX.Y.Z` and updates [`CHANGELOG.md`](./CHANGELOG.md), `package.json`, and `package-lock.json` back on `main`
+- Builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
+- Keeps `https://github.com/SiegeSailor/Website/releases/latest/download/<document>` evergreen, which the `README.md` badges and the profile page resume button link to
 
 ### Server and Static Environment Workflow Reference
 
