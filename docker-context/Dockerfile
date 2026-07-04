@@ -69,6 +69,7 @@ RUN addgroup --system --gid "${USER_GID}" "${GROUP_NAME}" && \
 USER "${USERNAME}"
 
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/public/. ./public/
+COPY --from=resume --chown="${USERNAME}:${GROUP_NAME}" /app/export/resume/. ./public/documents/
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/standalone/. ./
 COPY --from=build --chown="${USERNAME}:${GROUP_NAME}" /app/.next/static/. ./.next/static/
 

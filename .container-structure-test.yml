@@ -26,6 +26,9 @@ fileExistenceTests:
     path: "/app/.next/static/"
     shouldExist: true
     permissions: "drwxr-xr-x"
+  - name: "Check the resume documents"
+    path: "/app/public/documents/JinYu-Zhang-Resume-Professional.pdf"
+    shouldExist: true
   - name: "Check the Next.js start script"
     path: "/app/server.js"
     shouldExist: true

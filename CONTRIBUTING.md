@@ -202,7 +202,8 @@ GitHub Actions workflow [`release.yml`](./.github/workflows/release.yml) runs [s
 
 - Tags the commit `vX.Y.Z` and updates [`CHANGELOG.md`](./CHANGELOG.md), `package.json`, and `package-lock.json` back on `main`
 - Builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
-- Keeps `https://github.com/SiegeSailor/Website/releases/latest/download/<document>` evergreen, which the `README.md` badges and the profile page resume button link to
+
+The production Docker image also bakes the resume documents into `public/documents/`, so the website serves them at `https://jinyu-zhang.com/documents/<document>` — the URL the `README.md` badges and the profile page resume button link to. The repository is private, so release asset URLs only work for authenticated collaborators.
 
 ### Server and Static Environment Workflow Reference
 

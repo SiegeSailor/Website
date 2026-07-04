@@ -7,7 +7,7 @@ headlines:
 media:
   github: "https://github.com/SiegeSailor"
   linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
-  resume: "https://github.com/SiegeSailor/Website/releases/latest/download/JinYu-Zhang-Resume-Professional.pdf"
+  resume: "https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf"
 status:
   location: "NYC Metropolitan Area"
   position: "Senior Software Engineer"
