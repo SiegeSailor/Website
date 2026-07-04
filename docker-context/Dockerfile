@@ -1,5 +1,5 @@
 # [Stage] Define variables
-FROM node:25.2.1-bullseye@sha256:72d57f156e8f03e98b0d9a6fef7d76c64a4ed197404a40c2d7119eb6357e78ce AS base
+FROM node:26.4.0-bookworm@sha256:35d3b83382381e0e2f1d066b98aba486a4fab481a241c7516389635b88d927c1 AS base
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -31,6 +31,23 @@ COPY --from=dependencies /app/node_modules/. ./node_modules/
 COPY "." ./
 
 RUN npm run build:server
+
+
+# [Stage] Build the resume documents
+FROM dependencies AS resume
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends --yes \
+    fonts-crosextra-carlito \
+    libreoffice-writer \
+    pandoc \
+    poppler-utils && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY "files/resume/" ./files/resume/
+COPY "scripts/build-resume.mjs" ./scripts/build-resume.mjs
+
+RUN npm run build:resume
 
 
 # [Stage] Prepare the application and run the container

@@ -13,6 +13,7 @@ README.md
 # Module
 #######################################
 .next/
+export/
 input/
 next-env.d.ts
 node_modules/

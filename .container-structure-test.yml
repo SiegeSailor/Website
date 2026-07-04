@@ -8,7 +8,7 @@ commandTests:
   - name: "Check node version"
     command: "node"
     args: ["--version"]
-    expectedOutput: [".*25.2.1"]
+    expectedOutput: [".*26.4.0"]
     exitCode: 0
   - name: "Check the default user"
     command: "whoami"
@@ -23,15 +23,15 @@ commandTests:
 
 fileExistenceTests:
   - name: "Check the Next.js standalone build"
-    path: "/app/client/.next/static/"
+    path: "/app/.next/static/"
     shouldExist: true
     permissions: "drwxr-xr-x"
   - name: "Check the Next.js start script"
-    path: "/app/client/server.js"
+    path: "/app/server.js"
     shouldExist: true
     permissions: "-rw-r--r--"
 
 metadataTest:
   exposedPorts: ["3000"]
   user: "user"
-  workdir: "/app/client/"
+  workdir: "/app"

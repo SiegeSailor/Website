@@ -1,0 +1,332 @@
+# Single source of truth for the resume variants and the profile page.
+# Build with `npm run build:resume` and `npm run build:profile`.
+# Variants: professional (1-page, impact/scale focus) | academic (2-page,
+# systems/leadership focus) | profile (jinyu-zhang.com/profile only).
+# Any node without a `variants:` list appears in ALL variants.
+
+name: JIN YU (KEN) ZHANG
+contact:
+  line1: "NYC Metropolitan Area (NJ, USA)  |  857-540-6713  |  siegesailor@gmail.com"
+  line2: "jinyu-zhang.com  |  linkedin.com/in/jin-yu-zhang-812181155  |  github.com/SiegeSailor"
+
+summary:
+  professional: >-
+    Senior software engineer with 7+ years across regulated medical devices
+    (FDA / EU MDR) and large-scale consumer platforms. Ship device SDKs,
+    real-time distributed systems, and developer platforms for 5+ vendors and
+    20+ engineers; sustained 10,000 peak RPS at Shopee. First-author IEEE
+    publication on DevSecOps; building LLM-assisted engineering workflows in
+    regulated R&D.
+  academic: >-
+    Systems-focused software engineer with 7+ years bridging hardware,
+    firmware, and software on FDA / EU MDR-regulated medical devices, after
+    scaling consumer platforms to 200,000+ daily users. Lead cross-vendor
+    engineering (5+ vendors, 20+ developers), define cross-functional
+    interface standards, and coordinate global formative studies. First
+    author of an IEEE Access publication on quantitative DevSecOps metrics;
+    promoted intern to senior engineer in two years.
+
+skills:
+  - label: Languages
+    items: "C#, TypeScript / JavaScript (Node.js), Python, C++, Bash, SQL"
+  - label: AI Engineering
+    items: "Agentic coding (Claude Code), LLM pipelines in CI/CD, knowledge-graph extraction, LLM observability (Langfuse)"
+  - label: Distributed Systems
+    items: "gRPC, Protocol Buffers, RabbitMQ, Socket.IO / WebSocket, REST, microservices, concurrent & real-time systems, Zeroconf"
+  - label: Cloud & DevOps
+    items: "Docker, Kubernetes, GitLab CI/CD, GitHub Actions, Terraform, AWS, GCP, Linux (Ubuntu, Debian), Nginx"
+  - label: Data & Frontend
+    items: "MongoDB, MySQL, PostgreSQL, Redis; React.js, Next.js, Redux, Electron"
+    variants: [professional]
+  - label: Data
+    items: "MongoDB, MySQL, PostgreSQL, Redis"
+    variants: [academic]
+  - label: Regulated Software
+    items: "IEC 62304, ISO 13485, FDA & EU MDR compliance SDLC, DevSecOps"
+
+experience:
+  - company: CooperSurgical
+    location: "NJ / MA / CT, USA"
+    industry: Medical Device
+    website: "https://www.coopersurgical.com/"
+    blurb: "Medical device R&D — global IVF device leader operating in 130+ countries"
+    roles:
+      - title: Senior Software Engineer
+        dates: "Jun 2025 – Present"
+        location: "NJ, USA"
+      - title: Software Engineer
+        dates: "Jan 2024 – May 2025"
+        location: "MA, USA"
+      - title: Software Engineering Intern
+        dates: "May 2023 – Aug 2023"
+        location: "CT, USA"
+    bullets:
+      - text: >-
+          Architected a cross-product device SDK shipped as a Docker
+          container (gRPC, MongoDB, RabbitMQ, Zeroconf) with .NET, Node.js,
+          Python, and C++ clients, reused across 5+ FDA / EU MDR-regulated
+          IVF products
+      - text: >-
+          Cut RFID data-transition time by 90% with database caching and gRPC
+          streaming, reducing environmental-data rendering time on device UIs
+          by 50%
+      - text: >-
+          Led a shared React.js component library and its automated quality
+          workflow (ESLint, Jest, Semantic Release on GitLab CI) serving 5+
+          vendors and 20+ developers
+      - text: >-
+          Built secure IVF workstation software on purpose-built embedded
+          Linux — compliance-driven SDLC (IEC 62304 / ISO 13485), GitLab
+          CI/CD pipelines, and containerized applications
+      - text: >-
+          Integrated LLM-assisted engineering into R&D workflows: agentic
+          coding tools, self-healing document generation in GitLab CI,
+          knowledge-graph extraction, and LLM observability (Langfuse)
+      - text: >-
+          Developed a containerized Protocol Buffers compiler service
+          automating multi-language client generation, plus NuGet network
+          connectivity libraries and CLI tooling adopted org-wide
+        variants: [academic, profile]
+      - text: >-
+          Partnered with electrical, mechanical, and firmware teams to define
+          cross-functional interface standards, shaping next-generation IVF
+          device architecture and the R&D roadmap for the coming year
+        variants: [academic, profile]
+      - text: >-
+          Coordinated 3+ global formative studies per year across divergent
+          development schedules — identified system bottlenecks, set
+          achievable milestones, and established a continuous R&D–clinical
+          feedback loop
+        variants: [academic, profile]
+      - text: >-
+          Piloted workplace–device–cloud network communication with
+          cross-country teams and architected hybrid cloud / on-site services
+          (AWS, Wind River Studio) meeting data-integrity and retention
+          regulations at no-internet clinical sites
+        variants: [academic, profile]
+      - text: >-
+          Crafted a message streaming UI using ASP.NET Core for hardware and
+          firmware integration with RFID
+        variants: [profile]
+      - text: >-
+          Created an RPC-based kiosk-like real-time UI using Electron, Framer
+          Motion, Redux, and Next.js
+        variants: [profile]
+      - text: >-
+          Managed a monolithic codebase with GitLab following a microservices
+          structure and the Long-Term Support (LTS) strategy
+        variants: [profile]
+
+  - company: Shopee
+    location: "Taipei, Taiwan"
+    industry: E-Commerce
+    website: "https://shopee.tw/"
+    blurb: "Leading Southeast Asian e-commerce platform, 300M+ annual active users"
+    roles:
+      - title: Software Engineer, Mobile Web Games
+        dates: "Jan 2020 – Feb 2022"
+        location: "Taipei, Taiwan"
+    bullets:
+      - text: >-
+          Built real-time multiplayer game services (Socket.IO, Express.js,
+          Redis) sustaining 10,000 peak RPS and 200,000+ daily players on
+          low-end devices in weak-signal regions
+      - text: >-
+          Raised average player retention from 0.25 to 0.65 by designing a
+          weighted-random reward algorithm
+      - text: >-
+          Integrated regional data warehouses and deployment pipelines with
+          global services on GCP under a TDD-enforced workflow, cutting local
+          developers' redeployment effort by 90%+
+      - text: >-
+          Designed 2D-3D-blended web mobile games with Three.js and Phaser,
+          integrating with the main application built on React.js and Redux
+        variants: [profile]
+      - text: >-
+          Technical Presenter at [ALPHA Camp](https://rise.alphacamp.co/)
+          Digital Career 2021
+        variants: [profile]
+      - text: >-
+          Co-Organizer at [I’m the Best Coder Challenge
+          2020](https://careers.shopee.tw/bestcoder/)
+        variants: [profile]
+
+  - company: StageSource
+    location: "Boston, MA, USA"
+    industry: Art Service
+    website: "https://stagesource.site-ym.com/"
+    blurb:
+      text: "Nonprofit supporting 200+ theater companies and 1,500+ arts professionals"
+      variants: [academic, profile]
+    roles:
+      - title: Software Engineer (Contract)
+        dates: "Sep 2022 – Dec 2022"
+        location: "MA, USA"
+    bullets:
+      - text: >-
+          Led a 6-developer team to deliver an MVP SaaS prototype (Django,
+          uWSGI, Nginx, PostgreSQL) on schedule, introducing Scrum, CI/CD,
+          and cloud-first practices to the organization
+      - text: >-
+          Halved deployment time with GitHub Actions pipelines using
+          OIDC-authenticated deploys to AWS
+        variants: [academic, profile]
+      - text: >-
+          Utilized AWS CloudWatch and S3 to develop a layered storage system
+        variants: [profile]
+      - text: >-
+          Structured an automated testing pipeline using Unittest
+        variants: [profile]
+
+  - company: Edallianz
+    location: "Taipei, Taiwan"
+    industry: E-Commerce
+    website: "https://www.twincn.com/item.aspx?no=51236578"
+    blurb:
+      text: "Education services startup managing 700+ multi-country academic programs"
+      variants: [academic, profile]
+    roles:
+      - title: Software Engineer
+        dates: "Jan 2019 – Nov 2019"
+        location: "Taipei, Taiwan"
+    bullets:
+      - text: >-
+          Redesigned the payment endpoint flow from internal data-flow
+          analysis, lifting checkout conversion by 25%
+      - text: >-
+          Grew daily user posts 5x (+800 posts/day) by introducing CDN caching
+        variants: [professional, profile]
+      - text: >-
+          Launched a responsive UI framework (SASS, Webpack) restructuring
+          sites built on Django, Tornado, and Apache HTTP Server
+        variants: [academic, profile]
+      - text: >-
+          Built a responsive website to embed into kiosks to gather reviews
+          using Django and React.js
+        variants: [profile]
+
+  - company: Servicetech International
+    location: "Taichung, Taiwan"
+    industry: Medical Device
+    website: "https://www.servicetech.com.tw/"
+    blurb:
+      text: "Top Taiwanese distributor of non-invasive pain-management medical devices"
+      variants: [academic, profile]
+    roles:
+      - title: Software Engineer
+        dates: "Jun 2017 – Nov 2018"
+        location: "Taichung, Taiwan"
+      - title: Software Engineering Intern
+        dates: "Jun 2016 – Jan 2017"
+        location: "Taichung, Taiwan"
+        variants: [academic, profile]
+    bullets:
+      - text: >-
+          Drove a paperless transformation — shipped a supply-chain PWA
+          (Firebase, Ionic, React.js), consolidating 100+ ad-hoc sales
+          channels into 6 trackable procedures
+      - text: >-
+          Built a digital corporate identity system supporting health
+          education for 1,000+ medical institutions and 25+ device
+          exhibitions
+        variants: [academic, profile]
+      - text: >-
+          Initiated a configurable website using Bootstrap and PHP, and a CIS
+          material warehouse
+        variants: [profile]
+      - text: >-
+          Automated the contract filing process using Python scripting
+        variants: [profile]
+
+  - company: DY Game
+    location: "Yunlin, Taiwan"
+    industry: Gaming
+    website: "https://www.dygame.cn/"
+    blurb: "Mobile game studio specializing in motion-sensing gameplay"
+    roles:
+      - title: Game Development Intern
+        dates: "May 2014 – Aug 2014"
+        location: "Yunlin, Taiwan"
+    bullets:
+      - text: >-
+          Co-managed a 30-member team across programming, art, and operations
+          for a motion-sensing game title
+    variants: [academic, profile]
+
+publications:
+  - text: >-
+      First author, “Quantitative DevSecOps Metrics for Cloud-Based Web
+      Microservices,” IEEE Access, vol. 12, pp. 160317–160342, 2024.
+      doi: 10.1109/ACCESS.2024.3486314
+    variants: [academic]
+
+education:
+  - school: Boston University
+    degree: "M.S. in Computer Science (GPA 3.8 / 4.0)"
+    program: Computer Science
+    level: Master in Science
+    dates: "May 2022 – Jan 2024"
+    details:
+      - text: >-
+          First author, “Quantitative DevSecOps Metrics for Cloud-Based Web
+          Microservices,” IEEE Access, 2024
+        variants: [professional]
+      - text: >-
+          First author, [Quantitative DevSecOps Metrics for Cloud-Based Web
+          Microservices](https://ieeexplore.ieee.org/document/10735195), IEEE
+          Access, vol. 12, pp. 160317–160342, 2024, doi: 10.1109/ACCESS.2024.3486314
+        variants: [profile]
+      - text: "3rd place, NCAE-C Cyber Games 2023 Northeast Division — Server Security Leader (infrastructure defense)"
+        variants: [professional, academic]
+      - text: "3rd place, [NCAE-C Cyber Games](https://www.ncaecybergames.org/) 2023 Northeast Division — Server Security Leader (infrastructure defense)"
+        variants: [profile]
+      - text: "Member of Boston University Cybersecurity Club"
+        variants: [profile]
+      - text: "GPA 3.8 / 4.0"
+        variants: [profile]
+      - text: "Coursework: Cryptography, Secure Software Development, Computer Language Theory, Analysis of Algorithms"
+        variants: [academic, profile]
+  - school: Massachusetts Institute of Technology
+    degree: "Cert. in Data Science & Machine Learning (top 15 of 146)"
+    dates: "Aug 2023 – Nov 2023"
+    variants: [professional]
+  - school: Massachusetts Institute of Technology
+    degree: "Certificate in Data Science and Machine Learning"
+    program: Data Science and Machine Learning
+    level: Certificate
+    dates: "Aug 2023 – Nov 2023"
+    variants: [academic, profile]
+    details:
+      - text: "Ranked 15th of 146 participants; score 579.5 / 600"
+      - text: "Studied Deep Learning, Recommendation Systems, Computer Vision, and Supervised & Unsupervised Learning"
+        variants: [profile]
+  - school: New York University
+    degree: "Certificate, Preparatory Course for Graduate Studies in Computing"
+    program: Preparatory Course for Graduate Studies in Computing
+    level: Certificate
+    dates: "Jan 2022 – May 2022"
+    variants: [academic, profile]
+    details:
+      - text: "Studied Discrete Mathematics, C++, Data Structures, Networking, and Operating Systems"
+        variants: [profile]
+  - school: National Formosa University
+    degree: "B.F.A. in Multimedia Design"
+    program: Multimedia Design
+    level: Bachelor in Fine Arts
+    dates: "Sep 2013 – Jan 2017"
+    details:
+      - text: "Dual concentration in Computer Programming and Fine Arts"
+        variants: [academic, profile]
+      - text: >-
+          Studied 2D Computer Graphics, 3D Advanced Computer Animation,
+          Virtual Reality Design, Multimedia Programming, Computer Graphics &
+          Image Processing, and Information Software Application
+        variants: [profile]
+
+activities:
+  variants: [academic]
+  items:
+    - "Technical Speaker, ALPHA Camp Digital Career (2021) — represented Shopee Taiwan tech team"
+    - "Co-Organizer, Shopee “I’m the Best Coder” Challenge (2020) — competition design and algorithm verification"
+    - "Member, Boston University Cybersecurity Club (2022–2024) — hosted weekly NCAE-C preparation sessions"
+    - "Captain, NFU Multimedia Design volleyball team (2014–2016) — led the team to its first-ever championship"

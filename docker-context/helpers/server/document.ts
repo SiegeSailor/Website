@@ -51,7 +51,8 @@ export async function getProfile() {
 
     const sources = source.split("<!-- description -->");
     const description = sources[0]?.trim();
-    const content = sources[1]?.trim();
+    // MDX cannot compile HTML comments, e.g. the generated section markers.
+    const content = sources[1]?.replace(/<!--[\s\S]*?-->/g, "").trim();
     const headlines: string[] = data.headlines;
     const media: { resume: string; github: string; linkedin: string } =
       data.media;

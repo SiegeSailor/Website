@@ -7,7 +7,7 @@ headlines:
 media:
   github: "https://github.com/SiegeSailor"
   linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
-  resume: https://drive.google.com/file/d/1eSR5fJNkc6h0R_3YsAkLCfX2W9_MYPed/view?usp=sharing
+  resume: "https://github.com/SiegeSailor/Website/releases/download/resume/JinYu-Zhang-Resume-Professional.pdf"
 status:
   location: "NYC Metropolitan Area"
   position: "Senior Software Engineer"
@@ -45,103 +45,111 @@ I commit to have a broad range of experience in different technologies and pract
   - Hardware control loops to UX conversion
   - Developer tooling strategy
 
+<!-- generated:employment:start -->
+
 ## Employment
 
-| Timeline            | Company                   | Role                            | Industry       | Location         | Link                                                        |
-| ------------------- | ------------------------- | ------------------------------- | -------------- | ---------------- | ----------------------------------------------------------- |
-| Jun 2025 - Present  | CooperSurgical            | Senior Software Engineer        | Medical Device | NJ, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| Jan 2024 - May 2025 | CooperSurgical            | Software Engineer               | Medical Device | MA, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| May 2023 - Aug 2023 | CooperSurgical            | Software Engineering Intern     | Medical Device | CT, USA          | [coopersurgical.com](https://www.coopersurgical.com/)       |
-| Sep 2022 - Dec 2022 | StageSource               | Software Engineering Freelancer | Art Service    | MA, USA          | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
-| Jan 2020 - Feb 2022 | Shopee                    | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [shopee.tw](https://shopee.tw/)                             |
-| Jan 2019 - Nov 2019 | Edallianz                 | Software Engineer               | E-Commerce     | Taipei, Taiwan   | [twincn.com](https://www.twincn.com/item.aspx?no=51236578)  |
-| Jun 2017 - Nov 2018 | Servicetech International | Software Engineer               | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
-| Jun 2016 - Jan 2017 | Servicetech International | Software Engineering Intern     | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/)       |
-| May 2014 - Aug 2014 | DY Game                   | Game Development Intern         | Gaming         | Yunlin, Taiwan   | [dygame.cn](https://www.dygame.cn/)                         |
+| Timeline | Company | Role | Industry | Location | Link |
+| --- | --- | --- | --- | --- | --- |
+| Jun 2025 – Present | CooperSurgical | Senior Software Engineer | Medical Device | NJ, USA | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Jan 2024 – May 2025 | CooperSurgical | Software Engineer | Medical Device | MA, USA | [coopersurgical.com](https://www.coopersurgical.com/) |
+| May 2023 – Aug 2023 | CooperSurgical | Software Engineering Intern | Medical Device | CT, USA | [coopersurgical.com](https://www.coopersurgical.com/) |
+| Sep 2022 – Dec 2022 | StageSource | Software Engineer (Contract) | Art Service | MA, USA | [stagesource.site-ym.com](https://stagesource.site-ym.com/) |
+| Jan 2020 – Feb 2022 | Shopee | Software Engineer, Mobile Web Games | E-Commerce | Taipei, Taiwan | [shopee.tw](https://shopee.tw/) |
+| Jan 2019 – Nov 2019 | Edallianz | Software Engineer | E-Commerce | Taipei, Taiwan | [twincn.com](https://www.twincn.com/item.aspx?no=51236578) |
+| Jun 2017 – Nov 2018 | Servicetech International | Software Engineer | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/) |
+| Jun 2016 – Jan 2017 | Servicetech International | Software Engineering Intern | Medical Device | Taichung, Taiwan | [servicetech.com.tw](https://www.servicetech.com.tw/) |
+| May 2014 – Aug 2014 | DY Game | Game Development Intern | Gaming | Yunlin, Taiwan | [dygame.cn](https://www.dygame.cn/) |
 
 ### CooperSurgical
 
-| Timeline            | Role                        | Location |
-| ------------------- | --------------------------- | -------- |
-| Jun 2025 - Present  | Senior Software Engineer    | NJ, USA  |
-| Jan 2024 - May 2025 | Software Engineer           | MA, USA  |
-| May 2023 - Aug 2023 | Software Engineering Intern | CT, USA  |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| Jun 2025 – Present | Senior Software Engineer | NJ, USA |
+| Jan 2024 – May 2025 | Software Engineer | MA, USA |
+| May 2023 – Aug 2023 | Software Engineering Intern | CT, USA |
 
-> Medical Device R&D.
+> Medical device R&D — global IVF device leader operating in 130+ countries.
 
-- Developed a container as an SDK solution for multiple medical device products using **Docker**, **gRPC**, **MongoDB**, **RabbitMQ**, and **Zeroconf**, and support for **.NET**, **Node.js**, **Python**, and **C++**
-- Developed a containerized **Protocol Buffers** compiler service for various languages in a fully automated fashion
-- Architected secured medical software for IVF workstations, including integration with purpose-built embedded **Linux**, SDLC for compliance, **GitLab CI/CD** pipelines, and containerized applications
-- Crafted a message streaming UI using **ASP.NET Core** for hardware/firmware integration with RFID
-- Built utilities and provided documentation to streamline the organization's software development and delivery processes, such as **NuGet** network connectivity libraries and CLI automation scripts
-- Managed a **React.js** component library using **Ladle** and **Vite** with a well-configured static code analysis automated workflow on both local and CI environments using **Commitlint**, **Semantic Release**, **ESLint**, **Stylelint**, **Jest**, and **Prettier**, for 5+ vendors and internal teams
-- Managed a monolithic codebase with **GitLab** following **Microservices** structure the **Long-Term Support (LTS)** strategy
-- Created an RPC-based kiosk-like real-time UI using **Electron**, **Framer Motion**, **Redux**, and **Next.js**
-- Reduced RFID data transitioning time by 90% by implementing database caching and **gRPC**, leading to a 50% reduction in environmental data reading rendering time
-- Architected cloud microservices to comply with government regulations for data integrity and retention with **AWS**, **WindRiver Studio**, and on-site service plans
+- Architected a cross-product device SDK shipped as a Docker container (gRPC, MongoDB, RabbitMQ, Zeroconf) with .NET, Node.js, Python, and C++ clients, reused across 5+ FDA / EU MDR-regulated IVF products
+- Cut RFID data-transition time by 90% with database caching and gRPC streaming, reducing environmental-data rendering time on device UIs by 50%
+- Led a shared React.js component library and its automated quality workflow (ESLint, Jest, Semantic Release on GitLab CI) serving 5+ vendors and 20+ developers
+- Built secure IVF workstation software on purpose-built embedded Linux — compliance-driven SDLC (IEC 62304 / ISO 13485), GitLab CI/CD pipelines, and containerized applications
+- Integrated LLM-assisted engineering into R&D workflows: agentic coding tools, self-healing document generation in GitLab CI, knowledge-graph extraction, and LLM observability (Langfuse)
+- Developed a containerized Protocol Buffers compiler service automating multi-language client generation, plus NuGet network connectivity libraries and CLI tooling adopted org-wide
+- Partnered with electrical, mechanical, and firmware teams to define cross-functional interface standards, shaping next-generation IVF device architecture and the R&D roadmap for the coming year
+- Coordinated 3+ global formative studies per year across divergent development schedules — identified system bottlenecks, set achievable milestones, and established a continuous R&D–clinical feedback loop
+- Piloted workplace–device–cloud network communication with cross-country teams and architected hybrid cloud / on-site services (AWS, Wind River Studio) meeting data-integrity and retention regulations at no-internet clinical sites
+- Crafted a message streaming UI using ASP.NET Core for hardware and firmware integration with RFID
+- Created an RPC-based kiosk-like real-time UI using Electron, Framer Motion, Redux, and Next.js
+- Managed a monolithic codebase with GitLab following a microservices structure and the Long-Term Support (LTS) strategy
 
 ### StageSource
 
-| Timeline            | Role                            | Location |
-| ------------------- | ------------------------------- | -------- |
-| Sep 2022 - Dec 2022 | Software Engineering Freelancer | MA, USA  |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| Sep 2022 – Dec 2022 | Software Engineer (Contract) | MA, USA |
 
-> DevOps and Leadership.
+> Nonprofit supporting 200+ theater companies and 1,500+ arts professionals.
 
-- Led a 6-developer team and delivered a team-development workflow and a product prototype using **uWSGI**, **Django**, **Nginx**, and **PostgreSQL**, deploying through **GitHub Actions** to **AWS** instances
-- Optimized deployment time by 50% by introducing automated pipelines using **GitHub Actions** with **OpenID** authentication, promising a 25% increase in team efficiency
-- Utilized **AWS CloudWatch** and **S3** to develop a layered storage system
-- Structured an automated testing pipeline using **Unittest**
+- Led a 6-developer team to deliver an MVP SaaS prototype (Django, uWSGI, Nginx, PostgreSQL) on schedule, introducing Scrum, CI/CD, and cloud-first practices to the organization
+- Halved deployment time with GitHub Actions pipelines using OIDC-authenticated deploys to AWS
+- Utilized AWS CloudWatch and S3 to develop a layered storage system
+- Structured an automated testing pipeline using Unittest
 
 ### Shopee
 
-| Timeline            | Role              | Location       |
-| ------------------- | ----------------- | -------------- |
-| Jan 2020 - Feb 2022 | Software Engineer | Taipei, Taiwan |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| Jan 2020 – Feb 2022 | Software Engineer, Mobile Web Games | Taipei, Taiwan |
 
-> Mobile Web Games.
+> Leading Southeast Asian e-commerce platform, 300M+ annual active users.
 
-- Implemented high-volume tolerant socket connections using **Socket.io**, **Express.js**, and **Redis** for multi-player real-time SPA games built upon **Ant Design**, **Phaser**, **React.js**, **Redux**, **TypeScript**, and **Three.js**, accommodating over 200,000 daily traffic and the highest RPS of 10,000
-- Integrated region data warehouse and deployment pipelines with global services, with a TTD-enforced workflow using **GCP** to manage, operate, and monitor cloud services
-- Increased average player retention rate from 0.25 to 0.65 by implementing a weighted random algorithm
-- Designed 2D-3D-blended web mobile games with **Three.js** and **Phaser**, integrating with the main application built on **React.js** and **Redux**
+- Built real-time multiplayer game services (Socket.IO, Express.js, Redis) sustaining 10,000 peak RPS and 200,000+ daily players on low-end devices in weak-signal regions
+- Raised average player retention from 0.25 to 0.65 by designing a weighted-random reward algorithm
+- Integrated regional data warehouses and deployment pipelines with global services on GCP under a TDD-enforced workflow, cutting local developers' redeployment effort by 90%+
+- Designed 2D-3D-blended web mobile games with Three.js and Phaser, integrating with the main application built on React.js and Redux
 - Technical Presenter at [ALPHA Camp](https://rise.alphacamp.co/) Digital Career 2021
 - Co-Organizer at [I’m the Best Coder Challenge 2020](https://careers.shopee.tw/bestcoder/)
 
 ### Edallianz
 
-| Timeline            | Role              | Location       |
-| ------------------- | ----------------- | -------------- |
-| Jan 2019 - Nov 2019 | Software Engineer | Taipei, Taiwan |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| Jan 2019 – Nov 2019 | Software Engineer | Taipei, Taiwan |
 
-> Cross-Platform UX Integration.
+> Education services startup managing 700+ multi-country academic programs.
 
-- Launched an RWD UI framework using **SASS** and **Webpack** to restructure websites built with **Apache HTTP Server**, **Django**, **MySQL**, and **Tornado**
-- Boosted user post threads per day by 500% by introducing **CDN** caching, creating 800 more posts per day
-- Built a responsive website to embed into kiosks to gather reviews using **Django** and **React.js**
+- Redesigned the payment endpoint flow from internal data-flow analysis, lifting checkout conversion by 25%
+- Grew daily user posts 5x (+800 posts/day) by introducing CDN caching
+- Launched a responsive UI framework (SASS, Webpack) restructuring sites built on Django, Tornado, and Apache HTTP Server
+- Built a responsive website to embed into kiosks to gather reviews using Django and React.js
 
 ### Servicetech International
 
-| Timeline            | Role                        | Location         |
-| ------------------- | --------------------------- | ---------------- |
-| Jun 2017 - Nov 2018 | Software Engineer           | Taichung, Taiwan |
-| Jun 2016 - Jan 2017 | Software Engineering Intern | Taichung, Taiwan |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| Jun 2017 – Nov 2018 | Software Engineer | Taichung, Taiwan |
+| Jun 2016 – Jan 2017 | Software Engineering Intern | Taichung, Taiwan |
 
-> Digital Transformation.
+> Top Taiwanese distributor of non-invasive pain-management medical devices.
 
-- Formulated the supply chain management workflow to develop a PWA using **Firebase**, **Ionic**, and **React.js**
-- Initiated a configurable website using **Bootstrap** and **PHP**, and a CIS material warehouse
-- Automated the contract filing process using **Python** Scripting
+- Drove a paperless transformation — shipped a supply-chain PWA (Firebase, Ionic, React.js), consolidating 100+ ad-hoc sales channels into 6 trackable procedures
+- Built a digital corporate identity system supporting health education for 1,000+ medical institutions and 25+ device exhibitions
+- Initiated a configurable website using Bootstrap and PHP, and a CIS material warehouse
+- Automated the contract filing process using Python scripting
 
 ### DY Game
 
-| Timeline            | Role                    | Location       |
-| ------------------- | ----------------------- | -------------- |
-| May 2014 - Aug 2014 | Game Development Intern | Yunlin, Taiwan |
+| Timeline | Role | Location |
+| --- | --- | --- |
+| May 2014 – Aug 2014 | Game Development Intern | Yunlin, Taiwan |
 
-> Motion Sensing Game.
+> Mobile game studio specializing in motion-sensing gameplay.
 
-- Co-managed a 30-member team across programming, arts, and operations for a motion control game
+- Co-managed a 30-member team across programming, art, and operations for a motion-sensing game title
+
+<!-- generated:employment:end -->
 
 ## Skills
 
@@ -209,46 +217,49 @@ I commit to have a broad range of experience in different technologies and pract
 - ![Docusaurus](https://img.shields.io/badge/Docusaurus-3ECC5F?logo=docusaurus&logoColor=fff) ![GitBook](https://img.shields.io/badge/GitBook-3884FF?logo=gitbook&logoColor=fff) ![GitLab Pages](https://img.shields.io/badge/GitLab_Pages-FC6D26?logo=githubpages&logoColor=fff) ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-121013?logo=github&logoColor=white)
 - ![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack&logoColor=fff)
 
+<!-- generated:education:start -->
+
 ## Education
 
-| Timeline            | Institution                           | Program                                              | Degree                |
-| ------------------- | ------------------------------------- | ---------------------------------------------------- | --------------------- |
-| May 2022 - Jan 2024 | Boston University                     | Computer Science                                     | Master in Science     |
-| Aug 2023 - Nov 2023 | Massachusetts Institute of Technology | Data Science and Machine Learning                    | Certificate           |
-| Jan 2022 - May 2022 | New York University                   | Preparatory Course for Graduate Studies in Computing | Certificate           |
-| Sep 2013 - Jan 2017 | National Formosa University           | Multimedia Design                                    | Bachelor in Fine Arts |
+| Timeline | Institution | Program | Degree |
+| --- | --- | --- | --- |
+| May 2022 – Jan 2024 | Boston University | Computer Science | Master in Science |
+| Aug 2023 – Nov 2023 | Massachusetts Institute of Technology | Data Science and Machine Learning | Certificate |
+| Jan 2022 – May 2022 | New York University | Preparatory Course for Graduate Studies in Computing | Certificate |
+| Sep 2013 – Jan 2017 | National Formosa University | Multimedia Design | Bachelor in Fine Arts |
 
 ### Boston University
 
 - **Program:** Computer Science
 - **Degree:** Master in Science
-- **Timeline:** May 2022 - Jan 2024
-  - Ranked 3rd in infrastructure services configuration and defense at [NCAE-C](https://www.ncaecybergames.org/) 2023, North East Division
-  - 1st Author for [Quantitative DevSecOps Metrics for Cloud-Based Web Microservices](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317-160342, 2024, doi: 10.1109/ACCESS.2024.3486314
-  - Member of Cybersecurity Club
-  - GPA 3.8/4.0
-  - Studied Cryptography, Computer Language Theory, Secure Software Development, and Analysis of Algorithms
+- **Timeline:** May 2022 – Jan 2024
+  - First author, [Quantitative DevSecOps Metrics for Cloud-Based Web Microservices](https://ieeexplore.ieee.org/document/10735195), IEEE Access, vol. 12, pp. 160317–160342, 2024, doi: 10.1109/ACCESS.2024.3486314
+  - 3rd place, [NCAE-C Cyber Games](https://www.ncaecybergames.org/) 2023 Northeast Division — Server Security Leader (infrastructure defense)
+  - Member of Boston University Cybersecurity Club
+  - GPA 3.8 / 4.0
+  - Coursework: Cryptography, Secure Software Development, Computer Language Theory, Analysis of Algorithms
 
 ### Massachusetts Institute of Technology
 
 - **Program:** Data Science and Machine Learning
 - **Degree:** Certificate
-- **Timeline:** Aug 2023 - Nov 2023
-  - Ranked 15 out of 146 participants
-  - Score 579.5/600
+- **Timeline:** Aug 2023 – Nov 2023
+  - Ranked 15th of 146 participants; score 579.5 / 600
   - Studied Deep Learning, Recommendation Systems, Computer Vision, and Supervised & Unsupervised Learning
 
 ### New York University
 
 - **Program:** Preparatory Course for Graduate Studies in Computing
 - **Degree:** Certificate
-- **Timeline:** Jan 2022 - May 2022
+- **Timeline:** Jan 2022 – May 2022
   - Studied Discrete Mathematics, C++, Data Structures, Networking, and Operating Systems
 
 ### National Formosa University
 
 - **Program:** Multimedia Design
 - **Degree:** Bachelor in Fine Arts
-- **Timeline:** Sep 2013 - Jan 2017
-  - Earned dual concentrations in Computer Programming and Fine Arts
+- **Timeline:** Sep 2013 – Jan 2017
+  - Dual concentration in Computer Programming and Fine Arts
   - Studied 2D Computer Graphics, 3D Advanced Computer Animation, Virtual Reality Design, Multimedia Programming, Computer Graphics & Image Processing, and Information Software Application
+
+<!-- generated:education:end -->
