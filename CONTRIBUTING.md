@@ -46,27 +46,28 @@ Build the static export to verify everything is working correctly; the artifacts
 npm run build
 ```
 
-### Building the Resume and Profile
+### Building the Resume, Profile, and README
 
-[`docker-context/files/resume/Resume.yaml`](./docker-context/files/resume/Resume.yaml) is the single source of truth for the resume documents and the data-driven sections of the profile page. Almost any node in it can carry a `variants:` list; a node without one appears everywhere. Current variants:
+[`docker-context/files/resume/Resume.yaml`](./docker-context/files/resume/Resume.yaml) is the single source of truth for the resume documents, the website `/about` page (its `profile:` block and `projects:`), and the generated GitHub profile README. Almost any node in it can carry a `variants:` list; a node without one appears everywhere. Current variants:
 
 - `professional`: one-page resume, impact and scale focus
 - `academic`: two-page resume, systems and leadership focus
-- `profile`: website profile page only
+- `profile`: website only — the `/about` page and the profile README
 
-After editing `Resume.yaml`, rebuild the resume documents and the profile document:
+After editing `Resume.yaml`:
 
 ```shell
-npm run build:resume
-npm run build:profile
+npm run build:resume      # .docx (+ .pdf/.txt when LibreOffice/pandoc exist) into export/resume/; page counts verified
+npm run build:versions    # latest GitHub release per project -> versions.generated.json
+npm run build:readme      # Resume.yaml -> export/SiegeSailor-README.md (the GitHub profile README)
 ```
 
-`build:resume` writes `.docx` files to `export/resume/`, converting to `.pdf` (LibreOffice) and `.txt` (pandoc) when those tools are available, and verifies the page counts against the PDFs. `build:profile` regenerates the sections between the `generated` markers in [`files/documents/Profile.md`](./docker-context/files/documents/Profile.md), and runs automatically before `build`.
+`build:versions` runs automatically before `build` and is resilient: if GitHub is unreachable it omits the missing versions (the `/about` chip falls back to the project stage) and never fails the build.
 
-To run the full pipeline without local LibreOffice and pandoc, generate through the Docker image from the root directory:
+To run the full pipeline without local LibreOffice and pandoc, build the résumé image and copy the artifacts out from the root directory. This builds the image (which runs `build:resume` and `build:readme`) and copies the résumé documents plus the profile README (`docker-context/SiegeSailor-README.md`) out:
 
 ```shell
-bash scripts/generate-resume.sh "docker-context/export/resume" "linux/arm64"
+bash scripts/docker-copy.sh "docker-context/export/resume" "linux/arm64"
 ```
 
 Resume constraints (see [`CLAUDE.md`](./CLAUDE.md) for the full list):
@@ -120,7 +121,7 @@ To deploy content changes, build the site and resume documents, then sync to the
 
 ```shell
 (cd docker-context && npm run build)
-bash scripts/generate-resume.sh "docker-context/export/documents"
+bash scripts/docker-copy.sh "docker-context/export/documents"
 (cd infrastructure/
 aws s3 sync ../docker-context/export "s3://$(terraform output -raw site_bucket_name)" --delete --exclude "*.DS_Store"
 aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cloudfront_distribution_id)" --paths "/*")
@@ -128,11 +129,11 @@ aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cl
 
 ### Automatic Production Deployment
 
-GitHub Actions workflow [`production.yml`](./.github/workflows/production.yml) deploys on pushes to `main` when files under `docker-context/` or `infrastructure/` change: it builds the static site and resume documents, applies Terraform, syncs the export to S3, and invalidates the CloudFront cache.
+GitHub Actions workflow [`production.yml`](./.github/workflows/production.yml) deploys on pushes to `main` when files under `docker-context/` or `infrastructure/` change: it builds the static site and resume documents, applies Terraform, syncs the export to S3, invalidates the CloudFront cache, and regenerates and pushes the GitHub profile README to `SiegeSailor/SiegeSailor` (only when it changed).
 
 Configure these on the `production` environment:
 
-- Secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
+- Secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT` (a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor`, used only for the profile README sync)
 - Variables: `AWS_REGION`
 
 ### Releases
@@ -140,6 +141,6 @@ Configure these on the `production` environment:
 GitHub Actions workflow [`release.yml`](./.github/workflows/release.yml) runs [semantic-release](https://semantic-release.gitbook.io/) (configured in [`release.config.mjs`](./release.config.mjs)) on every push to `main`. Commit messages determine the version bump per Conventional Commits: `fix:` patches, `feat:` minors, and `BREAKING CHANGE` majors; other types cut no release. Each release:
 
 - Tags the commit `vX.Y.Z` and updates [`CHANGELOG.md`](./CHANGELOG.md), `package.json`, and `package-lock.json` back on `main`
-- Builds the resume documents with [`generate-resume.sh`](./scripts/generate-resume.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
+- Builds the resume documents with [`docker-copy.sh`](./scripts/docker-copy.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
 
 The deployed site serves the resume documents at `https://jinyu-zhang.com/documents/<document>` — the URL the `README.md` badges and the profile page resume button link to. The repository is private, so release asset URLs only work for authenticated collaborators.

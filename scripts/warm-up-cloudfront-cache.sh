@@ -55,7 +55,7 @@ main() {
 
   local -a urls=()
   
-  local -ra static_pages=("/" "/blog" "/profile")
+  local -ra static_pages=("/" "/about")
   for page in "${static_pages[@]}"; do
     urls+=("${base_url}${page}")
   done
