@@ -57,9 +57,9 @@ const COLOR_TO_FRAME: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
   danger: "bg-danger/10 border-danger/30",
-  default: "bg-default-100 border-default-200",
-  primary: "bg-primary/10 border-primary/30",
-  secondary: "bg-default-100 border-default-200",
+  default: "bg-default-50 border-default-200",
+  primary: "bg-success/10 border-success/30",
+  secondary: "bg-default-50 border-default-200",
   success: "bg-success/10 border-success/30",
   warning: "bg-warning/10 border-warning/30",
 } as const;
@@ -69,7 +69,7 @@ const COLOR_TO_COLOR: Readonly<
 > = {
   danger: "text-danger",
   default: "text-default-500",
-  primary: "text-primary",
+  primary: "text-success",
   secondary: "text-default-500",
   success: "text-success",
   warning: "text-warning",
