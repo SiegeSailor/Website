@@ -28,7 +28,9 @@ const SOFFICE_CMD = process.env.SOFFICE_CMD ?? "soffice --headless";
 const FONT = "Calibri";
 // Sizes are half-points; spacing/indents are twips (1440 = 1 inch).
 const SZ = { name: 32, contact: 18, section: 20, body: 19, blurb: 18 };
-const SPACE = { afterBullet: 12, afterBody: 40, beforeSection: 80, afterSection: 40 };
+// Tightened to keep the professional variant on one US-Letter page after the
+// Certifications section was split out of Education (see root CLAUDE.md).
+const SPACE = { afterBullet: 9, afterBody: 32, beforeSection: 44, afterSection: 26 };
 const RIGHT_TAB = 12240 - 792 * 2;
 
 const clean = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
@@ -172,10 +174,10 @@ const buildPublications = (v) => {
   ];
 };
 
-const buildEducation = (v) => {
-  const rows = (DATA.education || []).filter((e) => inVariant(e, v));
+const buildSchools = (title, list, v) => {
+  const rows = (list || []).filter((e) => inVariant(e, v));
   if (!rows.length) return [];
-  const out = [sectionHeader("Education")];
+  const out = [sectionHeader(title)];
   for (const entry of rows) {
     out.push(
       splitLine(
@@ -195,6 +197,9 @@ const buildEducation = (v) => {
   return out;
 };
 
+const buildEducation = (v) => buildSchools("Education", DATA.education, v);
+const buildCertifications = (v) => buildSchools("Certifications", DATA.certifications, v);
+
 const buildActivities = (v) => {
   const activities = DATA.activities;
   if (!activities || !inVariant(activities, v)) return [];
@@ -212,7 +217,7 @@ const buildVariant = async (v) => {
     keywords: `v${VERSION}`,
     styles: {
       default: {
-        document: { run: { font: FONT, size: SZ.body }, paragraph: { spacing: { line: 230 } } },
+        document: { run: { font: FONT, size: SZ.body }, paragraph: { spacing: { line: 226 } } },
       },
     },
     numbering: {
@@ -246,6 +251,7 @@ const buildVariant = async (v) => {
           ...buildExperience(v),
           ...buildPublications(v),
           ...buildEducation(v),
+          ...buildCertifications(v),
           ...buildActivities(v),
         ],
       },

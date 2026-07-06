@@ -9,6 +9,28 @@ contact:
   line1: "NYC Metropolitan Area (NJ, USA)  |  857-540-6713  |  siegesailor@gmail.com"
   line2: "jinyu-zhang.com  |  linkedin.com/in/jin-yu-zhang-812181155  |  github.com/SiegeSailor"
 
+# Website profile page (jinyu-zhang.com/about) and the generated GitHub profile
+# README. Not used by the PDF résumé.
+profile:
+  picture: /images/Jin-Yu-Zhang-Profile.jpg
+  headlines:
+    - "Full-Stack Development"
+    - "DevOps"
+    - "Cloud-Based Web Microservices"
+  media:
+    github: "https://github.com/SiegeSailor"
+    linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
+    resume: "https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf"
+  status:
+    location: "NYC Metropolitan Area"
+    position: "Senior Software Engineer"
+  bio: |
+    I'm a software engineer who loves building scalable and maintainable solutions. I specialize in DevOps and full-stack development, working with everything from cloud-based microservices to offline kiosks.
+
+    I've been fortunate to work across different industries, from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (5+ vendors with 20+ developers simultaneously) and boosting productivity across the entire development lifecycle.
+
+    I commit to have a broad range of experience in different technologies and practices, and find the best practice for each product I work on. Delivering team-oriented long-term solutions while keeping up with the latest industry trends in every software development field is my passion.
+
 summary:
   professional: >-
     Senior software engineer with 7+ years across regulated medical devices
@@ -286,6 +308,21 @@ education:
         variants: [profile]
       - text: "Coursework: Cryptography, Secure Software Development, Computer Language Theory, Analysis of Algorithms"
         variants: [academic, profile]
+  - school: National Formosa University
+    degree: "B.F.A. in Multimedia Design"
+    program: Multimedia Design
+    level: Bachelor in Fine Arts
+    dates: "Sep 2013 – Jan 2017"
+    details:
+      - text: "Dual concentration in Computer Programming and Fine Arts"
+        variants: [academic, profile]
+      - text: >-
+          Studied 2D Computer Graphics, 3D Advanced Computer Animation,
+          Virtual Reality Design, Multimedia Programming, Computer Graphics &
+          Image Processing, and Information Software Application
+        variants: [profile]
+
+certifications:
   - school: Massachusetts Institute of Technology
     degree: "Cert. in Data Science & Machine Learning (top 15 of 146)"
     dates: "Aug 2023 – Nov 2023"
@@ -309,19 +346,6 @@ education:
     details:
       - text: "Studied Discrete Mathematics, C++, Data Structures, Networking, and Operating Systems"
         variants: [profile]
-  - school: National Formosa University
-    degree: "B.F.A. in Multimedia Design"
-    program: Multimedia Design
-    level: Bachelor in Fine Arts
-    dates: "Sep 2013 – Jan 2017"
-    details:
-      - text: "Dual concentration in Computer Programming and Fine Arts"
-        variants: [academic, profile]
-      - text: >-
-          Studied 2D Computer Graphics, 3D Advanced Computer Animation,
-          Virtual Reality Design, Multimedia Programming, Computer Graphics &
-          Image Processing, and Information Software Application
-        variants: [profile]
 
 activities:
   variants: [academic]
@@ -330,3 +354,81 @@ activities:
     - "Co-Organizer, Shopee “I’m the Best Coder” Challenge (2020) — competition design and algorithm verification"
     - "Member, Boston University Cybersecurity Club (2022–2024) — hosted weekly NCAE-C preparation sessions"
     - "Captain, NFU Multimedia Design volleyball team (2014–2016) — led the team to its first-ever championship"
+
+# Side projects — shown only on the website profile (jinyu-zhang.com/profile),
+# never in the PDF résumé. `stage` is one of Planning | Development | Production.
+projects:
+  - title: Cryptography CLI
+    stage: Development
+    href: "https://github.com/SiegeSailor/OpenSource.Formulas"
+    variants: [profile]
+    description: >-
+      Available on `brew`, a *Rust* Command-Line Interface for executing
+      cryptographic algorithms. The CLI provides a collection of functions and
+      simulated secured communications between two parties.
+  - title: AI-Driven Development Tools Integration
+    stage: Planning
+    href: "https://github.com/SiegeSailor"
+    variants: [profile]
+    description: >-
+      *macOS*-specific desktop integration of AI-driven development tools for
+      automating workflows with *MCPs* and *Agents*, including onboarding
+      environment setup, credential management, **Slack** and **GitLab**
+      integration, image, icon, and sprite sheet generation, and **Gmail** and
+      *Webhooks* triggers.
+  - title: Concurrency Toolkit
+    stage: Planning
+    href: "https://github.com/SiegeSailor"
+    variants: [profile]
+    description: >-
+      Available on `pip`, a *Python* concurrent class wrapper for managing
+      multiple tasks with error handling and logging. Based on `asyncio`. This
+      is a go-to solution for simplified asynchronous programming with
+      easy-to-use abstractions.
+  - title: Account Management CBWMs
+    stage: Development
+    href: "https://github.com/SiegeSailor/OpenSource.AccountHub"
+    variants: [profile]
+    description: >-
+      Scalable *OWASP*-Complied Cloud-Based Microservice that allows users to
+      manage their accounts and settings. It provides an event-driven
+      architecture comes with a eventual consistency model and various
+      communication protocols for different use cases and CBWMs.
+  - title: Configurable Bucket CBWM Boilerplate
+    stage: Development
+    href: "https://github.com/SiegeSailor/OpenSource.Bucket"
+    variants: [profile]
+    description: >-
+      A project boilerplate that provides a *RESTful* interface for *AWS S3*
+      using *Flask*. Following the microservices principle, this project has
+      been wrapped with *Docker*, *LocalStack*, and *Terraform* to isolate the
+      running/deploying environments with a fully configurable layer that
+      supports development on local laptops, testing in *GitHub Actions* CI/CD
+      pipelines, and deployment to *AWS*.
+  - title: Deployable UI Library Boilerplate
+    stage: Planning
+    href: "https://github.com/SiegeSailor"
+    variants: [profile]
+    description: >-
+      Quick start for deploying *React* components on `npm`. A project
+      boilerplate that provides a set of team-oriented development tools, such
+      as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*,
+      *Stylelint*, and *Ladle*, and best practices.
+  - title: Self-Development Assistant
+    stage: Planning
+    href: "https://github.com/SiegeSailor"
+    variants: [profile]
+    description: >-
+      An *iOS* application built with *Godot* that comes with often-used
+      self-development and assistance features, such as the tomato timer, diet
+      tracking, goals-oriented schedules, and everyday-motivating quotes, to
+      help users build confidence and assertiveness.
+  - title: Jin Yu Zhang's Website
+    stage: Production
+    href: "https://github.com/SiegeSailor/Website"
+    variants: [profile]
+    description: >-
+      This site — a statically exported *Next.js* application served from *AWS
+      S3* behind *CloudFront*, with markdown-driven posts, in-site search, and a
+      single-source résumé build system. Built with *TailwindCSS*, *HeroUI*, the
+      *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.

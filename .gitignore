@@ -39,6 +39,12 @@ export/
 next-env.d.ts
 
 #######################################
+# Generated
+#######################################
+docker-context/files/resume/versions.generated.json
+docker-context/SiegeSailor-README.md
+
+#######################################
 # NPM
 #######################################
 node_modules/

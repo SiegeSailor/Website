@@ -1,6 +1,12 @@
 #!/bin/bash
 #
-# Generate resume documents into a target directory using the Docker image.
+# Build the resume Docker image and copy its generated artifacts out of it: the
+# resume documents into a target directory, and the GitHub profile README to
+# docker-context/SiegeSailor-README.md.
+#
+# Building the image IS what generates the artifacts (the `resume` stage runs
+# `npm run build:resume` and `npm run build:readme`), so the build step is
+# required — but with Docker layer caching an unchanged image is a fast no-op.
 
 set -o errexit
 
@@ -40,12 +46,13 @@ get_docker_cmd() {
 #######################################
 # Main function.
 # Arguments:
-#   $1 - Target directory (default: docker-context/export/resume)
+#   $1 - Resume documents target directory (default: docker-context/export/resume)
 #   $2 - Build platform (default: linux/amd64)
 #   $3 - Docker image tag (default: siegesailor-website-resume:latest)
 #   $@ - Additional flags to pass to Docker (optional)
 # Outputs:
-#   Resume documents generated into the target directory ($1)
+#   Resume documents in $1 and the profile README at
+#   docker-context/SiegeSailor-README.md
 #######################################
 main() {
   if [ ! -d "docker-context" ]; then
@@ -69,17 +76,20 @@ main() {
     "${docker_flags[@]}" \
     docker-context
 
-  echo -e "${GREEN}[INFO] Copying resume documents to ${target}${NONE}"
+  echo -e "${GREEN}[INFO] Copying artifacts out of ${image}${NONE}"
   mkdir -p "${target}"
   local container
   container="$(${docker_cmd} create "${image}")"
-  ${docker_cmd} cp "${container}:/app/export/resume/." "${target}" || {
+  {
+    ${docker_cmd} cp "${container}:/app/export/resume/." "${target}"
+    ${docker_cmd} cp "${container}:/app/export/SiegeSailor-README.md" "docker-context/SiegeSailor-README.md"
+  } || {
     ${docker_cmd} rm "${container}" >/dev/null
     exit 1
   }
   ${docker_cmd} rm "${container}" >/dev/null
 
-  echo -e "${BLUE}[DONE] Generated resume documents in ${target}${NONE}"
+  echo -e "${BLUE}[DONE] Resume documents in ${target}; profile README at docker-context/SiegeSailor-README.md${NONE}"
 }
 
 main "$@"

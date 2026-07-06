@@ -32,5 +32,9 @@ RUN apt-get update && \
 
 COPY "files/resume/" ./files/resume/
 COPY "scripts/build-resume.mjs" ./scripts/build-resume.mjs
+COPY "scripts/build-readme.mjs" ./scripts/build-readme.mjs
 
-RUN npm run build:resume
+# Builds export/resume/*.{docx,pdf,txt} and export/SiegeSailor-README.md. The
+# README picks up project versions from files/resume/versions.generated.json
+# when the host generated it before the image build (else it falls back to stage).
+RUN npm run build:resume && npm run build:readme

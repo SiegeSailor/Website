@@ -43,12 +43,13 @@ jobs:
         working-directory: docker-context
         env:
           COMMIT_SHORT: ${{ github.sha }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           npm ci
           npm run build
 
-      - name: Generate resume documents
-        run: bash scripts/generate-resume.sh "docker-context/export/documents"
+      - name: Generate resume documents and profile README
+        run: bash scripts/docker-copy.sh "docker-context/export/documents"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
@@ -96,3 +97,21 @@ jobs:
           distribution="$(terraform output -raw cloudfront_distribution_id)"
           aws s3 sync ../docker-context/export "s3://${bucket}" --delete --exclude "*.DS_Store"
           aws cloudfront create-invalidation --distribution-id "${distribution}" --paths "/*"
+
+      - name: Sync profile README
+        env:
+          GH_TOKEN: ${{ secrets.SIEGESAILOR_PAT }}
+        run: |
+          version="$(node -p "require('./docker-context/package.json').version")"
+          workdir="$(mktemp -d)"
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/SiegeSailor/SiegeSailor.git" "${workdir}"
+          cp docker-context/SiegeSailor-README.md "${workdir}/README.md"
+          cd "${workdir}"
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "docs: sync profile from v${version} [skip ci]"
+            git push
+          else
+            echo "profile README already up to date"
+          fi

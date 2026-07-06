@@ -5,7 +5,7 @@ export default {
     ["@semantic-release/release-notes-generator", { preset: "conventionalcommits" }],
     ["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],
     ["@semantic-release/npm", { npmPublish: false, pkgRoot: "docker-context" }],
-    ["@semantic-release/exec", { prepareCmd: "bash scripts/generate-resume.sh" }],
+    ["@semantic-release/exec", { prepareCmd: "bash scripts/docker-copy.sh" }],
     [
       "@semantic-release/git",
       {
