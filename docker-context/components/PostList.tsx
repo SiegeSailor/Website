@@ -16,8 +16,18 @@ export type TPost = Readonly<{
 }>;
 
 const MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ] as const;
 
 const monthDay = (date: string) => {
@@ -85,10 +95,10 @@ export default function PostList({ posts }: Readonly<{ posts: TPost[] }>) {
                   {post.minutes} min
                 </span>
               </div>
-              <p className="mt-1 sm:pl-[4.5rem] text-small text-default-500 leading-normal line-clamp-2">
+              <p className="mt-1 sm:pl-pl18 text-small text-default-500 leading-normal line-clamp-2">
                 {post.description}
               </p>
-              <p className="mt-1 sm:pl-[4.5rem] font-mono text-[0.65rem] uppercase tracking-wider text-default-500">
+              <p className="mt-1 sm:pl-pl18 font-mono text-[0.65rem] uppercase tracking-wider text-default-500">
                 {post.category}
               </p>
             </NextLink>

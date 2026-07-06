@@ -47,8 +47,8 @@ export function useColorTheme() {
               variable.replace("--heroui-", "").replaceAll("-", ""),
               `hsl(${value})`,
             ];
-          })
-        )
+          }),
+        ),
       );
     });
   }, [theme]);

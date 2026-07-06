@@ -62,7 +62,9 @@ export default function Mermaid({
         }
       } catch {
         // Never leave the skeleton spinning — show the source as a fallback.
-        setSvg(`<pre class="text-tiny overflow-x-auto p-2">${escapeHtml(source)}</pre>`);
+        setSvg(
+          `<pre class="text-tiny overflow-x-auto p-2">${escapeHtml(source)}</pre>`,
+        );
       } finally {
         if (!cancelled) setIsRendered(true);
       }
@@ -77,10 +79,7 @@ export default function Mermaid({
     <>
       <Skeleton
         isLoaded={isRendered}
-        className={clsx(
-          "w-full my-4 rounded-md border border-default-200 bg-default-50",
-          props.className,
-        )}
+        className={clsx("w-full rounded-md bg-default-50", props.className)}
       >
         <div className="relative w-full rounded-md bg-default-50 p-4 sm:p-6 overflow-x-auto">
           <Button
