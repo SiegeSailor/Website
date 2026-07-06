@@ -41,7 +41,7 @@ export default function ({
         className: clsx(
           "transition-opacity hover:opacity-80 cursor-pointer",
           className,
-          classNames?.base
+          classNames?.base,
         ),
       })}
     >
@@ -53,7 +53,7 @@ export default function ({
         className={slots.wrapper({
           class: clsx(
             "w-auto h-auto bg-transparent rounded-lg flex items-center justify-center group-data-[selected=true]:bg-transparent text-foreground! px-0 mx-0",
-            classNames?.wrapper
+            classNames?.wrapper,
           ),
         })}
       >

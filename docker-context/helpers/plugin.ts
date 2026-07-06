@@ -167,7 +167,7 @@ export function remarkRehypeCallout() {
       }
 
       const singleCalloutMatch = nodeText.match(
-        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n([\s\S]*?)\n:::\s*$/
+        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n([\s\S]*?)\n:::\s*$/,
       );
       if (singleCalloutMatch) {
         processSingleCallout(singleCalloutMatch);
@@ -175,7 +175,7 @@ export function remarkRehypeCallout() {
       }
 
       const startMatch = nodeText.match(
-        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n?([\s\S]*)$/
+        /^:::([^\s\n]+)(?:\s+([^\n]*))?\n?([\s\S]*)$/,
       );
       if (startMatch) {
         processCalloutStart(startMatch);

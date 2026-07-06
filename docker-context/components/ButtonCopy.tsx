@@ -39,7 +39,7 @@ export default function ({
       {...props}
       className={clsx(
         "text-default-500 hover:text-default-700 dark:text-default-400 dark:hover:text-default-200",
-        props.className
+        props.className,
       )}
     >
       {isCopied ? <CheckIcon size="1.25rem" /> : <CopyIcon size="1.25rem" />}

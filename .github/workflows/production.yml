@@ -39,14 +39,28 @@ jobs:
           cache: npm
           cache-dependency-path: docker-context/package-lock.json
 
+      - name: Install dependencies
+        working-directory: docker-context
+        run: npm ci
+
+      - name: Format check
+        working-directory: docker-context
+        run: npm run format:check
+
+      - name: Lint
+        working-directory: docker-context
+        run: npm run lint
+
+      - name: Typecheck
+        working-directory: docker-context
+        run: npm run typecheck
+
       - name: Build static site
         working-directory: docker-context
         env:
           COMMIT_SHORT: ${{ github.sha }}
           GH_TOKEN: ${{ github.token }}
-        run: |
-          npm ci
-          npm run build
+        run: npm run build
 
       - name: Generate resume documents and profile README
         run: bash scripts/docker-copy.sh "docker-context/export/documents"

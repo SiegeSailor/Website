@@ -25,7 +25,7 @@ export const useArticleStore = create<TState>((set) => ({
       categories.add(article.metadata.category);
       statuses.add(article.metadata.status);
       article.metadata.technologies.forEach((technology) =>
-        technologies.add(technology)
+        technologies.add(technology),
       );
     });
 

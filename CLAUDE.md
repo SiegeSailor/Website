@@ -37,6 +37,9 @@ Everything runs from `docker-context/`:
 ```bash
 npm ci                    # install dependencies
 npm run watch             # development server
+npm run lint              # ESLint (eslint-config-next); lint:fix to autofix
+npm run format            # Prettier write; format:check to verify only
+npm run typecheck         # tsc --noEmit
 npm run build             # static export to export/ (runs build:versions first)
 npm run build:resume      # Resume.yaml -> export/resume/*.{docx,pdf,txt}
 npm run build:versions    # latest GitHub release per project -> versions.generated.json

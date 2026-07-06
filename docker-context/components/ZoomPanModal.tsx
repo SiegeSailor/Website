@@ -1,6 +1,12 @@
 "use client";
 
-import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Modal,
   ModalContent,
@@ -31,9 +37,14 @@ export default function ZoomPanModal({
   children: ReactNode;
 }>) {
   const [zoom, setZoom] = useState<number>(ZOOM_MIN);
-  const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [offset, setOffset] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   const [dragging, setDragging] = useState(false);
-  const drag = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
+  const drag = useRef<{ x: number; y: number; ox: number; oy: number } | null>(
+    null,
+  );
 
   const reset = useCallback(() => {
     setZoom(ZOOM_MIN);
@@ -41,6 +52,8 @@ export default function ZoomPanModal({
   }, []);
 
   useEffect(() => {
+    // Reset zoom/pan to defaults each time the dialog opens.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isOpen) reset();
   }, [isOpen, reset]);
 
@@ -51,7 +64,12 @@ export default function ZoomPanModal({
 
   const onPointerDown = (event: React.PointerEvent) => {
     (event.currentTarget as Element).setPointerCapture?.(event.pointerId);
-    drag.current = { x: event.clientX, y: event.clientY, ox: offset.x, oy: offset.y };
+    drag.current = {
+      x: event.clientX,
+      y: event.clientY,
+      ox: offset.x,
+      oy: offset.y,
+    };
     setDragging(true);
   };
 
@@ -74,12 +92,21 @@ export default function ZoomPanModal({
         {(close) => (
           <>
             {title && (
-              <ModalHeader className="font-normal text-medium">{title}</ModalHeader>
+              <ModalHeader className="font-normal text-medium">
+                {title}
+              </ModalHeader>
             )}
             <ModalBody className="p-2">
               <div
                 className="relative h-[70vh] w-full overflow-hidden rounded-md bg-default-50 touch-none select-none"
-                style={{ cursor: zoom > ZOOM_MIN ? (dragging ? "grabbing" : "grab") : "default" }}
+                style={{
+                  cursor:
+                    zoom > ZOOM_MIN
+                      ? dragging
+                        ? "grabbing"
+                        : "grab"
+                      : "default",
+                }}
                 onWheel={onWheel}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
@@ -104,7 +131,9 @@ export default function ZoomPanModal({
                   isIconOnly
                   size="sm"
                   variant="light"
-                  onPress={() => setZoom((current) => clamp(current - ZOOM_STEP))}
+                  onPress={() =>
+                    setZoom((current) => clamp(current - ZOOM_STEP))
+                  }
                   aria-label="Zoom out"
                 >
                   <MinusIcon size="1rem" />
@@ -120,7 +149,9 @@ export default function ZoomPanModal({
                   isIconOnly
                   size="sm"
                   variant="light"
-                  onPress={() => setZoom((current) => clamp(current + ZOOM_STEP))}
+                  onPress={() =>
+                    setZoom((current) => clamp(current + ZOOM_STEP))
+                  }
                   aria-label="Zoom in"
                 >
                   <PlusIcon size="1rem" />

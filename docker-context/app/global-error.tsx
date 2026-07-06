@@ -48,7 +48,7 @@ export default function ({
         suppressHydrationWarning
         className={clsx(
           globalFontRoboto.className,
-          "bg-danger-100 overscroll-none"
+          "bg-danger-100 overscroll-none",
         )}
       >
         <Provider>

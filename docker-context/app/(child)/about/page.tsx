@@ -33,6 +33,8 @@ export default async function () {
   return (
     <div className="py-2">
       <div className="flex items-center gap-5 mb-6">
+        {/* Static export with unoptimized images: next/image adds no benefit. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={profile.picture}
           alt={AUTHOR}

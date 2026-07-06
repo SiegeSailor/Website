@@ -44,7 +44,7 @@ export default function ({
           ? "block w-full h-full text-inherit text-[size:inherit] font-[weight:inherit]"
           : "font-light inline",
         isArticle && "inline",
-        props.className
+        props.className,
       )}
     >
       {isArticle && !isPlain ? <ChildrenArticle {...props} /> : props.children}

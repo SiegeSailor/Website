@@ -35,6 +35,7 @@
     "zustand": "5.0.14"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "3.3.5",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/exec": "7.1.0",
     "@semantic-release/git": "10.0.1",
@@ -45,7 +46,11 @@
     "@types/react-dom": "19.2.3",
     "conventional-changelog-conventionalcommits": "10.2.0",
     "docx": "9.7.1",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.10",
+    "eslint-config-prettier": "10.1.8",
     "postcss": "8.5.16",
+    "prettier": "3.9.4",
     "semantic-release": "25.0.5",
     "tailwindcss": "4.3.2",
     "typescript": "5.9.3"
@@ -64,6 +69,11 @@
     "build:versions": "node ./scripts/build-versions.mjs",
     "build:readme": "node ./scripts/build-readme.mjs",
     "build:resume": "node ./scripts/build-resume.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
     "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack"
   },
   "type": "module",

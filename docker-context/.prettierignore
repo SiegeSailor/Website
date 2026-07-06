@@ -1,0 +1,13 @@
+.next/
+export/
+build-cache/
+node_modules/
+package-lock.json
+public/
+SiegeSailor-README.md
+next-env.d.ts
+
+# Authored content, not code: articles are prose (their own writing guide) and
+# Resume.yaml is the hand-tuned single source of truth. Leave them untouched.
+files/articles/
+files/resume/

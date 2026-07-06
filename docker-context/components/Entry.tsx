@@ -17,7 +17,7 @@ export default function ({
 
   useEffect(() => {
     parseArticles(articles);
-  }, [articles]);
+  }, [articles, parseArticles]);
 
   return children;
 }

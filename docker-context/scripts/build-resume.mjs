@@ -18,7 +18,9 @@ import {
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = load(readFileSync(join(ROOT, "files/resume/Resume.yaml"), "utf8"));
 const OUTPUT = join(ROOT, "export/resume");
-const VERSION = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")).version;
+const VERSION = JSON.parse(
+  readFileSync(join(ROOT, "package.json"), "utf8"),
+).version;
 
 const VARIANT_TO_LABEL = { professional: "Professional", academic: "Academic" };
 // The professional variant must stay within one US-Letter page.
@@ -30,15 +32,26 @@ const FONT = "Calibri";
 const SZ = { name: 32, contact: 18, section: 20, body: 19, blurb: 18 };
 // Tightened to keep the professional variant on one US-Letter page after the
 // Certifications section was split out of Education (see root CLAUDE.md).
-const SPACE = { afterBullet: 9, afterBody: 32, beforeSection: 44, afterSection: 26 };
+const SPACE = {
+  afterBullet: 9,
+  afterBody: 32,
+  beforeSection: 44,
+  afterSection: 26,
+};
 const RIGHT_TAB = 12240 - 792 * 2;
 
-const clean = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
+const clean = (s) =>
+  String(s ?? "")
+    .replace(/\s+/g, " ")
+    .trim();
 const inVariant = (item, v) => !item?.variants || item.variants.includes(v);
 
 const hasCommand = (command) => {
   try {
-    execSync(`command -v ${command.split(" ")[0]}`, { stdio: "ignore", shell: "/bin/bash" });
+    execSync(`command -v ${command.split(" ")[0]}`, {
+      stdio: "ignore",
+      shell: "/bin/bash",
+    });
     return true;
   } catch {
     return false;
@@ -52,15 +65,32 @@ const splitLine = (leftRuns, rightText, opts = {}) =>
     tabStops: [{ type: TabStopType.RIGHT, position: RIGHT_TAB }],
     ...opts,
     children: rightText
-      ? [...leftRuns, new TextRun({ text: "\t" + clean(rightText), font: FONT, size: SZ.body })]
+      ? [
+          ...leftRuns,
+          new TextRun({
+            text: "\t" + clean(rightText),
+            font: FONT,
+            size: SZ.body,
+          }),
+        ]
       : leftRuns,
   });
 
 const sectionHeader = (text) =>
   new Paragraph({
     spacing: { before: SPACE.beforeSection, after: SPACE.afterSection },
-    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "444444", space: 2 } },
-    children: [new TextRun({ text, bold: true, font: FONT, size: SZ.section, allCaps: true })],
+    border: {
+      bottom: { style: BorderStyle.SINGLE, size: 6, color: "444444", space: 2 },
+    },
+    children: [
+      new TextRun({
+        text,
+        bold: true,
+        font: FONT,
+        size: SZ.section,
+        allCaps: true,
+      }),
+    ],
   });
 
 const bullet = (text) =>
@@ -71,20 +101,28 @@ const bullet = (text) =>
   });
 
 const bodyLine = (runs, opts = {}) =>
-  new Paragraph({ spacing: { after: SPACE.afterBody }, ...opts, children: runs });
+  new Paragraph({
+    spacing: { after: SPACE.afterBody },
+    ...opts,
+    children: runs,
+  });
 
 const buildHeader = () => [
   new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { after: 40 },
-    children: [new TextRun({ text: DATA.name, bold: true, font: FONT, size: SZ.name })],
+    children: [
+      new TextRun({ text: DATA.name, bold: true, font: FONT, size: SZ.name }),
+    ],
   }),
   ...[DATA.contact.line1, DATA.contact.line2].map(
     (line) =>
       new Paragraph({
         alignment: AlignmentType.CENTER,
         spacing: { after: 20 },
-        children: [new TextRun({ text: clean(line), font: FONT, size: SZ.contact })],
+        children: [
+          new TextRun({ text: clean(line), font: FONT, size: SZ.contact }),
+        ],
       }),
   ),
 ];
@@ -106,7 +144,12 @@ const buildSkills = (v) => {
     ...rows.map((s) =>
       bodyLine(
         [
-          new TextRun({ text: `${s.label}: `, bold: true, font: FONT, size: SZ.body }),
+          new TextRun({
+            text: `${s.label}: `,
+            bold: true,
+            font: FONT,
+            size: SZ.body,
+          }),
           new TextRun({ text: clean(s.items), font: FONT, size: SZ.body }),
         ],
         { spacing: { after: 20 } },
@@ -126,25 +169,50 @@ const buildExperience = (v) => {
     out.push(
       splitLine(
         [
-          new TextRun({ text: job.company, bold: true, font: FONT, size: SZ.body }),
-          new TextRun({ text: ` — ${clean(job.location)}`, font: FONT, size: SZ.body }),
+          new TextRun({
+            text: job.company,
+            bold: true,
+            font: FONT,
+            size: SZ.body,
+          }),
+          new TextRun({
+            text: ` — ${clean(job.location)}`,
+            font: FONT,
+            size: SZ.body,
+          }),
         ],
         roles.length === 1 ? roles[0].dates : "",
         { spacing: { before: 60, after: 10 } },
       ),
     );
-    const blurb = typeof job.blurb === "string" ? { text: job.blurb } : job.blurb;
+    const blurb =
+      typeof job.blurb === "string" ? { text: job.blurb } : job.blurb;
     if (blurb?.text && inVariant(blurb, v))
       out.push(
         bodyLine(
-          [new TextRun({ text: clean(blurb.text), italics: true, font: FONT, size: SZ.blurb })],
+          [
+            new TextRun({
+              text: clean(blurb.text),
+              italics: true,
+              font: FONT,
+              size: SZ.blurb,
+            }),
+          ],
           { spacing: { after: 20 } },
         ),
       );
     if (roles.length === 1) {
       out.push(
         bodyLine(
-          [new TextRun({ text: roles[0].title, bold: true, italics: true, font: FONT, size: SZ.body })],
+          [
+            new TextRun({
+              text: roles[0].title,
+              bold: true,
+              italics: true,
+              font: FONT,
+              size: SZ.body,
+            }),
+          ],
           { spacing: { after: 20 } },
         ),
       );
@@ -152,7 +220,15 @@ const buildExperience = (v) => {
       for (const role of roles)
         out.push(
           splitLine(
-            [new TextRun({ text: role.title, bold: true, italics: true, font: FONT, size: SZ.body })],
+            [
+              new TextRun({
+                text: role.title,
+                bold: true,
+                italics: true,
+                font: FONT,
+                size: SZ.body,
+              }),
+            ],
             role.dates,
             { spacing: { after: 10 } },
           ),
@@ -169,7 +245,9 @@ const buildPublications = (v) => {
   return [
     sectionHeader("Publications"),
     ...publications.map((p) =>
-      bodyLine([new TextRun({ text: clean(p.text), font: FONT, size: SZ.body })]),
+      bodyLine([
+        new TextRun({ text: clean(p.text), font: FONT, size: SZ.body }),
+      ]),
     ),
   ];
 };
@@ -182,8 +260,17 @@ const buildSchools = (title, list, v) => {
     out.push(
       splitLine(
         [
-          new TextRun({ text: entry.school, bold: true, font: FONT, size: SZ.body }),
-          new TextRun({ text: ` — ${clean(entry.degree)}`, font: FONT, size: SZ.body }),
+          new TextRun({
+            text: entry.school,
+            bold: true,
+            font: FONT,
+            size: SZ.body,
+          }),
+          new TextRun({
+            text: ` — ${clean(entry.degree)}`,
+            font: FONT,
+            size: SZ.body,
+          }),
         ],
         entry.dates,
         { spacing: { before: 40, after: 10 } },
@@ -198,7 +285,8 @@ const buildSchools = (title, list, v) => {
 };
 
 const buildEducation = (v) => buildSchools("Education", DATA.education, v);
-const buildCertifications = (v) => buildSchools("Certifications", DATA.certifications, v);
+const buildCertifications = (v) =>
+  buildSchools("Certifications", DATA.certifications, v);
 
 const buildActivities = (v) => {
   const activities = DATA.activities;
@@ -217,7 +305,10 @@ const buildVariant = async (v) => {
     keywords: `v${VERSION}`,
     styles: {
       default: {
-        document: { run: { font: FONT, size: SZ.body }, paragraph: { spacing: { line: 226 } } },
+        document: {
+          run: { font: FONT, size: SZ.body },
+          paragraph: { spacing: { line: 226 } },
+        },
       },
     },
     numbering: {
@@ -267,41 +358,59 @@ const buildVariant = async (v) => {
 
 const convertVariant = (v, file) => {
   if (hasCommand("pandoc")) {
-    execSync(`pandoc --wrap=none -t plain "${file}" -o "${file.replace(/\.docx$/, ".txt")}"`);
+    execSync(
+      `pandoc --wrap=none -t plain "${file}" -o "${file.replace(/\.docx$/, ".txt")}"`,
+    );
     console.log(`built ${relative(ROOT, file.replace(/\.docx$/, ".txt"))}`);
   } else {
-    console.warn(`skipped .txt for ${relative(ROOT, file)} (pandoc not available)`);
+    console.warn(
+      `skipped .txt for ${relative(ROOT, file)} (pandoc not available)`,
+    );
   }
 
   if (!hasCommand(SOFFICE_CMD)) {
-    console.warn(`skipped .pdf for ${relative(ROOT, file)} (LibreOffice not available)`);
+    console.warn(
+      `skipped .pdf for ${relative(ROOT, file)} (LibreOffice not available)`,
+    );
     return;
   }
-  execSync(`${SOFFICE_CMD} --convert-to pdf --outdir "${OUTPUT}" "${file}"`, { stdio: "ignore" });
+  execSync(`${SOFFICE_CMD} --convert-to pdf --outdir "${OUTPUT}" "${file}"`, {
+    stdio: "ignore",
+  });
   const pdf = file.replace(/\.docx$/, ".pdf");
   console.log(`built ${relative(ROOT, pdf)}`);
 
   if (!hasCommand("pdfinfo")) {
-    console.warn(`skipped page count check for ${relative(ROOT, pdf)} (pdfinfo not available)`);
+    console.warn(
+      `skipped page count check for ${relative(ROOT, pdf)} (pdfinfo not available)`,
+    );
     return;
   }
   const pages = Number(
-    execSync(`pdfinfo "${pdf}"`).toString().match(/^Pages:\s+(\d+)$/m)?.[1],
+    execSync(`pdfinfo "${pdf}"`)
+      .toString()
+      .match(/^Pages:\s+(\d+)$/m)?.[1],
   );
   if (!VARIANT_TO_PAGES[v]) {
-    console.warn(`skipped page count check for ${relative(ROOT, pdf)} (no expected count for ${v})`);
+    console.warn(
+      `skipped page count check for ${relative(ROOT, pdf)} (no expected count for ${v})`,
+    );
     return;
   }
   if (pages !== VARIANT_TO_PAGES[v])
     throw new Error(
       `${relative(ROOT, pdf)} has ${pages} pages; the ${v} variant must have ${VARIANT_TO_PAGES[v]}`,
     );
-  console.log(`verified ${relative(ROOT, pdf)} (${pages} page${pages === 1 ? "" : "s"})`);
+  console.log(
+    `verified ${relative(ROOT, pdf)} (${pages} page${pages === 1 ? "" : "s"})`,
+  );
 };
 
 const requested = process.argv.slice(2);
 const variants =
-  requested.length && !requested.includes("all") ? requested : Object.keys(VARIANT_TO_LABEL);
+  requested.length && !requested.includes("all")
+    ? requested
+    : Object.keys(VARIANT_TO_LABEL);
 
 for (const variant of variants) {
   if (!VARIANT_TO_LABEL[variant])

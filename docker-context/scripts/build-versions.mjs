@@ -33,7 +33,9 @@ async function apiJson(path) {
   if (GH) {
     try {
       return JSON.parse(
-        execSync(`gh api ${path}`, { stdio: ["ignore", "pipe", "ignore"] }).toString(),
+        execSync(`gh api ${path}`, {
+          stdio: ["ignore", "pipe", "ignore"],
+        }).toString(),
       );
     } catch {
       return null;

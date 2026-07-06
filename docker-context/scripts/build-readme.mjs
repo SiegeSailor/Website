@@ -43,12 +43,14 @@ function experienceYears() {
   return `${year} Years ${month === "0" ? "" : `${monthFloor} Months`}`.trim();
 }
 
-const inProfile = (item) => !item?.variants || item.variants.includes("profile");
+const inProfile = (item) =>
+  !item?.variants || item.variants.includes("profile");
 const repoKey = (href) => {
   const match = String(href).match(REGEX_GITHUB_REPO);
   return match ? `${match[1]}/${match[2].replace(/\.git$/, "")}` : null;
 };
-const versionLabel = (version) => (/^v/i.test(version) ? version : `v${version}`);
+const versionLabel = (version) =>
+  /^v/i.test(version) ? version : `v${version}`;
 
 function readVersions() {
   if (!existsSync(VERSIONS_FILE)) return {};

@@ -11,11 +11,21 @@ export default async function () {
         © {year} {AUTHOR}
       </span>
       <span className="flex items-center gap-2">
-        <a href={profile.media.github} target="_blank" rel="noreferrer" className="hover:text-foreground">
+        <a
+          href={profile.media.github}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-foreground"
+        >
           GitHub
         </a>
         ·
-        <a href={profile.media.linkedin} target="_blank" rel="noreferrer" className="hover:text-foreground">
+        <a
+          href={profile.media.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-foreground"
+        >
           LinkedIn
         </a>
         ·

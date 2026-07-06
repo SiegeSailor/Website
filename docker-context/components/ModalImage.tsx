@@ -46,7 +46,11 @@ export default function ({
         )}
       />
       <span className="opacity-0 absolute left-0 top-0">{alt}</span>
-      <ZoomPanModal isOpen={isOpen} onClose={onClose} title={alt.replaceAll("-", " ")}>
+      <ZoomPanModal
+        isOpen={isOpen}
+        onClose={onClose}
+        title={alt.replaceAll("-", " ")}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={source}

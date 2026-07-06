@@ -2,29 +2,31 @@ import { create } from "zustand";
 
 type TState = {
   colors: {
-    [key in
-      | "background"
-      | "default50"
-      | "default100"
-      | "default200"
-      | "default300"
-      | "default400"
-      | "default500"
-      | "default600"
-      | "default700"
-      | "default800"
-      | "default900"
-      | "primary50"
-      | "primary100"
-      | "primary200"
-      | "primary300"
-      | "primary400"
-      | "primary500"
-      | "primary600"
-      | "primary700"
-      | "primary800"
-      | "primary900"
-      | "foreground"]: string;
+    [
+      key in
+        | "background"
+        | "default50"
+        | "default100"
+        | "default200"
+        | "default300"
+        | "default400"
+        | "default500"
+        | "default600"
+        | "default700"
+        | "default800"
+        | "default900"
+        | "primary50"
+        | "primary100"
+        | "primary200"
+        | "primary300"
+        | "primary400"
+        | "primary500"
+        | "primary600"
+        | "primary700"
+        | "primary800"
+        | "primary900"
+        | "foreground"
+    ]: string;
   };
   setColors: (colors: Partial<TState["colors"]>) => void;
 };

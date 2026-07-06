@@ -9,6 +9,12 @@ searchable post list, a compact `/about` page, and clean article pages. Check
 Everything under `app/` must stay statically exportable: no Server Actions, no
 request-time rendering, and route handlers must be static (see `feed.xml`).
 
+Code is formatted with Prettier (`.prettierrc.json`) and linted with ESLint
+(`eslint.config.mjs`, `eslint-config-next`). Run `npm run format` and
+`npm run lint` before committing; CI enforces both. Prettier owns formatting,
+ESLint owns correctness, and authored content (`files/articles/`,
+`files/resume/`) is excluded from Prettier.
+
 ## Project structure
 
 Folders and files are kebab-case, except `components/*`, which are PascalCase.

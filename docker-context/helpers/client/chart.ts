@@ -51,7 +51,7 @@ export function useColorTheme() {
         ),
       );
     });
-  }, [theme]);
+  }, [theme, setColors]);
 }
 
 export function useMermaid() {

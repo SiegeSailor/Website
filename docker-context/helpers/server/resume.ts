@@ -9,7 +9,8 @@ import { load } from "js-yaml";
 // written by scripts/build-versions.mjs at build time (optional / resilient).
 
 type TVariant = { variants?: string[] };
-const inProfile = (item?: TVariant) => !item?.variants || item.variants.includes("profile");
+const inProfile = (item?: TVariant) =>
+  !item?.variants || item.variants.includes("profile");
 
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -79,13 +80,15 @@ type TResumeData = {
 export type TResume = Awaited<ReturnType<typeof getResume>>;
 
 const toSchools = (list?: TSchool[]) =>
-  (list || []).filter(inProfile).map(({ school, degree, program, level, dates }) => ({
-    school,
-    degree,
-    program,
-    level,
-    dates,
-  }));
+  (list || [])
+    .filter(inProfile)
+    .map(({ school, degree, program, level, dates }) => ({
+      school,
+      degree,
+      program,
+      level,
+      dates,
+    }));
 
 function readVersions(): Record<string, string> {
   const file = join(process.cwd(), "files/resume/versions.generated.json");
@@ -115,22 +118,33 @@ export async function getResume() {
     bio: data.profile.bio.trim(),
   };
 
-  const experience = (data.experience || []).filter(inProfile).map((company) => ({
-    company: company.company,
-    location: company.location,
-    industry: company.industry,
-    website: company.website,
-    blurb: typeof company.blurb === "string" ? company.blurb : company.blurb?.text,
-    roles: (company.roles || [])
-      .filter(inProfile)
-      .map((role) => ({ title: role.title, dates: role.dates, location: role.location })),
-  }));
+  const experience = (data.experience || [])
+    .filter(inProfile)
+    .map((company) => ({
+      company: company.company,
+      location: company.location,
+      industry: company.industry,
+      website: company.website,
+      blurb:
+        typeof company.blurb === "string" ? company.blurb : company.blurb?.text,
+      roles: (company.roles || []).filter(inProfile).map((role) => ({
+        title: role.title,
+        dates: role.dates,
+        location: role.location,
+      })),
+    }));
 
   const projects = (data.projects || [])
     .filter(inProfile)
     .map(({ title, description, href, stage }) => {
       const key = repoKey(href);
-      return { title, description, href, stage, version: key ? versions[key] : undefined };
+      return {
+        title,
+        description,
+        href,
+        stage,
+        version: key ? versions[key] : undefined,
+      };
     });
 
   return {

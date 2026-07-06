@@ -9,6 +9,7 @@ This is a statically exported Next.js website served from S3 behind CloudFront. 
 Following conventions are used in this project:
 
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) (`eslint-config-next`) for the Next.js app
 - [Terraform Style Guide](https://developer.hashicorp.com/terraform/language/style)
 - [Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
 - [AWS Tagging Best Practices and Strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html)
@@ -45,6 +46,24 @@ Build the static export to verify everything is working correctly; the artifacts
 ```shell
 npm run build
 ```
+
+### Linting and Formatting
+
+The Next.js app is linted with ESLint (`eslint-config-next`) and formatted with
+Prettier. Run these before committing; CI runs the same checks on every pull
+request and blocks the production deploy if any fail:
+
+```shell
+npm run format        # Prettier: format code in place
+npm run format:check  # Prettier: verify formatting (CI uses this)
+npm run lint          # ESLint
+npm run lint:fix      # ESLint with autofix
+npm run typecheck     # tsc --noEmit
+```
+
+Prettier owns formatting; ESLint owns correctness. Authored content —
+`files/articles/` and `files/resume/Resume.yaml` — is excluded from Prettier so
+prose and the hand-tuned résumé source stay untouched.
 
 ### Building the Resume, Profile, and README
 

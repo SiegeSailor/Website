@@ -17,7 +17,10 @@ export default async function () {
         {AUTHOR}
       </NextLink>
       <nav className="ml-auto flex items-center gap-4 text-small text-default-500">
-        <NextLink href="/about" className="hover:text-foreground transition-colors">
+        <NextLink
+          href="/about"
+          className="hover:text-foreground transition-colors"
+        >
           About
         </NextLink>
         <a
