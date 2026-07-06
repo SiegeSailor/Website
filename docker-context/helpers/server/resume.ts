@@ -65,7 +65,8 @@ type TProfile = {
   headlines: string[];
   media: { github: string; linkedin: string; resume: string };
   status: { location: string; position: string };
-  bio: string;
+  tagline: string;
+  intro: string;
 };
 
 type TResumeData = {
@@ -115,7 +116,8 @@ export async function getResume() {
     headlines: data.profile.headlines,
     media: data.profile.media,
     status: { ...data.profile.status, experience: getExperienceYears() },
-    bio: data.profile.bio.trim(),
+    tagline: data.profile.tagline,
+    intro: data.profile.intro.trim(),
   };
 
   const experience = (data.experience || [])

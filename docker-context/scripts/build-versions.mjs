@@ -83,7 +83,7 @@ async function main() {
   const next = { ...versions };
   for (const [key, [owner, repo]] of repos) {
     const version = await latestVersion(owner, repo);
-    if (version) next[key] = version.replace(/^v/i, "");
+    if (version) next[key] = version;
   }
 
   writeFileSync(OUTPUT_FILE, `${JSON.stringify(next, null, 2)}\n`);

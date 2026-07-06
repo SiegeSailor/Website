@@ -11,9 +11,6 @@ export const metadata: Metadata = {
 
 const STAGE_ORDER = { Production: 0, Development: 1, Planning: 2 } as const;
 
-const versionLabel = (version: string) =>
-  /^v/i.test(version) ? version : `v${version}`;
-
 function Eyebrow({ children }: Readonly<{ children: string }>) {
   return (
     <h2 className="font-mono text-tiny uppercase tracking-[0.15em] text-default-500 mb-3">
@@ -25,7 +22,7 @@ function Eyebrow({ children }: Readonly<{ children: string }>) {
 export default async function () {
   const { profile, summary, projects } = await getResume();
 
-  const lead = profile.bio.split("\n\n")[0];
+  const lead = profile.intro.split("\n\n")[0];
   const shown = projects
     .filter((project) => project.stage !== "Planning")
     .sort((left, right) => STAGE_ORDER[left.stage] - STAGE_ORDER[right.stage]);
@@ -33,7 +30,6 @@ export default async function () {
   return (
     <div className="py-2">
       <div className="flex items-center gap-5 mb-6">
-        {/* Static export with unoptimized images: next/image adds no benefit. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={profile.picture}
@@ -42,7 +38,7 @@ export default async function () {
         />
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">{AUTHOR}</h1>
-          <p className="font-mono text-tiny text-default-500 mt-1">
+          <p className="font-mono text-default-500 mt-1">
             {profile.headlines.join(" · ")}
           </p>
         </div>
@@ -87,9 +83,7 @@ export default async function () {
                     project.version ? "text-primary" : "text-default-500"
                   }`}
                 >
-                  {project.version
-                    ? versionLabel(project.version)
-                    : project.stage.toLowerCase()}
+                  {project.version ?? project.stage.toLowerCase()}
                 </span>
               </div>
             ))}

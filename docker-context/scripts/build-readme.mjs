@@ -84,8 +84,6 @@ const readme = [
   "",
   `${profile.status.location} · ${profile.status.position} · ${experienceYears()} experience`,
   "",
-  profile.bio.trim(),
-  "",
   "## Summary",
   "",
   data.summary.professional.trim(),

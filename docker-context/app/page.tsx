@@ -55,14 +55,10 @@ export default async function () {
           ) : (
             current?.company
           )}
-          {" — "}DevOps &amp; full-stack, from cloud microservices to
-          FDA-regulated medical devices.
+          {" — "}
+          {profile.tagline}
         </h1>
-        <p className="mt-3 text-default-500 leading-relaxed">
-          I build scalable, maintainable systems and write up what I learn along
-          the way — CI/CD, containers, embedded WebKit, and the occasional
-          debugging saga.
-        </p>
+        <p className="mt-3 text-default-500 leading-relaxed">{profile.intro}</p>
       </div>
 
       <PostList posts={posts} />

@@ -24,26 +24,25 @@ profile:
   status:
     location: "NYC Metropolitan Area"
     position: "Senior Software Engineer"
-  bio: |
-    I'm a software engineer who loves building scalable and maintainable solutions. I specialize in DevOps and full-stack development, working with everything from cloud-based microservices to offline kiosks.
-
-    I've been fortunate to work across different industries, from scaling multiplayer games at [Shopee](https://shopee.tw/) to building FDA-compliant healthcare systems at [CooperSurgical](https://www.coopersurgical.com/). I enjoy the challenge of fostering team's efficiency (5+ vendors with 20+ developers simultaneously) and boosting productivity across the entire development lifecycle.
-
-    I commit to have a broad range of experience in different technologies and practices, and find the best practice for each product I work on. Delivering team-oriented long-term solutions while keeping up with the latest industry trends in every software development field is my passion.
-
+  # Home page (jinyu-zhang.com) hero: `tagline` completes the "<position> at
+  # <company> — " headline; `intro` is the paragraph beneath it.
+  tagline: "DevOps & full-stack, from cloud microservices to FDA-regulated medical devices."
+  intro: >-
+    I build scalable, maintainable systems and write up what I learn along the
+    way — CI/CD, containers, embedded WebKit, and the occasional debugging saga.
+ 
 summary:
   professional: >-
-    Senior software engineer with years of experience across regulated medical 
-    devices (FDA / EU MDR) and large-scale consumer platforms. Ship device SDKs,
+    Senior software engineer spanning regulated medical devices (FDA / EU MDR)
+    and large-scale consumer platforms. Led a team of 5 to ship device SDKs,
     real-time distributed systems, and developer platforms for 5+ vendors and
     20+ engineers; sustained 10,000 peak RPS at Shopee. First-author IEEE
-    publication on DevSecOps; building LLM-assisted engineering workflows in
-    regulated R&D.
+    publication on DevSecOps; building LLM-assisted workflows in regulated R&D.
   academic: >-
     Systems-focused software engineer with years of experience bridging hardware,
     firmware, and software on FDA / EU MDR-regulated medical devices, after
-    scaling consumer platforms to 200,000+ daily users. Lead cross-vendor
-    engineering (5+ vendors, 20+ developers), define cross-functional
+    scaling consumer platforms to 200,000+ daily users. Led a team of 5 across
+    cross-vendor engineering (5+ vendors, 20+ developers), define cross-functional
     interface standards, and coordinate global formative studies. First
     author of an IEEE Access publication on quantitative DevSecOps metrics;
     promoted intern to senior engineer in two years.
