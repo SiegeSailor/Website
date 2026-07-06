@@ -5,11 +5,10 @@ import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/navigation";
 
-import { useColorTheme, useChart, useMermaid } from "@/helpers/client/chart";
+import { useColorTheme, useMermaid } from "@/helpers/client/chart";
 
 function Initializer({ children }: Readonly<{ children: ReactNode }>) {
   useColorTheme();
-  useChart();
   useMermaid();
 
   return children;

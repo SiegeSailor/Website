@@ -1,9 +1,7 @@
 "use client";
 
-import { Chart, registerables } from "chart.js";
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 import mermaid from "mermaid";
 
 import { getCSSVariable } from "@/helpers/utility";
@@ -56,12 +54,6 @@ export function useColorTheme() {
   }, [theme]);
 }
 
-export function useChart() {
-  useEffect(() => {
-    Chart.register(ChartDataLabels, ...registerables);
-  }, []);
-}
-
 export function useMermaid() {
   const colors = useChartStore((state) => state.colors);
 
@@ -72,9 +64,9 @@ export function useMermaid() {
       themeVariables: {
         fontFamily: "Roboto",
         fontSize: "1rem",
-        mainBkg: colors.primary50,
+        mainBkg: colors.default100,
         textColor: colors.foreground,
-        primaryBorderColor: colors.default700,
+        primaryBorderColor: colors.primary500,
         primaryTextColor: colors.foreground,
         secondaryColor: colors.default500,
         primaryColor: colors.default700,
@@ -108,14 +100,14 @@ export function useMermaid() {
         pieSectionTextColor: colors.foreground,
         pieLegendTextColor: colors.foreground,
         pieOpacity: 1,
-        nodeBorder: colors.default700,
+        nodeBorder: colors.primary500,
         edgeLabelBackground: colors.default200,
         defaultLinkColor: colors.default700,
         clusterBkg: colors.default100,
         clusterBorder: "transparent",
         nodeTextColor: colors.foreground,
-        actorBkg: colors.primary50,
-        actorBorder: colors.default700,
+        actorBkg: colors.default100,
+        actorBorder: colors.primary500,
         actorTextColor: colors.foreground,
         actorLineColor: colors.default200,
         sequenceNumberColor: colors.background,
@@ -140,14 +132,19 @@ export function useMermaid() {
         }
 
         .flowchart-link {
-            stroke: hsl(var(--heroui-default-700)) !important;
+            stroke: hsl(var(--heroui-default-400)) !important;
         }
-        .marker, .label-container, .label-container path {
-            fill: hsl(var(--heroui-default-700));
-            stroke: hsl(var(--heroui-default-700)) !important;
+        .marker {
+            fill: hsl(var(--heroui-default-400));
+            stroke: hsl(var(--heroui-default-400)) !important;
+        }
+        .label-container, .label-container path {
+            fill: hsl(var(--heroui-default-100)) !important;
+            stroke: hsl(var(--heroui-primary-500)) !important;
         }
         .node.default path {
-            fill: hsl(var(--heroui-primary-50)) !important;
+            fill: hsl(var(--heroui-default-100)) !important;
+            stroke: hsl(var(--heroui-primary-500)) !important;
         }
         .nodeLabel p {
             color: hsl(var(--heroui-foreground)) !important;

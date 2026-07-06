@@ -25,7 +25,7 @@ export default function () {
       <Alert
         color="warning"
         classNames={{ title: "font-medium" }}
-        description={`This article couldn’t be found. Double-check the address or go back to the blog page.`}
+        description={`This article couldn’t be found. Double-check the address or go back home.`}
         title={
           <>
             Not Found: <TextRoute />
@@ -34,9 +34,9 @@ export default function () {
         variant="faded"
       >
         <div className="flex gap-2 mt-2">
-          <Link href={TITLE_TO_ROUTE["Blog"]} underline="none">
+          <Link href={TITLE_TO_ROUTE["Home"]} underline="none">
             <Button color="warning" size="md" variant="solid">
-              {ROUTE_TO_TITLE["/blog"]}
+              {ROUTE_TO_TITLE["/"]}
             </Button>
           </Link>
         </div>

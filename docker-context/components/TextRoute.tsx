@@ -1,9 +1,8 @@
 "use client";
 
-import { useRoute } from "@/helpers/client/history";
+import { usePathname } from "next/navigation";
 
 export default function () {
-  const { route } = useRoute();
-
-  return route;
+  const pathname = usePathname();
+  return <span className="font-mono">{pathname}</span>;
 }

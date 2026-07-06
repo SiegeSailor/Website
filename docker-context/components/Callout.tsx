@@ -56,25 +56,23 @@ const COLOR_TO_TITLE: Readonly<
 const COLOR_TO_FRAME: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
-  danger: "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
-  default: "bg-gray-50 border-gray-300 dark:bg-gray-950 dark:border-gray-700",
-  primary: "bg-blue-50 border-blue-300 dark:bg-blue-950 dark:border-blue-700",
-  secondary: "bg-gray-50 border-gray-300 dark:bg-gray-950 dark:border-gray-700",
-  success:
-    "bg-green-50 border-green-300 dark:bg-green-950 dark:border-green-700",
-  warning:
-    "bg-orange-50 border-orange-300 dark:bg-orange-950 dark:border-orange-700",
+  danger: "bg-danger/10 border-danger/30",
+  default: "bg-default-100 border-default-200",
+  primary: "bg-primary/10 border-primary/30",
+  secondary: "bg-default-100 border-default-200",
+  success: "bg-success/10 border-success/30",
+  warning: "bg-warning/10 border-warning/30",
 } as const;
 
 const COLOR_TO_COLOR: Readonly<
   Record<NonNullable<ComponentProps<typeof Code>["color"]>, string>
 > = {
-  danger: "text-red-500 dark:text-red-400",
-  default: "text-gray-500 dark:text-gray-400",
-  primary: "text-blue-500 dark:text-blue-400",
-  secondary: "text-gray-500 dark:text-gray-400",
-  success: "text-green-500 dark:text-green-400",
-  warning: "text-orange-500 dark:text-orange-400",
+  danger: "text-danger",
+  default: "text-default-500",
+  primary: "text-primary",
+  secondary: "text-default-500",
+  success: "text-success",
+  warning: "text-warning",
 } as const;
 
 export default async function ({

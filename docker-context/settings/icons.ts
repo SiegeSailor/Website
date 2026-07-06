@@ -1,5 +1,4 @@
 import { type ForwardRefExoticComponent, type RefAttributes } from "react";
-import { type Route } from "next";
 import {
   SiAmazon,
   SiBabel,
@@ -68,7 +67,7 @@ export const LUCIDE_ICON = {
 
 export const ROUTE_TO_ICON: Readonly<
   Record<
-    Route,
+    "/" | "/blog" | "/profile",
     ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
     >

@@ -17,22 +17,6 @@ input {
   font-size: 16px !important;
 }
 
-@theme {
-  --spacing-compact: 880px;
-  --spacing-content: 1280px;
-
-  --animate-scroll-timeline: scroll-timeline infinite linear alternate;
-
-  @keyframes scroll-timeline {
-    0% {
-      transform: translateY(-85%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
-}
-
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -45,30 +29,41 @@ input {
   }
 
   figure[data-rehype-pretty-code-figure] {
-    @apply flex flex-col items-start justify-start;
+    @apply flex flex-col w-full;
     @apply text-small;
     @apply my-4 first:mt-0 last:mb-0;
-    @apply relative;
+    @apply relative overflow-hidden;
+    @apply rounded-md border border-default-200;
   }
 
   figure[data-rehype-pretty-code-figure] figcaption {
-    @apply overflow-x-auto px-4 py-2 rounded-t-md w-full;
-    @apply bg-gray-900 text-white;
-    @apply border-b-8 border-gray-900 -mb-2;
-    @apply italic;
+    @apply overflow-x-auto px-4 py-2 w-full;
+    @apply bg-default-100 text-default-600 border-b border-default-200;
+    @apply font-mono text-tiny;
   }
 
   figure[data-rehype-pretty-code-figure] pre {
-    @apply overflow-x-auto py-4 rounded-md w-full;
-    @apply bg-gray-800 text-gray-300;
+    @apply overflow-x-auto py-4 w-full bg-default-50;
   }
 
   figure[data-rehype-pretty-code-figure] pre > span {
     @apply px-4;
   }
 
+  /* Dual-theme syntax colors (rehype-pretty-code); background comes from the
+     site surface above, so blocks match the site in light and dark. */
+  figure[data-rehype-pretty-code-figure] code[data-theme],
+  figure[data-rehype-pretty-code-figure] code[data-theme] span {
+    color: var(--shiki-light);
+  }
+
+  .dark figure[data-rehype-pretty-code-figure] code[data-theme],
+  .dark figure[data-rehype-pretty-code-figure] code[data-theme] span {
+    color: var(--shiki-dark);
+  }
+
   figure[data-rehype-pretty-code-figure] pre span[data-highlighted-line] {
-    @apply bg-white/10;
+    @apply bg-default-200/50;
   }
 
   pre[data-line-numbers] {
@@ -77,7 +72,7 @@ input {
 
   pre[data-line-numbers] > [data-line]::before {
     @apply [counter-increment:line] [content:counter(line)];
-    @apply inline-block w-3 mr-4 text-right text-gray-500;
+    @apply inline-block w-3 mr-4 text-right text-default-400;
   }
 
   pre[data-line-numbers-max-digits="2"] > [data-line]::before {

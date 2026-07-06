@@ -1,20 +1,13 @@
-import { Card, Divider } from "@heroui/react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import NextLink from "next/link";
 
-import { createPageTitle } from "@/helpers/utility";
+import { createPageTitle, getSlugByTitle } from "@/helpers/utility";
 import { DOMAIN } from "@/settings/constant";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
-import { getSlugByTitle } from "@/helpers/utility";
 import { globalMetadata } from "@/settings/heads";
-import ChipCategory from "@/components/ChipCategory";
-import ChipStatus from "@/components/ChipStatus";
-import DivisionSticky from "@/components/DivisionSticky";
 import Heading from "@/components/Heading";
-import ListboxArticles from "@/components/ListboxArticles";
-import ListboxContents, { IDENTIFIER } from "@/components/ListboxContents";
 import Markdown from "@/components/Markdown";
-import ScrollShadowTechnologies from "@/components/ScrollShadowTechnologies";
 
 type TParams = Readonly<{ date: string }>;
 
@@ -64,73 +57,72 @@ export default async function ({
 }: Readonly<{ params: Promise<TParams> }>) {
   const { date } = await params;
 
-  let article = null;
-  try {
-    article = await getArticleByDate(date);
-  } catch {
-    notFound();
-  }
+  const articles = await getArticles();
+  const index = articles.findIndex((item) => item.metadata.date === date);
+  if (index === -1) notFound();
 
+  const article = articles[index];
   const { metadata, content } = article;
+  const newer = articles[index - 1];
+  const older = articles[index + 1];
 
   return (
-    <div className="gap-12 grid grid-cols-1 md:grid-cols-12 gird-rows-1">
-      <div
-        id={IDENTIFIER}
-        className="md:col-span-8 lg:col-span-9 overflow-y-auto"
+    <article className="py-2">
+      <NextLink
+        href="/"
+        className="font-mono text-tiny text-default-500 hover:text-foreground transition-colors"
       >
-        <div className="flex flex-col gap-2 mb-16">
-          <Heading level={1} id={getSlugByTitle(metadata.title)}>
-            {metadata.title}
-          </Heading>
-          <div className="flex flex-wrap gap-1 items-center text-nowrap font-normal text-small text-foreground/50">
-            <span>{metadata.date} (drafted)</span>
-            <span>·</span>
-            <span>{metadata.createdOn} (created)</span>
-            <span>·</span>
-            <span>{metadata.updatedOn} (updated)</span>
-            <span>·</span>
-            <span>{metadata.minutes} mins read</span>
-          </div>
-          <div className="flex gap-2 items-center">
-            <ChipCategory category={metadata.category} />
-            <ChipStatus status={metadata.status} />
-            <span>·</span>
-            <ScrollShadowTechnologies
-              technologies={metadata.technologies}
-              propsItem={{
-                className: "text-foreground",
-                variant: "bordered",
-                size: "md",
-              }}
-              propsIcon={{ color: "default" }}
-            />
-          </div>
-          <Divider className="mt-4" />
-          <div className="my-2">
-            <Markdown source={metadata.description} />
-          </div>
-          <Divider />
-        </div>
+        ← Posts
+      </NextLink>
 
-        <article>
-          <Markdown source={content} />
-        </article>
+      <Heading level={1} id={getSlugByTitle(metadata.title)}>
+        {metadata.title}
+      </Heading>
+
+      <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-tiny text-default-500">
+        <span>{metadata.date}</span>
+        <span className="text-default-300">·</span>
+        <span>{metadata.minutes} min read</span>
+        <span className="text-default-300">·</span>
+        <span className="uppercase tracking-wider">{metadata.category}</span>
       </div>
-      <DivisionSticky className="hidden md:block md:col-span-4 lg:col-span-3 p-1">
-        {[
-          <Card shadow="sm">
-            <ListboxContents anchors={metadata.anchors} />
-          </Card>,
-          <Card shadow="sm">
-            <ListboxArticles date={metadata.date} />
-          </Card>,
-        ].map((item, index) => (
-          <div key={index} className="not-last:mb-4">
-            {item}
-          </div>
-        ))}
-      </DivisionSticky>
-    </div>
+
+      <div className="mt-6 pt-6 border-t border-default-200">
+        <div className="text-default-600">
+          <Markdown source={metadata.description} />
+        </div>
+        <Markdown source={content} />
+      </div>
+
+      {(newer || older) && (
+        <nav className="mt-14 pt-6 border-t border-default-200 flex justify-between gap-6">
+          {older ? (
+            <NextLink href={older.metadata.route} className="group max-w-[47%]">
+              <span className="block font-mono text-[0.65rem] uppercase tracking-wider text-default-500 mb-1">
+                Older
+              </span>
+              <span className="text-small underline-offset-4 decoration-1 group-hover:underline">
+                {older.metadata.title}
+              </span>
+            </NextLink>
+          ) : (
+            <span />
+          )}
+          {newer && (
+            <NextLink
+              href={newer.metadata.route}
+              className="group max-w-[47%] text-right ml-auto"
+            >
+              <span className="block font-mono text-[0.65rem] uppercase tracking-wider text-default-500 mb-1">
+                Newer
+              </span>
+              <span className="text-small underline-offset-4 decoration-1 group-hover:underline">
+                {newer.metadata.title}
+              </span>
+            </NextLink>
+          )}
+        </nav>
+      )}
+    </article>
   );
 }

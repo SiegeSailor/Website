@@ -9,12 +9,11 @@ import {
   globalMetadata,
   globalViewport,
 } from "@/settings/heads";
-import { AUTHOR } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
-import { getProfile } from "@/helpers/server/document";
 import { PublicEnv } from "@/helpers/utility";
 import Entry from "@/components/Entry";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
 
 export const metadata: Metadata = globalMetadata;
@@ -27,9 +26,6 @@ export default async function ({
   children: ReactNode;
 }>) {
   const articles = await getArticles();
-  const profile = await getProfile();
-
-  const year = new Date().getFullYear();
 
   return (
     <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
@@ -45,19 +41,13 @@ export default async function ({
             showSpinner={false}
           />
 
-          <div className="w-full h-screen flex flex-col">
-            <Entry articles={articles} profile={profile}>
+          <Entry articles={articles}>
+            <div className="min-h-screen flex flex-col w-full max-w-2xl mx-auto px-6">
               <Header />
-              <main className="w-full mx-auto px-4 grow pt-4 sm:pt-8">
-                {children}
-              </main>
-            </Entry>
-            <div className="text-center px-4 py-2 bg-default-100 text-small font-light flex flex-row flex-wrap justify-center gap-2">
-              <p>
-                © {year} {AUTHOR}
-              </p>
+              <main className="grow">{children}</main>
+              <Footer />
             </div>
-          </div>
+          </Entry>
         </Provider>
       </body>
     </html>

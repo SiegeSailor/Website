@@ -37,7 +37,10 @@ export default async function ({
             [
               rehypePrettyCode,
               {
-                theme: "slack-dark",
+                // Dual themes so code blocks follow the site theme; the site's
+                // own surface is used for the background (keepBackground: false).
+                theme: { light: "github-light", dark: "github-dark" },
+                keepBackground: false,
                 defaultLang: { block: "shell", inline: "text" },
               },
             ],

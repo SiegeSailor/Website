@@ -9,6 +9,11 @@ export const globalMetadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   icons: "/images/favicon.ico",
+  alternates: {
+    types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: `${TITLE} — RSS` }],
+    },
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
