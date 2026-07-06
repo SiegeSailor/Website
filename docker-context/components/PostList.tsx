@@ -67,7 +67,7 @@ export default function PostList({ posts }: Readonly<{ posts: TPost[] }>) {
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Filter posts by title, topic, or tech…"
+          placeholder="Filter posts by title, topic, or technologies…"
           aria-label="Filter posts"
           className="w-full bg-transparent outline-none text-small placeholder:text-default-500"
         />
@@ -85,22 +85,24 @@ export default function PostList({ posts }: Readonly<{ posts: TPost[] }>) {
               className="group block py-3 border-t border-default-200"
             >
               <div className="flex items-baseline gap-4">
-                <span className="font-mono text-tiny tabular-nums text-default-500 w-14 shrink-0">
+                <span className="font-mono text-tiny tabular-nums text-default-500 w-14 shrink-0 group-hover:underline">
                   {monthDay(post.date)}
                 </span>
-                <span className="flex-1 text-medium font-medium leading-snug tracking-tight underline-offset-4 decoration-1 group-hover:underline">
-                  {post.title}
-                </span>
-                <span className="font-mono text-tiny text-default-500 shrink-0">
+                <div className="flex-1 flex flex-col gap-1">
+                  <p className="flex-1 text-medium font-medium leading-snug tracking-tight underline-offset-4 decoration-1 group-hover:underline">
+                    {post.title}
+                  </p>
+                  <p className="mt-1 sm:pl-pl18 text-small text-default-500 leading-normal line-clamp-2 group-hover:underline">
+                    {post.description}
+                  </p>
+                  <p className="mt-1 sm:pl-pl18 font-mono text-[0.65rem] uppercase tracking-wider text-default-500 group-hover:underline">
+                    {post.category}
+                  </p>
+                </div>
+                <span className="font-mono text-tiny text-default-500 shrink-0 group-hover:underline">
                   {post.minutes} min
                 </span>
               </div>
-              <p className="mt-1 sm:pl-pl18 text-small text-default-500 leading-normal line-clamp-2">
-                {post.description}
-              </p>
-              <p className="mt-1 sm:pl-pl18 font-mono text-[0.65rem] uppercase tracking-wider text-default-500">
-                {post.category}
-              </p>
             </NextLink>
           ))}
         </section>
