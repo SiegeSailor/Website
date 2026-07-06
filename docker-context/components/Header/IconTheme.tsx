@@ -58,9 +58,9 @@ export default function ({
         })}
       >
         {!isSelected || isSSR ? (
-          <SunIcon size="1.45rem" strokeWidth="0.075rem" />
+          <SunIcon size="1.05rem" />
         ) : (
-          <MoonIcon size="1.45rem" strokeWidth="0.075rem" />
+          <MoonIcon size="1.05rem" />
         )}
       </div>
     </Component>
