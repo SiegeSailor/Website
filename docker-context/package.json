@@ -74,7 +74,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack"
+    "watch": "NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --webpack",
+    "watch:readme": "node --watch-path=./files/resume ./scripts/build-readme.mjs",
+    "watch:resume": "node --watch-path=./files/resume ./scripts/build-resume.mjs"
   },
   "type": "module",
   "version": "1.2.0"

@@ -72,6 +72,10 @@ const nextConfig = {
 
     fileLoaderRule.exclude = /\.svg$/i;
 
+    // Import YAML as raw text so the dev server watches it and hot-reloads
+    // pages built from Resume.yaml.
+    config.module.rules.push({ test: /\.ya?ml$/i, type: "asset/source" });
+
     return config;
   },
 };

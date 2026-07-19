@@ -2,6 +2,8 @@ import { join } from "path";
 import { readFileSync, existsSync } from "fs";
 import { load } from "js-yaml";
 
+import resumeYaml from "@/files/resume/Resume.yaml";
+
 // Single source of truth for the website's profile/about data and the résumé
 // variants. Only nodes belonging to the `profile` variant (or untagged) are
 // exposed here; the PDF résumé keeps its own professional / academic variants
@@ -107,8 +109,7 @@ const repoKey = (href: string): string | null => {
 };
 
 export async function getResume() {
-  const filePath = join(process.cwd(), "files/resume/Resume.yaml");
-  const data = (load(readFileSync(filePath, "utf8")) ?? {}) as TResumeData;
+  const data = (load(resumeYaml) ?? {}) as TResumeData;
   const versions = readVersions();
 
   const profile = {
