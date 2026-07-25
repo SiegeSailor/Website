@@ -1,0 +1,21 @@
+# Website-only: the home page hero, /about page, and the generated GitHub
+# profile README. Never rendered in the resume documents.
+profile:
+  picture: /images/Jin-Yu-Zhang.jpg
+  headlines:
+    - "Full-Stack Development"
+    - "DevOps"
+    - "Cloud-Based Web Microservices"
+  media:
+    github: "https://github.com/SiegeSailor"
+    linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
+    resume: "https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf"
+  status:
+    location: "NYC Metropolitan Area"
+    position: "Senior Software Engineer"
+  # Home page (jinyu-zhang.com) hero: `tagline` completes the "<position> at
+  # <company> — " headline; `intro` is the paragraph beneath it.
+  tagline: "DevOps & full-stack, from cloud microservices to FDA-regulated medical devices."
+  intro: >-
+    I build scalable, maintainable systems and write up what I learn along the
+    way — CI/CD, containers, embedded WebKit, and the occasional debugging saga.

@@ -7,7 +7,10 @@ on:
       - main
     paths:
       - .github/workflows/production.yml
-      - docker-context/**
+      - website/**
+      - tooling/**
+      - content/**
+      - package-lock.json
       - infrastructure/**
   workflow_dispatch:
 
@@ -35,35 +38,30 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "26"
+          node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: docker-context/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: docker-context
         run: npm ci
 
       - name: Format check
-        working-directory: docker-context
         run: npm run format:check
 
       - name: Lint
-        working-directory: docker-context
         run: npm run lint
 
       - name: Typecheck
-        working-directory: docker-context
         run: npm run typecheck
 
       - name: Build static site
-        working-directory: docker-context
         env:
           COMMIT_SHORT: ${{ github.sha }}
           GH_TOKEN: ${{ github.token }}
         run: npm run build
 
       - name: Generate resume documents and profile README
-        run: bash scripts/docker-copy.sh "docker-context/export/documents"
+        run: bash scripts/docker-copy.sh "website/export/documents"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
@@ -109,17 +107,17 @@ jobs:
         run: |
           bucket="$(terraform output -raw site_bucket_name)"
           distribution="$(terraform output -raw cloudfront_distribution_id)"
-          aws s3 sync ../docker-context/export "s3://${bucket}" --delete --exclude "*.DS_Store"
+          aws s3 sync ../website/export "s3://${bucket}" --delete --exclude "*.DS_Store"
           aws cloudfront create-invalidation --distribution-id "${distribution}" --paths "/*"
 
       - name: Sync profile README
         env:
           GH_TOKEN: ${{ secrets.SIEGESAILOR_PAT }}
         run: |
-          version="$(node -p "require('./docker-context/package.json').version")"
+          version="$(node -p "require('./package.json').version")"
           workdir="$(mktemp -d)"
           git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/SiegeSailor/SiegeSailor.git" "${workdir}"
-          cp docker-context/SiegeSailor-README.md "${workdir}/README.md"
+          cp website/SiegeSailor-README.md "${workdir}/README.md"
           cd "${workdir}"
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"

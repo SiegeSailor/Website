@@ -1,21 +1,21 @@
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { load } from "js-yaml";
+import { loadContent, loadVersions, VERSIONS_FILE } from "./content.mjs";
 
-// Resolves the latest release/tag for each GitHub project in Resume.yaml and
-// writes files/resume/versions.generated.json ({ "owner/repo": "2.3.0" }),
-// consumed by helpers/server/resume.ts. Resilient by design: any network / auth
+// Resolves the latest release/tag for each GitHub project in content/projects.yaml
+// and writes content/versions.generated.json ({ "owner/repo": "2.3.0" }), consumed
+// by both website/helpers/server/resume.ts and build-readme.mjs. Resilient by
+// design: any network / auth
 // / 404 failure is skipped (that project simply shows no version chip), the
 // existing JSON is preserved, and the process always exits 0 so `npm run build`
 // never fails offline. Prefers the authenticated `gh` CLI, falls back to the
 // REST API (GH_TOKEN / GITHUB_TOKEN if present, else unauthenticated).
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const RESUME_FILE = join(ROOT, "files/resume/Resume.yaml");
-const OUTPUT_FILE = join(ROOT, "files/resume/versions.generated.json");
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
+const OUTPUT_FILE = VERSIONS_FILE;
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "";
 
@@ -61,16 +61,9 @@ async function latestVersion(owner, repo) {
 }
 
 async function main() {
-  let versions = {};
-  if (existsSync(OUTPUT_FILE)) {
-    try {
-      versions = JSON.parse(readFileSync(OUTPUT_FILE, "utf8"));
-    } catch {
-      versions = {};
-    }
-  }
+  const versions = loadVersions();
 
-  const data = load(readFileSync(RESUME_FILE, "utf8"));
+  const data = loadContent();
   const repos = new Map();
   for (const project of data.projects || []) {
     const match = String(project.href || "").match(REGEX_GITHUB_REPO);

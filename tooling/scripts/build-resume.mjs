@@ -3,7 +3,6 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { load } from "js-yaml";
 import {
   AlignmentType,
   BorderStyle,
@@ -15,11 +14,15 @@ import {
   TextRun,
 } from "docx";
 
+import { loadContent } from "./content.mjs";
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA = load(readFileSync(join(ROOT, "files/resume/Resume.yaml"), "utf8"));
+const DATA = loadContent();
 const OUTPUT = join(ROOT, "export/resume");
+// The repository root package.json is the single version source (semantic-release
+// bumps it); stamped into the document metadata.
 const VERSION = JSON.parse(
-  readFileSync(join(ROOT, "package.json"), "utf8"),
+  readFileSync(join(ROOT, "../package.json"), "utf8"),
 ).version;
 
 const VARIANT_TO_LABEL = { professional: "Professional", academic: "Academic" };

@@ -1,0 +1,16 @@
+node_modules/
+package-lock.json
+CHANGELOG.md
+
+# Next.js
+website/.next/
+website/export/
+website/build-cache/
+website/public/
+website/next-env.d.ts
+website/SiegeSailor-README.md
+
+# Authored content, not code: articles are prose (their own writing guide) and
+# content/ is the hand-tuned single source of truth. Leave them untouched.
+website/files/articles/
+content/

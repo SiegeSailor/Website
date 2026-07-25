@@ -28,12 +28,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "26"
+          node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: docker-context/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: docker-context
         run: npm ci
 
       - name: Delete legacy resume release
@@ -44,11 +43,11 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: ./docker-context/node_modules/.bin/semantic-release
+        run: npx semantic-release
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
           name: resume-${{ github.sha }}
-          path: docker-context/export/resume/
+          path: tooling/export/resume/
           if-no-files-found: ignore

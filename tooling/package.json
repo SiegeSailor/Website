@@ -1,0 +1,24 @@
+{
+  "name": "@siegesailor-website/tooling",
+  "version": "1.2.0",
+  "description": "Builds the resume documents and the GitHub profile README from content/.",
+  "homepage": "https://github.com/SiegeSailor/Website",
+  "bugs": "https://github.com/SiegeSailor/Website/issues",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">= 26.5.0",
+    "npm": ">= 11.17.0"
+  },
+  "scripts": {
+    "build:readme": "node ./scripts/build-readme.mjs",
+    "build:resume": "node ./scripts/build-resume.mjs",
+    "build:versions": "node ./scripts/build-versions.mjs",
+    "watch:readme": "node --watch-path=../content ./scripts/build-readme.mjs",
+    "watch:resume": "node --watch-path=../content ./scripts/build-resume.mjs"
+  },
+  "dependencies": {
+    "docx": "9.7.1",
+    "js-yaml": "5.2.1"
+  }
+}

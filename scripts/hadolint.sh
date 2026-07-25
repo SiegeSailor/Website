@@ -28,7 +28,7 @@ main() {
   hadolint \
     --config .hadolint.yml \
     "${hadolint_flags[@]}" \
-    docker-context/Dockerfile
+    tooling/Dockerfile
 
   echo -e "${BLUE}[DONE] Linted Dockerfile${NONE}"
 }

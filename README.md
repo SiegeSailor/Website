@@ -5,14 +5,18 @@
 [![Resume: Professional](https://img.shields.io/badge/Resume-Professional-0078D4?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf)
 [![Resume: Academic](https://img.shields.io/badge/Resume-Academic-A31F34?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf)
 
-My personal website — a statically exported Next.js site served from S3 behind CloudFront. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and the `CLAUDE.md` files ([root](./CLAUDE.md), [application](./docker-context/CLAUDE.md), [articles](./docker-context/files/articles/CLAUDE.md)) for detailed instructions on contributing to relevant parts of the project.
+My personal website — a statically exported Next.js site served from S3 behind CloudFront. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and the `CLAUDE.md` files ([root](./CLAUDE.md), [application](./website/CLAUDE.md), [content](./content/CLAUDE.md), [articles](./website/files/articles/CLAUDE.md)) for detailed instructions on contributing to relevant parts of the project.
 
-## Resume
+## Resume and Profile
 
-[`docker-context/files/resume/Resume.yaml`](./docker-context/files/resume/Resume.yaml) is the single source of truth for both the resume documents and the [profile page](https://jinyu-zhang.com/profile). The [`release.yml`](./.github/workflows/release.yml) workflow versions the project with [semantic-release](https://semantic-release.gitbook.io/) on every push to `main`, renders the resume into ATS-safe `.docx`, `.pdf`, and `.txt` documents in two variants, and attaches them to every [release](https://github.com/SiegeSailor/Website/releases). The website image serves the documents publicly at `https://jinyu-zhang.com/documents/<document>`, which the badges above link to:
+[`content/`](./content/) is the single source of truth for four generated outputs, found at:
 
-- **Professional**: one page, impact and scale focus
-- **Academic**: two pages, systems and leadership focus
+- **Professional resume** (one page): <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf>
+- **Academic resume** (two pages): <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf>
+- **Website profile**: <https://jinyu-zhang.com> and <https://jinyu-zhang.com/about>
+- **GitHub profile README**: <https://github.com/SiegeSailor>
+
+Resume documents are also attached to every [release](https://github.com/SiegeSailor/Website/releases). See [`CONTRIBUTING.md`](./CONTRIBUTING.md#building-the-resume-profile-and-readme) for how each output is built and published.
 
 ## License
 

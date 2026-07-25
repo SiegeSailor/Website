@@ -10,10 +10,12 @@ Everything under `app/` must stay statically exportable: no Server Actions, no
 request-time rendering, and route handlers must be static (see `feed.xml`).
 
 Code is formatted with Prettier (`.prettierrc.json`) and linted with ESLint
-(`eslint.config.mjs`, `eslint-config-next`). Run `npm run format` and
-`npm run lint` before committing; CI enforces both. Prettier owns formatting,
-ESLint owns correctness, and authored content (`files/articles/`,
-`files/resume/`) is excluded from Prettier.
+(`eslint.config.mjs`, `eslint-config-next`). A Husky `pre-commit` hook runs
+both plus `tsc --noEmit` over staged files via lint-staged
+(`.lintstagedrc.mjs`), and CI enforces them across the app. Both configs live at
+the repository root, so run `npm run format` and `npm run lint` from there.
+Prettier owns formatting, ESLint owns correctness, and authored content
+(`files/articles/`, `../content/`) is excluded from Prettier.
 
 ## Project structure
 
@@ -37,23 +39,27 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
   - `files/articles/` — blog posts named `YYYY-MM-DD.md` (that folder's
     `CLAUDE.md` is the writing guide; `getArticleByFilename` in
     `helpers/server/article.ts` documents the front-matter fields).
-  - `files/resume/Resume.yaml` — the résumé source of truth, plus the website
-    `profile:` block and `projects:`, read via `getResume` in
-    `helpers/server/resume.ts`. Résumé constraints live in the root `CLAUDE.md`.
 - **`helpers/`** — shared functions. Same-domain helpers share a filename:
   `helpers/server/*` is server-only, `helpers/client/*` is client-only,
   `helpers/*` is shared.
 - **`public/`** — static assets. Article images live in
   `public/images/<YYYY-MM-DD>/` named `Pascal-Case.ext`.
-- **`scripts/`** — build scripts wired to npm scripts: `build-resume.mjs`,
-  `build-versions.mjs` (project release versions), `build-readme.mjs` (profile
-  README).
 - **`settings/`** — `constant.ts` (global constants and route titles),
   `heads.ts` (metadata, viewport, fonts), `icons.ts` (icon mapping).
 - **`stores/`** — Zustand stores: `article` (post list, seeded by `Entry`) and
   `chart` (theme-derived colors used by Mermaid).
 - **`styles/`** — global CSS, including the theme plugin and the markdown /
   code-block styling.
+
+## Reading `content/`
+
+The résumé, profile, and project data lives in `../content/` (that folder's
+`CLAUDE.md` is the guide), reached through the `@content/*` tsconfig alias.
+`getResume` in `helpers/server/resume.ts` imports `profile.yaml`, `summary.yaml`,
+`experience.yaml`, and `projects.yaml` as **raw text** — a webpack
+`asset/source` rule in `next.config.mjs` — so the dev server watches them and
+hot-reloads. Adding a top-level key the website needs means adding an import
+there; the folder is not globbed. Résumé constraints live in the root `CLAUDE.md`.
 
 ## Rendering notes
 
@@ -70,6 +76,6 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
   (`helpers/client/chart.ts`). Diagrams open in `ZoomPanModal` to enlarge, pan,
   and zoom.
 
-The `Dockerfile` only builds the résumé documents and the profile README
-(LibreOffice, pandoc, and fonts live in the image); the website itself is built
-with `npm run build` on the host.
+The résumé documents and the profile README are built by `tooling/`, not here;
+this workspace only builds the site, with `npm run build` from the repository
+root.

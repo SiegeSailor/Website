@@ -1,0 +1,16 @@
+# `professional` also serves as the summary on /about and the profile README.
+summary:
+  professional: >-
+    Senior software engineer spanning regulated medical devices (FDA / EU MDR)
+    and large-scale consumer platforms. Led a team of 5 to ship device SDKs,
+    real-time distributed systems, and developer platforms for 5+ vendors and
+    20+ engineers; sustained 10,000 peak RPS at Shopee. First-author IEEE
+    publication on DevSecOps; building LLM-assisted workflows in regulated R&D.
+  academic: >-
+    Systems-focused software engineer with years of experience bridging hardware,
+    firmware, and software on FDA / EU MDR-regulated medical devices, after
+    scaling consumer platforms to 200,000+ daily users. Led a team of 5 across
+    cross-vendor engineering (5+ vendors, 20+ developers), define cross-functional
+    interface standards, and coordinate global formative studies. First
+    author of an IEEE Access publication on quantitative DevSecOps metrics;
+    promoted intern to senior engineer in two years.

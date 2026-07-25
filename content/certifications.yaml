@@ -1,0 +1,17 @@
+certifications:
+  # Two MIT entries by design: professional needs the compact one-line form
+  # (one-page fit); academic spells out the ranking as a bullet.
+  - school: Massachusetts Institute of Technology
+    degree: "Cert. in Data Science & Machine Learning (top 15 of 146)"
+    dates: "Aug 2023 – Nov 2023"
+    variants: [professional]
+  - school: Massachusetts Institute of Technology
+    degree: "Certificate in Data Science and Machine Learning"
+    dates: "Aug 2023 – Nov 2023"
+    variants: [academic]
+    details:
+      - text: "Ranked 15th of 146 participants; score 579.5 / 600"
+  - school: New York University
+    degree: "Certificate, Preparatory Course for Graduate Studies in Computing"
+    dates: "Jan 2022 – May 2022"
+    variants: [academic]

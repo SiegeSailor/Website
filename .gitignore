@@ -41,8 +41,8 @@ next-env.d.ts
 #######################################
 # Generated
 #######################################
-docker-context/files/resume/versions.generated.json
-docker-context/SiegeSailor-README.md
+content/versions.generated.json
+website/SiegeSailor-README.md
 
 #######################################
 # NPM

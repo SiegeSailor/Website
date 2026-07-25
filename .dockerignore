@@ -1,0 +1,19 @@
+#######################################
+# Allowlist
+#######################################
+# The context is the repository root but the image only needs the tooling
+# workspace and the content it renders, so exclude everything and re-include
+# those paths -- this keeps website/public/ (~37 MB) out of the context.
+*
+
+!package.json
+!package-lock.json
+!content/
+!tooling/package.json
+!tooling/scripts/
+
+#######################################
+# Generated
+#######################################
+**/node_modules/
+**/export/

@@ -44,7 +44,7 @@ main() {
   local -r protocol="${2:-https}"
 
   local -r base_url="${protocol}://${domain}"
-  local -r path_to_articles="docker-context/files/articles"
+  local -r path_to_articles="website/files/articles"
   
   if [ ! -d "${path_to_articles}" ]; then
     echo -e "${YELLOW}[ERROR] This script must be run from the root directory${NONE}" >&2

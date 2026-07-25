@@ -5,13 +5,19 @@ on:
   pull_request:
     paths:
       - .github/workflows/ci.yml
-      - docker-context/**
+      - website/**
+      - tooling/**
+      - content/**
+      - package-lock.json
   push:
     branches-ignore:
       - main
     paths:
       - .github/workflows/ci.yml
-      - docker-context/**
+      - website/**
+      - tooling/**
+      - content/**
+      - package-lock.json
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -25,10 +31,6 @@ jobs:
     permissions:
       contents: read
 
-    defaults:
-      run:
-        working-directory: docker-context
-
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -36,9 +38,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "26"
+          node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: docker-context/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci

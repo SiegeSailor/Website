@@ -1,18 +1,16 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { load } from "js-yaml";
+import { loadContent, loadVersions } from "./content.mjs";
 
 // Generates the GitHub profile README (SiegeSailor/SiegeSailor) from the same
-// Resume.yaml `profile` block, summary, and projects that drive the /about page,
+// content/ `profile` block, summary, and projects that drive the /about page,
 // so the two stay in lockstep. Writes export/SiegeSailor-README.md (like
 // build-resume writes export/resume/*); the Docker image builds it and the
 // deploy workflow copies it out and pushes it to the profile repository.
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const RESUME_FILE = join(ROOT, "files/resume/Resume.yaml");
-const VERSIONS_FILE = join(ROOT, "files/resume/versions.generated.json");
 const OUTPUT_FILE = join(ROOT, "export/SiegeSailor-README.md");
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const NAME = "Jin Yu Zhang";
@@ -43,8 +41,6 @@ function experienceYears() {
   return `${year} Years ${month === "0" ? "" : `${monthFloor} Months`}`.trim();
 }
 
-const inProfile = (item) =>
-  !item?.variants || item.variants.includes("profile");
 const repoKey = (href) => {
   const match = String(href).match(REGEX_GITHUB_REPO);
   return match ? `${match[1]}/${match[2].replace(/\.git$/, "")}` : null;
@@ -52,21 +48,13 @@ const repoKey = (href) => {
 const versionLabel = (version) =>
   /^v/i.test(version) ? version : `v${version}`;
 
-function readVersions() {
-  if (!existsSync(VERSIONS_FILE)) return {};
-  try {
-    return JSON.parse(readFileSync(VERSIONS_FILE, "utf8"));
-  } catch {
-    return {};
-  }
-}
+const readVersions = loadVersions;
 
-const data = load(readFileSync(RESUME_FILE, "utf8"));
+const data = loadContent();
 const profile = data.profile;
 const versions = readVersions();
 
 const projects = (data.projects || [])
-  .filter(inProfile)
   .filter((project) => project.stage !== "Planning")
   .sort((left, right) => STAGE_ORDER[left.stage] - STAGE_ORDER[right.stage])
   .map((project) => {

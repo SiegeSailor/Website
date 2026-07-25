@@ -2,7 +2,7 @@
 #
 # Build the resume Docker image and copy its generated artifacts out of it: the
 # resume documents into a target directory, and the GitHub profile README to
-# docker-context/SiegeSailor-README.md.
+# website/SiegeSailor-README.md.
 #
 # Building the image IS what generates the artifacts (the `resume` stage runs
 # `npm run build:resume` and `npm run build:readme`), so the build step is
@@ -46,23 +46,23 @@ get_docker_cmd() {
 #######################################
 # Main function.
 # Arguments:
-#   $1 - Resume documents target directory (default: docker-context/export/resume)
+#   $1 - Resume documents target directory (default: tooling/export/resume)
 #   $2 - Build platform (default: linux/amd64)
-#   $3 - Docker image tag (default: siegesailor-website-resume:latest)
+#   $3 - Docker image tag (default: siegesailor-website-tooling:latest)
 #   $@ - Additional flags to pass to Docker (optional)
 # Outputs:
 #   Resume documents in $1 and the profile README at
-#   docker-context/SiegeSailor-README.md
+#   website/SiegeSailor-README.md
 #######################################
 main() {
-  if [ ! -d "docker-context" ]; then
+  if [ ! -d "tooling" ]; then
     echo -e "${YELLOW}[ERROR] This script must be run from the root directory${NONE}" >&2
     exit 1
   fi
 
-  local -r target="${1:-docker-context/export/resume}"
+  local -r target="${1:-tooling/export/resume}"
   local -r build_platform="${2:-linux/amd64}"
-  local -r image="${3:-siegesailor-website-resume:latest}"
+  local -r image="${3:-siegesailor-website-tooling:latest}"
   local -ra docker_flags=("${@:4}")
   local docker_cmd
   docker_cmd="$(get_docker_cmd)" || exit 1
@@ -73,23 +73,24 @@ main() {
     --target "resume" \
     --tag "${image}" \
     --platform "${build_platform}" \
+    --file "tooling/Dockerfile" \
     "${docker_flags[@]}" \
-    docker-context
+    .
 
   echo -e "${GREEN}[INFO] Copying artifacts out of ${image}${NONE}"
   mkdir -p "${target}"
   local container
   container="$(${docker_cmd} create "${image}")"
   {
-    ${docker_cmd} cp "${container}:/app/export/resume/." "${target}"
-    ${docker_cmd} cp "${container}:/app/export/SiegeSailor-README.md" "docker-context/SiegeSailor-README.md"
+    ${docker_cmd} cp "${container}:/app/tooling/export/resume/." "${target}"
+    ${docker_cmd} cp "${container}:/app/tooling/export/SiegeSailor-README.md" "website/SiegeSailor-README.md"
   } || {
     ${docker_cmd} rm "${container}" >/dev/null
     exit 1
   }
   ${docker_cmd} rm "${container}" >/dev/null
 
-  echo -e "${BLUE}[DONE] Resume documents in ${target}; profile README at docker-context/SiegeSailor-README.md${NONE}"
+  echo -e "${BLUE}[DONE] Resume documents in ${target}; profile README at website/SiegeSailor-README.md${NONE}"
 }
 
 main "$@"
