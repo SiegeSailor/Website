@@ -17,7 +17,7 @@ import {
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
 
 export async function getArticles() {
-  const directory = join(process.cwd(), "files/articles");
+  const directory = join(process.cwd(), "..", "content/articles");
   const filenames = readdirSync(directory);
 
   const articles = await Promise.all(
@@ -36,7 +36,7 @@ export async function getArticles() {
 export async function getArticleByFilename(filename: string) {
   try {
     const date = filename.split(".")[0];
-    const filePath = join(process.cwd(), "files/articles", filename);
+    const filePath = join(process.cwd(), "..", "content/articles", filename);
     const fileContents = readFileSync(filePath, "utf8");
     const { content: source, data } = matter(fileContents);
 

@@ -10,7 +10,7 @@ import { load } from "js-yaml";
 
 export const CONTENT_DIR = join(
   dirname(fileURLToPath(import.meta.url)),
-  "../../content",
+  "../../content/resume",
 );
 export const VERSIONS_FILE = join(CONTENT_DIR, "versions.generated.json");
 

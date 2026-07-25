@@ -12,15 +12,18 @@ The repository is an npm workspace: the root `package.json` owns the version
 (bumped by semantic-release) and the single `package-lock.json`; `website/` and
 `tooling/` are the two workspaces, and `content/` is plain data shared by both.
 
-- **`content/`** — the single source of truth for the résumé variants, the home
-  and `/about` pages, and the generated GitHub profile README. One YAML file per
-  top-level key, merged by each consumer (see its own
-  [`CLAUDE.md`](./content/CLAUDE.md)). Hand-tuned; excluded from Prettier.
+- **`content/`** — all authored content, shared by the other two folders and
+  excluded from Prettier because it is hand-tuned prose and data:
+  - `content/resume/` — the single source of truth for the résumé variants, the
+    home and `/about` pages, and the generated GitHub profile README. One YAML
+    file per top-level key, merged by each consumer (see its own
+    [`CLAUDE.md`](./content/resume/CLAUDE.md)).
+  - `content/articles/` — blog posts named `YYYY-MM-DD.md` (the folder's
+    `CLAUDE.md` is the writing guide).
 - **`website/`** — the Next.js application (see its own
   [`CLAUDE.md`](./website/CLAUDE.md) for the internal structure), built on the
-  host with `npm run build`. Reads `content/` through the `@content/*` alias.
-  - `files/articles/` — blog posts named `YYYY-MM-DD.md` (the folder's
-    `CLAUDE.md` is the writing guide).
+  host with `npm run build`. Reads `content/resume/` through the `@content/*`
+  alias and `content/articles/` from disk.
 - **`tooling/`** — the `Dockerfile` and the three build scripts that render
   `content/` into the résumé documents, the profile README, and the project
   version list. Deliberately depends on `js-yaml` and `docx` only, so the image
@@ -53,7 +56,7 @@ npm run format            # Prettier write; format:check to verify only
 npm run typecheck         # tsc --noEmit
 npm run build             # build:versions, then static export to website/export/
 npm run build:resume      # content/ -> tooling/export/resume/*.{docx,pdf,txt}
-npm run build:versions    # latest GitHub release per project -> content/versions.generated.json
+npm run build:versions    # latest GitHub release per project -> content/resume/versions.generated.json
 npm run build:readme      # content/ -> tooling/export/SiegeSailor-README.md
 ```
 
@@ -86,7 +89,7 @@ repository root, which is also the Docker build context. Terraform runs from
 
 ## Résumé, profile, and README
 
-`content/` feeds three outputs from one source:
+`content/resume/` feeds three outputs from one source:
 
 1. the **PDF/DOCX résumé** in two variants (`professional`, `academic`), built
    by `tooling/scripts/build-resume.mjs`;
@@ -95,8 +98,8 @@ repository root, which is also the Docker build context. Terraform runs from
 3. the **GitHub profile README** (`SiegeSailor/SiegeSailor`), built by
    `tooling/scripts/build-readme.mjs`.
 
-`content/` splits one file per top-level key and every consumer merges them, so a
-key must appear in exactly one file. See [`content/CLAUDE.md`](./content/CLAUDE.md)
+`content/resume/` splits one file per top-level key and every consumer merges them, so a
+key must appear in exactly one file. See [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md)
 for the file-to-key map and which consumer reads what.
 
 Any node may carry a `variants:` list (`professional`, `academic`); a node with
@@ -122,7 +125,7 @@ add a résumé variant, tag the relevant nodes and register it in
 4. **Never re-flatten stacked role lines** (CooperSurgical, Servicetech) into a
    single title/date range. Background-check vendors verify titles and dates;
    the stacked history is deliberate and factual.
-5. **Facts in `content/` are verified.** Do not alter dates, rankings, or
+5. **Facts in `content/resume/` are verified.** Do not alter dates, rankings, or
    titles without explicit confirmation from Ken.
 
 ### Résumé layout notes (hard-won — don't rediscover)

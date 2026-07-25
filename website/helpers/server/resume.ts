@@ -2,10 +2,10 @@ import { join } from "path";
 import { readFileSync, existsSync } from "fs";
 import { load } from "js-yaml";
 
-import experienceYaml from "@content/experience.yaml";
-import profileYaml from "@content/profile.yaml";
-import projectsYaml from "@content/projects.yaml";
-import summaryYaml from "@content/summary.yaml";
+import experienceYaml from "@content/resume/experience.yaml";
+import profileYaml from "@content/resume/profile.yaml";
+import projectsYaml from "@content/resume/projects.yaml";
+import summaryYaml from "@content/resume/summary.yaml";
 
 // Website view of content/: only the four files holding the keys used here. Nodes
 // tagged with a resume variant are resume-only, so only untagged nodes surface.
@@ -76,7 +76,11 @@ type TResumeData = {
 export type TResume = Awaited<ReturnType<typeof getResume>>;
 
 function readVersions(): Record<string, string> {
-  const file = join(process.cwd(), "..", "content/versions.generated.json");
+  const file = join(
+    process.cwd(),
+    "..",
+    "content/resume/versions.generated.json",
+  );
   if (!existsSync(file)) return {};
   try {
     return JSON.parse(readFileSync(file, "utf8")) as Record<string, string>;

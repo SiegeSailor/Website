@@ -5,11 +5,11 @@
 [![Resume: Professional](https://img.shields.io/badge/Resume-Professional-0078D4?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf)
 [![Resume: Academic](https://img.shields.io/badge/Resume-Academic-A31F34?logo=readdotcv&logoColor=white)](https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf)
 
-My personal website — a statically exported Next.js site served from S3 behind CloudFront. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and the `CLAUDE.md` files ([root](./CLAUDE.md), [application](./website/CLAUDE.md), [content](./content/CLAUDE.md), [articles](./website/files/articles/CLAUDE.md)) for detailed instructions on contributing to relevant parts of the project.
+My personal website — a statically exported Next.js site served from S3 behind CloudFront. Please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for development and deployment, and the `CLAUDE.md` files ([root](./CLAUDE.md), [application](./website/CLAUDE.md), [resume content](./content/resume/CLAUDE.md), [articles](./content/articles/CLAUDE.md)) for detailed instructions on contributing to relevant parts of the project.
 
 ## Resume and Profile
 
-[`content/`](./content/) is the single source of truth for four generated outputs, found at:
+[`content/resume/`](./content/resume/) is the single source of truth for four generated outputs, found at:
 
 - **Professional resume** (one page): <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf>
 - **Academic resume** (two pages): <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf>

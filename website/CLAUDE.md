@@ -15,7 +15,7 @@ both plus `tsc --noEmit` over staged files via lint-staged
 (`.lintstagedrc.mjs`), and CI enforces them across the app. Both configs live at
 the repository root, so run `npm run format` and `npm run lint` from there.
 Prettier owns formatting, ESLint owns correctness, and authored content
-(`files/articles/`, `../content/`) is excluded from Prettier.
+(`../content/`) is excluded from Prettier.
 
 ## Project structure
 
@@ -35,10 +35,6 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
   `ModalImage`, and `ButtonCopy`. `ZoomPanModal` is the shared enlarge/pan/zoom
   dialog used by both `ModalImage` and `Mermaid`. `Provider` sets up HeroUI and
   the theme; `Entry` seeds the article store on load.
-- **`files/`** — content read through helper functions:
-  - `files/articles/` — blog posts named `YYYY-MM-DD.md` (that folder's
-    `CLAUDE.md` is the writing guide; `getArticleByFilename` in
-    `helpers/server/article.ts` documents the front-matter fields).
 - **`helpers/`** — shared functions. Same-domain helpers share a filename:
   `helpers/server/*` is server-only, `helpers/client/*` is client-only,
   `helpers/*` is shared.
@@ -53,13 +49,19 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 
 ## Reading `content/`
 
-The résumé, profile, and project data lives in `../content/` (that folder's
-`CLAUDE.md` is the guide), reached through the `@content/*` tsconfig alias.
-`getResume` in `helpers/server/resume.ts` imports `profile.yaml`, `summary.yaml`,
-`experience.yaml`, and `projects.yaml` as **raw text** — a webpack
-`asset/source` rule in `next.config.mjs` — so the dev server watches them and
-hot-reloads. Adding a top-level key the website needs means adding an import
-there; the folder is not globbed. Résumé constraints live in the root `CLAUDE.md`.
+This workspace holds no authored content — it all lives in `../content/`, and
+each subfolder has its own `CLAUDE.md`:
+
+- `content/resume/` is reached through the `@content/*` tsconfig alias.
+  `getResume` in `helpers/server/resume.ts` imports `profile.yaml`,
+  `summary.yaml`, `experience.yaml`, and `projects.yaml` as **raw text** — a
+  webpack `asset/source` rule in `next.config.mjs` — so the dev server watches
+  them and hot-reloads. Adding a top-level key the website needs means adding an
+  import there; the folder is not globbed. Résumé constraints live in the root
+  `CLAUDE.md`.
+- `content/articles/` is read from disk by `helpers/server/article.ts`, which
+  documents the front-matter fields. Article images stay here in
+  `public/images/<YYYY-MM-DD>/` because Next.js serves them.
 
 ## Rendering notes
 

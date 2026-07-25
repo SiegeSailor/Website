@@ -25,21 +25,21 @@ You will follow each steps below and will not skip any of them.
 
 ### Creating the Article
 
-- Create a file in `files/articles/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
+- Create a file in `content/articles/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
 - Copy images in `input/` that are used in the article to `public/images/<YYYY-MM-DD>/` and name them in `Pascal-Case.ext`, e.g., `Branch-Name-LTS.png`
 
 #### Front-Matter Fields
 
 - Check `getArticleByFilename` in `helpers/server/article.ts` for required front-matter fields
 - Don't use any symbols in the `title` field
-- Try to use one of the existing categories in `files/articles/` (case-sensitive)
+- Try to use one of the existing categories in `content/articles/` (case-sensitive)
 - Check `settings/icons.ts` for existing technology icons and spelling (case-sensitive)
 - To add a technology, find suitable icons from `@icons-pack/react-simple-icons` and map them in `TECHNOLOGY_TO_ICON` in `settings/icons.ts`
 - If a technology is not found in `@icons-pack/react-simple-icons`, use a generic icon from `lucide-react` and re-export it in `LUCIDE_ICON` in `settings/icons.ts`
 
 ### Writing the Article
 
-- Check the other articles in `files/articles/` for writing style
+- Check the other articles in `content/articles/` for writing style
 - Prior `<!-- description -->`, write a brief summary stating the behind history and conclusion
 - After `<!-- description -->`, write the main content
 - Conclusion or the last section should be brief. You may even skip it if not necessary

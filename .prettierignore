@@ -10,7 +10,6 @@ website/public/
 website/next-env.d.ts
 website/SiegeSailor-README.md
 
-# Authored content, not code: articles are prose (their own writing guide) and
-# content/ is the hand-tuned single source of truth. Leave them untouched.
-website/files/articles/
+# Authored content, not code: content/articles/ is prose (its own writing guide)
+# and content/resume/ is the hand-tuned single source of truth.
 content/

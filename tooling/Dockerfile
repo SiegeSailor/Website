@@ -54,10 +54,10 @@ RUN printf '%s\n' \
         poppler-utils="25.03.0-5+deb13u4" && \
     rm -rf /var/lib/apt/lists/*
 
-COPY "content/" ./content/
+COPY "content/resume/" ./content/resume/
 COPY "tooling/scripts/" ./tooling/scripts/
 
-# Project versions come from content/versions.generated.json when the host
+# Project versions come from content/resume/versions.generated.json when the host
 # generated it before the build; otherwise the README falls back to the stage.
 RUN npm run build:resume --workspace tooling && \
     npm run build:readme --workspace tooling

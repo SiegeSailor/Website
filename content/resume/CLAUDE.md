@@ -1,4 +1,4 @@
-# CLAUDE.md — content
+# CLAUDE.md — content/resume
 
 The single source of truth for the résumé documents, the website home and
 `/about` pages, and the generated GitHub profile README. One file per top-level
@@ -45,7 +45,7 @@ to restrict it to one. The website and profile README ignore variants entirely.
 
 ## Constraints — never break these
 
-The full list lives in the root [`CLAUDE.md`](../CLAUDE.md); the ones that bite
+The full list lives in the root [`CLAUDE.md`](../../CLAUDE.md); the ones that bite
 when editing this folder:
 
 1. **The `professional` variant must fit one US-Letter page.** The build verifies

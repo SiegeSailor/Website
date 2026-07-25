@@ -4,7 +4,7 @@
 
 This is a statically exported Next.js website served from S3 behind CloudFront. To contribute to this project, please follow the guidelines below.
 
-The repository is an npm workspace with three top-level folders: `website/` (the Next.js app), `tooling/` (the `Dockerfile` and the résumé / README build scripts), and `content/` (the YAML single source of truth that both consume). The root `package.json` owns the version and the only `package-lock.json`; every command below runs from the repository root.
+The repository is an npm workspace with three top-level folders: `website/` (the Next.js app), `tooling/` (the `Dockerfile` and the résumé / README build scripts), and `content/` (all authored content: `content/resume/`, the YAML single source of truth both consume, and `content/articles/`, the blog posts). The root `package.json` owns the version and the only `package-lock.json`; every command below runs from the repository root.
 
 ### Prerequisites
 
@@ -76,14 +76,14 @@ npm run typecheck     # tsc --noEmit
 
 Prettier owns formatting; ESLint owns correctness. Prettier now runs from the
 root and so covers `tooling/` and the root Markdown too; ESLint stays scoped to
-`website/`, where its config lives. Authored content — `website/files/articles/`
-and `content/` — is excluded from Prettier so prose and the hand-tuned résumé
+`website/`, where its config lives. Authored content — all of
+`content/` — is excluded from Prettier so prose and the hand-tuned résumé
 source stay untouched, by the hook as well as by the manual commands. Terraform
 and the shell scripts are covered by neither.
 
 ### Building the Resume, Profile, and README
 
-[`content/`](./content/) is the single source of truth for four generated outputs. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and every consumer merges them back into one object, so **a key must appear in exactly one file**. [`content/CLAUDE.md`](./content/CLAUDE.md) maps each file to the outputs that read it.
+[`content/resume/`](./content/resume/) is the single source of truth for four generated outputs. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and every consumer merges them back into one object, so **a key must appear in exactly one file**. [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) maps each file to the outputs that read it.
 
 | Output                         | Script                                                                                    | Local generated files                                                                                  | Published to the public by                                                                                                                                                                                                                                                                                                        |
 | ------------------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -98,8 +98,8 @@ After editing `Resume.yaml`:
 
 ```shell
 npm run build:resume      # .docx into tooling/export/resume/, plus .txt with pandoc and .pdf with LibreOffice
-npm run build:versions    # latest GitHub release per project -> content/versions.generated.json
-npm run build:readme      # content/ -> tooling/export/SiegeSailor-README.md (the GitHub profile README)
+npm run build:versions    # latest GitHub release per project -> content/resume/versions.generated.json
+npm run build:readme      # content/resume/ -> tooling/export/SiegeSailor-README.md (the GitHub profile README)
 ```
 
 `build:resume` degrades instead of failing when a tool is absent: no pandoc means no `.txt`, no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped ...` for each and still exits `0`, so a bare `npm run build:resume` on a host without those three tools produces a `.docx` whose one-page constraint was never verified. Build through Docker (below) to get the checked artifacts; that is the only path where the check is guaranteed to run, and the only one with pinned LibreOffice and font versions.
@@ -124,7 +124,7 @@ Resume constraints (see [`CLAUDE.md`](./CLAUDE.md) for the full list):
 
 [`tooling/Dockerfile`](./tooling/Dockerfile) builds the resume documents and the GitHub profile README — it does not build the website, which is built on the host with `npm run build`. It exists because those documents need LibreOffice, pandoc, poppler, and the Carlito font, none of which ship on the GitHub Actions runners; pinning them in an image is what keeps the résumé page-count check meaningful and the rendered PDFs identical between a laptop and CI. A locally installed LibreOffice is a different version and may disagree on page counts.
 
-The image installs only the `tooling` workspace, so it pulls ~22 packages rather than the website's ~1,400, and the root `.dockerignore` allowlists only `content/`, `tooling/`, and the root manifests.
+The image installs only the `tooling` workspace, so it pulls ~22 packages rather than the website's ~1,400, and the root `.dockerignore` allowlists only `content/resume/`, `tooling/`, and the root manifests.
 
 Lint the Dockerfile using Hadolint from the root directory:
 
