@@ -74,7 +74,7 @@ const readme = [
   "",
   "## Summary",
   "",
-  data.summary.professional.trim(),
+  data.summary.find((entry) => entry.labels?.includes("resume")).text.trim(),
   "",
   "## Projects",
   "",

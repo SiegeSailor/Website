@@ -50,7 +50,6 @@ RUN printf '%s\n' \
     apt-get install --no-install-recommends --yes -o Acquire::Retries="3" \
         fonts-crosextra-carlito="20230309-2" \
         libreoffice-writer="4:25.2.3-2+deb13u6" \
-        pandoc="3.1.11.1+ds-2" \
         poppler-utils="25.03.0-5+deb13u4" && \
     rm -rf /var/lib/apt/lists/*
 

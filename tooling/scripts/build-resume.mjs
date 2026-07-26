@@ -25,16 +25,15 @@ const VERSION = JSON.parse(
   readFileSync(join(ROOT, "../package.json"), "utf8"),
 ).version;
 
-const VARIANT_TO_LABEL = { professional: "Professional", academic: "Academic" };
-// The professional variant must stay within one US-Letter page.
-const VARIANT_TO_PAGES = { professional: 1, academic: 2 };
+// The resume must stay within one US-Letter page.
+const PAGES = 1;
 const SOFFICE_CMD = process.env.SOFFICE_CMD ?? "soffice --headless";
 
 const FONT = "Calibri";
 // Sizes are half-points; spacing/indents are twips (1440 = 1 inch).
 const SZ = { name: 32, contact: 18, section: 20, body: 19, blurb: 18 };
-// Tightened to keep the professional variant on one US-Letter page after the
-// Certifications section was split out of Education (see root CLAUDE.md).
+// Tightened to keep the resume on one US-Letter page after the Certifications
+// section was split out of Education (see root CLAUDE.md).
 const SPACE = {
   afterBullet: 9,
   afterBody: 32,
@@ -47,7 +46,9 @@ const clean = (s) =>
   String(s ?? "")
     .replace(/\s+/g, " ")
     .trim();
-const inVariant = (item, v) => !item?.variants || item.variants.includes(v);
+// content/resume/ holds more than the resume; only nodes labelled `resume`
+// render, so an unlabelled node is kept for reference and never printed.
+const onResume = (item) => Boolean(item?.labels?.includes("resume"));
 
 const hasCommand = (command) => {
   try {
@@ -130,8 +131,8 @@ const buildHeader = () => [
   ),
 ];
 
-const buildSummary = (v) => {
-  const text = DATA.summary?.[v];
+const buildSummary = () => {
+  const text = (DATA.summary || []).find(onResume)?.text;
   if (!text) return [];
   return [
     sectionHeader("Summary"),
@@ -139,8 +140,8 @@ const buildSummary = (v) => {
   ];
 };
 
-const buildSkills = (v) => {
-  const rows = (DATA.skills || []).filter((s) => inVariant(s, v));
+const buildSkills = () => {
+  const rows = (DATA.skills || []).filter(onResume);
   if (!rows.length) return [];
   return [
     sectionHeader("Skills"),
@@ -161,14 +162,13 @@ const buildSkills = (v) => {
   ];
 };
 
-const buildExperience = (v) => {
-  const jobs = (DATA.experience || []).filter((j) => inVariant(j, v));
+const buildExperience = () => {
   const out = [sectionHeader("Work Experience")];
-  for (const job of jobs) {
-    const bullets = (job.bullets || []).filter((b) => inVariant(b, v));
+  for (const job of (DATA.experience || []).filter(onResume)) {
+    const bullets = (job.bullets || []).filter(onResume);
     if (!bullets.length) continue;
 
-    const roles = (job.roles || []).filter((r) => inVariant(r, v));
+    const roles = (job.roles || []).filter(onResume);
     out.push(
       splitLine(
         [
@@ -188,14 +188,12 @@ const buildExperience = (v) => {
         { spacing: { before: 60, after: 10 } },
       ),
     );
-    const blurb =
-      typeof job.blurb === "string" ? { text: job.blurb } : job.blurb;
-    if (blurb?.text && inVariant(blurb, v))
+    if (onResume(job.blurb))
       out.push(
         bodyLine(
           [
             new TextRun({
-              text: clean(blurb.text),
+              text: clean(job.blurb.text),
               italics: true,
               font: FONT,
               size: SZ.blurb,
@@ -242,8 +240,8 @@ const buildExperience = (v) => {
   return out;
 };
 
-const buildPublications = (v) => {
-  const publications = (DATA.publications || []).filter((p) => inVariant(p, v));
+const buildPublications = () => {
+  const publications = (DATA.publications || []).filter(onResume);
   if (!publications.length) return [];
   return [
     sectionHeader("Publications"),
@@ -255,8 +253,8 @@ const buildPublications = (v) => {
   ];
 };
 
-const buildSchools = (title, list, v) => {
-  const rows = (list || []).filter((e) => inVariant(e, v));
+const buildSchools = (title, list) => {
+  const rows = (list || []).filter(onResume);
   if (!rows.length) return [];
   const out = [sectionHeader(title)];
   for (const entry of rows) {
@@ -279,32 +277,30 @@ const buildSchools = (title, list, v) => {
         { spacing: { before: 40, after: 10 } },
       ),
     );
-    for (const detail of entry.details || []) {
-      const item = typeof detail === "string" ? { text: detail } : detail;
-      if (inVariant(item, v)) out.push(bullet(item.text));
-    }
+    for (const detail of (entry.details || []).filter(onResume))
+      out.push(bullet(detail.text));
   }
   return out;
 };
 
-const buildEducation = (v) => buildSchools("Education", DATA.education, v);
-const buildCertifications = (v) =>
-  buildSchools("Certifications", DATA.certifications, v);
+const buildEducation = () => buildSchools("Education", DATA.education);
+const buildCertifications = () =>
+  buildSchools("Certifications", DATA.certifications);
 
-const buildActivities = (v) => {
+const buildActivities = () => {
   const activities = DATA.activities;
-  if (!activities || !inVariant(activities, v)) return [];
+  if (!onResume(activities)) return [];
   return [
     sectionHeader("Activities & Leadership"),
     ...(activities.items || []).map((text) => bullet(text)),
   ];
 };
 
-const buildVariant = async (v) => {
+const buildDocument = async () => {
   const doc = new Document({
-    title: `${clean(DATA.name)} — Resume (${VARIANT_TO_LABEL[v]})`,
+    title: `${clean(DATA.name)} — Resume`,
     creator: clean(DATA.name),
-    subject: `Resume (${VARIANT_TO_LABEL[v]})`,
+    subject: "Resume",
     keywords: `v${VERSION}`,
     styles: {
       default: {
@@ -340,37 +336,26 @@ const buildVariant = async (v) => {
         },
         children: [
           ...buildHeader(),
-          ...buildSummary(v),
-          ...buildSkills(v),
-          ...buildExperience(v),
-          ...buildPublications(v),
-          ...buildEducation(v),
-          ...buildCertifications(v),
-          ...buildActivities(v),
+          ...buildSummary(),
+          ...buildSkills(),
+          ...buildExperience(),
+          ...buildPublications(),
+          ...buildEducation(),
+          ...buildCertifications(),
+          ...buildActivities(),
         ],
       },
     ],
   });
 
   mkdirSync(OUTPUT, { recursive: true });
-  const file = join(OUTPUT, `JinYu-Zhang-Resume-${VARIANT_TO_LABEL[v]}.docx`);
+  const file = join(OUTPUT, "JinYu-Zhang-Resume.docx");
   writeFileSync(file, await Packer.toBuffer(doc));
   console.log(`built ${relative(ROOT, file)}`);
   return file;
 };
 
-const convertVariant = (v, file) => {
-  if (hasCommand("pandoc")) {
-    execSync(
-      `pandoc --wrap=none -t plain "${file}" -o "${file.replace(/\.docx$/, ".txt")}"`,
-    );
-    console.log(`built ${relative(ROOT, file.replace(/\.docx$/, ".txt"))}`);
-  } else {
-    console.warn(
-      `skipped .txt for ${relative(ROOT, file)} (pandoc not available)`,
-    );
-  }
-
+const convert = (file) => {
   if (!hasCommand(SOFFICE_CMD)) {
     console.warn(
       `skipped .pdf for ${relative(ROOT, file)} (LibreOffice not available)`,
@@ -394,31 +379,13 @@ const convertVariant = (v, file) => {
       .toString()
       .match(/^Pages:\s+(\d+)$/m)?.[1],
   );
-  if (!VARIANT_TO_PAGES[v]) {
-    console.warn(
-      `skipped page count check for ${relative(ROOT, pdf)} (no expected count for ${v})`,
-    );
-    return;
-  }
-  if (pages !== VARIANT_TO_PAGES[v])
+  if (pages !== PAGES)
     throw new Error(
-      `${relative(ROOT, pdf)} has ${pages} pages; the ${v} variant must have ${VARIANT_TO_PAGES[v]}`,
+      `${relative(ROOT, pdf)} has ${pages} pages; the resume must have ${PAGES}`,
     );
   console.log(
     `verified ${relative(ROOT, pdf)} (${pages} page${pages === 1 ? "" : "s"})`,
   );
 };
 
-const requested = process.argv.slice(2);
-const variants =
-  requested.length && !requested.includes("all")
-    ? requested
-    : Object.keys(VARIANT_TO_LABEL);
-
-for (const variant of variants) {
-  if (!VARIANT_TO_LABEL[variant])
-    throw new Error(
-      `unknown variant "${variant}" — expected: ${Object.keys(VARIANT_TO_LABEL).join(", ")}`,
-    );
-  convertVariant(variant, await buildVariant(variant));
-}
+convert(await buildDocument());

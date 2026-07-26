@@ -7,14 +7,12 @@ import profileYaml from "@content/resume/profile.yaml";
 import projectsYaml from "@content/resume/projects.yaml";
 import summaryYaml from "@content/resume/summary.yaml";
 
-// Website view of content/: only the four files holding the keys used here. Nodes
-// tagged with a resume variant are resume-only, so only untagged nodes surface.
+// Website view of content/: only the four files holding the keys used here.
 // Imported as raw text (webpack `asset/source`) so the dev server hot-reloads.
+// `labels:` select what the resume document prints; the site only needs them to
+// pick the summary, and reads whole keys otherwise.
 // Project versions come from versions.generated.json (optional / resilient).
 const CONTENT = [profileYaml, summaryYaml, experienceYaml, projectsYaml];
-
-type TVariant = { variants?: string[] };
-const isShared = (item?: TVariant) => !item?.variants;
 
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
@@ -42,21 +40,25 @@ function getExperienceYears(): string {
   return `${year} Years ${month === "0" ? "" : `${monthFloor} Months`}`.trim();
 }
 
-type TRole = { title: string; dates: string; location?: string } & TVariant;
+type TLabelled = { labels?: string[] };
+const onResume = (item?: TLabelled) =>
+  Boolean(item?.labels?.includes("resume"));
+
+type TRole = { title: string; dates: string; location?: string };
 type TCompany = {
   company: string;
   location?: string;
   industry?: string;
   website?: string;
-  blurb?: string | ({ text: string } & TVariant);
+  blurb?: { text: string };
   roles?: TRole[];
-} & TVariant;
+};
 type TProject = {
   title: string;
   description: string;
   href: string;
   stage: "Planning" | "Development" | "Production";
-} & TVariant;
+};
 type TProfile = {
   picture: string;
   headlines: string[];
@@ -68,7 +70,7 @@ type TProfile = {
 
 type TResumeData = {
   profile: TProfile;
-  summary?: Record<string, string>;
+  summary?: ({ text: string } & TLabelled)[];
   experience?: TCompany[];
   projects?: TProject[];
 };
@@ -110,21 +112,18 @@ export async function getResume() {
     intro: data.profile.intro.trim(),
   };
 
-  const experience = (data.experience || [])
-    .filter(isShared)
-    .map((company) => ({
-      company: company.company,
-      location: company.location,
-      industry: company.industry,
-      website: company.website,
-      blurb:
-        typeof company.blurb === "string" ? company.blurb : company.blurb?.text,
-      roles: (company.roles || []).filter(isShared).map((role) => ({
-        title: role.title,
-        dates: role.dates,
-        location: role.location,
-      })),
-    }));
+  const experience = (data.experience || []).map((company) => ({
+    company: company.company,
+    location: company.location,
+    industry: company.industry,
+    website: company.website,
+    blurb: company.blurb?.text,
+    roles: (company.roles || []).map((role) => ({
+      title: role.title,
+      dates: role.dates,
+      location: role.location,
+    })),
+  }));
 
   const projects = (data.projects || []).map(
     ({ title, description, href, stage }) => {
@@ -141,7 +140,7 @@ export async function getResume() {
 
   return {
     profile,
-    summary: data.summary?.professional ?? "",
+    summary: (data.summary || []).find(onResume)?.text ?? "",
     experience,
     projects,
   };

@@ -1,19 +1,23 @@
 skills:
   - label: Languages
     items: "C#, TypeScript / JavaScript (Node.js), Python, C++, Bash, SQL"
+    labels: [resume]
   - label: AI Engineering
     items: "Agentic coding (Claude Code), LLM pipelines in CI/CD, knowledge-graph extraction, LLM observability (Langfuse)"
+    labels: [resume]
   - label: Distributed Systems
     items: "gRPC, Protocol Buffers, RabbitMQ, Socket.IO / WebSocket, REST, microservices, concurrent & real-time systems, Zeroconf"
+    labels: [resume]
   - label: Cloud & DevOps
     items: "Docker, Kubernetes, GitLab CI/CD, GitHub Actions, Terraform, AWS, GCP, Linux (Ubuntu, Debian), Nginx"
-  # One merged row for professional (one-page fit); academic drops frontend
-  # by design (systems focus).
+    labels: [resume]
+  # One merged row on the resume, for the one-page fit; the split rows below it
+  # are the systems-focused alternative.
   - label: Data & Frontend
     items: "MongoDB, MySQL, PostgreSQL, Redis; React.js, Next.js, Redux, Electron"
-    variants: [professional]
+    labels: [resume]
   - label: Data
     items: "MongoDB, MySQL, PostgreSQL, Redis"
-    variants: [academic]
   - label: Regulated Software
     items: "IEC 62304, ISO 13485, FDA & EU MDR compliance SDLC, DevSecOps"
+    labels: [resume]

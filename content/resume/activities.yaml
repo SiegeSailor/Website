@@ -1,5 +1,5 @@
+# Not on the resume; label the block `resume` to render the section.
 activities:
-  variants: [academic]
   items:
     - "Technical Speaker, ALPHA Camp Digital Career (2021) — represented Shopee Taiwan tech team"
     - "Co-Organizer, Shopee “I’m the Best Coder” Challenge (2020) — competition design and algorithm verification"

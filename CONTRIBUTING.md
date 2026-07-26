@@ -83,30 +83,29 @@ and the shell scripts are covered by neither.
 
 ### Building the Resume, Profile, and README
 
-[`content/resume/`](./content/resume/) is the single source of truth for four generated outputs. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and every consumer merges them back into one object, so **a key must appear in exactly one file**. [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) maps each file to the outputs that read it.
+[`content/resume/`](./content/resume/) is the single source of truth for three generated outputs. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and every consumer merges them back into one object, so **a key must appear in exactly one file**. [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) maps each file to the outputs that read it.
 
-| Output                         | Script                                                                                    | Local generated files                                                                                  | Published to the public by                                                                                                                                                                                                                                                                                                        |
-| ------------------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Professional resume (one page) | `npm run build:resume` ([`build-resume.mjs`](./tooling/scripts/build-resume.mjs))         | `tooling/export/resume/JinYu-Zhang-Resume-Professional.{docx,pdf,txt}`                                 | [`production.yml`](./.github/workflows/production.yml) rebuilds it into `export/documents/` via [`docker-copy.sh`](./scripts/docker-copy.sh) and syncs to S3 → <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Professional.pdf>; [`release.yml`](./.github/workflows/release.yml) also attaches it to every GitHub release |
-| Academic resume (two pages)    | `npm run build:resume` ([`build-resume.mjs`](./tooling/scripts/build-resume.mjs))         | `tooling/export/resume/JinYu-Zhang-Resume-Academic.{docx,pdf,txt}`                                     | Same as the professional resume → <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume-Academic.pdf>                                                                                                                                                                                                                             |
-| Website profile pages          | `npm run build` (read at build time by [`resume.ts`](./website/helpers/server/resume.ts)) | `website/export/index.html` (hero) and `website/export/about.html`                                     | [`production.yml`](./.github/workflows/production.yml) syncs `export/` to S3 and invalidates CloudFront → <https://jinyu-zhang.com> and <https://jinyu-zhang.com/about>                                                                                                                                                           |
-| GitHub profile README          | `npm run build:readme` ([`build-readme.mjs`](./tooling/scripts/build-readme.mjs))         | `tooling/export/SiegeSailor-README.md` (`docker-copy.sh` copies it to `website/SiegeSailor-README.md`) | [`production.yml`](./.github/workflows/production.yml) pushes it to `SiegeSailor/SiegeSailor` when it changed → <https://github.com/SiegeSailor>                                                                                                                                                                                  |
+| Output                | Script                                                                                    | Local generated files                                                                                  | Published to the public by                                                                                                                                                                                                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Resume (one page)     | `npm run build:resume` ([`build-resume.mjs`](./tooling/scripts/build-resume.mjs))         | `tooling/export/resume/JinYu-Zhang-Resume.{docx,pdf}`                                                  | [`production.yml`](./.github/workflows/production.yml) rebuilds it into `export/documents/` via [`docker-copy.sh`](./scripts/docker-copy.sh) and syncs to S3 → <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf>; [`release.yml`](./.github/workflows/release.yml) also attaches it to every GitHub release |
+| Website profile pages | `npm run build` (read at build time by [`resume.ts`](./website/helpers/server/resume.ts)) | `website/export/index.html` (hero) and `website/export/about.html`                                     | [`production.yml`](./.github/workflows/production.yml) syncs `export/` to S3 and invalidates CloudFront → <https://jinyu-zhang.com> and <https://jinyu-zhang.com/about>                                                                                                                                              |
+| GitHub profile README | `npm run build:readme` ([`build-readme.mjs`](./tooling/scripts/build-readme.mjs))         | `tooling/export/SiegeSailor-README.md` (`docker-copy.sh` copies it to `website/SiegeSailor-README.md`) | [`production.yml`](./.github/workflows/production.yml) pushes it to `SiegeSailor/SiegeSailor` when it changed → <https://github.com/SiegeSailor>                                                                                                                                                                     |
 
-The resume documents render in two variants driven by `variants:` tags in the YAML — `professional` (one page, impact and scale focus) and `academic` (two pages, systems and leadership focus); a node without a `variants:` list appears in both. The website and the profile README don't use variants: they read whole keys — the `profile:` block, `projects:`, `summary.professional`, and the first `experience` entry for the home-page hero.
+There is one resume — a single one-page document for professional use. `content/resume/` holds more than fits on it, so any node may carry a `labels:` list and **only nodes labelled `resume` are printed**; an unlabelled node stays in the source for reference. The website and the profile README ignore labels except to pick the summary, and read whole keys instead: the `profile:` block, `projects:`, the `resume` entry of `summary:`, and the first `experience` entry for the home-page hero.
 
-After editing `Resume.yaml`:
+After editing `content/resume/`:
 
 ```shell
-npm run build:resume      # .docx into tooling/export/resume/, plus .txt with pandoc and .pdf with LibreOffice
+npm run build:resume      # .docx into tooling/export/resume/, plus .pdf with LibreOffice
 npm run build:versions    # latest GitHub release per project -> content/resume/versions.generated.json
 npm run build:readme      # content/resume/ -> tooling/export/SiegeSailor-README.md (the GitHub profile README)
 ```
 
-`build:resume` degrades instead of failing when a tool is absent: no pandoc means no `.txt`, no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped ...` for each and still exits `0`, so a bare `npm run build:resume` on a host without those three tools produces a `.docx` whose one-page constraint was never verified. Build through Docker (below) to get the checked artifacts; that is the only path where the check is guaranteed to run, and the only one with pinned LibreOffice and font versions.
+`build:resume` degrades instead of failing when a tool is absent: no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped ...` for each and still exits `0`, so a bare `npm run build:resume` on a host without those two tools produces a `.docx` whose one-page constraint was never verified. Build through Docker (below) to get the checked artifacts; that is the only path where the check is guaranteed to run, and the only one with pinned LibreOffice and font versions.
 
 `build:versions` runs automatically before `build` and is resilient: if GitHub is unreachable it omits the missing versions (the `/about` chip falls back to the project stage) and never fails the build.
 
-To run the full pipeline with pinned tool versions — and without needing local LibreOffice and pandoc — build the image and copy the artifacts out. This builds the image (which runs `build:resume` and `build:readme`) and copies the résumé documents plus the profile README (`website/SiegeSailor-README.md`) out:
+To run the full pipeline with pinned tool versions — and without needing local LibreOffice — build the image and copy the artifacts out. This builds the image (which runs `build:resume` and `build:readme`) and copies the résumé document plus the profile README (`website/SiegeSailor-README.md`) out:
 
 ```shell
 bash scripts/docker-copy.sh "tooling/export/resume" "linux/arm64"
@@ -116,13 +115,13 @@ The Docker build context is the repository root with `tooling/Dockerfile`, and `
 
 Resume constraints (see [`CLAUDE.md`](./CLAUDE.md) for the full list):
 
-- The `professional` variant must fit one US-Letter page; `academic` is two pages by design. The build fails otherwise.
+- The resume must fit one US-Letter page. The build fails otherwise.
 - Keep the layout ATS-safe: single column, no tables or text boxes, native Word bullets, dates right-aligned with tab stops.
 - Never flatten the stacked role lines (CooperSurgical, Servicetech) into a single title and date range.
 
 ### The Docker image
 
-[`tooling/Dockerfile`](./tooling/Dockerfile) builds the resume documents and the GitHub profile README — it does not build the website, which is built on the host with `npm run build`. It exists because those documents need LibreOffice, pandoc, poppler, and the Carlito font, none of which ship on the GitHub Actions runners; pinning them in an image is what keeps the résumé page-count check meaningful and the rendered PDFs identical between a laptop and CI. A locally installed LibreOffice is a different version and may disagree on page counts.
+[`tooling/Dockerfile`](./tooling/Dockerfile) builds the resume document and the GitHub profile README — it does not build the website, which is built on the host with `npm run build`. It exists because they need LibreOffice, poppler, and the Carlito font, none of which ship on the GitHub Actions runners; pinning them in an image is what keeps the résumé page-count check meaningful and the rendered PDFs identical between a laptop and CI. A locally installed LibreOffice is a different version and may disagree on page counts.
 
 The image installs only the `tooling` workspace, so it pulls ~22 packages rather than the website's ~1,400, and the root `.dockerignore` allowlists only `content/resume/`, `tooling/`, and the root manifests.
 
@@ -132,15 +131,15 @@ Lint the Dockerfile using Hadolint from the root directory:
 bash scripts/hadolint.sh
 ```
 
-Apt packages resolve against [snapshot.debian.org](https://snapshot.debian.org) at the timestamp in the `DEBIAN_SNAPSHOT` build argument, which freezes the entire dependency closure rather than just the four packages named in the `apt-get install`. Taking Debian security updates is therefore a deliberate step, not something that happens on the next rebuild:
+Apt packages resolve against [snapshot.debian.org](https://snapshot.debian.org) at the timestamp in the `DEBIAN_SNAPSHOT` build argument, which freezes the entire dependency closure rather than just the three packages named in the `apt-get install`. Taking Debian security updates is therefore a deliberate step, not something that happens on the next rebuild:
 
 ```shell
 # Find the current candidate versions, then bump DEBIAN_SNAPSHOT and the pins together.
 docker run --rm node:26.5.0-trixie-slim \
-  bash -c 'apt-get update -qq && apt-cache policy libreoffice-writer pandoc poppler-utils fonts-crosextra-carlito'
+  bash -c 'apt-get update -qq && apt-cache policy libreoffice-writer poppler-utils fonts-crosextra-carlito'
 ```
 
-The default timestamp matches the one the base image was built against, which the image records in the comments of `/etc/apt/sources.list.d/debian.sources`. After bumping, rebuild and confirm the page counts still pass — a LibreOffice or Carlito change can shift the résumé layout.
+The default timestamp matches the one the base image was built against, which the image records in the comments of `/etc/apt/sources.list.d/debian.sources`. After bumping, rebuild and confirm the page count still passes — a LibreOffice or Carlito change can shift the résumé layout.
 
 ### Troubleshooting
 

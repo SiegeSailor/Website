@@ -2,19 +2,20 @@ education:
   - school: Boston University
     degree: "M.S. in Computer Science (GPA 3.8 / 4.0)"
     dates: "May 2022 – Jan 2024"
+    labels: [resume]
     details:
-      # Compact citation for the one-page professional variant; academic
-      # carries the full citation in its Publications section instead.
+      # Compact citation for the one-page fit; publications.yaml carries the
+      # full one.
       - text: >-
           First author, “Quantitative DevSecOps Metrics for Cloud-Based Web
           Microservices,” IEEE Access, 2024
-        variants: [professional]
+        labels: [resume]
       - text: "3rd place, NCAE-C Cyber Games 2023 Northeast Division — Server Security Leader (infrastructure defense)"
+        labels: [resume]
       - text: "Coursework: Cryptography, Secure Software Development, Computer Language Theory, Analysis of Algorithms"
-        variants: [academic]
   - school: National Formosa University
     degree: "B.F.A. in Multimedia Design"
     dates: "Sep 2013 – Jan 2017"
+    labels: [resume]
     details:
       - text: "Dual concentration in Computer Programming and Fine Arts"
-        variants: [academic]
