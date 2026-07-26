@@ -15,7 +15,7 @@
     "npm": ">= 11.17.0"
   },
   "scripts": {
-    "prepare": "husky",
+    "prepare": "if command -v husky > /dev/null; then husky; fi",
     "build": "npm run build:versions && npm run build --workspace website",
     "build:readme": "npm run build:readme --workspace tooling",
     "build:resume": "npm run build:resume --workspace tooling",

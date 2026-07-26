@@ -63,6 +63,10 @@ fails. The hook is installed by `npm ci` at the root (the `prepare` script), so
 no extra setup is needed — pass `--no-verify` to skip it, or set `HUSKY=0` to
 stop installing it altogether.
 
+Install from the root, not from inside a workspace: `cd website && npm ci`
+installs that workspace's tree without the root dev dependencies, so `prepare`
+finds no Husky and quietly skips the hook rather than failing the install.
+
 Run the same checks by hand across the whole app at any time; CI runs them on
 every pull request and blocks the production deploy if any fail:
 
