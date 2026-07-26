@@ -1,5 +1,5 @@
 {
-  "name": "@siegesailor-website/client",
+  "name": "@siegesailor-website/website",
   "version": "1.2.0",
   "description": "SiegeSailor's personal website client application.",
   "homepage": "https://github.com/SiegeSailor/Website",
@@ -62,7 +62,6 @@
     "eslint-config-next": "16.2.11",
     "eslint-config-prettier": "10.1.8",
     "postcss": "8.5.23",
-    "prettier": "3.9.4",
     "tailwindcss": "4.3.2",
     "typescript": "5.9.3"
   }
