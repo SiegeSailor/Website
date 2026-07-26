@@ -198,7 +198,7 @@ Configure these on the `production` environment:
 
 GitHub Actions workflow [`release.yml`](./.github/workflows/release.yml) runs [semantic-release](https://semantic-release.gitbook.io/) (configured in [`release.config.mjs`](./release.config.mjs)) on every push to `main`. Commit messages determine the version bump per Conventional Commits: `fix:` patches, `feat:` minors, and `BREAKING CHANGE` majors; other types cut no release. Each release:
 
-- Tags the commit `vX.Y.Z` and updates [`CHANGELOG.md`](./CHANGELOG.md), the root `package.json`, and `package-lock.json` back on `main`
+- Tags the commit `vX.Y.Z`, publishes a GitHub Release whose notes are generated from the commits, and updates the root `package.json` and `package-lock.json` back on `main`
 - Builds the resume documents with [`docker-copy.sh`](./scripts/docker-copy.sh), stamping the version into the document metadata, and attaches them as release assets alongside workflow artifacts
 
 The deployed site serves the resume documents at `https://jinyu-zhang.com/documents/<document>` — the URL the `README.md` badges and the profile page resume button link to. The repository is private, so release asset URLs only work for authenticated collaborators.

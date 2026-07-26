@@ -6,13 +6,12 @@ export default {
       "@semantic-release/release-notes-generator",
       { preset: "conventionalcommits" },
     ],
-    ["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],
     ["@semantic-release/npm", { npmPublish: false }],
     ["@semantic-release/exec", { prepareCmd: "bash scripts/docker-copy.sh" }],
     [
       "@semantic-release/git",
       {
-        assets: ["CHANGELOG.md", "package.json", "package-lock.json"],
+        assets: ["package.json", "package-lock.json"],
         message: "chore(release): ${nextRelease.version} [skip ci]",
       },
     ],
