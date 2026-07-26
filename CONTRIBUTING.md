@@ -34,11 +34,21 @@ npm run watch
 
 Editing anything in `content/` hot-reloads the pages built from it, because the website imports those files as raw text.
 
-Build the static export to verify everything is working correctly; the artifacts are generated in `website/export/`:
+`watch` is an aggregate: it runs every `watch:*` target concurrently through [`run-parallel.sh`](./scripts/run-parallel.sh), so one terminal gives you the dev server plus a résumé and profile README that rebuild whenever `content/` changes. Output is interleaved and one Ctrl-C stops all of them. Run a single target when the extra rebuilds are noise:
+
+```shell
+npm run watch:website     # dev server only
+npm run watch:resume      # resume documents only
+npm run watch:readme      # profile README only
+```
+
+Build to verify everything is working correctly. `build` is the same kind of aggregate, but sequential — it chains every `build:*` target with `&&` in dependency order (`build:versions` first, because the other three read the JSON it writes) and ends with the static export in `website/export/`:
 
 ```shell
 npm run build
 ```
+
+Neither aggregate expands a glob — npm has no such feature — so adding a `build:*` or `watch:*` script means adding it to the aggregate in the root `package.json` too.
 
 ### Conventions
 
@@ -87,15 +97,19 @@ and the shell scripts are covered by neither.
 
 ### Building the Resume, Profile, and README
 
-[`content/resume/`](./content/resume/) is the single source of truth for three generated outputs. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and every consumer merges them back into one object, so **a key must appear in exactly one file**. [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) maps each file to the outputs that read it.
+[`content/resume/`](./content/resume/) is the single source of truth for three generated outputs — and for the website's own text and metadata, so no page hard-codes a name, tagline, title, or link. It is split one YAML file per top-level key (`profile.yaml`, `experience.yaml`, `skills.yaml`, …) and **a key must appear in exactly one file**. [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) maps each file to the outputs that read it.
 
-| Output                | Script                                                                                    | Local generated files                                                                                  | Published to the public by                                                                                                                                                                                                                                                                                           |
-| --------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Resume (one page)     | `npm run build:resume` ([`build-resume.mjs`](./tooling/scripts/build-resume.mjs))         | `tooling/export/resume/JinYu-Zhang-Resume.{docx,pdf}`                                                  | [`production.yml`](./.github/workflows/production.yml) rebuilds it into `export/documents/` via [`docker-copy.sh`](./scripts/docker-copy.sh) and syncs to S3 → <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf>; [`release.yml`](./.github/workflows/release.yml) also attaches it to every GitHub release |
-| Website profile pages | `npm run build` (read at build time by [`resume.ts`](./website/helpers/server/resume.ts)) | `website/export/index.html` (hero) and `website/export/about.html`                                     | [`production.yml`](./.github/workflows/production.yml) syncs `export/` to S3 and invalidates CloudFront → <https://jinyu-zhang.com> and <https://jinyu-zhang.com/about>                                                                                                                                              |
-| GitHub profile README | `npm run build:readme` ([`build-readme.mjs`](./tooling/scripts/build-readme.mjs))         | `tooling/export/SiegeSailor-README.md` (`docker-copy.sh` copies it to `website/SiegeSailor-README.md`) | [`production.yml`](./.github/workflows/production.yml) pushes it to `SiegeSailor/SiegeSailor` when it changed → <https://github.com/SiegeSailor>                                                                                                                                                                     |
+| Output                | Script                                                                                      | Local generated files                                                                                  | Published to the public by                                                                                                                                                                                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Resume (one page)     | `npm run build:resume` ([`build-resume.mjs`](./tooling/scripts/build-resume.mjs))           | `tooling/export/resume/JinYu-Zhang-Resume.{docx,pdf}`                                                  | [`production.yml`](./.github/workflows/production.yml) rebuilds it into `export/documents/` via [`docker-copy.sh`](./scripts/docker-copy.sh) and syncs to S3 → <https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf>; [`release.yml`](./.github/workflows/release.yml) also attaches it to every GitHub release |
+| Website (all pages)   | `npm run build` (read at build time by [`content.ts`](./website/helpers/server/content.ts)) | `website/export/index.html` (hero) and `website/export/about.html`                                     | [`production.yml`](./.github/workflows/production.yml) syncs `export/` to S3 and invalidates CloudFront → <https://jinyu-zhang.com> and <https://jinyu-zhang.com/about>                                                                                                                                              |
+| GitHub profile README | `npm run build:readme` ([`build-readme.mjs`](./tooling/scripts/build-readme.mjs))           | `tooling/export/SiegeSailor-README.md` (`docker-copy.sh` copies it to `website/SiegeSailor-README.md`) | [`production.yml`](./.github/workflows/production.yml) pushes it to `SiegeSailor/SiegeSailor` when it changed → <https://github.com/SiegeSailor>                                                                                                                                                                     |
 
-There is one resume — a single one-page document for professional use. `content/resume/` holds more than fits on it, so any node may carry a `labels:` list and **only nodes labelled `resume` are printed**; an unlabelled node stays in the source for reference. The website and the profile README ignore labels except to pick the summary, and read whole keys instead: the `profile:` block, `projects:`, the `resume` entry of `summary:`, and the first `experience` entry for the home-page hero.
+There is one resume — a single one-page document for professional use.
+
+`content/resume/` is a **file-consumers structure**: every file declares in `consumers:` which outputs read it, optionally names its section in `heading:`, and holds exactly one content key. The consumer names are `resume`, `readme`, `site` (site-wide chrome and metadata), `/`, `/about`, and `versions`. A section leaves a document by dropping a name from a `consumers:` list — no builder edit, no code change. Both loaders reject a file with no `consumers:`, with more than one content key, or with a key another file already claims, so a typo fails the build instead of quietly emptying a section.
+
+The folder holds more than fits on the one page, so nodes inside a file can opt out the same way: a node with no `consumers` inherits the file's, and `consumers: []` archives it — kept in the source, printed nowhere. See [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) for the file map and what is archived today.
 
 After editing `content/resume/`:
 
@@ -107,7 +121,9 @@ npm run build:readme      # content/resume/ -> tooling/export/SiegeSailor-README
 
 `build:resume` degrades instead of failing when a tool is absent: no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped ...` for each and still exits `0`, so a bare `npm run build:resume` on a host without those two tools produces a `.docx` whose one-page constraint was never verified. Build through Docker (below) to get the checked artifacts; that is the only path where the check is guaranteed to run, and the only one with pinned LibreOffice and font versions.
 
-`build:versions` runs automatically before `build` and is resilient: if GitHub is unreachable it omits the missing versions (the `/about` chip falls back to the project stage) and never fails the build.
+All three also run as part of `npm run build`, ahead of the static export. That has one consequence worth knowing: on a host that _does_ have LibreOffice and poppler, the page-count check now runs on every site build against a LibreOffice version this repository does not pin, so a local version that disagrees on layout fails `npm run build` rather than just `npm run build:resume`. Build through Docker to settle whether the overflow is real.
+
+`build:versions` runs first within `build` and is resilient: if GitHub is unreachable it omits the missing versions (the `/about` chip falls back to the project stage) and never fails the build.
 
 To run the full pipeline with pinned tool versions — and without needing local LibreOffice — build the image and copy the artifacts out. This builds the image (which runs `build:resume` and `build:readme`) and copies the résumé document plus the profile README (`website/SiegeSailor-README.md`) out:
 

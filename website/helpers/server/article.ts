@@ -11,7 +11,7 @@ import {
   TECHNOLOGY_SET,
   STATUS,
   STATUS_SET,
-  TITLE_TO_ROUTE,
+  ROUTE_BLOG,
 } from "@/settings/constant";
 
 export type TArticle = Awaited<ReturnType<typeof getArticles>>[number];
@@ -70,9 +70,9 @@ export async function getArticleByFilename(filename: string) {
         level: 1,
         title: data.title,
         identifier: identifierArticle,
-        route: `${TITLE_TO_ROUTE.Blog}#${identifierArticle}`,
+        route: `${ROUTE_BLOG}#${identifierArticle}` as Route,
       },
-      ...getAnchorsByContent(content, TITLE_TO_ROUTE.Blog),
+      ...getAnchorsByContent(content, ROUTE_BLOG),
     ];
 
     const statistics = await getStatisticByFilePath(filePath);
@@ -87,7 +87,7 @@ export async function getArticleByFilename(filename: string) {
         date,
         description,
         minutes: Math.ceil((source.split(" ").length + 1) / 150),
-        route: `${TITLE_TO_ROUTE.Blog}/${date}` as Route,
+        route: `${ROUTE_BLOG}/${date}` as Route,
         status,
         technologies,
         title: data.title,

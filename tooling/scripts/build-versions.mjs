@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { loadContent, loadVersions, VERSIONS_FILE } from "./content.mjs";
+import { loadContent, loadVersions, VERSIONS_FILE } from "./load-content.mjs";
 
 // Resolves the latest release/tag for each GitHub project in content/projects.yaml
 // and writes content/versions.generated.json ({ "owner/repo": "2.3.0" }), consumed
@@ -63,7 +63,7 @@ async function latestVersion(owner, repo) {
 async function main() {
   const versions = loadVersions();
 
-  const data = loadContent();
+  const { data } = loadContent("versions");
   const repos = new Map();
   for (const project of data.projects || []) {
     const match = String(project.href || "").match(REGEX_GITHUB_REPO);

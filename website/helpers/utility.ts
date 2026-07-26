@@ -1,7 +1,5 @@
 import type { ComponentType } from "react";
 
-import { TITLE } from "@/settings/constant";
-
 const PUBLIC_ENV = {
   COMMIT_SHORT: process.env.COMMIT_SHORT ?? "-",
   NODE_ENV:
@@ -15,8 +13,11 @@ export const getPublicEnv = () => PUBLIC_ENV;
 
 export const PublicEnv: ComponentType = () => null;
 
-export function createPageTitle(...content: string[]) {
-  return [...content, TITLE].join(" | ");
+// The site title is passed in rather than imported: this helper is shared with
+// client components, and the content graph must not reach the browser bundle
+// (see helpers/server/content.ts).
+export function createPageTitle(siteTitle: string, ...content: string[]) {
+  return [...content, siteTitle].join(" | ");
 }
 
 export function getDateStringByDate(date: Date) {

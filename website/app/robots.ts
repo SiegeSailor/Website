@@ -1,10 +1,13 @@
 import { type MetadataRoute } from "next";
 
-import { DOMAIN, SCRAPERS_AI, SCRAPERS_NON_AI } from "@/settings/constant";
+import { SCRAPERS_AI, SCRAPERS_NON_AI } from "@/settings/constant";
+import { getSite } from "@/helpers/server/content";
 
 export const revalidate = false;
 
-export default function (): MetadataRoute.Robots {
+export default async function (): Promise<MetadataRoute.Robots> {
+  const { site } = await getSite();
+
   return {
     rules: [
       {
@@ -17,6 +20,6 @@ export default function (): MetadataRoute.Robots {
         disallow: "/",
       })),
     ],
-    sitemap: `https://${DOMAIN}/sitemap.xml`,
+    sitemap: `https://${site.domain}/sitemap.xml`,
   };
 }

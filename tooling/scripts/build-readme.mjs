@@ -2,39 +2,45 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { loadContent, loadVersions } from "./content.mjs";
+import { loadContent, loadVersions } from "./load-content.mjs";
 
-// Generates the GitHub profile README (SiegeSailor/SiegeSailor) from the same
-// content/ `profile` block, summary, and projects that drive the /about page,
-// so the two stay in lockstep. Writes export/SiegeSailor-README.md (like
-// build-resume writes export/resume/*); the Docker image builds it and the
-// deploy workflow copies it out and pushes it to the profile repository.
+// Generates the GitHub profile README (SiegeSailor/SiegeSailor) from the content
+// declaring `readme` in its `consumers:` — the same profile, summary, and
+// projects that drive the /about page, so the two stay in lockstep. Writes
+// export/SiegeSailor-README.md (like build-resume writes export/resume/*); the
+// Docker image builds it and the deploy workflow copies it out and pushes it to
+// the profile repository.
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_FILE = join(ROOT, "export/SiegeSailor-README.md");
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
-const NAME = "Jin Yu Zhang";
-const ABOUT_URL = "https://jinyu-zhang.com/about";
+// Presentation order, not content: Planning projects are hidden entirely.
 const STAGE_ORDER = { Production: 0, Development: 1, Planning: 2 };
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
-const TIMELINE = {
-  start: "2016-06-01",
-  intervals: [
-    { start: "2017-01-01", end: "2017-06-30" },
-    { start: "2022-02-01", end: "2024-01-31" },
-  ],
+
+const { data, headings } = loadContent("readme");
+
+const heading = (key) => {
+  const text = headings[key];
+  if (!text)
+    throw new Error(
+      `content/resume/ gives the readme a \`${key}\` key with no \`heading:\` to title its section`,
+    );
+  return text;
 };
 
+// Total experience is content/resume/timeline.yaml applied to today, not a
+// stated figure. website/helpers/server/resume.ts computes the same thing from
+// the same content; see load-content.mjs on why the two are separate.
 function experienceYears() {
-  const now = new Date();
-  const start = new Date(TIMELINE.start);
-  const total = now.getTime() - start.getTime();
-  const excluded = TIMELINE.intervals.reduce(
+  const { start, excluded = [] } = data.timeline;
+  const total = new Date().getTime() - new Date(start).getTime();
+  const skipped = excluded.reduce(
     (sum, period) =>
       sum + (new Date(period.end).getTime() - new Date(period.start).getTime()),
     0,
   );
-  const [year, month] = ((total - excluded) / MILLISECOND_ONE_YEAR)
+  const [year, month] = ((total - skipped) / MILLISECOND_ONE_YEAR)
     .toFixed(1)
     .split(".");
   const monthFloor = Math.floor((Number(month) / 10) * 12);
@@ -48,11 +54,8 @@ const repoKey = (href) => {
 const versionLabel = (version) =>
   /^v/i.test(version) ? version : `v${version}`;
 
-const readVersions = loadVersions;
-
-const data = loadContent();
+const versions = loadVersions();
 const profile = data.profile;
-const versions = readVersions();
 
 const projects = (data.projects || [])
   .filter((project) => project.stage !== "Planning")
@@ -65,28 +68,33 @@ const projects = (data.projects || [])
     }`;
   });
 
+const links = (data.media || [])
+  .map((entry) => `[${entry.label}](${entry.href})`)
+  .join(" · ");
+const about = `https://${data.site.domain}/about`;
+
 const readme = [
-  `# ${NAME}`,
+  `# ${data.identity.display}`,
   "",
   `**${profile.headlines.join(" · ")}**`,
   "",
   `${profile.status.location} · ${profile.status.position} · ${experienceYears()} experience`,
   "",
-  "## Summary",
+  `## ${heading("summary")}`,
   "",
-  data.summary.find((entry) => entry.labels?.includes("resume")).text.trim(),
+  data.summary[0].text.trim(),
   "",
-  "## Projects",
+  `## ${heading("projects")}`,
   "",
   ...projects,
   "",
-  "## Links",
+  `## ${heading("media")}`,
   "",
-  `[GitHub](${profile.media.github}) · [LinkedIn](${profile.media.linkedin}) · [Résumé (PDF)](${profile.media.resume})`,
+  links,
   "",
   "---",
   "",
-  `<sub>Generated from <a href="${ABOUT_URL}">jinyu-zhang.com/about</a> — do not edit by hand.</sub>`,
+  `<sub>Generated from <a href="${about}">${data.site.domain}/about</a> — do not edit by hand.</sub>`,
   "",
 ].join("\n");
 

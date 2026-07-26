@@ -2,7 +2,7 @@
 
 import { Alert, Button } from "@heroui/react";
 
-import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
+import { ROUTE_HOME } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 
@@ -23,9 +23,9 @@ export default function ({
           <Button color="danger" size="md" variant="solid" onPress={reset}>
             Retry
           </Button>
-          <Link href={TITLE_TO_ROUTE["Home"]} underline="none">
+          <Link href={ROUTE_HOME} underline="none">
             <Button color="danger" size="md" variant="flat" onPress={reset}>
-              {ROUTE_TO_TITLE["/"]}
+              {"Home"}
             </Button>
           </Link>
         </div>

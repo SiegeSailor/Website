@@ -5,18 +5,22 @@ import NextTopLoader from "nextjs-toploader";
 
 import "@/styles/global.css";
 import {
+  createGlobalMetadata,
   globalFontRoboto,
-  globalMetadata,
   globalViewport,
 } from "@/settings/heads";
 import { getArticles } from "@/helpers/server/article";
+import { getSite } from "@/helpers/server/content";
 import { PublicEnv } from "@/helpers/utility";
 import Entry from "@/components/Entry";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
 
-export const metadata: Metadata = globalMetadata;
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = await getSite();
+  return createGlobalMetadata(site);
+}
 
 export const viewport: Viewport = globalViewport;
 

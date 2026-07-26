@@ -14,10 +14,13 @@ import {
   TextRun,
 } from "docx";
 
-import { loadContent } from "./content.mjs";
+import { loadContent } from "./load-content.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA = loadContent();
+// Only the content declaring `resume` in its `consumers:`, already pruned of
+// archived nodes — a section is absent here because content says so, not
+// because this script filters it.
+const { data: DATA, headings: HEADINGS } = loadContent("resume");
 const OUTPUT = join(ROOT, "export/resume");
 // The repository root package.json is the single version source (semantic-release
 // bumps it); stamped into the document metadata.
@@ -46,9 +49,17 @@ const clean = (s) =>
   String(s ?? "")
     .replace(/\s+/g, " ")
     .trim();
-// content/resume/ holds more than the resume; only nodes labelled `resume`
-// render, so an unlabelled node is kept for reference and never printed.
-const onResume = (item) => Boolean(item?.labels?.includes("resume"));
+
+// Section names come from each content file's `heading:`. Section *order* stays
+// below, in code: it is ATS-sensitive and drives the one-page fit.
+const heading = (key) => {
+  const text = HEADINGS[key];
+  if (!text)
+    throw new Error(
+      `content/resume/ gives the resume a \`${key}\` key with no \`heading:\` to title its section`,
+    );
+  return text;
+};
 
 const hasCommand = (command) => {
   try {
@@ -116,7 +127,13 @@ const buildHeader = () => [
     alignment: AlignmentType.CENTER,
     spacing: { after: 40 },
     children: [
-      new TextRun({ text: DATA.name, bold: true, font: FONT, size: SZ.name }),
+      new TextRun({
+        // Upper-casing is presentation, so content stores the name as written.
+        text: clean(DATA.identity.legal).toUpperCase(),
+        bold: true,
+        font: FONT,
+        size: SZ.name,
+      }),
     ],
   }),
   ...[DATA.contact.line1, DATA.contact.line2].map(
@@ -132,19 +149,19 @@ const buildHeader = () => [
 ];
 
 const buildSummary = () => {
-  const text = (DATA.summary || []).find(onResume)?.text;
+  const text = (DATA.summary || [])[0]?.text;
   if (!text) return [];
   return [
-    sectionHeader("Summary"),
+    sectionHeader(heading("summary")),
     bodyLine([new TextRun({ text: clean(text), font: FONT, size: SZ.body })]),
   ];
 };
 
 const buildSkills = () => {
-  const rows = (DATA.skills || []).filter(onResume);
+  const rows = DATA.skills || [];
   if (!rows.length) return [];
   return [
-    sectionHeader("Skills"),
+    sectionHeader(heading("skills")),
     ...rows.map((s) =>
       bodyLine(
         [
@@ -163,12 +180,14 @@ const buildSkills = () => {
 };
 
 const buildExperience = () => {
-  const out = [sectionHeader("Work Experience")];
-  for (const job of (DATA.experience || []).filter(onResume)) {
-    const bullets = (job.bullets || []).filter(onResume);
+  const jobs = DATA.experience || [];
+  if (!jobs.length) return [];
+  const out = [sectionHeader(heading("experience"))];
+  for (const job of jobs) {
+    const bullets = job.bullets || [];
     if (!bullets.length) continue;
 
-    const roles = (job.roles || []).filter(onResume);
+    const roles = job.roles || [];
     out.push(
       splitLine(
         [
@@ -188,7 +207,7 @@ const buildExperience = () => {
         { spacing: { before: 60, after: 10 } },
       ),
     );
-    if (onResume(job.blurb))
+    if (job.blurb)
       out.push(
         bodyLine(
           [
@@ -241,10 +260,10 @@ const buildExperience = () => {
 };
 
 const buildPublications = () => {
-  const publications = (DATA.publications || []).filter(onResume);
+  const publications = DATA.publications || [];
   if (!publications.length) return [];
   return [
-    sectionHeader("Publications"),
+    sectionHeader(heading("publications")),
     ...publications.map((p) =>
       bodyLine([
         new TextRun({ text: clean(p.text), font: FONT, size: SZ.body }),
@@ -253,10 +272,10 @@ const buildPublications = () => {
   ];
 };
 
-const buildSchools = (title, list) => {
-  const rows = (list || []).filter(onResume);
+const buildSchools = (key, list) => {
+  const rows = list || [];
   if (!rows.length) return [];
-  const out = [sectionHeader(title)];
+  const out = [sectionHeader(heading(key))];
   for (const entry of rows) {
     out.push(
       splitLine(
@@ -277,29 +296,28 @@ const buildSchools = (title, list) => {
         { spacing: { before: 40, after: 10 } },
       ),
     );
-    for (const detail of (entry.details || []).filter(onResume))
-      out.push(bullet(detail.text));
+    for (const detail of entry.details || []) out.push(bullet(detail.text));
   }
   return out;
 };
 
-const buildEducation = () => buildSchools("Education", DATA.education);
+const buildEducation = () => buildSchools("education", DATA.education);
 const buildCertifications = () =>
-  buildSchools("Certifications", DATA.certifications);
+  buildSchools("certifications", DATA.certifications);
 
 const buildActivities = () => {
-  const activities = DATA.activities;
-  if (!onResume(activities)) return [];
+  const items = DATA.activities?.items || [];
+  if (!items.length) return [];
   return [
-    sectionHeader("Activities & Leadership"),
-    ...(activities.items || []).map((text) => bullet(text)),
+    sectionHeader(heading("activities")),
+    ...items.map((text) => bullet(text)),
   ];
 };
 
 const buildDocument = async () => {
   const doc = new Document({
-    title: `${clean(DATA.name)} — Resume`,
-    creator: clean(DATA.name),
+    title: `${clean(DATA.identity.display)} — Resume`,
+    creator: clean(DATA.identity.display),
     subject: "Resume",
     keywords: `v${VERSION}`,
     styles: {

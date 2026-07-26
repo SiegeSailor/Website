@@ -1,0 +1,11 @@
+# Who this is, in the two forms the outputs need. `legal` heads the resume
+# document (the builder upper-cases it); `display` is the byline on the site and
+# the profile README.
+consumers:
+  - resume
+  - readme
+  - site
+
+identity:
+  legal: Jin Yu (Ken) Zhang
+  display: Jin Yu Zhang

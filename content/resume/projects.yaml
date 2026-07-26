@@ -1,6 +1,15 @@
 # Side projects — shown on the /about page and the GitHub profile README,
 # never in the resume documents. `stage` is one of Planning | Development |
-# Production; Planning projects stay hidden until they advance.
+# Production; Planning projects stay hidden until they advance, which is why
+# they need no `consumers: []` of their own.
+consumers:
+  - /about
+  - readme
+  # build-versions resolves each `href` to its latest GitHub release.
+  - versions
+
+heading: Projects
+
 projects:
   - title: Cryptography CLI
     stage: Development

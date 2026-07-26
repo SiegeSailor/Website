@@ -5,21 +5,19 @@ import clsx from "clsx";
 import NextTopLoader from "nextjs-toploader";
 
 import "@/styles/global.css";
-import {
-  globalFontRoboto,
-  globalMetadata,
-  globalViewport,
-} from "@/settings/heads";
-import { createPageTitle } from "@/helpers/utility";
+import { globalFontRoboto, globalViewport } from "@/settings/heads";
 import DivisionCenter from "@/components/DivisionCenter";
 import Error from "@/app/error";
 import Provider from "@/components/Provider";
 
 // `metadata` and `viewport` don't work. They are manually inserted below in `<head />`.
-export const metadata: Metadata = {
-  ...globalMetadata,
-  title: createPageTitle("Error"),
-};
+//
+// This is the one document that cannot read content/: it is a client component
+// (it takes `reset`), and helpers/server/content.ts inlines every content file
+// through require.context, so importing it here would ship contact.yaml to the
+// browser. The last-resort error screen therefore carries its own literal title
+// and no social metadata, which is what an uncrawlable error page wants anyway.
+export const metadata: Metadata = { title: "Error" };
 
 export const viewport: Viewport = globalViewport;
 
@@ -31,7 +29,6 @@ export default function ({
     <html data-scroll-behavior="smooth" suppressHydrationWarning lang="en">
       <head>
         <title>{metadata.title?.toString()}</title>
-        <meta name="description" content={metadata.description?.toString()} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="theme-color"

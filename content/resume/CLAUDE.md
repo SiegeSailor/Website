@@ -1,61 +1,114 @@
 # CLAUDE.md — content/resume
 
-The single source of truth for the résumé document, the website home and
-`/about` pages, and the generated GitHub profile README. One file per top-level
-key; consumers merge them back into one object, so **a key must live in exactly
-one file** — a duplicate silently wins or loses depending on filename order.
+The single source of truth for the résumé document, the website, and the
+generated GitHub profile README. Nothing a reader sees is hard-coded in a
+consumer: names, taglines, summaries, links, page titles, and section headings
+all live here.
 
-| File                 | Key               | Consumed by                              |
-| -------------------- | ----------------- | ---------------------------------------- |
-| `contact.yaml`       | `name`, `contact` | résumé document                          |
-| `profile.yaml`       | `profile`         | website, profile README                  |
-| `summary.yaml`       | `summary`         | résumé document, website, README         |
-| `skills.yaml`        | `skills`          | résumé document                          |
-| `experience.yaml`    | `experience`      | résumé document, website home-page hero  |
-| `publications.yaml`  | `publications`    | résumé document                          |
-| `education.yaml`     | `education`       | résumé document                          |
-| `certifications.yaml`| `certifications`  | résumé document                          |
-| `activities.yaml`    | `activities`      | résumé document                          |
-| `projects.yaml`      | `projects`        | website `/about`, profile README         |
+## The file-consumers structure
+
+Every file has the same three parts, and the loaders reject a file that does
+not:
+
+```yaml
+consumers: # required — who reads this file
+  - resume
+  - /about
+
+heading: Summary # optional — names this file's section in a document
+
+summary: # exactly one content key
+  - text: "…"
+```
+
+- **`consumers:`** names the documents that read the file. A file disappears from
+  a document by dropping that name — nothing else changes. `consumers: []` means
+  archived: verified material kept in the source and printed nowhere.
+- **`heading:`** is the section title in whichever document renders it as a
+  section. Section *order* is not here; it stays in the builders, because the
+  résumé's order is ATS-sensitive and drives the one-page fit.
+- **exactly one content key** per file. Two files declaring the same key is a
+  build failure, not a silent last-write-wins.
+
+Filenames are free — the loader takes the key from the file's contents, which is
+why `site-identity.yaml` holds `site:` (a file named `site.yaml` trips a
+SchemaStore schema in editors).
+
+### Consumer names
+
+| Consumer   | Output                                                       |
+| ---------- | ------------------------------------------------------------ |
+| `resume`   | `tooling/export/resume/*.{docx,pdf}`                         |
+| `readme`   | the `SiegeSailor/SiegeSailor` profile README                  |
+| `site`     | site-wide chrome and metadata: header, footer, every `<head>` |
+| `/`        | the home page                                                 |
+| `/about`   | the `/about` page                                             |
+| `versions` | `build-versions` resolving each project's latest release      |
+
+### File map
+
+| File                  | Key              | Consumers                        |
+| --------------------- | ---------------- | -------------------------------- |
+| `identity.yaml`       | `identity`       | `resume`, `readme`, `site`       |
+| `contact.yaml`        | `contact`        | `resume`                         |
+| `site-identity.yaml`  | `site`           | `site`, `readme`                 |
+| `routes.yaml`         | `routes`         | `site`                           |
+| `media.yaml`          | `media`          | `site`, `/about`, `readme`       |
+| `profile.yaml`        | `profile`        | `/`, `/about`, `readme`          |
+| `timeline.yaml`       | `timeline`       | `/about`, `readme`               |
+| `summary.yaml`        | `summary`        | `resume`, `readme`, `/about`     |
+| `skills.yaml`         | `skills`         | `resume`                         |
+| `experience.yaml`     | `experience`     | `resume`, `/`                    |
+| `education.yaml`      | `education`      | `resume`                         |
+| `certifications.yaml` | `certifications` | `resume`                         |
+| `projects.yaml`       | `projects`       | `/about`, `readme`, `versions`   |
+| `publications.yaml`   | `publications`   | — (archived)                     |
+| `activities.yaml`     | `activities`     | — (archived)                     |
 
 `versions.generated.json` is written here by `tooling/scripts/build-versions.mjs`
 and is git-ignored — never edit or commit it.
 
-## Labels
+## Node-level consumers
 
-This folder holds more material than fits on the one-page résumé, so any node
-may carry a `labels:` list and **only nodes labelled `resume` are printed**:
+Nodes inside a file follow the same rule one level down, with one difference
+worth internalising: **a node with no `consumers` inherits the file's**, and
+`consumers: []` archives it.
 
 ```yaml
-- text: "Rendered on the resume"
-  labels: [resume]
-- text: "Kept here for reference; never printed"
+- text: "Printed wherever this file is consumed"
+- consumers: []
+  text: "Kept for reference; printed nowhere"
 ```
 
-An unlabelled node is archived, not dead — it is verified material waiting for a
-label (today: the fuller experience bullets, the full IEEE citation in
-`publications.yaml`, `activities.yaml`, the split skill rows, the second MIT and
-the NYU certificates, Servicetech's internship row, DY Game, and the second
-`summary` entry). Labels nest: a company is printed only if it is labelled, and
-so is each of its roles, its blurb, and each of its bullets.
+This is the inverse of the old `labels: [resume]`, where silence meant hidden.
+Archived nodes are now the ones that carry an annotation, so the résumé's
+held-back material is visible when reading the file rather than inferred from an
+absence. What is archived today: the fuller experience bullets, four company
+blurbs, DY Game, Servicetech's internship row, the split skill rows, the second
+MIT and the NYU certificates, some education details, and the second `summary`.
 
-The trade-off to know: **forgetting the label silently omits new content** from
-the document. After adding anything, rebuild and check it appears.
+Nesting still applies — a company is printed only if it is not archived, and so
+is each of its roles, its blurb, and each of its bullets.
+
+The trade-off to know: **archiving a node silently shortens a document.** After
+editing, rebuild and check what appears.
 
 ## Who reads what
 
-- **Résumé document** (`tooling/scripts/build-resume.mjs`) reads every file and
-  honours `labels:`.
-- **Website** (`website/helpers/server/resume.ts`) imports only `profile.yaml`,
-  `summary.yaml`, `experience.yaml`, and `projects.yaml`, as raw text so the dev
-  server hot-reloads edits. It ignores labels except to pick the summary, and
-  reads whole keys: `profile:`, `projects:`, the `resume` entry of `summary:`,
-  and the first `experience` entry (company and website for the home-page hero).
-- **Profile README** (`tooling/scripts/build-readme.mjs`) reads the same keys as
-  the website.
+- **Résumé document** (`tooling/scripts/build-resume.mjs`) loads the `resume`
+  consumer and renders what it gets; it no longer filters.
+- **Profile README** (`tooling/scripts/build-readme.mjs`) loads `readme`.
+- **Website** (`website/helpers/server/content.ts`) loads one consumer per
+  surface: `getSite()`, `getHome()`, `getAbout()`. It globs this folder through
+  webpack `require.context`, so a new file needs no code change and the dev
+  server still hot-reloads. That module is **server-only** — importing it from a
+  client component would ship `contact.yaml` to the browser.
 
-If you add a top-level key the website needs, add the matching import to
-`resume.ts` — the website does not glob this folder.
+Both loaders are the same ~50 lines twice over
+(`tooling/scripts/load-content.mjs` and `website/helpers/server/content.ts`),
+deliberately: the tooling workspace is pinned to `js-yaml` and `docx` to keep its
+Docker image at ~22 packages, so the website cannot import it. Change one and
+change the other.
 
 ## Constraints — never break these
 
@@ -64,8 +117,8 @@ when editing this folder:
 
 1. **The résumé must fit one US-Letter page.** The build verifies the page count
    with `pdfinfo` and fails on a violation. Spacing is already tight, so expect
-   overflow when labelling more content. To fit, in order of preference: drop a
-   bullet's `resume` label > tighten wording > merge skill groups.
+   overflow when un-archiving content. To fit, in order of preference: archive a
+   bullet > tighten wording > merge skill groups.
 2. **Never re-flatten stacked role lines** (CooperSurgical, Servicetech) into a
    single title and date range. Background-check vendors verify titles and dates;
    the stacked history is deliberate and factual.

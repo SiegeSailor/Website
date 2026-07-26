@@ -1,26 +1,25 @@
 import { Alert, Button } from "@heroui/react";
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 
-import { globalMetadata, globalViewport } from "@/settings/heads";
+import { globalViewport } from "@/settings/heads";
 import { createPageTitle } from "@/helpers/utility";
-import { TITLE_TO_ROUTE, ROUTE_TO_TITLE } from "@/settings/constant";
+import { getSite } from "@/helpers/server/content";
+import { ROUTE_HOME } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 import TextRoute from "@/components/TextRoute";
 
-// TODO: Subject to use this once https://github.com/vercel/next.js/issues/45620 is resolved.
-//       Currently, `metadata` doesn't work here, neither inherited. `<title />` used instead.
-export const metadata: Metadata = {
-  ...globalMetadata,
-  title: createPageTitle("Not Found"),
-};
-
 export const viewport: Viewport = globalViewport;
 
-export default function () {
+// TODO: Export `metadata` once https://github.com/vercel/next.js/issues/45620 is
+//       resolved. It does not work here and is not inherited, so the title is
+//       rendered as a `<title />` below, from content like every other route's.
+export default async function () {
+  const { site } = await getSite();
+
   return (
     <DivisionCenter>
-      <title>{metadata.title?.toString()}</title>
+      <title>{createPageTitle(site.title, "Not Found")}</title>
 
       <Alert
         color="warning"
@@ -34,9 +33,9 @@ export default function () {
         variant="faded"
       >
         <div className="flex gap-2 mt-2">
-          <Link href={TITLE_TO_ROUTE["Home"]} underline="none">
+          <Link href={ROUTE_HOME} underline="none">
             <Button color="warning" size="md" variant="solid">
-              {ROUTE_TO_TITLE["/"]}
+              {"Home"}
             </Button>
           </Link>
         </div>

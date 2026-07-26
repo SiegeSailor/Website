@@ -5,21 +5,25 @@ import NextTopLoader from "nextjs-toploader";
 
 import "@/styles/global.css";
 import {
+  createGlobalMetadata,
   globalFontRoboto,
-  globalMetadata,
   globalViewport,
 } from "@/settings/heads";
 import { createPageTitle } from "@/helpers/utility";
-import { ROUTE_TO_TITLE, TITLE_TO_ROUTE } from "@/settings/constant";
+import { getSite } from "@/helpers/server/content";
+import { ROUTE_HOME } from "@/settings/constant";
 import DivisionCenter from "@/components/DivisionCenter";
 import Link from "@/components/Link";
 import Provider from "@/components/Provider";
 import TextRoute from "@/components/TextRoute";
 
-export const metadata: Metadata = {
-  ...globalMetadata,
-  title: createPageTitle("Not Found"),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = await getSite();
+  return {
+    ...createGlobalMetadata(site),
+    title: createPageTitle(site.title, "Not Found"),
+  };
+}
 
 export const viewport: Viewport = globalViewport;
 
@@ -53,9 +57,9 @@ export default function () {
                 variant="faded"
               >
                 <div className="flex gap-2 mt-2">
-                  <Link href={TITLE_TO_ROUTE["Home"]} underline="none">
+                  <Link href={ROUTE_HOME} underline="none">
                     <Button color="warning" size="md" variant="solid">
-                      {ROUTE_TO_TITLE["/"]}
+                      {"Home"}
                     </Button>
                   </Link>
                 </div>

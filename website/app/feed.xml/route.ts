@@ -1,5 +1,5 @@
-import { AUTHOR, DESCRIPTION, DOMAIN, TITLE } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
+import { getSite } from "@/helpers/server/content";
 
 export const dynamic = "force-static";
 
@@ -20,8 +20,11 @@ const escapeXml = (value: string) =>
   });
 
 export async function GET() {
-  const articles = await getArticles();
-  const site = `https://${DOMAIN}`;
+  const [articles, { identity, site: identitySite }] = await Promise.all([
+    getArticles(),
+    getSite(),
+  ]);
+  const site = `https://${identitySite.domain}`;
 
   const items = articles
     .map((article) => {
@@ -44,11 +47,11 @@ export async function GET() {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     "  <channel>",
-    `    <title>${escapeXml(TITLE)}</title>`,
+    `    <title>${escapeXml(identitySite.title)}</title>`,
     `    <link>${site}</link>`,
-    `    <description>${escapeXml(DESCRIPTION)}</description>`,
+    `    <description>${escapeXml(identitySite.description)}</description>`,
     "    <language>en-us</language>",
-    `    <managingEditor>${escapeXml(AUTHOR)}</managingEditor>`,
+    `    <managingEditor>${escapeXml(identity.display)}</managingEditor>`,
     `    <atom:link href="${site}/feed.xml" rel="self" type="application/rss+xml" />`,
     items,
     "  </channel>",

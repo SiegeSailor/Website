@@ -1,46 +1,50 @@
 import NextLink from "next/link";
-import { GithubIcon, LinkedinIcon } from "lucide-react";
 
-import { AUTHOR } from "@/settings/constant";
-import { getResume } from "@/helpers/server/resume";
+import { ROUTES } from "@/settings/constant";
+import { MEDIA_TO_ICON } from "@/settings/icons";
+import { getSite } from "@/helpers/server/content";
 import IconTheme from "./IconTheme";
 
+// The header links out through the same media.yaml entries as /about and the
+// profile README, minus the résumé download — a header is for navigation.
+const NAVIGABLE = new Set(["github", "linkedin"]);
+
 export default async function () {
-  const { profile } = await getResume();
+  const { identity, media, titleOf } = await getSite();
 
   return (
     <header className="flex items-baseline gap-4 py-5 border-b border-default-200 mb-10">
       <NextLink
-        href="/"
+        href={ROUTES.home}
         className="text-large font-semibold tracking-tight hover:text-primary transition-colors"
       >
-        {AUTHOR}
+        {identity.display}
       </NextLink>
       <nav className="ml-auto flex items-center gap-4 text-small text-default-500">
         <NextLink
-          href="/about"
+          href={ROUTES.about}
           className="hover:text-foreground transition-colors"
         >
-          About
+          {titleOf(ROUTES.about)}
         </NextLink>
-        <a
-          href={profile.media.github}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="GitHub"
-          className="hover:text-foreground transition-colors"
-        >
-          <GithubIcon size="1.05rem" />
-        </a>
-        <a
-          href={profile.media.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-          className="hover:text-foreground transition-colors"
-        >
-          <LinkedinIcon size="1.05rem" />
-        </a>
+        {media
+          .filter((entry) => NAVIGABLE.has(entry.key))
+          .map((entry) => {
+            const Icon = MEDIA_TO_ICON[entry.key];
+            if (!Icon) return null;
+            return (
+              <a
+                key={entry.key}
+                href={entry.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={entry.label}
+                className="hover:text-foreground transition-colors"
+              >
+                <Icon size="1.05rem" />
+              </a>
+            );
+          })}
         <IconTheme />
       </nav>
     </header>

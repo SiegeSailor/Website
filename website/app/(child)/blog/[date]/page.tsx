@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import NextLink from "next/link";
 
 import { createPageTitle, getSlugByTitle } from "@/helpers/utility";
-import { DOMAIN } from "@/settings/constant";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
-import { globalMetadata } from "@/settings/heads";
+import { createGlobalMetadata } from "@/settings/heads";
+import { getSite } from "@/helpers/server/content";
 import Heading from "@/components/Heading";
 import Markdown from "@/components/Markdown";
 
@@ -25,9 +25,13 @@ export async function generateMetadata({
   params: Promise<TParams>;
 }>): Promise<Metadata> {
   const { date } = await params;
-  const article = await getArticleByDate(date);
+  const [article, { site }] = await Promise.all([
+    getArticleByDate(date),
+    getSite(),
+  ]);
+  const globalMetadata = createGlobalMetadata(site);
 
-  const title = createPageTitle(article.metadata.title);
+  const title = createPageTitle(site.title, article.metadata.title);
   const titleSocial = title.length >= 60 ? title.slice(0, 57) + "..." : title;
 
   const description = article.metadata.description;
@@ -39,7 +43,7 @@ export async function generateMetadata({
       ...globalMetadata.openGraph,
       title: titleSocial,
       description,
-      url: `https://${DOMAIN}${article.metadata.route}`,
+      url: `https://${site.domain}${article.metadata.route}`,
     },
     twitter: {
       ...globalMetadata.twitter,

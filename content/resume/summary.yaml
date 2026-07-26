@@ -1,13 +1,22 @@
-# The `resume` entry is also the summary on /about and the profile README.
+# The first entry is the summary everywhere: the resume document, /about, and
+# the profile README. The second is the systems-focused alternative, archived
+# with an empty `consumers` until it is wanted.
+consumers:
+  - resume
+  - readme
+  - /about
+
+heading: Summary
+
 summary:
-  - labels: [resume]
-    text: >-
+  - text: >-
       Senior software engineer spanning regulated medical devices (FDA / EU MDR)
       and large-scale consumer platforms. Led a team of 5 to ship device SDKs,
       real-time distributed systems, and developer platforms for 5+ vendors and
       20+ engineers; sustained 10,000 peak RPS at Shopee. First-author IEEE
       publication on DevSecOps; building LLM-assisted workflows in regulated R&D.
-  - text: >-
+  - consumers: []
+    text: >-
       Systems-focused software engineer with years of experience bridging hardware,
       firmware, and software on FDA / EU MDR-regulated medical devices, after
       scaling consumer platforms to 200,000+ daily users. Led a team of 5 across

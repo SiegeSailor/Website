@@ -1,0 +1,17 @@
+# Site-wide identity: the strings every route's <head> needs, plus the footer
+# licence link. `site` is the consumer name for chrome and metadata that is not
+# specific to one route.
+consumers:
+  - site
+  # The profile README signs off by pointing back at /about.
+  - readme
+
+site:
+  domain: jinyu-zhang.com
+  title: Jin Yu Zhang's Website
+  description: Jin Yu Zhang's personal website, showcasing my profile, projects, blog, and notes.
+  # Open Graph / Twitter card image, served from website/public/.
+  image: /images/Jin-Yu-Zhang-Profile.jpg
+  license:
+    label: CC BY 4.0
+    href: "https://creativecommons.org/licenses/by/4.0/"

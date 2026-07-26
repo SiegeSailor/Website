@@ -1,13 +1,14 @@
 import { type Metadata } from "next";
-import { GithubIcon, LinkedinIcon, FileDownIcon } from "lucide-react";
 
-import { AUTHOR, ROUTE_TO_TITLE } from "@/settings/constant";
+import { ROUTES } from "@/settings/constant";
+import { MEDIA_TO_ICON } from "@/settings/icons";
 import { createPageTitle } from "@/helpers/utility";
-import { getResume } from "@/helpers/server/resume";
+import { getAbout, getSite } from "@/helpers/server/content";
 
-export const metadata: Metadata = {
-  title: createPageTitle(ROUTE_TO_TITLE["/about"]),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { site, titleOf } = await getSite();
+  return { title: createPageTitle(site.title, titleOf(ROUTES.about)) };
+}
 
 const STAGE_ORDER = { Production: 0, Development: 1, Planning: 2 } as const;
 
@@ -20,7 +21,10 @@ function Eyebrow({ children }: Readonly<{ children: string }>) {
 }
 
 export default async function () {
-  const { profile, summary, projects } = await getResume();
+  const [
+    { profile, summary, projects, media, experienceYears, headings },
+    { identity },
+  ] = await Promise.all([getAbout(), getSite()]);
 
   const lead = profile.intro.split("\n\n")[0];
   const shown = projects
@@ -33,11 +37,13 @@ export default async function () {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={profile.picture}
-          alt={AUTHOR}
+          alt={identity.display}
           className="w-20 h-20 rounded-full object-cover shadow-none grayscale shrink-0"
         />
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{AUTHOR}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {identity.display}
+          </h1>
           <p className="font-mono text-default-500 mt-1">
             {profile.headlines.join(" · ")}
           </p>
@@ -49,21 +55,21 @@ export default async function () {
         <span className="text-default-300">·</span>
         <span>{profile.status.position}</span>
         <span className="text-default-300">·</span>
-        <span>{profile.status.experience} experience</span>
+        <span>{experienceYears} experience</span>
       </div>
 
       <p className="mb-9 leading-relaxed">{lead}</p>
 
       {summary && (
         <section className="mb-9">
-          <Eyebrow>Summary</Eyebrow>
+          <Eyebrow>{headings.summary}</Eyebrow>
           <p className="leading-relaxed text-foreground">{summary}</p>
         </section>
       )}
 
       {shown.length > 0 && (
         <section className="mb-9">
-          <Eyebrow>Projects</Eyebrow>
+          <Eyebrow>{headings.projects}</Eyebrow>
           <div className="flex flex-col">
             {shown.map((project) => (
               <div
@@ -92,30 +98,20 @@ export default async function () {
       )}
 
       <div className="flex flex-wrap gap-x-5 gap-y-2 pt-6 border-t border-default-200 text-small">
-        <a
-          href={profile.media.github}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
-        >
-          <GithubIcon size="1rem" /> GitHub
-        </a>
-        <a
-          href={profile.media.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
-        >
-          <LinkedinIcon size="1rem" /> LinkedIn
-        </a>
-        <a
-          href={profile.media.resume}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
-        >
-          <FileDownIcon size="1rem" /> Résumé (PDF)
-        </a>
+        {media.map((entry) => {
+          const Icon = MEDIA_TO_ICON[entry.key];
+          return (
+            <a
+              key={entry.key}
+              href={entry.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
+            >
+              {Icon ? <Icon size="1rem" /> : null} {entry.label}
+            </a>
+          );
+        })}
       </div>
     </div>
   );

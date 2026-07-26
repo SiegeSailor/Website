@@ -1,15 +1,17 @@
-# Website-only: the home page hero, /about page, and the generated GitHub
-# profile README. Never rendered in the resume documents.
+# The home page hero, the /about header, and the generated GitHub profile
+# README. Never rendered in the resume document — the document has its own name
+# and contact block. External links live in media.yaml.
+consumers:
+  - /
+  - /about
+  - readme
+
 profile:
   picture: /images/Jin-Yu-Zhang.jpg
   headlines:
     - "Full-Stack Development"
     - "DevOps"
     - "Cloud-Based Web Microservices"
-  media:
-    github: "https://github.com/SiegeSailor"
-    linkedin: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
-    resume: "https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf"
   status:
     location: "NYC Metropolitan Area"
     position: "Senior Software Engineer"

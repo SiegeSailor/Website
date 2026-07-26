@@ -52,13 +52,26 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 This workspace holds no authored content — it all lives in `../content/`, and
 each subfolder has its own `CLAUDE.md`:
 
-- `content/resume/` is reached through the `@content/*` tsconfig alias.
-  `getResume` in `helpers/server/resume.ts` imports `profile.yaml`,
-  `summary.yaml`, `experience.yaml`, and `projects.yaml` as **raw text** — a
-  webpack `asset/source` rule in `next.config.mjs` — so the dev server watches
-  them and hot-reloads. Adding a top-level key the website needs means adding an
-  import there; the folder is not globbed. Résumé constraints live in the root
-  `CLAUDE.md`.
+- `content/resume/` is reached through the `@content/*` tsconfig alias and read by
+  `helpers/server/content.ts`, which **globs the folder** with webpack
+  `require.context` and parses each file as **raw text** (an `asset/source` rule
+  in `next.config.mjs`). Adding, renaming, or deleting a YAML file therefore needs
+  no code change, and the dev server watches and hot-reloads all of them.
+
+  Each surface asks for its own consumer name and gets only the files declaring
+  it: `getSite()` for the header, footer, and every `<head>`; `getHome()` for the
+  home hero; `getAbout()` for `/about`. A page needing a new key adds it to the
+  right accessor.
+
+  **That module is server-only.** `require.context` inlines every file in the
+  directory, so importing it from a client component would ship `contact.yaml` —
+  a phone number and a postal area — to the browser. `app/global-error.tsx` is the
+  one document that cannot use it, because it must be a client component; it
+  carries a literal title instead. When adding content to a client component,
+  pass it down from a server parent.
+
+  Résumé constraints live in the root `CLAUDE.md`.
+
 - `content/articles/` is read from disk by `helpers/server/article.ts`, which
   documents the front-matter fields. Article images stay here in
   `public/images/<YYYY-MM-DD>/` because Next.js serves them.

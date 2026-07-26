@@ -1,14 +1,15 @@
 import { type Metadata } from "next";
 
 import { createPageTitle } from "@/helpers/utility";
-import { ROUTE_TO_TITLE } from "@/settings/constant";
+import { ROUTES } from "@/settings/constant";
 import { getArticles } from "@/helpers/server/article";
-import { getResume } from "@/helpers/server/resume";
+import { getHome, getSite } from "@/helpers/server/content";
 import PostList, { type TPost } from "@/components/PostList";
 
-export const metadata: Metadata = {
-  title: createPageTitle(ROUTE_TO_TITLE["/"]),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { site, titleOf } = await getSite();
+  return { title: createPageTitle(site.title, titleOf(ROUTES.home)) };
+}
 
 // The article `description` is markdown prose; flatten it to plain text for the
 // list summary so links/images/blockquote markers don't leak as raw syntax.
@@ -22,12 +23,11 @@ const toPlainText = (markdown: string) =>
     .trim();
 
 export default async function () {
-  const [articles, { profile, experience }] = await Promise.all([
+  const [articles, { profile, company }] = await Promise.all([
     getArticles(),
-    getResume(),
+    getHome(),
   ]);
 
-  const current = experience[0];
   const posts: TPost[] = articles.map((article) => ({
     date: article.metadata.date,
     title: article.metadata.title,
@@ -43,17 +43,17 @@ export default async function () {
       <div className="mb-12 mt-2">
         <h1 className="text-2xl sm:text-[1.7rem] font-medium leading-snug tracking-tight text-balance">
           {profile.status.position} at{" "}
-          {current?.website ? (
+          {company?.website ? (
             <a
-              href={current.website}
+              href={company.website}
               target="_blank"
               rel="noreferrer"
               className="text-primary hover:underline underline-offset-4"
             >
-              {current.company}
+              {company.company}
             </a>
           ) : (
-            current?.company
+            company?.company
           )}
           {" — "}
           {profile.tagline}

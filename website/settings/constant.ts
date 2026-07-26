@@ -9,27 +9,21 @@ export const STATUS_SET = new Set(STATUS);
 export const TECHNOLOGIES = getEntries(TECHNOLOGY_TO_ICON).map(([key]) => key);
 export const TECHNOLOGY_SET = new Set(TECHNOLOGIES);
 
-export const AUTHOR = "Jin Yu Zhang" as const;
-export const DOMAIN = "jinyu-zhang.com" as const;
+// Paths are routing, so they stay in code and stay typed; the *titles* for these
+// paths are content, in content/resume/routes.yaml, read server-side through
+// `getSite().titleOf`. "/blog" is a route *prefix* for article pages
+// (/blog/[date]) — there is no /blog index page, so it is not a typedRoutes
+// `Route` on its own.
+export const ROUTES = {
+  home: "/",
+  blog: "/blog",
+  about: "/about",
+} as const satisfies Record<string, string>;
 
-export const TITLE = `${AUTHOR}'s Website` as const;
-export const DESCRIPTION =
-  `${AUTHOR}'s personal website, showcasing my profile, projects, blog, and notes.` as const;
-
-type TTitle = "Home" | "Blog" | "About";
-// "/blog" is a route *prefix* for article pages (/blog/[date]); there is no
-// /blog index page, so it isn't a typedRoutes `Route` on its own — key by path.
-type TPath = "/" | "/blog" | "/about";
-
-export const ROUTE_TO_TITLE: Readonly<Record<TPath, TTitle>> = {
-  "/": "Home",
-  "/blog": "Blog",
-  "/about": "About",
-} as const;
-
-export const TITLE_TO_ROUTE = Object.fromEntries(
-  getEntries(ROUTE_TO_TITLE).map(([route, title]) => [title, route]),
-) as Readonly<Record<TTitle, Route>>;
+// "/blog" has no page of its own, so typedRoutes does not know it as a `Route`;
+// the cast is what the previous title-keyed map was doing implicitly.
+export const ROUTE_HOME = ROUTES.home as Route;
+export const ROUTE_BLOG = ROUTES.blog as Route;
 
 export const SCRAPERS_AI = [
   "AdsBot-Google",

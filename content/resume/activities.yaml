@@ -1,4 +1,9 @@
-# Not on the resume; label the block `resume` to render the section.
+# Archived: there is no room on the one page. Add `resume` to `consumers` to
+# render the section.
+consumers: []
+
+heading: Activities & Leadership
+
 activities:
   items:
     - "Technical Speaker, ALPHA Camp Digital Career (2021) — represented Shopee Taiwan tech team"

@@ -1,6 +1,10 @@
+# Archived: Education carries the compact citation instead, for the one-page
+# fit. Add `resume` to `consumers` to render the Publications section.
+consumers: []
+
+heading: Publications
+
 publications:
-  # Not on the resume: Education carries the compact citation instead, for the
-  # one-page fit. Label this `resume` to render the Publications section.
   - text: >-
       First author, “Quantitative DevSecOps Metrics for Cloud-Based Web
       Microservices,” IEEE Access, vol. 12, pp. 160317–160342, 2024.

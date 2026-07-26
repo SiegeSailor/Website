@@ -50,12 +50,29 @@ import {
 } from "@icons-pack/react-simple-icons";
 import {
   DatabaseIcon,
+  FileDownIcon,
+  GithubIcon,
   HomeIcon,
+  LinkedinIcon,
   LucideProps,
   NewspaperIcon,
   NotebookIcon,
   UserIcon,
 } from "lucide-react";
+
+type TLucideIcon = ForwardRefExoticComponent<
+  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+>;
+
+// The code half of content/resume/media.yaml: each entry's `key` picks its icon
+// here. A new link needs an entry on both sides, which is why the site renders
+// the label without an icon rather than crashing when one is missing.
+export const MEDIA_TO_ICON: Readonly<Record<string, TLucideIcon | undefined>> =
+  {
+    github: GithubIcon,
+    linkedin: LinkedinIcon,
+    resume: FileDownIcon,
+  } as const;
 
 export const LUCIDE_ICON = {
   DatabaseIcon,

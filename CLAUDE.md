@@ -14,27 +14,30 @@ The repository is an npm workspace: the root `package.json` owns the version
 
 - **`content/`** — all authored content, shared by the other two folders and
   excluded from Prettier because it is hand-tuned prose and data:
-  - `content/resume/` — the single source of truth for the résumé, the home and
-    `/about` pages, and the generated GitHub profile README. One YAML file per
-    top-level key, merged by each consumer (see its own
-    [`CLAUDE.md`](./content/resume/CLAUDE.md)).
+  - `content/resume/` — the single source of truth for the résumé, the whole
+    website, and the generated GitHub profile README. A **file-consumers
+    structure**: every file declares in `consumers:` which outputs read it,
+    optionally names its section in `heading:`, and holds exactly one content key
+    (see its own [`CLAUDE.md`](./content/resume/CLAUDE.md)).
   - `content/articles/` — blog posts named `YYYY-MM-DD.md` (the folder's
     `CLAUDE.md` is the writing guide).
 - **`website/`** — the Next.js application (see its own
   [`CLAUDE.md`](./website/CLAUDE.md) for the internal structure), built on the
   host with `npm run build`. Reads `content/resume/` through the `@content/*`
   alias and `content/articles/` from disk.
-- **`tooling/`** — the `Dockerfile` and the three build scripts that render
+- **`tooling/`** — the `Dockerfile`, the three build scripts that render
   `content/` into the résumé document, the profile README, and the project
-  version list. Deliberately depends on `js-yaml` and `docx` only, so the image
-  installs ~22 packages instead of the website's ~1,400.
+  version list, plus `load-content.mjs`, the loader they share. Deliberately
+  depends on `js-yaml` and `docx` only, so the image installs ~22 packages
+  instead of the website's ~1,400.
 - **`infrastructure/`** — one flat Terraform environment: the site S3 bucket,
   CloudFront (with a viewer-request function that rewrites extensionless routes
   to `.html`), ACM, Route 53, and a budget alarm.
 - **`scripts/`** — shell scripts following the Google Shell Style Guide, one
   function per script: `docker-copy.sh` (build the tooling image and copy its
-  artifacts out), `hadolint.sh` (lint the Dockerfile), and
-  `warm-up-cloudfront-cache.sh`.
+  artifacts out), `hadolint.sh` (lint the Dockerfile), `run-parallel.sh` (run
+  several root npm scripts at once, which is how `watch` drives every `watch:*`
+  target), and `warm-up-cloudfront-cache.sh`.
 - **`.github/workflows/`** — `ci.yml` runs format, lint, and typecheck on pull
   requests; `production.yml` builds and deploys the site, résumé, and profile
   README; `release.yml` runs semantic-release.
@@ -51,15 +54,27 @@ workspace, so there is no need to `cd` into one:
 
 ```bash
 npm ci                    # install both workspaces from the single lockfile
-npm run watch             # development server
+npm run watch             # every watch:* target at once, in one terminal
+npm run watch:website     # development server only
+npm run watch:resume      # rebuild the resume documents on a content/ change
+npm run watch:readme      # rebuild the profile README on a content/ change
 npm run lint              # ESLint (eslint-config-next); lint:fix to autofix
 npm run format            # Prettier write; format:check to verify only
 npm run typecheck         # tsc --noEmit
-npm run build             # build:versions, then static export to website/export/
+npm run build             # every build:* target, in dependency order
+npm run build:website     # static export to website/export/
 npm run build:resume      # content/ -> tooling/export/resume/*.{docx,pdf}
 npm run build:versions    # latest GitHub release per project -> content/resume/versions.generated.json
 npm run build:readme      # content/ -> tooling/export/SiegeSailor-README.md
 ```
+
+`build` and `watch` are aggregates of their own `:*` variants, so a new variant
+has to be added to the aggregate by hand — npm does not expand script globs.
+`build` chains them with `&&` in dependency order (`build:versions` writes the
+JSON the other three read); `watch` runs them concurrently through
+`scripts/run-parallel.sh`. Because `build` now includes `build:resume`, a host
+with its own LibreOffice verifies the one-page constraint on every site build
+against a version Docker does not pin — see the résumé constraints below.
 
 Node and npm are pinned: `.nvmrc` holds `26.5.0`, the `engines` fields require
 it, CI reads `.nvmrc`, and the image is `node:26.5.0-trixie-slim`. Run
@@ -94,22 +109,23 @@ root, which is also the Docker build context. Terraform runs from
 
 1. the **PDF/DOCX résumé** — one document, for professional use — built by
    `tooling/scripts/build-resume.mjs`;
-2. the website **home and `/about` pages**, read at build time by
-   `website/helpers/server/resume.ts`; and
+2. the **website** — every page's content and metadata, read at build time by
+   `website/helpers/server/content.ts`; and
 3. the **GitHub profile README** (`SiegeSailor/SiegeSailor`), built by
    `tooling/scripts/build-readme.mjs`.
 
-`content/resume/` splits one file per top-level key and every consumer merges them, so a
-key must appear in exactly one file. See [`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md)
-for the file-to-key map and which consumer reads what.
+Each consumer asks for itself by name and gets only the files that declare it, so
+a section leaves a document by dropping a name from a `consumers:` list rather
+than by editing a builder. The consumer names are `resume`, `readme`, `site`,
+`/`, `/about`, and `versions`. See
+[`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) for the file map, the
+node-level rules, and the two loaders that must stay in step.
 
-`content/resume/` holds more than fits on the one page, so any node may carry a
-`labels:` list and **only nodes labelled `resume` are printed** — an unlabelled
-node stays in the source for reference (the fuller bullets, the Publications and
-Activities sections, the second summary). The website and profile README ignore
-labels except to pick the summary, and read whole keys: `profile:`, `projects:`,
-the `resume` entry of `summary:`, and the first `experience` entry (company and
-website for the home-page hero).
+What stays in code, deliberately: section **order** (ATS-sensitive, drives the
+one-page fit), the résumé's typography, UI microcopy (nav and button labels,
+search placeholder, callout and error-page copy), route **paths** (they are
+typed routing, unlike route titles), the scraper lists, `TECHNOLOGY_TO_ICON` and
+`MEDIA_TO_ICON` (they import React components), and the HeroUI theme values.
 
 ### Résumé constraints — never break these
 

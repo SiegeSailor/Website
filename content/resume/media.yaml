@@ -1,0 +1,21 @@
+# External profile links. `key` selects the icon in website/settings/icons.ts,
+# so a new entry needs a matching icon there before the site will render it.
+# `heading` names the section on the profile README; the site renders these
+# inline, in the header, footer, and at the foot of /about.
+consumers:
+  - site
+  - /about
+  - readme
+
+heading: Links
+
+media:
+  - key: github
+    label: GitHub
+    href: "https://github.com/SiegeSailor"
+  - key: linkedin
+    label: LinkedIn
+    href: "https://www.linkedin.com/in/jin-yu-zhang-812181155/"
+  - key: resume
+    label: Résumé (PDF)
+    href: "https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf"

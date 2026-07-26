@@ -1,0 +1,13 @@
+# Page titles, keyed by path. "/blog" is a route prefix for article pages
+# (/blog/[date]) — there is no /blog index page, so it carries a title for the
+# article header without being a page of its own.
+consumers:
+  - site
+
+routes:
+  - path: /
+    title: Home
+  - path: /blog
+    title: Blog
+  - path: /about
+    title: About
