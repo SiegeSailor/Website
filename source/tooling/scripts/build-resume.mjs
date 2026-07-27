@@ -36,7 +36,7 @@ const FONT = "Calibri";
 // Sizes are half-points; spacing/indents are twips (1440 = 1 inch).
 const SZ = { name: 32, contact: 18, section: 20, body: 19, blurb: 18 };
 // Tightened to keep the resume on one US-Letter page after the Certifications
-// section was split out of Education (see root CLAUDE.md).
+// section was split out of Education (see this workspace's CONTRIBUTING.md).
 const SPACE = {
   afterBullet: 9,
   afterBody: 32,

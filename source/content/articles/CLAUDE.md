@@ -1,97 +1,78 @@
-# CLAUDE.md — Writing Articles
+# CLAUDE.md — source/content/articles
 
-Instructions for writing technical articles for the SiegeSailor website.
+The blog posts, one file per post named `YYYY-MM-DD.md`. This is the writing
+guide; see [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for the edit-and-rebuild
+loop and [`../CLAUDE.md`](../CLAUDE.md) for the rules that cover all content.
 
-## Core Directives
+Follow every rule here. Ask before proceeding when a rule is unclear for the
+article at hand, and say so when a rule reads as ambiguous or contradictory.
 
-You are an expert technical content writer. Your writing style is half professional and half conversational, sometime making international software engineer jokes. Your primary goal is to make consistent, syntactically correct, and well-structured technical articles. You must follow every rules in this document meticulously.
+## Voice
 
-### Key Behaviors
-
-- **Ask for Instructions**: If there is anything unclear about fulfilling the rules for an article, immediately ask for clarification before proceeding
-- **Feedback**: Give feedback on how to improve the copilot instructions if you find any ambiguity or inconsistency
-- **Concise Conclusion**: You don't generally need to write a conclusion in your response. No more than 5 sentences if necessary
+Half professional, half conversational, with the occasional international
+software engineer joke. First person for personal experience, specific details
+and numbers over generalities, and companies, technologies, and tools named
+with links. Read a few neighbouring posts before starting — they are the style
+reference.
 
 ## Workflow
 
-You will follow each steps below and will not skip any of them.
+1. **Date** — take the draft date from the prompt, in `YYYY-MM-DD`. Read
+   anything related in `input/`, and fetch what the web can add.
+2. **Create** — write `source/content/articles/<YYYY-MM-DD>.md`. Copy any images
+   used from `input/` to
+   `../../website/public/images/<YYYY-MM-DD>/`, named `Pascal-Case.ext`, for
+   example `Branch-Name-LTS.png`.
+3. **Write** — a brief summary before `<!-- description -->` giving the history
+   behind the post and its conclusion; the main content after it.
+4. **Verify** — reread against this guide, run `npm run watch`, open
+   `http://localhost:3000/blog/<YYYY-MM-DD>`, and confirm the terminal shows no
+   error logs.
 
-### Gathering Date
+## Front matter
 
-- Find the draft date in the prompt
-- Date format is `YYYY-MM-DD`
-- Read related files in `input/`
-- Fetch any related information from the web
+- Check `getArticleByFilename` in `../../website/helpers/server/article.ts` for
+  the required fields
+- No symbols in `title`
+- Reuse an existing category from the neighbouring posts where one fits
+  (case-sensitive)
+- Check `../../website/settings/icons.ts` for existing technology names and
+  spelling (case-sensitive). To add one, map an icon from
+  `@icons-pack/react-simple-icons` in `TECHNOLOGY_TO_ICON`; if the technology has
+  none, re-export a generic `lucide-react` icon in `LUCIDE_ICON` and map that
 
-### Creating the Article
+## Structure
 
-- Create a file in `source/content/articles/` with the filename as `YYYY-MM-DD.md` using the draft date gathered in [Gathering Date](#gathering-date)
-- Copy images in `input/` that are used in the article to `public/images/<YYYY-MM-DD>/` and name them in `Pascal-Case.ext`, e.g., `Branch-Name-LTS.png`
+- `## <heading>` for main sections, never `###`, except that `###` may open the
+  article
+- Headings concise, descriptive, and free of symbols
+- Keep the conclusion brief, or skip it when it adds nothing
 
-#### Front-Matter Fields
+## Markdown
 
-- Check `getArticleByFilename` in `helpers/server/article.ts` for required front-matter fields
-- Don't use any symbols in the `title` field
-- Try to use one of the existing categories in `source/content/articles/` (case-sensitive)
-- Check `settings/icons.ts` for existing technology icons and spelling (case-sensitive)
-- To add a technology, find suitable icons from `@icons-pack/react-simple-icons` and map them in `TECHNOLOGY_TO_ICON` in `settings/icons.ts`
-- If a technology is not found in `@icons-pack/react-simple-icons`, use a generic icon from `lucide-react` and re-export it in `LUCIDE_ICON` in `settings/icons.ts`
+The renderer is `../../website/components/Markdown.tsx`; check it and
+`../../website/helpers/plugin.ts` for what is supported.
 
-### Writing the Article
+- ` `` ` around inline code and mathematical expressions
+- ` ```<language> ` for code blocks, with `title="/path/to/<filename>"` when the
+  block refers to a file
+- `:::<type>` callouts — the types are in
+  `../../website/components/Callout.tsx`
+- `[<title>](/blog/YYYY-MM-DD#anchor)` for internal links, the anchor optional
+- `[Company Name](URL)` for companies, and a path relative to the repository
+  root when referring to a file
+- Mermaid diagrams where a diagram beats a paragraph
 
-- Check the other articles in `source/content/articles/` for writing style
-- Prior `<!-- description -->`, write a brief summary stating the behind history and conclusion
-- After `<!-- description -->`, write the main content
-- Conclusion or the last section should be brief. You may even skip it if not necessary
+### Bullet points
 
-#### Content Structure and Organization
+- `- **<title>**: <description>` when the points share a topic
+- `- [title](link): <description>` when there is a reference to link
+- `- <description>` when the points are sentences that do not generalize
+- `1.` instead of `-` for a process
 
-- Use `## <heading>` for main sections within the article (not `###`)
-- You may use `### <heading>` as the first section if needed
-- Keep section headings concise and descriptive
-- Group related content under logical headings
+## Don'ts
 
-#### Professional Tone and Voice
-
-- Use first-person perspective when describing personal experiences
-- Include specific details and numbers
-- Balance professional tone with personal anecdotes
-- Mention specific companies, technologies, and tools by name with proper links
-
-#### Markdown Syntax
-
-- Check `helpers/plugin.ts`, `components/Markdown.tsx`, and their dependencies for supported markdown features
-- Use ` `` ` to wrap inline code and mathematical expressions
-- Use callout `:::<type>` when needed (see `components/Callout.tsx` for available types)
-- Use code snippet ` ```<language> ` with proper syntax highlighting
-- Add `title="/path/to/<filename>"` to a code snippet where a file is being referenced
-- Use `[<title>](/blog/YYYY-MM-DD#anchor)` for internal articles, where `#anchor` is optional and `<title>` is a placeholder
-- Draw diagrams using Mermaid syntax if needed
-
-#### Formatting Consistency
-
-- Use `[Company Name](URL)` format for company references
-- Prefer a relative path from root unless no file structure mentioned
-- Use proper spacing around code blocks and sections
-- Maintain consistent indentation in nested lists
-
-#### Bullet Points
-
-- Use `- **<title>**: <description>` if you can generalize the common topic of the bullet points
-- Use `- [title](link): <description>` if you can find a reference link
-- Use `- <description>` if the bullet points contain sentences that are not easily generalized
-- Use `1. ` instead of `- ` for process descriptions
-
-#### Don'ts
-
-- Don't use `**<title>**` as headings
-- Don't end bullet points with `.`
-- Don't use any symbols in headings
-- Don't be too verbose
-
-### Testing the Syntax
-
-- Always review and fix the article following [Writing the Article](#writing-the-article)
-- Run `npm run watch` to start a local development server
-- Run Playwright to test `http://localhost:3000/blog/<YYYY-MM-DD>`
-- Make sure there is no error console logs in the terminal
+- Don't use `**<title>**` as a heading
+- Don't end a bullet point with `.`
+- Don't use symbols in headings
+- Don't be verbose
