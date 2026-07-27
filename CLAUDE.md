@@ -22,6 +22,19 @@ than repeated — so before writing a rule down, decide which scope owns it.
 | [`infrastructure/`](./infrastructure/CLAUDE.md) | Terraform and anything deployed to AWS             |
 | [`scripts/`](./scripts/CLAUDE.md)               | The shell scripts                                  |
 
+Conventions that follow a **file type across scopes** are path-scoped rules in
+[`.claude/rules/`](./.claude/rules/) instead, loaded only when a matching file
+is opened:
+
+| Rule                                                     | Loads for                                       |
+| -------------------------------------------------------- | ----------------------------------------------- |
+| [`documentation.md`](./.claude/rules/documentation.md)   | Any `README.md`, `CONTRIBUTING.md`, `CLAUDE.md` |
+| [`workflow.md`](./.claude/rules/workflow.md)             | `.github/workflows/*.yml`                       |
+| [`shell-script.md`](./.claude/rules/shell-script.md)     | Any `*.sh` and the Husky hooks                  |
+| [`npm-script.md`](./.claude/rules/npm-script.md)         | Any `package.json`                              |
+| [`content-loader.md`](./.claude/rules/content-loader.md) | The two loaders that must stay in step          |
+| [`generated-file.md`](./.claude/rules/generated-file.md) | Build output that must never be edited          |
+
 ## Repository layout
 
 The repository is an npm workspace: the root `package.json` owns the version and
@@ -43,7 +56,8 @@ two member workspaces, and `source/content/` is plain data shared by both.
 - **`scripts/`** — the shell scripts the npm scripts and workflows call.
 - **`.github/workflows/`** — one workflow per task; see
   [the workflow table](./CONTRIBUTING.md#workflows).
-- **`.claude/skills/`** — the project's skills, one folder each.
+- **`.claude/`** — `rules/`, path-scoped conventions, and `skills/`, one folder
+  each.
 - Community health files follow GitHub standards: `README.md`,
   `CONTRIBUTING.md`, `LICENSE-MIT.md` (code), and `LICENSE-CC-BY.md` (docs and
   blog posts).
