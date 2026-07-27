@@ -72,9 +72,15 @@ Anything a Node script can do belongs in
 build graph.
 
 Name it `<technology>-<action>.sh` — the tool it drives, then what it does to it,
-as in `docker-copy.sh` and `docker-lint.sh`. A name that starts with the action
-(`warm-up-cloudfront-cache.sh`) or names no action (`hadolint.sh`) sorts away
-from its siblings and hides how many scripts already drive the same tool.
+as in `docker-copy.sh` and `cloudfront-warm.sh`. Two rules follow from that
+order:
+
+- **Leave `-<action>` off when the tool has only one action.** `hadolint.sh`
+  lints Dockerfiles and does nothing else, so `hadolint-lint.sh` would only
+  stutter. An action earns its place when the same tool could take another —
+  Docker also builds and pushes, CloudFront also invalidates.
+- **Never lead with the action.** `warm-up-cloudfront-cache.sh` sorts away from
+  its siblings and hides how many scripts already drive the same tool.
 
 A new script that a developer runs must appear in
 [`README.md`](./README.md); one an npm script calls must also be wired into the
@@ -91,10 +97,12 @@ Being documented is not being used: delete a script nothing calls.
 - **`docker-copy.sh` cannot skip the build.** Building the image _is_ what
   generates the artifacts it copies, and layer caching already makes an
   unchanged image cheap.
-- **`docker-lint.sh` runs in CI**, where both workflows download the pinned
-  hadolint before calling it. Bumping that version means bumping it in
-  `pull-request-verify.yml`, `main-deploy.yml`, and the prerequisites table
-  together.
+- **`hadolint.sh` runs in CI** as the last step of
+  [`.github/actions/verify`](../.github/actions/verify/action.yml), which puts the
+  pinned hadolint on the `PATH` first. The `version` input of
+  [`setup-hadolint`](../.github/actions/setup-hadolint/action.yml) is the only
+  place that version lives in CI; bumping it means bumping the prerequisites
+  table with it.
 - **`npm-parallel.sh` traps every signal that ends it**, SIGHUP included,
   because job control puts the children in their own process groups and the trap
   becomes the only path that stops them. Do not simplify it to a bare

@@ -23,10 +23,10 @@ documents plus the profile README out:
 
 ```shell
 bash scripts/docker-copy.sh "source/tooling/export/resume" "linux/arm64"
-bash scripts/docker-lint.sh   # lint the Dockerfile
+bash scripts/hadolint.sh   # lint the Dockerfile
 ```
 
-`docker-lint.sh` runs in both workflows, which install the pinned hadolint first;
+`hadolint.sh` runs in both workflows, which install the pinned hadolint first;
 locally it needs hadolint on the `PATH` and says so when it is missing.
 
 Because `npm run build` includes `build:resume`, a host that _does_ have
