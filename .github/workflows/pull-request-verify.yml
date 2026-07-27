@@ -1,26 +1,27 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: CI
+name: "pull-request: Verify code quality and types"
+run-name: "pull-request: Verify ${{ github.head_ref || github.ref_name }} by @${{ github.actor }}"
 
 on:
   pull_request:
     paths:
-      - .github/workflows/ci.yml
+      - .github/workflows/pull-request-verify.yml
       - source/**
       - package-lock.json
   push:
     branches-ignore:
       - main
     paths:
-      - .github/workflows/ci.yml
+      - .github/workflows/pull-request-verify.yml
       - source/**
       - package-lock.json
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: pull-request-verify-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  check:
+  verify:
     name: Format, Lint, Typecheck
     runs-on: ubuntu-latest
 

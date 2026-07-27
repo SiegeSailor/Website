@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Release
+name: "main: Publish semantic release"
+run-name: "main: Publish semantic release from ${{ github.sha }} by @${{ github.actor }}"
 
 on:
   push:
@@ -8,7 +9,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: release
+  group: main-release
   cancel-in-progress: false
 
 jobs:
@@ -35,15 +36,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Delete legacy resume release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release delete resume --cleanup-tag --yes || true
-
+      # semantic-release resolves the version mid-run, too late for `run-name`,
+      # so the run reports it in the summary instead.
       - name: Release
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: npx semantic-release
+        run: |
+          npx semantic-release 2>&1 | tee "${RUNNER_TEMP}/release.log"
+          if grep -q "Published release" "${RUNNER_TEMP}/release.log"; then
+            echo "released v$(node -p "require('./package.json').version") from ${GITHUB_SHA}" >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "no release cut from ${GITHUB_SHA}" >> "${GITHUB_STEP_SUMMARY}"
+          fi
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7

@@ -1,19 +1,20 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Production
+name: "main: Deploy AWS static website"
+run-name: "main: Deploy ${{ github.ref_name }}@${{ github.sha }} by @${{ github.actor }}"
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/production.yml
+      - .github/workflows/main-deploy.yml
       - source/**
       - package-lock.json
       - infrastructure/**
   workflow_dispatch:
 
 concurrency:
-  group: production
+  group: main-deploy
   cancel-in-progress: false
 
 jobs:
@@ -58,7 +59,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: npm run build
 
-      - name: Generate resume documents and profile README
+      - name: Generate resume documents
         run: bash scripts/docker-copy.sh "source/website/export/documents"
 
       - name: Configure AWS credentials
@@ -107,21 +108,9 @@ jobs:
           distribution="$(terraform output -raw cloudfront_distribution_id)"
           aws s3 sync ../source/website/export "s3://${bucket}" --delete --exclude "*.DS_Store"
           aws cloudfront create-invalidation --distribution-id "${distribution}" --paths "/*"
-
-      - name: Sync profile README
-        env:
-          GH_TOKEN: ${{ secrets.SIEGESAILOR_PAT }}
-        run: |
-          version="$(node -p "require('./package.json').version")"
-          workdir="$(mktemp -d)"
-          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/SiegeSailor/SiegeSailor.git" "${workdir}"
-          cp source/website/SiegeSailor-README.md "${workdir}/README.md"
-          cd "${workdir}"
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -am "docs: sync profile from v${version} [skip ci]"
-            git push
-          else
-            echo "profile README already up to date"
-          fi
+          {
+            echo "| Target | Value |"
+            echo "| --- | --- |"
+            echo "| Bucket | \`${bucket}\` |"
+            echo "| Distribution | \`${distribution}\` |"
+          } >> "${GITHUB_STEP_SUMMARY}"
