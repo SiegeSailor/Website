@@ -41,8 +41,8 @@ next-env.d.ts
 #######################################
 # Generated
 #######################################
-content/resume/versions.generated.json
-website/SiegeSailor-README.md
+source/content/resume/versions.generated.json
+source/website/SiegeSailor-README.md
 
 #######################################
 # NPM

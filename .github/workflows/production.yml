@@ -7,9 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/production.yml
-      - website/**
-      - tooling/**
-      - content/**
+      - source/**
       - package-lock.json
       - infrastructure/**
   workflow_dispatch:
@@ -61,7 +59,7 @@ jobs:
         run: npm run build
 
       - name: Generate resume documents and profile README
-        run: bash scripts/docker-copy.sh "website/export/documents"
+        run: bash scripts/docker-copy.sh "source/website/export/documents"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
@@ -107,7 +105,7 @@ jobs:
         run: |
           bucket="$(terraform output -raw site_bucket_name)"
           distribution="$(terraform output -raw cloudfront_distribution_id)"
-          aws s3 sync ../website/export "s3://${bucket}" --delete --exclude "*.DS_Store"
+          aws s3 sync ../source/website/export "s3://${bucket}" --delete --exclude "*.DS_Store"
           aws cloudfront create-invalidation --distribution-id "${distribution}" --paths "/*"
 
       - name: Sync profile README
@@ -117,7 +115,7 @@ jobs:
           version="$(node -p "require('./package.json').version")"
           workdir="$(mktemp -d)"
           git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/SiegeSailor/SiegeSailor.git" "${workdir}"
-          cp website/SiegeSailor-README.md "${workdir}/README.md"
+          cp source/website/SiegeSailor-README.md "${workdir}/README.md"
           cd "${workdir}"
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"

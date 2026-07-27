@@ -2,10 +2,10 @@ import { join } from "path";
 import { readFileSync, existsSync } from "fs";
 import { load } from "js-yaml";
 
-// The website's half of the file-consumers structure in content/resume/: every
+// The website's half of the file-consumers structure in source/content/resume/: every
 // file declares which documents read it, so a route asks for its own consumer
 // name and gets only what it is entitled to. See
-// tooling/scripts/load-content.mjs, the deliberate twin of this module — the
+// source/tooling/scripts/load-content.mjs, the deliberate twin of this module — the
 // tooling workspace is pinned to js-yaml and docx to keep its Docker image
 // small, so it cannot be imported here, and the two are kept in step by hand.
 //
@@ -68,13 +68,13 @@ function loadContent(consumer: string) {
     const document = (load(context(file)) ?? {}) as TNode;
     if (!Array.isArray(document.consumers))
       throw new Error(
-        `content/resume/${file} is missing a \`consumers:\` list`,
+        `source/content/resume/${file} is missing a \`consumers:\` list`,
       );
 
     const keys = Object.keys(document).filter((key) => !META_KEYS.has(key));
     if (keys.length !== 1)
       throw new Error(
-        `content/resume/${file} must hold exactly one content key, found ${
+        `source/content/resume/${file} must hold exactly one content key, found ${
           keys.length ? keys.join(", ") : "none"
         }`,
       );
@@ -82,7 +82,7 @@ function loadContent(consumer: string) {
     const [key] = keys;
     if (origin[key])
       throw new Error(
-        `content/resume/ declares \`${key}\` in both ${origin[key]} and ${file}; a key must live in exactly one file`,
+        `source/content/resume/ declares \`${key}\` in both ${origin[key]} and ${file}; a key must live in exactly one file`,
       );
     origin[key] = file;
 
@@ -148,8 +148,8 @@ const repoKey = (href: string): string | null => {
   return match ? `${match[1]}/${match[2].replace(/\.git$/, "")}` : null;
 };
 
-// Total experience is content/resume/timeline.yaml applied to today, never a
-// stated figure. tooling/scripts/build-readme.mjs computes the same thing from
+// Total experience is source/content/resume/timeline.yaml applied to today, never
+// a stated figure. source/tooling/scripts/build-readme.mjs computes the same thing from
 // the same content.
 function getExperienceYears(timeline: {
   start: string;

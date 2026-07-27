@@ -6,7 +6,7 @@ import { type TSite } from "@/helpers/server/content";
 export const globalFontRoboto = Roboto({ subsets: ["latin"] });
 
 // Card dimensions and locale are format, not content, so they stay here; every
-// string comes from content/resume/site-identity.yaml. Built from `site` rather
+// string comes from source/content/resume/site-identity.yaml. Built from `site` rather
 // than imported as a constant so the content graph stays server-side.
 const CARD = { width: 1200, height: 630, type: "image/jpeg" } as const;
 

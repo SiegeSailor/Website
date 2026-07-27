@@ -10,7 +10,7 @@ export const TECHNOLOGIES = getEntries(TECHNOLOGY_TO_ICON).map(([key]) => key);
 export const TECHNOLOGY_SET = new Set(TECHNOLOGIES);
 
 // Paths are routing, so they stay in code and stay typed; the *titles* for these
-// paths are content, in content/resume/routes.yaml, read server-side through
+// paths are content, in source/content/resume/routes.yaml, read server-side through
 // `getSite().titleOf`. "/blog" is a route *prefix* for article pages
 // (/blog/[date]) — there is no /blog index page, so it is not a typedRoutes
 // `Route` on its own.

@@ -9,27 +9,32 @@ day-to-day development and deployment flow lives in
 ## Repository layout
 
 The repository is an npm workspace: the root `package.json` owns the version
-(bumped by semantic-release) and the single `package-lock.json`; `website/` and
-`tooling/` are the two workspaces, and `content/` is plain data shared by both.
+(bumped by semantic-release) and the single `package-lock.json`;
+`source/website/` and `source/tooling/` are the two workspaces, and
+`source/content/` is plain data shared by both.
 
-- **`content/`** — all authored content, shared by the other two folders and
-  excluded from Prettier because it is hand-tuned prose and data:
-  - `content/resume/` — the single source of truth for the résumé, the whole
-    website, and the generated GitHub profile README. A **file-consumers
-    structure**: every file declares in `consumers:` which outputs read it,
-    optionally names its section in `heading:`, and holds exactly one content key
-    (see its own [`CLAUDE.md`](./content/resume/CLAUDE.md)).
-  - `content/articles/` — blog posts named `YYYY-MM-DD.md` (the folder's
-    `CLAUDE.md` is the writing guide).
-- **`website/`** — the Next.js application (see its own
-  [`CLAUDE.md`](./website/CLAUDE.md) for the internal structure), built on the
-  host with `npm run build`. Reads `content/resume/` through the `@content/*`
-  alias and `content/articles/` from disk.
-- **`tooling/`** — the `Dockerfile`, the three build scripts that render
-  `content/` into the résumé document, the profile README, and the project
-  version list, plus `load-content.mjs`, the loader they share. Deliberately
-  depends on `js-yaml` and `docx` only, so the image installs ~22 packages
-  instead of the website's ~1,400.
+- **`source/`** — the three authored folders, nested under one parent so they
+  stay adjacent in a file tree. Nothing else lives here, and the three keep
+  their sibling relationship: the website reaches `../content/`, and the tooling
+  scripts reach `../../content/resume/`.
+  - **`source/content/`** — all authored content, shared by the other two folders
+    and excluded from Prettier because it is hand-tuned prose and data:
+    - `source/content/resume/` — the single source of truth for the résumé, the
+      whole website, and the generated GitHub profile README. A **file-consumers
+      structure**: every file declares in `consumers:` which outputs read it,
+      optionally names its section in `heading:`, and holds exactly one content
+      key (see its own [`CLAUDE.md`](./source/content/resume/CLAUDE.md)).
+    - `source/content/articles/` — blog posts named `YYYY-MM-DD.md` (the folder's
+      `CLAUDE.md` is the writing guide).
+  - **`source/website/`** — the Next.js application (see its own
+    [`CLAUDE.md`](./source/website/CLAUDE.md) for the internal structure), built
+    on the host with `npm run build`. Reads `source/content/resume/` through the
+    `@content/*` alias and `source/content/articles/` from disk.
+  - **`source/tooling/`** — the `Dockerfile`, the three build scripts that render
+    `source/content/` into the résumé document, the profile README, and the
+    project version list, plus `load-content.mjs`, the loader they share.
+    Deliberately depends on `js-yaml` and `docx` only, so the image installs ~22
+    packages instead of the website's ~1,400.
 - **`infrastructure/`** — one flat Terraform environment: the site S3 bucket,
   CloudFront (with a viewer-request function that rewrites extensionless routes
   to `.html`), ACM, Route 53, and a budget alarm.
@@ -56,16 +61,16 @@ workspace, so there is no need to `cd` into one:
 npm ci                    # install both workspaces from the single lockfile
 npm run watch             # every watch:* target at once, in one terminal
 npm run watch:website     # development server only
-npm run watch:resume      # rebuild the resume documents on a content/ change
-npm run watch:readme      # rebuild the profile README on a content/ change
+npm run watch:resume      # rebuild the resume documents on a source/content/ change
+npm run watch:readme      # rebuild the profile README on a source/content/ change
 npm run lint              # ESLint (eslint-config-next); lint:fix to autofix
 npm run format            # Prettier write; format:check to verify only
 npm run typecheck         # tsc --noEmit
 npm run build             # every build:* target, in dependency order
-npm run build:website     # static export to website/export/
-npm run build:resume      # content/ -> tooling/export/resume/*.{docx,pdf}
-npm run build:versions    # latest GitHub release per project -> content/resume/versions.generated.json
-npm run build:readme      # content/ -> tooling/export/SiegeSailor-README.md
+npm run build:website     # static export to source/website/export/
+npm run build:resume      # source/content/ -> source/tooling/export/resume/*.{docx,pdf}
+npm run build:versions    # latest GitHub release per project -> source/content/resume/versions.generated.json
+npm run build:readme      # source/content/ -> source/tooling/export/SiegeSailor-README.md
 ```
 
 `build` and `watch` are aggregates of their own `:*` variants, so a new variant
@@ -100,25 +105,25 @@ root, which is also the Docker build context. Terraform runs from
 - Keep code comments minimal — state only the constraints the code cannot show.
 - Match the format and style of adjacent files before adding or editing
   anything.
-- Everything under `website/app/` must stay statically exportable: no Server
+- Everything under `source/website/app/` must stay statically exportable: no Server
   Actions, API routes, or request-time rendering.
 
 ## Résumé, profile, and README
 
-`content/resume/` feeds three outputs from one source:
+`source/content/resume/` feeds three outputs from one source:
 
 1. the **PDF/DOCX résumé** — one document, for professional use — built by
-   `tooling/scripts/build-resume.mjs`;
+   `source/tooling/scripts/build-resume.mjs`;
 2. the **website** — every page's content and metadata, read at build time by
-   `website/helpers/server/content.ts`; and
+   `source/website/helpers/server/content.ts`; and
 3. the **GitHub profile README** (`SiegeSailor/SiegeSailor`), built by
-   `tooling/scripts/build-readme.mjs`.
+   `source/tooling/scripts/build-readme.mjs`.
 
 Each consumer asks for itself by name and gets only the files that declare it, so
 a section leaves a document by dropping a name from a `consumers:` list rather
 than by editing a builder. The consumer names are `resume`, `readme`, `site`,
 `/`, `/about`, and `versions`. See
-[`content/resume/CLAUDE.md`](./content/resume/CLAUDE.md) for the file map, the
+[`source/content/resume/CLAUDE.md`](./source/content/resume/CLAUDE.md) for the file map, the
 node-level rules, and the two loaders that must stay in step.
 
 What stays in code, deliberately: section **order** (ATS-sensitive, drives the
@@ -145,7 +150,7 @@ typed routing, unlike route titles), the scraper lists, `TECHNOLOGY_TO_ICON` and
    the stacked history is deliberate and factual. Servicetech's 2016–2017
    internship row is in the source but unlabelled; label it rather than widening
    the 2017–2018 range if it is ever needed.
-5. **Facts in `content/resume/` are verified.** Do not alter dates, rankings, or
+5. **Facts in `source/content/resume/` are verified.** Do not alter dates, rankings, or
    titles without explicit confirmation from Ken.
 
 ### Résumé layout notes (hard-won — don't rediscover)
@@ -168,4 +173,4 @@ typed routing, unlike route titles), the scraper lists, `TECHNOLOGY_TO_ICON` and
   tighten wording > merge skill groups > shave `SPACE` constants > reduce font
   size (last resort).
 - When text metrics matter, inspect visually:
-  `pdftoppm -jpeg -r 80 tooling/export/resume/<file>.pdf /tmp/page`.
+  `pdftoppm -jpeg -r 80 source/tooling/export/resume/<file>.pdf /tmp/page`.

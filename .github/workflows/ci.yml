@@ -5,18 +5,14 @@ on:
   pull_request:
     paths:
       - .github/workflows/ci.yml
-      - website/**
-      - tooling/**
-      - content/**
+      - source/**
       - package-lock.json
   push:
     branches-ignore:
       - main
     paths:
       - .github/workflows/ci.yml
-      - website/**
-      - tooling/**
-      - content/**
+      - source/**
       - package-lock.json
 
 concurrency:

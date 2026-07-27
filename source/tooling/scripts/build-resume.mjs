@@ -25,7 +25,7 @@ const OUTPUT = join(ROOT, "export/resume");
 // The repository root package.json is the single version source (semantic-release
 // bumps it); stamped into the document metadata.
 const VERSION = JSON.parse(
-  readFileSync(join(ROOT, "../package.json"), "utf8"),
+  readFileSync(join(ROOT, "../../package.json"), "utf8"),
 ).version;
 
 // The resume must stay within one US-Letter page.
@@ -56,7 +56,7 @@ const heading = (key) => {
   const text = HEADINGS[key];
   if (!text)
     throw new Error(
-      `content/resume/ gives the resume a \`${key}\` key with no \`heading:\` to title its section`,
+      `source/content/resume/ gives the resume a \`${key}\` key with no \`heading:\` to title its section`,
     );
   return text;
 };

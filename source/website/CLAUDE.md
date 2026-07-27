@@ -47,12 +47,12 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 - **`styles/`** — global CSS, including the theme plugin and the markdown /
   code-block styling.
 
-## Reading `content/`
+## Reading `source/content/`
 
 This workspace holds no authored content — it all lives in `../content/`, and
 each subfolder has its own `CLAUDE.md`:
 
-- `content/resume/` is reached through the `@content/*` tsconfig alias and read by
+- `source/content/resume/` is reached through the `@content/*` tsconfig alias and read by
   `helpers/server/content.ts`, which **globs the folder** with webpack
   `require.context` and parses each file as **raw text** (an `asset/source` rule
   in `next.config.mjs`). Adding, renaming, or deleting a YAML file therefore needs
@@ -72,7 +72,7 @@ each subfolder has its own `CLAUDE.md`:
 
   Résumé constraints live in the root `CLAUDE.md`.
 
-- `content/articles/` is read from disk by `helpers/server/article.ts`, which
+- `source/content/articles/` is read from disk by `helpers/server/article.ts`, which
   documents the front-matter fields. Article images stay here in
   `public/images/<YYYY-MM-DD>/` because Next.js serves them.
 
@@ -91,6 +91,6 @@ each subfolder has its own `CLAUDE.md`:
   (`helpers/client/chart.ts`). Diagrams open in `ZoomPanModal` to enlarge, pan,
   and zoom.
 
-The résumé documents and the profile README are built by `tooling/`, not here;
+The résumé documents and the profile README are built by `source/tooling/`, not here;
 this workspace only builds the site, with `npm run build` from the repository
 root.

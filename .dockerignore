@@ -3,14 +3,14 @@
 #######################################
 # The context is the repository root but the image only needs the tooling
 # workspace and the content it renders, so exclude everything and re-include
-# those paths -- this keeps website/public/ (~37 MB) out of the context.
+# those paths -- this keeps source/website/public/ (~37 MB) out of the context.
 *
 
 !package.json
 !package-lock.json
-!content/resume/
-!tooling/package.json
-!tooling/scripts/
+!source/content/resume/
+!source/tooling/package.json
+!source/tooling/scripts/
 
 #######################################
 # Generated

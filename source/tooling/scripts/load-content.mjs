@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { load } from "js-yaml";
 
-// content/resume/ is a file-consumers structure: every file declares the
+// source/content/resume/ is a file-consumers structure: every file declares the
 // documents that read it in `consumers:`, optionally names its document section
 // in `heading:`, and carries exactly one content key. Loading for a consumer
 // therefore returns only what that consumer is entitled to, and a section
@@ -14,7 +14,7 @@ import { load } from "js-yaml";
 // `consumers` inherits the file's, and `consumers: []` archives it — verified
 // material kept in the source but printed nowhere.
 //
-// website/helpers/server/content.ts is the deliberate twin of this module. The
+// source/website/helpers/server/content.ts is the deliberate twin of this module. The
 // website cannot import it (tooling is a separate workspace, pinned to js-yaml
 // and docx so its Docker image stays small) and needs webpack to own the files
 // for dev hot-reload, so the two implementations are kept in step by hand.
@@ -65,11 +65,13 @@ const readFiles = () =>
 // silent typo becomes a build failure instead of a section that vanishes.
 const parseFile = ({ file, document }) => {
   if (!Array.isArray(document.consumers))
-    throw new Error(`content/resume/${file} is missing a \`consumers:\` list`);
+    throw new Error(
+      `source/content/resume/${file} is missing a \`consumers:\` list`,
+    );
   const keys = Object.keys(document).filter((key) => !META_KEYS.has(key));
   if (keys.length !== 1)
     throw new Error(
-      `content/resume/${file} must hold exactly one content key, found ${
+      `source/content/resume/${file} must hold exactly one content key, found ${
         keys.length ? keys.join(", ") : "none"
       }`,
     );
@@ -90,7 +92,7 @@ export const loadContent = (consumer) => {
   for (const entry of readFiles().map(parseFile)) {
     if (origin[entry.key])
       throw new Error(
-        `content/resume/ declares \`${entry.key}\` in both ${origin[entry.key]} and ${entry.file}; a key must live in exactly one file`,
+        `source/content/resume/ declares \`${entry.key}\` in both ${origin[entry.key]} and ${entry.file}; a key must live in exactly one file`,
       );
     origin[entry.key] = entry.file;
     if (!entry.consumers.includes(consumer)) continue;

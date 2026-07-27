@@ -12,7 +12,7 @@ import Provider from "@/components/Provider";
 
 // `metadata` and `viewport` don't work. They are manually inserted below in `<head />`.
 //
-// This is the one document that cannot read content/: it is a client component
+// This is the one document that cannot read source/content/: it is a client component
 // (it takes `reset`), and helpers/server/content.ts inlines every content file
 // through require.context, so importing it here would ship contact.yaml to the
 // browser. The last-resort error screen therefore carries its own literal title

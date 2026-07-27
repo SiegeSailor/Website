@@ -18,7 +18,7 @@ export default {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "tooling/export/resume/*" }],
+        assets: [{ path: "source/tooling/export/resume/*" }],
         successComment: false,
         failComment: false,
         failTitle: false,

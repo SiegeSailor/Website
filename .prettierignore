@@ -2,13 +2,13 @@ node_modules/
 package-lock.json
 
 # Next.js
-website/.next/
-website/export/
-website/build-cache/
-website/public/
-website/next-env.d.ts
-website/SiegeSailor-README.md
+source/website/.next/
+source/website/export/
+source/website/build-cache/
+source/website/public/
+source/website/next-env.d.ts
+source/website/SiegeSailor-README.md
 
-# Authored content, not code: content/articles/ is prose (its own writing guide)
-# and content/resume/ is the hand-tuned single source of truth.
-content/
+# Authored content, not code: source/content/articles/ is prose (its own writing
+# guide) and source/content/resume/ is the hand-tuned single source of truth.
+source/content/

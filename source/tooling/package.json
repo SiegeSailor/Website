@@ -1,7 +1,7 @@
 {
   "name": "@siegesailor-website/tooling",
   "version": "1.2.0",
-  "description": "Builds the resume documents and the GitHub profile README from content/.",
+  "description": "Builds the resume documents and the GitHub profile README from source/content/.",
   "homepage": "https://github.com/SiegeSailor/Website",
   "bugs": "https://github.com/SiegeSailor/Website/issues",
   "private": true,

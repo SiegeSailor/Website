@@ -24,13 +24,13 @@ const heading = (key) => {
   const text = headings[key];
   if (!text)
     throw new Error(
-      `content/resume/ gives the readme a \`${key}\` key with no \`heading:\` to title its section`,
+      `source/content/resume/ gives the readme a \`${key}\` key with no \`heading:\` to title its section`,
     );
   return text;
 };
 
-// Total experience is content/resume/timeline.yaml applied to today, not a
-// stated figure. website/helpers/server/resume.ts computes the same thing from
+// Total experience is source/content/resume/timeline.yaml applied to today, not
+// a stated figure. source/website/helpers/server/content.ts computes the same thing from
 // the same content; see load-content.mjs on why the two are separate.
 function experienceYears() {
   const { start, excluded = [] } = data.timeline;

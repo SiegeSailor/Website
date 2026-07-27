@@ -10,7 +10,7 @@ site:
   domain: jinyu-zhang.com
   title: Jin Yu Zhang's Website
   description: Jin Yu Zhang's personal website, showcasing my profile, projects, blog, and notes.
-  # Open Graph / Twitter card image, served from website/public/.
+  # Open Graph / Twitter card image, served from source/website/public/.
   image: /images/Jin-Yu-Zhang-Profile.jpg
   license:
     label: CC BY 4.0

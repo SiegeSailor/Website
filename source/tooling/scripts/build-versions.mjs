@@ -5,16 +5,16 @@ import { fileURLToPath } from "node:url";
 
 import { loadContent, loadVersions, VERSIONS_FILE } from "./load-content.mjs";
 
-// Resolves the latest release/tag for each GitHub project in content/projects.yaml
-// and writes content/versions.generated.json ({ "owner/repo": "2.3.0" }), consumed
-// by both website/helpers/server/resume.ts and build-readme.mjs. Resilient by
+// Resolves the latest release/tag for each GitHub project in projects.yaml and
+// writes versions.generated.json ({ "owner/repo": "2.3.0" }) beside it, consumed
+// by both source/website/helpers/server/content.ts and build-readme.mjs. Resilient by
 // design: any network / auth
 // / 404 failure is skipped (that project simply shows no version chip), the
 // existing JSON is preserved, and the process always exits 0 so `npm run build`
 // never fails offline. Prefers the authenticated `gh` CLI, falls back to the
 // REST API (GH_TOKEN / GITHUB_TOKEN if present, else unauthenticated).
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUTPUT_FILE = VERSIONS_FILE;
 const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "";

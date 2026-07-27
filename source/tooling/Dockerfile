@@ -16,11 +16,11 @@ FROM base AS dependencies
 # The build context is the repository root; the root manifests carry the workspace
 # resolution and the version stamped into the documents.
 COPY "package.json" "package-lock.json" ./
-COPY "tooling/package.json" ./tooling/
+COPY "source/tooling/package.json" ./source/tooling/
 
 # --ignore-scripts: the root `prepare` runs Husky, which needs a .git directory
 # that is deliberately outside the context.
-RUN npm ci --workspace tooling --omit=dev --ignore-scripts
+RUN npm ci --workspace source/tooling --omit=dev --ignore-scripts
 
 
 # [Stage] Build the resume documents
@@ -53,10 +53,10 @@ RUN printf '%s\n' \
         poppler-utils="25.03.0-5+deb13u4" && \
     rm -rf /var/lib/apt/lists/*
 
-COPY "content/resume/" ./content/resume/
-COPY "tooling/scripts/" ./tooling/scripts/
+COPY "source/content/resume/" ./source/content/resume/
+COPY "source/tooling/scripts/" ./source/tooling/scripts/
 
-# Project versions come from content/resume/versions.generated.json when the host
-# generated it before the build; otherwise the README falls back to the stage.
-RUN npm run build:resume --workspace tooling && \
-    npm run build:readme --workspace tooling
+# Project versions come from source/content/resume/versions.generated.json when the
+# host generated it before the build; otherwise the README falls back to the stage.
+RUN npm run build:resume --workspace source/tooling && \
+    npm run build:readme --workspace source/tooling

@@ -1,4 +1,4 @@
-# CLAUDE.md — content/resume
+# CLAUDE.md — source/content/resume
 
 The single source of truth for the résumé document, the website, and the
 generated GitHub profile README. Nothing a reader sees is hard-coded in a
@@ -38,7 +38,7 @@ SchemaStore schema in editors).
 
 | Consumer   | Output                                                       |
 | ---------- | ------------------------------------------------------------ |
-| `resume`   | `tooling/export/resume/*.{docx,pdf}`                         |
+| `resume`   | `source/tooling/export/resume/*.{docx,pdf}`                         |
 | `readme`   | the `SiegeSailor/SiegeSailor` profile README                  |
 | `site`     | site-wide chrome and metadata: header, footer, every `<head>` |
 | `/`        | the home page                                                 |
@@ -65,7 +65,7 @@ SchemaStore schema in editors).
 | `publications.yaml`   | `publications`   | — (archived)                     |
 | `activities.yaml`     | `activities`     | — (archived)                     |
 
-`versions.generated.json` is written here by `tooling/scripts/build-versions.mjs`
+`versions.generated.json` is written here by `source/tooling/scripts/build-versions.mjs`
 and is git-ignored — never edit or commit it.
 
 ## Node-level consumers
@@ -95,17 +95,17 @@ editing, rebuild and check what appears.
 
 ## Who reads what
 
-- **Résumé document** (`tooling/scripts/build-resume.mjs`) loads the `resume`
+- **Résumé document** (`source/tooling/scripts/build-resume.mjs`) loads the `resume`
   consumer and renders what it gets; it no longer filters.
-- **Profile README** (`tooling/scripts/build-readme.mjs`) loads `readme`.
-- **Website** (`website/helpers/server/content.ts`) loads one consumer per
+- **Profile README** (`source/tooling/scripts/build-readme.mjs`) loads `readme`.
+- **Website** (`source/website/helpers/server/content.ts`) loads one consumer per
   surface: `getSite()`, `getHome()`, `getAbout()`. It globs this folder through
   webpack `require.context`, so a new file needs no code change and the dev
   server still hot-reloads. That module is **server-only** — importing it from a
   client component would ship `contact.yaml` to the browser.
 
 Both loaders are the same ~50 lines twice over
-(`tooling/scripts/load-content.mjs` and `website/helpers/server/content.ts`),
+(`source/tooling/scripts/load-content.mjs` and `source/website/helpers/server/content.ts`),
 deliberately: the tooling workspace is pinned to `js-yaml` and `docx` to keep its
 Docker image at ~22 packages, so the website cannot import it. Change one and
 change the other.
