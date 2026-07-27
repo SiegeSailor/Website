@@ -43,6 +43,7 @@ two member workspaces, and `source/content/` is plain data shared by both.
 - **`scripts/`** — the shell scripts the npm scripts and workflows call.
 - **`.github/workflows/`** — one workflow per task; see
   [the workflow table](./CONTRIBUTING.md#workflows).
+- **`.claude/skills/`** — the project's skills, one folder each.
 - Community health files follow GitHub standards: `README.md`,
   `CONTRIBUTING.md`, `LICENSE-MIT.md` (code), and `LICENSE-CC-BY.md` (docs and
   blog posts).
@@ -62,8 +63,9 @@ two member workspaces, and `source/content/` is plain data shared by both.
 - **The resume must fit one US-Letter page and stay ATS-safe.** The full list is
   in [`source/content/resume/CLAUDE.md`](./source/content/resume/CLAUDE.md); the
   build verifies the page count and fails on a violation.
-- **Commit with Conventional Commits** — the type drives the release, so a
-  careless `feat:` cuts a minor version. See
+- **Commit through the [`commit`](./.claude/skills/commit/SKILL.md) skill** —
+  one Conventional Commits line, no body, and the type drives the release, so a
+  careless `feat:` cuts a minor version. See also
   [Commits and releases](./CONTRIBUTING.md#commits-and-releases).
 
 ## How the pieces connect
