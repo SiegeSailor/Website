@@ -23,13 +23,47 @@ documents plus the profile README out:
 
 ```shell
 bash scripts/docker-copy.sh "source/tooling/export/resume" "linux/arm64"
-bash scripts/hadolint.sh   # lint the Dockerfile
+bash scripts/docker-lint.sh   # lint the Dockerfile
 ```
+
+`docker-lint.sh` runs in both workflows, which install the pinned hadolint first;
+locally it needs hadolint on the `PATH` and says so when it is missing.
 
 Because `npm run build` includes `build:resume`, a host that _does_ have
 LibreOffice and poppler runs the page-count check on every site build, against a
 version this repository does not pin. When a local build disagrees, build
 through Docker to settle whether the overflow is real.
+
+## What a builder must not do
+
+- **Never filter content.** A builder loads its consumer and renders what it
+  gets; a section is absent because the content says so. Section **order** is
+  the one deliberate exception and stays in code, because it is ATS-sensitive
+  and drives the one-page fit.
+- **Never emit a literal `•`** — bullets come from the numbering config as
+  native Word bullets — and never add a table, a text box, or a header or
+  footer. Dates are right-aligned with tab stops, not spaces. The `.docx` is the
+  primary deliverable; the PDF is a convenience.
+- **Never stamp a version from anywhere but the root `package.json`**, which
+  semantic-release owns.
+
+The resume constraints these serve are documented in
+[`../content/resume/CLAUDE.md`](../content/resume/CLAUDE.md).
+
+## The two loaders are twins
+
+`scripts/load-content.mjs` and `../website/helpers/server/content.ts` are the
+same ~50 lines written twice, deliberately: the website cannot import this
+workspace, pinned to `js-yaml` and `docx` to keep the image at ~22 packages, and
+it needs webpack to own the files for dev hot-reload.
+
+**Change one and change the other in the same commit.** They must agree on what
+`consumers:` means and that a file without it is rejected, that a file carries
+exactly one content key and a key claimed twice is a build failure, and that a
+node inheriting silence is printed while `consumers: []` is archived.
+
+A divergence does not fail a build. It quietly gives the resume different
+content from the website, which is the failure the structure exists to prevent.
 
 ## Resume layout notes
 

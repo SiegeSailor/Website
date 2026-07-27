@@ -4,6 +4,14 @@ Read the [root guide](../../CONTRIBUTING.md) first. This folder is authored
 content, so the loop is edit, rebuild, and look at what changed — there is
 nothing to lint here.
 
+> [!important]
+> The facts in `resume/` are verified. Do not alter a date, a ranking, a title,
+> or a number without explicit confirmation from Ken — this is the folder a
+> background-check vendor is effectively reading.
+
+Nothing here is reformatted, either. The folder is excluded from Prettier on
+purpose: reflowing prose or re-indenting YAML changes the rendered documents.
+
 ## The loop
 
 ```shell

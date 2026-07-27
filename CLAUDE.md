@@ -2,19 +2,24 @@
 
 The personal website of Jin Yu (Ken) Zhang — a statically exported Next.js site
 served from S3 behind CloudFront, plus a single-source resume and profile build
-system. This file is the map and the rules that hold everywhere;
-[`README.md`](./README.md) says what the project is and
-[`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it, including every
-command, convention, check, and workflow.
+system. This file is the map; [`README.md`](./README.md) says what the project
+is and [`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it, including every
+command, convention, check, commit rule, and workflow.
 
 ## Where the rules live
 
 Each scope carries three documents: `README.md` (what it is),
 `CONTRIBUTING.md` (how to work on it), and `CLAUDE.md` (what must not break).
-**A rule true of two scopes belongs at the root**, linked from the scopes rather
-than repeated — so before writing a rule down, decide which scope owns it.
+Two rules decide where a sentence goes, both stated in
+[`CONTRIBUTING.md`](./CONTRIBUTING.md#documentation):
 
-| Scope                                           | Read its `CLAUDE.md` before touching               |
+- A rule true of **two scopes** belongs at the root, linked from both.
+- A rule true of a `CONTRIBUTING.md` **and** a `CLAUDE.md` belongs to the
+  `CONTRIBUTING.md`. **So every `CLAUDE.md` below is a pointer plus the few
+  rules that have no other home — read the `CONTRIBUTING.md` it names before
+  editing that scope.**
+
+| Scope                                           | Read before touching                               |
 | ----------------------------------------------- | -------------------------------------------------- |
 | [`source/website/`](./source/website/CLAUDE.md) | The Next.js application                            |
 | [`source/tooling/`](./source/tooling/CLAUDE.md) | The document builders, their loader, and the image |
@@ -23,8 +28,8 @@ than repeated — so before writing a rule down, decide which scope owns it.
 | [`scripts/`](./scripts/CLAUDE.md)               | The shell scripts                                  |
 
 Conventions that follow a **file type across scopes** are path-scoped rules in
-[`.claude/rules/`](./.claude/rules/) instead, loaded only when a matching file
-is opened:
+[`.claude/rules/`](./.claude/rules/), loaded only when a matching file is
+opened. Each one names the document that owns it:
 
 | Rule                                                     | Loads for                                       |
 | -------------------------------------------------------- | ----------------------------------------------- |
@@ -62,42 +67,28 @@ two member workspaces, and `source/content/` is plain data shared by both.
   `CONTRIBUTING.md`, `LICENSE-MIT.md` (code), and `LICENSE-CC-BY.md` (docs and
   blog posts).
 
+`source/content/resume/` feeds four outputs, and each asks for itself by name in
+a `consumers:` list, so a section leaves a document without a builder edit. The
+consumers and the file map are in
+[`source/content/README.md`](./source/content/README.md).
+
 ## Rules that hold everywhere
 
-- **Match the format and style of adjacent files** before adding or editing
-  anything, and keep code comments minimal — state only the constraints the code
-  cannot show.
-- **Never edit a generated file**:
-  `source/content/resume/versions.generated.json`,
-  `source/website/SiegeSailor-README.md`, and every `export/` folder.
-- **Everything under `source/website/app/` must stay statically exportable**: no
-  Server Actions, no API routes, no request-time rendering.
-- **Facts in `source/content/resume/` are verified.** Do not alter dates,
-  rankings, or titles without explicit confirmation from Ken.
-- **The resume must fit one US-Letter page and stay ATS-safe.** The full list is
-  in [`source/content/resume/CLAUDE.md`](./source/content/resume/CLAUDE.md); the
-  build verifies the page count and fails on a violation.
+Each of these is stated in full where it is linked; none may be broken on the
+way to finishing something else.
+
+- **Match the format and style of adjacent files**, and keep code comments
+  minimal — [conventions](./CONTRIBUTING.md#conventions).
+- **Never edit a generated file** —
+  [the list](./CONTRIBUTING.md#generated-files).
+- **Everything under `source/website/app/` must stay statically exportable** —
+  [why](./source/website/CONTRIBUTING.md#staying-statically-exportable).
+- **The facts in `source/content/resume/` are verified**; dates, rankings, and
+  titles change only with Ken's confirmation —
+  [detail](./source/content/CONTRIBUTING.md).
+- **The resume must fit one US-Letter page and stay ATS-safe** —
+  [the constraints](./source/content/resume/CLAUDE.md#constraints-that-must-never-break).
+- **Never apply Terraform without confirmation** —
+  [infrastructure](./infrastructure/CLAUDE.md).
 - **Commit through the [`commit`](./.claude/skills/commit/SKILL.md) skill** —
-  one Conventional Commits line, no body, and the type drives the release, so a
-  careless `feat:` cuts a minor version. See also
-  [Commits and releases](./CONTRIBUTING.md#commits-and-releases).
-
-## How the pieces connect
-
-`source/content/resume/` feeds three outputs from one source, and each output
-asks for itself by name:
-
-| Consumer name         | Output                                       | Built by                                    |
-| --------------------- | -------------------------------------------- | ------------------------------------------- |
-| `resume`              | The one-page PDF/DOCX resume                 | `source/tooling/scripts/build-resume.mjs`   |
-| `readme`              | The `SiegeSailor/SiegeSailor` profile README | `source/tooling/scripts/build-readme.mjs`   |
-| `site`, `/`, `/about` | Every page's content and metadata            | `source/website/helpers/server/content.ts`  |
-| `versions`            | The latest release per project               | `source/tooling/scripts/build-versions.mjs` |
-
-A section leaves a document by dropping a name from a `consumers:` list, not by
-editing a builder. What deliberately stays in code instead: section **order**
-(ATS-sensitive, drives the one-page fit), the resume's typography, UI microcopy
-(nav and button labels, search placeholder, callout and error-page copy), route
-**paths** (they are typed routing, unlike route titles), the scraper lists,
-`TECHNOLOGY_TO_ICON` and `MEDIA_TO_ICON` (they import React components), and the
-HeroUI theme values.
+  one Conventional Commits line, no body, and the type drives the release.

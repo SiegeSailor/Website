@@ -40,7 +40,7 @@ npm run watch
 ```
 
 `watch` runs every `watch:*` target concurrently through
-[`run-parallel.sh`](./scripts/run-parallel.sh), so one terminal gives the dev
+[`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev
 server plus a resume and profile README that rebuild whenever
 `source/content/` changes. Output is interleaved and one Ctrl-C stops all of
 them. `build` is the same kind of aggregate but sequential: it chains every
@@ -71,6 +71,22 @@ Neither aggregate expands a glob — npm has no such feature — so **adding a
 The shell scripts are documented in [`scripts/`](./scripts/README.md), and the
 Terraform commands in [`infrastructure/`](./infrastructure/CONTRIBUTING.md).
 
+### Adding a command
+
+A new `build:<name>` or `watch:<name>` touches four places, and one missed step
+is silent — an unlisted variant simply never runs:
+
+1. The workspace `package.json`, where the script actually runs.
+2. The root `package.json`, delegating with
+   `npm run <script> --workspace source/<workspace>`. Root scripts delegate;
+   they never implement.
+3. The root aggregate: `build` chains with `&&` in dependency order and
+   `build:versions` stays first, because the others read the JSON it writes;
+   `watch` passes its targets to `scripts/npm-parallel.sh`.
+4. The table above.
+
+Version fields belong to semantic-release; never bump one by hand.
+
 ## Conventions
 
 These standards are followed throughout:
@@ -89,26 +105,42 @@ And these repository rules:
 - Match the format and style of adjacent files before adding or editing
   anything.
 - Keep code comments minimal — state only the constraints the code cannot show.
-- Never edit a generated file. `source/content/resume/versions.generated.json`,
-  `source/website/SiegeSailor-README.md`, and every `export/` folder are build
-  output and git-ignored.
+
+### Generated files
+
+Never edit one. All of these are git-ignored build output, so an edit survives
+until the next build and then disappears, taking the reason for it with it —
+change the input and rebuild instead.
+
+| Path                                            | Written by                                        | Rebuild with                                   |
+| ----------------------------------------------- | ------------------------------------------------- | ---------------------------------------------- |
+| `source/content/resume/versions.generated.json` | `source/tooling/scripts/build-versions.mjs`       | `npm run build:versions`                       |
+| `source/website/SiegeSailor-README.md`          | `scripts/docker-copy.sh`, copied out of the image | `bash scripts/docker-copy.sh`                  |
+| `source/tooling/export/`                        | The document builders                             | `npm run build:resume`, `npm run build:readme` |
+| `source/website/export/`                        | `next build`                                      | `npm run build:website`                        |
 
 ## Quality checks
 
-Prettier owns formatting, ESLint owns correctness, and `tsc` owns types:
+Prettier owns formatting, ESLint owns correctness, `tsc` owns types, and hadolint
+owns the `Dockerfile`:
 
 ```shell
-npm run format:check  # Prettier, verify only (what CI runs)
-npm run lint          # ESLint
-npm run typecheck     # tsc --noEmit
+npm run format:check         # Prettier, verify only (what CI runs)
+npm run lint                 # ESLint
+npm run typecheck            # tsc --noEmit
+bash scripts/docker-lint.sh  # hadolint on source/tooling/Dockerfile
 ```
 
-All three run automatically on `git commit` through a Husky `pre-commit` hook
-that calls [lint-staged](https://github.com/lint-staged/lint-staged)
+The first three run automatically on `git commit` through a Husky `pre-commit`
+hook that calls [lint-staged](https://github.com/lint-staged/lint-staged)
 ([`.lintstagedrc.mjs`](./.lintstagedrc.mjs)): staged files are formatted and
 autofixed in place and re-staged, `tsc --noEmit` runs when a `.ts`/`.tsx` file
 is staged, and the commit aborts if anything fails. Pass `--no-verify` to skip
 the hook, or set `HUSKY=0` to stop installing it.
+
+The Dockerfile lint stays out of the hook — hadolint is a system binary rather
+than a dependency, so a machine without it would fail every commit. Both
+workflows install a pinned version and run it, so a violation fails CI instead.
 
 Prettier runs from the root and so also covers `source/tooling/` and the
 Markdown; ESLint stays scoped to `source/website/`, where its config lives.
@@ -123,21 +155,76 @@ are covered by neither.
 
 ## Documentation
 
-Each scope carries a `README.md` (what it is), a `CONTRIBUTING.md` (how to work
-on it), and a `CLAUDE.md` (the rules that must not be broken). One rule:
+Each scope carries three documents, and each answers one question:
+
+| Document          | Answers              | Written for            |
+| ----------------- | -------------------- | ---------------------- |
+| `README.md`       | What is this?        | Someone browsing       |
+| `CONTRIBUTING.md` | How do I work on it? | Someone changing it    |
+| `CLAUDE.md`       | What must not break? | An agent about to edit |
+
+Two rules keep them from drifting apart:
 
 > If a rule is true of two scopes, it belongs at the root and the scopes link to
 > it.
+>
+> If a rule is true of a `CONTRIBUTING.md` and a `CLAUDE.md`, it belongs to the
+> `CONTRIBUTING.md` and the `CLAUDE.md` links to it.
 
 That is why setup, commands, conventions, checks, commits, and workflows are all
-here rather than restated per folder.
+here rather than restated per folder, and why the `CLAUDE.md` files and
+[`.claude/rules/`](./.claude/rules/) are short pointers into these documents.
+Before adding a paragraph, search for it:
+`grep -rn "<phrase>" --include="*.md" .`
+
+### Style
+
+- **Say what is true and stop.** No summary of what the document just said, no
+  "in conclusion", no restating a heading in its first sentence.
+- **Explain the why the code cannot show.** A layout a reader can see in the
+  file tree is not worth a paragraph; the reason a constant is 10656 twips is.
+- **Never contradict another document.** Two docs disagreeing is worse than
+  neither existing; fix the owner and link to it.
+- Sentence case in headings, no symbols, no emoji.
+- Prefer a table when three or more items share the same shape, a list when they
+  do not, and prose when the reasoning matters more than the items.
+- Fence every code block with a language — `shell` for terminal commands,
+  `yaml`, `bash`, `markdown` for the rest.
+- Use GitHub alerts (`> [!note]`, `> [!important]`, `> [!warning]`) sparingly;
+  two on one page means neither is read.
+- Link with a relative path and check that it resolves. Write URLs as autolinks
+  (`<https://example.com>`) and paths in backticks. No raw HTML.
+- Wrap prose at 80 columns. Prettier preserves line breaks, so the wrapping is
+  the author's to get right — but it does reflow tables, so run
+  `npm run format` after editing.
 
 ## Commits and releases
 
-Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) with
-one-line messages under 72 characters where possible. The type drives the
-release: `fix:` cuts a patch, `feat:` a minor, `BREAKING CHANGE` a major, and
-any other type cuts no release.
+A commit message is one [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+line and nothing else:
+
+```text
+<type>(<scope>)?: <subject>
+```
+
+- **No body, no footer, no trailers** — the subject is the whole message.
+- **Under 72 characters**, type included, in the imperative mood, lowercase
+  after the colon and no trailing period.
+- **Scope only when it sharpens the subject**; most commits need none.
+- **One concern per commit.** Split by concern rather than by file, even when
+  the work was a single task.
+
+The type decides the release, so a careless one publishes a version:
+
+| Type                                                       | Release |
+| ---------------------------------------------------------- | ------- |
+| `feat`                                                     | minor   |
+| `fix`                                                      | patch   |
+| `feat!`, `fix!` (any type with `!`)                        | major   |
+| `refactor`, `docs`, `ci`, `chore`, `test`, `style`, `perf` | none    |
+
+Mark a breaking change with `!` after the type rather than a `BREAKING CHANGE:`
+footer, which would need a body.
 
 [semantic-release](https://semantic-release.gitbook.io/) — configured in
 [`release.config.mjs`](./release.config.mjs) — runs on every push to `main` and:
@@ -158,13 +245,13 @@ profile page button point at.
 
 ## Workflows
 
-One workflow does one task. Files are named `<branch|trigger>-<context>.yml` and
-the `name` field reads `<branch|trigger>: <detailed context>`, so a run is
-identifiable from its title alone.
+One workflow does one task — a single job with a single outcome. When a second
+outcome appears, such as a deploy that also pushes a README, it becomes a second
+file.
 
 | Workflow                                                                 | Trigger                                 | Task                                                                         |
 | ------------------------------------------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------------- |
-| [`pull-request-verify.yml`](./.github/workflows/pull-request-verify.yml) | Pull requests and pushes outside `main` | Format, lint, and typecheck                                                  |
+| [`pull-request-verify.yml`](./.github/workflows/pull-request-verify.yml) | Pull requests and pushes outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
 | [`main-deploy.yml`](./.github/workflows/main-deploy.yml)                 | Push to `main`, or manual               | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
 | [`main-profile.yml`](./.github/workflows/main-profile.yml)               | Push to `main`, or manual               | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
 | [`main-release.yml`](./.github/workflows/main-release.yml)               | Push to `main`, or manual               | Run semantic-release and attach the resume documents                         |
@@ -177,6 +264,38 @@ need:
   `SiegeSailor/SiegeSailor`, used only by the profile README sync)
 - **Variables**: `AWS_REGION`
 
-A `run-name` carries the branch, the commit, and the actor. It is fixed before
-the first step runs and cannot read a value computed during the run, so
-`main-release.yml` reports the published version in the job summary instead.
+### Naming
+
+A run is identifiable from its title alone, with no trailing period on any
+field:
+
+| Field       | Format                                  | Example                                |
+| ----------- | --------------------------------------- | -------------------------------------- |
+| Filename    | `<branch\|trigger>-<context>.yml`       | `main-deploy.yml`                      |
+| `name`      | `<branch\|trigger>: <detailed context>` | `main: Deploy AWS static website`      |
+| `run-name`  | `<name>` plus what identifies the run   | `main: Deploy <ref>@<sha> by @<actor>` |
+| Job `name`  | Title Case, what the job produces       | `Build and Deploy`                     |
+| Step `name` | Sentence case, imperative               | `Install dependencies`                 |
+
+A `run-name` is fixed before the first step runs and can only read `github`,
+`inputs`, and `vars` — never a value the run computes. Anything resolved
+mid-run, such as a released version or a bucket name, goes to
+`$GITHUB_STEP_SUMMARY` instead, which is what `main-release.yml` does.
+
+### What every workflow carries
+
+- The schema comment on line 1:
+  `# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json`
+- A `paths:` filter that includes the workflow's own file, so a change to it is
+  exercised.
+- A `concurrency.group` named after the workflow. `cancel-in-progress: true`
+  only where a superseded run is worthless; never on a deploy or a release.
+- The narrowest `permissions` the job needs — `contents: read` unless it writes.
+- `environment: production` whenever it reads a production secret.
+- `actions/setup-node` with `node-version-file: .nvmrc`, `cache: npm`, and
+  `cache-dependency-path: package-lock.json`. Never pin a Node version here.
+- Actions pinned to a major (`actions/checkout@v7`), tools to an exact version
+  (`terraform_version: 1.14.1`).
+
+Renaming a workflow breaks the table above and the badges in
+[`README.md`](./README.md); update both in the same commit.

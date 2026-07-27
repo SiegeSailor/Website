@@ -46,8 +46,8 @@ aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cl
 ```
 
 An invalidation empties the edge caches, so the first visitor to each page pays
-for a full origin fetch. [`warm-up-cloudfront-cache.sh`](../scripts/README.md)
-requests every page afterwards to absorb that.
+for a full origin fetch. [`cloudfront-warm.sh`](../scripts/README.md) requests
+every page in the deployed sitemap afterwards to absorb that.
 
 ## Adding a resource
 
@@ -63,6 +63,10 @@ requests every page afterwards to absorb that.
 
 ## Gotchas
 
+- **State is remote and shared.** Never commit `*.tfstate`, `*.tfvars`, or
+  `.terraform/`, and never repoint the backend to try something out.
+- **Both buckets set `force_destroy = true`**, so a `terraform destroy` takes
+  the site and the state with it. Treat the destroy path as unavailable.
 - **ACM for CloudFront must live in `us-east-1`**, whatever `aws_region` says —
   the `acm` module pins its own region for that reason.
 - **The hosted zone is not managed here.** `jinyu-zhang.com` was purchased

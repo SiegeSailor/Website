@@ -1,25 +1,15 @@
 # CLAUDE.md — infrastructure
 
-The single flat Terraform environment behind `jinyu-zhang.com`. See
-[`README.md`](./README.md) for what is deployed and
-[`CONTRIBUTING.md`](./CONTRIBUTING.md) for the command flow and the gotchas.
+The single flat Terraform environment behind `jinyu-zhang.com`.
 
-## Rules
+- [`README.md`](./README.md) — what is deployed and how a request is served.
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md) — **read before editing a `.tf` file.**
+  It owns the credentials, the command flow, deploying by hand, the naming,
+  tagging, and `moved`-block rules, and the gotchas.
+
+## Only here
 
 - **This is live production and it costs money.** Never run `terraform apply`,
-  `destroy`, or any mutating `aws` command without explicit confirmation from
-  Ken. `plan`, `validate`, `fmt`, and `tflint` are always fine.
-- **State is remote and shared.** Never commit `*.tfstate`, `*.tfvars`, or
-  `.terraform/`; never point the backend somewhere else to "test something".
-- **Both storage buckets have `force_destroy = true`**, so a `destroy` takes the
-  site and the state with it. Treat the destroy path as unavailable.
-- **Never hard-code a name or a region.** Names come from `locals`, the region
-  from `var.aws_region` — except ACM, which must be `us-east-1` for CloudFront.
-- **Every resource carries tags** (`local.shared_tags`, or `local.module_tags`
-  for the site itself). The budget alarm is only meaningful while that holds.
-- **Keep the `moved` blocks.** They map old addresses onto current ones; deleting
-  one makes the next plan propose a destroy and recreate.
-- **The Route 53 zone is read, not managed.** Do not convert the `data` block
-  into a resource.
-- **Run Terraform from `infrastructure/`**, the one exception to the
-  run-from-the-root rule; the rest of the repository does not.
+  `terraform destroy`, or any mutating `aws` command without explicit
+  confirmation from Ken. `plan`, `validate`, `fmt`, and `tflint` are always
+  fine.
