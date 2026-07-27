@@ -30,15 +30,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-          cache-dependency-path: package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup workspace
+        uses: ./.github/actions/setup-workspace
 
       # The profile README needs neither LibreOffice nor the pinned fonts, so it
       # is built on the runner; only the resume documents go through Docker.

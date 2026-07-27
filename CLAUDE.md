@@ -31,14 +31,14 @@ Conventions that follow a **file type across scopes** are path-scoped rules in
 [`.claude/rules/`](./.claude/rules/), loaded only when a matching file is
 opened. Each one names the document that owns it:
 
-| Rule                                                     | Loads for                                       |
-| -------------------------------------------------------- | ----------------------------------------------- |
-| [`documentation.md`](./.claude/rules/documentation.md)   | Any `README.md`, `CONTRIBUTING.md`, `CLAUDE.md` |
-| [`workflow.md`](./.claude/rules/workflow.md)             | `.github/workflows/*.yml`                       |
-| [`shell-script.md`](./.claude/rules/shell-script.md)     | Any `*.sh` and the Husky hooks                  |
-| [`npm-script.md`](./.claude/rules/npm-script.md)         | Any `package.json`                              |
-| [`content-loader.md`](./.claude/rules/content-loader.md) | The two loaders that must stay in step          |
-| [`generated-file.md`](./.claude/rules/generated-file.md) | Build output that must never be edited          |
+| Rule                                                     | Loads for                                        |
+| -------------------------------------------------------- | ------------------------------------------------ |
+| [`documentation.md`](./.claude/rules/documentation.md)   | Any `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`  |
+| [`workflow.md`](./.claude/rules/workflow.md)             | `.github/workflows/*.yml` and `.github/actions/` |
+| [`shell-script.md`](./.claude/rules/shell-script.md)     | Any `*.sh` and the Husky hooks                   |
+| [`npm-script.md`](./.claude/rules/npm-script.md)         | Any `package.json`                               |
+| [`content-loader.md`](./.claude/rules/content-loader.md) | The two loaders that must stay in step           |
+| [`generated-file.md`](./.claude/rules/generated-file.md) | Build output that must never be edited           |
 
 ## Repository layout
 
@@ -59,8 +59,10 @@ two member workspaces, and `source/content/` is plain data shared by both.
 - **`infrastructure/`** — one flat Terraform environment: the site S3 bucket,
   CloudFront, ACM, Route 53, and a budget alarm.
 - **`scripts/`** — the shell scripts the npm scripts and workflows call.
-- **`.github/workflows/`** — one workflow per task; see
-  [the workflow table](./CONTRIBUTING.md#workflows).
+- **`.github/`** — `workflows/`, one workflow per task, and `actions/`, the
+  composite actions the workflows share; see
+  [the workflow table](./CONTRIBUTING.md#workflows) and
+  [shared steps](./CONTRIBUTING.md#shared-steps).
 - **`.claude/`** — `rules/`, path-scoped conventions, and `skills/`, one folder
   each.
 - Community health files follow GitHub standards: `README.md`,

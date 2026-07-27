@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: Setup Hadolint
+description: Install a pinned hadolint on the PATH, the way setup-node and setup-tflint do for their tools.
+
+inputs:
+  version:
+    description: hadolint release to install, without the leading v
+    required: false
+    # The one place this version lives. Bump it here and in the prerequisites
+    # table in CONTRIBUTING.md together.
+    default: "2.14.0"
+
+runs:
+  using: composite
+  steps:
+    - name: Download hadolint
+      shell: bash
+      env:
+        HADOLINT_VERSION: ${{ inputs.version }}
+      run: |
+        curl --silent --show-error --fail --location \
+          --output "${RUNNER_TEMP}/hadolint" \
+          "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-linux-x86_64"
+        chmod +x "${RUNNER_TEMP}/hadolint"
+        echo "${RUNNER_TEMP}" >> "${GITHUB_PATH}"

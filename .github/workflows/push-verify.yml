@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: "push: Verify code quality and types"
+run-name: "push: Verify ${{ github.ref_name }}@${{ github.sha }} by @${{ github.actor }}"
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - .github/workflows/push-verify.yml
+      - .github/actions/**
+      - source/**
+      - package-lock.json
+      - .hadolint.yml
+
+concurrency:
+  group: push-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Format, Lint, Typecheck
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup-workspace
+
+      - name: Verify code quality and types
+        uses: ./.github/actions/verify

@@ -26,15 +26,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-          cache-dependency-path: package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup workspace
+        uses: ./.github/actions/setup-workspace
 
       # semantic-release resolves the version mid-run, too late for `run-name`,
       # so the run reports it in the summary instead.

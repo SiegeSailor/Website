@@ -128,7 +128,7 @@ owns the `Dockerfile`:
 npm run format:check         # Prettier, verify only (what CI runs)
 npm run lint                 # ESLint
 npm run typecheck            # tsc --noEmit
-bash scripts/docker-lint.sh  # hadolint on source/tooling/Dockerfile
+bash scripts/hadolint.sh     # hadolint on source/tooling/Dockerfile
 ```
 
 The first three run automatically on `git commit` through a Husky `pre-commit`
@@ -249,12 +249,12 @@ One workflow does one task — a single job with a single outcome. When a second
 outcome appears, such as a deploy that also pushes a README, it becomes a second
 file.
 
-| Workflow                                                                 | Trigger                                 | Task                                                                         |
-| ------------------------------------------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------------- |
-| [`pull-request-verify.yml`](./.github/workflows/pull-request-verify.yml) | Pull requests and pushes outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
-| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)                 | Push to `main`, or manual               | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
-| [`main-profile.yml`](./.github/workflows/main-profile.yml)               | Push to `main`, or manual               | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](./.github/workflows/main-release.yml)               | Push to `main`, or manual               | Run semantic-release and attach the resume documents                         |
+| Workflow                                                   | Trigger                   | Task                                                                         |
+| ---------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------- |
+| [`push-verify.yml`](./.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
+| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
+| [`main-profile.yml`](./.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
+| [`main-release.yml`](./.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                         |
 
 The `production` environment carries the credentials both `main` deployments
 need:
@@ -282,18 +282,56 @@ A `run-name` is fixed before the first step runs and can only read `github`,
 mid-run, such as a released version or a bucket name, goes to
 `$GITHUB_STEP_SUMMARY` instead, which is what `main-release.yml` does.
 
+### Shared steps
+
+Every workflow opens the same way, and two of them run the same gates —
+`push-verify.yml` and `main-deploy.yml`, because nothing else guarantees the
+gates run at all: there is no branch protection and no pull request, so the
+deploy is the only check on what actually ships. Those steps live once, in
+[`.github/actions/`](./.github/actions/), as composite actions:
+
+| Action                                                            | Does                                                           | Used by       |
+| ----------------------------------------------------------------- | -------------------------------------------------------------- | ------------- |
+| [`setup-workspace`](./.github/actions/setup-workspace/action.yml) | `actions/setup-node` from `.nvmrc`, then `npm ci`              | All four      |
+| [`verify`](./.github/actions/verify/action.yml)                   | `format:check`, `lint`, `typecheck`, and the `Dockerfile` lint | The two gates |
+| [`setup-hadolint`](./.github/actions/setup-hadolint/action.yml)   | Puts the pinned hadolint on the `PATH`                         | `verify`      |
+
+So a workflow reads `Checkout` → `Setup workspace` → its own work, with
+`Verify code quality and types` between them where the gates apply.
+
+A composite action runs inside the calling job, so none of these costs a second
+runner or a second `npm ci` — which a reusable `workflow_call` would. Three
+consequences worth knowing before editing one:
+
+- **`Checkout` can never move into an action.** The runner reads `action.yml` out
+  of the checked-out repository, so a local action cannot run before it.
+- **`verify` installs nothing**, on purpose. `setup-workspace` owns the
+  `node_modules` the deploy's own build needs, so removing or reordering the
+  gates cannot break a later step.
+- **Every `run` step inside an action needs its own `shell: bash`**, and a
+  nested local action, the way `verify` calls `setup-hadolint`, is pathed from
+  the repository root rather than from the action's folder.
+
+Actions are named the way GitHub's own are, `<action>-<technology>`
+(`setup-hadolint`, like `setup-node`), not the `<technology>-<action>` the
+[shell scripts](./scripts/CONTRIBUTING.md) use. The hadolint version lives in
+that action's `version` input default and nowhere else in CI.
+
 ### What every workflow carries
 
 - The schema comment on line 1:
   `# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json`
 - A `paths:` filter that includes the workflow's own file, so a change to it is
-  exercised.
+  exercised — plus `.github/actions/**` on `push-verify.yml`, the one workflow
+  that exists to exercise the shared actions. The `main:` workflows deliberately
+  omit it, and `main-deploy.yml` omits `.hadolint.yml` too: a CI-only change must
+  not deploy production or touch another repository.
 - A `concurrency.group` named after the workflow. `cancel-in-progress: true`
   only where a superseded run is worthless; never on a deploy or a release.
 - The narrowest `permissions` the job needs — `contents: read` unless it writes.
 - `environment: production` whenever it reads a production secret.
-- `actions/setup-node` with `node-version-file: .nvmrc`, `cache: npm`, and
-  `cache-dependency-path: package-lock.json`. Never pin a Node version here.
+- `Setup workspace` directly after `Checkout`, never its own `actions/setup-node`
+  — that action owns the inputs, so no workflow pins a Node version.
 - Actions pinned to a major (`actions/checkout@v7`), tools to an exact version
   (`terraform_version: 1.14.1`).
 
