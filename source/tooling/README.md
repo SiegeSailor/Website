@@ -4,7 +4,7 @@ Renders [`../content/`](../content/README.md) into the documents the website doe
 
 | Script                                               | Reads Consumer | Writes                                        |
 | ---------------------------------------------------- | -------------- | --------------------------------------------- |
-| [`build-readme.mjs`](./scripts/build-readme.mjs)     | `readme`       | `export/SiegeSailor-README.md`                |
+| [`build-profile.mjs`](./scripts/build-profile.mjs)   | `profile`      | `export/SiegeSailor-README.md`                |
 | [`build-resume.mjs`](./scripts/build-resume.mjs)     | `resume`       | `export/resume/JinYu-Zhang-Resume.{docx,pdf}` |
 | [`build-versions.mjs`](./scripts/build-versions.mjs) | `versions`     | `../content/resume/versions.generated.json`   |
 | [`load-content.mjs`](./scripts/load-content.mjs)     | —              | The loader the other 3 share                  |

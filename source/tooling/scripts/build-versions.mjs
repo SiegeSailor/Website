@@ -7,7 +7,7 @@ import { loadContent, loadVersions, VERSIONS_FILE } from "./load-content.mjs";
 
 // Resolves the latest release/tag for each GitHub project in projects.yaml and
 // writes versions.generated.json ({ "owner/repo": "2.3.0" }) beside it, consumed
-// by both source/website/helpers/server/content.ts and build-readme.mjs. Resilient by
+// by both source/website/helpers/server/content.ts and build-profile.mjs. Resilient by
 // design: any network / auth
 // / 404 failure is skipped (that project simply shows no version chip), the
 // existing JSON is preserved, and the process always exits 0 so `npm run build`

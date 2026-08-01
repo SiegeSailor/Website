@@ -4,7 +4,7 @@
 # they need no `consumers: []` of their own.
 consumers:
   - /about
-  - readme
+  - profile
   # build-versions resolves each `href` to its latest GitHub release.
   - versions
 

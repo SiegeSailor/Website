@@ -5,7 +5,7 @@
 consumers:
   - site
   - /about
-  - readme
+  - profile
 
 heading: Links
 

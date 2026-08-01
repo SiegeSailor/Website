@@ -3,7 +3,7 @@
 # than parsing them into timezone-shifted dates.
 consumers:
   - /about
-  - readme
+  - profile
 
 timeline:
   start: "2016-06-01"

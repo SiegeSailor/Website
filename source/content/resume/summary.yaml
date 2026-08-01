@@ -3,7 +3,7 @@
 # with an empty `consumers` until it is wanted.
 consumers:
   - resume
-  - readme
+  - profile
   - /about
 
 heading: Summary
