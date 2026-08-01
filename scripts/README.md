@@ -1,13 +1,13 @@
 # scripts
 
-The shell scripts the npm scripts and the workflows call. Each one does a single job that would be awkward as an npm script: driving Docker, supervising parallel processes, or fanning out HTTP requests. Every name reads `<technology>-<action>.sh` — the action left off where the tool has only one — so the file says which tool it drives before it is opened.
+The shell scripts the NPM scripts and the workflows call. Each one does a single job that would be awkward as an NPM script: driving Docker, supervising parallel processes, or fanning out HTTP requests. Every name reads `<technology>-<action>.sh` — the action left off where the tool has only one — so the file says which tool it drives before it is opened.
 
-| Script                                       | Does                                                                            | Called By                           |
-| -------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------- |
-| [`cloudfront-warm.sh`](./cloudfront-warm.sh) | Requests every page in the deployed sitemap so CloudFront caches it again       | By hand                             |
-| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and profile README out | `main-deploy.yml`, semantic-release |
-| [`hadolint.sh`](./hadolint.sh)               | Runs hadolint on `source/tooling/Dockerfile`                                    | The `verify` action                 |
-| [`npm-parallel.sh`](./npm-parallel.sh)       | Runs several root npm scripts at once in one terminal                           | `npm run watch`                     |
+| Script                                       | Does                                                                         | Called By                           |
+| -------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------- |
+| [`cloudfront-warm.sh`](./cloudfront-warm.sh) | Requests every page in the deployed sitemap so CloudFront caches it again    | By hand                             |
+| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and the Profile out | `main-deploy.yml`, semantic-release |
+| [`hadolint.sh`](./hadolint.sh)               | Runs hadolint on `source/tooling/Dockerfile`                                 | The `verify` action                 |
+| [`npm-parallel.sh`](./npm-parallel.sh)       | Runs several root NPM scripts at once in one terminal                        | `npm run watch`                     |
 
 ## Usage
 
@@ -26,6 +26,6 @@ Defaults: `docker-copy.sh` writes to `source/tooling/export/resume` and builds `
 
 Building the image _is_ what generates the resume documents — the `resume` stage runs the builders — so `docker-copy.sh` always builds, though Docker layer caching makes an unchanged image a fast no-op. It also handles hosts where Docker needs elevation, escalating to `sudo` only when it can do so without an interactive password prompt.
 
-`hadolint.sh` needs hadolint on the `PATH` — a system binary, not a dependency — so it checks for it and fails with an install pointer. In CI it is the last step of [`.github/actions/verify`](../.github/actions/verify/action.yml), which puts a pinned version there first. That is why the lint lives in a script rather than an npm script: CI and a laptop run the same command.
+`hadolint.sh` needs hadolint on the `PATH` — a system binary, not a dependency — so it checks for it and fails with an install pointer. In CI it is the last step of [`.github/actions/verify`](../.github/actions/verify/action.yml), which puts a pinned version there first. That is why the lint lives in a script rather than an NPM script: CI and a laptop run the same command.
 
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the shape every script follows.

@@ -1,25 +1,25 @@
 # CLAUDE.md — source/content/articles
 
-The blog posts, one file per post named `YYYY-MM-DD.md`. This is the writing guide; see [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for the edit-and-rebuild loop and [`../CLAUDE.md`](../CLAUDE.md) for the rules that cover all content.
+The articles, one file per article named `YYYY-MM-DD.md`. This is the writing guide; see [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for the edit-and-rebuild loop and [`../CLAUDE.md`](../CLAUDE.md) for the rules that cover all content.
 
 Follow every rule here. Ask before proceeding when a rule is unclear for the article at hand, and say so when a rule reads as ambiguous or contradictory.
 
 ## Voice
 
-Half professional, half conversational, with the occasional international software engineer joke. First person for personal experience, specific details and numbers over generalities, and companies, technologies, and tools named with links. Read a few neighboring posts before starting — they are the style reference.
+Half professional, half conversational, with the occasional international software engineer joke. First person for personal experience, specific details and numbers over generalities, and companies, technologies, and tools named with links. Read a few neighboring articles before starting — they are the style reference.
 
 ## Workflow
 
 1. **Date** — take the draft date from the prompt, in `YYYY-MM-DD`, read anything related in `input/`, and fetch what the web can add
 2. **Create** — write `source/content/articles/<YYYY-MM-DD>.md`, and copy any images used from `input/` to `../../website/public/images/<YYYY-MM-DD>/`, named `Pascal-Case.ext`, for example `Branch-Name-LTS.png`
-3. **Write** — a brief summary before `<!-- description -->` giving the history behind the post and its conclusion; the main content after it
+3. **Write** — a brief summary before `<!-- description -->` giving the history behind the article and its conclusion; the main content after it
 4. **Verify** — reread against this guide, run `npm run watch`, open `http://localhost:3000/blog/<YYYY-MM-DD>`, and confirm the terminal shows no error logs
 
 ## Front Matter
 
 - Check `getArticleByFilename` in `../../website/helpers/server/article.ts` for the required fields
 - No symbols in `title`
-- Reuse an existing category from the neighboring posts where one fits (case-sensitive)
+- Reuse an existing category from the neighboring articles where one fits (case-sensitive)
 - Check `../../website/settings/icons.ts` for existing technology names and spelling (case-sensitive). To add one, map an icon from `@icons-pack/react-simple-icons` in `TECHNOLOGY_TO_ICON`; if the technology has none, re-export a generic `lucide-react` icon in `LUCIDE_ICON` and map that
 
 ## Structure

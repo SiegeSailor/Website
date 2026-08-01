@@ -12,7 +12,7 @@ npm run build:resume
 
 `build:resume` degrades instead of failing when a tool is absent: no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped …` for each and still exits 0, so a bare `npm run build:resume` can produce a `.docx` whose one-page constraint was never verified.
 
-Build through Docker for the checked artifacts with pinned LibreOffice and font versions. This builds the image, which runs both builders, and copies the resume documents plus the profile README out:
+Build through Docker for the checked artifacts with pinned LibreOffice and font versions. This builds the image, which runs both builders, and copies the resume documents plus the Profile out:
 
 ```shell
 bash scripts/docker-copy.sh "source/tooling/export/resume" "linux/arm64"
@@ -43,7 +43,7 @@ A divergence does not fail a build. It quietly gives the resume different conten
 
 Hard-won; do not rediscover them.
 
-- **Import `js-yaml` as `import { load } from "js-yaml"`**: The default import fails under Node ESM
+- **Import `js-yaml` as `import { load } from "js-yaml"`**: The default import fails under Node.js ESM
 - **LibreOffice Ignores the `docx` `PositionalTab`**: Right-aligned dates use classic paragraph `tabStops` (`TabStopType.RIGHT` at 10656 twips) plus a literal `"\t"` in the `TextRun`
 - **Typography Constants Sit at the Top of `build-resume.mjs`**: `SZ` (half-points; body 19 = 9.5 pt), `SPACE` (twips), line spacing 226, and page margins 600/792 twips — spacing was already tightened to keep Certifications on the page, so headroom is small
 - **On Linux, Calibri Is Absent**: Install `fonts-crosextra-carlito`, which is metric-compatible, or page breaks shift; the Docker `resume` stage does this
@@ -69,5 +69,5 @@ A new output means a new consumer name, so it touches both sides:
 
 1. Add the script under `scripts/`, loading its content with `loadContent("<consumer>")` rather than reading files itself
 2. Declare the consumer on the content files that feed it, and document it in [`../content/resume/CLAUDE.md`](../content/resume/CLAUDE.md)
-3. Add `build:<name>` to this workspace's `package.json`, then to the root `package.json`, then to the root `build` aggregate — npm does not expand globs, and `build:versions` has to stay first
+3. Add `build:<name>` to this workspace's `package.json`, then to the root `package.json`, then to the root `build` aggregate — NPM does not expand globs, and `build:versions` has to stay first
 4. Keep the dependency list at `js-yaml` and `docx`, since a third dependency changes the image size argument and needs a reason

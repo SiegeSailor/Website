@@ -1,6 +1,6 @@
 # source/tooling
 
-Renders [`../content/`](../content/README.md) into the documents the website does not build: the resume, the GitHub profile README, and the project version list. It does **not** build the website, which is built on the host with `npm run build`.
+Renders [`../content/`](../content/README.md) into the documents the website does not build: the resume, the Profile, and the project version list. It does **not** build the website, which is built on the host with `npm run build`.
 
 | Script                                               | Reads Consumer | Writes                                        |
 | ---------------------------------------------------- | -------------- | --------------------------------------------- |

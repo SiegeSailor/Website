@@ -10,7 +10,7 @@ Nothing here is reformatted, either. The folder is excluded from Prettier on pur
 ## The Loop
 
 ```shell
-npm run watch    # dev server plus resume and README rebuilds on every save
+npm run watch    # dev server plus resume and Profile rebuilds on every save
 ```
 
 Editing anything here hot-reloads the pages built from it, because the website imports the files as raw text. To check the documents on their own after an edit:
@@ -18,7 +18,7 @@ Editing anything here hot-reloads the pages built from it, because the website i
 ```shell
 npm run build:versions    # refresh the project versions first
 npm run build:resume      # .docx, plus .pdf and the page-count check with LibreOffice
-npm run build:readme      # the profile README
+npm run build:readme      # the Profile
 ```
 
 The page-count check is skipped silently on a host without LibreOffice and poppler, so build through Docker before believing the resume still fits — see [`../tooling/CONTRIBUTING.md`](../tooling/CONTRIBUTING.md).
@@ -43,7 +43,7 @@ A node inside the file opts out the same way one level down — `consumers: []` 
 > [!warning]
 > Archiving a node silently shortens a document, and un-archiving one can push the resume past its single page. After editing, rebuild and read what came out.
 
-## Adding a File or a Post
+## Adding a File or an Article
 
-- **A Blog Post**: `articles/YYYY-MM-DD.md`, following [`articles/CLAUDE.md`](./articles/CLAUDE.md), which covers the front matter, the tone, the Markdown features the renderer supports, and where images go
+- **An Article**: `articles/YYYY-MM-DD.md`, following [`articles/CLAUDE.md`](./articles/CLAUDE.md), which covers the front matter, the tone, the Markdown features the renderer supports, and where images go
 - **A Resume File**: A `consumers:` list, an optional `heading:`, and one content key that no other file claims — the filename is free, because the loader takes the key from the contents, and no code change is needed, because the website globs the folder, so record it in the file map in [`resume/CLAUDE.md`](./resume/CLAUDE.md)

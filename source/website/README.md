@@ -1,8 +1,8 @@
 # source/website
 
-The website itself: a TypeScript, TailwindCSS, and HeroUI application on the Next.js App Router, built as a static export (`output: "export"`) and served from S3 behind CloudFront. It is a deliberately minimal blog — a single-column reading experience with a searchable post list, a compact `/about` page, and clean article pages.
+The website itself: a TypeScript, TailwindCSS, and HeroUI application on the Next.js App Router, built as a static export (`output: "export"`) and served from S3 behind CloudFront. It is a deliberately minimal blog — a single-column reading experience with a searchable article list, a compact `/about` page, and clean article pages.
 
-The workspace holds no authored content. Every word comes from [`../content/`](../content/README.md): the resume source through the `@content/*` alias, and the blog posts from disk.
+The workspace holds no authored content. Every word comes from [`../content/`](../content/README.md): the resume source through the `@content/*` alias, and the articles from disk.
 
 ## Structure
 
@@ -15,7 +15,7 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 | [`helpers/`](./helpers/)       | Shared functions: `server/*` server-only, `client/*` client-only, `*` shared                           |
 | [`public/`](./public/)         | Static assets; article images in `public/images/<YYYY-MM-DD>/` named `Pascal-Case.ext`                 |
 | [`settings/`](./settings/)     | `constant.ts` (constants and route titles), `heads.ts` (metadata, viewport, fonts), `icons.ts`         |
-| [`stores/`](./stores/)         | Zustand stores: `article` (post list, seeded by `Entry`) and `chart` (theme colors for Mermaid)        |
+| [`stores/`](./stores/)         | Zustand stores: `article` (article list, seeded by `Entry`) and `chart` (theme colors for Mermaid)     |
 | [`styles/`](./styles/)         | Global CSS, the HeroUI theme plugin, and the Markdown and code-block styling                           |
 
 ## Routes
@@ -23,7 +23,7 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 | Route                | Source                             | Renders                                                       |
 | -------------------- | ---------------------------------- | ------------------------------------------------------------- |
 | `/`                  | `app/page.tsx`                     | A short intro plus `PostList`, searchable and grouped by year |
-| `/about`             | `app/(child)/about/page.tsx`       | The profile, composed from `getAbout()`                       |
+| `/about`             | `app/(child)/about/page.tsx`       | Composed from `getAbout()`                                    |
 | `/blog/<YYYY-MM-DD>` | `app/(child)/blog/[date]/page.tsx` | One article, with previous and next links                     |
 | `/feed.xml`          | `app/feed.xml/route.ts`            | A static RSS feed (`export const dynamic = "force-static"`)   |
 

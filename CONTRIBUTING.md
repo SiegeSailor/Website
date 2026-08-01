@@ -2,9 +2,9 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-Everything in this document applies to the whole repository. Rules that apply to a single scope live with that scope — see the [documentation map](./README.md#documentation).
+Everything in this document applies to the whole repository. Rules that apply to a single scope live with that scope — see [Scopes](#scopes).
 
-The repository is one npm workspace. The root `package.json` owns the version (bumped by semantic-release) and the only `package-lock.json`; [`source/website/`](./source/website/) and [`source/tooling/`](./source/tooling/) are the 2 member workspaces. **Every command runs from the repository root**, which is also the Docker build context — the root scripts delegate into the right workspace, so there is never a need to `cd` into one.
+The repository is one NPM workspace. The root `package.json` owns the version (bumped by semantic-release) and the only `package-lock.json`; [`source/website/`](./source/website/) and [`source/tooling/`](./source/tooling/) are the 2 member workspaces. **Every command runs from the repository root**, which is also the Docker build context — the root scripts delegate into the right workspace, so there is never a need to `cd` into one.
 
 ## Prerequisites
 
@@ -14,11 +14,11 @@ The repository is one npm workspace. The root `package.json` owns the version (b
 | [Docker](https://www.docker.com/)                      | `29.4.0`  | Resume documents with pinned tools |
 | [hadolint](https://github.com/hadolint/hadolint)       | `2.14.0`  | Linting the `Dockerfile`           |
 | [Node.js](https://nodejs.org/)                         | `26.5.0`  | Everything                         |
-| npm                                                    | `11.17.0` | Everything                         |
+| NPM                                                    | `11.17.0` | Everything                         |
 | [Terraform](https://developer.hashicorp.com/terraform) | `1.14.1`  | Deploying by hand                  |
 | [TFLint](https://github.com/terraform-linters/tflint)  | `0.60.0`  | Deploying by hand                  |
 
-Node and npm are pinned in [`.nvmrc`](./.nvmrc), required by every `engines` field, read by CI, and matched by the Docker image. Run `nvm install` after pulling a change to `.nvmrc`.
+Node.js and NPM are pinned in [`.nvmrc`](./.nvmrc), required by every `engines` field, read by CI, and matched by the Docker image. Run `nvm install` after pulling a change to `.nvmrc`.
 
 ## Scopes
 
@@ -28,7 +28,7 @@ The project is modularized into the following scopes:
 | -------------------------------------- | ------------------------------------------------- |
 | Root                                   | Shared setup, conventions, commits, and workflows |
 | [`infrastructure/`](./infrastructure/) | The Terraform environment on AWS                  |
-| [`scripts/`](./scripts/)               | The shell scripts the npm scripts call            |
+| [`scripts/`](./scripts/)               | The shell scripts the NPM scripts call            |
 | [`source/content/`](./source/content/) | The authored resume source and articles           |
 | [`source/tooling/`](./source/tooling/) | The document builders and their image             |
 | [`source/website/`](./source/website/) | The Next.js application                           |
@@ -42,9 +42,9 @@ npm ci
 npm run watch
 ```
 
-`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and profile README that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
+`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and Profile that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
 
-Neither aggregate expands a glob — npm has no such feature — so **adding a `build:*` or `watch:*` script means adding it to the aggregate too**.
+Neither aggregate expands a glob — NPM has no such feature — so **adding a `build:*` or `watch:*` script means adding it to the aggregate too**.
 
 ## Commands
 
@@ -60,7 +60,7 @@ Neither aggregate expands a glob — npm has no such feature — so **adding a `
 | `npm run lint`           | ESLint; `lint:fix` autofixes                                                        |
 | `npm run typecheck`      | `tsc --noEmit`                                                                      |
 | `npm run watch`          | Every `watch:*` target at once, in one terminal                                     |
-| `npm run watch:readme`   | Rebuild the profile README on a `source/content/` change                            |
+| `npm run watch:readme`   | Rebuild the Profile on a `source/content/` change                                   |
 | `npm run watch:resume`   | Rebuild the resume documents on a `source/content/` change                          |
 | `npm run watch:website`  | Development server only                                                             |
 
@@ -154,22 +154,22 @@ Mark a breaking change with `!` after the type rather than a `BREAKING CHANGE:` 
 
 [semantic-release](https://semantic-release.gitbook.io/) — configured in [`release.config.mjs`](./release.config.mjs) — runs on every push to `main`, where it tags the commit `vX.Y.Z`, publishes a GitHub Release whose notes come from the commits, and commits the bumped `package.json` and `package-lock.json` back to `main`. It then builds the resume documents through [`docker-copy.sh`](./scripts/docker-copy.sh), stamping the version into the document metadata, and attaches them to the release.
 
-There is no `CHANGELOG.md` and no `SECURITY.md`: issues and pull requests are disabled on this repository, and the release notes live on the GitHub Release. The repository is private, so a release asset URL only works for an authenticated collaborator — the public link to the resume is the deployed `https://jinyu-zhang.com/documents/<document>`, which is what the badges and the profile page button point at.
+There is no `CHANGELOG.md` and no `SECURITY.md`: issues and pull requests are disabled on this repository, and the release notes live on the GitHub Release. The repository is private, so a release asset URL only works for an authenticated collaborator — the public link to the resume is the deployed `https://jinyu-zhang.com/documents/<document>`, which is what the badges and the `/about` page button point at.
 
 ## Workflows
 
 One workflow does one task — a single job with a single outcome. When a second outcome appears, such as a deploy that also pushes a README, it becomes a second file.
 
-| Workflow                                                   | Trigger                   | Task                                                                         |
-| ---------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------- |
-| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
-| [`main-profile.yml`](./.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](./.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                         |
-| [`push-verify.yml`](./.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
+| Workflow                                                   | Trigger                   | Task                                                                  |
+| ---------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------- |
+| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront             |
+| [`main-profile.yml`](./.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the Profile and push it to `SiegeSailor/SiegeSailor` if changed |
+| [`main-release.yml`](./.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                  |
+| [`push-verify.yml`](./.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                    |
 
 The `production` environment carries the credentials both `main` deployments need:
 
-- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the profile README sync
+- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the Profile sync
 - **Variables**: `AWS_REGION`
 
 ### Naming
@@ -213,7 +213,7 @@ Actions are named the way GitHub's own are, `<action>-<technology>` (`setup-hado
 - A `concurrency.group` named after the workflow, with `cancel-in-progress: true` only where a superseded run is worthless and never on a deploy or a release
 - The narrowest `permissions` the job needs, which is `contents: read` unless it writes
 - `environment: production` whenever it reads a production secret
-- `Setup workspace` directly after `Checkout`, never its own `actions/setup-node`, because that action owns the inputs and so no workflow pins a Node version
+- `Setup workspace` directly after `Checkout`, never its own `actions/setup-node`, because that action owns the inputs and so no workflow pins a Node.js version
 - Actions pinned to a major (`actions/checkout@v7`), tools to an exact version (`terraform_version: 1.14.1`)
 
 Renaming a workflow breaks the table above and the badges in [`README.md`](./README.md); update both in the same commit.

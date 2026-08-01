@@ -51,23 +51,26 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 
 ### Terminology
 
-| Term       | Variants            |
-| ---------- | ------------------- |
-| ACM        | Certificate Manager |
-| CloudFront | Cloudfront          |
-| Docker     |                     |
-| ESLint     | Eslint, eslint      |
-| GitHub     | Github, github      |
-| hadolint   | Hadolint            |
-| Markdown   | MD                  |
-| Next.js    | NextJS, Next        |
-| npm        | NPM, Npm            |
-| Prettier   | prettier            |
-| Route 53   | Route53             |
-| S3         |                     |
-| Terraform  | terraform           |
-| TFLint     | tflint              |
-| YAML       | YML                 |
+| Term       | Variants |
+| ---------- | -------- |
+| ACM        |          |
+| Article    |          |
+| CloudFront |          |
+| Docker     |          |
+| ESLint     |          |
+| GitHub     |          |
+| hadolint   |          |
+| Markdown   | MD       |
+| Next.js    |          |
+| Node.js    |          |
+| NPM        |          |
+| Prettier   |          |
+| Profile    |          |
+| Route 53   |          |
+| S3         |          |
+| Terraform  |          |
+| TFLint     |          |
+| YAML       | YML      |
 
 > [!note]
 > When you find a term repeated, prompt user for confirmation to add to this table. If find 2 similar terms, prompt user to clarify, correct them to use the same term, and add to this table.
