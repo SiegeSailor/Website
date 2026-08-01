@@ -42,7 +42,7 @@ npm ci
 npm run watch
 ```
 
-`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and Profile that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
+`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and profile README that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
 
 Neither aggregate expands a glob — NPM has no such feature — so **adding a `build:*` or `watch:*` script means adding it to the aggregate too**.
 
@@ -60,7 +60,7 @@ Neither aggregate expands a glob — NPM has no such feature — so **adding a `
 | `npm run lint`           | ESLint; `lint:fix` autofixes                                                        |
 | `npm run typecheck`      | `tsc --noEmit`                                                                      |
 | `npm run watch`          | Every `watch:*` target at once, in one terminal                                     |
-| `npm run watch:readme`   | Rebuild the Profile on a `source/content/` change                                   |
+| `npm run watch:readme`   | Rebuild the profile README on a `source/content/` change                            |
 | `npm run watch:resume`   | Rebuild the resume documents on a `source/content/` change                          |
 | `npm run watch:website`  | Development server only                                                             |
 
@@ -154,22 +154,22 @@ Mark a breaking change with `!` after the type rather than a `BREAKING CHANGE:` 
 
 [semantic-release](https://semantic-release.gitbook.io/) — configured in [`release.config.mjs`](./release.config.mjs) — runs on every push to `main`, where it tags the commit `vX.Y.Z`, publishes a GitHub Release whose notes come from the commits, and commits the bumped `package.json` and `package-lock.json` back to `main`. It then builds the resume documents through [`docker-copy.sh`](./scripts/docker-copy.sh), stamping the version into the document metadata, and attaches them to the release.
 
-There is no `CHANGELOG.md` and no `SECURITY.md`: issues and pull requests are disabled on this repository, and the release notes live on the GitHub Release. The repository is private, so a release asset URL only works for an authenticated collaborator — the public link to the resume is the deployed `https://jinyu-zhang.com/documents/<document>`, which is what the badges and the `/about` page button point at.
+There is no `CHANGELOG.md` and no `SECURITY.md`: issues and pull requests are disabled on this repository, and the release notes live on the GitHub Release. The repository is private, so a release asset URL only works for an authenticated collaborator — the public link to the resume is the deployed `https://jinyu-zhang.com/documents/<document>`, which is what the badges and the profile page button point at.
 
 ## Workflows
 
 One workflow does one task — a single job with a single outcome. When a second outcome appears, such as a deploy that also pushes a README, it becomes a second file.
 
-| Workflow                                                   | Trigger                   | Task                                                                  |
-| ---------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------- |
-| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront             |
-| [`main-profile.yml`](./.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the Profile and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](./.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                  |
-| [`push-verify.yml`](./.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                    |
+| Workflow                                                   | Trigger                   | Task                                                                         |
+| ---------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------- |
+| [`main-deploy.yml`](./.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
+| [`main-profile.yml`](./.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
+| [`main-release.yml`](./.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                         |
+| [`push-verify.yml`](./.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
 
 The `production` environment carries the credentials both `main` deployments need:
 
-- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the Profile sync
+- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the profile README sync
 - **Variables**: `AWS_REGION`
 
 ### Naming

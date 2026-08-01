@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-The personal website of Jin Yu (Ken) Zhang — a statically exported Next.js site served from S3 behind CloudFront, plus a single-source resume and Profile build system. This file is the map; [`README.md`](./README.md) says what the project is and [`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it, including every command, convention, check, commit rule, and workflow.
+The personal website of Jin Yu (Ken) Zhang — a statically exported Next.js site served from S3 behind CloudFront, plus a single-source resume and profile build system. This file is the map; [`README.md`](./README.md) says what the project is and [`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it, including every command, convention, check, commit rule, and workflow.
 
 ## Where the Rules Live
 
@@ -35,7 +35,7 @@ The repository is an NPM workspace: the root `package.json` owns the version and
 | `.github/`        | `workflows/`, one workflow per task, and `actions/`, the composite actions they share — [the table](./CONTRIBUTING.md#workflows) and [shared steps](./CONTRIBUTING.md#shared-steps) |
 | `infrastructure/` | One flat Terraform environment: the site S3 bucket, CloudFront, ACM, Route 53, and a budget alarm                                                                                   |
 | `scripts/`        | The shell scripts the NPM scripts and workflows call                                                                                                                                |
-| `source/content/` | All authored content: `resume/`, the single source of truth for the resume, the whole website, and the Profile, and `articles/`, the articles                                       |
+| `source/content/` | All authored content: `resume/`, the single source of truth for the resume, the whole website, and the profile README, and `articles/`, the articles                                |
 | `source/tooling/` | The `Dockerfile`, the 3 build scripts that render `source/content/` into documents, and the loader they share                                                                       |
 | `source/website/` | The Next.js application, built on the host                                                                                                                                          |
 

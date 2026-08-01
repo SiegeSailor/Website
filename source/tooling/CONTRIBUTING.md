@@ -12,7 +12,7 @@ npm run build:resume
 
 `build:resume` degrades instead of failing when a tool is absent: no LibreOffice means no `.pdf`, and — because the page-count check reads the rendered PDF with `pdfinfo` — **no LibreOffice or no poppler also means no page-count check**. It prints `skipped …` for each and still exits 0, so a bare `npm run build:resume` can produce a `.docx` whose one-page constraint was never verified.
 
-Build through Docker for the checked artifacts with pinned LibreOffice and font versions. This builds the image, which runs both builders, and copies the resume documents plus the Profile out:
+Build through Docker for the checked artifacts with pinned LibreOffice and font versions. This builds the image, which runs both builders, and copies the resume documents plus the profile README out:
 
 ```shell
 bash scripts/docker-copy.sh "source/tooling/export/resume" "linux/arm64"

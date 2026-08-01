@@ -10,7 +10,7 @@ Nothing here is reformatted, either. The folder is excluded from Prettier on pur
 ## The Loop
 
 ```shell
-npm run watch    # dev server plus resume and Profile rebuilds on every save
+npm run watch    # dev server plus resume and README rebuilds on every save
 ```
 
 Editing anything here hot-reloads the pages built from it, because the website imports the files as raw text. To check the documents on their own after an edit:
@@ -18,7 +18,7 @@ Editing anything here hot-reloads the pages built from it, because the website i
 ```shell
 npm run build:versions    # refresh the project versions first
 npm run build:resume      # .docx, plus .pdf and the page-count check with LibreOffice
-npm run build:readme      # the Profile
+npm run build:readme      # the profile README
 ```
 
 The page-count check is skipped silently on a host without LibreOffice and poppler, so build through Docker before believing the resume still fits — see [`../tooling/CONTRIBUTING.md`](../tooling/CONTRIBUTING.md).

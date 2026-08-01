@@ -5,7 +5,7 @@ All authored content, shared by the 2 workspaces that render it. Nothing here is
 | Folder                     | Holds                                                                        | Guide                                        |
 | -------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------- |
 | [`articles/`](./articles/) | Articles, one file per article named `YYYY-MM-DD.md`                         | [`articles/CLAUDE.md`](./articles/CLAUDE.md) |
-| [`resume/`](./resume/)     | The single source of truth for the resume, the whole website, and the Profile | [`resume/CLAUDE.md`](./resume/CLAUDE.md)     |
+| [`resume/`](./resume/)     | The single source of truth for the resume, the whole website, and the profile README | [`resume/CLAUDE.md`](./resume/CLAUDE.md)     |
 
 ## One Source, 4 Outputs
 
@@ -14,7 +14,7 @@ All authored content, shared by the 2 workspaces that render it. Nothing here is
 | Output                                | Consumers             |
 | ------------------------------------- | --------------------- |
 | Every page's content and metadata     | `site`, `/`, `/about` |
-| The `SiegeSailor/SiegeSailor` Profile | `readme`              |
+| The `SiegeSailor/SiegeSailor` profile README | `readme`              |
 | The latest release per project        | `versions`            |
 | The one-page PDF and DOCX resume      | `resume`              |
 

@@ -7,11 +7,11 @@
 
 This is my personal website repository. A source of truth that automatically updates my:
 
-| Output  | Published At                                               |
-| ------- | ---------------------------------------------------------- |
-| Profile | `https://github.com/SiegeSailor`                           |
-| Resume  | `https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf` |
-| Website | `https://jinyu-zhang.com`                                  |
+| Output         | Published At                                               |
+| -------------- | ---------------------------------------------------------- |
+| GitHub Profile | `https://github.com/SiegeSailor`                           |
+| Resume         | `https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf` |
+| Website        | `https://jinyu-zhang.com`                                  |
 
 ## License
 

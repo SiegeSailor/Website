@@ -23,7 +23,7 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 | Route                | Source                             | Renders                                                       |
 | -------------------- | ---------------------------------- | ------------------------------------------------------------- |
 | `/`                  | `app/page.tsx`                     | A short intro plus `PostList`, searchable and grouped by year |
-| `/about`             | `app/(child)/about/page.tsx`       | Composed from `getAbout()`                                    |
+| `/about`             | `app/(child)/about/page.tsx`       | The profile, composed from `getAbout()`                       |
 | `/blog/<YYYY-MM-DD>` | `app/(child)/blog/[date]/page.tsx` | One article, with previous and next links                     |
 | `/feed.xml`          | `app/feed.xml/route.ts`            | A static RSS feed (`export const dynamic = "force-static"`)   |
 

@@ -65,7 +65,6 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 | Node.js    |          |
 | NPM        |          |
 | Prettier   |          |
-| Profile    |          |
 | Route 53   |          |
 | S3         |          |
 | Terraform  |          |
