@@ -1,26 +1,51 @@
 ---
 name: commit
-description: Write a commit message for this repository — Conventional Commits, one line, no body. Use whenever committing, amending, or drafting a commit message here.
+description: Write a commit message for this repository. Conventional Commits, one line, no body. Use whenever committing, amending, or drafting a commit message here.
 ---
 
 # Commit
 
-**[`CONTRIBUTING.md`](../../../CONTRIBUTING.md#commits-and-releases) owns the format**: one Conventional Commits line, no body, no footer, no trailers, under 72 characters, imperative, one concern per commit, and a type table showing which types publish a version. Read it, then write the message.
-
-Say what the commit does, not what it touches:
+A commit message is one [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) line and nothing else:
 
 ```text
-refactor: nest the three workspaces under source/
-feat: aggregate build and watch over their :* variants
-fix: skip the Husky hook install when Husky is absent
+<type>(<scope>)?: <subject>
+```
+
+| Rule                                    | Detail                                                                           |
+| --------------------------------------- | -------------------------------------------------------------------------------- |
+| No body, no footer, no trailers         | The subject is the whole message                                                 |
+| One concern per commit                  | Split by concern rather than by file, even when the work was a single task       |
+| Scope only when it sharpens the subject | The **Commit Scope** of the scope the change sits in, and most commits need none |
+| Under 72 characters                     | Type included, imperative mood, lowercase after the colon, no trailing period    |
+
+> [!note]
+> [`documentation.md`](../../rules/documentation.md#scopes) owns the scopes and the name each one lends to `<scope>`. A change that spans scopes, or that sits at the root, takes none.
+
+The type decides the release, so a careless one publishes a version:
+
+| Type                                                       | Release |
+| ---------------------------------------------------------- | ------- |
+| `feat`                                                     | minor   |
+| `fix`                                                      | patch   |
+| `feat!`, `fix!` (any type with `!`)                        | major   |
+| `refactor`, `docs`, `ci`, `chore`, `test`, `style`, `perf` | none    |
+
+> [!important]
+> Do not use `BREAKING CHANGE:` footer, which would need a body.
+
+Example commit messages:
+
+```text
+feat(tooling): aggregate build and watch over their :* variants
 ci: split workflows by task and rename them by trigger
 ```
 
-A major version is Ken's call — ask before writing the `!`.
+> [!important]
+> A major version is a human's call. Prompt before wiring the `!`.
 
-## Before Committing
+### Before Committing
 
-- **Work on a Branch**: `main` deploys and releases on every push
 - **Let the Hook Run**: A failure means fixing the code, not passing `--no-verify`
 - **Stage Deliberately**: `git add -A` sweeps in unrelated work, so read `git status` first and never stage generated output
 - **Wait to Be Asked**: Commit only when asked, and push only when asked
+- **Work on a Branch**: `main` deploys and releases on every push

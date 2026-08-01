@@ -30,15 +30,7 @@ The repository is one NPM workspace:
 
 ### Scopes
 
-The project is modularized into the following scopes:
-
-| Scope                                  | Contents                                                    |
-| -------------------------------------- | ----------------------------------------------------------- |
-| [`/`](./)                              | Shared setup, the rules, and the commit convention          |
-| [`infrastructure/`](./infrastructure/) | The Terraform environment on AWS for static file deployment |
-| [`source/content/`](./source/content/) | Source of truth for articles, resume, and README            |
-| [`source/tooling/`](./source/tooling/) | The Resume and README builders and their Docker image       |
-| [`source/website/`](./source/website/) | The Next.js application                                     |
+The project is modularized into scopes, each with its own documents. [`.claude/rules/documentation.md`](./.claude/rules/documentation.md#scopes) lists them and what each holds.
 
 ## Getting Started
 
