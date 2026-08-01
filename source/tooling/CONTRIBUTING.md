@@ -1,6 +1,6 @@
 # Contributing to source/tooling
 
-Read the [root guide](../../CONTRIBUTING.md) first for setup and the full command list. Everything here runs from the repository root.
+Read the [root guide](../../CONTRIBUTING.md) first for setup, and [`.claude/rules/npm-script.md`](../../.claude/rules/npm-script.md) for the full command list. Everything here runs from the repository root.
 
 ## Building
 

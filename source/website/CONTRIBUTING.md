@@ -1,6 +1,6 @@
 # Contributing to source/website
 
-Read the [root guide](../../CONTRIBUTING.md) first — setup, the full command list, the lint and format rules, and the commit convention are all there. Run everything from the repository root; `npm run watch:website` starts the dev server on its own, and `npm run build:website` produces the static export. Check `package.json` for exact dependency versions and use the matching APIs.
+Read the [root guide](../../CONTRIBUTING.md) first — setup, the scopes, and the commit convention are there, and it names the rule that owns each of the commands, the conventions, the quality checks, and the workflows. Run everything from the repository root; `npm run watch:website` starts the dev server on its own, and `npm run build:website` produces the static export. Check `package.json` for exact dependency versions and use the matching APIs.
 
 ## Staying Statically Exportable
 
