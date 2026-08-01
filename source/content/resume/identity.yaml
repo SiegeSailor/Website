@@ -3,7 +3,7 @@
 # the profile README.
 consumers:
   - resume
-  - profile
+  - readme
   - site
 
 identity:

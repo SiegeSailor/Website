@@ -6,7 +6,7 @@ Read the [root guide](../../CONTRIBUTING.md) first for setup and the full comman
 
 ```shell
 npm run build:versions    # must run first; the other 2 read its JSON
-npm run build:profile
+npm run build:readme
 npm run build:resume
 ```
 

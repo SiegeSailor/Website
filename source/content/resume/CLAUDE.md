@@ -12,30 +12,30 @@ Filenames are free — the loader takes the key from the file's contents, which 
 | ---------- | ------------------------------------------------------------- |
 | `/`        | The home page                                                 |
 | `/about`   | The `/about` page                                             |
-| `profile`  | The `SiegeSailor/SiegeSailor` Profile                         |
+| `readme`   | The `SiegeSailor/SiegeSailor` Profile                         |
 | `resume`   | `source/tooling/export/resume/*.{docx,pdf}`                   |
 | `site`     | Site-wide chrome and metadata: header, footer, every `<head>` |
 | `versions` | `build-versions` resolving each project's latest release      |
 
 ## File Map
 
-| File                  | Key              | Consumers                       |
-| ---------------------- | ----------------- | -------------------------------- |
-| `activities.yaml`     | `activities`     | — (archived)                    |
-| `certifications.yaml` | `certifications` | `resume`                        |
-| `contact.yaml`        | `contact`        | `resume`                        |
-| `education.yaml`      | `education`      | `resume`                        |
-| `experience.yaml`     | `experience`     | `resume`, `/`                   |
-| `identity.yaml`       | `identity`       | `resume`, `profile`, `site`     |
-| `media.yaml`          | `media`          | `site`, `/about`, `profile`     |
-| `profile.yaml`        | `profile`        | `/`, `/about`, `profile`        |
-| `projects.yaml`       | `projects`       | `/about`, `profile`, `versions` |
-| `publications.yaml`   | `publications`   | — (archived)                    |
-| `routes.yaml`         | `routes`         | `site`                          |
-| `site-identity.yaml`  | `site`           | `site`, `profile`               |
-| `skills.yaml`         | `skills`         | `resume`                        |
-| `summary.yaml`        | `summary`        | `resume`, `profile`, `/about`   |
-| `timeline.yaml`       | `timeline`       | `/about`, `profile`             |
+| File                  | Key              | Consumers                      |
+| --------------------- | ---------------- | ------------------------------ |
+| `activities.yaml`     | `activities`     | — (archived)                   |
+| `certifications.yaml` | `certifications` | `resume`                       |
+| `contact.yaml`        | `contact`        | `resume`                       |
+| `education.yaml`      | `education`      | `resume`                       |
+| `experience.yaml`     | `experience`     | `resume`, `/`                  |
+| `identity.yaml`       | `identity`       | `resume`, `readme`, `site`     |
+| `media.yaml`          | `media`          | `site`, `/about`, `readme`     |
+| `profile.yaml`        | `profile`        | `/`, `/about`, `readme`        |
+| `projects.yaml`       | `projects`       | `/about`, `readme`, `versions` |
+| `publications.yaml`   | `publications`   | — (archived)                   |
+| `routes.yaml`         | `routes`         | `site`                         |
+| `site-identity.yaml`  | `site`           | `site`, `readme`               |
+| `skills.yaml`         | `skills`         | `resume`                       |
+| `summary.yaml`        | `summary`        | `resume`, `readme`, `/about`   |
+| `timeline.yaml`       | `timeline`       | `/about`, `readme`             |
 
 ## What Is Archived Today
 
@@ -49,7 +49,7 @@ Nesting applies — a company is printed only if it is not archived, and so is e
 
 | Reader                                                      | Loads                                                                                                                                                                                              |
 | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Profile (`source/tooling/scripts/build-profile.mjs`)        | `profile`                                                                                                                                                                                           |
+| Profile (`source/tooling/scripts/build-readme.mjs`)         | `readme`                                                                                                                                                                                           |
 | Resume document (`source/tooling/scripts/build-resume.mjs`) | `resume`, rendering what it gets without filtering                                                                                                                                                 |
 | Website (`source/website/helpers/server/content.ts`)        | One consumer per surface — `getSite()`, `getHome()`, `getAbout()` — globbing this folder through webpack `require.context`, so a new file needs no code change and the dev server still hot-reloads |
 

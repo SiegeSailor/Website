@@ -149,7 +149,7 @@ const repoKey = (href: string): string | null => {
 };
 
 // Total experience is source/content/resume/timeline.yaml applied to today, never
-// a stated figure. source/tooling/scripts/build-profile.mjs computes the same thing from
+// a stated figure. source/tooling/scripts/build-readme.mjs computes the same thing from
 // the same content.
 function getExperienceYears(timeline: {
   start: string;

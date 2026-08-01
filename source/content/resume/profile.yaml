@@ -4,7 +4,7 @@
 consumers:
   - /
   - /about
-  - profile
+  - readme
 
 profile:
   picture: /images/Jin-Yu-Zhang.jpg

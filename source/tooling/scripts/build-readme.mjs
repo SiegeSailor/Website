@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { loadContent, loadVersions } from "./load-content.mjs";
 
 // Generates the GitHub profile README (SiegeSailor/SiegeSailor) from the content
-// declaring `profile` in its `consumers:` — the same profile, summary, and
+// declaring `readme` in its `consumers:` — the same profile, summary, and
 // projects that drive the /about page, so the two stay in lockstep. Writes
 // export/SiegeSailor-README.md (like build-resume writes export/resume/*); the
 // Docker image builds it and the deploy workflow copies it out and pushes it to
@@ -18,13 +18,13 @@ const REGEX_GITHUB_REPO = /^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/;
 const STAGE_ORDER = { Production: 0, Development: 1, Planning: 2 };
 const MILLISECOND_ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
 
-const { data, headings } = loadContent("profile");
+const { data, headings } = loadContent("readme");
 
 const heading = (key) => {
   const text = headings[key];
   if (!text)
     throw new Error(
-      `source/content/resume/ gives the profile a \`${key}\` key with no \`heading:\` to title its section`,
+      `source/content/resume/ gives the readme a \`${key}\` key with no \`heading:\` to title its section`,
     );
   return text;
 };
