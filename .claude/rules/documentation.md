@@ -8,7 +8,7 @@ paths:
 
 # Writing Documentation
 
-Each scope carries three documents, and each answers one question:
+Each scope carries 3 documents, and each answers one question:
 
 | Document              | Audience | Purpose                             |
 | --------------------- | -------- | ----------------------------------- |
@@ -30,7 +30,7 @@ If a fact belongs to multiple documents, we should move it to `.claude/rules/*.m
 
 Follow the styles strictly. Prompt the user if you find the following styles conflicting with the content you are writing:
 
-- **Adopt GitHub Markdown**: Use GitHub MD syntax, e.g., `> [!important]`
+- **Adopt GitHub Markdown**: Use GitHub Markdown syntax, e.g., `> [!important]`
 - **Apply Title Case for Headings**: Headings, table headers, and list headers are always in title case
 - **Avoid Newlines**: Only use a newline to separate paragraphs; let text wrap naturally
 - **Comply Terminology**: Use consistent terminology as described in [Terminology](#terminology)
@@ -51,11 +51,23 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 
 ### Terminology
 
-| Term     | Variants |
-| -------- | -------- |
-| GitHub   |          |
-| YAML     | YML      |
-| Markdown | MD       |
+| Term       | Variants            |
+| ---------- | ------------------- |
+| ACM        | Certificate Manager |
+| CloudFront | Cloudfront          |
+| Docker     |                     |
+| ESLint     | Eslint, eslint      |
+| GitHub     | Github, github      |
+| hadolint   | Hadolint            |
+| Markdown   | MD                  |
+| Next.js    | NextJS, Next        |
+| npm        | NPM, Npm            |
+| Prettier   | prettier            |
+| Route 53   | Route53             |
+| S3         |                     |
+| Terraform  | terraform           |
+| TFLint     | tflint              |
+| YAML       | YML                 |
 
 > [!note]
 > When you find a term repeated, prompt user for confirmation to add to this table. If find 2 similar terms, prompt user to clarify, correct them to use the same term, and add to this table.
