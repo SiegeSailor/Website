@@ -1,7 +1,7 @@
 {
   "name": "@siegesailor-website/root",
   "version": "1.2.0",
-  "description": "SiegeSailor's personal website, resume documents, and SiegeSailor/SiegeSailor README.",
+  "description": "SiegeSailor's personal website, resume documents, and README.",
   "homepage": "https://github.com/SiegeSailor/Website",
   "bugs": "https://github.com/SiegeSailor/Website/issues",
   "private": true,
@@ -21,7 +21,7 @@
     "build:resume": "npm run build:resume --workspace source/tooling",
     "build:versions": "npm run build:versions --workspace source/tooling",
     "build:website": "npm run build --workspace source/website",
-    "watch": "bash scripts/npm-parallel.sh watch:readme watch:resume watch:website",
+    "watch": "npm run build:versions && bash scripts/npm-parallel.sh watch:readme watch:resume watch:website",
     "watch:readme": "npm run watch:readme --workspace source/tooling",
     "watch:resume": "npm run watch:resume --workspace source/tooling",
     "watch:website": "npm run watch --workspace source/website",

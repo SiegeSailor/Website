@@ -8,8 +8,6 @@ paths:
 
 # Writing Documentation
 
-Each scope carries 3 documents, and each answers one question:
-
 | Document              | Audience | Purpose                             |
 | --------------------- | -------- | ----------------------------------- |
 | `.claude/rules/*.md`  | Agent    | What are the relevant rules?        |
@@ -51,25 +49,26 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 
 ### Terminology
 
-| Term       | Variants |
-| ---------- | -------- |
-| ACM        |          |
-| Article    |          |
-| CloudFront |          |
-| Docker     |          |
-| ESLint     |          |
-| GitHub     |          |
-| hadolint   |          |
-| Markdown   | MD       |
-| Next.js    |          |
-| Node.js    |          |
-| NPM        |          |
-| Prettier   |          |
-| Route 53   |          |
-| S3         |          |
-| Terraform  |          |
-| TFLint     |          |
-| YAML       | YML      |
+| Term             | Variants |
+| ---------------- | -------- |
+| ACM              |          |
+| Article          |          |
+| CloudFront       |          |
+| Docker           |          |
+| ESLint           |          |
+| GitHub           |          |
+| hadolint         |          |
+| Markdown         | MD       |
+| Next.js          |          |
+| Node.js          |          |
+| NPM              |          |
+| Prettier         |          |
+| Route 53         |          |
+| S3               |          |
+| Terraform        |          |
+| TFLint           |          |
+| YAML             | YML      |
+| Semantic Release |          |
 
 > [!note]
 > When you find a term repeated, prompt user for confirmation to add to this table. If find 2 similar terms, prompt user to clarify, correct them to use the same term, and add to this table.

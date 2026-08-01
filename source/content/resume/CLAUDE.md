@@ -1,6 +1,6 @@
 # CLAUDE.md — source/content/resume
 
-The single source of truth for the resume document, the website, and the generated SiegeSailor/SiegeSailor README. Nothing a reader sees is hard-coded in a consumer: names, taglines, summaries, links, page titles, and section headings all live here.
+The single source of truth for the resume document, the website, and the generated README. Nothing a reader sees is hard-coded in a consumer: names, taglines, summaries, links, page titles, and section headings all live here.
 
 [`../CONTRIBUTING.md`](../CONTRIBUTING.md#changing-what-appears-where) owns the file-consumers structure — the `consumers:`, `heading:`, and one-content-key shape, and what the loaders reject. **Read it before editing a file here.** This document is the map of what is already declared, and the constraints on what may change.
 
