@@ -1,7 +1,7 @@
 {
   "name": "@siegesailor-website/root",
   "version": "1.2.0",
-  "description": "SiegeSailor's personal website, resume documents, and GitHub profile README.",
+  "description": "SiegeSailor's personal website, resume documents, and SiegeSailor/SiegeSailor README.",
   "homepage": "https://github.com/SiegeSailor/Website",
   "bugs": "https://github.com/SiegeSailor/Website/issues",
   "private": true,

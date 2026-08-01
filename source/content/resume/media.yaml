@@ -1,6 +1,6 @@
 # External profile links. `key` selects the icon in source/website/settings/icons.ts,
 # so a new entry needs a matching icon there before the site will render it.
-# `heading` names the section on the profile README; the site renders these
+# `heading` names the section on the README; the site renders these
 # inline, in the header, footer, and at the foot of /about.
 consumers:
   - site

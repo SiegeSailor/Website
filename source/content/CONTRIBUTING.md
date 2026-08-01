@@ -18,7 +18,7 @@ Editing anything here hot-reloads the pages built from it, because the website i
 ```shell
 npm run build:versions    # refresh the project versions first
 npm run build:resume      # .docx, plus .pdf and the page-count check with LibreOffice
-npm run build:readme      # the profile README
+npm run build:readme      # the README
 ```
 
 The page-count check is skipped silently on a host without LibreOffice and poppler, so build through Docker before believing the resume still fits — see [`../tooling/CONTRIBUTING.md`](../tooling/CONTRIBUTING.md).

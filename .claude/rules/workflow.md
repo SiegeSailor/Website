@@ -8,16 +8,16 @@ paths:
 
 One workflow does one task — a single job with a single outcome. When a second outcome appears, such as a deploy that also pushes a README, it becomes a second file.
 
-| Workflow                                                       | Trigger                   | Task                                                                         |
-| -------------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------- |
-| [`main-deploy.yml`](../../.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront                    |
-| [`main-profile.yml`](../../.github/workflows/main-profile.yml) | Push to `main`, or manual | Build the profile README and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                         |
-| [`push-verify.yml`](../../.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                           |
+| Workflow                                                       | Trigger                   | Task                                                                 |
+| -------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------- |
+| [`main-deploy.yml`](../../.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront            |
+| [`main-readme.yml`](../../.github/workflows/main-readme.yml)   | Push to `main`, or manual | Build the README and push it to `SiegeSailor/SiegeSailor` if changed |
+| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                 |
+| [`push-verify.yml`](../../.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                   |
 
 The `production` environment carries the credentials both `main` deployments need:
 
-- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the profile README sync
+- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the README sync
 - **Variables**: `AWS_REGION`
 
 Renaming a workflow breaks the table above and the badges in [`README.md`](../../README.md); update both in the same commit. Confirm the file parses before finishing:

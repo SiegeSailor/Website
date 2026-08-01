@@ -4,7 +4,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 LABEL org.opencontainers.image.authors="Jin Yu Zhang <siegesailor@gmail.com>"
 LABEL org.opencontainers.image.title="siegesailor-website/tooling"
-LABEL org.opencontainers.image.description="SiegeSailor's resume document and profile README builder."
+LABEL org.opencontainers.image.description="SiegeSailor's resume document and README builder."
 
 ENV DEBIAN_FRONTEND="noninteractive"
 

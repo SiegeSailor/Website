@@ -22,7 +22,7 @@ paths:
 | `npm run lint`           | ESLint; `lint:fix` autofixes                                                        |
 | `npm run typecheck`      | `tsc --noEmit`                                                                      |
 | `npm run watch`          | Every `watch:*` target at once, in one terminal                                     |
-| `npm run watch:readme`   | Rebuild the profile README on a `source/content/` change                            |
+| `npm run watch:readme`   | Rebuild the README on a `source/content/` change                                    |
 | `npm run watch:resume`   | Rebuild the resume documents on a `source/content/` change                          |
 | `npm run watch:website`  | Development server only                                                             |
 

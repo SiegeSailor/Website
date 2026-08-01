@@ -2,12 +2,12 @@
 
 The shell scripts the NPM scripts and the workflows call. Each one does a single job that would be awkward as an NPM script: driving Docker, supervising parallel processes, or fanning out HTTP requests. Every name reads `<technology>-<action>.sh` — the action left off where the tool has only one — so the file says which tool it drives before it is opened.
 
-| Script                                       | Does                                                                            | Called By                           |
-| -------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------- |
-| [`cloudfront-warm.sh`](./cloudfront-warm.sh) | Requests every page in the deployed sitemap so CloudFront caches it again       | By hand                             |
-| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and profile README out | `main-deploy.yml`, semantic-release |
-| [`hadolint.sh`](./hadolint.sh)               | Runs hadolint on `source/tooling/Dockerfile`                                    | The `verify` action                 |
-| [`npm-parallel.sh`](./npm-parallel.sh)       | Runs several root NPM scripts at once in one terminal                           | `npm run watch`                     |
+| Script                                       | Does                                                                        | Called By                           |
+| -------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------- |
+| [`cloudfront-warm.sh`](./cloudfront-warm.sh) | Requests every page in the deployed sitemap so CloudFront caches it again   | By hand                             |
+| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and the README out | `main-deploy.yml`, semantic-release |
+| [`hadolint.sh`](./hadolint.sh)               | Runs hadolint on `source/tooling/Dockerfile`                                | The `verify` action                 |
+| [`npm-parallel.sh`](./npm-parallel.sh)       | Runs several root NPM scripts at once in one terminal                       | `npm run watch`                     |
 
 ## Usage
 

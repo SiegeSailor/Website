@@ -1,6 +1,6 @@
 # CLAUDE.md — source/content/resume
 
-The single source of truth for the resume document, the website, and the generated GitHub profile README. Nothing a reader sees is hard-coded in a consumer: names, taglines, summaries, links, page titles, and section headings all live here.
+The single source of truth for the resume document, the website, and the generated SiegeSailor/SiegeSailor README. Nothing a reader sees is hard-coded in a consumer: names, taglines, summaries, links, page titles, and section headings all live here.
 
 [`../CONTRIBUTING.md`](../CONTRIBUTING.md#changing-what-appears-where) owns the file-consumers structure — the `consumers:`, `heading:`, and one-content-key shape, and what the loaders reject. **Read it before editing a file here.** This document is the map of what is already declared, and the constraints on what may change.
 
@@ -9,10 +9,10 @@ Filenames are free — the loader takes the key from the file's contents, which 
 ## Consumer Names
 
 | Consumer   | Output                                                        |
-| ---------- | ------------------------------------------------------------- |
+| ----------- | -------------------------------------------------------------- |
 | `/`        | The home page                                                 |
 | `/about`   | The `/about` page                                             |
-| `readme`   | The `SiegeSailor/SiegeSailor` profile README                         |
+| `readme`   | The `SiegeSailor/SiegeSailor` README                          |
 | `resume`   | `source/tooling/export/resume/*.{docx,pdf}`                   |
 | `site`     | Site-wide chrome and metadata: header, footer, every `<head>` |
 | `versions` | `build-versions` resolving each project's latest release      |
@@ -49,7 +49,7 @@ Nesting applies — a company is printed only if it is not archived, and so is e
 
 | Reader                                                      | Loads                                                                                                                                                                                               |
 | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Profile README (`source/tooling/scripts/build-readme.mjs`)  | `readme`                                                                                                                                                                                            |
+| README (`source/tooling/scripts/build-readme.mjs`)          | `readme`                                                                                                                                                                                            |
 | Resume document (`source/tooling/scripts/build-resume.mjs`) | `resume`, rendering what it gets without filtering                                                                                                                                                  |
 | Website (`source/website/helpers/server/content.ts`)        | One consumer per surface — `getSite()`, `getHome()`, `getAbout()` — globbing this folder through webpack `require.context`, so a new file needs no code change and the dev server still hot-reloads |
 

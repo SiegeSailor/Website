@@ -1,5 +1,5 @@
 # The first entry is the summary everywhere: the resume document, /about, and
-# the profile README. The second is the systems-focused alternative, archived
+# the README. The second is the systems-focused alternative, archived
 # with an empty `consumers` until it is wanted.
 consumers:
   - resume

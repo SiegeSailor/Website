@@ -4,12 +4,12 @@ import { fileURLToPath } from "node:url";
 
 import { loadContent, loadVersions } from "./load-content.mjs";
 
-// Generates the GitHub profile README (SiegeSailor/SiegeSailor) from the content
+// Generates the README (SiegeSailor/SiegeSailor) from the content
 // declaring `readme` in its `consumers:` — the same profile, summary, and
 // projects that drive the /about page, so the two stay in lockstep. Writes
 // export/SiegeSailor-README.md (like build-resume writes export/resume/*); the
 // Docker image builds it and the deploy workflow copies it out and pushes it to
-// the profile repository.
+// the SiegeSailor/SiegeSailor repository.
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_FILE = join(ROOT, "export/SiegeSailor-README.md");

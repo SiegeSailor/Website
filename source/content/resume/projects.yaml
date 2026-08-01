@@ -1,4 +1,4 @@
-# Side projects — shown on the /about page and the GitHub profile README,
+# Side projects — shown on the /about page and the README,
 # never in the resume documents. `stage` is one of Planning | Development |
 # Production; Planning projects stay hidden until they advance, which is why
 # they need no `consumers: []` of their own.

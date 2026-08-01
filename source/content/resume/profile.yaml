@@ -1,6 +1,6 @@
-# The home page hero, the /about header, and the generated GitHub profile
-# README. Never rendered in the resume document — the document has its own name
-# and contact block. External links live in media.yaml.
+# The home page hero, the /about header, and the generated README. Never
+# rendered in the resume document — the document has its own name and contact
+# block. External links live in media.yaml.
 consumers:
   - /
   - /about

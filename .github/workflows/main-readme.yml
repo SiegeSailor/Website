@@ -1,20 +1,20 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "main: Sync GitHub profile README"
-run-name: "main: Sync GitHub profile README from ${{ github.sha }} by @${{ github.actor }}"
+name: "main: Sync README to SiegeSailor/SiegeSailor"
+run-name: "main: Sync README from ${{ github.sha }} by @${{ github.actor }}"
 
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/main-profile.yml
+      - .github/workflows/main-readme.yml
       - source/content/**
       - source/tooling/**
       - package-lock.json
   workflow_dispatch:
 
 concurrency:
-  group: main-profile
+  group: main-readme
   cancel-in-progress: false
 
 jobs:
@@ -33,17 +33,17 @@ jobs:
       - name: Setup workspace
         uses: ./.github/actions/setup-workspace
 
-      # The profile README needs neither LibreOffice nor the pinned fonts, so it
-      # is built on the runner; only the resume documents go through Docker.
+      # The README needs neither LibreOffice nor the pinned fonts, so it is
+      # built on the runner; only the resume documents go through Docker.
       - name: Resolve project versions
         env:
           GH_TOKEN: ${{ github.token }}
         run: npm run build:versions
 
-      - name: Build profile README
+      - name: Build README
         run: npm run build:readme
 
-      - name: Sync profile README
+      - name: Sync README
         env:
           GH_TOKEN: ${{ secrets.SIEGESAILOR_PAT }}
         run: |
@@ -53,11 +53,11 @@ jobs:
           cp source/tooling/export/SiegeSailor-README.md "${workdir}/README.md"
           cd "${workdir}"
           if [ -z "$(git status --porcelain)" ]; then
-            echo "profile README already up to date" >> "${GITHUB_STEP_SUMMARY}"
+            echo "README already up to date" >> "${GITHUB_STEP_SUMMARY}"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "docs: sync profile from v${version} [skip ci]"
+          git commit -am "docs: sync the README from v${version} [skip ci]"
           git push
-          echo "profile README synced from v${version}" >> "${GITHUB_STEP_SUMMARY}"
+          echo "README synced from v${version}" >> "${GITHUB_STEP_SUMMARY}"

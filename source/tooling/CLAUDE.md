@@ -1,6 +1,6 @@
 # CLAUDE.md — source/tooling
 
-The builders that turn [`../content/`](../content/CLAUDE.md) into the resume, the profile README, and the version list.
+The builders that turn [`../content/`](../content/CLAUDE.md) into the resume, the README, and the version list.
 
 | Document                                                     | Owns                                                                                                                                                                               |
 | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

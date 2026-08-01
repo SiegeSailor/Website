@@ -1,6 +1,6 @@
 # CLAUDE.md — source/content
 
-All authored content, and the single source the resume, the website, and the profile README are built from.
+All authored content, and the single source the resume, the website, and the README are built from.
 
 | Document                                     | Owns                                                                                                                                                                                  |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

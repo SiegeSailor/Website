@@ -53,7 +53,7 @@ npm run watch
 > [!important]
 > Install from the root, not from inside a workspace. `cd source/website && npm ci` installs that workspace's tree without the root dev dependencies, so `prepare` finds no Husky and quietly skips the hook.
 
-`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and profile README that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
+`watch` runs every `watch:*` target concurrently through [`npm-parallel.sh`](./scripts/npm-parallel.sh), so one terminal gives the dev server plus a resume and README that rebuild whenever `source/content/` changes. Output is interleaved and one Ctrl-C stops all of them. `build` is the same kind of aggregate but sequential: it chains every `build:*` target with `&&` in dependency order, starting with `build:versions` because the other 3 read the JSON it writes.
 
 Neither aggregate expands a glob — NPM has no such feature — so **adding a `build:*` or `watch:*` script means adding it to the aggregate too**.
 

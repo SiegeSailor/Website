@@ -1,6 +1,6 @@
 # Who this is, in the two forms the outputs need. `legal` heads the resume
 # document (the builder upper-cases it); `display` is the byline on the site and
-# the profile README.
+# the README.
 consumers:
   - resume
   - readme

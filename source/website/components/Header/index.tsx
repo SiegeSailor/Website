@@ -6,7 +6,7 @@ import { getSite } from "@/helpers/server/content";
 import IconTheme from "./IconTheme";
 
 // The header links out through the same media.yaml entries as /about and the
-// profile README, minus the résumé download — a header is for navigation.
+// README, minus the résumé download — a header is for navigation.
 const NAVIGABLE = new Set(["github", "linkedin"]);
 
 export default async function () {

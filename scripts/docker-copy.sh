@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Build the resume Docker image and copy its generated artifacts out of it: the
-# resume document into a target directory, and the GitHub profile README to
+# resume document into a target directory, and the README to
 # source/website/SiegeSailor-README.md.
 #
 # Building the image IS what generates the artifacts (the `resume` stage runs
@@ -51,7 +51,7 @@ get_docker_cmd() {
 #   $3 - Docker image tag (default: siegesailor-website-tooling:latest)
 #   $@ - Additional flags to pass to Docker (optional)
 # Outputs:
-#   Resume document in $1 and the profile README at
+#   Resume document in $1 and the README at
 #   source/website/SiegeSailor-README.md
 #######################################
 main() {
@@ -90,7 +90,7 @@ main() {
   }
   ${docker_cmd} rm "${container}" >/dev/null
 
-  echo -e "${BLUE}[DONE] Resume document in ${target}; profile README at source/website/SiegeSailor-README.md${NONE}"
+  echo -e "${BLUE}[DONE] Resume document in ${target}; README at source/website/SiegeSailor-README.md${NONE}"
 }
 
 main "$@"

@@ -3,7 +3,7 @@
 # specific to one route.
 consumers:
   - site
-  # The profile README signs off by pointing back at /about.
+  # The README signs off by pointing back at /about.
   - readme
 
 site:
