@@ -20,6 +20,6 @@ The workspace depends on `js-yaml` and `docx` only. That is deliberate: the Dock
 - The build context is the repository root with `source/tooling/Dockerfile`, and the root `.dockerignore` allowlists only `source/content/resume/`, `source/tooling/`, and the root manifests, so the context stays under 1 MB
 - Only the `source/tooling` workspace is installed, with `--ignore-scripts` because the root `prepare` runs Husky and needs a `.git` the context excludes
 - Apt packages resolve against [snapshot.debian.org](https://snapshot.debian.org) at the `DEBIAN_SNAPSHOT` timestamp, which freezes the entire dependency closure rather than the 3 named packages
-- Building the image is what generates the artifacts: the `resume` stage runs `build:resume` and `build:readme`
+- Building the image is what generates the artifacts: the `resume` stage runs `build:resume` and `build:profile`
 
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the commands, the resume layout notes, and how to take a Debian update.

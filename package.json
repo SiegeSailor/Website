@@ -16,8 +16,8 @@
   },
   "scripts": {
     "prepare": "if command -v husky > /dev/null; then husky; fi",
-    "build": "npm run build:versions && npm run build:readme && npm run build:resume && npm run build:website",
-    "build:readme": "npm run build:readme --workspace source/tooling",
+    "build": "npm run build:versions && npm run build:profile && npm run build:resume && npm run build:website",
+    "build:profile": "npm run build:profile --workspace source/tooling",
     "build:resume": "npm run build:resume --workspace source/tooling",
     "build:versions": "npm run build:versions --workspace source/tooling",
     "build:website": "npm run build --workspace source/website",

@@ -5,7 +5,7 @@
 # source/website/SiegeSailor-README.md.
 #
 # Building the image IS what generates the artifacts (the `resume` stage runs
-# `npm run build:resume` and `npm run build:readme`), so the build step is
+# `npm run build:resume` and `npm run build:profile`), so the build step is
 # required — but with Docker layer caching an unchanged image is a fast no-op.
 
 set -o errexit

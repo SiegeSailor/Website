@@ -41,7 +41,7 @@ jobs:
         run: npm run build:versions
 
       - name: Build profile README
-        run: npm run build:readme
+        run: npm run build:profile
 
       - name: Sync profile README
         env:

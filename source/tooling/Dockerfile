@@ -59,4 +59,4 @@ COPY "source/tooling/scripts/" ./source/tooling/scripts/
 # Project versions come from source/content/resume/versions.generated.json when the
 # host generated it before the build; otherwise the README falls back to the stage.
 RUN npm run build:resume --workspace source/tooling && \
-    npm run build:readme --workspace source/tooling
+    npm run build:profile --workspace source/tooling

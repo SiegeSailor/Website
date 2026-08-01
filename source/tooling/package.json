@@ -11,7 +11,7 @@
     "npm": ">= 11.17.0"
   },
   "scripts": {
-    "build:readme": "node ./scripts/build-readme.mjs",
+    "build:profile": "node ./scripts/build-readme.mjs",
     "build:resume": "node ./scripts/build-resume.mjs",
     "build:versions": "node ./scripts/build-versions.mjs",
     "watch:readme": "node --watch-path=../content ./scripts/build-readme.mjs",
