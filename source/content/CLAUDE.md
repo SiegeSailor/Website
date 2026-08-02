@@ -11,5 +11,5 @@ All authored content, and the single source the resume, the website, and the REA
 
 ## Constraints That Must Never Break
 
-- **The Facts in `resume/` Are Verified**: Do not alter a date, a ranking, a title, or a number without explicit confirmation from Ken — this is the folder a background-check vendor is effectively reading
 - **Nothing Here Is Reformatted**: The folder is excluded from Prettier on purpose, because reflowing prose or re-indenting YAML changes the rendered documents
+- **The Facts in `resume/` Are Verified**: Do not alter a date, a ranking, a title, or a number without explicit confirmation from Ken — this is the folder a background-check vendor is effectively reading
