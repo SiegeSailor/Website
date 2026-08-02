@@ -6,7 +6,7 @@ paths:
 
 # Editing a Package Manifest
 
-`build` and `watch` are aggregates written out by hand — NPM does not expand script globs — so a variant missing from its aggregate never runs, and nothing reports it. Version fields belong to semantic-release; never bump one by hand.
+`build` and `watch` are aggregates written out by hand — NPM does not expand script globs — so a variant missing from its aggregate never runs, and nothing reports it. Version fields belong to Semantic Release; never bump one by hand.
 
 ## Commands
 

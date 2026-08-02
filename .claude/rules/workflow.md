@@ -12,7 +12,7 @@ One workflow does one task — a single job with a single outcome. When a second
 | -------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------- |
 | [`main-deploy.yml`](../../.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront            |
 | [`main-readme.yml`](../../.github/workflows/main-readme.yml)   | Push to `main`, or manual | Build the README and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run semantic-release and attach the resume documents                 |
+| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run Semantic Release and attach the resume documents                 |
 | [`push-verify.yml`](../../.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                   |
 
 The `production` environment carries the credentials both `main` deployments need:
