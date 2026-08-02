@@ -51,7 +51,7 @@ main "$@"
 
 ## Adding a Script
 
-Add one only when the work needs a shell — process supervision, Docker, `curl` fan-out, or a system binary a workflow and a laptop should invoke the same way. Anything a Node.js script can do belongs in [`source/tooling/`](../source/tooling/CONTRIBUTING.md), which is already in the build graph.
+Add one only when the work needs a shell — process supervision, Docker, `curl` fan-out, or a system binary a workflow and a laptop should invoke the same way. Anything a Node.js script can do belongs in [`source/tooling/`](../source/tooling/), which is already in the build graph.
 
 Name it `<technology>-<action>.sh` — the tool it drives, then what it does to it, as in `docker-copy.sh` and `cloudfront-warm.sh`. 2 rules follow from that order:
 
