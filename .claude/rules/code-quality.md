@@ -19,7 +19,7 @@ npm run typecheck            # tsc --noEmit
 bash scripts/hadolint.sh     # hadolint on source/tooling/Dockerfile
 ```
 
-The first 3 run automatically on `git commit` through a Husky `pre-commit` hook that calls [lint-staged](https://github.com/lint-staged/lint-staged) ([`.lintstagedrc.mjs`](../../.lintstagedrc.mjs)): staged files are formatted and autofixed in place and re-staged, `tsc --noEmit` runs when a `.ts` or `.tsx` file is staged, and the commit aborts if anything fails. Pass `--no-verify` to skip the hook, or set `HUSKY=0` to stop installing it.
+The first 3 run automatically on `git commit` through a Husky `pre-commit` hook that calls [lint-staged](https://github.com/lint-staged/lint-staged) ([`.lintstagedrc.mjs`](../../.lintstagedrc.mjs)): staged files are formatted and autofixed in place and re-staged, `tsc --noEmit` runs when a `.ts` or `.tsx` file is staged, and the commit aborts if anything fails. A failure means fixing the code, never skipping the hook — [`SKILL.md`](../skills/commit/SKILL.md#before-committing) states that rule. Set `HUSKY=0` to stop installing it.
 
 The `Dockerfile` lint stays out of the hook — hadolint is a system binary rather than a dependency, so a machine without it would fail every commit. Both workflows install a pinned version and run it, so a violation fails CI instead.
 
