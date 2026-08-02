@@ -14,7 +14,7 @@ The repository is one NPM workspace:
     - [`source/tooling/`](./source/tooling/): Member workspace
     - [`source/content`](./source/content/): Plain data shared by the two member workspaces
 
-### Scopes
+## Scopes
 
 Besides the workspaces and standard folders, e.g., `.github/` and `.husky/`, the project is modularized into scopes, and a scope's must-not-break rules live in its `CLAUDE.md`. Each is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
 
@@ -30,9 +30,9 @@ Besides the workspaces and standard folders, e.g., `.github/` and `.husky/`, the
 > [!note]
 > Read a scope's `CLAUDE.md` before editing anything inside it. A change that spans scopes takes no `<scope>`, the way a change to the root takes none.
 
-## Rules That Hold Everywhere
+## Universal Rules
 
-Each is stated in full where it is linked; none may be broken on the way to finishing something else:
+These are rules that hold everywhere. Each is stated in full where it is linked; none may be broken on the way to finishing something else:
 
 | Stated In                                                            | Rule                                               |
 | -------------------------------------------------------------------- | -------------------------------------------------- |
