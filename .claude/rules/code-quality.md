@@ -23,4 +23,4 @@ The first 3 run automatically on `git commit` through a Husky `pre-commit` hook 
 
 The `Dockerfile` lint stays out of the hook — hadolint is a system binary rather than a dependency, so a machine without it would fail every commit. CI installs a pinned version instead, so a violation fails there; [`workflow.md`](./workflow.md#shared-steps) owns where that version lives.
 
-Prettier runs from the root and so also covers `source/tooling/` and the Markdown; ESLint stays scoped to `source/website/`, where its config lives. Authored content — all of `source/content/` — is excluded from Prettier so prose and the hand-tuned resume source stay untouched. Terraform and the shell scripts are covered by neither.
+Prettier runs from the root and so also covers `source/tooling/` and the Markdown; ESLint stays scoped to `source/website/`, where its config lives. Terraform and the shell scripts are covered by neither.
