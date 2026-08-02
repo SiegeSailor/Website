@@ -12,7 +12,7 @@ All authored content, shared by the 2 workspaces that render it. Nothing here is
 `resume/` is a **file-consumers structure**: every file declares in `consumers:` which outputs read it, optionally names its section in `heading:`, and holds exactly one content key. Each output asks for itself by name and gets only the files that declare it, so a section leaves a document by dropping a name from a list — no builder edit, no code change.
 
 | Output                               | Consumers             |
-| ------------------------------------- | ---------------------- |
+| ------------------------------------ | --------------------- |
 | Every page's content and metadata    | `site`, `/`, `/about` |
 | The latest release per project       | `versions`            |
 | The one-page PDF and DOCX resume     | `resume`              |

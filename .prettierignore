@@ -8,7 +8,3 @@ source/website/build-cache/
 source/website/public/
 source/website/next-env.d.ts
 source/website/SiegeSailor-README.md
-
-# Authored content, not code: source/content/articles/ is prose (its own writing
-# guide) and source/content/resume/ is the hand-tuned single source of truth.
-source/content/

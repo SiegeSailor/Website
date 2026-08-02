@@ -9,7 +9,7 @@ Filenames are free — the loader takes the key from the file's contents, which 
 ## Consumer Names
 
 | Consumer   | Output                                                        |
-| ----------- | -------------------------------------------------------------- |
+| ---------- | ------------------------------------------------------------- |
 | `/`        | The home page                                                 |
 | `/about`   | The `/about` page                                             |
 | `readme`   | The `SiegeSailor/SiegeSailor` README                          |
@@ -48,7 +48,7 @@ Nesting applies — a company is printed only if it is not archived, and so is e
 ## Who Reads What
 
 | Reader                                                      | Loads                                                                                                                                                                                               |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | README (`source/tooling/scripts/build-readme.mjs`)          | `readme`                                                                                                                                                                                            |
 | Resume document (`source/tooling/scripts/build-resume.mjs`) | `resume`, rendering what it gets without filtering                                                                                                                                                  |
 | Website (`source/website/helpers/server/content.ts`)        | One consumer per surface — `getSite()`, `getHome()`, `getAbout()` — globbing this folder through webpack `require.context`, so a new file needs no code change and the dev server still hot-reloads |
