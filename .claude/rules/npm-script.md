@@ -12,7 +12,7 @@ paths:
 
 | Command                  | Does                                                                                |
 | ------------------------ | ----------------------------------------------------------------------------------- |
-| `npm ci`                 | Install both workspaces from the single lockfile                                    |
+| `npm ci`                 | Install the 2 member workspaces from the root lockfile                              |
 | `npm run build`          | Every `build:*` target, in dependency order                                         |
 | `npm run build:readme`   | `source/content/` → `source/tooling/export/SiegeSailor-README.md`                   |
 | `npm run build:resume`   | `source/content/` → `source/tooling/export/resume/*.{docx,pdf}`                     |
