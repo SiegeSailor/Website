@@ -11,27 +11,26 @@ A commit message is one [Conventional Commits](https://www.conventionalcommits.o
 <type>(<scope>)?: <subject>
 ```
 
-| Rule                                    | Detail                                                                           |
-| --------------------------------------- | -------------------------------------------------------------------------------- |
-| No body, no footer, no trailers         | The subject is the whole message                                                 |
-| One concern per commit                  | Split by concern rather than by file, even when the work was a single task       |
-| Scope only when it sharpens the subject | The **Commit Scope** of the scope the change sits in, and most commits need none |
-| Under 72 characters                     | Type included, imperative mood, lowercase after the colon, no trailing period    |
+| Part        | Rule                                                          |
+| ----------- | ------------------------------------------------------------- |
+| `<scope>`   | Only when it sharpens the subject, and most commits need none |
+| `<subject>` | Imperative mood, lowercase, and no trailing period            |
+| `<type>`    | Picks the release from the table below                        |
+
+The subject is the whole message, no body, no footer, no trailers, and the line stays under 72 characters, type included. One concern per commit: split by concern rather than by file, even when the work was a single task.
 
 > [!note]
 > [`CLAUDE.md`](../../../CLAUDE.md#scopes) owns the scopes and the name each one lends to `<scope>`. A change that spans scopes, or that sits at the root, takes none.
 
-The type decides the release, so a careless one publishes a version:
-
 | Type                                                       | Release |
 | ---------------------------------------------------------- | ------- |
+| `feat!`, `fix!` (any type with `!`)                        | major   |
 | `feat`                                                     | minor   |
 | `fix`                                                      | patch   |
-| `feat!`, `fix!` (any type with `!`)                        | major   |
-| `refactor`, `docs`, `ci`, `chore`, `test`, `style`, `perf` | none    |
+| `chore`, `ci`, `docs`, `perf`, `refactor`, `style`, `test` | none    |
 
 > [!important]
-> Do not use `BREAKING CHANGE:` footer, which would need a body.
+> A careless type publishes a version. Do not use a `BREAKING CHANGE:` footer, which would need a body.
 
 Example commit messages:
 

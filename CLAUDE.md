@@ -20,7 +20,7 @@ Besides the workspaces and standard folders, e.g., `.github/` and `.husky/`, the
 
 | Scope                                  | Commit Scope     | Contents                                                    |
 | -------------------------------------- | ---------------- | ----------------------------------------------------------- |
-| [`/`](./)                              |                  | Shared setup, the rules, the skills, and the CI workflows   |
+| [`/`](./)                              | -                | Shared setup, the rules, the skills, and the CI workflows   |
 | [`infrastructure/`](./infrastructure/) | `infrastructure` | The Terraform environment on AWS for static file deployment |
 | [`scripts/`](./scripts/)               | `scripts`        | The shell scripts the NPM scripts and the workflows call    |
 | [`source/content/`](./source/content/) | `content`        | Source of truth for articles, resume, and README            |
@@ -32,9 +32,11 @@ Besides the workspaces and standard folders, e.g., `.github/` and `.husky/`, the
 
 ## Rules That Hold Everywhere
 
-Each of these is stated in full where it is linked; none may be broken on the way to finishing something else:
+Each is stated in full where it is linked; none may be broken on the way to finishing something else:
 
-- [`source/content/CLAUDE.md`](./source/content/CLAUDE.md): Change a verified fact in `source/content/resume/` only with user's confirmation
-- [`.claude/skills/commit/SKILL.md`](./.claude/skills/commit/SKILL.md): Commit through the `commit` skill: one Conventional Commits line, no body
-- [`source/website/CLAUDE.md`](./source/website/CLAUDE.md): Keep everything under `source/website/app/` statically exportable
-- [`infrastructure/CLAUDE.md`](./infrastructure/CLAUDE.md): Never apply Terraform without confirmation
+| Stated In                                                            | Rule                                               |
+| -------------------------------------------------------------------- | -------------------------------------------------- |
+| [`.claude/skills/commit/SKILL.md`](./.claude/skills/commit/SKILL.md) | Commit through the skill                           |
+| [`infrastructure/CLAUDE.md`](./infrastructure/CLAUDE.md)             | Never apply Terraform without confirmation         |
+| [`source/content/CLAUDE.md`](./source/content/CLAUDE.md)             | Never change a verified fact without confirmation  |
+| [`source/website/CLAUDE.md`](./source/website/CLAUDE.md)             | Keep everything under `app/` statically exportable |
