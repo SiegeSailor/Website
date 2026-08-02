@@ -41,7 +41,9 @@ Filenames are free — the loader takes the key from the file's contents, which 
 
 A node is printed unless it carries `archived: true` — verified material kept in the source and printed nowhere. This is the inverse of the old `labels: [resume]`, where silence meant hidden, so the resume's held-back material is visible when reading the file rather than inferred from an absence.
 
-Archived today: the fuller experience bullets, 4 company blurbs, DY Game, Servicetech's internship row, the split skill rows, the second MIT and the NYU certificates, some education details, and the second `summary`.
+Archived today: the fuller experience bullets, 4 company blurbs, StageSource, DY Game, Servicetech's internship row, the split skill rows, the second MIT and the NYU certificates, some education details, and the second `summary`.
+
+StageSource and DY Game are the 2 archived for a reason other than the page fit. Both were student engagements — a Boston University course team on a real client's requirements, and an internship taken during the B.F.A. — so `education.yaml` prints each as a detail of the degree it belongs to, and no employment-verification vendor is sent after a job that was never one. Un-archiving either means moving it back off `education.yaml` in the same edit.
 
 Nesting applies — a company is printed only if it is not archived, and so is each of its roles, its blurb, and each of its bullets.
 
