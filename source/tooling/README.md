@@ -11,7 +11,7 @@ Renders [`../content/`](../content/README.md) into the documents the website doe
 
 `build-versions.mjs` runs first: the other 2 read the JSON it writes. It is resilient by design — any network, auth, or 404 failure is skipped, the existing JSON is preserved, and it always exits 0, so an offline build never fails and the affected project simply shows no version chip.
 
-The workspace depends on `js-yaml` and `docx` only. That is deliberate: the Docker image installs ~22 packages instead of the website's ~1,400, which is also why `load-content.mjs` is a hand-kept twin of the website's `helpers/server/content.ts` rather than a shared import.
+The workspace depends on `js-yaml` and `docx` only. That is deliberate: the Docker image installs ~22 packages instead of the website's ~1,400, which is also why `load-content.mjs` is a hand-kept twin rather than a shared import — [`CLAUDE.md`](./CLAUDE.md#the-2-loaders-are-twins) owns what that costs.
 
 ## The Docker Image
 

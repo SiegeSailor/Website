@@ -1,6 +1,6 @@
 # Contributing to source/tooling
 
-Read the [root guide](../../CONTRIBUTING.md) first for setup. Everything here runs from the repository root.
+Read the [root guide](../../CONTRIBUTING.md) first for setup and for where commands run.
 
 ## Building
 
@@ -19,7 +19,7 @@ bash scripts/docker-copy.sh "source/tooling/export/resume" "linux/arm64"
 bash scripts/hadolint.sh   # lint the Dockerfile
 ```
 
-`hadolint.sh` runs in both workflows, which install the pinned hadolint first; locally it needs hadolint on the `PATH` and says so when it is missing.
+`hadolint.sh` needs hadolint on the `PATH` locally and says so when it is missing — [`scripts/CLAUDE.md`](../../scripts/CLAUDE.md#per-script-constraints) owns how it runs in CI.
 
 Because `npm run build` includes `build:resume`, a host that _does_ have LibreOffice and poppler runs the page-count check on every site build, against a version this repository does not pin. When a local build disagrees, build through Docker to settle whether the overflow is real.
 
@@ -56,5 +56,5 @@ A new output means a new consumer name, so it touches both sides:
 
 1. Add the script under `scripts/`, loading its content with `loadContent("<consumer>")` rather than reading files itself
 2. Declare the consumer on the content files that feed it, and document it in [`../content/resume/CLAUDE.md`](../content/resume/CLAUDE.md)
-3. Add `build:<name>` to this workspace's `package.json`, then to the root `package.json`, then to the root `build` aggregate — NPM does not expand globs, and `build:versions` has to stay first
+3. Wire `build:<name>` through the 4 places [`npm-script.md`](../../.claude/rules/npm-script.md#adding-a-command) lists, keeping `build:versions` first
 4. Keep the dependency list at `js-yaml` and `docx`, since a third dependency changes the image size argument and needs a reason
