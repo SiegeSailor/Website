@@ -40,7 +40,7 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 - **Order Alphabetically**: Lists, tables, and ordered content should follow alphabetical order when applicable
 - **State Only the Necessary**: No summary of what the document just said, no conclusion, and no restating a heading
 - **Use Actual Numbers**: Use actual numbers instead of words like three, five, e.g., 2 dogs, 7 birds
-- **Use Backticks for URLs**: Write URLs as `https://example.com`. No raw HTML
+- **Use Backticks for URLs**: Write a bare URL as `https://example.com`, and link it when it has link text. No raw HTML
 - **Use Double Quotes**: Use double quotes when applicable
 - **Use Periods only for Paragraphs**: Headings, lists, and tables do not end with a period
 
@@ -49,26 +49,31 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 
 ### Terminology
 
-| Term             | Variants |
-| ---------------- | -------- |
-| ACM              |          |
-| Article          |          |
-| CloudFront       |          |
-| Docker           |          |
-| ESLint           |          |
-| GitHub           |          |
-| hadolint         |          |
-| Markdown         | MD       |
-| Next.js          |          |
-| Node.js          |          |
-| NPM              |          |
-| Prettier         |          |
-| Route 53         |          |
-| S3               |          |
-| Terraform        |          |
-| TFLint           |          |
-| YAML             | YML      |
-| Semantic Release |          |
+| Term                 | Variants |
+| -------------------- | -------- |
+| ACM                  |          |
+| Article              |          |
+| AWS                  |          |
+| CloudFront           |          |
+| Conventional Commits |          |
+| Docker               |          |
+| ESLint               |          |
+| GitHub               |          |
+| hadolint             |          |
+| Husky                |          |
+| JavaScript           |          |
+| Markdown             | MD       |
+| Next.js              |          |
+| Node.js              |          |
+| NPM                  |          |
+| Prettier             |          |
+| Route 53             |          |
+| S3                   |          |
+| Semantic Release     |          |
+| Terraform            |          |
+| TFLint               |          |
+| TypeScript           |          |
+| YAML                 | YML      |
 
 > [!note]
 > When you find a term repeated, prompt user for confirmation to add to this table. If find 2 similar terms, prompt user to clarify, correct them to use the same term, and add to this table.
