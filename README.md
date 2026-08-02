@@ -1,9 +1,9 @@
 # Website
 
-[![push: Verify](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml)
 [![main: Deploy](https://github.com/SiegeSailor/Website/actions/workflows/main-deploy.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-deploy.yml)
 [![main: README](https://github.com/SiegeSailor/Website/actions/workflows/main-readme.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-readme.yml)
 [![main: Release](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml)
+[![push: Verify](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml)
 
 This is my personal website repository. A source of truth that automatically updates my:
 

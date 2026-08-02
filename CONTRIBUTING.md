@@ -27,7 +27,7 @@
 
 ## Getting Started
 
-A single `npm ci` installs both workspaces from the root lockfile and, through the `prepare` script, the Husky hook:
+`npm ci` installs the 2 member workspaces from the root lockfile and, through the `prepare` script, the Husky hook:
 
 ```shell
 npm ci

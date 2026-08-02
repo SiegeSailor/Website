@@ -10,9 +10,9 @@ The repository is one NPM workspace:
 
 - [`/`](./): `package.json` owns the version and the only `package-lock.json`
   - [`source/`](./source/)
-    - [`source/website/`](./source/website/): Member workspace
+    - [`source/content/`](./source/content/): Plain data shared by the 2 member workspaces
     - [`source/tooling/`](./source/tooling/): Member workspace
-    - [`source/content`](./source/content/): Plain data shared by the two member workspaces
+    - [`source/website/`](./source/website/): Member workspace
 
 ## Scopes
 
