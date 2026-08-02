@@ -17,7 +17,7 @@ skills:
     items: "Docker, Kubernetes, GitLab CI/CD, GitHub Actions, Terraform, AWS, GCP, Linux (Ubuntu, Debian), Nginx"
   - label: Data & Frontend
     items: "MongoDB, MySQL, PostgreSQL, Redis; React.js, Next.js, Redux, Electron"
-  - consumers: []
+  - archived: true
     label: Data
     items: "MongoDB, MySQL, PostgreSQL, Redis"
   - label: Regulated Software

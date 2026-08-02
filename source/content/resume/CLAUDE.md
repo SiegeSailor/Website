@@ -2,7 +2,7 @@
 
 The single source of truth for the resume document, the website, and the generated README. Nothing a reader sees is hard-coded in a consumer: names, taglines, summaries, links, page titles, and section headings all live here.
 
-[`../CONTRIBUTING.md`](../CONTRIBUTING.md#changing-what-appears-where) owns the file-consumers structure — the `consumers:`, `heading:`, and one-content-key shape, and what the loaders reject. **Read it before editing a file here.** This document is the map of what is already declared, and the constraints on what may change.
+[`../CONTRIBUTING.md`](../CONTRIBUTING.md#changing-what-appears-where) owns the file-consumers structure — the `consumers:`, `archived:`, `heading:`, and one-content-key shape, and what the loaders reject. **Read it before editing a file here.** This document is the map of what is already declared, and the constraints on what may change.
 
 Filenames are free — the loader takes the key from the file's contents, which is why `site-identity.yaml` holds `site:` (a file named `site.yaml` trips a SchemaStore schema in editors).
 
@@ -39,7 +39,7 @@ Filenames are free — the loader takes the key from the file's contents, which 
 
 ## What Is Archived Today
 
-A node with no `consumers` inherits the file's; `consumers: []` archives it — verified material kept in the source and printed nowhere. This is the inverse of the old `labels: [resume]`, where silence meant hidden, so the resume's held-back material is visible when reading the file rather than inferred from an absence.
+A node is printed unless it carries `archived: true` — verified material kept in the source and printed nowhere. This is the inverse of the old `labels: [resume]`, where silence meant hidden, so the resume's held-back material is visible when reading the file rather than inferred from an absence.
 
 Archived today: the fuller experience bullets, 4 company blurbs, DY Game, Servicetech's internship row, the split skill rows, the second MIT and the NYU certificates, some education details, and the second `summary`.
 

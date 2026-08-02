@@ -23,7 +23,7 @@ The page-count check is skipped silently on a host without LibreOffice and poppl
 
 ## Changing What Appears Where
 
-Move content between documents by editing `consumers:`, never a builder:
+Move a whole file between documents by editing `consumers:`, and hold a single node back with `archived:`, never a builder:
 
 ```yaml
 consumers: # this file is read by
@@ -34,9 +34,11 @@ heading: Summary # what titles its section in a document
 
 summary: # exactly one content key per file
   - text: "…"
+  - archived: true # in the source, printed nowhere
+    text: "…"
 ```
 
-A node inside the file opts out the same way one level down — `consumers: []` archives it, and silence inherits the file's list. Both loaders reject a file with no `consumers:`, with more than one content key, or with a key another file already claims, so a typo fails the build instead of quietly emptying a section.
+The 2 keys work at different levels: `consumers:` routes the file and belongs only at the top of it, while `archived: true` hides one node and everything nested under it. Archiving is consumer-independent, so an archived node leaves every document at once — there is no way to print a node in one document and hide it in another. Both loaders reject a file with no `consumers:`, with more than one content key, with a key another file already claims, or with a `consumers:` on a node instead of at the top, so a typo fails the build instead of quietly emptying a section or printing something meant to be held back.
 
 > [!warning]
 > Archiving a node silently shortens a document, and un-archiving one can push the resume past its single page. After editing, rebuild and read what came out.

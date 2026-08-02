@@ -10,9 +10,9 @@ import { load } from "js-yaml";
 // therefore returns only what that consumer is entitled to, and a section
 // disappears from a document by dropping its name from `consumers`.
 //
-// Nodes inside a file follow the same rule one level down: a node with no
-// `consumers` inherits the file's, and `consumers: []` archives it — verified
-// material kept in the source but printed nowhere.
+// A node inside a file is printed unless it carries `archived: true`, which
+// keeps verified material in the source and prints it nowhere. Archiving is
+// consumer-independent, so an archived node leaves every document at once.
 //
 // source/website/helpers/server/content.ts is the deliberate twin of this module. The
 // website cannot import it (tooling is a separate workspace, pinned to js-yaml
@@ -30,25 +30,25 @@ const META_KEYS = new Set(["consumers", "heading"]);
 const isNode = (value) =>
   Boolean(value) && typeof value === "object" && !Array.isArray(value);
 
-// A node opts out only by declaring `consumers` that omit this consumer;
-// anything silent inherits the file's declaration.
-const isArchived = (value, consumer) =>
-  isNode(value) &&
-  Array.isArray(value.consumers) &&
-  !value.consumers.includes(consumer);
+const isArchived = (value) => isNode(value) && value.archived === true;
 
-const prune = (value, consumer) => {
+// The `archived` flag is dropped on the way out so it never reaches a renderer.
+// A node-level `consumers:` is the superseded syntax and is rejected rather than
+// ignored, because ignoring it would silently print material meant to be held back.
+const prune = (value, file) => {
   if (Array.isArray(value))
     return value
-      .filter((item) => !isArchived(item, consumer))
-      .map((item) => prune(item, consumer));
+      .filter((item) => !isArchived(item))
+      .map((item) => prune(item, file));
   if (!isNode(value)) return value;
+  if ("consumers" in value)
+    throw new Error(
+      `source/content/resume/${file} has a node-level \`consumers:\`; hold a node back with \`archived: true\``,
+    );
   return Object.fromEntries(
     Object.entries(value)
-      .filter(
-        ([key, nested]) => key !== "consumers" && !isArchived(nested, consumer),
-      )
-      .map(([key, nested]) => [key, prune(nested, consumer)]),
+      .filter(([key, nested]) => key !== "archived" && !isArchived(nested))
+      .map(([key, nested]) => [key, prune(nested, file)]),
   );
 };
 
@@ -96,7 +96,7 @@ export const loadContent = (consumer) => {
       );
     origin[entry.key] = entry.file;
     if (!entry.consumers.includes(consumer)) continue;
-    data[entry.key] = prune(entry.value, consumer);
+    data[entry.key] = prune(entry.value, entry.file);
     if (entry.heading) headings[entry.key] = entry.heading;
   }
 

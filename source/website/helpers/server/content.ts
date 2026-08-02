@@ -35,25 +35,25 @@ type TNode = Record<string, unknown>;
 const isNode = (value: unknown): value is TNode =>
   Boolean(value) && typeof value === "object" && !Array.isArray(value);
 
-// A node opts out only by declaring `consumers` that omit this consumer;
-// anything silent inherits the file's declaration.
-const isArchived = (value: unknown, consumer: string) =>
-  isNode(value) &&
-  Array.isArray(value.consumers) &&
-  !value.consumers.includes(consumer);
+const isArchived = (value: unknown) => isNode(value) && value.archived === true;
 
-const prune = (value: unknown, consumer: string): unknown => {
+// The `archived` flag is dropped on the way out so it never reaches a renderer.
+// A node-level `consumers:` is the superseded syntax and is rejected rather than
+// ignored, because ignoring it would silently print material meant to be held back.
+const prune = (value: unknown, file: string): unknown => {
   if (Array.isArray(value))
     return value
-      .filter((item) => !isArchived(item, consumer))
-      .map((item) => prune(item, consumer));
+      .filter((item) => !isArchived(item))
+      .map((item) => prune(item, file));
   if (!isNode(value)) return value;
+  if ("consumers" in value)
+    throw new Error(
+      `source/content/resume/${file} has a node-level \`consumers:\`; hold a node back with \`archived: true\``,
+    );
   return Object.fromEntries(
     Object.entries(value)
-      .filter(
-        ([key, nested]) => key !== "consumers" && !isArchived(nested, consumer),
-      )
-      .map(([key, nested]) => [key, prune(nested, consumer)]),
+      .filter(([key, nested]) => key !== "archived" && !isArchived(nested))
+      .map(([key, nested]) => [key, prune(nested, file)]),
   );
 };
 
@@ -87,7 +87,7 @@ function loadContent(consumer: string) {
     origin[key] = file;
 
     if (!document.consumers.includes(consumer)) continue;
-    data[key] = prune(document[key], consumer);
+    data[key] = prune(document[key], file);
     if (typeof document.heading === "string") headings[key] = document.heading;
   }
 

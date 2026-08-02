@@ -20,6 +20,6 @@ The one that is silent when broken: the page-count check exits 0 when LibreOffic
 
 `scripts/load-content.mjs` and `../website/helpers/server/content.ts` are the same ~50 lines written twice, deliberately: the website cannot import this workspace, pinned to `js-yaml` and `docx` to keep the image at ~22 packages, and it needs webpack to own the files for dev hot-reload.
 
-**Change one and change the other in the same commit.** They must agree on what `consumers:` means and that a file without it is rejected, that a file carries exactly one content key and a key claimed twice is a build failure, and that a node inheriting silence is printed while `consumers: []` is archived.
+**Change one and change the other in the same commit.** They must agree on what `consumers:` means and that a file without it is rejected, that a file carries exactly one content key and a key claimed twice is a build failure, and that a node is printed unless it carries `archived: true`, which they strip so it never reaches a renderer while rejecting the superseded node-level `consumers:` outright.
 
 A divergence does not fail a build. It quietly gives the resume different content from the website, which is the failure the structure exists to prevent.

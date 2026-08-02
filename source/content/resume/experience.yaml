@@ -3,8 +3,8 @@
 #
 # Stacked role lines are deliberate: background-check vendors verify titles and
 # dates separately, so CooperSurgical and Servicetech keep one line per title
-# rather than one widened range. Nodes with an empty `consumers` are verified
-# material held back for the one-page fit — label them to bring them back.
+# rather than one widened range. Nodes marked `archived: true` are verified
+# material held back for the one-page fit — drop the flag to bring them back.
 consumers:
   - resume
   - /
@@ -50,23 +50,23 @@ experience:
           Integrated LLM-assisted engineering into R&D workflows: agentic
           coding tools, self-healing document generation in GitLab CI,
           knowledge-graph extraction, and LLM observability (Langfuse)
-      - consumers: []
+      - archived: true
         text: >-
           Developed a containerized Protocol Buffers compiler service
           automating multi-language client generation, plus NuGet network
           connectivity libraries and CLI tooling adopted org-wide
-      - consumers: []
+      - archived: true
         text: >-
           Partnered with electrical, mechanical, and firmware teams to define
           cross-functional interface standards, shaping next-generation IVF
           device architecture and the R&D roadmap for the coming year
-      - consumers: []
+      - archived: true
         text: >-
           Coordinated 3+ global formative studies per year across divergent
           development schedules — identified system bottlenecks, set
           achievable milestones, and established a continuous R&D–clinical
           feedback loop
-      - consumers: []
+      - archived: true
         text: >-
           Piloted workplace–device–cloud network communication with
           cross-country teams and architected hybrid cloud / on-site services
@@ -101,7 +101,7 @@ experience:
     industry: Art Service
     website: "https://stagesource.site-ym.com/"
     blurb:
-      consumers: []
+      archived: true
       text: "Nonprofit supporting 200+ theater companies and 1,500+ arts professionals"
     roles:
       - title: Software Engineer (Contract)
@@ -112,7 +112,7 @@ experience:
           Led a 6-developer team to deliver an MVP SaaS prototype (Django,
           uWSGI, Nginx, PostgreSQL) on schedule, introducing Scrum, CI/CD,
           and cloud-first practices to the organization
-      - consumers: []
+      - archived: true
         text: >-
           Halved deployment time with GitHub Actions pipelines using
           OIDC-authenticated deploys to AWS
@@ -122,7 +122,7 @@ experience:
     industry: E-Commerce
     website: "https://www.twincn.com/item.aspx?no=51236578"
     blurb:
-      consumers: []
+      archived: true
       text: "Education services startup managing 700+ multi-country academic programs"
     roles:
       - title: Software Engineer
@@ -134,7 +134,7 @@ experience:
           analysis, lifting checkout conversion by 25%
       - text: >-
           Grew daily user posts 5x (+800 posts/day) by introducing CDN caching
-      - consumers: []
+      - archived: true
         text: >-
           Launched a responsive UI framework (SASS, Webpack) restructuring
           sites built on Django, Tornado, and Apache HTTP Server
@@ -144,14 +144,14 @@ experience:
     industry: Medical Device
     website: "https://www.servicetech.com.tw/"
     blurb:
-      consumers: []
+      archived: true
       text: "Top Taiwanese distributor of non-invasive pain-management medical devices"
     roles:
       - title: Software Engineer
         dates: "Jun 2017 – Nov 2018"
         location: "Taichung, Taiwan"
       # Label this rather than widening the 2017–2018 range if it is ever needed.
-      - consumers: []
+      - archived: true
         title: Software Engineering Intern
         dates: "Jun 2016 – Jan 2017"
         location: "Taichung, Taiwan"
@@ -160,13 +160,13 @@ experience:
           Drove a paperless transformation — shipped a supply-chain PWA
           (Firebase, Ionic, React.js), consolidating 100+ ad-hoc sales
           channels into 6 trackable procedures
-      - consumers: []
+      - archived: true
         text: >-
           Built a digital corporate identity system supporting health
           education for 1,000+ medical institutions and 25+ device
           exhibitions
 
-  - consumers: []
+  - archived: true
     company: DY Game
     location: "Yunlin, Taiwan"
     industry: Gaming

@@ -9,13 +9,13 @@ certifications:
   - school: Massachusetts Institute of Technology
     degree: "Cert. in Data Science & Machine Learning (top 15 of 146)"
     dates: "Aug 2023 – Nov 2023"
-  - consumers: []
+  - archived: true
     school: Massachusetts Institute of Technology
     degree: "Certificate in Data Science and Machine Learning"
     dates: "Aug 2023 – Nov 2023"
     details:
       - text: "Ranked 15th of 146 participants; score 579.5 / 600"
-  - consumers: []
+  - archived: true
     school: New York University
     degree: "Certificate, Preparatory Course for Graduate Studies in Computing"
     dates: "Jan 2022 – May 2022"
