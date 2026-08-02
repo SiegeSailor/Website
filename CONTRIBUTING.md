@@ -2,13 +2,10 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-The repository is one NPM workspace:
+The repository is one NPM workspace. **Every command runs from the repository root**, which is also the Docker build context. the root scripts delegate into the right workspace, so there is never a need to `cd` into one.
 
-- [`/`](./): `package.json` owns the version and the only `package-lock.json`
-  - [`source/website/`](./source/website/)
-  - [`source/tooling/`](./source/tooling/)
-
-**Every command runs from the repository root**, which is also the Docker build context. the root scripts delegate into the right workspace, so there is never a need to `cd` into one.
+> [!note]
+> See [CLAUDE.md](./CLAUDE.md#repository-layout) explains the NPM workspace structure and the repository layout.
 
 > [!important]
 > Versions are bumped by Semantic Release automatically in [`main-release.yml`](./.github/workflows/main-release.yml).

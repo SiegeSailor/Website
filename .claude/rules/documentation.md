@@ -22,7 +22,7 @@ paths:
 > [!important]
 > When an agent is about to edit, it can ignore documents that target humans, but still needs to edit the document in a human-readable way. An agent only needs to read and update the documents that target humans when a content is about the human-readable content itself (see **Purpose** above).
 
-If a fact belongs to multiple documents, we should move it to `.claude/rules/*.md` and link to it from the other documents. Before adding a paragraph anywhere, check that it is not already written down: `grep -rn "<phrase>" --include="*.md"`, and make sure never contradict to another document.
+If a fact belongs to multiple documents across scopes, we should move it to `.claude/rules/*.md` and link to it from the other documents. If a fact is shared within a scope's documents, we should state it in `CLAUDE.md` and have other documents link to it. Before adding a paragraph anywhere, check that it is not already written down: `grep -rn "<phrase>" --include="*.md"`, and make sure never contradict to another document.
 
 ## Writing Style
 
