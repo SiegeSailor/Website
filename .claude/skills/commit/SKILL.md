@@ -19,7 +19,7 @@ A commit message is one [Conventional Commits](https://www.conventionalcommits.o
 | Under 72 characters                     | Type included, imperative mood, lowercase after the colon, no trailing period    |
 
 > [!note]
-> [`documentation.md`](../../rules/documentation.md#scopes) owns the scopes and the name each one lends to `<scope>`. A change that spans scopes, or that sits at the root, takes none.
+> [`CLAUDE.md`](../../../CLAUDE.md#scopes) owns the scopes and the name each one lends to `<scope>`. A change that spans scopes, or that sits at the root, takes none.
 
 The type decides the release, so a careless one publishes a version:
 

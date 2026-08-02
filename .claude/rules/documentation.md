@@ -24,22 +24,6 @@ paths:
 
 If a fact belongs to multiple documents, we should move it to `.claude/rules/*.md` and link to it from the other documents. Before adding a paragraph anywhere, check that it is not already written down: `grep -rn "<phrase>" --include="*.md"`, and make sure never contradict to another document.
 
-### Scopes
-
-The project is modularized into scopes, and a scope's must-not-break rules live in its `CLAUDE.md`. Each is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
-
-| Scope                                      | Commit Scope     | Contents                                                    |
-| ------------------------------------------ | ---------------- | ----------------------------------------------------------- |
-| [`/`](../../)                              | —                | Shared setup, the rules, the skills, and the CI workflows   |
-| [`infrastructure/`](../../infrastructure/) | `infrastructure` | The Terraform environment on AWS for static file deployment |
-| [`scripts/`](../../scripts/)               | `scripts`        | The shell scripts the NPM scripts and the workflows call    |
-| [`source/content/`](../../source/content/) | `content`        | Source of truth for articles, resume, and README            |
-| [`source/tooling/`](../../source/tooling/) | `tooling`        | The resume and README builders and their Docker image       |
-| [`source/website/`](../../source/website/) | `website`        | The Next.js application                                     |
-
-> [!note]
-> Read a scope's `CLAUDE.md` before editing anything inside it. A change that spans scopes takes no `<scope>`, the way a change to the root takes none.
-
 ## Writing Style
 
 Follow the styles strictly. Prompt the user if you find the following styles conflicting with the content you are writing:

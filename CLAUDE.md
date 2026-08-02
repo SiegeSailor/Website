@@ -6,19 +6,35 @@ Path-scoped conventions live in [`.claude/rules/`](./.claude/rules/); read the o
 
 ## Repository Layout
 
-The repository is an NPM workspace: the root `package.json` owns the version and the single `package-lock.json`; `source/website/` and `source/tooling/` are the 2 member workspaces, and `source/content/` is plain data shared by both. Beyond the scopes, `.github/` holds `workflows/`, one workflow per task, and `actions/`, the composite actions they share.
+The repository is one NPM workspace:
 
-The 3 authored folders are nested under `source/` so they stay adjacent in a file tree, and nothing else lives there. They also keep their sibling relationship: the website reaches `../content/`, and the tooling scripts reach `../../content/resume/`. Community health files follow GitHub standards at the root: `README.md`, `CONTRIBUTING.md`, `LICENSE-MIT.md` for code, and `LICENSE-CC-BY.md` for documents and articles.
+- [`/`](./): `package.json` owns the version and the only `package-lock.json`
+  - [`source/`](./source/)
+    - [`source/website/`](./source/website/): Member workspace
+    - [`source/tooling/`](./source/tooling/): Member workspace
+    - [`source/content`](./source/content/): Plain data shared by the two member workspaces
 
-`source/content/resume/` feeds 4 outputs, and each asks for itself by name in a `consumers:` list, so a section leaves a document without a builder edit. The consumers and the file map are in [`source/content/README.md`](./source/content/README.md).
+### Scopes
+
+Besides the workspaces and standard folders, e.g., `.github/` and `.husky/`, the project is modularized into scopes, and a scope's must-not-break rules live in its `CLAUDE.md`. Each is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
+
+| Scope                                  | Commit Scope     | Contents                                                    |
+| -------------------------------------- | ---------------- | ----------------------------------------------------------- |
+| [`/`](./)                              |                  | Shared setup, the rules, the skills, and the CI workflows   |
+| [`infrastructure/`](./infrastructure/) | `infrastructure` | The Terraform environment on AWS for static file deployment |
+| [`scripts/`](./scripts/)               | `scripts`        | The shell scripts the NPM scripts and the workflows call    |
+| [`source/content/`](./source/content/) | `content`        | Source of truth for articles, resume, and README            |
+| [`source/tooling/`](./source/tooling/) | `tooling`        | The resume and README builders and their Docker image       |
+| [`source/website/`](./source/website/) | `website`        | The Next.js application                                     |
+
+> [!note]
+> Read a scope's `CLAUDE.md` before editing anything inside it. A change that spans scopes takes no `<scope>`, the way a change to the root takes none.
 
 ## Rules That Hold Everywhere
 
-Each of these is stated in full where it is linked; none may be broken on the way to finishing something else.
+Each of these is stated in full where it is linked; none may be broken on the way to finishing something else:
 
-| Rule                                                                            | Stated In                                                            |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Change a verified fact in `source/content/resume/` only with Ken's confirmation | [`source/content/CLAUDE.md`](./source/content/CLAUDE.md)             |
-| Commit through the `commit` skill: one Conventional Commits line, no body       | [`.claude/skills/commit/SKILL.md`](./.claude/skills/commit/SKILL.md) |
-| Keep everything under `source/website/app/` statically exportable               | [`source/website/CLAUDE.md`](./source/website/CLAUDE.md)             |
-| Never apply Terraform without confirmation                                      | [`infrastructure/CLAUDE.md`](./infrastructure/CLAUDE.md)             |
+- [`source/content/CLAUDE.md`](./source/content/CLAUDE.md): Change a verified fact in `source/content/resume/` only with user's confirmation
+- [`.claude/skills/commit/SKILL.md`](./.claude/skills/commit/SKILL.md): Commit through the `commit` skill: one Conventional Commits line, no body
+- [`source/website/CLAUDE.md`](./source/website/CLAUDE.md): Keep everything under `source/website/app/` statically exportable
+- [`infrastructure/CLAUDE.md`](./infrastructure/CLAUDE.md): Never apply Terraform without confirmation
