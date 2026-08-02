@@ -1,6 +1,6 @@
 # Contributing to scripts
 
-Read the [root guide](../CONTRIBUTING.md) first; this covers only what is specific to the shell scripts. They follow the [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) and are checked by neither Prettier nor ESLint, so the shape below and the constraints in [`CLAUDE.md`](./CLAUDE.md) are the whole convention.
+Read the [root guide](../CONTRIBUTING.md) first; this covers only what is specific to the shell scripts. They follow the [Shell Style Guide](https://google.github.io/styleguide/shellguide.html), and nothing lints them, so the shape below and the constraints in [`CLAUDE.md`](./CLAUDE.md) are the whole convention.
 
 ## The Shape of a Script
 

@@ -1,6 +1,6 @@
 # scripts
 
-The shell scripts the NPM scripts and the workflows call. Each one does a single job that would be awkward as an NPM script: driving Docker, supervising parallel processes, or fanning out HTTP requests. Every name reads `<technology>-<action>.sh` — the action left off where the tool has only one — so the file says which tool it drives before it is opened.
+The shell scripts the NPM scripts and the workflows call. Each one does a single job that would be awkward as an NPM script: driving Docker, supervising parallel processes, or fanning out HTTP requests. Every name reads `<technology>-<action>.sh`, so the file says which tool it drives before it is opened — [`CONTRIBUTING.md`](./CONTRIBUTING.md#adding-a-script) owns that rule.
 
 | Script                                       | Does                                                                        | Called By                           |
 | -------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------- |
@@ -22,10 +22,6 @@ bash scripts/npm-parallel.sh <npm-script> [npm-script...]
 
 Defaults: `docker-copy.sh` writes to `source/tooling/export/resume` and builds `linux/amd64`; `cloudfront-warm.sh` targets `https://jinyu-zhang.com`.
 
-`cloudfront-warm.sh` takes its page list from the deployed `sitemap.xml` rather than from `source/content/`, so it warms what is actually live even when the working tree is ahead of it, and exits 1 unless every page returns 200.
+`cloudfront-warm.sh` exits 1 unless every page returns 200. `hadolint.sh` needs hadolint on the `PATH` and fails with an install pointer when it is missing, which is why the lint lives in a script rather than an NPM script: CI and a laptop run the same command.
 
-Building the image _is_ what generates the resume documents — the `resume` stage runs the builders — so `docker-copy.sh` always builds, though Docker layer caching makes an unchanged image a fast no-op. It also handles hosts where Docker needs elevation, escalating to `sudo` only when it can do so without an interactive password prompt.
-
-`hadolint.sh` needs hadolint on the `PATH` — a system binary, not a dependency — so it checks for it and fails with an install pointer. In CI it is the last step of [`.github/actions/verify`](../.github/actions/verify/action.yml), which puts a pinned version there first. That is why the lint lives in a script rather than an NPM script: CI and a laptop run the same command.
-
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the shape every script follows.
+See [`CLAUDE.md`](./CLAUDE.md#per-script-constraints) for the constraint each script carries and [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the shape every script follows.
