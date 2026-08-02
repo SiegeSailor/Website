@@ -55,8 +55,8 @@ So a workflow reads `Checkout` → `Setup workspace` → its own work, with `Ver
 A composite action runs inside the calling job, so none of these costs a second runner or a second `npm ci` — which a reusable `workflow_call` would. 3 consequences are worth knowing before editing one:
 
 - **`Checkout` Can Never Move into an Action**: The runner reads `action.yml` out of the checked-out repository, so a local action cannot run before it
-- **`verify` Installs Nothing, on Purpose**: `setup-workspace` owns the `node_modules` the deploy's own build needs, so removing or reordering the gates cannot break a later step
 - **Every `run` Step inside an Action Needs Its Own `shell: bash`**: A nested local action, the way `verify` calls `setup-hadolint`, is pathed from the repository root rather than from the action's folder
+- **`verify` Installs Nothing, on Purpose**: `setup-workspace` owns the `node_modules` the deploy's own build needs, so removing or reordering the gates cannot break a later step
 
 Actions are named the way GitHub's own are, `<action>-<technology>` (`setup-hadolint`, like `setup-node`), not the `<technology>-<action>` the [shell scripts](../../scripts/CONTRIBUTING.md) use. The hadolint version lives in that action's `version` input default and nowhere else in CI.
 

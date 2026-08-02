@@ -14,9 +14,9 @@ All authored content, shared by the 2 workspaces that render it. Nothing here is
 | Output                               | Consumers             |
 | ------------------------------------- | ---------------------- |
 | Every page's content and metadata    | `site`, `/`, `/about` |
-| The `SiegeSailor/SiegeSailor` README | `readme`              |
 | The latest release per project       | `versions`            |
 | The one-page PDF and DOCX resume     | `resume`              |
+| The `SiegeSailor/SiegeSailor` README | `readme`              |
 
 Nodes inside a file follow the same rule one level down — [`CONTRIBUTING.md`](./CONTRIBUTING.md#changing-what-appears-where) owns that shape, and the full file map is in [`resume/CLAUDE.md`](./resume/CLAUDE.md).
 

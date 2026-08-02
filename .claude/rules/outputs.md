@@ -13,5 +13,5 @@ Never edit one, and never commit one. All of these are git-ignored build output,
 | ----------------------------------------------- | ------------------------------------------------- | ---------------------------------------------- |
 | `source/content/resume/versions.generated.json` | `source/tooling/scripts/build-versions.mjs`       | `npm run build:versions`                       |
 | `source/tooling/export/`                        | The document builders                             | `npm run build:resume`, `npm run build:readme` |
-| `source/website/SiegeSailor-README.md`          | `scripts/docker-copy.sh`, copied out of the image | `bash scripts/docker-copy.sh`                  |
 | `source/website/export/`                        | `next build`                                      | `npm run build:website`                        |
+| `source/website/SiegeSailor-README.md`          | `scripts/docker-copy.sh`, copied out of the image | `bash scripts/docker-copy.sh`                  |

@@ -31,10 +31,10 @@ Because `npm run build` includes `build:resume`, a host that _does_ have LibreOf
 Hard-won; do not rediscover them.
 
 - **Import `js-yaml` as `import { load } from "js-yaml"`**: The default import fails under Node.js ESM
-- **LibreOffice Ignores the `docx` `PositionalTab`**: Right-aligned dates use classic paragraph `tabStops` (`TabStopType.RIGHT` at 10656 twips) plus a literal `"\t"` in the `TextRun`
-- **Typography Constants Sit at the Top of `build-resume.mjs`**: `SZ` (half-points; body 19 = 9.5 pt), `SPACE` (twips), line spacing 226, and page margins 600/792 twips — spacing was already tightened to keep Certifications on the page, so headroom is small
-- **On Linux, Calibri Is Absent**: Install `fonts-crosextra-carlito`, which is metric-compatible, or page breaks shift; the Docker `resume` stage does this
 - **Inspect Visually When Text Metrics Matter**: `pdftoppm -jpeg -r 80 source/tooling/export/resume/<file>.pdf /tmp/page`
+- **LibreOffice Ignores the `docx` `PositionalTab`**: Right-aligned dates use classic paragraph `tabStops` (`TabStopType.RIGHT` at 10656 twips) plus a literal `"\t"` in the `TextRun`
+- **On Linux, Calibri Is Absent**: Install `fonts-crosextra-carlito`, which is metric-compatible, or page breaks shift; the Docker `resume` stage does this
+- **Typography Constants Sit at the Top of `build-resume.mjs`**: `SZ` (half-points; body 19 = 9.5 pt), `SPACE` (twips), line spacing 226, and page margins 600/792 twips — spacing was already tightened to keep Certifications on the page, so headroom is small
 
 To fit one page, in order of preference: drop a bullet's `resume` consumer > tighten wording > merge skill groups > shave `SPACE` constants > reduce font size, as a last resort, but never below 9.5 pt body.
 
