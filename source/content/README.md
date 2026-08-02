@@ -18,12 +18,8 @@ All authored content, shared by the 2 workspaces that render it. Nothing here is
 | The latest release per project       | `versions`            |
 | The one-page PDF and DOCX resume     | `resume`              |
 
-Nodes inside a file follow the same rule one level down: a node with no `consumers` inherits the file's, and `consumers: []` archives it — verified material kept in the source and printed nowhere. The full file map is in [`resume/CLAUDE.md`](./resume/CLAUDE.md).
+Nodes inside a file follow the same rule one level down — [`CONTRIBUTING.md`](./CONTRIBUTING.md#changing-what-appears-where) owns that shape, and the full file map is in [`resume/CLAUDE.md`](./resume/CLAUDE.md).
 
-`articles/` is plainer: `../website/helpers/server/article.ts` reads the folder from disk, and the front matter in each file drives the article list, the feed, and the article page. Images live with the website, in `../website/public/images/<YYYY-MM-DD>/`, because Next.js serves them.
+`articles/` is plainer: `../website/helpers/server/article.ts` reads the folder from disk, and the front matter in each file drives the article list, the feed, and the article page. Images live with the website, because Next.js serves them — [`../website/README.md`](../website/README.md#structure) gives the path.
 
-## Not Formatted
-
-This whole folder is excluded from Prettier. It is hand-tuned prose and data, and reflowing it changes the rendered documents. `resume/versions.generated.json` is build output and git-ignored — never edit or commit it.
-
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the edit-and-rebuild loop.
+See [`CLAUDE.md`](./CLAUDE.md#constraints-that-must-never-break) for why nothing here is reformatted and [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the edit-and-rebuild loop.

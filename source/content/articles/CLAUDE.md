@@ -20,7 +20,7 @@ Half professional, half conversational, with the occasional international softwa
 - Check `getArticleByFilename` in `../../website/helpers/server/article.ts` for the required fields
 - No symbols in `title`
 - Reuse an existing category from the neighboring articles where one fits (case-sensitive)
-- Check `../../website/settings/icons.ts` for existing technology names and spelling (case-sensitive). To add one, map an icon from `@icons-pack/react-simple-icons` in `TECHNOLOGY_TO_ICON`; if the technology has none, re-export a generic `lucide-react` icon in `LUCIDE_ICON` and map that
+- Check `../../website/settings/icons.ts` for existing technology names and spelling (case-sensitive); [`../../website/CONTRIBUTING.md`](../../website/CONTRIBUTING.md#adding-an-icon) owns how to add one
 
 ## Structure
 
