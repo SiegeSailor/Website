@@ -12,8 +12,8 @@ The one that is silent when broken: the page-count check exits 0 when LibreOffic
 
 ## Constraints That Must Never Break
 
-- **Never Filter Content**: A builder loads its consumer and renders what it gets, and a section is absent because the content says so — section **order** is the one deliberate exception and stays in code, because it is ATS-sensitive and drives the one-page fit
 - **Never Emit a Literal `•`**: Bullets come from the numbering config as native Word bullets, and nothing may add a table, a text box, or a header or footer — dates are right-aligned with tab stops, not spaces, and the `.docx` is the primary deliverable while the PDF is a convenience
+- **Never Filter Content**: A builder loads its consumer and renders what it gets, and a section is absent because the content says so — section **order** is the one deliberate exception and stays in code, because it is ATS-sensitive and drives the one-page fit
 - **Never Stamp a Version from Anywhere but the Root `package.json`**: Semantic Release owns it
 
 ## The 2 Loaders Are Twins
