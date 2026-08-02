@@ -40,7 +40,7 @@ aws s3 sync ../source/website/export "s3://$(terraform output -raw site_bucket_n
 aws cloudfront create-invalidation --distribution-id "$(terraform output -raw cloudfront_distribution_id)" --paths "/*")
 ```
 
-An invalidation empties the edge caches, so the first visitor to each page pays for a full origin fetch. [`cloudfront-warm.sh`](../scripts/README.md) requests every page in the deployed sitemap afterwards to absorb that.
+An invalidation empties the edge caches, so the first visitor to each page pays for a full origin fetch. Running `cloudfront-warm.sh` afterwards absorbs that — [`scripts/README.md`](../scripts/README.md) says what it does and how to run it.
 
 ## Adding a Resource
 
