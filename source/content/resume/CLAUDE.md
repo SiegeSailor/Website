@@ -53,7 +53,7 @@ Nesting applies — a company is printed only if it is not archived, and so is e
 | Resume document (`source/tooling/scripts/build-resume.mjs`) | `resume`, rendering what it gets without filtering                                                                                                                                                  |
 | Website (`source/website/helpers/server/content.ts`)        | One consumer per surface — `getSite()`, `getHome()`, `getAbout()` — globbing this folder through webpack `require.context`, so a new file needs no code change and the dev server still hot-reloads |
 
-The 2 loaders are hand-kept twins — see [`../../tooling/CONTRIBUTING.md`](../../tooling/CONTRIBUTING.md#the-2-loaders-are-twins).
+The 2 loaders are hand-kept twins — see [`../../tooling/CLAUDE.md`](../../tooling/CLAUDE.md#the-2-loaders-are-twins).
 
 ## Constraints That Must Never Break
 

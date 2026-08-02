@@ -1,6 +1,6 @@
 # Contributing to source/tooling
 
-Read the [root guide](../../CONTRIBUTING.md) first for setup, and [`.claude/rules/npm-script.md`](../../.claude/rules/npm-script.md) for the full command list. Everything here runs from the repository root.
+Read the [root guide](../../CONTRIBUTING.md) first for setup. Everything here runs from the repository root.
 
 ## Building
 
@@ -23,21 +23,8 @@ bash scripts/hadolint.sh   # lint the Dockerfile
 
 Because `npm run build` includes `build:resume`, a host that _does_ have LibreOffice and poppler runs the page-count check on every site build, against a version this repository does not pin. When a local build disagrees, build through Docker to settle whether the overflow is real.
 
-## What a Builder Must Not Do
-
-- **Never Filter Content**: A builder loads its consumer and renders what it gets, and a section is absent because the content says so — section **order** is the one deliberate exception and stays in code, because it is ATS-sensitive and drives the one-page fit
-- **Never Emit a Literal `•`**: Bullets come from the numbering config as native Word bullets, and nothing may add a table, a text box, or a header or footer — dates are right-aligned with tab stops, not spaces, and the `.docx` is the primary deliverable while the PDF is a convenience
-- **Never Stamp a Version from Anywhere but the Root `package.json`**: semantic-release owns it
-
-The resume constraints these serve are documented in [`../content/resume/CLAUDE.md`](../content/resume/CLAUDE.md).
-
-## The 2 Loaders Are Twins
-
-`scripts/load-content.mjs` and `../website/helpers/server/content.ts` are the same ~50 lines written twice, deliberately: the website cannot import this workspace, pinned to `js-yaml` and `docx` to keep the image at ~22 packages, and it needs webpack to own the files for dev hot-reload.
-
-**Change one and change the other in the same commit.** They must agree on what `consumers:` means and that a file without it is rejected, that a file carries exactly one content key and a key claimed twice is a build failure, and that a node inheriting silence is printed while `consumers: []` is archived.
-
-A divergence does not fail a build. It quietly gives the resume different content from the website, which is the failure the structure exists to prevent.
+> [!important]
+> [`CLAUDE.md`](./CLAUDE.md) states what a builder must never do and why the 2 loaders are hand-kept twins. The resume constraints they serve are in [`../content/resume/CLAUDE.md`](../content/resume/CLAUDE.md).
 
 ## Resume Layout Notes
 

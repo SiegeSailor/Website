@@ -1,12 +1,9 @@
 # Contributing to source/website
 
-Read the [root guide](../../CONTRIBUTING.md) first — setup, the scopes, and the commit convention are there, and it names the rule that owns each of the commands, the conventions, the quality checks, and the workflows. Run everything from the repository root; `npm run watch:website` starts the dev server on its own, and `npm run build:website` produces the static export. Check `package.json` for exact dependency versions and use the matching APIs.
+Read the [root guide](../../CONTRIBUTING.md) first for setup. Run everything from the repository root; `npm run watch:website` starts the dev server on its own, and `npm run build:website` produces the static export. Check `package.json` for exact dependency versions and use the matching APIs.
 
-## Staying Statically Exportable
-
-Everything under `app/` must survive `output: "export"`: no Server Actions, no API routes, no request-time rendering, and route handlers must be static (see `feed.xml`). The whole deployment is an export synced to S3, so a dynamic route does not fail loudly — it silently stops being deployable.
-
-Folders and files are kebab-case, except `components/*`, which are PascalCase.
+> [!important]
+> [`CLAUDE.md`](./CLAUDE.md) states the 2 constraints this workspace cannot break: everything under `app/` stays statically exportable, and `content.ts` stays server-only.
 
 ## Working with Content
 
@@ -17,10 +14,7 @@ No page hard-codes a name, tagline, title, or link. Text comes from [`../content
 
 What deliberately stays in code: route **paths** (they are typed routing, unlike route titles), UI microcopy such as nav and button labels, the search placeholder, and the callout and error-page copy, plus `TECHNOLOGY_TO_ICON` and `MEDIA_TO_ICON`, which import React components.
 
-> [!important]
-> `content.ts` is server-only. `require.context` inlines every file in `../content/resume/`, so importing it from a client component ships `contact.yaml` — a phone number and a postal area — to the browser. Pass content down from a server parent instead. `app/global-error.tsx` is the one document that cannot use it, because it must be a client component; it carries a literal title.
-
-`content.ts` is also a hand-kept twin of [`../tooling/scripts/load-content.mjs`](../tooling/CONTRIBUTING.md#the-2-loaders-are-twins); changing one means changing the other.
+`content.ts` is also a hand-kept twin of [`../tooling/scripts/load-content.mjs`](../tooling/CLAUDE.md#the-2-loaders-are-twins); changing one means changing the other.
 
 ## Adding a Page
 

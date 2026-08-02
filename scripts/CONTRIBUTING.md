@@ -1,6 +1,6 @@
 # Contributing to scripts
 
-Read the [root guide](../CONTRIBUTING.md) first; this covers only what is specific to the shell scripts. They follow the [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) and are checked by neither Prettier nor ESLint, so the shape below is the whole convention.
+Read the [root guide](../CONTRIBUTING.md) first; this covers only what is specific to the shell scripts. They follow the [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) and are checked by neither Prettier nor ESLint, so the shape below and the constraints in [`CLAUDE.md`](./CLAUDE.md) are the whole convention.
 
 ## The Shape of a Script
 
@@ -41,12 +41,13 @@ main "$@"
 
 - **Declare with `readonly` and `local -r`**: Wherever the value does not change, and quote every expansion
 - **Give Every Function the Block Comment**: With `Globals`, `Arguments`, `Outputs`, and `Returns` sections where they apply, and a file header saying what the script does and which constraint the code cannot show
-- **Guard the Working Directory First**: Test for a file or folder that only exists at the root, and fail with `[ERROR]` on stderr and exit 1 — never make a script work from its own directory instead, because the NPM scripts, the Docker context, and the workflows all assume the root
 - **Log with the Color Constants**: Use the `[INFO]`, `[WARNING]`, `[ERROR]`, and `[DONE]` prefixes, and send errors and warnings to stderr
-- **Never Prompt**: These run unattended in CI, so anything that could block — a `sudo` password, a confirmation — must be detected and fail loudly instead
 - **One Job per Script**: Driven by a `main` that takes positional arguments with `"${1:-default}"` defaults and ends with `main "$@"`
 - **Set `-o errexit` at the Top**: And `set -o monitor` only where the script supervises long-lived children
 - **Take No New Dependencies**: Beyond `bash`, `curl`, `git`, and the tool the script exists to drive
+
+> [!important]
+> [`CLAUDE.md`](./CLAUDE.md) states the 2 rules a script may never break — guard the working directory first, and never prompt — and the constraints each individual script carries.
 
 ## Adding a Script
 
@@ -58,14 +59,6 @@ Name it `<technology>-<action>.sh` — the tool it drives, then what it does to 
 - **Never Lead with the Action**: `warm-up-cloudfront-cache.sh` sorts away from its siblings and hides how many scripts already drive the same tool
 
 A new script that a developer runs must appear in [`README.md`](./README.md); one an NPM script calls must also be wired into the root `package.json`. Renaming or removing one means tracing every caller first — the root `package.json`, [`release.config.mjs`](../release.config.mjs), [`.github/workflows/`](../.github/workflows/), and the documents that link it. Being documented is not being used: delete a script nothing calls.
-
-## Per-Script Constraints
-
-- **`cloudfront-warm.sh` Reads the Deployed `sitemap.xml`**: Not `source/content/`, so it warms what is actually live even when the working tree is ahead of it
-- **`docker-copy.sh` Cannot Skip the Build**: Building the image _is_ what generates the artifacts it copies, and layer caching already makes an unchanged image cheap
-- **`docker-copy.sh` Must Never Prompt for a Password**: It escalates to `sudo` only when non-interactive `sudo` works or a TTY is attached, and CI relies on it failing loudly instead of hanging
-- **`hadolint.sh` Runs in CI**: As the last step of [`.github/actions/verify`](../.github/actions/verify/action.yml), which puts the pinned hadolint on the `PATH` first — the `version` input of [`setup-hadolint`](../.github/actions/setup-hadolint/action.yml) is the only place that version lives in CI, so bumping it means bumping the prerequisites table with it
-- **`npm-parallel.sh` Traps Every Signal That Ends It**: SIGHUP included, because job control puts the children in their own process groups and the trap becomes the only path that stops them — do not simplify it to a bare `trap ... INT TERM`
 
 ## Checking a Change
 

@@ -2,6 +2,9 @@
 
 Read the [root guide](../CONTRIBUTING.md) first — it lists the required Terraform, TFLint, and AWS CLI versions. Everything here runs from `infrastructure/`, unlike the rest of the repository.
 
+> [!important]
+> [`CLAUDE.md`](./CLAUDE.md) states what must never break here, starting with the one that costs money: no `apply`, no `destroy`, and no mutating `aws` command without explicit confirmation.
+
 ## Credentials
 
 Create an access key under [IAM / Security Credentials](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials/access-key-wizard) and store it with `aws configure`; Terraform picks it up automatically for the `aws` provider.
@@ -45,12 +48,3 @@ An invalidation empties the edge caches, so the first visitor to each page pays 
 - **Build the Name from `locals`**: Never write `siegesailor-website-production-…` into a resource
 - **Move Rather Than Recreate**: Renaming a resource means adding a `moved` block, and the existing ones are there because addresses changed and the state must follow
 - **Prefer a Well-Known Module**: A `terraform-aws-modules/*` module with a `~>` pin, as the existing S3, ACM, and CloudFront resources do
-
-## Gotchas
-
-- **Both Buckets Set `force_destroy = true`**: A `terraform destroy` takes the site and the state with it, so treat the destroy path as unavailable
-- **ACM for CloudFront Must Live in `us-east-1`**: Whatever `aws_region` says, which is why the `acm` module pins its own region
-- **Editing the Routing Function Changes Every Route**: It is inline `cloudfront-js-2.0` in `content-delivery-network.tf`, so test a path with and without a trailing slash, a nested path, and a real file extension before applying
-- **State Is Remote and Shared**: Never commit `*.tfstate`, `*.tfvars`, or `.terraform/`, and never repoint the backend to try something out
-- **The Cache Policy Is `create_before_destroy`**: The distribution references it, so a replacement has to exist before the old one can be detached
-- **The Hosted Zone Is Not Managed Here**: `jinyu-zhang.com` was purchased through Route 53 by hand and is read with a `data` block, so destroying this environment leaves the domain alone

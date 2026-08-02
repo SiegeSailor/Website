@@ -26,7 +26,7 @@ If a fact belongs to multiple documents, we should move it to `.claude/rules/*.m
 
 ### Scopes
 
-The project is modularized into scopes. Each carries the 3 documents above, is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
+The project is modularized into scopes, and a scope's must-not-break rules live in its `CLAUDE.md`. Each is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
 
 | Scope                                      | Commit Scope     | Contents                                                    |
 | ------------------------------------------ | ---------------- | ----------------------------------------------------------- |

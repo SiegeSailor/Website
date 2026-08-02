@@ -28,10 +28,6 @@ The repository is one NPM workspace:
 > [!note]
 > Node.js and NPM are pinned in [`.nvmrc`](./.nvmrc), required by every `engines` field, read by CI, and matched by the Docker image. Run `nvm install` after pulling a change to `.nvmrc`.
 
-### Scopes
-
-The project is modularized into scopes, each with its own documents. [`.claude/rules/documentation.md`](./.claude/rules/documentation.md#scopes) lists them and what each holds.
-
 ## Getting Started
 
 A single `npm ci` installs both workspaces from the root lockfile and, through the `prepare` script, the Husky hook:
