@@ -2,7 +2,7 @@
 
 Shell scripts called by the NPM scripts and the workflows.
 
-- [`CONTRIBUTING.md`](./CONTRIBUTING.md) — **read before editing a script**; neither Prettier nor ESLint touches shell, so that document is the whole review: the skeleton, the shape, when a script should exist, and how to check a change
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md) — **read before editing a script**; it owns the skeleton, the shape, when a script should exist, and how to check a change
 - [`README.md`](./README.md) — what each script does and how to run it
 
 ## Constraints That Must Never Break
