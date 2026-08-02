@@ -60,4 +60,4 @@ The 2 loaders are hand-kept twins — see [`../../tooling/CLAUDE.md`](../../tool
 1. **The resume must fit one US-Letter page** — spacing is already tight, so expect overflow when un-archiving content, and [`../../tooling/CONTRIBUTING.md`](../../tooling/CONTRIBUTING.md#resume-layout-notes) owns both how the page-count check behaves and the ladder for fitting content back
 2. **Keep the resume ATS-safe** — single column; no tables, text boxes, or headers and footers; the standard section names (Summary, Skills, Work Experience, Education, Certifications)
 3. **Never re-flatten stacked role lines** (CooperSurgical, Servicetech) into a single title and date range — background-check vendors verify titles and dates, and the stacked history is deliberate and factual; Servicetech's 2016–2017 internship row is in the source but archived, so un-archive it rather than widening the 2017–2018 range if it is ever needed
-4. **The facts here are verified** — see [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
+4. **The facts here are verified** — see [`../CLAUDE.md`](../CLAUDE.md#constraints-that-must-never-break)
