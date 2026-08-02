@@ -1,6 +1,6 @@
 # Contributing to source/website
 
-Read the [root guide](../../CONTRIBUTING.md) first for setup. Run everything from the repository root; `npm run watch:website` starts the dev server on its own, and `npm run build:website` produces the static export. Check `package.json` for exact dependency versions and use the matching APIs.
+Read the [root guide](../../CONTRIBUTING.md) first for setup and for where commands run. Check `package.json` for exact dependency versions and use the matching APIs.
 
 > [!important]
 > [`CLAUDE.md`](./CLAUDE.md) states the 2 constraints this workspace cannot break: everything under `app/` stays statically exportable, and `content.ts` stays server-only.
@@ -9,7 +9,7 @@ Read the [root guide](../../CONTRIBUTING.md) first for setup. Run everything fro
 
 No page hard-codes a name, tagline, title, or link. Text comes from [`../content/`](../content/CONTRIBUTING.md) and reaches the app 2 ways:
 
-- **`helpers/server/article.ts`**: Reads `../content/articles/` from disk and documents the front-matter fields, while the article images stay in `public/images/<YYYY-MM-DD>/` because Next.js serves them
+- **`helpers/server/article.ts`**: Reads `../content/articles/` from disk and documents the front-matter fields, while the article images stay with the website because Next.js serves them — [`README.md`](./README.md#structure) gives the path
 - **`helpers/server/content.ts`**: Globs `../content/resume/` with webpack `require.context` and parses each file as raw text, so adding, renaming, or deleting a YAML file needs no code change — each surface asks for its own consumer name, `getSite()` for the header, footer, and every `<head>`, `getHome()` for the home hero, and `getAbout()` for `/about`, and a page that needs a new key adds it to the right accessor
 
 What deliberately stays in code: route **paths** (they are typed routing, unlike route titles), UI microcopy such as nav and button labels, the search placeholder, and the callout and error-page copy, plus `TECHNOLOGY_TO_ICON` and `MEDIA_TO_ICON`, which import React components.
