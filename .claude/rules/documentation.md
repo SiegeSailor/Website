@@ -8,16 +8,16 @@ paths:
 
 # Writing Documentation
 
-| Document              | Audience | Purpose                             |
-| --------------------- | -------- | ----------------------------------- |
-| `.claude/rules/*.md`  | Agent    | What are the relevant rules?        |
-| `.claude/skills/*.md` | Agent    | What can I reuse deterministically? |
-| `**/CLAUDE.md`        | Agent    | What must I follow for this scope?  |
-| `**/CONTRIBUTING.md`  | Human    | How do I work on this scope?        |
-| `**/README.md`        | Human    | What is the scope about?            |
-| `CLAUDE.md`           | Agent    | What must I follow?                 |
-| `CONTRIBUTING.md`     | Human    | How do I contribute?                |
-| `README.md`           | Human    | What is this?                       |
+| Document                 | Audience | Purpose                             |
+| ------------------------ | -------- | ----------------------------------- |
+| `.claude/rules/*.md`     | Agent    | What are the relevant rules?        |
+| `.claude/skills/**/*.md` | Agent    | What can I reuse deterministically? |
+| `**/CLAUDE.md`           | Agent    | What must I follow for this scope?  |
+| `**/CONTRIBUTING.md`     | Human    | How do I work on this scope?        |
+| `**/README.md`           | Human    | What is the scope about?            |
+| `CLAUDE.md`              | Agent    | What must I follow?                 |
+| `CONTRIBUTING.md`        | Human    | How do I contribute?                |
+| `README.md`              | Human    | What is this?                       |
 
 > [!important]
 > When an agent is about to edit, it can ignore documents that target humans, but still needs to edit the document in a human-readable way. An agent only needs to read and update the documents that target humans when a content is about the human-readable content itself (see **Purpose** above).
