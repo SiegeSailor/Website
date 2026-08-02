@@ -6,7 +6,7 @@ paths:
 
 # Editing a Package Manifest
 
-`build` and `watch` are aggregates written out by hand — NPM does not expand script globs — so a variant missing from its aggregate never runs, and nothing reports it. Version fields belong to Semantic Release; never bump one by hand.
+`build` and `watch` are aggregates written out by hand. NPM does not expand script globs, so a variant missing from its aggregate never runs, and nothing reports it. Version fields belong to Semantic Release; never bump one by hand.
 
 ## Commands
 
@@ -30,7 +30,7 @@ The shell scripts are documented in [`scripts/README.md`](../../scripts/README.m
 
 ## Adding a Command
 
-A new `build:<name>` or `watch:<name>` touches 4 places, and one missed step is silent — an unlisted variant simply never runs:
+A new `build:<name>` or `watch:<name>` touches 4 places, and one missed step is silent. An unlisted variant simply never runs:
 
 1. The workspace `package.json`, where the script actually runs
 2. The root `package.json`, delegating with `npm run <script> --workspace source/<workspace>`, because root scripts delegate and never implement
