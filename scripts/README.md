@@ -5,7 +5,7 @@ The shell scripts the NPM scripts and the workflows call. Each one does a single
 | Script                                       | Does                                                                        | Called By                           |
 | -------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------- |
 | [`cloudfront-warm.sh`](./cloudfront-warm.sh) | Requests every page in the deployed sitemap so CloudFront caches it again   | By hand                             |
-| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and the README out | `main-deploy.yml`, semantic-release |
+| [`docker-copy.sh`](./docker-copy.sh)         | Builds the tooling image and copies the resume documents and the README out | `main-deploy.yml`, Semantic Release |
 | [`hadolint.sh`](./hadolint.sh)               | Runs hadolint on `source/tooling/Dockerfile`                                | The `verify` action                 |
 | [`npm-parallel.sh`](./npm-parallel.sh)       | Runs several root NPM scripts at once in one terminal                       | `npm run watch`                     |
 
