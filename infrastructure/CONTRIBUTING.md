@@ -1,6 +1,6 @@
 # Contributing to infrastructure
 
-Read the [root guide](../CONTRIBUTING.md) first — it lists the required Terraform, TFLint, and AWS CLI versions. Everything here runs from `infrastructure/`, unlike the rest of the repository.
+Read the [root guide](../CONTRIBUTING.md) first — it lists the required Terraform, TFLint, and AWS CLI versions. The Terraform commands run from `infrastructure/`, unlike the rest of the repository.
 
 > [!important]
 > [`CLAUDE.md`](./CLAUDE.md) states what must never break here, starting with the one that costs money: no `apply`, no `destroy`, and no mutating `aws` command without explicit confirmation.
