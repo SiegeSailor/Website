@@ -42,7 +42,7 @@ ci: split workflows by task and rename them by trigger
 > [!important]
 > A major version is a human's call. Prompt before wiring the `!`.
 
-### Before Committing
+## Before Committing
 
 - **Let the Hook Run**: A failure means fixing the code, not passing `--no-verify`
 - **Stage Deliberately**: `git add -A` sweeps in unrelated work, so read `git status` first and never stage generated output

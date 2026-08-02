@@ -10,7 +10,7 @@
 > [!important]
 > Versions are bumped by Semantic Release automatically in [`main-release.yml`](./.github/workflows/main-release.yml).
 
-### Prerequisites
+## Prerequisites
 
 | Tool                                                   | Version   | Needed For                         |
 | ------------------------------------------------------ | --------- | ---------------------------------- |
