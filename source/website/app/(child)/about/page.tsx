@@ -26,7 +26,6 @@ export default async function () {
     { identity },
   ] = await Promise.all([getAbout(), getSite()]);
 
-  const lead = profile.intro.split("\n\n")[0];
   const shown = projects
     .filter((project) => project.stage !== "Planning")
     .sort((left, right) => STAGE_ORDER[left.stage] - STAGE_ORDER[right.stage]);
@@ -58,14 +57,7 @@ export default async function () {
         <span>{experienceYears} experience</span>
       </div>
 
-      <p className="mb-9 leading-relaxed">{lead}</p>
-
-      {summary && (
-        <section className="mb-9">
-          <Eyebrow>{headings.summary}</Eyebrow>
-          <p className="leading-relaxed text-foreground">{summary}</p>
-        </section>
-      )}
+      {summary && <p className="mb-9 leading-relaxed">{summary}</p>}
 
       {shown.length > 0 && (
         <section className="mb-9">
