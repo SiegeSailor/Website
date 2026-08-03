@@ -9,15 +9,16 @@ consumers:
 profile:
   picture: /images/Jin-Yu-Zhang.jpg
   headlines:
-    - "Full-Stack Development"
-    - "DevOps"
-    - "Cloud-Based Web Microservices"
+    - "Distributed Systems"
+    - "Platform Engineering"
+    - "Backend Architecture"
   status:
     location: "NYC Metropolitan Area"
     position: "Senior Software Engineer"
   # Home page (jinyu-zhang.com) hero: `tagline` completes the "<position> at
   # <company> — " headline; `intro` is the paragraph beneath it.
-  tagline: "DevOps & full-stack, from cloud microservices to FDA-regulated medical devices."
+  tagline: "Distributed systems and developer platforms, from 10,000 RPS consumer scale to FDA-regulated devices."
   intro: >-
-    I build scalable, maintainable systems and write up what I learn along the
-    way — CI/CD, containers, embedded WebKit, and the occasional debugging saga.
+    I build systems where the interface between components is the hard part.
+    That means device clients over gRPC, services that hold up under load, and
+    the CI/CD that keeps them shippable. I write up what I learn along the way.
