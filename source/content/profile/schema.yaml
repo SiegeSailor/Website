@@ -1,0 +1,516 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+#
+# Proposed shape for source/content/profile/, the replacement for
+# source/content/resume/. This file is a demonstration, not the final field set:
+# every construct below is here to show how a kind of data is declared and what
+# metadata a consumer can rely on. Delete what the real sections do not need.
+#
+# Two halves:
+#   1. `properties` — the document envelope every profile file carries
+#   2. `$defs` — the reusable vocabulary, referenced with `$ref`
+#
+# An authored file opts into editor type hints with a first-line modeline:
+#   # yaml-language-server: $schema=./schema.yaml
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://jinyu-zhang.com/schema/profile.yaml"
+
+title: Profile Document
+description: >-
+  One authored file in source/content/profile/. A file declares who reads it,
+  what it is called where it is printed, and a single list of entries.
+
+type: object
+required:
+  - consumers
+  - entries
+# Rejects a typo'd key instead of silently dropping the section it meant.
+additionalProperties: false
+
+properties:
+  # ─────────────────────────── Document envelope ───────────────────────────
+  # Metadata about the file itself. Everything here is consumed by a loader or
+  # a builder, never printed as prose.
+
+  version:
+    description: Schema generation this file was authored against.
+    # `const` pins a value exactly — a bumped schema fails every stale file.
+    const: 2
+
+  consumers:
+    $ref: "#/$defs/consumers"
+
+  heading:
+    description: Section title where the entries are printed.
+    type: string
+    minLength: 1
+    maxLength: 40
+    examples:
+      - Work Experience
+      - Certifications
+
+  order:
+    description: >-
+      Sort weight among sections within a consumer. Lower prints first; ties
+      fall back to filename order.
+    type: integer
+    minimum: 0
+    maximum: 999
+    default: 500
+
+  archived:
+    $ref: "#/$defs/archived"
+
+  visibility:
+    $ref: "#/$defs/visibility"
+
+  variants:
+    description: >-
+      Resume variants this file belongs to. Absent means every variant.
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      enum:
+        - academic
+        - professional
+
+  verification:
+    $ref: "#/$defs/verification"
+
+  updated:
+    description: Last authored edit, for staleness reporting.
+    $ref: "#/$defs/date"
+
+  # ──────────────────────────────── Payload ────────────────────────────────
+
+  entries:
+    description: The file's content. One shape per file, always a list.
+    type: array
+    minItems: 1
+    items:
+      $ref: "#/$defs/entry"
+
+$defs:
+  # ──────────────────────── Scalars and constrained strings ────────────────
+
+  consumers:
+    description: >-
+      Outputs entitled to read this file. A consumer asks for its own name and
+      gets nothing it did not declare.
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      enum:
+        - "/"
+        - "/about"
+        - readme
+        - resume
+        - site
+        - versions
+
+  archived:
+    description: >-
+      Verified material held in the source and printed nowhere. Applies to the
+      node it sits on and everything nested under it.
+    type: boolean
+    default: false
+
+  visibility:
+    description: >-
+      How far a node may travel. `document` never reaches a public page — the
+      phone number and postal area belong to the resume file only.
+    enum:
+      - public
+      - document
+      - private
+    default: public
+
+  slug:
+    description: Stable identifier for cross-file references and anchors.
+    type: string
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+    examples:
+      - coopersurgical
+      - boston-university
+
+  date:
+    description: Full calendar date.
+    type: string
+    # `format` needs ajv-formats to be enforced; the pattern holds on its own.
+    format: date
+    # Single-quoted: a double-quoted YAML scalar rejects the `\d` escape.
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+    examples:
+      - "2025-06-01"
+
+  month:
+    description: >-
+      Month precision, which is all a resume ever prints. Quote it — bare
+      2025-06 is a YAML date and shifts by timezone on parse.
+    type: string
+    pattern: '^\d{4}-(0[1-9]|1[0-2])$'
+    examples:
+      - "2025-06"
+
+  url:
+    type: string
+    format: uri
+    pattern: "^https://"
+
+  email:
+    type: string
+    format: email
+
+  markdown:
+    description: >-
+      Inline Markdown. Renderers accept emphasis, code spans, and links;
+      block-level syntax is not supported.
+    type: string
+    minLength: 1
+    # A budget, not a style rule: the resume must fit one US-Letter page.
+    maxLength: 320
+
+  measurement:
+    description: A claimed number, kept machine-readable so it can be checked.
+    type: object
+    required:
+      - value
+    additionalProperties: false
+    properties:
+      value:
+        type: number
+        minimum: 0
+      unit:
+        # A nullable field: absent and explicitly null are both allowed.
+        type:
+          - string
+          - "null"
+        examples:
+          - "%"
+          - RPS
+      approximate:
+        type: boolean
+        default: false
+
+  change:
+    description: >-
+      A before-and-after pair. Positional, so `prefixItems` types each slot and
+      `items: false` closes the list at 2.
+    type: array
+    minItems: 2
+    maxItems: 2
+    prefixItems:
+      - title: Before
+        type: number
+      - title: After
+        type: number
+    items: false
+
+  # ──────────────────────── Composed objects ───────────────────────────────
+
+  interval:
+    description: >-
+      A date range. `ongoing: true` replaces `end` — an entry may state one or
+      the other, never both.
+    type: object
+    required:
+      - start
+    additionalProperties: false
+    properties:
+      start:
+        $ref: "#/$defs/month"
+      end:
+        $ref: "#/$defs/month"
+      ongoing:
+        type: boolean
+        default: false
+    # `if`/`then` expresses the mutual exclusion `required` cannot.
+    if:
+      properties:
+        ongoing:
+          const: true
+      required:
+        - ongoing
+    then:
+      not:
+        required:
+          - end
+    else:
+      required:
+        - end
+
+  verification:
+    description: >-
+      Provenance for facts a background-check vendor effectively reads. Naming
+      the source is what makes a later edit reviewable.
+    type: object
+    required:
+      - checked
+    additionalProperties: false
+    properties:
+      checked:
+        $ref: "#/$defs/date"
+      by:
+        type: string
+      source:
+        description: Where the fact was read from.
+        # `anyOf`, not `oneOf`: the branches overlap — a URL also satisfies the
+        # free-text one — and `oneOf` would reject every value that matches both.
+        anyOf:
+          - $ref: "#/$defs/url"
+          - type: string
+            minLength: 4
+    # Both keys must appear together or neither may.
+    dependentRequired:
+      by:
+        - source
+
+  organization:
+    type: object
+    required:
+      - name
+    additionalProperties: false
+    properties:
+      id:
+        $ref: "#/$defs/slug"
+      name:
+        type: string
+        minLength: 1
+      website:
+        $ref: "#/$defs/url"
+      industry:
+        enum:
+          - Art Service
+          - E-Commerce
+          - Gaming
+          - Medical Device
+      locations:
+        description: >-
+          Every location the engagement touched, most recent first. The first
+          is the primary one.
+        type: array
+        minItems: 1
+        items:
+          $ref: "#/$defs/location"
+
+  location:
+    type: object
+    required:
+      - region
+    additionalProperties: false
+    properties:
+      city:
+        type: string
+      region:
+        description: State, province, or equivalent.
+        type: string
+      country:
+        description: ISO 3166-1 alpha-2.
+        type: string
+        pattern: "^[A-Z]{2}$"
+
+  bullet:
+    description: >-
+      A printed line. The string shorthand is the common case; the object form
+      is what a line needs once it carries metadata.
+    # `oneOf` on the whole node gives a shorthand and a long form.
+    oneOf:
+      - $ref: "#/$defs/markdown"
+      - type: object
+        required:
+          - text
+        additionalProperties: false
+        properties:
+          text:
+            $ref: "#/$defs/markdown"
+          archived:
+            $ref: "#/$defs/archived"
+          visibility:
+            $ref: "#/$defs/visibility"
+          # A map with typed values: keys are author-chosen, values are not.
+          metrics:
+            type: object
+            propertyNames:
+              $ref: "#/$defs/slug"
+            additionalProperties:
+              $ref: "#/$defs/measurement"
+          change:
+            $ref: "#/$defs/change"
+          note:
+            description: >-
+              Why the line is worded the way it is. Never printed — this is the
+              comment a consumer cannot strip.
+            type: string
+
+  role:
+    type: object
+    required:
+      - title
+      - interval
+    additionalProperties: false
+    properties:
+      title:
+        type: string
+        minLength: 1
+      interval:
+        $ref: "#/$defs/interval"
+      location:
+        $ref: "#/$defs/location"
+      employment:
+        enum:
+          - contract
+          - full-time
+          - internship
+      archived:
+        $ref: "#/$defs/archived"
+
+  # ──────────────────────── The entry itself ───────────────────────────────
+
+  entry:
+    description: >-
+      One node in a section. `kind` selects which of the optional groups below
+      apply, so a single schema covers experience, education, and projects.
+    type: object
+    required:
+      - kind
+      - label
+    # `allOf` composition means `additionalProperties` cannot see the branch
+    # keys; `unevaluatedProperties` is the keyword that can.
+    unevaluatedProperties: false
+
+    properties:
+      kind:
+        enum:
+          - certification
+          - education
+          - employment
+          - project
+          - publication
+          - skill-group
+
+      id:
+        $ref: "#/$defs/slug"
+
+      label:
+        description: Headline for the entry, printed as-is.
+        type: string
+        minLength: 1
+
+      summary:
+        $ref: "#/$defs/markdown"
+
+      archived:
+        $ref: "#/$defs/archived"
+
+      visibility:
+        $ref: "#/$defs/visibility"
+
+      verification:
+        $ref: "#/$defs/verification"
+
+      featured:
+        description: Pin this entry ahead of its siblings on the website.
+        type: boolean
+        default: false
+
+      order:
+        type: integer
+        minimum: 0
+        default: 500
+
+      tags:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: "#/$defs/slug"
+
+      organization:
+        $ref: "#/$defs/organization"
+
+      roles:
+        description: >-
+          One line per title. Never flattened into a widened range — vendors
+          verify titles and dates separately.
+        type: array
+        minItems: 1
+        items:
+          $ref: "#/$defs/role"
+
+      interval:
+        $ref: "#/$defs/interval"
+
+      bullets:
+        type: array
+        items:
+          $ref: "#/$defs/bullet"
+
+      href:
+        $ref: "#/$defs/url"
+
+      stage:
+        enum:
+          - Planning
+          - Development
+          - Production
+
+      items:
+        description: Comma-joined skill list for a `skill-group` entry.
+        type: string
+        minLength: 1
+
+      labels:
+        description: Superseded by `tags`.
+        deprecated: true
+        type: array
+        items:
+          type: string
+
+    allOf:
+      # Employment carries the organization and the stacked role lines.
+      - if:
+          properties:
+            kind:
+              const: employment
+          required:
+            - kind
+        then:
+          required:
+            - organization
+            - roles
+
+      # A dated credential states its own range instead.
+      - if:
+          properties:
+            kind:
+              enum:
+                - certification
+                - education
+          required:
+            - kind
+        then:
+          required:
+            - organization
+            - interval
+
+      - if:
+          properties:
+            kind:
+              const: project
+          required:
+            - kind
+        then:
+          required:
+            - stage
+            - summary
+
+      - if:
+          properties:
+            kind:
+              const: skill-group
+          required:
+            - kind
+        then:
+          required:
+            - items

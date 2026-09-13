@@ -1,0 +1,223 @@
+# yaml-language-server: $schema=./schema.yaml
+#
+# The modeline above is the whole mechanism: with the YAML extension installed,
+# an editor completes keys, shows each `description` on hover, and underlines a
+# wrong type or a value outside an `enum` as you type.
+#
+# One authored file per section, exercising every construct in schema.yaml. The
+# facts are drawn from source/content/resume/ so the two shapes can be compared
+# side by side; this file is a specimen and no consumer reads it.
+
+version: 2
+
+consumers:
+  - resume
+  - /
+
+heading: Work Experience
+order: 200
+
+variants:
+  - professional
+
+verification:
+  checked: "2026-07-03"
+  by: Ken
+  source: "https://www.coopersurgical.com/"
+
+updated: "2026-08-04"
+
+entries:
+  - kind: employment
+    id: coopersurgical
+    label: CooperSurgical
+    summary: >-
+      Medical device R&D — global IVF device leader operating in 130+
+      countries.
+    featured: true
+    tags:
+      - distributed-systems
+      - regulated-software
+    organization:
+      id: coopersurgical
+      name: CooperSurgical
+      website: "https://www.coopersurgical.com/"
+      industry: Medical Device
+      locations:
+        - city: Trumbull
+          region: NJ
+          country: US
+        - region: MA
+          country: US
+        - region: CT
+          country: US
+    roles:
+      - title: Senior Software Engineer
+        employment: full-time
+        interval:
+          start: "2025-06"
+          ongoing: true
+        location:
+          region: NJ
+          country: US
+      - title: Software Engineer
+        employment: full-time
+        interval:
+          start: "2024-01"
+          end: "2025-05"
+        location:
+          region: MA
+          country: US
+      - title: Software Engineering Intern
+        employment: internship
+        interval:
+          start: "2023-05"
+          end: "2023-08"
+        location:
+          region: CT
+          country: US
+    bullets:
+      # The shorthand: a bare string is a printed line with no metadata.
+      - >-
+        Architected a cross-product device SDK shipped as a Docker container
+        (gRPC, MongoDB, RabbitMQ, Zeroconf) with .NET, Node.js, Python, and C++
+        clients, reused across 5+ FDA / EU MDR-regulated IVF products
+      # The long form, once a line carries numbers worth checking.
+      - text: >-
+          Cut RFID data-transition time by 90% with database caching and gRPC
+          streaming, reducing environmental-data rendering time on device UIs
+          by 50%
+        metrics:
+          transition-time-reduction:
+            value: 90
+            unit: "%"
+          render-time-reduction:
+            value: 50
+            unit: "%"
+      - text: >-
+          Developed a containerized Protocol Buffers compiler service
+          automating multi-language client generation, plus NuGet network
+          connectivity libraries and CLI tooling adopted org-wide
+        archived: true
+        note: Held back for the one-page fit, not for accuracy.
+
+  - kind: employment
+    id: shopee
+    label: Shopee
+    organization:
+      name: Shopee
+      website: "https://shopee.tw/"
+      industry: E-Commerce
+      locations:
+        - city: Taipei
+          region: Taipei
+          country: TW
+    roles:
+      - title: Software Engineer, Mobile Web Games
+        employment: full-time
+        interval:
+          start: "2020-01"
+          end: "2022-02"
+    bullets:
+      - text: >-
+          Built real-time multiplayer game services (Socket.IO, Express.js,
+          Redis) sustaining 10,000 peak RPS and 200,000+ daily players on
+          low-end devices in weak-signal regions
+        metrics:
+          peak-throughput:
+            value: 10000
+            unit: RPS
+          daily-players:
+            value: 200000
+            unit: null
+            approximate: true
+      - text: >-
+          Raised first-to-last-day player retention from 0.25 to 0.65 across
+          3–14 day shopping-festival runs by designing a weighted-random
+          reward algorithm
+        change:
+          - 0.25
+          - 0.65
+        note: >-
+          The window is the claim: first-to-last-day within one festival run,
+          not D1 or D7 cohort retention.
+
+  # Archived as employment, not for the page fit: a course team on a real
+  # client's requirements, so no vendor can verify it as a job.
+  - kind: employment
+    id: stagesource
+    label: StageSource
+    archived: true
+    organization:
+      name: StageSource
+      website: "https://stagesource.site-ym.com/"
+      industry: Art Service
+      locations:
+        - city: Boston
+          region: MA
+          country: US
+    roles:
+      - title: Software Engineer (Contract)
+        employment: contract
+        interval:
+          start: "2022-09"
+          end: "2022-12"
+    bullets:
+      - >-
+        Led a 6-developer team to deliver an MVP SaaS prototype (Django, uWSGI,
+        Nginx, PostgreSQL) on schedule, introducing Scrum, CI/CD, and
+        cloud-first practices to the organization
+
+  # The other `kind`s, one each, to show what the conditional branches require.
+  - kind: education
+    id: boston-university
+    label: "M.S. in Computer Science (GPA 3.8 / 4.0)"
+    organization:
+      name: Boston University
+      locations:
+        - city: Boston
+          region: MA
+          country: US
+    interval:
+      start: "2022-05"
+      end: "2024-01"
+    bullets:
+      - >-
+        First author, “Quantitative DevSecOps Metrics for Cloud-Based Web
+        Microservices,” IEEE Access, 2024
+
+  - kind: certification
+    id: mit-data-science
+    label: "Cert. in Data Science & Machine Learning (top 15 of 146)"
+    organization:
+      name: Massachusetts Institute of Technology
+      locations:
+        - region: MA
+          country: US
+    interval:
+      start: "2023-08"
+      end: "2023-11"
+    verification:
+      checked: "2026-07-03"
+
+  - kind: project
+    id: cryptography-cli
+    label: Cryptography CLI
+    stage: Development
+    href: "https://github.com/SiegeSailor/OpenSource.Formulas"
+    summary: >-
+      Available on `brew`, a *Rust* Command-Line Interface for executing
+      cryptographic algorithms.
+
+  - kind: skill-group
+    id: languages
+    label: Languages
+    items: "C#, TypeScript / JavaScript (Node.js), Python, C++, Bash, SQL"
+
+  # `visibility: document` is the flag that keeps a phone number off a public
+  # page while the resume document still prints it.
+  - kind: skill-group
+    id: contact-line
+    label: Contact
+    visibility: document
+    items: "NYC Metropolitan Area | 857-540-6713 | siegesailor@gmail.com"
