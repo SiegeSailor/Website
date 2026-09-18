@@ -41,22 +41,22 @@ export default function Mermaid({
           .querySelector("svg");
 
         if (element) {
-          // Fit to the column width for a consistent size; pin an explicit
-          // aspect-ratio from the viewBox so the height is deterministic
-          // (bare `height: auto` collapses to 150px in some engines).
+          // Render at natural scale: 1 viewBox unit = 1 CSS pixel. Scaling to
+          // the column width instead would give every diagram its own scale
+          // factor, so node size, text and stroke width would differ chart to
+          // chart. Mermaid sets its own `max-width`, so the style is replaced
+          // outright rather than extended.
           const viewBox = element.getAttribute("viewBox");
-          let aspect = "";
           if (viewBox) {
             const [, , width, height] = viewBox.split(" ").map(Number);
             if (width && height) {
               element.setAttribute("width", String(width));
               element.setAttribute("height", String(height));
-              aspect = ` aspect-ratio: ${width} / ${height};`;
             }
           }
           element.setAttribute(
             "style",
-            `width: 100%; height: auto; max-width: 100%; display: block; margin: 0 auto;${aspect}`,
+            "max-width: none; display: block; margin: 0 auto;",
           );
           setSvg(element.outerHTML);
         }
@@ -81,7 +81,7 @@ export default function Mermaid({
         isLoaded={isRendered}
         className={clsx("w-full rounded-md bg-default-50", props.className)}
       >
-        <div className="relative w-full rounded-md bg-default-50 p-4 sm:p-6 overflow-x-auto">
+        <div className="relative h-96 w-full overflow-auto rounded-md bg-default-50 p-4 sm:p-6">
           <Button
             isIconOnly
             size="sm"
@@ -92,15 +92,15 @@ export default function Mermaid({
           >
             <Maximize2Icon size="1rem" />
           </Button>
-          <div className="w-full" dangerouslySetInnerHTML={{ __html: svg }} />
+          <div
+            className="flex min-h-full items-center justify-center"
+            dangerouslySetInnerHTML={{ __html: svg }}
+          />
         </div>
       </Skeleton>
 
       <ZoomPanModal isOpen={isOpen} onClose={onClose} title="Diagram">
-        <div
-          className="w-full [&>svg]:max-h-[70vh]!"
-          dangerouslySetInnerHTML={{ __html: svg }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: svg }} />
       </ZoomPanModal>
     </>
   );
