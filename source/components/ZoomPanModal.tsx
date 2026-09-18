@@ -17,9 +17,12 @@ import {
 } from "@heroui/react";
 import { PlusIcon, MinusIcon } from "lucide-react";
 
-const ZOOM_MIN = 1 as const;
+// Diagrams render at natural scale, so a large one can exceed the dialog:
+// zooming below 100% is what lets the whole thing be seen at once.
+const ZOOM_MIN = 0.25 as const;
 const ZOOM_MAX = 8 as const;
 const ZOOM_STEP = 0.25 as const;
+const ZOOM_INITIAL = 1 as const;
 
 const clamp = (value: number) => Math.min(Math.max(value, ZOOM_MIN), ZOOM_MAX);
 
@@ -36,7 +39,7 @@ export default function ZoomPanModal({
   title?: string;
   children: ReactNode;
 }>) {
-  const [zoom, setZoom] = useState<number>(ZOOM_MIN);
+  const [zoom, setZoom] = useState<number>(ZOOM_INITIAL);
   const [offset, setOffset] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
@@ -45,9 +48,10 @@ export default function ZoomPanModal({
   const drag = useRef<{ x: number; y: number; ox: number; oy: number } | null>(
     null,
   );
+  const stageRef = useRef<HTMLDivElement | null>(null);
 
   const reset = useCallback(() => {
-    setZoom(ZOOM_MIN);
+    setZoom(ZOOM_INITIAL);
     setOffset({ x: 0, y: 0 });
   }, []);
 
@@ -57,10 +61,24 @@ export default function ZoomPanModal({
     if (isOpen) reset();
   }, [isOpen, reset]);
 
-  const onWheel = (event: React.WheelEvent) => {
-    event.preventDefault();
-    setZoom((current) => clamp(current - Math.sign(event.deltaY) * ZOOM_STEP));
-  };
+  // React registers `wheel` passively, so `preventDefault` inside an `onWheel`
+  // prop is a no-op: the page scrolls, and a trackpad pinch (which arrives as
+  // ctrl+wheel) zooms the whole browser instead of just this dialog. Only a
+  // native listener registered with `passive: false` can hold the gesture here.
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      setZoom((current) =>
+        clamp(current - Math.sign(event.deltaY) * ZOOM_STEP),
+      );
+    };
+
+    stage.addEventListener("wheel", onWheel, { passive: false });
+    return () => stage.removeEventListener("wheel", onWheel);
+  }, [isOpen]);
 
   const onPointerDown = (event: React.PointerEvent) => {
     (event.currentTarget as Element).setPointerCapture?.(event.pointerId);
@@ -98,16 +116,9 @@ export default function ZoomPanModal({
             )}
             <ModalBody className="p-2">
               <div
+                ref={stageRef}
                 className="relative h-[70vh] w-full overflow-hidden rounded-md bg-default-50 touch-none select-none"
-                style={{
-                  cursor:
-                    zoom > ZOOM_MIN
-                      ? dragging
-                        ? "grabbing"
-                        : "grab"
-                      : "default",
-                }}
-                onWheel={onWheel}
+                style={{ cursor: dragging ? "grabbing" : "grab" }}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={endDrag}
