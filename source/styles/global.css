@@ -2,9 +2,9 @@
 @plugin "./plugin-heroui.ts";
 /* HeroUI ships its component classes inside its own bundle, so Tailwind has to
    scan them or every component renders unstyled. npm hoists the package to the
-   repo-root node_modules (three levels up from this file), and the bundle is
+   repo-root node_modules (two levels up from this file), and the bundle is
    mostly `.mjs` — both parts of the path have to be right. */
-@source './../../../node_modules/@heroui/theme/dist/**/*.{js,mjs,ts,mts,jsx,tsx}';
+@source './../../node_modules/@heroui/theme/dist/**/*.{js,mjs,ts,mts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 
 * {
