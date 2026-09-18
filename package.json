@@ -1,14 +1,13 @@
 {
   "name": "@siegesailor-website/root",
   "version": "2.0.0",
-  "description": "SiegeSailor's personal website, resume documents, and README.",
+  "description": "SiegeSailor's personal website.",
   "homepage": "https://github.com/SiegeSailor/Website",
   "bugs": "https://github.com/SiegeSailor/Website/issues",
   "private": true,
   "type": "module",
   "workspaces": [
-    "source/website",
-    "source/tooling"
+    "source"
   ],
   "engines": {
     "node": ">= 26.5.0",
@@ -16,20 +15,13 @@
   },
   "scripts": {
     "prepare": "if command -v husky > /dev/null; then husky; fi",
-    "build": "npm run build:versions && npm run build:readme && npm run build:resume && npm run build:website",
-    "build:readme": "npm run build:readme --workspace source/tooling",
-    "build:resume": "npm run build:resume --workspace source/tooling",
-    "build:versions": "npm run build:versions --workspace source/tooling",
-    "build:website": "npm run build --workspace source/website",
-    "watch": "npm run build:versions && bash scripts/npm-parallel.sh watch:readme watch:resume watch:website",
-    "watch:readme": "npm run watch:readme --workspace source/tooling",
-    "watch:resume": "npm run watch:resume --workspace source/tooling",
-    "watch:website": "npm run watch --workspace source/website",
+    "build": "npm run build --workspace source",
+    "watch": "npm run watch --workspace source",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "npm run lint --workspace source/website",
-    "lint:fix": "npm run lint:fix --workspace source/website",
-    "typecheck": "npm run typecheck --workspace source/website"
+    "lint": "npm run lint --workspace source",
+    "lint:fix": "npm run lint:fix --workspace source",
+    "typecheck": "npm run typecheck --workspace source"
   },
   "devDependencies": {
     "@semantic-release/exec": "7.1.0",

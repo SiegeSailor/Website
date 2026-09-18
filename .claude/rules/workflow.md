@@ -8,16 +8,15 @@ paths:
 
 One workflow does one task — a single job with a single outcome. When a second outcome appears, such as a deploy that also pushes a README, it becomes a second file.
 
-| Workflow                                                       | Trigger                   | Task                                                                 |
-| -------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------- |
-| [`main-deploy.yml`](../../.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront            |
-| [`main-readme.yml`](../../.github/workflows/main-readme.yml)   | Push to `main`, or manual | Build the README and push it to `SiegeSailor/SiegeSailor` if changed |
-| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run Semantic Release and attach the resume documents                 |
-| [`push-verify.yml`](../../.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, typecheck, and lint the `Dockerfile`                   |
+| Workflow                                                       | Trigger                   | Task                                                      |
+| -------------------------------------------------------------- | ------------------------- | --------------------------------------------------------- |
+| [`main-deploy.yml`](../../.github/workflows/main-deploy.yml)   | Push to `main`, or manual | Build, apply Terraform, sync to S3, invalidate CloudFront |
+| [`main-release.yml`](../../.github/workflows/main-release.yml) | Push to `main`, or manual | Run Semantic Release                                      |
+| [`push-verify.yml`](../../.github/workflows/push-verify.yml)   | Every push outside `main` | Format, lint, and typecheck                               |
 
 The `production` environment carries the credentials both `main` deployments need:
 
-- **Secrets**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `SIEGESAILOR_PAT`, a Personal Access Token with `contents: write` on `SiegeSailor/SiegeSailor` used only by the README sync
+- **Secrets**: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
 - **Variables**: `AWS_REGION`
 
 Renaming a workflow breaks the table above and the badges in [`README.md`](../../README.md); update both in the same commit. Confirm the file parses before finishing:
@@ -44,26 +43,25 @@ A `run-name` is fixed before the first step runs and can only read `github`, `in
 
 Every workflow opens the same way, and 2 of them run the same gates — `push-verify.yml` and `main-deploy.yml`, because nothing else guarantees the gates run at all: there is no branch protection and no pull request, so the deploy is the only check on what actually ships. Those steps live once, in [`.github/actions/`](../../.github/actions/), as composite actions:
 
-| Action                                                                | Does                                                           | Used By     |
-| --------------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
-| [`setup-hadolint`](../../.github/actions/setup-hadolint/action.yml)   | Puts the pinned hadolint on the `PATH`                         | `verify`    |
-| [`setup-workspace`](../../.github/actions/setup-workspace/action.yml) | `actions/setup-node` from `.nvmrc`, then `npm ci`              | All 4       |
-| [`verify`](../../.github/actions/verify/action.yml)                   | `format:check`, `lint`, `typecheck`, and the `Dockerfile` lint | The 2 gates |
+| Action                                                                | Does                                              | Used By     |
+| --------------------------------------------------------------------- | ------------------------------------------------- | ----------- |
+| [`setup-workspace`](../../.github/actions/setup-workspace/action.yml) | `actions/setup-node` from `.nvmrc`, then `npm ci` | All 3       |
+| [`verify`](../../.github/actions/verify/action.yml)                   | `format:check`, `lint`, and `typecheck`           | The 2 gates |
 
 So a workflow reads `Checkout` → `Setup workspace` → its own work, with `Verify code quality and types` between them where the gates apply.
 
 A composite action runs inside the calling job, so none of these costs a second runner or a second `npm ci` — which a reusable `workflow_call` would. 3 consequences are worth knowing before editing one:
 
 - **`Checkout` Can Never Move into an Action**: The runner reads `action.yml` out of the checked-out repository, so a local action cannot run before it
-- **Every `run` Step inside an Action Needs Its Own `shell: bash`**: A nested local action, the way `verify` calls `setup-hadolint`, is pathed from the repository root rather than from the action's folder
+- **Every `run` Step inside an Action Needs Its Own `shell: bash`**: A nested local action is pathed from the repository root rather than from the action's folder
 - **`verify` Installs Nothing, on Purpose**: `setup-workspace` owns the `node_modules` the deploy's own build needs, so removing or reordering the gates cannot break a later step
 
-Actions are named the way GitHub's own are, `<action>-<technology>` (`setup-hadolint`, like `setup-node`), not the `<technology>-<action>` the [shell scripts](../../scripts/CONTRIBUTING.md) use. The hadolint version lives in that action's `version` input default and nowhere else in CI.
+Actions are named the way GitHub's own are, `<action>-<technology>` (`setup-workspace`, like `setup-node`), not the `<technology>-<action>` the [shell scripts](../../scripts/CONTRIBUTING.md) use.
 
 ## What Every Workflow Carries
 
 - The schema comment on line 1: `# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json`
-- A `paths:` filter that includes the workflow's own file, so a change to it is exercised, plus `.github/actions/**` on `push-verify.yml`, the one workflow that exists to exercise the shared actions — the `main:` workflows deliberately omit it, and `main-deploy.yml` omits `.hadolint.yml` too, because a CI-only change must not deploy production or touch another repository
+- A `paths:` filter that includes the workflow's own file, so a change to it is exercised, plus `.github/actions/**` on `push-verify.yml`, the one workflow that exists to exercise the shared actions — the `main:` workflows deliberately omit it, because a CI-only change must not deploy production
 - A `concurrency.group` named after the workflow, with `cancel-in-progress: true` only where a superseded run is worthless and never on a deploy or a release
 - The narrowest `permissions` the job needs, which is `contents: read` unless it writes
 - `environment: production` whenever it reads a production secret

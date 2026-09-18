@@ -46,9 +46,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: npm run build
 
-      - name: Generate resume documents
-        run: bash scripts/docker-copy.sh "source/website/export/documents"
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -93,7 +90,7 @@ jobs:
         run: |
           bucket="$(terraform output -raw site_bucket_name)"
           distribution="$(terraform output -raw cloudfront_distribution_id)"
-          aws s3 sync ../source/website/export "s3://${bucket}" --delete --exclude "*.DS_Store"
+          aws s3 sync ../source/export "s3://${bucket}" --delete --exclude "*.DS_Store"
           aws cloudfront create-invalidation --distribution-id "${distribution}" --paths "/*"
           {
             echo "| Target | Value |"

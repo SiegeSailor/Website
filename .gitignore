@@ -39,12 +39,6 @@ export/
 next-env.d.ts
 
 #######################################
-# Generated
-#######################################
-source/content/resume/versions.generated.json
-source/website/SiegeSailor-README.md
-
-#######################################
 # NPM
 #######################################
 node_modules/

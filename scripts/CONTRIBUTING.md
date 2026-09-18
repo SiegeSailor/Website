@@ -51,11 +51,11 @@ main "$@"
 
 ## Adding a Script
 
-Add one only when the work needs a shell — process supervision, Docker, `curl` fan-out, or a system binary a workflow and a laptop should invoke the same way. Anything a Node.js script can do belongs in [`source/tooling/`](../source/tooling/), which is already in the build graph.
+Add one only when the work needs a shell — process supervision, `curl` fan-out, or a system binary a workflow and a laptop should invoke the same way. Anything the application itself can do belongs in [`source/`](../source/), which is already in the build graph.
 
-Name it `<technology>-<action>.sh` — the tool it drives, then what it does to it, as in `docker-copy.sh` and `cloudfront-warm.sh`. 2 rules follow from that order:
+Name it `<technology>-<action>.sh` — the tool it drives, then what it does to it, as in `cloudfront-warm.sh`. 2 rules follow from that order:
 
-- **Leave `-<action>` Off When the Tool Has Only One Action**: `hadolint.sh` lints Dockerfiles and does nothing else, so `hadolint-lint.sh` would only stutter — an action earns its place when the same tool could take another, the way Docker also builds and pushes and CloudFront also invalidates
+- **Leave `-<action>` Off When the Tool Has Only One Action**: A linter that only lints would stutter as `<tool>-lint.sh` — an action earns its place when the same tool could take another, the way CloudFront also invalidates
 - **Never Lead with the Action**: `warm-up-cloudfront-cache.sh` sorts away from its siblings and hides how many scripts already drive the same tool
 
 A new script that a developer runs must appear in [`README.md`](./README.md); one an NPM script calls must also be wired into the root `package.json`. Renaming or removing one means tracing every caller first — the root `package.json`, [`release.config.mjs`](../release.config.mjs), [`.github/workflows/`](../.github/workflows/), and the documents that link it. Being documented is not being used: delete a script nothing calls.
@@ -69,4 +69,4 @@ bash scripts/cloudfront-warm.sh
 (cd source && bash ../scripts/cloudfront-warm.sh)  # must fail with [ERROR]
 ```
 
-`npm-parallel.sh` is the one worth stress-testing after an edit: enable job control (`set -o monitor`) so each child leads its own process group, then confirm one Ctrl-C leaves no orphaned dev server or `node --watch` behind.
+A script that supervises child processes is worth stress-testing after an edit: enable job control (`set -o monitor`) so each child leads its own process group, then confirm one Ctrl-C leaves no orphan behind.

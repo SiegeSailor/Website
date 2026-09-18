@@ -7,7 +7,6 @@ export default {
       { preset: "conventionalcommits" },
     ],
     ["@semantic-release/npm", { npmPublish: false }],
-    ["@semantic-release/exec", { prepareCmd: "bash scripts/docker-copy.sh" }],
     [
       "@semantic-release/git",
       {
@@ -18,7 +17,6 @@ export default {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "source/tooling/export/resume/*" }],
         successComment: false,
         failComment: false,
         failTitle: false,

@@ -42,10 +42,3 @@ jobs:
           else
             echo "no release cut from ${GITHUB_SHA}" >> "${GITHUB_STEP_SUMMARY}"
           fi
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: resume-${{ github.sha }}
-          path: source/tooling/export/resume/
-          if-no-files-found: ignore

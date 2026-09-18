@@ -54,17 +54,13 @@ Follow the styles strictly. Prompt the user if you find the following styles con
 | ACM                  |          |
 | Article              |          |
 | AWS                  |          |
-| Carlito              |          |
 | CloudFront           |          |
 | Conventional Commits |          |
-| Docker               |          |
 | ESLint               |          |
 | GitHub               |          |
-| hadolint             |          |
 | HeroUI               |          |
 | Husky                |          |
 | JavaScript           |          |
-| LibreOffice          |          |
 | Markdown             | MD       |
 | Next.js              |          |
 | Node.js              |          |

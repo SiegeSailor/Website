@@ -1,17 +1,12 @@
 # Website
 
 [![main: Deploy](https://github.com/SiegeSailor/Website/actions/workflows/main-deploy.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-deploy.yml)
-[![main: README](https://github.com/SiegeSailor/Website/actions/workflows/main-readme.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-readme.yml)
 [![main: Release](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml)
 [![push: Verify](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml)
 
-This is my personal website repository. A source of truth that automatically updates my:
+This is my personal website repository — a statically exported Next.js application published at `https://jinyu-zhang.com`.
 
-| Output  | Published At                                               |
-| ------- | ---------------------------------------------------------- |
-| README  | `https://github.com/SiegeSailor`                           |
-| Resume  | `https://jinyu-zhang.com/documents/JinYu-Zhang-Resume.pdf` |
-| Website | `https://jinyu-zhang.com`                                  |
+My profile facts and the documents built from them live in [`SiegeSailor/SiegeSailor`](https://github.com/SiegeSailor/SiegeSailor).
 
 ## License
 

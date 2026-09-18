@@ -3,7 +3,7 @@
 # Request every page of the deployed site so CloudFront caches it again after an
 # invalidation, instead of the next real visitor paying for the origin fetch.
 #
-# The page list comes from the deployed sitemap, not from source/content/, so it
+# The page list comes from the deployed sitemap, not from the working tree, so it
 # always matches what is actually live. One curl serves all of them, which needs
 # an --output per URL: a single --output binds to the first URL only.
 

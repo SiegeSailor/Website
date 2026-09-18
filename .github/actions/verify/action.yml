@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 name: Verify
-description: Run every quality gate — Prettier, ESLint, tsc, and hadolint on the Dockerfile.
+description: Run every quality gate — Prettier, ESLint, and tsc.
 
 # Composite steps run in the calling job, so this needs no runner of its own and
 # reuses the caller's node_modules: run setup-workspace before it. Removing this
@@ -19,10 +19,3 @@ runs:
     - name: Typecheck
       shell: bash
       run: npm run typecheck
-
-    - name: Setup Hadolint
-      uses: ./.github/actions/setup-hadolint
-
-    - name: Lint Dockerfile
-      shell: bash
-      run: bash scripts/hadolint.sh

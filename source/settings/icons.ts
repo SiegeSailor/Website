@@ -1,0 +1,147 @@
+import { type ForwardRefExoticComponent, type RefAttributes } from "react";
+import {
+  SiAmazon,
+  SiBabel,
+  SiCplusplus,
+  SiCss3,
+  SiDjango,
+  SiDocker,
+  SiDotnet,
+  SiElectron,
+  SiEnvoyproxy,
+  SiExpress,
+  SiFirebase,
+  SiFlask,
+  SiGit,
+  SiGithub,
+  SiGitlab,
+  SiGnubash,
+  SiGo,
+  SiGoogle,
+  SiGooglechrome,
+  SiGooglecloud,
+  SiGulp,
+  SiHtml5,
+  SiIonic,
+  SiJavascript,
+  SiJson,
+  SiKubernetes,
+  SiLinux,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNginx,
+  SiNodedotjs,
+  SiNpm,
+  SiNuget,
+  SiPython,
+  SiRabbitmq,
+  SiReact,
+  SiRedis,
+  SiRedux,
+  SiSemanticrelease,
+  SiTailwindcss,
+  SiTerraform,
+  SiThreedotjs,
+  SiTypescript,
+  SiVite,
+  SiWayland,
+  SiWebpack,
+} from "@icons-pack/react-simple-icons";
+import {
+  DatabaseIcon,
+  GithubIcon,
+  HomeIcon,
+  LinkedinIcon,
+  LucideProps,
+  NewspaperIcon,
+  NotebookIcon,
+  UserIcon,
+} from "lucide-react";
+
+type TLucideIcon = ForwardRefExoticComponent<
+  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+>;
+
+// The code half of settings/content.ts's MEDIA: each entry's `key` picks its icon
+// here. A new link needs an entry on both sides, which is why the site renders
+// the label without an icon rather than crashing when one is missing.
+export const MEDIA_TO_ICON: Readonly<Record<string, TLucideIcon | undefined>> =
+  {
+    github: GithubIcon,
+    linkedin: LinkedinIcon,
+  } as const;
+
+export const LUCIDE_ICON = {
+  DatabaseIcon,
+  HomeIcon,
+  NewspaperIcon,
+  NotebookIcon,
+  UserIcon,
+} as const;
+
+export const ROUTE_TO_ICON: Readonly<
+  Record<
+    "/" | "/blog" | "/profile",
+    ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+    >
+  >
+> = {
+  "/": HomeIcon,
+  "/blog": NewspaperIcon,
+  "/profile": UserIcon,
+} as const;
+
+export const TECHNOLOGY_TO_ICON = {
+  ".NET": SiDotnet,
+  "C++": SiCplusplus,
+  "Express.js": SiExpress,
+  "Next.js": SiNextdotjs,
+  "Node.js": SiNodedotjs,
+  "Protocol Buffers": SiGoogle,
+  "React.js": SiReact,
+  "Tailwind CSS": SiTailwindcss,
+  "Three.js": SiThreedotjs,
+  AWS: SiAmazon,
+  Babel: SiBabel,
+  Bash: SiGnubash,
+  CSS: SiCss3,
+  Django: SiDjango,
+  Docker: SiDocker,
+  Electron: SiElectron,
+  Envoy: SiEnvoyproxy,
+  Firebase: SiFirebase,
+  Flask: SiFlask,
+  GCP: SiGooglecloud,
+  Git: SiGit,
+  GitHub: SiGithub,
+  GitLab: SiGitlab,
+  Go: SiGo,
+  gRPC: SiGoogle,
+  Gulp: SiGulp,
+  HTML: SiHtml5,
+  Ionic: SiIonic,
+  JavaScript: SiJavascript,
+  JSON: SiJson,
+  Kubernetes: SiKubernetes,
+  Linux: SiLinux,
+  MongoDB: SiMongodb,
+  MySQL: SiMysql,
+  Nginx: SiNginx,
+  NPM: SiNpm,
+  NuGet: SiNuget,
+  Python: SiPython,
+  RabbitMQ: SiRabbitmq,
+  Redis: SiRedis,
+  Redux: SiRedux,
+  SemanticRelease: SiSemanticrelease,
+  SQL: DatabaseIcon,
+  Supervisord: NotebookIcon,
+  Terraform: SiTerraform,
+  TypeScript: SiTypescript,
+  Vite: SiVite,
+  Wayland: SiWayland,
+  WebKit: SiGooglechrome,
+  Webpack: SiWebpack,
+} as const;
