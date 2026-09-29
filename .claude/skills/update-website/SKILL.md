@@ -12,7 +12,7 @@ This repository renders **constants**. There is no content loader and no build-t
 ## Process
 
 1. **Fetch the facts.** `gh api repos/SiegeSailor/SiegeSailor/contents/profile/<file>` for each file you need, or clone into a temp directory. Record the commit SHA: `gh api repos/SiegeSailor/SiegeSailor/commits/main --jq '.sha'`.
-2. **Read `profile/POLICY.md` and obey it.** It states the judgment calls the YAML alone does not show.
+2. **Read `profile/CLAUDE.md` and obey it.** It states the judgment calls the YAML alone does not show.
 3. **Resolve project versions** with `gh api repos/{owner}/{repo}/releases/latest --jq '.tag_name'`, falling back to the tag list, then to no version. A project without one renders its stage instead. Network failure is not fatal — keep the value already in the file.
 4. **Rewrite `source/settings/content.ts`**, stamping the source SHA and date in the header comment.
 5. **Apply any structural instruction** given alongside: a new section, a reordered page, a value no page reads yet.
@@ -27,7 +27,7 @@ gh api repos/SiegeSailor/SiegeSailor/commits/main --jq '.sha'   # against the SH
 
 ## Constraints That Must Never Break
 
-- **Never copy contact details across**: the phone number and postal area belong to the résumé document only, and `POLICY.md` says so. `settings/content.ts` must never carry them
+- **Never copy contact details across**: the phone number and postal area belong to the résumé document only, and `profile/CLAUDE.md` says so. `settings/content.ts` must never carry them
 - **Never invent a fact**: every string here is verified and read by background-check vendors. Copy it, never rephrase it — if a value needs different wording for the site, ask Ken first
 - **A new `media` entry needs an icon first**: `key` selects it in [`settings/icons.ts`](../../../source/settings/icons.ts), and the site will not render an entry without one
 - **Keep everything under `app/` statically exportable**: the site is `next build` with no server at runtime
