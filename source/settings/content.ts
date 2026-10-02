@@ -4,6 +4,8 @@
 //
 // Contact details are deliberately absent. The phone number and postal area
 // belong to the résumé document only and must never reach a public page.
+//
+// Mirrors profile/ at SiegeSailor/SiegeSailor@0001681 (2026-10-02).
 
 export type TMedia = { key: string; label: string; href: string };
 export type TIdentity = { legal: string; display: string };
@@ -79,7 +81,7 @@ const PROFILE: TProfile = {
     position: "Senior Software Engineer",
   },
   tagline:
-    "Distributed systems and developer platforms, from 10,000 RPS consumer scale to FDA-regulated devices.",
+    "Distributed systems and developer platforms, from 10,000+ RPS consumer scale to FDA-regulated devices.",
   intro:
     "I build systems where the interface between components is the hard part. That means device clients over gRPC, services that hold up under load, and the CI/CD that keeps them shippable. I write up what I learn along the way.",
 };
@@ -91,17 +93,17 @@ const COMPANY: TCompany = {
 };
 
 const SUMMARY =
-  "Senior software engineer bridging across distributed systems, hardware, and firmware. Architected a device SDK over gRPC with C++, Python, .NET, and Node.js clients, reused across 5+ products under FDA and EU MDR. Sustained 10,000 peak RPS and 200,000+ daily players at Shopee. Led engineering across 5+ vendors and 20+ developers.";
+  "Senior software engineer bridging across distributed systems, hardware, and firmware. Architected a device SDK over gRPC with C++, Python, .NET, and Node.js clients, reused across 5+ products under FDA and EU MDR. Sustained 10,000+ peak RPS and 200,000+ daily players at Shopee. Led a team of 5, and a shared component library built with 4+ vendors and used by 20+ developers.";
 
 // Planning projects stay hidden until they advance; /about filters on `stage`.
 const PROJECTS: TProject[] = [
   {
     title: "Cryptography CLI",
     stage: "Development",
-    href: "https://github.com/SiegeSailor/OpenSource.Formulas",
+    href: "https://github.com/SiegeSailor/Cryptography",
     version: "v2.3.2",
     description:
-      "Available on `brew`, a *Rust* Command-Line Interface for executing cryptographic algorithms. The CLI provides a collection of functions and simulated secured communications between two parties.",
+      "Available on `npm`, a *TypeScript* package with *WebAssembly* enabled that provides a collection of cryptography functions and a command-line tool with interactive prompts to demonstrate key encryption flows and algorithms.",
   },
   {
     title: "AI-Driven Development Tools Integration",
@@ -149,9 +151,23 @@ const PROJECTS: TProject[] = [
     title: "Jin Yu Zhang's Website",
     stage: "Production",
     href: "https://github.com/SiegeSailor/Website",
-    version: "v2.0.0",
+    version: "v2.0.3",
     description:
       "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts and in-site search. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
+  },
+  {
+    title: "TypeScript Markdown Files Converter",
+    stage: "Planning",
+    href: "https://github.com/SiegeSailor",
+    description:
+      "A *TypeScript* NPM package for parsing markdown files to readable HTML files using *Remark* and parsing folders/files to parsable data structures.",
+  },
+  {
+    title: "AI Story Writer",
+    stage: "Planning",
+    href: "https://github.com/SiegeSailor",
+    description:
+      "A local AI-powered storytelling engine that helps users build interconnected fantasy universes. The system automatically categorizes the inputs, such as races and weapons, and keeps track of them. Built with *Python*, *SQLite*, *Ollama*, *Mistral 7B*, and *Streamlit*.",
   },
 ];
 
@@ -167,7 +183,7 @@ const TIMELINE = {
   start: "2016-06-01",
   excluded: [
     { label: "Military Service", start: "2017-01-01", end: "2017-06-30" },
-    { label: "Career Gap", start: "2022-02-01", end: "2024-01-31" },
+    { label: "Career Gap", start: "2022-06-01", end: "2024-01-31" },
   ],
 };
 
