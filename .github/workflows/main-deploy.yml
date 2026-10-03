@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "main: Deploy AWS static website"
+name: "main: Deploy"
 run-name: "main: Deploy ${{ github.ref_name }}@${{ github.sha }} by @${{ github.actor }}"
 
 on:

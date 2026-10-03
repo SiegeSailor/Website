@@ -4,9 +4,7 @@
 [![main: Release](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/main-release.yml)
 [![push: Verify](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml/badge.svg)](https://github.com/SiegeSailor/Website/actions/workflows/push-verify.yml)
 
-This is my personal website repository — a statically exported Next.js application published at `https://jinyu-zhang.com`.
-
-My profile facts and the documents built from them live in [`SiegeSailor/SiegeSailor`](https://github.com/SiegeSailor/SiegeSailor).
+This is my personal website repository. A statically exported Next.js application published at `https://jinyu-zhang.com`. My profile facts and the documents built from them live in [`SiegeSailor/SiegeSailor`](https://github.com/SiegeSailor/SiegeSailor).
 
 ## License
 

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "main: Publish semantic release"
+name: "main: Release"
 run-name: "main: Publish semantic release from ${{ github.sha }} by @${{ github.actor }}"
 
 on:
