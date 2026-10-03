@@ -7,7 +7,7 @@ The single flat Terraform environment behind `jinyu-zhang.com`.
 
 ## Constraints That Must Never Break
 
-**This is live production and it costs money.** Never run `terraform apply`, `terraform destroy`, or any mutating `aws` command without explicit confirmation from Ken. `plan`, `validate`, `fmt`, and `tflint` are always fine.
+**This is live production and it costs money.** Never run `terraform apply`, `terraform destroy`, or any mutating `aws` command without explicit confirmation from Jin Yu Zhang. `plan`, `validate`, `fmt`, and `tflint` are always fine.
 
 - **ACM for CloudFront Must Live in `us-east-1`**: Whatever `aws_region` says, which is why the `acm` module pins its own region
 - **Both Buckets Set `force_destroy = true`**: A `terraform destroy` takes the site and the state with it, so treat the destroy path as unavailable

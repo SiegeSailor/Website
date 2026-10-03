@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-The personal website of Jin Yu (Ken) Zhang — a statically exported Next.js site served from S3 behind CloudFront. This file is the map; [`README.md`](./README.md) says what the project is and [`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it.
+The personal website of Jin Yu Zhang — a statically exported Next.js site served from S3 behind CloudFront. This file is the map; [`README.md`](./README.md) says what the project is and [`CONTRIBUTING.md`](./CONTRIBUTING.md) how to work in it.
 
 Path-scoped conventions live in [`.claude/rules/`](./.claude/rules/); read the ones whose `paths:` match the files being edited.
 
