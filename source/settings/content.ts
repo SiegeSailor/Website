@@ -5,7 +5,7 @@
 // Contact details are deliberately absent. The phone number and postal area
 // belong to the résumé document only and must never reach a public page.
 //
-// Mirrors profile/ at SiegeSailor/SiegeSailor@0001681 (2026-10-02).
+// Mirrors profile/ at SiegeSailor/SiegeSailor@ce14437 (2026-10-03).
 
 export type TMedia = { key: string; label: string; href: string };
 export type TIdentity = { legal: string; display: string };
@@ -71,19 +71,15 @@ const ROUTE_TITLES: TRouteTitle[] = [
 
 const PROFILE: TProfile = {
   picture: "/images/Jin-Yu-Zhang.jpg",
-  headlines: [
-    "Distributed Systems",
-    "Platform Engineering",
-    "Backend Architecture",
-  ],
+  headlines: ["Distributed Systems", "Cloud & DevOps", "Observability"],
   status: {
     location: "NYC Metropolitan Area",
     position: "Senior Software Engineer",
   },
   tagline:
-    "Distributed systems and developer platforms, from 10,000+ RPS consumer scale to FDA-regulated devices.",
+    "Distributed systems, observability, and CI/CD, from 10,000+ RPS consumer scale to FDA-regulated devices.",
   intro:
-    "I build systems where the interface between components is the hard part. That means device clients over gRPC, services that hold up under load, and the CI/CD that keeps them shippable. I write up what I learn along the way.",
+    "I build systems that have to keep running: real-time services at 10,000+ peak RPS, medical devices at clinical sites with no internet, and the pipelines, load tests, and observability behind them. I write up what I learn along the way.",
 };
 
 // The home page hero links the current employer.
@@ -93,7 +89,7 @@ const COMPANY: TCompany = {
 };
 
 const SUMMARY =
-  "Senior software engineer bridging across distributed systems, hardware, and firmware. Architected a device SDK over gRPC with C++, Python, .NET, and Node.js clients, reused across 5+ products under FDA and EU MDR. Sustained 10,000+ peak RPS and 200,000+ daily players at Shopee. Led a team of 5, and a shared component library built with 4+ vendors and used by 20+ developers.";
+  "Senior software engineer building distributed systems from consumer scale to regulated medical devices. At Shopee, built real-time multiplayer game services sustaining 10,000+ peak RPS and 200,000+ daily players, with scheduled Locust load testing, and let 5 international teams redeploy on GCP without hard-coded configurations. At CooperSurgical, cut RFID data-transition time by 90% with caching and gRPC streaming, designed device observability from Envoy traffic logs and spans to error traces, and led a team of 5.";
 
 // Planning projects stay hidden until they advance; /about filters on `stage`.
 const PROJECTS: TProject[] = [
@@ -153,7 +149,7 @@ const PROJECTS: TProject[] = [
     href: "https://github.com/SiegeSailor/Website",
     version: "v2.0.3",
     description:
-      "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts and in-site search. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
+      "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts, in-site search, and a single-source résumé build system. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
   },
   {
     title: "TypeScript Markdown Files Converter",
