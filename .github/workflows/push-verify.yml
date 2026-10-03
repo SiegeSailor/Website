@@ -4,8 +4,6 @@ run-name: "push: Verify ${{ github.ref_name }}@${{ github.sha }} by @${{ github.
 
 on:
   push:
-    branches-ignore:
-      - main
     paths:
       - .github/workflows/push-verify.yml
       - .github/actions/**
