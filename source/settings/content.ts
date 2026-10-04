@@ -5,7 +5,7 @@
 // Contact details are deliberately absent. The phone number and postal area
 // belong to the résumé document only and must never reach a public page.
 //
-// Mirrors profile/ at SiegeSailor/SiegeSailor@8385279 (2026-10-03).
+// Mirrors profile/ at SiegeSailor/SiegeSailor@426043f (2026-10-03).
 
 export type TMedia = { key: string; label: string; href: string };
 export type TIdentity = { legal: string; display: string };
@@ -94,12 +94,43 @@ const SUMMARY =
 // Planning projects stay hidden until they advance; /about filters on `stage`.
 const PROJECTS: TProject[] = [
   {
+    title: "Jin Yu Zhang's Website",
+    stage: "Production",
+    href: "https://github.com/SiegeSailor/Website",
+    version: "v2.1.2",
+    description:
+      "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts, in-site search, and a single-source résumé build system. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
+  },
+  {
+    title: "Terminal Sigma",
+    stage: "Production",
+    href: "https://github.com/SiegeSailor/Terminal-Sigma",
+    version: "v1.1.0",
+    description:
+      "Available on `npm` and as a desktop app, a *TypeScript* terminal dashboard that gives game-style feedback on self-development: a pixel-art character levels up alongside a Pomodoro timer, diet and workout trackers, and everyday quotes, in English and Traditional Chinese. Built with *React*, *Ink*, *Zod*, *Electron*, and *xterm.js*.",
+  },
+  {
+    title: "Smarty Notebook Collection",
+    stage: "Production",
+    href: "https://github.com/SiegeSailor/Smarty-Notebook-Collection",
+    version: "v3.0.0",
+    description:
+      "A collection of self-contained *Jupyter* notebooks that run batch requests against the **Smarty** Cloud API, such as fetching U.S. ZIP+4 codes by address. Built with *Python*, *pandas*, *Requests*, and *Poetry*.",
+  },
+  {
     title: "Cryptography CLI",
     stage: "Development",
     href: "https://github.com/SiegeSailor/Cryptography",
     version: "v2.3.2",
     description:
       "Available on `npm`, a *TypeScript* package with *WebAssembly* enabled that provides a collection of cryptography functions and a command-line tool with interactive prompts to demonstrate key encryption flows and algorithms.",
+  },
+  {
+    title: "Self-Development Assistant",
+    stage: "Planning",
+    href: "https://github.com/SiegeSailor",
+    description:
+      "An *iOS* application built with *Godot* that comes with often-used self-development and assistance features, such as the tomato timer, diet tracking, goals-oriented schedules, and everyday-motivating quotes, to help users build confidence and assertiveness.",
   },
   {
     title: "AI-Driven Development Tools Integration",
@@ -135,37 +166,6 @@ const PROJECTS: TProject[] = [
     href: "https://github.com/SiegeSailor",
     description:
       "Quick start for deploying *React* components on `npm`. A project boilerplate that provides a set of team-oriented development tools, such as *GitLab CI/CD*, *Semantic Release*, *TypeScript*, *Jest*, *ESLint*, *Stylelint*, and *Ladle*, and best practices.",
-  },
-  {
-    title: "Self-Development Assistant",
-    stage: "Planning",
-    href: "https://github.com/SiegeSailor",
-    description:
-      "An *iOS* application built with *Godot* that comes with often-used self-development and assistance features, such as the tomato timer, diet tracking, goals-oriented schedules, and everyday-motivating quotes, to help users build confidence and assertiveness.",
-  },
-  {
-    title: "Jin Yu Zhang's Website",
-    stage: "Production",
-    href: "https://github.com/SiegeSailor/Website",
-    version: "v2.1.1",
-    description:
-      "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts, in-site search, and a single-source résumé build system. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
-  },
-  {
-    title: "Terminal-Sigma",
-    stage: "Production",
-    href: "https://github.com/SiegeSailor/Terminal-Sigma",
-    version: "v1.1.0",
-    description:
-      "Available on `npm` and as a desktop app, a *TypeScript* terminal dashboard that gives game-style feedback on self-development: a pixel-art character levels up alongside a Pomodoro timer, diet and workout trackers, and everyday quotes, in English and Traditional Chinese. Built with *React*, *Ink*, *Zod*, *Electron*, and *xterm.js*.",
-  },
-  {
-    title: "Smarty Notebook Collection",
-    stage: "Production",
-    href: "https://github.com/SiegeSailor/Smarty-Notebook-Collection",
-    version: "v3.0.0",
-    description:
-      "A collection of self-contained *Jupyter* notebooks that run batch requests against the **Smarty** Cloud API, such as fetching U.S. ZIP+4 codes by address. Built with *Python*, *pandas*, *Requests*, and *Poetry*.",
   },
   {
     title: "TypeScript Markdown Files Converter",
