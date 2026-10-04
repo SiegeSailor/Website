@@ -5,7 +5,7 @@
 // Contact details are deliberately absent. The phone number and postal area
 // belong to the résumé document only and must never reach a public page.
 //
-// Mirrors profile/ at SiegeSailor/SiegeSailor@426043f (2026-10-03).
+// Mirrors profile/ at SiegeSailor/SiegeSailor@cbb86ad (2026-10-03).
 
 export type TMedia = { key: string; label: string; href: string };
 export type TIdentity = { legal: string; display: string };
