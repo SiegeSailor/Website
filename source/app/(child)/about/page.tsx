@@ -4,6 +4,7 @@ import { ROUTES } from "@/settings/constant";
 import { MEDIA_TO_ICON } from "@/settings/icons";
 import { createPageTitle } from "@/helpers/utility";
 import { getAbout, getSite } from "@/settings/content";
+import ChipVersion from "@/components/ChipVersion";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { site, titleOf } = await getSite();
@@ -76,13 +77,7 @@ export default async function () {
                 >
                   {project.title}
                 </a>
-                <span
-                  className={`font-mono text-tiny shrink-0 border border-default-200 rounded-full px-2 py-0.5 ${
-                    project.version ? "text-primary" : "text-default-500"
-                  }`}
-                >
-                  {project.version ?? project.stage.toLowerCase()}
-                </span>
+                <ChipVersion href={project.href} stage={project.stage} />
               </div>
             ))}
           </div>

@@ -30,7 +30,6 @@ export type TProject = {
   description: string;
   href: string;
   stage: "Planning" | "Development" | "Production";
-  version?: string;
 };
 
 const IDENTITY: TIdentity = {
@@ -97,7 +96,6 @@ const PROJECTS: TProject[] = [
     title: "Jin Yu Zhang's Website",
     stage: "Production",
     href: "https://github.com/SiegeSailor/Website",
-    version: "v2.1.2",
     description:
       "This site — a statically exported *Next.js* application served from *AWS S3* behind *CloudFront*, with markdown-driven posts, in-site search, and a single-source résumé build system. Built with *TailwindCSS*, *HeroUI*, the *UnifiedJS* ecosystem, *Mermaid*, and *Zustand*.",
   },
@@ -105,7 +103,6 @@ const PROJECTS: TProject[] = [
     title: "Terminal Sigma",
     stage: "Production",
     href: "https://github.com/SiegeSailor/Terminal-Sigma",
-    version: "v1.1.0",
     description:
       "Available on `npm` and as a desktop app, a *TypeScript* terminal dashboard that gives game-style feedback on self-development: a pixel-art character levels up alongside a Pomodoro timer, diet and workout trackers, and everyday quotes, in English and Traditional Chinese. Built with *React*, *Ink*, *Zod*, *Electron*, and *xterm.js*.",
   },
@@ -113,7 +110,6 @@ const PROJECTS: TProject[] = [
     title: "Smarty Notebook Collection",
     stage: "Production",
     href: "https://github.com/SiegeSailor/Smarty-Notebook-Collection",
-    version: "v3.0.0",
     description:
       "A collection of self-contained *Jupyter* notebooks that run batch requests against the **Smarty** Cloud API, such as fetching U.S. ZIP+4 codes by address. Built with *Python*, *pandas*, *Requests*, and *Poetry*.",
   },
@@ -121,7 +117,6 @@ const PROJECTS: TProject[] = [
     title: "Cryptography CLI",
     stage: "Development",
     href: "https://github.com/SiegeSailor/Cryptography",
-    version: "v2.3.2",
     description:
       "Available on `npm`, a *TypeScript* package with *WebAssembly* enabled that provides a collection of cryptography functions and a command-line tool with interactive prompts to demonstrate key encryption flows and algorithms.",
   },
