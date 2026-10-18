@@ -9,6 +9,7 @@ import { createGlobalMetadata } from "@/settings/heads";
 import { getSite } from "@/settings/content";
 import Comments from "@/components/Comments";
 import Markdown from "@/components/Markdown";
+import MorePosts from "@/components/MorePosts";
 import TableOfContents from "@/components/TableOfContents";
 
 type TParams = Readonly<{ date: string }>;
@@ -71,6 +72,16 @@ export default async function ({
   const { metadata, content } = article;
   const newer = articles[index - 1];
   const older = articles[index + 1];
+  const related = articles
+    .filter(
+      (item) =>
+        item !== article && item.metadata.category === metadata.category,
+    )
+    .slice(0, 5)
+    .map((item) => ({
+      title: item.metadata.title,
+      route: item.metadata.route,
+    }));
 
   return (
     <article className="py-2">
@@ -156,6 +167,8 @@ export default async function ({
           )}
         </nav>
       )}
+
+      <MorePosts category={metadata.category} posts={related} />
 
       <Comments post={metadata.date} />
     </article>
