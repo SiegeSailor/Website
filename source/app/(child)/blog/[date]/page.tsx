@@ -115,11 +115,8 @@ export default async function ({
         ))}
       </div>
 
-      <TableOfContents
-        anchors={metadata.anchors.filter(
-          (anchor) => anchor.level === 2 || anchor.level === 3,
-        )}
-      />
+      {/* The first anchor is the article title, not a section. */}
+      <TableOfContents anchors={metadata.anchors.slice(1)} />
 
       <div className="mt-6 pt-6 border-t border-default-200">
         <div className="text-default-600">
