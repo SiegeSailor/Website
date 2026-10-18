@@ -13,3 +13,4 @@ Shell scripts called by the workflows and by hand.
 ## Per-Script Constraints
 
 - **`cloudfront-warm.sh` Reads the Deployed `sitemap.xml`**: Not the working tree, so it warms what is actually live even when the tree is ahead of it
+- **`dynamodb-moderate.sh` Is the Only Way a Comment Goes Public**: It writes production data directly, and it validates the post and comment ID before splicing them into a key, so keep that check in front of any new action
