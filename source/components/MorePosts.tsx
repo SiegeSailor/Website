@@ -37,24 +37,6 @@ export default function ({
         aria-label="More posts"
         className="hidden xl:flex flex-col gap-7 fixed top-28 right-[calc(50%+23rem)] w-52 max-h-[calc(100vh-9rem)] overflow-y-auto"
       >
-        {/* Hands the query to the home page, whose filter also selects any
-            category or technology it names. */}
-        <Form action={ROUTE_HOME} role="search" className="flex flex-col gap-3">
-          <label htmlFor="more-posts-search" className={CLASS_LABEL}>
-            Search posts
-          </label>
-          <div className="flex items-center gap-2 border-b border-default-200 pb-1.5 transition-colors focus-within:border-primary">
-            <SearchIcon size="0.85rem" className="text-default-500 shrink-0" />
-            <input
-              id="more-posts-search"
-              name="q"
-              type="search"
-              placeholder="Title, topic, technology…"
-              className="w-full bg-transparent outline-none text-small placeholder:text-default-500"
-            />
-          </div>
-        </Form>
-
         {posts.length > 0 && (
           <nav
             aria-label={`More in ${category}`}

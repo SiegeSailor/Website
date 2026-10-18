@@ -217,7 +217,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
               .map((reply) => (
                 <div
                   key={reply.id}
-                  className="mt-2 ml-3.5 pl-3.5 border-l border-default-200"
+                  className="mt-4 ml-3.5 pl-3.5 border-l border-default-200"
                 >
                   <Comment comment={reply} />
                 </div>
