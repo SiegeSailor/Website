@@ -25,6 +25,16 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx"],
   productionBrowserSourceMaps: true,
   reactStrictMode: process.env.NODE_ENV === "development",
+  // `npm run watch` has no /api of its own, so it borrows the live comments
+  // API; a comment posted locally is real and held as pending like any other.
+  ...(process.env.NODE_ENV === "development" && {
+    rewrites: async () => [
+      {
+        source: "/api/:path*",
+        destination: "https://jinyu-zhang.com/api/:path*",
+      },
+    ],
+  }),
   turbopack: {
     rules: {
       "*.svg": {

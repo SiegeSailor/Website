@@ -19,8 +19,8 @@ type TComment = Readonly<{
 
 type TStatus = Readonly<{ isError: boolean; text: string }>;
 
-// Served by the comments API behind the same CloudFront distribution; it does
-// not exist under `npm run watch`.
+// Served by the comments API behind the same CloudFront distribution;
+// `npm run watch` proxies it to the live site (see next.config.mjs).
 const ENDPOINT = "/api/comments";
 const LIMIT_NAME = 50;
 const LIMIT_BODY = 2000;
