@@ -50,6 +50,62 @@ resource "aws_cloudfront_cache_policy" "web_short_ttl" {
   }
 }
 
+resource "aws_cloudfront_cache_policy" "comments" {
+  name        = "${local.comments_name}-short-ttl"
+  comment     = "One minute per post for approved comments."
+  default_ttl = 60
+  max_ttl     = 60
+  min_ttl     = 0
+
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config {
+      cookie_behavior = "none"
+    }
+
+    headers_config {
+      header_behavior = "none"
+    }
+
+    query_strings_config {
+      query_string_behavior = "whitelist"
+
+      query_strings {
+        items = ["post"]
+      }
+    }
+
+    enable_accept_encoding_brotli = true
+    enable_accept_encoding_gzip   = true
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# Forwarding `Host` would make API Gateway reject the request, and without
+# `CloudFront-Viewer-Address` the function only sees the edge's address.
+resource "aws_cloudfront_origin_request_policy" "comments" {
+  name    = "${local.comments_name}-viewer-address"
+  comment = "The reader's address and the body type, never the host."
+
+  cookies_config {
+    cookie_behavior = "none"
+  }
+
+  headers_config {
+    header_behavior = "whitelist"
+
+    headers {
+      items = ["CloudFront-Viewer-Address", "Content-Type"]
+    }
+  }
+
+  query_strings_config {
+    query_string_behavior = "none"
+  }
+}
+
 # Rewrites extensionless routes to the exported `.html` files in S3.
 resource "aws_cloudfront_function" "rewrite_static_routes" {
   name    = "${local.project}-${local.environment}-${local.module}-rewrite-static-routes"
@@ -103,6 +159,20 @@ module "cloudfront" {
       domain_name               = module.site_s3_bucket.s3_bucket_bucket_regional_domain_name
       origin_access_control_key = "s3_site"
     }
+
+    comments_api = {
+      domain_name = replace(aws_apigatewayv2_api.comments.api_endpoint, "https://", "")
+
+      custom_origin_config = {
+        http_port              = 80
+        https_port             = 443
+        origin_protocol_policy = "https-only"
+      }
+
+      custom_header = {
+        X-Origin-Verify = random_password.comments_origin.result
+      }
+    }
   }
 
   default_cache_behavior = {
@@ -124,6 +194,17 @@ module "cloudfront" {
   }
 
   ordered_cache_behavior = [
+    # No routing function here: it would rewrite `/api/comments` to a file.
+    {
+      path_pattern             = "/api/*"
+      target_origin_id         = "comments_api"
+      viewer_protocol_policy   = "redirect-to-https"
+      allowed_methods          = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+      cached_methods           = ["GET", "HEAD"]
+      compress                 = true
+      cache_policy_id          = aws_cloudfront_cache_policy.comments.id
+      origin_request_policy_id = aws_cloudfront_origin_request_policy.comments.id
+    },
     {
       path_pattern           = "/_next/static/*"
       target_origin_id       = "s3_site"

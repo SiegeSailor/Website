@@ -17,6 +17,9 @@ locals {
   domain = "jinyu-zhang.com"
 
   site_bucket_name = "${local.project}-${local.environment}-${local.module}"
+
+  comments_module = "comments"
+  comments_name   = "${local.project}-${local.environment}-${local.comments_module}"
 }
 
 #######################################
@@ -32,5 +35,9 @@ locals {
 
   module_tags = merge(local.shared_tags, {
     Module = local.module
+  })
+
+  comments_tags = merge(local.shared_tags, {
+    Module = local.comments_module
   })
 }

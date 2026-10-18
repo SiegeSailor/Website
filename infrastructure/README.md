@@ -1,13 +1,15 @@
 # infrastructure
 
-One flat Terraform environment — `production` — that serves the static export from S3 through CloudFront on `jinyu-zhang.com`. There are no modules of our own and no workspaces: every file here describes one part of that single environment.
+One flat Terraform environment — `production` — that serves the static export from S3 through CloudFront on `jinyu-zhang.com`, plus the comments API on the same distribution. There are no modules of our own and no workspaces: every file here describes one part of that single environment.
 
 | File                                                           | Describes                                                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | [`backend.tf`](./backend.tf)                                   | The S3 state backend, with `use_lockfile`                                |
 | [`budget.tf`](./budget.tf)                                     | A \$10/month budget with alerts at 80% and 100%                          |
-| [`content-delivery-network.tf`](./content-delivery-network.tf) | ACM, the cache policy, the routing function, and the distribution        |
+| [`comments.tf`](./comments.tf)                                 | The comments table, function, HTTP API, secrets, and email topic         |
+| [`content-delivery-network.tf`](./content-delivery-network.tf) | ACM, the cache policies, the routing function, and the distribution      |
 | [`domain.tf`](./domain.tf)                                     | Route 53 A and AAAA aliases for the apex and `www`                       |
+| [`functions/comments/`](./functions/comments/index.mjs)        | The comments function itself, zipped by `archive_file` at plan time      |
 | [`locals.tf`](./locals.tf)                                     | Naming and tagging: `project`, `environment`, `module`, `domain`         |
 | [`main.tf`](./main.tf)                                         | The AWS provider and its `default_tags`                                  |
 | [`outputs.tf`](./outputs.tf)                                   | Region, environment, bucket name, and distribution ID out                |
@@ -20,6 +22,12 @@ One flat Terraform environment — `production` — that serves the static expor
 The site bucket blocks all public access; only CloudFront can read it, through an Origin Access Control granted by the bucket policy. A viewer-request CloudFront function rewrites extensionless routes to the exported files — `/about` to `/about.html`, `/` to `/index.html` — because a static export has no server to do it. Missing keys come back from S3 as `403`, so both `403` and `404` map to `/404.html`.
 
 Caching is split by path: HTML and documents use a short-TTL policy (300s default, 3600s max) since deploys invalidate the distribution anyway, while `/_next/static/*` and `/images/*` use the AWS-managed `CachingOptimized` policy.
+
+## How a Comment Is Served
+
+`/api/*` is its own cache behavior, without the routing function, in front of an API Gateway HTTP API and 1 Lambda function. CloudFront adds a secret `X-Origin-Verify` header that the function requires, so the public `execute-api` URL is refused on its own, and it forwards `CloudFront-Viewer-Address` so the function sees the reader rather than the edge. A `GET` returns a post's approved comments and is cached for 60s per `post`; a `POST` is validated, stored as pending in DynamoDB with the address only as a keyed hash, and emailed through SNS. Nothing is shown until [`dynamodb-moderate.sh`](../scripts/README.md) approves it.
+
+The API Gateway stage is throttled to 2 requests per second with a burst of 5, shared by every reader, which caps the cost of a flood rather than stopping one sender.
 
 ## Naming, Tagging, and Cost
 
