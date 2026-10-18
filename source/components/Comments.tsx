@@ -59,6 +59,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
   const section = useRef<HTMLElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
   const [comments, setComments] = useState<TComment[]>();
+  const [isHeld, setIsHeld] = useState(false);
   const [isUnavailable, setIsUnavailable] = useState(false);
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
@@ -67,27 +68,28 @@ export default function ({ post }: Readonly<{ post: string }>) {
   const [status, setStatus] = useState<TStatus>();
   const [isSending, setIsSending] = useState(false);
 
+  // Fetched on load rather than on scroll, so comments are in place before a
+  // reader reaches them instead of pushing the footer down under them.
   useEffect(() => {
-    const element = section.current;
-    if (!element) return;
+    let isCurrent = true;
+    fetch(`${ENDPOINT}?post=${post}`)
+      .then((response) => {
+        if (!response.ok) throw new Error(response.statusText);
+        return response.json() as Promise<{ comments: TComment[] }>;
+      })
+      .then((data) => {
+        if (!isCurrent) return;
+        // A reader who got here first would see them push the page down, so
+        // they wait behind a button of the same height as the loading line.
+        const top = section.current?.getBoundingClientRect().top ?? Infinity;
+        setIsHeld(data.comments.length > 0 && top < window.innerHeight);
+        setComments(data.comments);
+      })
+      .catch(() => isCurrent && setIsUnavailable(true));
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        fetch(`${ENDPOINT}?post=${post}`)
-          .then((response) => {
-            if (!response.ok) throw new Error(response.statusText);
-            return response.json() as Promise<{ comments: TComment[] }>;
-          })
-          .then((data) => setComments(data.comments))
-          .catch(() => setIsUnavailable(true));
-      },
-      { rootMargin: "200px" },
-    );
-    observer.observe(element);
-
-    return () => observer.disconnect();
+    return () => {
+      isCurrent = false;
+    };
   }, [post]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -151,117 +153,128 @@ export default function ({ post }: Readonly<{ post: string }>) {
         Comments{comments ? ` · ${comments.length}` : ""}
       </h2>
 
-      {isUnavailable && (
+      {/* One line in every state, so the answer never changes the height. */}
+      {(!tops.length || isHeld) && (
         <p className="text-small text-default-500">
-          Comments are unavailable right now.
+          {isHeld ? (
+            <button
+              type="button"
+              onClick={() => setIsHeld(false)}
+              className="text-primary underline underline-offset-4"
+            >
+              Show {comments?.length} comments
+            </button>
+          ) : isUnavailable ? (
+            "Comments are unavailable right now."
+          ) : comments ? (
+            "No comments yet."
+          ) : (
+            "Loading comments…"
+          )}
         </p>
       )}
 
-      {!comments && !isUnavailable && (
-        <p className="text-small text-default-500">Loading comments…</p>
-      )}
-
-      {tops.map((top) => (
-        <Comment key={top.id} comment={top}>
-          <button
-            type="button"
-            onClick={() => {
-              setParent(top);
-              field.current?.focus();
-            }}
-            className="self-start font-mono text-tiny text-default-500 hover:text-foreground"
-          >
-            Reply
-          </button>
-          {comments
-            ?.filter((reply) => reply.parentId === top.id)
-            .map((reply) => (
-              <div
-                key={reply.id}
-                className="mt-2 ml-3.5 pl-3.5 border-l border-default-200"
-              >
-                <Comment comment={reply} />
-              </div>
-            ))}
-        </Comment>
-      ))}
-
-      {comments && (
-        <form
-          onSubmit={submit}
-          noValidate
-          className="flex flex-col gap-2.5 rounded-medium border border-default-200 p-3.5"
-        >
-          {parent && (
-            <p className="flex gap-3 text-small text-default-500">
-              Replying to {parent.name}
-              <button
-                type="button"
-                onClick={() => setParent(undefined)}
-                className="text-primary underline underline-offset-4"
-              >
-                Cancel
-              </button>
-            </p>
-          )}
-          <label htmlFor="comment-name" className={CLASS_LABEL}>
-            Name
-          </label>
-          <input
-            id="comment-name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            maxLength={LIMIT_NAME}
-            autoComplete="nickname"
-            className={CLASS_FIELD}
-          />
-          <label htmlFor="comment-body" className={CLASS_LABEL}>
-            Comment
-          </label>
-          <textarea
-            id="comment-body"
-            ref={field}
-            value={body}
-            onChange={(event) => setBody(event.target.value)}
-            maxLength={LIMIT_BODY}
-            rows={4}
-            className={`${CLASS_FIELD} resize-y`}
-          />
-          {/* Hidden from people; a bot that fills it is dropped by the API. */}
-          <input
-            name="website"
-            value={website}
-            onChange={(event) => setWebsite(event.target.value)}
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden
-            className="hidden"
-          />
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="font-mono text-tiny text-default-500">
-              Plain text. Comments appear after review. {body.length} /{" "}
-              {LIMIT_BODY}
-            </span>
+      {!isHeld &&
+        tops.map((top) => (
+          <Comment key={top.id} comment={top}>
             <button
-              type="submit"
-              disabled={isSending}
-              className="rounded-small bg-primary px-3.5 py-1.5 text-small text-primary-foreground transition-opacity disabled:opacity-disabled"
+              type="button"
+              onClick={() => {
+                setParent(top);
+                field.current?.focus();
+              }}
+              className="self-start font-mono text-tiny text-default-500 hover:text-foreground"
             >
-              {isSending ? "Posting…" : "Post comment"}
+              Reply
             </button>
-          </div>
-          <p
-            role="status"
-            className={
-              status?.isError
-                ? "min-h-5 text-small text-warning"
-                : "min-h-5 text-small text-primary"
-            }
-          >
-            {status?.text}
+            {comments
+              ?.filter((reply) => reply.parentId === top.id)
+              .map((reply) => (
+                <div
+                  key={reply.id}
+                  className="mt-2 ml-3.5 pl-3.5 border-l border-default-200"
+                >
+                  <Comment comment={reply} />
+                </div>
+              ))}
+          </Comment>
+        ))}
+
+      {/* Rendered before the comments arrive, so nothing appears late. */}
+      <form
+        onSubmit={submit}
+        noValidate
+        className="flex flex-col gap-2.5 rounded-medium border border-default-200 p-3.5"
+      >
+        {parent && (
+          <p className="flex gap-3 text-small text-default-500">
+            Replying to {parent.name}
+            <button
+              type="button"
+              onClick={() => setParent(undefined)}
+              className="text-primary underline underline-offset-4"
+            >
+              Cancel
+            </button>
           </p>
-        </form>
-      )}
+        )}
+        <label htmlFor="comment-name" className={CLASS_LABEL}>
+          Name
+        </label>
+        <input
+          id="comment-name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          maxLength={LIMIT_NAME}
+          autoComplete="nickname"
+          className={CLASS_FIELD}
+        />
+        <label htmlFor="comment-body" className={CLASS_LABEL}>
+          Comment
+        </label>
+        <textarea
+          id="comment-body"
+          ref={field}
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+          maxLength={LIMIT_BODY}
+          rows={4}
+          className={`${CLASS_FIELD} resize-y`}
+        />
+        {/* Hidden from people; a bot that fills it is dropped by the API. */}
+        <input
+          name="website"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden
+          className="hidden"
+        />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="font-mono text-tiny text-default-500">
+            Plain text. Comments appear after review. {body.length} /{" "}
+            {LIMIT_BODY}
+          </span>
+          <button
+            type="submit"
+            disabled={isSending || isUnavailable}
+            className="rounded-small bg-primary px-3.5 py-1.5 text-small text-primary-foreground transition-opacity disabled:opacity-disabled"
+          >
+            {isSending ? "Posting…" : "Post comment"}
+          </button>
+        </div>
+        <p
+          role="status"
+          className={
+            status?.isError
+              ? "min-h-5 text-small text-warning"
+              : "min-h-5 text-small text-primary"
+          }
+        >
+          {status?.text}
+        </p>
+      </form>
     </section>
   );
 }
