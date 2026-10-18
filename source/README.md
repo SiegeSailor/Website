@@ -20,18 +20,22 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 
 ## Routes
 
-| Route                | Source                             | Renders                                                       |
-| -------------------- | ---------------------------------- | ------------------------------------------------------------- |
-| `/`                  | `app/page.tsx`                     | A short intro plus `PostList`, searchable and grouped by year |
-| `/about`             | `app/(child)/about/page.tsx`       | The profile, composed from `getAbout()`                       |
-| `/blog/<YYYY-MM-DD>` | `app/(child)/blog/[date]/page.tsx` | One article, with previous and next links                     |
-| `/feed.xml`          | `app/feed.xml/route.ts`            | A static RSS feed (`export const dynamic = "force-static"`)   |
+| Route                | Source                             | Renders                                                                                        |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `/`                  | `app/page.tsx`                     | A short intro plus `PostList`, filtered by text, category, and technology, and grouped by year |
+| `/about`             | `app/(child)/about/page.tsx`       | The profile, composed from `getAbout()`                                                        |
+| `/blog/<YYYY-MM-DD>` | `app/(child)/blog/[date]/page.tsx` | One article, with its sections, previous and next links, and comments                          |
+| `/feed.xml`          | `app/feed.xml/route.ts`            | A static RSS feed (`export const dynamic = "force-static"`)                                    |
+
+`PostList` keeps its filters in the URL — `/?q=release&category=DevOps&tech=GitLab,NPM` — so an article's category and technology links open it pre-filtered. A category or technology typed as a whole phrase selects its chip.
 
 `layout.tsx` wraps every page in the narrow column with the header and footer; `(child)/layout.tsx` is a thin wrapper for the sub-pages.
 
 ## Components
 
 The site chrome is `Header`, `Footer`, and `PostList`. Article content is rendered by `Markdown`, which composes `Heading`, `Link`, `Code` (inline), `Callout`, `Mermaid`, `ModalImage`, and `ButtonCopy`. `ZoomPanModal` is the shared enlarge, pan, and zoom dialog behind both `ModalImage` and `Mermaid`. `Provider` sets up HeroUI and the theme; `Entry` seeds the article store on load.
+
+An article page adds `TableOfContents`, its level 2 and 3 headings in the right gutter on wide screens and a disclosure on narrow ones, shown from 3 headings up, and `Comments`, which calls `/api/comments` from the browser. That API is not part of the export: it lives in [`../infrastructure/`](../infrastructure/README.md), so under `npm run watch` the section says comments are unavailable.
 
 ## Configuration Worth Knowing
 

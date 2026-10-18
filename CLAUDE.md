@@ -17,12 +17,12 @@ The repository is one NPM workspace:
 
 Besides the workspace and standard folders, e.g., `.github/` and `.husky/`, the project is modularized into scopes, and a scope's must-not-break rules live in its `CLAUDE.md`. Each is named for the folder it lives in, and lends its **Commit Scope** to the `<scope>` of a commit message:
 
-| Scope                                  | Commit Scope     | Contents                                                    |
-| -------------------------------------- | ---------------- | ----------------------------------------------------------- |
-| [`/`](./)                              | -                | Shared setup, the rules, the skills, and the CI workflows   |
-| [`infrastructure/`](./infrastructure/) | `infrastructure` | The Terraform environment on AWS for static file deployment |
-| [`scripts/`](./scripts/)               | `scripts`        | The shell scripts the workflows and the operator call       |
-| [`source/`](./source/)                 | `website`        | The Next.js application, its posts, and its copy            |
+| Scope                                  | Commit Scope     | Contents                                                           |
+| -------------------------------------- | ---------------- | ------------------------------------------------------------------ |
+| [`/`](./)                              | -                | Shared setup, the rules, the skills, and the CI workflows          |
+| [`infrastructure/`](./infrastructure/) | `infrastructure` | The Terraform environment on AWS for the site and its comments API |
+| [`scripts/`](./scripts/)               | `scripts`        | The shell scripts the workflows and the operator call              |
+| [`source/`](./source/)                 | `website`        | The Next.js application, its posts, and its copy                   |
 
 > [!note]
 > Read a scope's `CLAUDE.md` before editing anything inside it. A change that spans scopes takes no `<scope>`, the way a change to the root takes none.
