@@ -8,6 +8,7 @@ import { createGlobalMetadata } from "@/settings/heads";
 import { getSite } from "@/settings/content";
 import Heading from "@/components/Heading";
 import Markdown from "@/components/Markdown";
+import TableOfContents from "@/components/TableOfContents";
 
 type TParams = Readonly<{ date: string }>;
 
@@ -90,6 +91,12 @@ export default async function ({
         <span className="text-default-300">·</span>
         <span className="uppercase tracking-wider">{metadata.category}</span>
       </div>
+
+      <TableOfContents
+        anchors={metadata.anchors.filter(
+          (anchor) => anchor.level === 2 || anchor.level === 3,
+        )}
+      />
 
       <div className="mt-6 pt-6 border-t border-default-200">
         <div className="text-default-600">
