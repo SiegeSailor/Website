@@ -35,15 +35,16 @@ Folders and files are kebab-case, except `components/*`, which are PascalCase.
 
 The site chrome is `Header`, `Footer`, and `PostList`. Article content is rendered by `Markdown`, which composes `Heading`, `Link`, `Code` (inline), `Callout`, `Mermaid`, `ModalImage`, and `ButtonCopy`. `ZoomPanModal` is the shared enlarge, pan, and zoom dialog behind both `ModalImage` and `Mermaid`. `Provider` sets up HeroUI and the theme; `Entry` seeds the article store on load.
 
-An article page adds `TableOfContents`, its level 2 and 3 headings in the right gutter on wide screens and a disclosure on narrow ones, shown from 3 headings up, and `Comments`, which calls `/api/comments` from the browser. That API is not part of the export: it lives in [`../infrastructure/`](../infrastructure/README.md), so under `npm run watch` the section says comments are unavailable.
+An article page adds `TableOfContents`, every heading indented by its depth plus a final "Comments" link, in the right gutter on wide screens and a disclosure on narrow ones, and `Comments`, which calls `/api/comments` from the browser. A comment is GitHub Markdown, rendered through `remark-html`, whose default sanitizing drops raw HTML, event handlers, and `javascript:` links, and the form previews it before posting. The section keeps one height until a reader expands it, so loading comments never shifts the page. That API is not part of the export: it lives in [`../infrastructure/`](../infrastructure/README.md).
 
 ## Configuration Worth Knowing
 
-[`next.config.mjs`](./next.config.mjs) makes 4 decisions the rest of the code depends on:
+[`next.config.mjs`](./next.config.mjs) makes 5 decisions the rest of the code depends on:
 
 | Decision                                         | Consequence                                                                             |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------- |
 | `.yaml` files load as raw text (`asset/source`)  | The dev server watches `../content/` and hot-reloads the pages built from it            |
+| Development proxies `/api/*` to the live site    | `npm run watch` loads real comments, and a comment posted locally is real and pending   |
 | SVGs import as React components through SVGR     | A `?url` suffix gives a plain URL instead                                               |
 | The export lands in `export/` rather than `out/` | Every deploy syncs `source/export/`                                                     |
 | `typedRoutes` type-checks route paths            | Paths stay in code while route _titles_ come from content, where a typo is a type error |
