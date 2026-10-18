@@ -8,7 +8,6 @@ import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { createGlobalMetadata } from "@/settings/heads";
 import { getSite } from "@/settings/content";
 import Comments from "@/components/Comments";
-import Heading from "@/components/Heading";
 import Markdown from "@/components/Markdown";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -82,9 +81,12 @@ export default async function ({
         ← Posts
       </NextLink>
 
-      <Heading level={1} id={getSlugByTitle(metadata.title)}>
+      <h1
+        id={getSlugByTitle(metadata.title)}
+        className="mt-3 text-2xl sm:text-[1.7rem] font-medium leading-snug tracking-tight text-balance"
+      >
         {metadata.title}
-      </Heading>
+      </h1>
 
       <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-tiny text-default-500">
         <span>{metadata.date}</span>

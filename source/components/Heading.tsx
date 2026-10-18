@@ -3,13 +3,14 @@ import { Link2Icon } from "lucide-react";
 import type { Route } from "next";
 import clsx from "clsx";
 
+// Every level stays below the article title (1.7rem, medium) on the post page.
 const LEVEL_TO_CLASSNAMES: Readonly<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {
-  1: "text-5xl leading-tight font-bold",
-  2: "text-4xl font-bold",
-  3: "text-3xl font-semibold",
-  4: "text-2xl font-semibold",
-  5: "text-xl font-medium",
-  6: "text-lg font-medium",
+  1: "text-[1.45rem] leading-snug font-medium tracking-tight",
+  2: "text-xl leading-snug font-medium tracking-tight",
+  3: "text-large font-medium",
+  4: "text-medium font-semibold",
+  5: "text-medium font-medium",
+  6: "text-small font-semibold",
 } as const;
 
 export default async function ({
