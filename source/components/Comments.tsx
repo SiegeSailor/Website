@@ -7,6 +7,10 @@ import {
   useRef,
   useState,
 } from "react";
+import clsx from "clsx";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
 
 type TComment = Readonly<{
   id: string;
@@ -29,6 +33,26 @@ const CLASS_LABEL =
   "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-default-500";
 const CLASS_FIELD =
   "w-full rounded-small border border-default-200 bg-background px-3 py-2 text-small outline-none transition-colors focus:border-primary";
+const CLASS_TAB =
+  "font-mono text-[0.65rem] uppercase tracking-[0.18em] transition-colors";
+
+// Comments are untrusted. remark-html sanitizes with GitHub's own allow-list by
+// default, which drops raw HTML, event handlers, and `javascript:` links.
+const processor = remark().use(remarkGfm).use(remarkHtml);
+const toHtml = (markdown: string) =>
+  String(processor.processSync(markdown)).replaceAll(
+    '<a href="http',
+    '<a rel="nofollow ugc noopener noreferrer" target="_blank" href="http',
+  );
+
+function Markdown({ source }: Readonly<{ source: string }>) {
+  return (
+    <div
+      className="markdown-comment"
+      dangerouslySetInnerHTML={{ __html: toHtml(source) }}
+    />
+  );
+}
 
 function Comment({
   comment,
@@ -47,9 +71,7 @@ function Comment({
           {comment.createdAt.slice(0, 10)}
         </span>
       </div>
-      <p className="text-small whitespace-pre-wrap wrap-break-word">
-        {comment.body}
-      </p>
+      <Markdown source={comment.body} />
       {children}
     </div>
   );
@@ -65,6 +87,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
   const [body, setBody] = useState("");
   const [website, setWebsite] = useState("");
   const [parent, setParent] = useState<TComment>();
+  const [isPreview, setIsPreview] = useState(false);
   const [status, setStatus] = useState<TStatus>();
   const [isSending, setIsSending] = useState(false);
 
@@ -126,6 +149,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
         });
         setBody("");
         setParent(undefined);
+        setIsPreview(false);
         return;
       }
       if (response.status === 429)
@@ -181,6 +205,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
               type="button"
               onClick={() => {
                 setParent(top);
+                setIsPreview(false);
                 field.current?.focus();
               }}
               className="self-start font-mono text-tiny text-default-500 hover:text-foreground"
@@ -229,9 +254,34 @@ export default function ({ post }: Readonly<{ post: string }>) {
           autoComplete="nickname"
           className={CLASS_FIELD}
         />
-        <label htmlFor="comment-body" className={CLASS_LABEL}>
-          Comment
-        </label>
+        <div className="flex items-baseline gap-4">
+          <label
+            htmlFor="comment-body"
+            className={clsx(CLASS_LABEL, "mr-auto")}
+          >
+            Comment
+          </label>
+          {(["Write", "Preview"] as const).map((tab) => {
+            const isActive = (tab === "Preview") === isPreview;
+            return (
+              <button
+                key={tab}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setIsPreview(tab === "Preview")}
+                className={clsx(
+                  CLASS_TAB,
+                  isActive
+                    ? "text-foreground underline underline-offset-4"
+                    : "text-default-500 hover:text-foreground",
+                )}
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
+        {/* Hidden rather than unmounted, so a resized box keeps its size. */}
         <textarea
           id="comment-body"
           ref={field}
@@ -239,8 +289,18 @@ export default function ({ post }: Readonly<{ post: string }>) {
           onChange={(event) => setBody(event.target.value)}
           maxLength={LIMIT_BODY}
           rows={4}
-          className={`${CLASS_FIELD} resize-y`}
+          hidden={isPreview}
+          className={clsx(CLASS_FIELD, "min-h-28 resize-y")}
         />
+        {isPreview && (
+          <div className={clsx(CLASS_FIELD, "min-h-28")}>
+            {body.trim() ? (
+              <Markdown source={body} />
+            ) : (
+              <p className="text-default-500">Nothing to preview.</p>
+            )}
+          </div>
+        )}
         {/* Hidden from people; a bot that fills it is dropped by the API. */}
         <input
           name="website"
@@ -253,7 +313,7 @@ export default function ({ post }: Readonly<{ post: string }>) {
         />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-mono text-tiny text-default-500">
-            Plain text. Comments appear after review. {body.length} /{" "}
+            GitHub Markdown. Comments appear after review. {body.length} /{" "}
             {LIMIT_BODY}
           </span>
           <button

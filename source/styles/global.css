@@ -152,3 +152,67 @@ input {
     @apply translate-y-1.5;
   }
 }
+
+/* Comments arrive as sanitized HTML from remark-html, outside the article's
+   Markdown components, so their elements are styled here instead. */
+@layer components {
+  .markdown-comment {
+    @apply flex flex-col gap-2 text-small leading-relaxed wrap-break-word;
+  }
+
+  .markdown-comment a {
+    @apply text-primary underline underline-offset-4;
+  }
+
+  .markdown-comment ul {
+    @apply list-disc pl-5;
+  }
+
+  .markdown-comment ol {
+    @apply list-decimal pl-5;
+  }
+
+  .markdown-comment ul.contains-task-list {
+    @apply list-none pl-0;
+  }
+
+  .markdown-comment input[type="checkbox"] {
+    @apply mr-1.5 align-middle;
+  }
+
+  .markdown-comment blockquote {
+    @apply border-l-2 border-default-300 pl-3 text-default-500;
+  }
+
+  .markdown-comment code {
+    @apply rounded-small bg-default-100 px-1 py-0.5 font-mono text-[0.85em];
+  }
+
+  .markdown-comment pre {
+    @apply overflow-x-auto rounded-small border border-default-200 bg-default-50 p-3;
+  }
+
+  .markdown-comment pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .markdown-comment :is(h1, h2, h3, h4, h5, h6) {
+    @apply text-medium font-semibold;
+  }
+
+  .markdown-comment table {
+    @apply block w-max max-w-full overflow-x-auto border-collapse;
+  }
+
+  .markdown-comment :is(th, td) {
+    @apply border border-default-200 px-2 py-1;
+  }
+
+  .markdown-comment img {
+    @apply w-auto max-w-full max-h-80 min-h-0 shadow-none;
+  }
+
+  .markdown-comment hr {
+    @apply border-default-200;
+  }
+}
