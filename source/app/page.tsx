@@ -36,6 +36,7 @@ export default async function () {
     category: article.metadata.category,
     technologies: article.metadata.technologies,
     route: article.metadata.route,
+    isDraft: article.metadata.status === "Draft",
   }));
 
   return (

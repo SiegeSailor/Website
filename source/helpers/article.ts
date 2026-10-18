@@ -2,6 +2,13 @@ import type { Route } from "next";
 
 import { getSlugByTitle } from "@/helpers/utility";
 
+export type TFacet = "category" | "tech";
+
+// PostList reads these parameters back on the home page.
+export function getFilterRoute(facet: TFacet, value: string) {
+  return `/?${facet}=${encodeURIComponent(value)}` as Route;
+}
+
 export function getAnchorsByContent(content: string, prefixRoute: Route) {
   const lines = content.split("\n");
   const result: {

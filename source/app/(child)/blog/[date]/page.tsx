@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import NextLink from "next/link";
 
 import { createPageTitle, getSlugByTitle } from "@/helpers/utility";
+import { getFilterRoute } from "@/helpers/article";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { createGlobalMetadata } from "@/settings/heads";
 import { getSite } from "@/settings/content";
@@ -89,7 +90,28 @@ export default async function ({
         <span className="text-default-300">·</span>
         <span>{metadata.minutes} min read</span>
         <span className="text-default-300">·</span>
-        <span className="uppercase tracking-wider">{metadata.category}</span>
+        <NextLink
+          href={getFilterRoute("category", metadata.category)}
+          className="uppercase tracking-wider text-primary underline-offset-4 hover:underline"
+        >
+          {metadata.category}
+        </NextLink>
+        {metadata.status === "Draft" && (
+          <>
+            <span className="text-default-300">·</span>
+            <span className="uppercase tracking-wider">Draft</span>
+          </>
+        )}
+        <span className="text-default-300">·</span>
+        {metadata.technologies.map((technology) => (
+          <NextLink
+            key={technology}
+            href={getFilterRoute("tech", technology)}
+            className="underline-offset-4 hover:text-foreground hover:underline"
+          >
+            {technology}
+          </NextLink>
+        ))}
       </div>
 
       <TableOfContents
