@@ -1,0 +1,267 @@
+"use client";
+
+import {
+  type FormEvent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+type TComment = Readonly<{
+  id: string;
+  parentId: string | null;
+  name: string;
+  body: string;
+  isAuthor: boolean;
+  createdAt: string;
+}>;
+
+type TStatus = Readonly<{ isError: boolean; text: string }>;
+
+// Served by the comments API behind the same CloudFront distribution; it does
+// not exist under `npm run watch`.
+const ENDPOINT = "/api/comments";
+const LIMIT_NAME = 50;
+const LIMIT_BODY = 2000;
+
+const CLASS_LABEL =
+  "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-default-500";
+const CLASS_FIELD =
+  "w-full rounded-small border border-default-200 bg-background px-3 py-2 text-small outline-none transition-colors focus:border-primary";
+
+function Comment({
+  comment,
+  children,
+}: Readonly<{ comment: TComment; children?: ReactNode }>) {
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex flex-wrap items-baseline gap-x-2.5">
+        <span className="text-small font-semibold">{comment.name}</span>
+        {comment.isAuthor && (
+          <span className="rounded-full border border-primary-200 dark:border-primary-700 px-1.5 font-mono text-[0.6rem] tracking-[0.14em] text-primary">
+            AUTHOR
+          </span>
+        )}
+        <span className="font-mono text-tiny text-default-500">
+          {comment.createdAt.slice(0, 10)}
+        </span>
+      </div>
+      <p className="text-small whitespace-pre-wrap wrap-break-word">
+        {comment.body}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+export default function ({ post }: Readonly<{ post: string }>) {
+  const section = useRef<HTMLElement>(null);
+  const field = useRef<HTMLTextAreaElement>(null);
+  const [comments, setComments] = useState<TComment[]>();
+  const [isUnavailable, setIsUnavailable] = useState(false);
+  const [name, setName] = useState("");
+  const [body, setBody] = useState("");
+  const [website, setWebsite] = useState("");
+  const [parent, setParent] = useState<TComment>();
+  const [status, setStatus] = useState<TStatus>();
+  const [isSending, setIsSending] = useState(false);
+
+  useEffect(() => {
+    const element = section.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        fetch(`${ENDPOINT}?post=${post}`)
+          .then((response) => {
+            if (!response.ok) throw new Error(response.statusText);
+            return response.json() as Promise<{ comments: TComment[] }>;
+          })
+          .then((data) => setComments(data.comments))
+          .catch(() => setIsUnavailable(true));
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [post]);
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!name.trim())
+      return setStatus({
+        isError: true,
+        text: "Add a name so readers know who wrote it.",
+      });
+    if (!body.trim())
+      return setStatus({
+        isError: true,
+        text: "Write a comment before posting.",
+      });
+
+    setIsSending(true);
+    let text = "The comment could not be sent. Try again later.";
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          post,
+          parentId: parent?.id ?? null,
+          name,
+          body,
+          website,
+        }),
+      });
+      if (response.ok) {
+        setStatus({
+          isError: false,
+          text: `Thanks, ${name.trim()}. Your comment will show here once it's approved.`,
+        });
+        setBody("");
+        setParent(undefined);
+        return;
+      }
+      if (response.status === 429)
+        text = "Too many comments right now. Try again in a minute.";
+      else if (response.status === 400)
+        text = ((await response.json()) as { error?: string }).error ?? text;
+    } catch {
+      // A network failure keeps the generic message.
+    } finally {
+      setIsSending(false);
+    }
+    setStatus({ isError: true, text });
+  };
+
+  const tops = comments?.filter((comment) => !comment.parentId) ?? [];
+
+  return (
+    <section
+      ref={section}
+      id="comments"
+      aria-labelledby="comments-title"
+      className="mt-10 pt-6 border-t border-default-200 flex flex-col gap-5"
+    >
+      <h2 id="comments-title" className={CLASS_LABEL}>
+        Comments{comments ? ` · ${comments.length}` : ""}
+      </h2>
+
+      {isUnavailable && (
+        <p className="text-small text-default-500">
+          Comments are unavailable right now.
+        </p>
+      )}
+
+      {!comments && !isUnavailable && (
+        <p className="text-small text-default-500">Loading comments…</p>
+      )}
+
+      {tops.map((top) => (
+        <Comment key={top.id} comment={top}>
+          <button
+            type="button"
+            onClick={() => {
+              setParent(top);
+              field.current?.focus();
+            }}
+            className="self-start font-mono text-tiny text-default-500 hover:text-foreground"
+          >
+            Reply
+          </button>
+          {comments
+            ?.filter((reply) => reply.parentId === top.id)
+            .map((reply) => (
+              <div
+                key={reply.id}
+                className="mt-2 ml-3.5 pl-3.5 border-l border-default-200"
+              >
+                <Comment comment={reply} />
+              </div>
+            ))}
+        </Comment>
+      ))}
+
+      {comments && (
+        <form
+          onSubmit={submit}
+          noValidate
+          className="flex flex-col gap-2.5 rounded-medium border border-default-200 p-3.5"
+        >
+          {parent && (
+            <p className="flex gap-3 text-small text-default-500">
+              Replying to {parent.name}
+              <button
+                type="button"
+                onClick={() => setParent(undefined)}
+                className="text-primary underline underline-offset-4"
+              >
+                Cancel
+              </button>
+            </p>
+          )}
+          <label htmlFor="comment-name" className={CLASS_LABEL}>
+            Name
+          </label>
+          <input
+            id="comment-name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            maxLength={LIMIT_NAME}
+            autoComplete="nickname"
+            className={CLASS_FIELD}
+          />
+          <label htmlFor="comment-body" className={CLASS_LABEL}>
+            Comment
+          </label>
+          <textarea
+            id="comment-body"
+            ref={field}
+            value={body}
+            onChange={(event) => setBody(event.target.value)}
+            maxLength={LIMIT_BODY}
+            rows={4}
+            className={`${CLASS_FIELD} resize-y`}
+          />
+          {/* Hidden from people; a bot that fills it is dropped by the API. */}
+          <input
+            name="website"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden
+            className="hidden"
+          />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="font-mono text-tiny text-default-500">
+              Plain text. Comments appear after review. {body.length} /{" "}
+              {LIMIT_BODY}
+            </span>
+            <button
+              type="submit"
+              disabled={isSending}
+              className="rounded-small bg-primary px-3.5 py-1.5 text-small text-primary-foreground transition-opacity disabled:opacity-disabled"
+            >
+              {isSending ? "Posting…" : "Post comment"}
+            </button>
+          </div>
+          <p
+            role="status"
+            className={
+              status?.isError
+                ? "min-h-5 text-small text-warning"
+                : "min-h-5 text-small text-primary"
+            }
+          >
+            {status?.text}
+          </p>
+        </form>
+      )}
+    </section>
+  );
+}

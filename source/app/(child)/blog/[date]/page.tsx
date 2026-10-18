@@ -7,6 +7,7 @@ import { getFilterRoute } from "@/helpers/article";
 import { getArticles, getArticleByDate } from "@/helpers/server/article";
 import { createGlobalMetadata } from "@/settings/heads";
 import { getSite } from "@/settings/content";
+import Comments from "@/components/Comments";
 import Heading from "@/components/Heading";
 import Markdown from "@/components/Markdown";
 import TableOfContents from "@/components/TableOfContents";
@@ -156,6 +157,8 @@ export default async function ({
           )}
         </nav>
       )}
+
+      <Comments post={metadata.date} />
     </article>
   );
 }
